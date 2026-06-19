@@ -4,9 +4,19 @@ import Link from "next/link";
 import { ArrowLeft, Bell, Share, Shield, Zap, Mic, Flame, ChevronRight, Trophy, Target, Activity } from "lucide-react";
 import { useState } from "react";
 
+const playerOptions = [
+  { name: 'DE BRUYNE', team: 'Man City', img: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop' },
+  { name: 'HAALAND', team: 'Man City', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+  { name: 'SALAH', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop' },
+  { name: 'DARWIN NÚÑEZ', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+  { name: 'VAN DIJK', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop' },
+];
+
 export default function PreMatchDetails() {
   const [activeTab, setActiveTab] = useState('LINEUP');
   const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
+  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('DE BRUYNE');
+  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('DARWIN NÚÑEZ');
 
   const handleVote = (type: 'chaos' | 'tactical' | 'tension') => {
     setVotes(prev => {
@@ -203,18 +213,24 @@ export default function PreMatchDetails() {
 
         {/* 5. Player Spotlight */}
         <section className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory">
-           {/* Player to Watch */}
+           {/* MVP Watch */}
            <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#00E5FF]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity">
-                 <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
+                 <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
                  <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
               </div>
-              <div className="relative z-10">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">PLAYER TO WATCH</h3>
-                 <h2 className="text-xl font-black uppercase mb-1">DE BRUYNE</h2>
-                 <p className="text-xs text-gray-400 mb-4">Man City</p>
+              <div className="relative z-10 w-full">
+                 <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">MVP WATCH</h3>
+                 <select 
+                   value={mvpWatchPlayer}
+                   onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                 >
+                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                 </select>
+                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
                  <div className="flex items-end gap-2">
                    <span className="text-2xl font-black text-[#00E5FF]">8.7</span>
                    <span className="text-[10px] text-gray-500 uppercase pb-1">Season rating</span>
@@ -222,18 +238,24 @@ export default function PreMatchDetails() {
               </div>
            </div>
 
-           {/* Under Pressure */}
+           {/* Fraud Watch */}
            <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#D32F2F]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity">
-                 <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
+                 <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
                  <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
               </div>
-              <div className="relative z-10">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">UNDER PRESSURE</h3>
-                 <h2 className="text-xl font-black uppercase mb-1">DARWIN NÚÑEZ</h2>
-                 <p className="text-xs text-gray-400 mb-4">Liverpool</p>
+              <div className="relative z-10 w-full">
+                 <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">FRAUD WATCH</h3>
+                 <select 
+                   value={fraudWatchPlayer}
+                   onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                 >
+                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                 </select>
+                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
                  <div className="flex items-end gap-2">
                    <span className="text-sm font-bold text-gray-300 max-w-[100px] leading-tight">Needs a big performance</span>
                  </div>
