@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
+@theme {
+  --color-teal: #00E5FF;
+  --color-coral: #FF4F00;
+  --color-dark: #050505;
+  --color-dark-card: #121212;
+  --color-light: #ffffff;
+  --color-background: #050505;
+  --color-foreground: #ffffff;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #050505;
+  --foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Utilities for glassmorphism */
+@utility glass {
+  background: rgba(18, 18, 18, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Scrollbar Utilities */
+.hover-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+}
+.hover-scrollbar:hover {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.hover-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  background: transparent;
+}
+.hover-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.hover-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+}
+.hover-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 25s linear infinite;
 }
