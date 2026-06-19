@@ -5,37 +5,6 @@ export default function StandsPage() {
   return (
     <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white">
       
-      {/* Mobile Top Header (THE STAND) */}
-      <div className="flex md:hidden flex-col items-center justify-center mb-8 mt-2 relative">
-        <div className="absolute right-0 top-0 w-10 h-10 rounded-full border border-white/10 overflow-hidden p-0.5">
-          <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
-            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
-            <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-black" />
-          </div>
-        </div>
-        <div className="absolute right-12 top-2">
-           <Bell className="w-6 h-6 text-white" />
-        </div>
-        <div className="absolute left-0 top-1 w-10 h-10 rounded-full bg-[#121212] border border-white/10 flex items-center justify-center">
-           <div className="w-6 h-6 rounded-full border-2 border-[#00C853] flex items-center justify-center relative">
-              <div className="w-2 h-2 rounded-full bg-[#00C853]" />
-              <div className="absolute -right-1 -top-1 w-1.5 h-1.5 rounded-full bg-[#00C853]" />
-           </div>
-        </div>
-        
-        <div className="flex items-center gap-2 mb-1">
-          <div className="flex gap-1 items-center h-6">
-            <div className="w-1 h-3 bg-[#00C853] rounded-full" />
-            <div className="w-1 h-5 bg-[#00C853] rounded-full" />
-            <div className="w-1 h-4 bg-[#00C853] rounded-full" />
-            <div className="w-1 h-6 bg-[#00C853] rounded-full" />
-            <div className="w-1 h-3 bg-[#00C853] rounded-full" />
-          </div>
-          <h1 className="text-xl font-bold tracking-widest">THE STAND</h1>
-        </div>
-        <p className="text-[10px] text-gray-400">Where football fans speak</p>
-      </div>
-
       {/* Top Navigation Tabs */}
       <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar">
         <button className="px-5 py-2.5 rounded-full bg-[#00603A] border border-[#00C853]/50 text-white font-bold text-sm whitespace-nowrap flex items-center gap-2 shadow-[0_0_15px_rgba(0,200,83,0.2)]">
