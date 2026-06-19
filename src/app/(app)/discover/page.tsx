@@ -41,8 +41,8 @@ export default function DiscoverPage() {
           <div className="flex flex-col items-center justify-center mb-10">
             <div className="flex items-center justify-center gap-6 md:gap-12">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white p-2 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" alt="MCI" className="w-full h-full object-contain" />
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#6CABDD] flex items-center justify-center shadow-[0_0_30px_rgba(108,171,221,0.4)] border-4 border-white/20">
+                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">MCI</span>
                 </div>
                 <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">MCI</span>
               </div>
@@ -57,9 +57,9 @@ export default function DiscoverPage() {
               </div>
 
               <div className="flex items-center gap-4">
-                <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">ARS</span>
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white p-2 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" alt="ARS" className="w-full h-full object-contain" />
+                <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">LIV</span>
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#C8102E] flex items-center justify-center shadow-[0_0_30px_rgba(200,16,46,0.4)] border-4 border-white/20">
+                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">LIV</span>
                 </div>
               </div>
             </div>
