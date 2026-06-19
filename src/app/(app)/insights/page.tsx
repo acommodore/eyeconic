@@ -19,7 +19,7 @@ const liveStands = [
     id: 1,
     listeners: '8.4K',
     title: "Arsenal fans debating Saka's 9.2 rating",
-    subtitle: "Was he really MOTM?\nTitle race implications & more",
+    subtitle: "Was he really MVP?\nTitle race implications & more",
     image: "https://images.unsplash.com/photo-1518605368461-1e1e38cd1562?q=80&w=600&auto=format&fit=crop",
     avatars: [
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop",
@@ -32,7 +32,7 @@ const liveStands = [
   {
     id: 2,
     listeners: '5.2K',
-    title: "Liverpool post-match: Salah MOTM debate",
+    title: "Liverpool post-match: Salah MVP debate",
     subtitle: "Brilliance, stats &\nwhat it means for the title",
     image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=600&auto=format&fit=crop",
     avatars: [

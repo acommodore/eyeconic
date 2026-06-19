@@ -155,7 +155,7 @@ export default function PreMatchDetails() {
         </section>
 
         {/* 3. Join the Discussion */}
-        <Link href="/stands/1" className="block cursor-pointer">
+        <Link href="/stands/2" className="block cursor-pointer">
           <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-3xl p-6 flex justify-between items-center border border-white/5 relative overflow-hidden hover:border-white/10 transition-colors">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
             <div className="relative z-10">

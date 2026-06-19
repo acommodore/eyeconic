@@ -414,7 +414,7 @@ export default function MatchPulsePage() {
                   +99
                 </div>
               </div>
-              <Link href="/stands/1" className="bg-[#FF4F00] text-white rounded-lg px-6 py-3 flex items-center gap-3 hover:brightness-110 transition-all shadow-lg relative z-10 whitespace-nowrap w-full md:w-auto justify-center">
+              <Link href="/stands/2" className="bg-[#FF4F00] text-white rounded-lg px-6 py-3 flex items-center gap-3 hover:brightness-110 transition-all shadow-lg relative z-10 whitespace-nowrap w-full md:w-auto justify-center">
                    <span className="font-black tracking-widest text-[10px] uppercase">JOIN THE STAND</span>
                    <div className="flex items-center justify-center gap-0.5 ml-2">
                       <div className="w-0.5 h-2 bg-white rounded-full" />

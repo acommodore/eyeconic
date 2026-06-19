@@ -7,7 +7,7 @@ import { useState } from "react";
 const hotTakes = [
   {
     id: 1,
-    question: "Was Salah the right MOTM?",
+    question: "Was Salah the right MVP?",
     options: [
       { text: "Yes, 100% deserved", percent: 72, color: "bg-[#00E5FF]" },
       { text: "No, Van Dijk deserved it", percent: 18, color: "bg-[#00E5FF]/30" },
@@ -65,15 +65,15 @@ const highlights = [
 ];
 
 const rosterLIV = [
-  { num: 11, name: "Mo Salah", rating: "9.2", potm: true, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { num: 4, name: "Virgil van Dijk", rating: "8.4", potm: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
-  { num: 66, name: "Trent Alexander-Arnold", rating: "7.9", potm: false, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" }
+  { num: 11, name: "Mo Salah", rating: "9.2", MVP: true, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { num: 4, name: "Virgil van Dijk", rating: "8.4", MVP: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+  { num: 66, name: "Trent Alexander-Arnold", rating: "7.9", MVP: false, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" }
 ];
 
 const rosterMCI = [
-  { num: 9, name: "Erling Haaland", rating: "6.1", potm: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
-  { num: 17, name: "Kevin De Bruyne", rating: "6.3", potm: false, img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
-  { num: 20, name: "Bernardo Silva", rating: "6.4", potm: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" }
+  { num: 9, name: "Erling Haaland", rating: "6.1", MVP: false, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
+  { num: 17, name: "Kevin De Bruyne", rating: "6.3", MVP: false, img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { num: 20, name: "Bernardo Silva", rating: "6.4", MVP: false, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" }
 ];
 
 export default function MatchDetailsPage() {
@@ -147,7 +147,7 @@ export default function MatchDetailsPage() {
       {activeTab === 'OVERVIEW' && (
         <div className="space-y-10">
           
-          {/* Fan Voted MOTM */}
+          {/* Fan Voted MVP */}
           <section className="bg-[#121212] border border-white/5 rounded-3xl p-6 relative overflow-hidden">
             {/* Background Heatmap Graphic */}
             <div className="absolute top-0 right-0 w-2/3 h-full opacity-30 pointer-events-none">
@@ -157,7 +157,7 @@ export default function MatchDetailsPage() {
             </div>
 
             <div className="flex items-center gap-2 mb-6">
-              <h2 className="text-xs font-black tracking-widest text-white uppercase">FAN VOTED MOTM</h2>
+              <h2 className="text-xs font-black tracking-widest text-white uppercase">FAN VOTED MVP</h2>
               <Eye className="w-3 h-3 text-gray-500" />
             </div>
 
@@ -176,7 +176,7 @@ export default function MatchDetailsPage() {
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
                   <h3 className="text-3xl font-black">Mo Salah</h3>
-                  <span className="px-2 py-0.5 border border-[#00E5FF]/50 text-[#00E5FF] text-[10px] font-black rounded tracking-widest">POTM</span>
+                  <span className="px-2 py-0.5 border border-[#00E5FF]/50 text-[#00E5FF] text-[10px] font-black rounded tracking-widest">MVP</span>
                 </div>
                 <p className="text-sm text-gray-400 font-medium mb-6">Liverpool • Forward • #11</p>
 
@@ -399,7 +399,7 @@ export default function MatchDetailsPage() {
                         <span className="text-sm font-black w-6 text-center">{player.num}</span>
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-bold text-white">{player.name}</span>
-                          {player.potm && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">POTM</span>}
+                          {player.MVP && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">MVP</span>}
                         </div>
                       </div>
                     </div>
@@ -417,7 +417,7 @@ export default function MatchDetailsPage() {
                         <span className="text-sm font-black w-6 text-center">{player.num}</span>
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-bold text-white">{player.name}</span>
-                          {player.potm && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">POTM</span>}
+                          {player.MVP && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">MVP</span>}
                         </div>
                       </div>
                     </div>

@@ -73,7 +73,7 @@ export default function StandsPage() {
                       Arsenal fans debating Saka's 9.2 rating
                     </h3>
                     <p className="text-xs font-medium text-gray-300 mb-4 line-clamp-2">
-                      Was he really MOTM? Title race implications, stats & more
+                      Was he really MVP? Title race implications, stats & more
                     </p>
 
                     <div className="flex items-center gap-2 mb-4">
@@ -87,7 +87,7 @@ export default function StandsPage() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Link href="/stands/1" className="flex-1 bg-[#6200EA] text-white font-bold py-2.5 rounded-xl hover:bg-[#6200EA]/90 transition-all text-sm shadow-[0_0_15px_rgba(98,0,234,0.3)] flex items-center justify-center">
+                      <Link href="/stands/2" className="flex-1 bg-[#6200EA] text-white font-bold py-2.5 rounded-xl hover:bg-[#6200EA]/90 transition-all text-sm shadow-[0_0_15px_rgba(98,0,234,0.3)] flex items-center justify-center">
                         Join Stand
                       </Link>
                       <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 transition-colors backdrop-blur">
@@ -119,7 +119,7 @@ export default function StandsPage() {
                     </div>
                     
                     <h3 className="text-lg font-bold text-white leading-tight mb-2">
-                      Liverpool post-match: Salah MOTM debate
+                      Liverpool post-match: Salah MVP debate
                     </h3>
                     <p className="text-xs font-medium text-gray-300 mb-4 line-clamp-2">
                       Brilliance, stats & what it means for the title
@@ -185,7 +185,7 @@ export default function StandsPage() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Link href="/stands/3" className="flex-1 bg-[#FF6D00] text-black font-bold py-2.5 rounded-xl hover:bg-[#FF6D00]/90 transition-all text-sm shadow-[0_0_15px_rgba(255,109,0,0.3)] flex items-center justify-center">
+                      <Link href="/stands/2" className="flex-1 bg-[#FF6D00] text-black font-bold py-2.5 rounded-xl hover:bg-[#FF6D00]/90 transition-all text-sm shadow-[0_0_15px_rgba(255,109,0,0.3)] flex items-center justify-center">
                         Join Stand
                       </Link>
                       <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 transition-colors backdrop-blur">
