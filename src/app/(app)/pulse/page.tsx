@@ -344,8 +344,8 @@ export default function MatchPulsePage() {
               <div className="flex flex-col items-center gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full" />
-                  <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-b from-[#1A0000] to-[#3A0000] rounded-[2rem] p-4 flex items-center justify-center relative z-10 border border-red-500/30">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png" alt="LIV" className="w-full h-full object-contain filter drop-shadow-xl" />
+                  <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-4 flex items-center justify-center relative z-10 border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)]">
+                    <span className="text-white font-black text-2xl md:text-4xl tracking-tighter filter drop-shadow-md">LIV</span>
                   </div>
                 </div>
                 <span className="text-xl font-bold tracking-widest text-gray-400">LIVERPOOL</span>
@@ -367,8 +367,8 @@ export default function MatchPulsePage() {
               <div className="flex flex-col items-center gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-                  <div className="w-24 h-32 md:w-32 md:h-40 bg-gradient-to-b from-[#00102A] to-[#002A5A] rounded-[2rem] p-4 flex items-center justify-center relative z-10 border border-blue-400/30">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png" alt="MCI" className="w-full h-full object-contain filter drop-shadow-xl" />
+                  <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-4 flex items-center justify-center relative z-10 border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)]">
+                    <span className="text-white font-black text-2xl md:text-4xl tracking-tighter filter drop-shadow-md">MCI</span>
                   </div>
                 </div>
                 <span className="text-xl font-bold tracking-widest text-gray-400">MAN CITY</span>
