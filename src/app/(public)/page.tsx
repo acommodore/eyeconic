@@ -181,7 +181,7 @@ function HeroSection() {
 
 function ProblemAndShiftSection() {
   return (
-    <section id="shift" className="w-full py-40 px-6 bg-black relative border-y border-white/5">
+    <section id="shift" className="w-full py-40 px-6 bg-black relative border-y border-white/5 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent pointer-events-none" />
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -210,49 +210,80 @@ function ProblemAndShiftSection() {
           </motion.p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 text-left">
-          {/* Traditional Feeds */}
+        <div className="grid md:grid-cols-2 gap-8 text-left perspective-[1000px]">
+          {/* Traditional Feeds - Make it look extremely dead and boring to contrast */}
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, rotateY: 10, scale: 0.95 }}
+            whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
             viewport={{ once: true }}
-            className="p-12 rounded-2xl bg-[#080808] border border-white/5 relative overflow-hidden"
+            className="p-12 rounded-2xl bg-[#030303] border border-white/5 relative overflow-hidden grayscale opacity-50"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gray-800" />
-            <h3 className="text-sm font-mono font-bold mb-10 text-gray-600 uppercase tracking-[0.2em]">Traditional Feeds</h3>
+            <h3 className="text-sm font-mono font-bold mb-10 text-gray-600 uppercase tracking-[0.2em]">The Old Way // Dead Data</h3>
             <ul className="space-y-8">
               {['Static Box Scores', 'Lagging Stats', 'Text Play-by-Play'].map((item, i) => (
-                <li key={i} className="flex items-center gap-5 text-gray-600 text-lg font-medium tracking-wide">
-                  <XCircle className="w-5 h-5 opacity-50 shrink-0" /> {item}
+                <li key={i} className="flex items-center gap-5 text-gray-700 text-lg font-medium tracking-wide">
+                  <XCircle className="w-5 h-5 opacity-30 shrink-0" /> {item}
                 </li>
               ))}
             </ul>
           </motion.div>
           
-          {/* The Attention Layer */}
+          {/* The Attention Layer - Hyper Animated */}
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, rotateY: -10, scale: 0.95 }}
+            whileInView={{ opacity: 1, rotateY: 0, scale: 1 }}
             viewport={{ once: true }}
-            className="p-12 rounded-2xl bg-gradient-to-b from-[#00E5FF]/[0.05] to-transparent border border-[#00E5FF]/20 relative overflow-hidden group"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="p-12 rounded-2xl relative overflow-hidden group shadow-[0_0_50px_rgba(0,229,255,0.15)] hover:shadow-[0_0_100px_rgba(0,229,255,0.3)] transition-all duration-700 border border-[#00E5FF]/30 backdrop-blur-xl bg-black/40"
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-blue-500 shadow-[0_0_20px_#00E5FF]" />
-            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#00E5FF]/10 blur-[80px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors duration-700" />
+            {/* Animated Mesh Background */}
+            <div className="absolute inset-0 opacity-30 group-hover:opacity-60 transition-opacity duration-1000 mix-blend-screen pointer-events-none">
+              <motion.div 
+                animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-20 -left-20 w-80 h-80 bg-[#00E5FF] rounded-full blur-[100px]" 
+              />
+              <motion.div 
+                animate={{ rotate: -360, scale: [1, 1.5, 1] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#FF4F00] rounded-full blur-[100px]" 
+              />
+            </div>
+            
+            {/* Laser Scanner */}
+            <motion.div 
+              animate={{ top: ["-10%", "110%"] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="absolute left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00E5FF] to-transparent shadow-[0_0_15px_#00E5FF] z-0"
+            />
             
             <h3 className="text-sm font-mono font-bold mb-10 text-white uppercase tracking-[0.2em] flex items-center gap-3 relative z-10">
-              <Activity className="w-4 h-4 text-[#00E5FF]" /> The Attention Layer
+              <Activity className="w-5 h-5 text-[#00E5FF] animate-pulse drop-shadow-[0_0_10px_#00E5FF]" /> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5FF]">The Attention Layer</span>
             </h3>
+            
             <ul className="space-y-8 relative z-10">
-              {['Live Emotional Intelligence', 'Real-Time Sentiment Parsing', 'Match Excitement Detection'].map((item, i) => (
+              {[
+                { text: 'Live Emotional Intelligence', color: 'from-[#00E5FF] to-blue-500', iconColor: '#00E5FF' },
+                { text: 'Real-Time Sentiment Parsing', color: 'from-[#FF4F00] to-orange-500', iconColor: '#FF4F00' },
+                { text: 'Match Excitement Detection', color: 'from-purple-400 to-pink-500', iconColor: '#A855F7' }
+              ].map((item, i) => (
                 <motion.li 
                   key={i} 
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + (i * 0.1) }}
-                  className="flex items-center gap-5 text-white text-lg font-medium tracking-wide"
+                  transition={{ delay: 0.3 + (i * 0.15) }}
+                  className="flex items-center gap-5 text-white text-lg font-bold tracking-wide group/item"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-[#00E5FF] shrink-0 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" /> {item}
+                  <div className="relative flex items-center justify-center shrink-0">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.color} rounded-full blur-md opacity-50 group-hover/item:opacity-100 transition-opacity`} />
+                    <CheckCircle2 className="w-6 h-6 relative z-10" color={item.iconColor} />
+                  </div>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover/item:to-white transition-all">
+                    {item.text}
+                  </span>
                 </motion.li>
               ))}
             </ul>
