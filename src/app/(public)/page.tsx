@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
-  Activity, Flame, ArrowRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, Terminal as TerminalIcon
+  Activity, Flame, ArrowRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, Terminal as TerminalIcon, Globe
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -453,35 +453,47 @@ function TerminalSection() {
 }
 
 function SocialProofSection() {
-  return (
-    <section className="w-full py-32 px-6 border-y border-white/5 bg-[#050505] relative overflow-hidden">
-      {/* Background data scroll effect */}
-      <div className="absolute inset-0 z-0 opacity-5 font-mono text-[8px] text-[#00E5FF] whitespace-nowrap overflow-hidden select-none pointer-events-none flex flex-col justify-center">
-         {Array.from({ length: 20 }).map((_, i) => (
-           <motion.div 
-             key={i}
-             animate={{ x: [0, -1000] }}
-             transition={{ duration: Math.random() * 20 + 20, repeat: Infinity, ease: "linear" }}
-             className="mb-1"
-           >
-             {Array.from({ length: 50 }).map(() => Math.random().toString(36).substring(2, 10)).join(' ')}
-           </motion.div>
-         ))}
-      </div>
+  const stats = [
+    { label: "Fan Reactions Parsed", value: "10M+", trend: "Live", icon: <Activity className="w-5 h-5 text-[#00E5FF]" /> },
+    { label: "Matches Analyzed", value: "500+", trend: "Global", icon: <Globe className="w-5 h-5 text-[#FF4F00]" /> },
+    { label: "Communities Engaged", value: "100+", trend: "Active", icon: <Users className="w-5 h-5 text-[#A855F7]" /> }
+  ];
 
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-around items-center gap-16 text-center font-mono relative z-10">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">10k+</div>
-          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Fan Reactions Parsed</div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">500+</div>
-          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Matches Analyzed</div>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">100+</div>
-          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Communities Engaged</div>
-        </motion.div>
+  return (
+    <section className="w-full py-32 px-6 border-y border-white/5 bg-[#020202] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.02] to-transparent pointer-events-none" />
+      
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 relative z-10">
+          {stats.map((stat, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-8 rounded-2xl bg-[#080808] border border-white/5 relative group overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,1)]"
+            >
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="flex justify-between items-start mb-10">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors duration-500">
+                  {stat.icon}
+                </div>
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-white/5 rounded border border-white/5 group-hover:border-[#00E5FF]/20 group-hover:text-[#00E5FF] transition-colors duration-500">
+                  {stat.trend}
+                </div>
+              </div>
+              
+              <div className="text-5xl font-mono font-bold text-white mb-2 tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-500">
+                {stat.value}
+              </div>
+              <div className="text-sm font-bold text-gray-500 uppercase tracking-widest transition-colors">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
