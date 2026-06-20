@@ -196,6 +196,17 @@ function ProblemAndShiftSection() {
               Eyeconic shows you what it felt like.
             </span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto tracking-wide leading-relaxed font-medium"
+          >
+            Dozens of matches happening simultaneously. Paralysis of choice. When you have no preference on what to watch, 
+            <span className="text-white font-bold"> The Attention Layer </span> 
+            cuts through the noise, parsing momentum swings and crowd tension to broadcast exactly which match demands your screen right now.
+          </motion.p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 text-left">
