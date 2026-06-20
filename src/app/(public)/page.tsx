@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
-  Activity, Flame, ArrowRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, ChevronRight, Terminal as TerminalIcon
+  Activity, Flame, ArrowRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, Terminal as TerminalIcon
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   return (
@@ -269,57 +270,73 @@ function FeaturesSection() {
       desc: "Track matches heating up or flatlining in real time.",
       colSpan: "md:col-span-2",
       icon: <Activity className="w-5 h-5 text-[#00E5FF]" />,
-      borderHover: "hover:border-[#00E5FF]/40"
+      glowColor: "rgba(0, 229, 255, 0.4)",
+      borderColor: "border-[#00E5FF]/30",
     },
     {
       title: "Narrative Engine",
       desc: "Instant AI distillation of the match's psychological storyline.",
       colSpan: "md:col-span-1",
       icon: <Flame className="w-5 h-5 text-[#FF4F00]" />,
-      borderHover: "hover:border-[#FF4F00]/40"
+      glowColor: "rgba(255, 79, 0, 0.4)",
+      borderColor: "border-[#FF4F00]/30",
     },
     {
       title: "Disagreement Map",
       desc: "Visualizing the exact moments fan debates explode.",
       colSpan: "md:col-span-1",
       icon: <Users className="w-5 h-5 text-purple-400" />,
-      borderHover: "hover:border-purple-500/40"
+      glowColor: "rgba(168, 85, 247, 0.4)",
+      borderColor: "border-purple-500/30",
     },
     {
       title: "Call The Moment",
       desc: "The crowd-powered prediction engine rewarding fans who spot the shifts first.",
       colSpan: "md:col-span-2",
       icon: <Play className="w-5 h-5 text-green-400" />,
-      borderHover: "hover:border-green-500/40"
+      glowColor: "rgba(74, 222, 128, 0.4)",
+      borderColor: "border-green-500/30",
     }
   ];
 
   return (
-    <section id="features" className="w-full py-40 px-6 bg-[#050505] relative">
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/3 h-full bg-gradient-to-r from-white/[0.02] to-transparent pointer-events-none" />
+    <section id="features" className="w-full py-40 px-6 bg-[#050505] relative overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="mb-24">
+        <div className="mb-24 text-center">
           <h2 className="text-[10px] font-mono text-gray-500 tracking-[0.3em] uppercase mb-4">// Core Architecture</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">The Engine</h3>
+          <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tighter drop-shadow-xl">The Engine</h3>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8 perspective-[1000px]">
           {features.map((feat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, rotateX: 10 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, ease: "easeOut" }}
-              className={`group relative p-8 rounded-2xl bg-[#0A0A0A] border border-white/5 transition-all duration-500 ${feat.borderHover} ${feat.colSpan}`}
+              transition={{ delay: i * 0.1, ease: "easeOut", duration: 0.8 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className={`group relative p-10 rounded-2xl bg-[#080808] border border-white/5 transition-all duration-300 ${feat.colSpan} overflow-hidden`}
+              style={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.8)" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent rounded-2xl pointer-events-none" />
+              {/* Spinning / Glowing Gradient background on hover */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{ background: `radial-gradient(circle at center, ${feat.glowColor} 0%, transparent 70%)`, filter: "blur(40px)" }}
+              />
+              
+              {/* Dynamic border highlight */}
+              <div className={`absolute inset-0 border rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${feat.borderColor}`} />
+              
               <div className="relative z-10 flex flex-col h-full">
-                <div className="w-12 h-12 rounded-full bg-black border border-white/10 flex items-center justify-center mb-8 shadow-inner">
+                <div className="w-14 h-14 rounded-full bg-black/80 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-8 shadow-inner relative group-hover:scale-110 transition-transform duration-500">
+                  <div className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: feat.glowColor.replace('0.4', '1') }} />
                   {feat.icon}
                 </div>
-                <h4 className="text-xl font-bold mb-3 text-white tracking-tight">{feat.title}</h4>
+                <h4 className="text-2xl font-bold mb-3 text-white tracking-tight">{feat.title}</h4>
                 <p className="text-gray-400 text-sm leading-relaxed tracking-wide">{feat.desc}</p>
               </div>
             </motion.div>
@@ -331,71 +348,107 @@ function FeaturesSection() {
 }
 
 function TerminalSection() {
+  const [dataPoints, setDataPoints] = useState<number[]>([20, 30, 25, 45, 60, 50, 75, 80, 95]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDataPoints(prev => {
+        const next = [...prev.slice(1), Math.max(10, Math.min(100, prev[prev.length - 1] + (Math.random() * 20 - 10)))];
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const pathD = `M ${dataPoints.map((p, i) => `${i * (100 / (dataPoints.length - 1))} ${100 - p}`).join(' L ')}`;
+
   return (
-    <section id="terminal" className="w-full py-40 px-6 relative bg-black border-t border-white/5">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tighter">The Attention Layer</h2>
-          <p className="text-sm text-gray-500 font-mono tracking-widest uppercase">// Bloomberg Terminal for Football Emotion</p>
+    <section id="terminal" className="w-full py-40 px-6 relative bg-black border-t border-white/5 overflow-hidden">
+      {/* Scanning Laser Line */}
+      <motion.div 
+        animate={{ top: ["0%", "100%", "0%"] }}
+        transition={{ duration: 8, ease: "linear", repeat: Infinity }}
+        className="absolute left-0 w-full h-[2px] bg-[#00E5FF]/20 shadow-[0_0_20px_#00E5FF] z-0 pointer-events-none"
+      />
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-24">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tighter">The Attention Layer</h2>
+          <p className="text-sm text-gray-500 font-mono tracking-widest uppercase flex items-center justify-center gap-3">
+             <span className="w-2 h-2 bg-[#00E5FF] rounded-full animate-ping" />
+             Bloomberg Terminal for Football Emotion
+          </p>
         </div>
         
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full max-w-5xl mx-auto rounded-xl border border-white/10 overflow-hidden shadow-[0_20px_100px_rgba(0,0,0,1)] bg-[#030303] font-mono relative"
+          className="w-full max-w-5xl mx-auto rounded-xl border border-white/10 overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,1)] bg-[#030303] font-mono relative backdrop-blur-xl"
         >
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent" />
           
           {/* Header */}
-          <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-[#0A0A0A]">
+          <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-black/80">
             <div className="flex gap-4 items-center">
-              <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
-              <span className="text-[#00E5FF] font-bold text-xs tracking-[0.2em]">LIVE TRACKING</span>
+              <span className="w-2 h-2 bg-[#00E5FF] shadow-[0_0_8px_#00E5FF] animate-pulse" />
+              <span className="text-[#00E5FF] font-bold text-xs tracking-[0.2em] relative overflow-hidden">
+                 LIVE TRACKING
+              </span>
             </div>
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-white/10" />
-              <div className="w-3 h-3 rounded-full bg-white/10" />
-              <div className="w-3 h-3 rounded-full bg-white/10" />
+            <div className="flex gap-2">
+              <div className="text-[10px] text-gray-600 mr-4 hidden sm:block">UPTIME: 99.99%</div>
+              <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+              <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+              <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
             </div>
           </div>
           
           {/* Content */}
-          <div className="p-8 md:p-12 text-sm leading-loose">
-             <div className="space-y-2 mb-12">
-                <div className="flex flex-col md:flex-row md:items-center justify-between text-white hover:bg-white/[0.02] p-4 rounded transition-colors">
-                   <span className="text-gray-300">
-                     <span className="text-white font-bold w-8 inline-block">88'</span> <span className="opacity-50 mx-4">|</span> RMA vs MCI <span className="opacity-50 mx-4">|</span> [ 2 - 2 ]
+          <div className="p-8 md:p-12 text-sm leading-loose relative">
+             {/* Chart Overlay */}
+             <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none p-12 flex items-end">
+               <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-32 stroke-[#00E5FF] fill-none stroke-2 drop-shadow-[0_0_10px_#00E5FF]">
+                 <path d={pathD} className="transition-all duration-1000 ease-linear" />
+               </svg>
+             </div>
+
+             <div className="space-y-4 mb-16 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-center justify-between text-white bg-white/[0.03] border border-white/5 p-5 rounded-lg transition-colors relative overflow-hidden">
+                   <div className="absolute left-0 top-0 w-1 h-full bg-[#FF4F00] shadow-[0_0_15px_#FF4F00]" />
+                   <span className="text-gray-300 text-base">
+                     <span className="text-white font-bold w-8 inline-block">88'</span> <span className="opacity-30 mx-4">|</span> RMA vs MCI <span className="opacity-30 mx-4">|</span> [ 2 - 2 ]
                    </span>
                    <span className="text-[#FF4F00] font-bold tracking-widest flex items-center gap-3 mt-2 md:mt-0">
-                     &gt;&gt; 98 EMOTION <span className="px-2 py-0.5 bg-[#FF4F00]/10 border border-[#FF4F00]/20 rounded text-[10px]">CRITICAL</span>
+                     &gt;&gt; 98 EMTN <span className="px-2 py-0.5 bg-[#FF4F00]/20 border border-[#FF4F00]/40 rounded text-[10px] animate-pulse">CRITICAL</span>
                    </span>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between text-white hover:bg-white/[0.02] p-4 rounded transition-colors">
-                   <span className="text-gray-300">
-                     <span className="text-white font-bold w-8 inline-block">65'</span> <span className="opacity-50 mx-4">|</span> ARS vs PSG <span className="opacity-50 mx-4">|</span> [ 1 - 0 ]
+                <div className="flex flex-col md:flex-row md:items-center justify-between text-white hover:bg-white/[0.02] p-5 rounded-lg transition-colors border border-transparent">
+                   <span className="text-gray-300 text-base">
+                     <span className="text-white font-bold w-8 inline-block">65'</span> <span className="opacity-30 mx-4">|</span> ARS vs PSG <span className="opacity-30 mx-4">|</span> [ 1 - 0 ]
                    </span>
                    <span className="text-[#00E5FF] font-bold tracking-widest flex items-center gap-3 mt-2 md:mt-0">
-                     &gt;&gt; 85 EMOTION <span className="px-2 py-0.5 bg-[#00E5FF]/10 border border-[#00E5FF]/20 rounded text-[10px]">RISING</span>
+                     &gt;&gt; 85 EMTN <span className="px-2 py-0.5 bg-[#00E5FF]/10 border border-[#00E5FF]/20 rounded text-[10px]">RISING</span>
                    </span>
                 </div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between text-gray-600 hover:bg-white/[0.02] p-4 rounded transition-colors">
-                   <span>
-                     <span className="font-bold w-8 inline-block">32'</span> <span className="opacity-50 mx-4">|</span> JUV vs MIL <span className="opacity-50 mx-4">|</span> [ 0 - 0 ]
+                <div className="flex flex-col md:flex-row md:items-center justify-between text-gray-600 hover:bg-white/[0.02] p-5 rounded-lg transition-colors border border-transparent">
+                   <span className="text-base">
+                     <span className="font-bold w-8 inline-block">32'</span> <span className="opacity-30 mx-4">|</span> JUV vs MIL <span className="opacity-30 mx-4">|</span> [ 0 - 0 ]
                    </span>
                    <span className="font-bold tracking-widest flex items-center gap-3 mt-2 md:mt-0">
-                     &gt;&gt; 42 EMOTION <span className="px-2 py-0.5 bg-gray-800 border border-gray-700 rounded text-[10px] text-gray-500">STAGNANT</span>
+                     &gt;&gt; 42 EMTN <span className="px-2 py-0.5 bg-gray-900 border border-gray-800 rounded text-[10px] text-gray-500">STAGNANT</span>
                    </span>
                 </div>
              </div>
 
-             <div className="relative overflow-hidden bg-gradient-to-r from-[#FF4F00]/10 to-transparent border border-[#FF4F00]/20 p-6 rounded text-[#FF4F00]">
-                <div className="absolute left-0 top-0 w-1 h-full bg-[#FF4F00]" />
+             <div className="relative overflow-hidden bg-[#FF4F00]/5 border border-[#FF4F00]/20 p-6 rounded-lg text-[#FF4F00] backdrop-blur-sm z-10 shadow-[inset_0_0_30px_rgba(255,79,0,0.1)]">
+                <div className="absolute -inset-x-full top-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF4F00] to-transparent animate-[scan_3s_linear_infinite]" />
                 <div className="flex items-center gap-3 mb-3 font-bold uppercase tracking-[0.2em] text-xs">
-                   <AlertTriangle className="w-4 h-4 animate-pulse" /> MOMENTUM SHIFT DETECTED
+                   <AlertTriangle className="w-4 h-4 animate-pulse" /> SYSTEM ALERT // MOMENTUM SHIFT
                 </div>
-                <p className="font-medium tracking-wide text-gray-300">
-                  <span className="text-white font-bold">ALERT:</span> Madrid pressing hard. Crowd sentiment spiking <span className="text-white bg-[#FF4F00]/20 px-1 rounded">+400%</span> (Last 120s).
+                <p className="font-medium tracking-wide text-gray-300 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F00] animate-ping" />
+                  Madrid pressing heavily. Crowd sentiment spiking <span className="text-white bg-[#FF4F00]/20 border border-[#FF4F00]/30 px-2 py-0.5 rounded text-xs">+400%</span> in the last 120s.
                 </p>
              </div>
           </div>
@@ -407,19 +460,33 @@ function TerminalSection() {
 
 function SocialProofSection() {
   return (
-    <section className="w-full py-24 px-6 border-y border-white/5 bg-[#050505]">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-around items-center gap-16 text-center font-mono">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="text-5xl font-bold text-white mb-4 tracking-tighter">10k+</div>
-          <div className="text-gray-500 font-bold tracking-[0.2em] uppercase text-[10px]">Fan Reactions Parsed</div>
+    <section className="w-full py-32 px-6 border-y border-white/5 bg-[#050505] relative overflow-hidden">
+      {/* Background data scroll effect */}
+      <div className="absolute inset-0 z-0 opacity-5 font-mono text-[8px] text-[#00E5FF] whitespace-nowrap overflow-hidden select-none pointer-events-none flex flex-col justify-center">
+         {Array.from({ length: 20 }).map((_, i) => (
+           <motion.div 
+             key={i}
+             animate={{ x: [0, -1000] }}
+             transition={{ duration: Math.random() * 20 + 20, repeat: Infinity, ease: "linear" }}
+             className="mb-1"
+           >
+             {Array.from({ length: 50 }).map(() => Math.random().toString(36).substring(2, 10)).join(' ')}
+           </motion.div>
+         ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-around items-center gap-16 text-center font-mono relative z-10">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">10k+</div>
+          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Fan Reactions Parsed</div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-          <div className="text-5xl font-bold text-white mb-4 tracking-tighter">500+</div>
-          <div className="text-gray-500 font-bold tracking-[0.2em] uppercase text-[10px]">Matches Analyzed</div>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">500+</div>
+          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Matches Analyzed</div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-          <div className="text-5xl font-bold text-white mb-4 tracking-tighter">100+</div>
-          <div className="text-gray-500 font-bold tracking-[0.2em] uppercase text-[10px]">Communities Engaged</div>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">100+</div>
+          <div className="text-[#00E5FF] font-bold tracking-[0.2em] uppercase text-[10px] drop-shadow-[0_0_8px_#00E5FF]">Communities Engaged</div>
         </motion.div>
       </div>
     </section>
@@ -428,31 +495,50 @@ function SocialProofSection() {
 
 function WaitlistSection() {
   return (
-    <section className="w-full py-40 px-6 relative overflow-hidden bg-black">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#00E5FF]/5 rounded-full blur-[150px] pointer-events-none" />
+    <section className="w-full py-40 px-6 relative overflow-hidden bg-[#020202]">
+      {/* Abstract Data Core */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] pointer-events-none z-0">
+         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#00E5FF_0%,_transparent_50%)] opacity-10 blur-[50px]" />
+         <motion.div 
+           animate={{ rotate: 360 }}
+           transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/[0.05] rounded-full border-dashed"
+         />
+         <motion.div 
+           animate={{ rotate: -360 }}
+           transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#00E5FF]/10 rounded-full"
+         />
+      </div>
       
       <div className="max-w-xl mx-auto text-center relative z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tighter">Join the Future of Football Discovery</h2>
-        <p className="text-[#00E5FF] font-mono text-xs tracking-[0.3em] uppercase mb-16">// Enter the Waitlist</p>
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tighter drop-shadow-2xl">Join the Future of Football Discovery</h2>
+        <p className="text-[#00E5FF] font-mono text-xs tracking-[0.4em] uppercase mb-16 flex justify-center items-center gap-4">
+           <span className="w-8 h-[1px] bg-[#00E5FF]" /> Enter the Waitlist <span className="w-8 h-[1px] bg-[#00E5FF]" />
+        </p>
         
-        <form className="space-y-6 text-left" onSubmit={(e) => e.preventDefault()}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <form className="space-y-6 text-left p-10 backdrop-blur-2xl bg-white/[0.02] border border-white/10 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)]" onSubmit={(e) => e.preventDefault()}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="relative group">
-              <input type="text" className="w-full bg-[#0A0A0A] border-b border-white/20 px-4 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Name" id="name" />
-              <label htmlFor="name" className="absolute left-4 top-4 text-gray-600 font-mono text-sm transition-all peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-focus:bg-black peer-focus:px-1 peer-valid:-top-3 peer-valid:text-[10px] peer-valid:bg-black peer-valid:px-1 uppercase tracking-widest">[ Name ]</label>
+              <input type="text" className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Name" id="name" />
+              <label htmlFor="name" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-400 uppercase tracking-widest">[ Name ]</label>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
             </div>
             <div className="relative group">
-              <input type="text" className="w-full bg-[#0A0A0A] border-b border-white/20 px-4 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Club" id="club" />
-              <label htmlFor="club" className="absolute left-4 top-4 text-gray-600 font-mono text-sm transition-all peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-focus:bg-black peer-focus:px-1 peer-valid:-top-3 peer-valid:text-[10px] peer-valid:bg-black peer-valid:px-1 uppercase tracking-widest">[ Favourite Club ]</label>
+              <input type="text" className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Club" id="club" />
+              <label htmlFor="club" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-400 uppercase tracking-widest">[ Favourite Club ]</label>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
             </div>
           </div>
-          <div className="relative group mt-6">
-            <input type="email" className="w-full bg-[#0A0A0A] border-b border-white/20 px-4 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Email" id="email" />
-            <label htmlFor="email" className="absolute left-4 top-4 text-gray-600 font-mono text-sm transition-all peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-focus:bg-black peer-focus:px-1 peer-valid:-top-3 peer-valid:text-[10px] peer-valid:bg-black peer-valid:px-1 uppercase tracking-widest">[ Email Address ]</label>
+          <div className="relative group mt-8">
+            <input type="email" className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Email" id="email" />
+            <label htmlFor="email" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-400 uppercase tracking-widest">[ Email Address ]</label>
+            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
           </div>
           
-          <button className="relative w-full mt-10 bg-white text-black font-bold tracking-[0.2em] text-sm py-5 hover:scale-[1.02] transition-transform uppercase overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+          <button className="relative w-full mt-12 bg-[#00E5FF] text-black font-black tracking-[0.3em] text-sm py-6 rounded-none hover:bg-white transition-all uppercase overflow-hidden group">
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             [ SECURE ACCESS ]
           </button>
         </form>
@@ -463,11 +549,11 @@ function WaitlistSection() {
 
 function Footer() {
   return (
-    <footer className="w-full border-t border-white/5 bg-[#050505] py-16 px-6">
+    <footer className="w-full border-t border-white/5 bg-[#030303] py-16 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3">
-          <Activity className="w-5 h-5 text-gray-400" />
-          <span className="text-lg font-bold tracking-tighter text-gray-400">Eyeconic</span>
+          <Activity className="w-5 h-5 text-gray-500" />
+          <span className="text-lg font-bold tracking-tighter text-gray-500">Eyeconic</span>
         </div>
         
         <div className="flex gap-10 text-[10px] text-gray-600 font-mono tracking-[0.2em] uppercase">
