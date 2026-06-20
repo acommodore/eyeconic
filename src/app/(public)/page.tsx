@@ -193,7 +193,7 @@ function ProblemAndShiftSection() {
           >
             Traditional apps show you what happened.<br/> 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-blue-500">
-              Eyeconic shows you what it felt like.
+              Eyeconic shows you what is worth watching.
             </span>
           </motion.h2>
           <motion.p
