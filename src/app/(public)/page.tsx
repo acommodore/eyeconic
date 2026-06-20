@@ -364,13 +364,7 @@ function TerminalSection() {
 
   return (
     <section id="terminal" className="w-full py-40 px-6 relative bg-black border-t border-white/5 overflow-hidden">
-      {/* Scanning Laser Line */}
-      <motion.div 
-        animate={{ top: ["0%", "100%", "0%"] }}
-        transition={{ duration: 8, ease: "linear", repeat: Infinity }}
-        className="absolute left-0 w-full h-[2px] bg-[#00E5FF]/20 shadow-[0_0_20px_#00E5FF] z-0 pointer-events-none"
-      />
-
+      {/* Scanning Laser Line Removed */}
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tighter">The Attention Layer</h2>
