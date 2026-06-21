@@ -21,8 +21,11 @@ export default function DiscoverPage() {
           {/* Top Bar */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-3">
-              <span className="px-2 py-1 bg-[#D32F2F] text-[10px] font-black tracking-wider rounded">LIVE NOW</span>
-              <span className="text-xs text-gray-300 font-medium tracking-wide flex items-center gap-2">
+              <div className="flex items-center gap-1.5 px-2 py-1 bg-black/60 border border-[#FF4F00]/30 rounded font-mono">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FF4F00] animate-pulse" />
+                <span className="text-[#FF4F00] text-[9px] font-bold tracking-widest">[ LIVE_FEED // ACTIVE ]</span>
+              </div>
+              <span className="text-xs text-gray-300 font-medium tracking-wide flex items-center gap-2 font-mono">
                  <div className="w-4 h-4 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
                     <span className="w-2 h-2 rounded-full bg-white" />
                  </div>
@@ -48,9 +51,9 @@ export default function DiscoverPage() {
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="flex items-center gap-4 md:gap-8 text-5xl md:text-7xl font-black tracking-tighter">
+                <div className="flex items-center gap-4 md:gap-8 text-5xl md:text-7xl font-mono font-black tracking-tighter">
                   <span>2</span>
-                  <span className="text-gray-600">-</span>
+                  <span className="text-[#00E5FF]/50">-</span>
                   <span>1</span>
                 </div>
                 <span className="text-[#00E5FF] font-mono font-bold text-lg mt-2">68'</span>
@@ -245,8 +248,11 @@ export default function DiscoverPage() {
                 <div className="relative z-20 flex-1 flex flex-col">
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 bg-[#D32F2F] text-[9px] font-black tracking-wider rounded">LIVE</span>
-                      <span className="text-[10px] text-gray-300 font-medium drop-shadow-md">Premier League</span>
+                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
+                        <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
+                        [ SYS.SYNC ]
+                      </span>
+                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">Premier League</span>
                     </div>
                     <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
                       <Eye className="w-3 h-3" /> 12.4K
@@ -261,7 +267,7 @@ export default function DiscoverPage() {
                       <span className="text-xs font-bold drop-shadow-md">MCI</span>
                     </div>
                     <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-black tracking-tighter text-white">2 - 1</span>
+                      <span className="text-3xl font-mono font-black tracking-tighter text-white">2 - 1</span>
                       <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">68'</span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
@@ -272,12 +278,18 @@ export default function DiscoverPage() {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 mb-6 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[0_0_15px_rgba(255,79,0,0.1)]">
-                    <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                      <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-black tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                      <span className="text-xl font-black text-[#FF4F00]">78</span>
+                  <div className="flex flex-col gap-2 mb-6">
+                    <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[inset_0_0_20px_rgba(255,79,0,0.05)]">
+                      <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
+                        <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
+                        <span className="text-xl font-mono font-black text-[#FF4F00]">78</span>
+                      </div>
+                      <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">End-to-end transitions increasing</p>
                     </div>
-                    <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">End-to-end transitions increasing</p>
+                    <div className="text-[8px] font-mono text-[#00E5FF]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#00E5FF]/20">
+                      <span className="w-1 h-1 bg-[#00E5FF] animate-pulse rounded-full" />
+                      &gt; PARSING 4.2K REACTIONS/SEC...
+                    </div>
                   </div>
 
                   <div className="flex gap-2 mt-auto">
@@ -295,8 +307,11 @@ export default function DiscoverPage() {
                 <div className="relative z-20 flex-1 flex flex-col">
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 bg-[#D32F2F] text-[9px] font-black tracking-wider rounded">LIVE</span>
-                      <span className="text-[10px] text-gray-300 font-medium drop-shadow-md">La Liga</span>
+                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#FF4F00]/30 rounded font-mono text-[#FF4F00] text-[8px] font-bold tracking-widest">
+                        <div className="w-1 h-1 rounded-full bg-[#FF4F00] animate-pulse" />
+                        [ SYS.SYNC ]
+                      </span>
+                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">La Liga</span>
                     </div>
                     <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
                       <Eye className="w-3 h-3" /> 8.2K
@@ -311,7 +326,7 @@ export default function DiscoverPage() {
                       <span className="text-xs font-bold drop-shadow-md">RMA</span>
                     </div>
                     <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-black tracking-tighter text-white">1 - 1</span>
+                      <span className="text-3xl font-mono font-black tracking-tighter text-white">1 - 1</span>
                       <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">55'</span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
@@ -322,12 +337,18 @@ export default function DiscoverPage() {
                     </div>
                   </div>
 
-                  <div className="flex gap-3 mb-6 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[0_0_15px_rgba(255,79,0,0.1)]">
-                    <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                      <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-black tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                      <span className="text-xl font-black text-[#FF4F00]">82</span>
+                  <div className="flex flex-col gap-2 mb-6">
+                    <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[inset_0_0_20px_rgba(255,79,0,0.05)]">
+                      <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
+                        <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
+                        <span className="text-xl font-mono font-black text-[#FF4F00]">82</span>
+                      </div>
+                      <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">Momentum swinging both ways</p>
                     </div>
-                    <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">Momentum swinging both ways</p>
+                    <div className="text-[8px] font-mono text-[#FF4F00]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#FF4F00]/20">
+                      <span className="w-1 h-1 bg-[#FF4F00] animate-pulse rounded-full" />
+                      &gt; DETECTING POLARIZED SENTIMENT...
+                    </div>
                   </div>
 
                   <div className="flex gap-2 mt-auto">
@@ -345,8 +366,11 @@ export default function DiscoverPage() {
                 <div className="relative z-20 flex-1 flex flex-col">
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 bg-[#D32F2F] text-[9px] font-black tracking-wider rounded">LIVE</span>
-                      <span className="text-[10px] text-gray-300 font-medium drop-shadow-md">Serie A</span>
+                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
+                        <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
+                        [ SYS.SYNC ]
+                      </span>
+                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">Serie A</span>
                     </div>
                     <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
                       <Eye className="w-3 h-3" /> 4.6K
@@ -361,7 +385,7 @@ export default function DiscoverPage() {
                       <span className="text-xs font-bold drop-shadow-md">JUV</span>
                     </div>
                     <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-black tracking-tighter text-white">0 - 0</span>
+                      <span className="text-3xl font-mono font-black tracking-tighter text-white">0 - 0</span>
                       <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">24'</span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
@@ -372,8 +396,14 @@ export default function DiscoverPage() {
                     </div>
                   </div>
 
-                  <div className="flex mb-6 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#00E5FF]/30 items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.1)]">
-                    <p className="text-[11px] text-[#00E5FF] font-black tracking-widest flex items-center gap-2"><GitBranch className="w-4 h-4" /> TACTICAL BATTLE</p>
+                  <div className="flex flex-col gap-2 mb-6">
+                    <div className="flex bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#00E5FF]/30 items-center justify-center shadow-[inset_0_0_20px_rgba(0,229,255,0.05)]">
+                      <p className="text-[11px] text-[#00E5FF] font-mono font-black tracking-widest flex items-center gap-2"><GitBranch className="w-4 h-4" /> TACTICAL BATTLE</p>
+                    </div>
+                    <div className="text-[8px] font-mono text-[#00E5FF]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#00E5FF]/20">
+                      <span className="w-1 h-1 bg-[#00E5FF] animate-pulse rounded-full" />
+                      &gt; LOW VOLATILITY DETECTED
+                    </div>
                   </div>
 
                   <div className="flex gap-2 mt-auto">
@@ -416,8 +446,11 @@ export default function DiscoverPage() {
                     <div className="relative z-20 flex-1 flex flex-col">
                       <div className="flex justify-between items-center mb-6">
                         <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 bg-[#00E5FF] text-black text-[9px] font-black tracking-wider rounded">UPCOMING</span>
-                          <span className="text-[10px] text-gray-300 font-medium drop-shadow-md">{match.time}</span>
+                          <span className="flex items-center gap-1 px-1.5 py-0.5 bg-[#00E5FF]/10 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
+                            <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
+                            [ SCHEDULED ]
+                          </span>
+                          <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">{match.time}</span>
                         </div>
                         <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
                           {match.fans} FANS
@@ -443,12 +476,18 @@ export default function DiscoverPage() {
                         </div>
                       </div>
 
-                      <div className="flex gap-3 mb-6 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
-                        <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                          <span className="flex items-center gap-1 text-[9px] text-purple-500 font-black tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                          <span className="text-xl font-black text-purple-500">{match.chaos.replace('%','')}</span>
+                      <div className="flex flex-col gap-2 mb-6">
+                        <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-purple-500/30 shadow-[inset_0_0_20px_rgba(168,85,247,0.05)]">
+                          <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
+                            <span className="flex items-center gap-1 text-[9px] text-purple-500 font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
+                            <span className="text-xl font-mono font-black text-purple-500">{match.chaos.replace('%','')}</span>
+                          </div>
+                          <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">{match.insights[0]}</p>
                         </div>
-                        <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">{match.insights[0]}</p>
+                        <div className="text-[8px] font-mono text-purple-500/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-purple-500/20">
+                          <span className="w-1 h-1 bg-purple-500 animate-pulse rounded-full" />
+                          &gt; FORECASTING MATCH VOLATILITY...
+                        </div>
                       </div>
 
                       <div className="flex gap-2 mt-auto">
