@@ -19,8 +19,8 @@ export default function Home() {
       <main className="flex flex-col items-center overflow-hidden relative z-10">
         <HeroSection />
         <ProblemAndShiftSection />
-        <FeaturesSection />
         <TerminalSection />
+        <FeaturesSection />
         <SocialProofSection />
         <WaitlistSection />
       </main>

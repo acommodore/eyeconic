@@ -226,7 +226,13 @@ export default function OnboardingPage() {
                             return (
                               <button
                                 key={`sug-${team.id}`}
-                                onClick={() => setRival(team.id)}
+                                onClick={() => {
+                                  setRival(team.id);
+                                  setTimeout(() => {
+                                    setStep(3);
+                                    window.scrollTo(0, 0);
+                                  }, 250);
+                                }}
                                 className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
                                   isSelected 
                                     ? 'border-[#FF4F00] bg-[#FF4F00]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
@@ -273,6 +279,11 @@ export default function OnboardingPage() {
                                     }, 250);
                                   } else {
                                     setRival(team.id);
+                                    // Auto advance
+                                    setTimeout(() => {
+                                      setStep(3);
+                                      window.scrollTo(0, 0);
+                                    }, 250);
                                   }
                                 }}
                                 className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
@@ -304,7 +315,7 @@ export default function OnboardingPage() {
         </main>
 
         {/* Fixed Bottom Bar */}
-        {!isFinishing && step > 1 && (
+        {!isFinishing && step === 3 && (
           <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-20">
             <button
               onClick={handleNext}
