@@ -1,228 +1,112 @@
 "use client";
 
 import Link from "next/link";
-import { Eye, Bell, Zap, GitBranch, Bookmark, Crosshair, Star, Swords, Dices, Mic } from "lucide-react";
+import { Eye, Bell, Zap, GitBranch, Bookmark, Crosshair, Star, Swords, Dices, Mic, Activity, TrendingUp, BarChart2 } from "lucide-react";
 
 export default function DiscoverPage() {
   return (
     <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white space-y-10">
       
       {/* 1. HERO SECTION: FEATURED MATCH */}
-      <section className="w-full rounded-[32px] border border-white/20 overflow-hidden relative group shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-        {/* Dark gradient primarily at the bottom for text readability, clearer at the top */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-black/20 z-10" />
-        {/* Subtle team color tints on the edges */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/20 via-transparent to-[#FF0000]/10 z-10 mix-blend-overlay" />
-        {/* Bright, high-quality stadium background */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7137b29de2f6?q=80&w=2400&auto=format&fit=crop')] bg-cover bg-center opacity-80 group-hover:scale-105 transition-transform duration-1000" />
+      <section className="w-full rounded-2xl border border-white/10 overflow-hidden relative group shadow-[0_0_50px_rgba(0,0,0,0.8)] bg-[#0A0A0A]">
+        {/* Very dark gradient primarily at the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#050505]/80 to-transparent z-10" />
+        {/* Moody background image, very low opacity */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7137b29de2f6?q=80&w=2400&auto=format&fit=crop')] bg-cover bg-center opacity-20 grayscale mix-blend-luminosity group-hover:scale-105 transition-transform duration-1000" />
         
-        <div className="relative z-20 p-6 md:p-10 flex flex-col h-full">
+        <div className="relative z-20 p-6 md:p-8 flex flex-col h-[400px]">
           
           {/* Top Bar */}
           <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 px-2 py-1 bg-black/60 border border-[#FF4F00]/30 rounded font-mono">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#FF4F00] animate-pulse" />
-                <span className="text-[#FF4F00] text-[9px] font-bold tracking-widest">[ LIVE_FEED // ACTIVE ]</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 px-2 py-1 bg-black/60 border border-[#00E5FF]/20 rounded font-mono">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+                <span className="text-[#00E5FF] text-[10px] font-bold tracking-widest">[ SYSTEM // ACTIVE ]</span>
               </div>
-              <span className="text-xs text-gray-300 font-medium tracking-wide flex items-center gap-2 font-mono">
-                 <div className="w-4 h-4 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
-                    <span className="w-2 h-2 rounded-full bg-white" />
-                 </div>
+              <span className="text-xs text-gray-400 font-medium tracking-wide flex items-center gap-2 font-mono">
                  Premier League
               </span>
             </div>
-            <div className="flex items-center gap-4 text-gray-300">
-              <span className="flex items-center gap-1.5 text-xs font-bold">
+            <div className="flex items-center gap-4 text-gray-400 font-mono text-xs">
+              <span className="flex items-center gap-1.5">
                 <Eye className="w-4 h-4" /> 12.4K
               </span>
-              <Bell className="w-5 h-5 text-[#00E5FF] cursor-pointer hover:scale-110 transition-transform" />
+              <Bell className="w-4 h-4 hover:text-white cursor-pointer transition-colors" />
             </div>
           </div>
 
           {/* Main Scoreboard */}
-          <div className="flex flex-col items-center justify-center mb-10">
-            <div className="flex items-center justify-center gap-6 md:gap-12">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#6CABDD] flex items-center justify-center shadow-[0_0_30px_rgba(108,171,221,0.4)] border-4 border-white/20">
-                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">MCI</span>
+          <div className="flex flex-col items-center justify-center flex-1">
+            <div className="flex items-center justify-center gap-8 md:gap-12">
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shadow-[0_0_20px_rgba(108,171,221,0.2)]">
+                  <span className="text-[#6CABDD] font-black text-lg md:text-xl tracking-tighter">MCI</span>
                 </div>
-                <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">MCI</span>
+                <span className="text-xs md:text-sm font-bold tracking-widest text-gray-300">MAN CITY</span>
               </div>
               
               <div className="flex flex-col items-center">
-                <div className="flex items-center gap-4 md:gap-8 text-5xl md:text-7xl font-mono font-black tracking-tighter">
+                <div className="flex items-center gap-4 md:gap-6 text-5xl md:text-6xl font-mono font-black tracking-tighter text-white">
                   <span>2</span>
-                  <span className="text-[#00E5FF]/50">-</span>
+                  <span className="text-gray-700">-</span>
                   <span>1</span>
                 </div>
-                <span className="text-[#00E5FF] font-mono font-bold text-lg mt-2">68'</span>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">LIV</span>
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#C8102E] flex items-center justify-center shadow-[0_0_30px_rgba(200,16,46,0.4)] border-4 border-white/20">
-                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">LIV</span>
+                <div className="flex items-center gap-2 mt-4 text-[#00E5FF] font-mono text-xs md:text-sm border border-[#00E5FF]/30 px-3 py-1 rounded bg-[#00E5FF]/5">
+                  <span className="w-1.5 h-1.5 bg-[#00E5FF] rounded-full animate-ping" />
+                  68:14
                 </div>
               </div>
+
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shadow-[0_0_20px_rgba(200,16,46,0.2)]">
+                  <span className="text-[#C8102E] font-black text-lg md:text-xl tracking-tighter">LIV</span>
+                </div>
+                <span className="text-xs md:text-sm font-bold tracking-widest text-gray-300">LIVERPOOL</span>
+              </div>
             </div>
-            <p className="text-[10px] text-gray-500 font-bold tracking-[0.2em] mt-6">ETIHAD STADIUM</p>
           </div>
 
-          {/* Bottom Data Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-end mt-auto pt-10">
-            {/* MVP & Metrics */}
-            <div className="flex items-center justify-between bg-black/60 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full border-2 border-[#00E5FF] p-0.5 overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop" alt="Haaland" className="w-full h-full rounded-full object-cover" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-black text-[#00E5FF] tracking-wider">MVP</span>
-                  <h4 className="font-black text-lg leading-tight uppercase">E. HAALAND</h4>
-                  <p className="text-[10px] text-gray-400 font-bold tracking-wider mt-0.5 flex items-center gap-1">
-                    <span className="text-[#00E5FF] text-sm">9.1</span> AS VOTED BY 12.4K FANS
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-6 pr-2">
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center gap-1.5 text-gray-400 text-[10px] font-bold tracking-wider">
-                    <Zap className="w-3 h-3 text-[#FF4F00]" /> CHAOS
-                  </div>
-                  <span className="text-xl font-black text-[#FF4F00]">78</span>
-                </div>
-                <div className="w-px h-8 bg-white/10 self-center" />
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center gap-1.5 text-gray-400 text-[10px] font-bold tracking-wider">
-                    <GitBranch className="w-3 h-3 text-[#00E5FF]" /> TACTICAL
-                  </div>
-                  <span className="text-xl font-black text-[#00E5FF]">84</span>
-                </div>
-              </div>
+          {/* Bottom Data Row - Terminal Style */}
+          <div className="flex items-end justify-between mt-auto">
+            <div className="flex flex-col gap-2 w-1/2 md:w-1/3">
+               <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase">Momentum Delta</span>
+               <div className="flex items-end gap-1 h-6">
+                 {[40, 45, 30, 60, 75, 80, 95, 85, 90].map((h, i) => (
+                   <div key={i} className="w-1 md:w-2 bg-[#00E5FF]" style={{ height: `${h}%`, opacity: (i+1)/9 }} />
+                 ))}
+               </div>
+               <span className="text-[9px] md:text-xs text-[#00E5FF] font-mono font-bold truncate">&gt; MCI PRESSURE SURGING</span>
             </div>
 
-            {/* Pulse Button & Ticker */}
-            <div className="flex flex-col items-end gap-4">
-              <div className="flex items-center text-[10px] font-bold tracking-wider text-gray-400 w-full overflow-hidden whitespace-nowrap relative">
-                <div className="flex gap-3 animate-marquee w-fit whitespace-nowrap pl-[100%]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] self-center" /> End-to-end transitions
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] ml-2 self-center" /> High pressing intensity
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] ml-2 self-center" /> Lead changes: <span className="text-[#00E5FF]">3</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] ml-2 self-center" /> Big chances: <span className="text-[#00E5FF]">6</span>
-                </div>
+            <div className="flex flex-col items-end gap-3 w-1/2 md:w-1/3">
+              <div className="flex items-center gap-4 text-[10px] md:text-xs font-mono text-gray-400">
+                <div className="flex items-center gap-1"><Zap className="w-3 h-3 text-[#FF4F00]"/> CHAOS: <span className="text-white font-bold">78</span></div>
+                <div className="hidden md:flex items-center gap-1"><GitBranch className="w-3 h-3 text-[#00E5FF]"/> TACTIC: <span className="text-white font-bold">84</span></div>
               </div>
-              <Link href="/pulse" className="w-full bg-gradient-to-r from-[#FF4F00] to-[#FF8C00] text-black font-black py-4 rounded-xl hover:brightness-110 transition-all shadow-[0_0_30px_rgba(255,79,0,0.3)] text-center flex flex-col items-center justify-center">
-                <span className="block text-lg tracking-widest">ENTER MATCH PULSE</span>
-                <span className="block text-[10px] font-bold opacity-80 mt-1 tracking-wider">Live ratings, fan talk & real-time moments</span>
+              <Link href="/pulse" className="bg-white text-black font-bold text-[10px] md:text-xs px-4 md:px-6 py-2 md:py-2.5 rounded hover:bg-gray-200 transition-colors tracking-widest flex items-center gap-2 w-fit">
+                <Activity className="w-3 h-3 md:w-4 md:h-4" /> ENTER PULSE
               </Link>
             </div>
-          </div>
-
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            <div className="w-6 h-1 rounded-full bg-[#00E5FF]" />
-            <div className="w-4 h-1 rounded-full bg-white/20" />
-            <div className="w-4 h-1 rounded-full bg-white/20" />
-            <div className="w-4 h-1 rounded-full bg-white/20" />
           </div>
 
         </div>
       </section>
 
-      {/* 2. CHOOSE YOUR EXPERIENCE (Horizontal Strip) */}
-      <section>
-        <h2 className="text-xs font-black tracking-widest text-white uppercase mb-4">CHOOSE YOUR EXPERIENCE</h2>
-        <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
-          
-          <button className="min-w-[140px] flex-1 border border-[#00E5FF]/30 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:border-[#00E5FF] transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <Bookmark className="w-8 h-8 text-[#00E5FF] mb-1" />
-              <span className="text-[10px] font-bold tracking-widest text-white">BOOKMARKS</span>
-              <span className="text-2xl font-black text-[#00E5FF]">8</span>
-              <div className="flex items-center gap-1.5 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
-                <span className="text-[8px] font-bold text-[#00E5FF] tracking-widest">LIVE MATCHES</span>
-              </div>
-            </div>
+      {/* 2. CHOOSE YOUR EXPERIENCE (Sleek Toggles) */}
+      <section className="flex gap-2 overflow-x-auto pb-2 hover-scrollbar">
+        {[
+          { icon: <Bookmark className="w-4 h-4" />, label: "BOOKMARKS", color: "text-[#00E5FF]", border: "border-[#00E5FF]/30", bg: "bg-[#00E5FF]/5" },
+          { icon: <Zap className="w-4 h-4" />, label: "CHAOS", color: "text-[#FF4F00]", border: "border-[#FF4F00]/30", bg: "bg-transparent" },
+          { icon: <GitBranch className="w-4 h-4" />, label: "TACTICAL", color: "text-gray-400", border: "border-white/10", bg: "bg-transparent" },
+          { icon: <Star className="w-4 h-4" />, label: "STAR WATCH", color: "text-gray-400", border: "border-white/10", bg: "bg-transparent" },
+          { icon: <Swords className="w-4 h-4" />, label: "RIVALRIES", color: "text-gray-400", border: "border-white/10", bg: "bg-transparent" },
+          { icon: <Dices className="w-4 h-4" />, label: "SURPRISE ME", color: "text-gray-400", border: "border-white/10", bg: "bg-transparent" }
+        ].map((filter, i) => (
+          <button key={i} className={`flex items-center gap-2 px-4 py-2.5 rounded border ${filter.border} ${filter.bg} hover:bg-white/5 transition-colors whitespace-nowrap`}>
+            <span className={filter.color}>{filter.icon}</span>
+            <span className={`text-[10px] font-bold tracking-widest ${i === 0 ? 'text-white' : 'text-gray-400'}`}>{filter.label}</span>
           </button>
-
-          <button className="min-w-[140px] flex-1 border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:border-[#FF4F00]/50 transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <Zap className="w-8 h-8 text-[#FF4F00] mb-1 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(255,79,0,0.8)]" />
-              <span className="text-[10px] font-bold tracking-widest text-gray-300 group-hover:text-white transition-colors">CHAOS</span>
-              <span className="text-2xl font-black text-white">6</span>
-              <div className="flex items-center gap-1.5 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF4F00] animate-pulse" />
-                <span className="text-[8px] font-bold text-gray-400 tracking-widest">LIVE MATCHES</span>
-              </div>
-            </div>
-          </button>
-
-          <button className="min-w-[140px] flex-1 border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:border-[#00E5FF]/50 transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <GitBranch className="w-8 h-8 text-[#00E5FF] mb-1 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
-              <span className="text-[10px] font-bold tracking-widest text-gray-300 group-hover:text-white transition-colors">TACTICAL</span>
-              <span className="text-2xl font-black text-white">4</span>
-              <div className="flex items-center gap-1.5 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
-                <span className="text-[8px] font-bold text-gray-400 tracking-widest">LIVE MATCHES</span>
-              </div>
-            </div>
-          </button>
-
-          <button className="min-w-[140px] flex-1 border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:border-[#6200EA]/50 transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7137b29de2f6?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <Star className="w-8 h-8 text-[#6200EA] mb-1 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(98,0,234,0.8)]" />
-              <span className="text-[10px] font-bold tracking-widest text-gray-300 group-hover:text-white transition-colors">STAR WATCH</span>
-              <span className="text-2xl font-black text-white">5</span>
-              <div className="flex items-center gap-1.5 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#6200EA] animate-pulse" />
-                <span className="text-[8px] font-bold text-gray-400 tracking-widest">LIVE MATCHES</span>
-              </div>
-            </div>
-          </button>
-
-          <button className="min-w-[140px] flex-1 border border-white/5 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:border-[#D32F2F]/50 transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/40 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <Swords className="w-8 h-8 text-[#D32F2F] mb-1 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(211,47,47,0.8)]" />
-              <span className="text-[10px] font-bold tracking-widest text-gray-300 group-hover:text-white transition-colors">RIVALRIES</span>
-              <span className="text-2xl font-black text-white">3</span>
-              <div className="flex items-center gap-1.5 mt-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
-                <span className="text-[8px] font-bold text-gray-400 tracking-widest">LIVE MATCHES</span>
-              </div>
-            </div>
-          </button>
-
-          <button className="min-w-[140px] flex-1 border border-dashed border-white/20 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors snap-start group relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/80 z-10 group-hover:bg-black/60 transition-colors" />
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=600&auto=format&fit=crop')] bg-cover bg-center opacity-30 group-hover:scale-110 transition-transform duration-700" />
-            
-            <div className="relative z-20 flex flex-col items-center">
-              <Dices className="w-8 h-8 text-gray-400 mb-1 group-hover:rotate-12 transition-transform" />
-              <span className="text-[10px] font-bold tracking-widest text-gray-300">SURPRISE ME</span>
-              <span className="text-2xl font-black text-white">?</span>
-              <span className="text-[8px] font-bold text-gray-500 tracking-widest mt-2">PICK FOR ME</span>
-            </div>
-          </button>
-
-        </div>
+        ))}
       </section>
 
       {/* 3. SPLIT PANE GRID */}
@@ -233,182 +117,78 @@ export default function DiscoverPage() {
           
           {/* WHAT'S HAPPENING */}
           <section>
-             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs font-black tracking-widest text-white uppercase">WHAT'S HAPPENING</h2>
-              <span className="text-xs text-[#00E5FF] font-bold hover:text-white cursor-pointer transition-colors tracking-widest">VIEW ALL &gt;</span>
+             <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
+              <h2 className="text-xs font-mono tracking-widest text-gray-400 uppercase"><span className="text-[#00E5FF]">&gt;</span> LIVE MATCHES</h2>
+              <span className="text-[10px] text-gray-500 font-mono cursor-pointer hover:text-white transition-colors">[ VIEW ALL ]</span>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
-              {/* Match Card 1 */}
-              <div className="min-w-[300px] rounded-3xl p-5 border border-white/10 snap-start flex flex-col relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-black/60 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                
-                <div className="relative z-20 flex-1 flex flex-col">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
-                        <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
-                        [ SYS.SYNC ]
-                      </span>
-                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">Premier League</span>
-                    </div>
-                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
-                      <Eye className="w-3 h-3" /> 12.4K
-                    </span>
-                  </div>
+              {/* Match Node 1 */}
+              <div className="rounded-xl border border-white/5 bg-[#0A0A0A] p-5 flex flex-col relative group hover:border-[#00E5FF]/30 transition-colors">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[10px] font-mono text-[#00E5FF] bg-[#00E5FF]/10 px-2 py-0.5 rounded flex items-center gap-1">
+                    <span className="w-1 h-1 bg-[#00E5FF] animate-pulse rounded-full" /> SYS.SYNC
+                  </span>
+                  <span className="text-[10px] font-mono text-gray-500">12.4K</span>
+                </div>
 
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-[#4FC3F7] font-bold text-white flex items-center justify-center text-[10px]">MCI</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">MCI</span>
-                    </div>
-                    <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-mono font-black tracking-tighter text-white">2 - 1</span>
-                      <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">68'</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-[#D32F2F] font-bold text-white flex items-center justify-center text-[10px]">ARS</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">ARS</span>
-                    </div>
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold text-white w-8">MCI</span>
+                    <span className="text-xl font-mono font-bold text-white">2</span>
                   </div>
-
-                  <div className="flex flex-col gap-2 mb-6">
-                    <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[inset_0_0_20px_rgba(255,79,0,0.05)]">
-                      <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                        <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                        <span className="text-xl font-mono font-black text-[#FF4F00]">78</span>
-                      </div>
-                      <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">End-to-end transitions increasing</p>
-                    </div>
-                    <div className="text-[8px] font-mono text-[#00E5FF]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#00E5FF]/20">
-                      <span className="w-1 h-1 bg-[#00E5FF] animate-pulse rounded-full" />
-                      &gt; PARSING 4.2K REACTIONS/SEC...
-                    </div>
+                  <div className="text-xs font-mono text-gray-600">-</div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl font-mono font-bold text-white">1</span>
+                    <span className="text-sm font-bold text-gray-400 w-8 text-right">ARS</span>
                   </div>
+                </div>
 
-                  <div className="flex gap-2 mt-auto">
-                    <button className="flex-1 bg-[#FF4F00]/10 border border-[#FF4F00]/50 text-[#FF4F00] font-bold text-xs tracking-widest rounded-xl hover:bg-[#FF4F00] hover:text-black transition-colors py-3">ENTER PULSE</button>
-                    <button className="w-12 bg-black/40 backdrop-blur border border-white/10 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors"><Bookmark className="w-4 h-4 text-gray-300" /></button>
+                <div className="flex flex-col gap-2 mt-auto">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-gray-500">
+                    <span>MOMENTUM</span>
+                    <span className="text-[#FF4F00]">CHAOS: 78</span>
+                  </div>
+                  {/* Minimalist sparkline */}
+                  <div className="h-4 w-full flex items-end gap-[2px]">
+                    {[2,3,4,3,5,6,8,7,9,10,9,12,11,14,13].map((h, i) => (
+                      <div key={i} className="flex-1 bg-[#FF4F00]/50 rounded-t-sm" style={{ height: `${(h/14)*100}%` }} />
+                    ))}
                   </div>
                 </div>
               </div>
 
-               {/* Match Card 2 */}
-              <div className="min-w-[300px] rounded-3xl p-5 border border-white/10 snap-start flex flex-col relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-black/60 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                
-                <div className="relative z-20 flex-1 flex flex-col">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#FF4F00]/30 rounded font-mono text-[#FF4F00] text-[8px] font-bold tracking-widest">
-                        <div className="w-1 h-1 rounded-full bg-[#FF4F00] animate-pulse" />
-                        [ SYS.SYNC ]
-                      </span>
-                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">La Liga</span>
-                    </div>
-                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
-                      <Eye className="w-3 h-3" /> 8.2K
-                    </span>
-                  </div>
+               {/* Match Node 2 */}
+              <div className="rounded-xl border border-white/5 bg-[#0A0A0A] p-5 flex flex-col relative group hover:border-[#FF4F00]/30 transition-colors">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[10px] font-mono text-[#FF4F00] bg-[#FF4F00]/10 px-2 py-0.5 rounded flex items-center gap-1">
+                    <span className="w-1 h-1 bg-[#FF4F00] animate-pulse rounded-full" /> LALIGA
+                  </span>
+                  <span className="text-[10px] font-mono text-gray-500">8.2K</span>
+                </div>
 
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-yellow-500 font-bold text-black flex items-center justify-center text-[10px]">RMA</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">RMA</span>
-                    </div>
-                    <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-mono font-black tracking-tighter text-white">1 - 1</span>
-                      <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">55'</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-blue-800 font-bold text-red-500 flex items-center justify-center text-[10px]">BAR</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">BAR</span>
-                    </div>
+                <div className="flex justify-between items-center mb-6">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold text-white w-8">RMA</span>
+                    <span className="text-xl font-mono font-bold text-white">1</span>
                   </div>
-
-                  <div className="flex flex-col gap-2 mb-6">
-                    <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#FF4F00]/30 shadow-[inset_0_0_20px_rgba(255,79,0,0.05)]">
-                      <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                        <span className="flex items-center gap-1 text-[9px] text-[#FF4F00] font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                        <span className="text-xl font-mono font-black text-[#FF4F00]">82</span>
-                      </div>
-                      <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">Momentum swinging both ways</p>
-                    </div>
-                    <div className="text-[8px] font-mono text-[#FF4F00]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#FF4F00]/20">
-                      <span className="w-1 h-1 bg-[#FF4F00] animate-pulse rounded-full" />
-                      &gt; DETECTING POLARIZED SENTIMENT...
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 mt-auto">
-                    <button className="flex-1 bg-[#FF4F00]/10 border border-[#FF4F00]/50 text-[#FF4F00] font-bold text-xs tracking-widest rounded-xl hover:bg-[#FF4F00] hover:text-black transition-colors py-3">ENTER PULSE</button>
-                    <button className="w-12 bg-black/40 backdrop-blur border border-white/10 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors"><Bookmark className="w-4 h-4 text-gray-300" /></button>
+                  <div className="text-xs font-mono text-gray-600">-</div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl font-mono font-bold text-white">1</span>
+                    <span className="text-sm font-bold text-gray-400 w-8 text-right">BAR</span>
                   </div>
                 </div>
-              </div>
 
-               {/* Match Card 3 */}
-              <div className="min-w-[300px] rounded-3xl p-5 border border-white/10 snap-start flex flex-col relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-black/60 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                
-                <div className="relative z-20 flex-1 flex flex-col">
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-2">
-                      <span className="flex items-center gap-1 px-1.5 py-0.5 bg-black/50 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
-                        <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
-                        [ SYS.SYNC ]
-                      </span>
-                      <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">Serie A</span>
-                    </div>
-                    <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
-                      <Eye className="w-3 h-3" /> 4.6K
-                    </span>
+                <div className="flex flex-col gap-2 mt-auto">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-gray-500">
+                    <span>MOMENTUM</span>
+                    <span className="text-[#00E5FF]">TACTICAL: 82</span>
                   </div>
-
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-black font-bold text-white flex items-center justify-center text-[10px]">JUV</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">JUV</span>
-                    </div>
-                    <div className="flex flex-col items-center drop-shadow-lg">
-                      <span className="text-3xl font-mono font-black tracking-tighter text-white">0 - 0</span>
-                      <span className="text-xs font-mono font-bold text-[#00E5FF] mt-1">24'</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-10 h-10 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                        <div className="w-full h-full rounded-full bg-red-600 font-bold text-black flex items-center justify-center text-[10px]">MIL</div>
-                      </div>
-                      <span className="text-xs font-bold drop-shadow-md">MIL</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2 mb-6">
-                    <div className="flex bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-[#00E5FF]/30 items-center justify-center shadow-[inset_0_0_20px_rgba(0,229,255,0.05)]">
-                      <p className="text-[11px] text-[#00E5FF] font-mono font-black tracking-widest flex items-center gap-2"><GitBranch className="w-4 h-4" /> TACTICAL BATTLE</p>
-                    </div>
-                    <div className="text-[8px] font-mono text-[#00E5FF]/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-[#00E5FF]/20">
-                      <span className="w-1 h-1 bg-[#00E5FF] animate-pulse rounded-full" />
-                      &gt; LOW VOLATILITY DETECTED
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 mt-auto">
-                    <button className="flex-1 bg-[#FF4F00]/10 border border-[#FF4F00]/50 text-[#FF4F00] font-bold text-xs tracking-widest rounded-xl hover:bg-[#FF4F00] hover:text-black transition-colors py-3">ENTER PULSE</button>
-                    <button className="w-12 bg-black/40 backdrop-blur border border-white/10 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors"><Bookmark className="w-4 h-4 text-gray-300" /></button>
+                  <div className="h-4 w-full flex items-end gap-[2px]">
+                    {[10,9,11,10,8,7,6,5,7,6,4,5,3,4,2].map((h, i) => (
+                      <div key={i} className="flex-1 bg-[#00E5FF]/50 rounded-t-sm" style={{ height: `${(h/11)*100}%` }} />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -418,183 +198,99 @@ export default function DiscoverPage() {
 
           {/* UPCOMING */}
           <section>
-             <div className="flex items-center justify-between mb-4">
-               <h2 className="text-xs font-black tracking-widest text-white uppercase">UPCOMING</h2>
-               <span className="text-xs text-[#00E5FF] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
+             <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
+               <h2 className="text-xs font-mono tracking-widest text-gray-400 uppercase"><span className="text-[#00E5FF]">&gt;</span> UPCOMING_PREDICTIONS</h2>
              </div>
-             <div className="flex gap-6 overflow-x-auto pb-4 hover-scrollbar snap-x">
+             
+             <div className="space-y-3">
                {[
-                 {
-                   id: 1, team1: "REAL MADRID", team2: "MAN CITY", time: "15:00", fans: "5.2K", chaos: "91%",
-                   img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1200&auto=format&fit=crop",
-                   insights: ["Maximum defensive volatility detected", "Transition efficiency at season high", "Both teams top 3 in big chances created"],
-                   p1: { name: "RMA", bg: "bg-yellow-500", text: "text-black" },
-                   p2: { name: "MCI", bg: "bg-blue-300", text: "text-white" }
-                 },
-                 {
-                   id: 2, team1: "BAYERN", team2: "DORTMUND", time: "17:30", fans: "4.8K", chaos: "85%",
-                   img: "https://images.unsplash.com/photo-1518605368461-1e1e38cd1562?q=80&w=1200&auto=format&fit=crop",
-                   insights: ["High tempo pressing expected", "Key battle in midfield pivot", "Historical high goal count"],
-                   p1: { name: "BAY", bg: "bg-red-600", text: "text-white" },
-                   p2: { name: "DOR", bg: "bg-yellow-400", text: "text-black" }
-                 }
-                ].map((match) => (
-                  <div key={match.id} className="min-w-[300px] md:min-w-[340px] rounded-3xl p-5 border border-white/10 relative overflow-hidden flex flex-col group shadow-[0_0_30px_rgba(0,229,255,0.05)] snap-start shrink-0 h-[420px]">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/90 to-black/60 z-10" />
-                    <div className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: `url('${match.img}')` }} />
-                    
-                    <div className="relative z-20 flex-1 flex flex-col">
-                      <div className="flex justify-between items-center mb-6">
-                        <div className="flex items-center gap-2">
-                          <span className="flex items-center gap-1 px-1.5 py-0.5 bg-[#00E5FF]/10 border border-[#00E5FF]/30 rounded font-mono text-[#00E5FF] text-[8px] font-bold tracking-widest">
-                            <div className="w-1 h-1 rounded-full bg-[#00E5FF] animate-pulse" />
-                            [ SCHEDULED ]
-                          </span>
-                          <span className="text-[10px] text-gray-300 font-mono drop-shadow-md">{match.time}</span>
-                        </div>
-                        <span className="flex items-center gap-1.5 text-[10px] font-bold text-gray-300 drop-shadow-md">
-                          {match.fans} FANS
-                        </span>
-                      </div>
+                 { id: 1, team1: "RMA", team2: "MCI", time: "15:00", fans: "5.2K", chaos: "91", insight: "Maximum defensive volatility detected", spark: [2,4,6,5,8,7,9,12,14] },
+                 { id: 2, team1: "BAY", team2: "DOR", time: "17:30", fans: "4.8K", chaos: "85", insight: "High tempo pressing expected", spark: [1,2,2,3,4,5,4,6,7] }
+               ].map((match) => (
+                 <div key={match.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-xl border border-white/5 bg-[#0A0A0A] hover:bg-white/5 transition-colors gap-4">
+                   
+                   <div className="flex items-center gap-6 w-full sm:w-auto">
+                     <span className="text-xs font-mono text-gray-500 w-10">{match.time}</span>
+                     <div className="flex items-center gap-3">
+                       <span className="font-bold text-white">{match.team1}</span>
+                       <span className="text-xs text-gray-600">v</span>
+                       <span className="font-bold text-gray-400">{match.team2}</span>
+                     </div>
+                   </div>
 
-                      <div className="flex justify-between items-center mb-6">
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="w-12 h-12 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                            <div className={`w-full h-full rounded-full ${match.p1.bg} ${match.p1.text} font-bold flex items-center justify-center text-[11px]`}>{match.p1.name}</div>
-                          </div>
-                          <span className="text-xs font-bold drop-shadow-md text-center max-w-[80px] truncate">{match.team1}</span>
+                   <div className="flex items-center gap-6 w-full sm:w-auto flex-1 justify-end">
+                     <div className="hidden md:flex flex-col gap-1 items-end w-32">
+                        <span className="text-[9px] font-mono text-purple-400">PREDICTED VOLATILITY</span>
+                        <div className="h-3 w-full flex items-end gap-[1px] justify-end">
+                          {match.spark.map((h, i) => (
+                            <div key={i} className="w-1.5 bg-purple-500/50" style={{ height: `${(h/14)*100}%` }} />
+                          ))}
                         </div>
-                        <div className="flex flex-col items-center drop-shadow-lg">
-                          <span className="text-2xl font-black tracking-tighter text-white">VS</span>
-                          <span className="text-[10px] font-bold text-[#00E5FF] mt-1 tracking-widest px-2 py-0.5 rounded-full border border-[#00E5FF]/30 bg-[#00E5FF]/10 cursor-pointer hover:bg-[#00E5FF]/20 transition-colors">JOIN</span>
-                        </div>
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="w-12 h-12 bg-white rounded-full p-1 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                            <div className={`w-full h-full rounded-full ${match.p2.bg} ${match.p2.text} font-bold flex items-center justify-center text-[11px]`}>{match.p2.name}</div>
-                          </div>
-                          <span className="text-xs font-bold drop-shadow-md text-center max-w-[80px] truncate">{match.team2}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2 mb-6">
-                        <div className="flex gap-3 bg-black/40 backdrop-blur-sm rounded-xl p-3 border border-purple-500/30 shadow-[inset_0_0_20px_rgba(168,85,247,0.05)]">
-                          <div className="flex flex-col items-center justify-center pr-3 border-r border-white/10 shrink-0">
-                            <span className="flex items-center gap-1 text-[9px] text-purple-500 font-mono tracking-widest"><Zap className="w-3 h-3"/> CHAOS</span>
-                            <span className="text-xl font-mono font-black text-purple-500">{match.chaos.replace('%','')}</span>
-                          </div>
-                          <p className="text-[10px] text-gray-300 leading-tight flex items-center italic">{match.insights[0]}</p>
-                        </div>
-                        <div className="text-[8px] font-mono text-purple-500/70 tracking-widest flex items-center gap-1 bg-black/60 px-2 py-1 rounded w-fit border border-purple-500/20">
-                          <span className="w-1 h-1 bg-purple-500 animate-pulse rounded-full" />
-                          &gt; FORECASTING MATCH VOLATILITY...
-                        </div>
-                      </div>
-
-                      <div className="flex gap-2 mt-auto">
-                        <Link href={`/prematch/${match.id}`} className="flex-1 bg-[#FF4F00] text-white font-black text-xs tracking-widest rounded-xl hover:bg-[#FF4F00]/90 transition-colors py-3 flex items-center justify-center shadow-[0_0_15px_rgba(255,79,0,0.3)]">
-                          MATCH DETAILS
-                        </Link>
-                        <button className="w-12 bg-black/40 backdrop-blur border border-white/10 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors shrink-0">
-                          <Bookmark className="w-5 h-5 text-gray-300" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                     </div>
+                     <span className="text-[10px] font-mono text-purple-400 border border-purple-500/20 bg-purple-500/10 px-2 py-1 rounded">
+                       {match.chaos} IDX
+                     </span>
+                     <button className="text-[10px] font-bold tracking-widest text-black bg-white px-3 py-1.5 rounded hover:bg-gray-200">
+                       PREMATCH
+                     </button>
+                   </div>
+                 </div>
+               ))}
              </div>
           </section>
 
         </div>
 
-        {/* Right Pane */}
+        {/* Right Pane (Command Sidebar) */}
         <div className="xl:col-span-4">
-           <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xs font-black tracking-widest text-white uppercase">MORE TONIGHT</h2>
-              <span className="text-[10px] text-[#00E5FF] font-bold hover:text-white cursor-pointer transition-colors tracking-widest">See full schedule &gt;</span>
+           <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
+              <h2 className="text-xs font-mono tracking-widest text-gray-400 uppercase"><span className="text-[#00E5FF]">&gt;</span> SYS.LOG / SCHEDULE</h2>
             </div>
             
-            <div className="space-y-4">
-               {/* List Item 1 */}
-               <div className="flex items-center justify-between p-4 bg-[#121212] border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer group">
-                  <div className="flex items-start gap-4">
-                     <div className="flex flex-col w-12 shrink-0">
-                       <span className="text-lg font-black">20:45</span>
-                       <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
-                     </div>
-                     <div>
-                       <div className="flex items-center gap-2 mb-1">
-                         <span className="font-bold text-sm">LIV <span className="text-gray-500 font-normal text-xs mx-0.5">vs</span> MUN</span>
-                         <span className="text-[8px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300 font-bold tracking-widest">EPL</span>
+            <div className="space-y-3">
+               {[
+                 { time: "20:45", t1: "LIV", t2: "MUN", league: "EPL", desc: "High press vs weak defense", metric: "68", trend: "up" },
+                 { time: "21:00", t1: "PSG", t2: "BVB", league: "UCL", desc: "Strategic gridlock expected", metric: "42", trend: "down" },
+                 { time: "22:00", t1: "ATM", t2: "SEV", league: "LAL", desc: "Physical duel in midfield", metric: "36", trend: "down" }
+               ].map((item, i) => (
+                 <div key={i} className="flex flex-col p-4 bg-[#0A0A0A] border border-white/5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                    <div className="flex justify-between items-start mb-2">
+                       <div className="flex items-center gap-3">
+                         <span className="text-xs font-mono text-gray-500">{item.time}</span>
+                         <span className="text-xs font-bold text-white">{item.t1} <span className="text-gray-600 font-normal">v</span> {item.t2}</span>
                        </div>
-                       <p className="text-[10px] text-gray-400 italic font-medium">High press vs weak defense</p>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex gap-1">
-                       <div className="w-4 h-1.5 bg-[#00E5FF] rounded-sm" />
-                       <div className="w-4 h-1.5 bg-[#00E5FF] rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                     </div>
-                     <span className="font-mono text-[#00E5FF] font-bold">68</span>
-                     <Bell className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-                  </div>
-               </div>
+                       <span className="text-[9px] bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-gray-400 font-mono">
+                         {item.league}
+                       </span>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <p className="text-[10px] text-gray-500 font-mono italic">{item.desc}</p>
+                      <div className="flex items-center gap-1 font-mono text-xs">
+                        <span className={item.trend === 'up' ? 'text-[#FF4F00]' : 'text-gray-500'}>
+                          {item.trend === 'up' ? '▲' : '▼'}
+                        </span>
+                        <span className="text-white">{item.metric}</span>
+                      </div>
+                    </div>
+                 </div>
+               ))}
+            </div>
 
-               {/* List Item 2 */}
-               <div className="flex items-center justify-between p-4 bg-[#121212] border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer group">
-                  <div className="flex items-start gap-4">
-                     <div className="flex flex-col w-12 shrink-0">
-                       <span className="text-lg font-black">21:00</span>
-                       <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
-                     </div>
-                     <div>
-                       <div className="flex items-center gap-2 mb-1">
-                         <span className="font-bold text-sm">PSG <span className="text-gray-500 font-normal text-xs mx-0.5">vs</span> BVB</span>
-                         <span className="text-[8px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300 font-bold tracking-widest">UCL</span>
-                       </div>
-                       <p className="text-[10px] text-gray-400 italic font-medium">Strategic gridlock expected</p>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex gap-1">
-                       <div className="w-4 h-1.5 bg-[#00E5FF] rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                     </div>
-                     <span className="font-mono text-[#00E5FF] font-bold">42</span>
-                     <Bell className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-                  </div>
+            {/* Volatility Movers Mini-module */}
+            <div className="mt-8">
+               <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-2">
+                  <h2 className="text-xs font-mono tracking-widest text-gray-400 uppercase"><span className="text-[#FF4F00]">&gt;</span> VOLATILITY MOVERS</h2>
                </div>
-
-               {/* List Item 3 */}
-               <div className="flex items-center justify-between p-4 bg-[#121212] border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer group">
-                  <div className="flex items-start gap-4">
-                     <div className="flex flex-col w-12 shrink-0">
-                       <span className="text-lg font-black">22:00</span>
-                       <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
-                     </div>
-                     <div>
-                       <div className="flex items-center gap-2 mb-1">
-                         <span className="font-bold text-sm">ATM <span className="text-gray-500 font-normal text-xs mx-0.5">vs</span> SEV</span>
-                         <span className="text-[8px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300 font-bold tracking-widest">LALIGA</span>
-                       </div>
-                       <p className="text-[10px] text-gray-400 italic font-medium">Physical duel in midfield</p>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex gap-1">
-                       <div className="w-4 h-1.5 bg-[#00E5FF] rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                       <div className="w-4 h-1.5 bg-white/10 rounded-sm" />
-                     </div>
-                     <span className="font-mono text-[#00E5FF] font-bold">36</span>
-                     <Bell className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-                  </div>
+               <div className="p-4 bg-gradient-to-br from-[#FF4F00]/10 to-transparent border border-[#FF4F00]/20 rounded-xl flex items-center justify-between">
+                 <div className="flex flex-col gap-1">
+                   <span className="text-[10px] font-mono text-[#FF4F00]">#1 SPIKE DETECTED</span>
+                   <span className="text-sm font-bold text-white">TOT v CHE</span>
+                 </div>
+                 <div className="flex flex-col items-end gap-1">
+                   <span className="text-lg font-mono font-black text-[#FF4F00]">+24%</span>
+                   <span className="text-[9px] text-gray-400 font-mono">LAST 1HR</span>
+                 </div>
                </div>
-
             </div>
         </div>
 
