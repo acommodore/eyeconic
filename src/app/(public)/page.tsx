@@ -59,7 +59,7 @@ function HeroSection() {
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center pt-24 pb-20 px-6 lg:px-20 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
       {/* Heavy Dark Overlay */}
-      <div className="absolute inset-0 bg-white/70 dark:bg-[#050505]/90 z-0" />
+      <div className="absolute inset-0 bg-white/85 dark:bg-[#050505]/90 z-0" />
 
       <div className="relative z-30 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 mt-10">
         <div className="flex-1 text-left w-full">
@@ -68,18 +68,18 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md mb-8 transition-colors">
-              <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
-              <span className="text-[10px] font-mono tracking-widest text-gray-700 dark:text-gray-300 uppercase font-bold">Live Intelligence Engine</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-md mb-8 transition-colors">
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-[#00E5FF] animate-pulse" />
+              <span className="text-[10px] font-mono tracking-widest text-black dark:text-gray-300 uppercase font-black">Live Intelligence Engine</span>
             </div>
             
-            <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter leading-[0.9] text-gray-900 dark:text-white mb-6 transition-colors">
+            <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter leading-[0.9] text-black dark:text-white mb-6 transition-colors">
               SEE WHAT'S<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-400 dark:to-gray-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-gray-800 to-gray-600 dark:from-white dark:via-gray-400 dark:to-gray-600">
                 WORTH WATCHING.
               </span>
             </h1>
-            <h2 className="text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+            <h2 className="text-blue-700 dark:text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(29,78,216,0.3)] dark:drop-shadow-[0_0_10px_rgba(0,229,255,0.3)] font-bold">
               STATS ARE DECEPTIVE
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium mb-12 tracking-wide max-w-xl leading-relaxed transition-colors">
