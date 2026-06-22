@@ -224,81 +224,6 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Live Now: Top Stands */}
-      <section className="mt-12">
-        <div className="flex items-center justify-between px-6 mb-6">
-          <div className="flex items-center gap-3">
-            <h2 className="text-sm font-black tracking-widest uppercase">LIVE NOW: TOP STANDS</h2>
-            <span className="bg-red-500 text-white text-[10px] font-black tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
-               LIVE <Activity className="w-3 h-3 animate-pulse" />
-            </span>
-          </div>
-          <button className="text-[#00E5FF] text-sm font-bold flex items-center gap-1 hover:underline">
-            See all <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-        <p className="px-6 text-sm text-gray-400 mb-6">Join the biggest conversations in football right now</p>
-        
-        <div className="px-6 overflow-x-auto hover-scrollbar flex gap-6 pb-4">
-          {liveStands.map(stand => (
-            <div key={stand.id} className="relative w-[380px] shrink-0 rounded-[2rem] overflow-hidden border border-white/10 group">
-              {/* Background Image & Gradient */}
-              <div className="absolute inset-0">
-                <img src={stand.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className={`absolute inset-0 bg-gradient-to-t ${stand.accent} via-black/80 to-[#0A0A0A] opacity-90`} />
-              </div>
-
-              <div className="relative p-6 flex flex-col h-full min-h-[360px]">
-                <div className="mb-auto">
-                  {/* Listening Badge */}
-                  <div className="bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 inline-flex items-center gap-2 mb-6 w-max border border-white/10">
-                    <span className="text-xs font-bold text-gray-300">{stand.listeners} listening</span>
-                  </div>
-
-                  <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shadow-lg`}>
-                    <Mic className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-black leading-tight mb-2 pr-4">{stand.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-6 whitespace-pre-line">{stand.subtitle}</p>
-
-                  <div className="flex items-center justify-between">
-                  {/* Avatars */}
-                  <div className="flex items-center">
-                    {stand.avatars.map((avatar, idx) => (
-                      <img 
-                        key={idx} 
-                        src={avatar} 
-                        className="w-8 h-8 rounded-full border-2 border-[#121212] object-cover -ml-3 first:ml-0" 
-                        style={{ zIndex: 10 - idx }}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center gap-2">
-                    <button className={`px-4 py-2 rounded-full font-bold text-xs transition-colors ${stand.iconBg} hover:opacity-90`}>
-                      Join Stand
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
-                      <div className="flex gap-0.5 items-end h-4">
-                        <div className="w-0.5 bg-white h-2 animate-pulse" />
-                        <div className="w-0.5 bg-white h-4 animate-pulse" style={{animationDelay: '0.1s'}} />
-                        <div className="w-0.5 bg-white h-3 animate-pulse" style={{animationDelay: '0.2s'}} />
-                        <div className="w-0.5 bg-white h-1.5 animate-pulse" style={{animationDelay: '0.3s'}} />
-                      </div>
-                    </button>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* What You Missed */}
       <section className="mt-12">
         <div className="flex items-center justify-between px-6 mb-6">
@@ -423,6 +348,84 @@ export default function InsightsPage() {
                 <p className="text-[10px] text-gray-500 font-bold">{insight.ratingText}</p>
               </div>
             ))}
+        </div>
+      </section>
+
+      {/* Live Now: Top Stands (Ticker Style) */}
+      <section className="mt-12 border-y border-white/10 bg-[#0A0A0A] py-6 relative overflow-hidden">
+        <div className="flex items-center gap-3 px-6 mb-4">
+          <span className="bg-red-500 text-white text-[10px] font-black tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
+             LIVE <Activity className="w-3 h-3 animate-pulse" />
+          </span>
+          <h2 className="text-xs font-black tracking-widest uppercase text-gray-300">TOP STANDS</h2>
+        </div>
+        
+        <div className="flex overflow-x-auto hover-scrollbar gap-4 px-6 pb-2 snap-x">
+          {liveStands.map(stand => (
+            <div key={stand.id} className="min-w-[360px] md:min-w-[400px] shrink-0 bg-[#121212] border border-white/5 hover:border-white/20 transition-colors rounded-full p-2 pr-6 flex items-center justify-between snap-start cursor-pointer group">
+              
+              <div className="flex items-center gap-4">
+                {/* Icon/Avatar Cluster */}
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]`}>
+                    <Mic className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex items-center -ml-3">
+                    {stand.avatars.slice(0, 2).map((avatar, idx) => (
+                      <img 
+                        key={idx} 
+                        src={avatar} 
+                        className="w-8 h-8 rounded-full border border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all" 
+                        style={{ zIndex: 9 - idx }}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Title */}
+                <div className="flex flex-col justify-center">
+                  <h3 className="text-xs font-bold text-white max-w-[180px] md:max-w-[220px] truncate">{stand.title}</h3>
+                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">{stand.listeners} LISTENING</span>
+                </div>
+              </div>
+
+              {/* Join Button */}
+              <button className="text-[10px] font-black tracking-widest uppercase text-[#00E5FF] bg-[#00E5FF]/10 px-3 py-1.5 rounded-full hover:bg-[#00E5FF]/20 transition-colors shrink-0">
+                JOIN
+              </button>
+            </div>
+          ))}
+          {/* Duplicating for visual density of the ticker */}
+          {liveStands.map(stand => (
+            <div key={`dup-${stand.id}`} className="min-w-[360px] md:min-w-[400px] shrink-0 bg-[#121212] border border-white/5 hover:border-white/20 transition-colors rounded-full p-2 pr-6 flex items-center justify-between snap-start cursor-pointer group">
+              
+              <div className="flex items-center gap-4">
+                <div className="flex items-center">
+                  <div className={`w-10 h-10 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]`}>
+                    <Mic className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex items-center -ml-3">
+                    {stand.avatars.slice(0, 2).map((avatar, idx) => (
+                      <img 
+                        key={idx} 
+                        src={avatar} 
+                        className="w-8 h-8 rounded-full border border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all" 
+                        style={{ zIndex: 9 - idx }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center">
+                  <h3 className="text-xs font-bold text-white max-w-[180px] md:max-w-[220px] truncate">{stand.title}</h3>
+                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">{stand.listeners} LISTENING</span>
+                </div>
+              </div>
+
+              <button className="text-[10px] font-black tracking-widest uppercase text-[#00E5FF] bg-[#00E5FF]/10 px-3 py-1.5 rounded-full hover:bg-[#00E5FF]/20 transition-colors shrink-0">
+                JOIN
+              </button>
+            </div>
+          ))}
         </div>
       </section>
 
