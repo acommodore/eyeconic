@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Eye, Bell, Zap, GitBranch, Bookmark, Mic } from "lucide-react";
+import { Eye, Bell, Zap, GitBranch, Bookmark, Mic, Star } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TABS = ["ALL MATCHES", "LIVE NOW", "HIGH CHAOS", "TACTICAL", "BOOKMARKS"];
