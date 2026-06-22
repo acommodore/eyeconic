@@ -67,7 +67,7 @@ const missedHighlights = [
     title: "Late drama in Madrid",
     subtitle: "RMD 1 - 1 MC | MVP: BENZEMA 9.0",
     desc: "Benzema's ghost haunts the box in the 94th minute.",
-    image: "https://images.unsplash.com/photo-1508344928928-7137b29de2f6?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=800&auto=format&fit=crop",
     stats: [
       { label: "AVG RATING", value: "8.4", color: "text-[#00E5FF]" },
       { label: "CHAOS PEAK", value: "94%", color: "text-[#00E5FF]" },
@@ -367,45 +367,86 @@ export default function InsightsPage() {
            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-           <div className="flex w-max animate-ticker gap-6 items-center hover:cursor-grab active:cursor-grabbing">
-             {[...liveStands, ...liveStands, ...liveStands, ...liveStands].map((stand, i) => (
-               <div key={`${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer group overflow-hidden">
-                 
-                 {/* Color Injection to fix "too dark" issue */}
-                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 group-hover:opacity-60 transition-opacity duration-500`} />
-                 <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
+           <div className="flex w-max hover:cursor-grab active:cursor-grabbing group">
+             {/* Track 1 */}
+             <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] pr-6">
+               {[...liveStands, ...liveStands].map((stand, i) => (
+                 <div key={`t1-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
+                   
+                   {/* Color Injection to fix "too dark" issue */}
+                   <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 hover:opacity-60 transition-opacity duration-500`} />
+                   <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
 
-                 <div className="flex items-center gap-4 relative z-10">
-                   {/* Icon/Avatar Cluster */}
-                   <div className="flex items-center">
-                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
-                       <Mic className="w-5 h-5 text-white" />
+                   <div className="flex items-center gap-4 relative z-10 group/item">
+                     {/* Icon/Avatar Cluster */}
+                     <div className="flex items-center">
+                       <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                         <Mic className="w-5 h-5 text-white" />
+                       </div>
+                       <div className="flex items-center -ml-4">
+                         {stand.avatars.slice(0, 3).map((avatar, idx) => (
+                           <img 
+                             key={idx} 
+                             src={avatar} 
+                             className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover/item:grayscale-0 transition-all duration-500" 
+                             style={{ zIndex: 9 - idx }}
+                           />
+                         ))}
+                       </div>
                      </div>
-                     <div className="flex items-center -ml-4">
-                       {stand.avatars.slice(0, 3).map((avatar, idx) => (
-                         <img 
-                           key={idx} 
-                           src={avatar} 
-                           className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all duration-500" 
-                           style={{ zIndex: 9 - idx }}
-                         />
-                       ))}
+
+                     {/* Title */}
+                     <div className="flex flex-col justify-center">
+                       <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover/item:text-[#00E5FF] transition-colors">{stand.title}</h3>
+                       <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
                      </div>
                    </div>
 
-                   {/* Title */}
-                   <div className="flex flex-col justify-center">
-                     <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover:text-[#00E5FF] transition-colors">{stand.title}</h3>
-                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
-                   </div>
+                   {/* Join Button */}
+                   <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 hover:border-white/30">
+                     JOIN
+                   </button>
                  </div>
+               ))}
+             </div>
 
-                 {/* Join Button */}
-                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 group-hover:border-white/30">
-                   JOIN
-                 </button>
-               </div>
-             ))}
+             {/* Track 2 (Identical for seamless looping) */}
+             <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] pr-6">
+               {[...liveStands, ...liveStands].map((stand, i) => (
+                 <div key={`t2-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
+                   
+                   <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 hover:opacity-60 transition-opacity duration-500`} />
+                   <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
+
+                   <div className="flex items-center gap-4 relative z-10 group/item">
+                     <div className="flex items-center">
+                       <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                         <Mic className="w-5 h-5 text-white" />
+                       </div>
+                       <div className="flex items-center -ml-4">
+                         {stand.avatars.slice(0, 3).map((avatar, idx) => (
+                           <img 
+                             key={idx} 
+                             src={avatar} 
+                             className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover/item:grayscale-0 transition-all duration-500" 
+                             style={{ zIndex: 9 - idx }}
+                           />
+                         ))}
+                       </div>
+                     </div>
+
+                     <div className="flex flex-col justify-center">
+                       <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover/item:text-[#00E5FF] transition-colors">{stand.title}</h3>
+                       <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+                     </div>
+                   </div>
+
+                   <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 hover:border-white/30">
+                     JOIN
+                   </button>
+                 </div>
+               ))}
+             </div>
            </div>
         </div>
       </section>
