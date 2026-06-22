@@ -67,7 +67,7 @@ const missedHighlights = [
     title: "Late drama in Madrid",
     subtitle: "RMD 1 - 1 MC | MVP: BENZEMA 9.0",
     desc: "Benzema's ghost haunts the box in the 94th minute.",
-    image: "https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop",
     stats: [
       { label: "AVG RATING", value: "8.4", color: "text-[#00E5FF]" },
       { label: "CHAOS PEAK", value: "94%", color: "text-[#00E5FF]" },
@@ -369,7 +369,7 @@ export default function InsightsPage() {
 
            <div className="flex w-max hover:cursor-grab active:cursor-grabbing group">
              {/* Track 1 */}
-             <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] pr-6">
+             <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
                {[...liveStands, ...liveStands].map((stand, i) => (
                  <div key={`t1-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
                    
@@ -411,7 +411,7 @@ export default function InsightsPage() {
              </div>
 
              {/* Track 2 (Identical for seamless looping) */}
-             <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] pr-6">
+             <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
                {[...liveStands, ...liveStands].map((stand, i) => (
                  <div key={`t2-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
                    
