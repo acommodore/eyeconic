@@ -16,7 +16,13 @@ export default function ActiveStandPage() {
             <Link href="/stands" className="p-2 hover:bg-white/10 rounded-full transition-colors group">
               <ArrowLeft className="w-6 h-6 text-[#00E5FF] group-hover:-translate-x-1 transition-transform" />
             </Link>
-            <h1 className="text-xl md:text-3xl font-black tracking-widest">ARS V TOT</h1>
+            <div className="flex items-center gap-3">
+              <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-md" alt="ARS" />
+              <span className="text-xl md:text-2xl font-black text-gray-500 tracking-widest">V</span>
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full p-1 flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-full h-full object-contain" alt="TOT" />
+              </div>
+            </div>
             <div className="px-3 py-1.5 rounded-full border border-[#00C853]/40 bg-[#00C853]/10 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00C853] animate-pulse" />
               <span className="text-[10px] font-bold text-[#00C853] tracking-widest">4.2K LISTENING</span>
@@ -94,7 +100,7 @@ export default function ActiveStandPage() {
         {/* Live Chat Feed */}
         <div className="flex-1 overflow-y-auto space-y-6 pb-6 scrollbar-hide">
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-[8px] flex items-center justify-center shrink-0">ARS</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-6 h-6 object-contain shrink-0 drop-shadow-sm" alt="ARS" />
             <p className="text-sm text-gray-200 leading-relaxed">
               <span className="font-bold text-[#00E5FF] mr-2">Gooner4Life:</span> 
               Absolute shocker from the VAR there. Clear penalty!
@@ -102,7 +108,9 @@ export default function ActiveStandPage() {
           </div>
 
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[8px] flex items-center justify-center shrink-0">LIV</div>
+            <div className="w-6 h-6 bg-white rounded-full p-0.5 flex items-center justify-center shrink-0">
+              <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" alt="LIV" />
+            </div>
             <p className="text-sm text-gray-200 leading-relaxed">
               <span className="font-bold text-[#00E5FF] mr-2">BlueMason:</span> 
               Never a pen. He dove before the contact even happened. 🤡
@@ -110,7 +118,9 @@ export default function ActiveStandPage() {
           </div>
 
           <div className="flex gap-3">
-            <div className="w-6 h-6 rounded-full bg-white text-black font-bold text-[8px] flex items-center justify-center shrink-0">TOT</div>
+            <div className="w-6 h-6 bg-white rounded-full p-0.5 flex items-center justify-center shrink-0">
+              <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-full h-full object-contain" alt="TOT" />
+            </div>
             <p className="text-sm text-gray-200 leading-relaxed">
               <span className="font-bold text-[#00E5FF] mr-2">Spursy_10:</span> 
               Host is biased as usual. Get him off the mic!
@@ -119,7 +129,7 @@ export default function ActiveStandPage() {
 
           {/* Faded older messages to show scroll effect */}
           <div className="flex gap-3 opacity-60">
-            <div className="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-[8px] flex items-center justify-center shrink-0">ARS</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-6 h-6 object-contain shrink-0 drop-shadow-sm" alt="ARS" />
             <p className="text-sm text-gray-200 leading-relaxed">
               <span className="font-bold text-[#00E5FF] mr-2">GunnerVic:</span> 
               Are you blind?! He clipped his heel!

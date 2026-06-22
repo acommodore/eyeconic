@@ -114,8 +114,8 @@ export default function DiscoverPage() {
           <div className="flex flex-col items-center justify-center mb-10">
             <div className="flex items-center justify-center gap-6 md:gap-12">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#6CABDD] flex items-center justify-center shadow-[0_0_30px_rgba(108,171,221,0.4)] border-4 border-white/20">
-                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">MCI</span>
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-[0_0_30px_rgba(108,171,221,0.4)] border-4 border-[#6CABDD]/50 p-2 md:p-3 overflow-hidden">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain" />
                 </div>
                 <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">MCI</span>
               </div>
@@ -131,8 +131,8 @@ export default function DiscoverPage() {
 
               <div className="flex items-center gap-4">
                 <span className="text-2xl md:text-4xl font-black tracking-widest hidden md:block">LIV</span>
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#C8102E] flex items-center justify-center shadow-[0_0_30px_rgba(200,16,46,0.4)] border-4 border-white/20">
-                  <span className="text-white font-black text-xl md:text-3xl tracking-tighter">LIV</span>
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-[0_0_30px_rgba(200,16,46,0.4)] border-4 border-[#C8102E]/50 p-2 md:p-3 overflow-hidden">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="LIV" className="w-full h-full object-contain" />
                 </div>
               </div>
             </div>

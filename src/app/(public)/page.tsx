@@ -143,7 +143,11 @@ function HeroSection() {
                   <div className="relative p-4 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg overflow-hidden group/item hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#FF4F00] shadow-[0_0_15px_#FF4F00]" />
                      <div className="flex justify-between items-center">
-                       <span className="text-gray-900 dark:text-white font-bold tracking-wider transition-colors">RMA vs MCI</span>
+                       <div className="flex items-center gap-2">
+                         <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-5 h-5 object-contain" alt="RMA" />
+                         <span className="text-gray-500 dark:text-gray-400 text-[10px] font-black tracking-widest">VS</span>
+                         <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5 object-contain" alt="MCI" />
+                       </div>
                        <span className="text-[#FF4F00] font-black drop-shadow-[0_0_8px_rgba(255,79,0,0.6)]">98 EMTN</span>
                      </div>
                      <div className="text-[10px] text-gray-500 mt-2 uppercase tracking-widest flex items-center gap-2">
@@ -154,7 +158,11 @@ function HeroSection() {
                   <div className="relative p-4 border border-gray-200 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#00E5FF]" />
                      <div className="flex justify-between items-center">
-                       <span className="text-gray-700 dark:text-gray-300 font-bold tracking-wider transition-colors">ARS vs PSG</span>
+                       <div className="flex items-center gap-2">
+                         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 object-contain" alt="ARS" />
+                         <span className="text-gray-500 dark:text-gray-400 text-[10px] font-black tracking-widest">VS</span>
+                         <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" className="w-5 h-5 object-contain" alt="PSG" />
+                       </div>
                        <span className="text-[#00E5FF] font-bold">85 EMTN</span>
                      </div>
                   </div>
@@ -162,7 +170,11 @@ function HeroSection() {
                   <div className="relative p-4 border border-gray-200 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors opacity-60">
                      <div className="absolute left-0 top-0 w-1 h-full bg-gray-400 dark:bg-gray-600" />
                      <div className="flex justify-between items-center">
-                       <span className="text-gray-600 dark:text-gray-500 font-bold tracking-wider transition-colors">JUV vs MIL</span>
+                       <div className="flex items-center gap-2">
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" className="w-5 h-5 object-contain drop-shadow-md filter dark:invert-0 invert" alt="JUV" />
+                         <span className="text-gray-500 dark:text-gray-400 text-[10px] font-black tracking-widest">VS</span>
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-5 h-5 object-contain" alt="MIL" />
+                       </div>
                        <span className="text-gray-600 dark:text-gray-500 font-bold transition-colors">42 EMTN</span>
                      </div>
                   </div>
@@ -560,8 +572,29 @@ function TerminalSection() {
                       className={`flex flex-col md:flex-row md:items-center justify-between text-gray-900 dark:text-white p-5 rounded-lg transition-colors relative overflow-hidden border ${wrapperStyle}`}
                     >
                        <div className={`absolute left-0 top-0 w-1 h-full transition-colors ${leftBarStyle}`} />
-                       <span className="text-gray-600 dark:text-gray-300 text-base transition-colors font-mono">
-                         <span className="text-gray-900 dark:text-white font-bold w-12 inline-block transition-colors">{timeString}</span> <span className="opacity-30 mx-4 text-black dark:text-white">|</span> {match.teams} <span className="opacity-30 mx-4 text-black dark:text-white">|</span> {match.score}
+                       <span className="text-gray-600 dark:text-gray-300 text-base transition-colors font-mono flex items-center">
+                         <span className="text-gray-900 dark:text-white font-bold w-12 inline-block transition-colors shrink-0">{timeString}</span> 
+                         <span className="opacity-30 mx-4 text-black dark:text-white shrink-0">|</span> 
+                         
+                         {match.teams === 'RMA vs MCI' && (
+                           <span className="inline-flex items-center gap-2 w-[120px] justify-center">
+                             <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-5 h-5 object-contain" alt="RMA" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5 object-contain" alt="MCI" />
+                           </span>
+                         )}
+                         {match.teams === 'ARS vs PSG' && (
+                           <span className="inline-flex items-center gap-2 w-[120px] justify-center">
+                             <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 object-contain" alt="ARS" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" className="w-5 h-5 object-contain" alt="PSG" />
+                           </span>
+                         )}
+                         {match.teams === 'JUV vs MIL' && (
+                           <span className="inline-flex items-center gap-2 w-[120px] justify-center">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" className="w-5 h-5 object-contain drop-shadow-md filter dark:invert-0 invert" alt="JUV" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-5 h-5 object-contain" alt="MIL" />
+                           </span>
+                         )}
+                         {!['RMA vs MCI', 'ARS vs PSG', 'JUV vs MIL'].includes(match.teams) && match.teams}
+
+                         <span className="opacity-30 mx-4 text-black dark:text-white shrink-0">|</span> 
+                         {match.score}
                        </span>
                        <span className={`${scoreColor} font-bold tracking-widest flex items-center gap-3 mt-2 md:mt-0 transition-colors`}>
                          &gt;&gt; {Math.round(match.emtn)} <span className={`px-2 py-0.5 rounded text-[10px] ${isMain && simulationMode === 'chaos' ? 'animate-pulse' : ''} ${pillBg}`}>{pillText}</span>

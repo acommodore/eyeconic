@@ -6,20 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ArrowLeft } from "lucide-react";
 
 const TEAMS = [
-  { id: "mci", name: "Man City", short: "MCI", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#4FC3F7]", text: "text-white", border: "border-white/20" },
-  { id: "ars", name: "Arsenal", short: "ARS", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-600", text: "text-white", border: "border-white/20" },
-  { id: "liv", name: "Liverpool", short: "LIV", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#D32F2F]", text: "text-white", border: "border-white/20" },
-  { id: "che", name: "Chelsea", short: "CHE", league: "ENGLISH PREMIER LEAGUE", bg: "bg-blue-700", text: "text-white", border: "border-white/20" },
-  { id: "mun", name: "Man United", short: "MUN", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-700", text: "text-white", border: "border-white/20" },
-  { id: "tot", name: "Spurs", short: "TOT", league: "ENGLISH PREMIER LEAGUE", bg: "bg-white", text: "text-black", border: "border-gray-200" },
-  { id: "rma", name: "Real Madrid", short: "RMA", league: "LALIGA EA SPORTS", bg: "bg-white", text: "text-black", border: "border-gray-200" },
-  { id: "bar", name: "Barcelona", short: "BAR", league: "LALIGA EA SPORTS", bg: "bg-blue-800", text: "text-red-500", border: "border-red-500/50" },
-  { id: "atm", name: "Atletico", short: "ATM", league: "LALIGA EA SPORTS", bg: "bg-red-600", text: "text-white", border: "border-white/20" },
-  { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", bg: "bg-red-600", text: "text-white", border: "border-white/20" },
-  { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", bg: "bg-yellow-400", text: "text-black", border: "border-black/20" },
-  { id: "juv", name: "Juventus", short: "JUV", league: "SERIE A", bg: "bg-black", text: "text-white", border: "border-white/20" },
-  { id: "mil", name: "AC Milan", short: "MIL", league: "SERIE A", bg: "bg-red-600", text: "text-black", border: "border-black/50" },
-  { id: "psg", name: "PSG", short: "PSG", league: "LIGUE 1", bg: "bg-blue-900", text: "text-red-500", border: "border-white/20" }
+  { id: "mci", name: "Man City", short: "MCI", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#4FC3F7]", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" },
+  { id: "ars", name: "Arsenal", short: "ARS", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" },
+  { id: "liv", name: "Liverpool", short: "LIV", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#D32F2F]", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" },
+  { id: "che", name: "Chelsea", short: "CHE", league: "ENGLISH PREMIER LEAGUE", bg: "bg-blue-700", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" },
+  { id: "mun", name: "Man United", short: "MUN", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-700", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
+  { id: "tot", name: "Spurs", short: "TOT", league: "ENGLISH PREMIER LEAGUE", bg: "bg-white", text: "text-black", border: "border-gray-200", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" },
+  { id: "rma", name: "Real Madrid", short: "RMA", league: "LALIGA EA SPORTS", bg: "bg-white", text: "text-black", border: "border-gray-200", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
+  { id: "bar", name: "Barcelona", short: "BAR", league: "LALIGA EA SPORTS", bg: "bg-blue-800", text: "text-red-500", border: "border-red-500/50", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
+  { id: "atm", name: "Atletico", short: "ATM", league: "LALIGA EA SPORTS", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
+  { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg" },
+  { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", bg: "bg-yellow-400", text: "text-black", border: "border-black/20", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
+  { id: "juv", name: "Juventus", short: "JUV", league: "SERIE A", bg: "bg-black", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" },
+  { id: "mil", name: "AC Milan", short: "MIL", league: "SERIE A", bg: "bg-red-600", text: "text-black", border: "border-black/50", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" },
+  { id: "psg", name: "PSG", short: "PSG", league: "LIGUE 1", bg: "bg-white", text: "text-black", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" }
 ];
 
 const SUGGESTED_RIVALS: Record<string, string[]> = {
@@ -178,8 +178,8 @@ export default function OnboardingPage() {
                      <div className="flex items-center gap-6 md:gap-12 w-full justify-center max-w-2xl">
                        
                        <div className="flex flex-col items-center gap-4 flex-1">
-                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center font-black text-3xl md:text-4xl shadow-[0_0_30px_rgba(255,255,255,0.1)] border border-white/20 ${favoriteTeam.bg} ${favoriteTeam.text}`}>
-                           {favoriteTeam.short}
+                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,255,255,0.1)] border border-white/20 ${favoriteTeam.bg}`}>
+                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-md ${favoriteTeam.id === 'tot' || favoriteTeam.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
                          <div className="text-center">
                            <span className="text-[10px] text-[#00E5FF] font-bold tracking-widest uppercase mb-1 block">YOUR CLUB</span>
@@ -192,8 +192,8 @@ export default function OnboardingPage() {
                        </div>
 
                        <div className="flex flex-col items-center gap-4 flex-1">
-                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center font-black text-3xl md:text-4xl shadow-[0_0_30px_rgba(255,79,0,0.1)] border border-[#FF4F00]/50 ${rivalTeam.bg} ${rivalTeam.text}`}>
-                           {rivalTeam.short}
+                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,79,0,0.1)] border border-[#FF4F00]/50 ${rivalTeam.bg}`}>
+                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-md ${rivalTeam.id === 'tot' || rivalTeam.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
                          <div className="text-center">
                            <span className="text-[10px] text-[#FF4F00] font-bold tracking-widest uppercase mb-1 block">YOUR RIVAL</span>
@@ -239,8 +239,8 @@ export default function OnboardingPage() {
                                     : 'border-[#FF4F00]/20 bg-[#121212] hover:bg-white/10'
                                 }`}
                               >
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-black text-xs shadow-md border ${team.border} ${team.bg} ${team.text}`}>
-                                  {team.short}
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
+                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' || team.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
                                 <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                                   {team.name}
@@ -292,8 +292,8 @@ export default function OnboardingPage() {
                                     : 'border-white/5 bg-[#121212] hover:bg-white/10'
                                 }`}
                               >
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-black text-xs shadow-md border ${team.border} ${team.bg} ${team.text}`}>
-                                  {team.short}
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
+                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' || team.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
                                 <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                                   {team.name}
