@@ -181,7 +181,7 @@ export default function OnboardingPage() {
                       className="text-5xl md:text-7xl font-black tracking-tighter mb-4 uppercase leading-[0.9]"
                     >
                       {step === 1 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Where's your<br/>loyalty?</span>}
-                      {step === 2 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Name your<br/>enemy.</span>}
+                      {step === 2 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Name your<br/>rival.</span>}
                       {step === 3 && <span className="text-white">The Stage is Set.</span>}
                     </motion.h1>
                     <motion.p 
@@ -191,7 +191,7 @@ export default function OnboardingPage() {
                       className="text-gray-400 text-lg md:text-xl font-medium tracking-wide"
                     >
                       {step === 1 && "Select the club that dictates your weekends."}
-                      {step === 2 && "Who boils your blood? Choose your ultimate rival."}
+                      {step === 2 && "Who boils your blood? This is where it gets personal."}
                       {step === 3 && "Your bias is recorded. The engine is primed."}
                     </motion.p>
                   </div>
@@ -269,7 +269,7 @@ export default function OnboardingPage() {
                            style={{ backgroundColor: rivalTeam.color }}
                          />
                          <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs text-red-400 font-bold tracking-widest uppercase backdrop-blur-md">
-                           The Enemy
+                           Arch Rival
                          </span>
                          <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
                            <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.2)] ${rivalTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
