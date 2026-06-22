@@ -31,11 +31,11 @@ export default function Home() {
 
 function Navbar() {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-transparent border-b border-gray-200 dark:border-white/5 transition-colors">
+    <nav className="fixed top-0 w-full z-50 bg-transparent border-b border-gray-300 dark:border-white/5 transition-colors">
       <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-white/10 flex items-center justify-center relative overflow-hidden group transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-white dark:bg-black border border-gray-300 dark:border-white/10 flex items-center justify-center relative overflow-hidden group transition-colors">
             <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] opacity-10 dark:opacity-20 group-hover:opacity-100 transition-opacity duration-500" />
             <Activity className="w-4 h-4 text-gray-900 dark:text-white relative z-10 transition-colors" />
           </div>
@@ -59,7 +59,7 @@ function HeroSection() {
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center pt-24 pb-20 px-6 lg:px-20 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
       {/* Heavy Dark Overlay */}
-      <div className="absolute inset-0 bg-white/90 dark:bg-[#050505]/90 z-0" />
+      <div className="absolute inset-0 bg-white/70 dark:bg-[#050505]/90 z-0" />
 
       <div className="relative z-30 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 mt-10">
         <div className="flex-1 text-left w-full">
@@ -68,14 +68,14 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md mb-8 transition-colors">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md mb-8 transition-colors">
               <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
-              <span className="text-[10px] font-mono tracking-widest text-gray-600 dark:text-gray-300 uppercase">Live Intelligence Engine</span>
+              <span className="text-[10px] font-mono tracking-widest text-gray-700 dark:text-gray-300 uppercase font-bold">Live Intelligence Engine</span>
             </div>
             
             <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter leading-[0.9] text-gray-900 dark:text-white mb-6 transition-colors">
               SEE WHAT'S<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-gray-400 to-gray-300 dark:from-white dark:via-gray-400 dark:to-gray-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 dark:from-white dark:via-gray-400 dark:to-gray-600">
                 WORTH WATCHING.
               </span>
             </h1>
@@ -106,11 +106,11 @@ function HeroSection() {
             {/* Glow Behind */}
             <div className="absolute -inset-1 bg-gradient-to-br from-[#00E5FF]/30 to-[#FF7F50]/20 blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity duration-1000" />
             
-            <div className="relative backdrop-blur-2xl bg-white/60 dark:bg-black/60 border border-gray-200 dark:border-white/10 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden font-mono transition-colors duration-500">
+            <div className="relative backdrop-blur-2xl bg-white/60 dark:bg-black/60 border border-gray-300 dark:border-white/10 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden font-mono transition-colors duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent pointer-events-none" />
               
               {/* Terminal Header */}
-              <div className="px-6 py-4 border-b border-gray-200 dark:border-white/10 flex items-center justify-between bg-black/5 dark:bg-white/5 transition-colors">
+              <div className="px-6 py-4 border-b border-gray-300 dark:border-white/10 flex items-center justify-between bg-black/5 dark:bg-white/5 transition-colors">
                 <div className="flex items-center gap-3 text-gray-500 dark:text-gray-400 text-xs tracking-widest uppercase">
                   <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> EYECONIC_OS v2.0
                 </div>
@@ -131,7 +131,7 @@ function HeroSection() {
                 </div>
                 
                 <div className="space-y-6 text-sm">
-                  <div className="relative p-4 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg overflow-hidden group/item hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+                  <div className="relative p-4 bg-black/5 dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg overflow-hidden group/item hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#FF7F50] shadow-[0_0_15px_#FF7F50]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -146,7 +146,7 @@ function HeroSection() {
                      </div>
                   </div>
 
-                  <div className="relative p-4 border border-gray-200 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                  <div className="relative p-4 border border-gray-300 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#00E5FF]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ function HeroSection() {
                      </div>
                   </div>
 
-                  <div className="relative p-4 border border-gray-200 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors opacity-60">
+                  <div className="relative p-4 border border-gray-300 dark:border-white/5 rounded-lg group/item hover:bg-black/5 dark:hover:bg-white/5 transition-colors opacity-60">
                      <div className="absolute left-0 top-0 w-1 h-full bg-gray-400 dark:bg-gray-600" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -181,7 +181,7 @@ function HeroSection() {
 
 function ProblemAndShiftSection() {
   return (
-    <section id="shift" className="w-full py-24 px-6 bg-white dark:bg-black relative border-y border-gray-200 dark:border-white/5 transition-colors duration-500 overflow-hidden">
+    <section id="shift" className="w-full py-24 px-6 bg-white dark:bg-black relative border-y border-gray-300 dark:border-white/5 transition-colors duration-500 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/[0.03] dark:from-white/[0.03] to-transparent pointer-events-none z-0" />
       
       {/* Background Ambience */}
@@ -222,7 +222,7 @@ function ProblemAndShiftSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-6 md:p-8 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-200 dark:border-white/5 relative overflow-hidden transition-colors"
+            className="p-6 md:p-8 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-300 dark:border-white/5 relative overflow-hidden transition-colors"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gray-300 dark:bg-gray-800 transition-colors" />
             <h3 className="text-sm font-mono font-bold mb-6 text-gray-500 dark:text-gray-600 uppercase tracking-[0.2em] transition-colors">Traditional Feeds</h3>
@@ -328,7 +328,7 @@ function FeaturesSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, ease: "easeOut", duration: 0.8 }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className={`group relative p-6 md:p-8 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-200 dark:border-white/5 transition-all duration-300 ${feat.colSpan} overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]`}
+              className={`group relative p-6 md:p-8 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-300 dark:border-white/5 transition-all duration-300 ${feat.colSpan} overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]`}
             >
               {/* Spinning / Glowing Gradient background on hover */}
               <div 
@@ -340,7 +340,7 @@ function FeaturesSection() {
               <div className={`absolute inset-0 border rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${feat.borderColor}`} />
               
               <div className="relative z-10 flex flex-col h-full">
-                <div className="w-12 h-12 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-110 transition-transform duration-500">
+                <div className="w-12 h-12 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm border border-gray-300 dark:border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-110 transition-transform duration-500">
                   <div className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: feat.glowColor.replace('0.4', '1') }} />
                   {feat.icon}
                 </div>
@@ -454,7 +454,7 @@ function TerminalSection() {
   const currentAlert = alerts[simulationMode];
 
   return (
-    <section id="terminal" className="w-full py-24 px-6 relative bg-white dark:bg-black border-t border-gray-200 dark:border-white/5 overflow-hidden transition-colors duration-500">
+    <section id="terminal" className="w-full py-24 px-6 relative bg-white dark:bg-black border-t border-gray-300 dark:border-white/5 overflow-hidden transition-colors duration-500">
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white tracking-tighter transition-colors">The Attention Layer</h2>
@@ -468,25 +468,25 @@ function TerminalSection() {
         <div className="max-w-5xl mx-auto mb-8 flex flex-wrap justify-center gap-4">
           <button 
             onClick={() => setSimulationMode('idle')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'idle' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/50 text-[#00E5FF]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'idle' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/50 text-[#00E5FF]' : 'bg-gray-100 dark:bg-white/5 border-gray-300 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
           >
             Reset
           </button>
           <button 
             onClick={() => setSimulationMode('tension')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'tension' ? 'bg-[#FFBD2E]/10 border-[#FFBD2E]/50 text-[#FFBD2E]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FFBD2E]'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'tension' ? 'bg-[#FFBD2E]/10 border-[#FFBD2E]/50 text-[#FFBD2E]' : 'bg-gray-100 dark:bg-white/5 border-gray-300 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FFBD2E]'}`}
           >
             Inject: Tension
           </button>
           <button 
             onClick={() => setSimulationMode('momentum')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'momentum' ? 'bg-[#FF7F50]/10 border-[#FF7F50]/50 text-[#FF7F50]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF7F50]'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'momentum' ? 'bg-[#FF7F50]/10 border-[#FF7F50]/50 text-[#FF7F50]' : 'bg-gray-100 dark:bg-white/5 border-gray-300 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF7F50]'}`}
           >
             Inject: Momentum
           </button>
           <button 
             onClick={() => setSimulationMode('chaos')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'chaos' ? 'bg-[#FF5F56]/10 border-[#FF5F56]/50 text-[#FF5F56]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF5F56]'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'chaos' ? 'bg-[#FF5F56]/10 border-[#FF5F56]/50 text-[#FF5F56]' : 'bg-gray-100 dark:bg-white/5 border-gray-300 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF5F56]'}`}
           >
             Inject: Chaos (VAR)
           </button>
@@ -496,12 +496,12 @@ function TerminalSection() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full max-w-5xl mx-auto rounded-xl border border-gray-200 dark:border-white/10 overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,1)] bg-gray-50 dark:bg-[#030303] font-mono relative backdrop-blur-xl transition-colors duration-500"
+          className="w-full max-w-5xl mx-auto rounded-xl border border-gray-300 dark:border-white/10 overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,1)] bg-gray-50 dark:bg-[#030303] font-mono relative backdrop-blur-xl transition-colors duration-500"
         >
           <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent ${currentAlert.gradient} to-transparent opacity-50 transition-colors duration-500`} />
           
           {/* Header */}
-          <div className="px-6 py-4 border-b border-gray-200 dark:border-white/5 flex items-center justify-between bg-white dark:bg-black/80 transition-colors">
+          <div className="px-6 py-4 border-b border-gray-300 dark:border-white/5 flex items-center justify-between bg-white dark:bg-black/80 transition-colors">
             <div className="flex gap-4 items-center">
               <span className={`w-2 h-2 rounded-full ${currentAlert.dot} shadow-[0_0_8px_currentColor]`} />
               <span className={`${currentAlert.color} font-bold text-xs tracking-[0.2em] relative overflow-hidden transition-colors`}>
@@ -532,32 +532,32 @@ function TerminalSection() {
                   const timeString = `${mMin}:${mSec < 10 ? '0' + mSec : mSec}`;
                   
                   const isMain = match.id === selectedMatchId;
-                  let wrapperStyle = "hover:bg-black/[0.02] dark:hover:bg-white/[0.02] border-transparent cursor-pointer";
+                  let wrapperStyle = "hover:bg-black/[0.05] dark:hover:bg-white/[0.02] border-gray-300 dark:border-transparent cursor-pointer";
                   let leftBarStyle = "bg-transparent";
-                  let scoreColor = "text-gray-500";
+                  let scoreColor = "text-gray-600 dark:text-gray-500 font-bold";
                   let pillText = "STAGNANT";
-                  let pillBg = "bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-500";
+                  let pillBg = "bg-gray-200 dark:bg-gray-900 border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-500 font-bold";
 
                   if (isMain && simulationMode !== 'idle') {
-                    wrapperStyle = `bg-black/[0.03] dark:bg-white/[0.03] border-gray-200 dark:border-white/5 ${currentAlert.shadow} cursor-pointer`;
+                    wrapperStyle = `bg-black/[0.03] dark:bg-white/[0.03] border-gray-400 dark:border-white/5 ${currentAlert.shadow} cursor-pointer`;
                     leftBarStyle = `${currentAlert.dot} shadow-[0_0_15px_currentColor]`;
                     scoreColor = currentAlert.color;
                     pillText = currentAlert.pill;
-                    pillBg = `${currentAlert.bg} border ${currentAlert.border} ${currentAlert.color}`;
+                    pillBg = `${currentAlert.bg} border ${currentAlert.border} ${currentAlert.color} font-bold`;
                   } else if (match.emtn >= 80) {
-                    scoreColor = "text-[#FF7F50]";
+                    scoreColor = "text-[#FF7F50] font-bold";
                     pillText = "CRITICAL";
-                    pillBg = "bg-[#FF7F50]/10 border-[#FF7F50]/20 text-[#FF7F50]";
+                    pillBg = "bg-[#FF7F50]/10 border-[#FF7F50]/20 text-[#FF7F50] font-bold";
                   } else if (match.emtn >= 50) {
-                    scoreColor = "text-[#00E5FF]";
+                    scoreColor = "text-[#00E5FF] font-bold";
                     pillText = "RISING";
-                    pillBg = "bg-[#00E5FF]/5 border-[#00E5FF]/20 text-[#00E5FF]";
+                    pillBg = "bg-[#00E5FF]/5 border-[#00E5FF]/20 text-[#00E5FF] font-bold";
                   }
 
                   // Force the left bar for the main match even in idle mode
                   if (isMain && simulationMode === 'idle') {
                     leftBarStyle = "bg-[#00E5FF] shadow-[0_0_15px_#00E5FF]";
-                    wrapperStyle = "bg-black/[0.03] dark:bg-white/[0.03] border-gray-200 dark:border-white/5 cursor-pointer";
+                    wrapperStyle = "bg-black/[0.03] dark:bg-white/[0.03] border-gray-400 dark:border-white/5 cursor-pointer";
                   }
 
                   return (
@@ -630,7 +630,7 @@ function SocialProofSection() {
   ];
 
   return (
-    <section className="w-full py-16 px-6 border-y border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#020202] relative overflow-hidden transition-colors duration-500">
+    <section className="w-full py-16 px-6 border-y border-gray-300 dark:border-white/5 bg-gray-50 dark:bg-[#020202] relative overflow-hidden transition-colors duration-500">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/[0.02] dark:from-white/[0.02] to-transparent pointer-events-none" />
       
       <div className="max-w-6xl mx-auto">
@@ -642,15 +642,15 @@ function SocialProofSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-2xl bg-white dark:bg-[#080808] border border-gray-200 dark:border-white/5 relative group overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,1)] transition-colors duration-500"
+              className="p-8 rounded-2xl bg-white dark:bg-[#080808] border border-gray-300 dark:border-white/5 relative group overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,1)] transition-colors duration-500"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="flex justify-between items-start mb-10">
-                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-gray-200 dark:border-white/10 group-hover:bg-black/10 dark:group-hover:bg-white/10 transition-colors duration-500">
+                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center border border-gray-300 dark:border-white/10 group-hover:bg-black/10 dark:group-hover:bg-white/10 transition-colors duration-500">
                   {stat.icon}
                 </div>
-                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-black/5 dark:bg-white/5 rounded border border-gray-200 dark:border-white/5 group-hover:border-[#00E5FF]/20 group-hover:text-[#00E5FF] transition-colors duration-500">
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-black/5 dark:bg-white/5 rounded border border-gray-300 dark:border-white/5 group-hover:border-[#00E5FF]/20 group-hover:text-[#00E5FF] transition-colors duration-500">
                   {stat.trend}
                 </div>
               </div>
@@ -731,7 +731,7 @@ function WaitlistSection() {
 
 function Footer() {
   return (
-    <footer className="w-full border-t border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#030303] py-16 px-6 transition-colors duration-500">
+    <footer className="w-full border-t border-gray-300 dark:border-white/5 bg-gray-50 dark:bg-[#030303] py-16 px-6 transition-colors duration-500">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3">
           <Activity className="w-5 h-5 text-gray-500" />
