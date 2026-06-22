@@ -14,7 +14,7 @@ const baseDates = [
   { day: 'MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
 ];
 
-const liveStands = [
+const baseLiveStands = [
   {
     id: 1,
     listeners: '8.4K',
@@ -208,7 +208,7 @@ export default function InsightsPage() {
   // Use the date number to create a pseudo-random rotation of the arrays
   const offset = parseInt(activeDate) % 3;
   
-  const rotateArray = (arr: any[]) => {
+  const rotateArray = <T,>(arr: T[]): T[] => {
     if (offset === 0) return arr;
     return [...arr.slice(offset), ...arr.slice(0, offset)];
   };
