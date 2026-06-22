@@ -67,11 +67,11 @@ const missedHighlights = [
     title: "Late drama in Madrid",
     subtitle: "RMD 1 - 1 MC | MVP: BENZEMA 9.0",
     desc: "Benzema's ghost haunts the box in the 94th minute.",
-    image: "https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1508344928928-7137b29de2f6?q=80&w=800&auto=format&fit=crop",
     stats: [
       { label: "AVG RATING", value: "8.4", color: "text-[#00E5FF]" },
       { label: "CHAOS PEAK", value: "94%", color: "text-[#00E5FF]" },
-      { label: "SENTIMENT SHIFT", value: "+14%", color: "text-[#00E5FF]" }
+      { label: "SENTIMENT", value: "+14%", color: "text-[#00E5FF]" }
     ]
   },
   {
@@ -80,10 +80,12 @@ const missedHighlights = [
     tagColor: "bg-[#FF4F00]/20 text-[#FF4F00]",
     title: "Spurs steal it at the death",
     subtitle: "TOT 2 - 1 CHE | KULUSEVSKI 91'",
-    desc: "",
-    image: "https://images.unsplash.com/photo-1518605368461-1e1e38cd1562?q=80&w=800&auto=format&fit=crop",
+    desc: "A chaotic final 10 minutes leads to late heartbreak.",
+    image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop",
     stats: [
-      { label: "Chaos peak", value: "92%", color: "text-[#FF4F00]" }
+      { label: "AVG RATING", value: "7.9", color: "text-[#FF4F00]" },
+      { label: "CHAOS PEAK", value: "92%", color: "text-[#FF4F00]" },
+      { label: "SENTIMENT", value: "-10%", color: "text-[#FF4F00]" }
     ]
   }
 ];
@@ -237,9 +239,8 @@ export default function InsightsPage() {
           {missedHighlights.map(highlight => (
              <Link href={`/match/${highlight.id}`} key={highlight.id} className="relative w-[380px] shrink-0 rounded-[2rem] overflow-hidden border border-white/10 group block">
                <div className="absolute inset-0">
-                 <img src={highlight.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                 <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+                 <img src={highlight.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-black/30" />
                </div>
 
                <div className="relative p-8 flex flex-col justify-end h-[360px]">
@@ -352,7 +353,7 @@ export default function InsightsPage() {
       </section>
 
       {/* Live Now: Top Stands (Ticker Style) */}
-      <section className="mt-12 border-y border-white/10 bg-[#0A0A0A] py-6 relative overflow-hidden">
+      <section className="mt-12 bg-[#0A0A0A] py-6 relative overflow-hidden">
         <div className="flex items-center gap-3 px-6 mb-4">
           <span className="bg-red-500 text-white text-[10px] font-black tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
              LIVE <Activity className="w-3 h-3 animate-pulse" />
