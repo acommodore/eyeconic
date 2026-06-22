@@ -24,7 +24,7 @@ export default function DashboardPage() {
                 
                 <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between">
                   <div className="flex justify-between items-start">
-                    <span className="px-3 py-1.5 rounded-lg bg-[#FF4F00] text-sm font-bold text-white flex items-center gap-2 shadow-[0_0_15px_rgba(255,79,0,0.5)]">
+                    <span className="px-3 py-1.5 rounded-lg bg-[#FF7F50] text-sm font-bold text-white flex items-center gap-2 shadow-[0_0_15px_rgba(255,79,0,0.5)]">
                       <span className="w-2 h-2 rounded-full bg-white animate-pulse" /> MATCH LIVE
                     </span>
                     <span className="px-3 py-1.5 rounded-lg bg-[#00E5FF]/20 text-[#00E5FF] text-sm font-bold border border-[#00E5FF]/30">
@@ -49,7 +49,7 @@ export default function DashboardPage() {
               {/* Secondary Live Match */}
               <div className="glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-colors border border-white/5">
                 <div className="flex justify-between items-start">
-                  <span className="px-2 py-1 rounded bg-[#FF4F00] text-xs font-bold text-white flex items-center gap-1">
+                  <span className="px-2 py-1 rounded bg-[#FF7F50] text-xs font-bold text-white flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> LIVE
                   </span>
                   <span className="px-2 py-1 rounded bg-[#00E5FF]/10 text-[#00E5FF] text-xs font-bold">65 VIBE</span>
@@ -58,13 +58,17 @@ export default function DashboardPage() {
                 <div className="my-8">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-black border border-white/10 flex items-center justify-center font-bold text-sm">JUV</div>
-                      <span className="font-bold text-xl">JUV</span>
+                      <div className="w-12 h-12 rounded-full bg-blue-600 border border-white/10 flex items-center justify-center font-bold text-sm p-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" className="w-full h-full object-contain" alt="INT" />
+                      </div>
+                      <span className="font-bold text-xl">INT</span>
                     </div>
                     <span className="text-3xl font-black">0 - 0</span>
                     <div className="flex items-center gap-4">
                       <span className="font-bold text-xl">MIL</span>
-                      <div className="w-12 h-12 rounded-full bg-red-600 border border-white/10 flex items-center justify-center font-bold text-sm">MIL</div>
+                      <div className="w-12 h-12 rounded-full bg-white border border-white/10 flex items-center justify-center font-bold text-sm p-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-full h-full object-contain" alt="MIL" />
+                      </div>
                     </div>
                   </div>
                   <p className="text-center text-sm text-gray-400 font-mono mt-4">32:00</p>
@@ -78,7 +82,7 @@ export default function DashboardPage() {
                {/* Tertiary Live Match */}
                <div className="glass rounded-3xl p-6 flex flex-col justify-between hover:bg-white/5 transition-colors border border-white/5">
                 <div className="flex justify-between items-start">
-                  <span className="px-2 py-1 rounded bg-[#FF4F00] text-xs font-bold text-white flex items-center gap-1">
+                  <span className="px-2 py-1 rounded bg-[#FF7F50] text-xs font-bold text-white flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> LIVE
                   </span>
                   <span className="px-2 py-1 rounded bg-[#00E5FF]/10 text-[#00E5FF] text-xs font-bold">88 VIBE</span>
@@ -87,16 +91,20 @@ export default function DashboardPage() {
                 <div className="my-8">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-blue-800 border border-white/10 flex items-center justify-center font-bold text-sm">RMA</div>
+                      <div className="w-12 h-12 rounded-full bg-white border border-white/10 flex items-center justify-center font-bold text-sm p-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-full h-full object-contain" alt="RMA" />
+                      </div>
                       <span className="font-bold text-xl">RMA</span>
                     </div>
                     <span className="text-3xl font-black">2 - 1</span>
                     <div className="flex items-center gap-4">
-                      <span className="font-bold text-xl">FCB</span>
-                      <div className="w-12 h-12 rounded-full bg-red-800 border border-white/10 flex items-center justify-center font-bold text-sm">FCB</div>
+                      <span className="font-bold text-xl">BAR</span>
+                      <div className="w-12 h-12 rounded-full bg-white border border-white/10 flex items-center justify-center font-bold text-sm p-1.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" className="w-full h-full object-contain" alt="BAR" />
+                      </div>
                     </div>
                   </div>
-                  <p className="text-center text-sm text-[#FF4F00] font-mono mt-4">76:00 (High Chaos)</p>
+                  <p className="text-center text-sm text-[#FF7F50] font-mono mt-4">76:00 (High Chaos)</p>
                 </div>
                 
                 <Link href="/match/3" className="w-full bg-white/5 border border-white/10 text-white font-bold py-3.5 rounded-xl hover:bg-white/10 transition-all text-center block">

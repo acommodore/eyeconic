@@ -53,7 +53,7 @@ export default function ProfilePage() {
             <div className="flex flex-col items-center md:items-start">
               <span className="text-xs text-gray-500 font-bold tracking-widest mb-2">VIBE RATING</span>
               <div className="h-16 flex items-center">
-                 <span className="text-5xl drop-shadow-[0_0_20px_#FF4F00]">🔥</span>
+                 <span className="text-5xl drop-shadow-[0_0_20px_#FF7F50]">🔥</span>
               </div>
             </div>
 
@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
             <div className="flex flex-col items-center md:items-start">
               <span className="text-xs text-gray-500 font-bold tracking-widest mb-2">GLOBAL RANK</span>
-              <span className="text-4xl font-black text-[#FF4F00] h-16 flex items-center drop-shadow-[0_0_10px_rgba(255,79,0,0.5)]">#482</span>
+              <span className="text-4xl font-black text-[#FF7F50] h-16 flex items-center drop-shadow-[0_0_10px_rgba(255,79,0,0.5)]">#482</span>
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export default function ProfilePage() {
               <span className="text-[#00E5FF]">LVL 42</span>
             </div>
             <div className="h-3 w-full bg-black/50 rounded-full overflow-hidden border border-white/5 shadow-inner">
-              <div className="h-full w-[70%] bg-gradient-to-r from-[#00E5FF] to-[#FF4F00] shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
+              <div className="h-full w-[70%] bg-gradient-to-r from-[#00E5FF] to-[#FF7F50] shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
             </div>
           </div>
         </div>
@@ -111,10 +111,10 @@ export default function ProfilePage() {
             </div>
 
             <div className="border-l-2 border-white/10 pl-8 relative group">
-              <div className="absolute -left-2.5 top-1 w-5 h-5 rounded-full bg-[#FF4F00] shadow-[0_0_15px_#FF4F00] border-4 border-[#121212]" />
+              <div className="absolute -left-2.5 top-1 w-5 h-5 rounded-full bg-[#FF7F50] shadow-[0_0_15px_#FF7F50] border-4 border-[#121212]" />
               <div className="flex justify-between items-center text-sm mb-2 bg-[#121212] p-4 rounded-2xl border border-white/5 group-hover:bg-white/5 transition-colors">
                 <div>
-                  <span className="font-bold text-[#FF4F00] block mb-1">RIVALRY FLARE</span>
+                  <span className="font-bold text-[#FF7F50] block mb-1">RIVALRY FLARE</span>
                   <p className="text-base text-gray-300">Spotted tactical flaw in Titan Rivals defense. Intelligence shared.</p>
                 </div>
                 <div className="text-right">
@@ -134,7 +134,7 @@ export default function ProfilePage() {
           <div className="grid grid-cols-4 md:grid-cols-5 gap-4">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div key={i} className="aspect-square bg-[#121212] rounded-2xl flex items-center justify-center border border-white/5 opacity-70 hover:opacity-100 hover:scale-105 hover:bg-white/5 transition-all cursor-pointer shadow-lg">
-                <Medal className={`w-10 h-10 ${i % 3 === 0 ? 'text-[#FF4F00] drop-shadow-[0_0_8px_rgba(255,79,0,0.5)]' : 'text-[#00E5FF] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]'}`} />
+                <Medal className={`w-10 h-10 ${i % 3 === 0 ? 'text-[#FF7F50] drop-shadow-[0_0_8px_rgba(255,79,0,0.5)]' : 'text-[#00E5FF] drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]'}`} />
               </div>
             ))}
             <div className="aspect-square bg-[#121212] rounded-2xl flex items-center justify-center border border-white/5 opacity-20">

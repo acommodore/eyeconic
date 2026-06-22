@@ -6,11 +6,11 @@ import Link from "next/link";
 
 const baseDates = [
   { day: 'THU', date: '08', active: false, dotColor: 'bg-gray-600' },
-  { day: 'FRI', date: '09', active: false, dotColor: 'bg-[#FF4F00]' },
+  { day: 'FRI', date: '09', active: false, dotColor: 'bg-[#FF7F50]' },
   { day: 'SAT', date: '10', active: false, dotColor: 'bg-[#00E5FF]' },
   { day: 'SUN', date: '11', active: false, dotColor: 'bg-purple-500' },
   { day: 'MON', date: '12', active: false, dotColor: 'bg-gray-600' },
-  { day: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF4F00]' },
+  { day: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF7F50]' },
   { day: 'MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
 ];
 
@@ -77,15 +77,15 @@ const baseMissedHighlights = [
   {
     id: 2,
     tag: "WILD FINISH",
-    tagColor: "bg-[#FF4F00]/20 text-[#FF4F00]",
+    tagColor: "bg-[#FF7F50]/20 text-[#FF7F50]",
     title: "Spurs steal it at the death",
     subtitle: "TOT 2 - 1 CHE | KULUSEVSKI 91'",
     desc: "A chaotic final 10 minutes leads to late heartbreak.",
     image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop",
     stats: [
-      { label: "AVG RATING", value: "7.9", color: "text-[#FF4F00]" },
-      { label: "CHAOS PEAK", value: "92%", color: "text-[#FF4F00]" },
-      { label: "SENTIMENT", value: "-10%", color: "text-[#FF4F00]" }
+      { label: "AVG RATING", value: "7.9", color: "text-[#FF7F50]" },
+      { label: "CHAOS PEAK", value: "92%", color: "text-[#FF7F50]" },
+      { label: "SENTIMENT", value: "-10%", color: "text-[#FF7F50]" }
     ]
   }
 ];
@@ -323,7 +323,7 @@ export default function InsightsPage() {
                   <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
                   <div className="absolute -bottom-1 -right-1 bg-[#00E5FF] text-black text-[10px] font-black px-1.5 rounded">8.5</div>
                 </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 1 <div className="w-1.5 h-1.5 rounded-full bg-[#FF4F00]"/> 1</div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 1 <div className="w-1.5 h-1.5 rounded-full bg-[#FF7F50]"/> 1</div>
               </div>
             </div>
 
@@ -469,7 +469,7 @@ export default function InsightsPage() {
                     {match.timeline.map((marker, i) => (
                        <div key={i} className={`absolute top-1/2 -translate-y-1/2 ${
                           marker.type === 'cyan' ? 'w-2.5 h-2.5 bg-[#00E5FF] rotate-45' :
-                          marker.type === 'orange' ? 'w-2.5 h-2.5 bg-[#FF4F00] rotate-45' :
+                          marker.type === 'orange' ? 'w-2.5 h-2.5 bg-[#FF7F50] rotate-45' :
                           marker.type === 'purple' ? 'w-2.5 h-2.5 bg-purple-500 rotate-45' :
                           marker.type === 'blue' ? 'w-2.5 h-2.5 bg-blue-500 rotate-45' :
                           marker.type === 'red' ? 'w-2.5 h-2.5 bg-red-600 rotate-45' :

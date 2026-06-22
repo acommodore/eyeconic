@@ -36,7 +36,7 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-white/10 flex items-center justify-center relative overflow-hidden group transition-colors">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#FF4F00] opacity-10 dark:opacity-20 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] opacity-10 dark:opacity-20 group-hover:opacity-100 transition-opacity duration-500" />
             <Activity className="w-4 h-4 text-gray-900 dark:text-white relative z-10 transition-colors" />
           </div>
           <span className="text-xl font-bold tracking-tighter text-gray-900 dark:text-white transition-colors">Eyeconic</span>
@@ -45,9 +45,6 @@ function Navbar() {
           <ThemeToggle />
           <Link href="/login" className="hidden sm:block text-xs font-bold text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors uppercase tracking-widest">
             Log In
-          </Link>
-          <Link href="/onboarding" className="px-5 py-2.5 rounded-full bg-gray-900 text-white dark:bg-white dark:text-black text-xs font-bold hover:scale-105 transition-all uppercase tracking-widest">
-            Get Started
           </Link>
         </div>
       </div>
@@ -60,12 +57,9 @@ function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
 
   return (
-    <section id="hero" className="relative w-full min-h-screen flex items-center pt-24 pb-20 px-6 lg:px-20 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500">
-      {/* Background Ambience */}
-      <motion.div style={{ y }} className="absolute inset-0 z-0 opacity-20 dark:opacity-40 transition-opacity">
-        <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#00E5FF]/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#FF4F00]/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
-      </motion.div>
+    <section id="hero" className="relative w-full min-h-screen flex items-center pt-24 pb-20 px-6 lg:px-20 overflow-hidden bg-gray-50 dark:bg-[#050505] transition-colors duration-500 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
+      {/* Heavy Dark Overlay */}
+      <div className="absolute inset-0 bg-white/90 dark:bg-[#050505]/90 z-0" />
 
       <div className="relative z-30 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 mt-10">
         <div className="flex-1 text-left w-full">
@@ -86,7 +80,7 @@ function HeroSection() {
               </span>
             </h1>
             <h2 className="text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
-              // STATS ARE DECEPTIVE
+              STATS ARE DECEPTIVE
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium mb-12 tracking-wide max-w-xl leading-relaxed transition-colors">
               Eyeconic parses live crowd sentiment, momentum swings, and tension to broadcast exactly where the drama is happening, right now.
@@ -95,10 +89,7 @@ function HeroSection() {
             <div className="flex flex-col sm:flex-row items-center gap-4 font-mono">
               <Link href="/onboarding" className="group relative w-full sm:w-auto bg-gray-900 text-white dark:bg-white dark:text-black font-bold text-sm tracking-widest py-4 px-8 overflow-hidden hover:scale-105 transition-all flex justify-center items-center gap-3 rounded-none">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 dark:via-black/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                [ GET STARTED ] <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link href="/login" className="w-full sm:w-auto text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors bg-transparent border border-gray-300 dark:border-white/20 px-8 py-4 hover:bg-black/5 dark:hover:bg-white/5 text-sm font-bold tracking-widest flex justify-center items-center rounded-none">
-                [ LOG IN ]
+                GET STARTED <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </motion.div>
@@ -113,7 +104,7 @@ function HeroSection() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[480px] transform-style-3d group"
           >
             {/* Glow Behind */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-[#00E5FF]/30 to-[#FF4F00]/20 blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity duration-1000" />
+            <div className="absolute -inset-1 bg-gradient-to-br from-[#00E5FF]/30 to-[#FF7F50]/20 blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity duration-1000" />
             
             <div className="relative backdrop-blur-2xl bg-white/60 dark:bg-black/60 border border-gray-200 dark:border-white/10 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden font-mono transition-colors duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent pointer-events-none" />
@@ -141,17 +132,17 @@ function HeroSection() {
                 
                 <div className="space-y-6 text-sm">
                   <div className="relative p-4 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg overflow-hidden group/item hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
-                     <div className="absolute left-0 top-0 w-1 h-full bg-[#FF4F00] shadow-[0_0_15px_#FF4F00]" />
+                     <div className="absolute left-0 top-0 w-1 h-full bg-[#FF7F50] shadow-[0_0_15px_#FF7F50]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
                          <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-5 h-5 object-contain" alt="RMA" />
                          <span className="text-gray-500 dark:text-gray-400 text-[10px] font-black tracking-widest">VS</span>
                          <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5 object-contain" alt="MCI" />
                        </div>
-                       <span className="text-[#FF4F00] font-black drop-shadow-[0_0_8px_rgba(255,79,0,0.6)]">98 EMTN</span>
+                       <span className="text-[#FF7F50] font-black drop-shadow-[0_0_8px_rgba(255,79,0,0.6)]">98 EMTN</span>
                      </div>
                      <div className="text-[10px] text-gray-500 mt-2 uppercase tracking-widest flex items-center gap-2">
-                        <Flame className="w-3 h-3 text-[#FF4F00]" /> Critical Sentiment
+                        <Flame className="w-3 h-3 text-[#FF7F50]" /> Critical Sentiment
                      </div>
                   </div>
 
@@ -171,7 +162,7 @@ function HeroSection() {
                      <div className="absolute left-0 top-0 w-1 h-full bg-gray-400 dark:bg-gray-600" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
-                         <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" className="w-5 h-5 object-contain drop-shadow-md filter dark:invert-0 invert" alt="JUV" />
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" className="w-5 h-5 object-contain drop-shadow-md" alt="INT" />
                          <span className="text-gray-500 dark:text-gray-400 text-[10px] font-black tracking-widest">VS</span>
                          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-5 h-5 object-contain" alt="MIL" />
                        </div>
@@ -190,8 +181,14 @@ function HeroSection() {
 
 function ProblemAndShiftSection() {
   return (
-    <section id="shift" className="w-full py-24 px-6 bg-white dark:bg-black relative border-y border-gray-200 dark:border-white/5 transition-colors duration-500">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/[0.03] dark:from-white/[0.03] to-transparent pointer-events-none" />
+    <section id="shift" className="w-full py-24 px-6 bg-white dark:bg-black relative border-y border-gray-200 dark:border-white/5 transition-colors duration-500 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/[0.03] dark:from-white/[0.03] to-transparent pointer-events-none z-0" />
+      
+      {/* Background Ambience */}
+      <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#00E5FF]/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#FF7F50]/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
+      </div>
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12 text-center">
@@ -213,9 +210,9 @@ function ProblemAndShiftSection() {
             transition={{ delay: 0.1 }}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto tracking-wide leading-relaxed font-medium transition-colors"
           >
-            Dozens of matches happening simultaneously. Paralysis of choice. When you have no preference on what to watch, 
-            <span className="text-gray-900 dark:text-white font-bold transition-colors"> The Attention Layer </span> 
-            cuts through the noise, parsing momentum swings and crowd tension to broadcast exactly which match demands your screen right now.
+            Instead of checking 5 different apps to figure out which game is getting exciting, 
+            <span className="text-gray-900 dark:text-white font-bold transition-colors"> Eyeconic </span> 
+            does the heavy lifting. Powered by our proprietary <span className="text-[#00E5FF] font-bold">Attention Layer</span>, we analyze real-time crowd noise, tactical shifts, and momentum spikes to tell you exactly when a boring 0-0 draw turns into an absolute thriller.
           </motion.p>
         </div>
         
@@ -225,14 +222,14 @@ function ProblemAndShiftSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-12 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-200 dark:border-white/5 relative overflow-hidden transition-colors"
+            className="p-6 md:p-8 rounded-2xl bg-gray-50 dark:bg-[#080808] border border-gray-200 dark:border-white/5 relative overflow-hidden transition-colors"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gray-300 dark:bg-gray-800 transition-colors" />
-            <h3 className="text-sm font-mono font-bold mb-10 text-gray-500 dark:text-gray-600 uppercase tracking-[0.2em] transition-colors">Traditional Feeds</h3>
-            <ul className="space-y-8">
-              {['Static Box Scores', 'Lagging Stats', 'Text Play-by-Play'].map((item, i) => (
-                <li key={i} className="flex items-center gap-5 text-gray-500 dark:text-gray-600 text-lg font-medium tracking-wide transition-colors">
-                  <XCircle className="w-5 h-5 opacity-50 shrink-0" /> {item}
+            <h3 className="text-sm font-mono font-bold mb-6 text-gray-500 dark:text-gray-600 uppercase tracking-[0.2em] transition-colors">Traditional Feeds</h3>
+            <ul className="space-y-4">
+              {['Endless scrolling', 'Blind channel surfing', 'Static scores', 'Missed moments', 'Guesswork'].map((item, i) => (
+                <li key={i} className="flex items-center gap-4 text-gray-500 dark:text-gray-600 text-base font-medium tracking-wide transition-colors">
+                  <XCircle className="w-4 h-4 opacity-50 shrink-0" /> {item}
                 </li>
               ))}
             </ul>
@@ -243,25 +240,25 @@ function ProblemAndShiftSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-12 rounded-2xl bg-gradient-to-b from-[#00E5FF]/10 dark:from-[#00E5FF]/[0.05] to-transparent border border-[#00E5FF]/20 relative overflow-hidden group transition-colors"
+            className="p-6 md:p-8 rounded-2xl bg-gradient-to-b from-[#00E5FF]/10 dark:from-[#00E5FF]/[0.05] to-transparent border border-[#00E5FF]/20 relative overflow-hidden group transition-colors"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-blue-500 shadow-[0_0_20px_#00E5FF]" />
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#00E5FF]/10 blur-[80px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors duration-700" />
             
-            <h3 className="text-sm font-mono font-bold mb-10 text-gray-900 dark:text-white uppercase tracking-[0.2em] flex items-center gap-3 relative z-10 transition-colors">
-              <Activity className="w-4 h-4 text-[#00E5FF]" /> The Attention Layer
+            <h3 className="text-sm font-mono font-bold mb-6 text-gray-900 dark:text-white uppercase tracking-[0.2em] flex items-center gap-3 relative z-10 transition-colors">
+              <Activity className="w-4 h-4 text-[#00E5FF]" /> Eyeconic
             </h3>
-            <ul className="space-y-8 relative z-10">
-              {['Live Emotional Intelligence', 'Real-Time Sentiment Parsing', 'Match Excitement Detection'].map((item, i) => (
+            <ul className="space-y-4 relative z-10">
+              {['Instant match intelligence', 'Know what\'s worth watching', 'Live momentum insights', 'Timely game alerts', 'Watch with confidence'].map((item, i) => (
                 <motion.li 
                   key={i} 
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + (i * 0.1) }}
-                  className="flex items-center gap-5 text-gray-900 dark:text-white text-lg font-medium tracking-wide transition-colors"
+                  className="flex items-center gap-4 text-gray-900 dark:text-white text-base font-medium tracking-wide transition-colors"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-[#00E5FF] shrink-0 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" /> {item}
+                  <CheckCircle2 className="w-4 h-4 text-[#00E5FF] shrink-0 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" /> {item}
                 </motion.li>
               ))}
             </ul>
@@ -275,32 +272,32 @@ function ProblemAndShiftSection() {
 function FeaturesSection() {
   const features = [
     {
-      title: "Emotional Momentum",
-      desc: "Track matches heating up or flatlining in real time.",
+      title: "The EMTN Score",
+      desc: "Our live algorithm quantifies match excitement using real-time crowd noise, momentum shifts, and tactical data.",
       colSpan: "md:col-span-2",
       icon: <Activity className="w-5 h-5 text-[#00E5FF]" />,
       glowColor: "rgba(0, 229, 255, 0.4)",
       borderColor: "border-[#00E5FF]/30",
     },
     {
-      title: "Narrative Engine",
-      desc: "Instant AI distillation of the match's psychological storyline.",
+      title: "Smart Match Routing",
+      desc: "Never miss a thriller. Get instantly redirected to the best match happening right now, completely hands-free.",
       colSpan: "md:col-span-1",
-      icon: <Flame className="w-5 h-5 text-[#FF4F00]" />,
+      icon: <Flame className="w-5 h-5 text-[#FF7F50]" />,
       glowColor: "rgba(255, 79, 0, 0.4)",
-      borderColor: "border-[#FF4F00]/30",
+      borderColor: "border-[#FF7F50]/30",
     },
     {
-      title: "Disagreement Map",
-      desc: "Visualizing the exact moments fan debates explode.",
+      title: "Live Audio Rooms",
+      desc: "Drop directly into heated fan discussions exactly when a controversial call or crucial goal happens.",
       colSpan: "md:col-span-1",
       icon: <Users className="w-5 h-5 text-purple-400" />,
       glowColor: "rgba(168, 85, 247, 0.4)",
       borderColor: "border-purple-500/30",
     },
     {
-      title: "Call The Moment",
-      desc: "The crowd-powered prediction engine rewarding fans who spot the shifts first.",
+      title: "Sentiment Parsing",
+      desc: "Instantly see what the crowd is saying. Our AI breaks down fan debates and tactical reactions in real time.",
       colSpan: "md:col-span-2",
       icon: <Play className="w-5 h-5 text-green-400" />,
       glowColor: "rgba(74, 222, 128, 0.4)",
@@ -309,13 +306,17 @@ function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="w-full py-24 px-6 bg-white dark:bg-[#050505] relative overflow-hidden transition-colors duration-500">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 z-0 opacity-10 dark:opacity-10" style={{ backgroundImage: 'linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+    <section id="features" className="w-full py-24 px-6 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-[#050515] dark:via-[#050505] dark:to-[#150515] relative overflow-hidden transition-colors duration-500">
+
+      
+      {/* Glowing Orbs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 dark:bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-purple-500/20 dark:bg-purple-600/10 rounded-full blur-[120px] pointer-events-none translate-y-1/2" />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12 text-center">
           <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tighter drop-shadow-xl transition-colors">The Engine</h3>
+          <p className="text-[#00E5FF] font-mono tracking-widest mt-4 text-sm md:text-base uppercase">POWERED BY THE ATTENTION LAYER</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 perspective-[1000px]">
@@ -371,7 +372,7 @@ function TerminalSection() {
   const [matches, setMatches] = useState<MatchItem[]>([
     { id: '1', teams: 'RMA vs MCI', score: '[ 2 - 2 ]', timeSeconds: 88 * 60, emtn: 98 },
     { id: '2', teams: 'ARS vs PSG', score: '[ 1 - 0 ]', timeSeconds: 65 * 60, emtn: 85 },
-    { id: '3', teams: 'JUV vs MIL', score: '[ 0 - 0 ]', timeSeconds: 32 * 60, emtn: 42 },
+    { id: '3', teams: 'INT vs MIL', score: '[ 0 - 0 ]', timeSeconds: 32 * 60, emtn: 42 },
   ]);
 
   useEffect(() => {
@@ -435,19 +436,19 @@ function TerminalSection() {
   const alerts = {
     idle: {
       color: "text-[#00E5FF]", bg: "bg-[#00E5FF]/5", border: "border-[#00E5FF]/20", shadow: "shadow-[inset_0_0_30px_rgba(0,229,255,0.05)] dark:shadow-[inset_0_0_30px_rgba(0,229,255,0.1)]", gradient: "via-[#00E5FF]",
-      icon: <Activity className="w-4 h-4 animate-pulse" />, title: "SYSTEM NORMAL // MONITORING", desc: "All systems nominal. Analyzing baseline fan sentiment across global leagues.", pill: "STABLE", dot: "bg-[#00E5FF] animate-pulse"
+      icon: <Activity className="w-4 h-4 animate-pulse" />, title: "SYSTEM NORMAL - MONITORING", desc: "All systems nominal. Analyzing baseline fan sentiment across global leagues.", pill: "STABLE", dot: "bg-[#00E5FF] animate-pulse"
     },
     tension: {
       color: "text-[#FFBD2E]", bg: "bg-[#FFBD2E]/5", border: "border-[#FFBD2E]/20", shadow: "shadow-[inset_0_0_30px_rgba(255,189,46,0.05)] dark:shadow-[inset_0_0_30px_rgba(255,189,46,0.1)]", gradient: "via-[#FFBD2E]",
-      icon: <Activity className="w-4 h-4" />, title: "SYSTEM ALERT // UNUSUAL CROWD SILENCE", desc: "Extreme drop in social volume. High tension. Anticipating major match event.", pill: "TENSION 99%", dot: "bg-[#FFBD2E]"
+      icon: <Activity className="w-4 h-4" />, title: "SYSTEM ALERT - UNUSUAL CROWD SILENCE", desc: "Extreme drop in social volume. High tension. Anticipating major match event.", pill: "TENSION 99%", dot: "bg-[#FFBD2E]"
     },
     momentum: {
-      color: "text-[#FF4F00]", bg: "bg-[#FF4F00]/5", border: "border-[#FF4F00]/20", shadow: "shadow-[inset_0_0_30px_rgba(255,79,0,0.05)] dark:shadow-[inset_0_0_30px_rgba(255,79,0,0.1)]", gradient: "via-[#FF4F00]",
-      icon: <AlertTriangle className="w-4 h-4 animate-pulse" />, title: "SYSTEM ALERT // MOMENTUM SHIFT", desc: `${selectedMatch?.teams.split(' vs ')[0] || 'Madrid'} pressing heavily. Crowd sentiment spiking exponentially in the last 120s.`, pill: "+400%", dot: "bg-[#FF4F00] animate-ping"
+      color: "text-[#FF7F50]", bg: "bg-[#FF7F50]/5", border: "border-[#FF7F50]/20", shadow: "shadow-[inset_0_0_30px_rgba(255,79,0,0.05)] dark:shadow-[inset_0_0_30px_rgba(255,79,0,0.1)]", gradient: "via-[#FF7F50]",
+      icon: <AlertTriangle className="w-4 h-4 animate-pulse" />, title: "SYSTEM ALERT - MOMENTUM SHIFT", desc: `${selectedMatch?.teams.split(' vs ')[0] || 'Madrid'} pressing heavily. Crowd sentiment spiking exponentially in the last 120s.`, pill: "+400%", dot: "bg-[#FF7F50] animate-ping"
     },
     chaos: {
       color: "text-[#FF5F56]", bg: "bg-[#FF5F56]/10", border: "border-[#FF5F56]/40", shadow: "shadow-[inset_0_0_50px_rgba(255,95,86,0.1)] dark:shadow-[inset_0_0_50px_rgba(255,95,86,0.2)]", gradient: "via-[#FF5F56]",
-      icon: <AlertTriangle className="w-4 h-4 animate-ping" />, title: "CRITICAL // MASS DISAGREEMENT DETECTED", desc: "VAR review initiated. Severe polarization across all communities. High volatility.", pill: "CHAOS", dot: "bg-[#FF5F56] animate-pulse"
+      icon: <AlertTriangle className="w-4 h-4 animate-ping" />, title: "CRITICAL - MASS DISAGREEMENT DETECTED", desc: "VAR review initiated. Severe polarization across all communities. High volatility.", pill: "CHAOS", dot: "bg-[#FF5F56] animate-pulse"
     }
   };
   const currentAlert = alerts[simulationMode];
@@ -469,25 +470,25 @@ function TerminalSection() {
             onClick={() => setSimulationMode('idle')}
             className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'idle' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/50 text-[#00E5FF]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}
           >
-            [ Reset ]
+            Reset
           </button>
           <button 
             onClick={() => setSimulationMode('tension')}
             className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'tension' ? 'bg-[#FFBD2E]/10 border-[#FFBD2E]/50 text-[#FFBD2E]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FFBD2E]'}`}
           >
-            [ Inject: Tension ]
+            Inject: Tension
           </button>
           <button 
             onClick={() => setSimulationMode('momentum')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'momentum' ? 'bg-[#FF4F00]/10 border-[#FF4F00]/50 text-[#FF4F00]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF4F00]'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'momentum' ? 'bg-[#FF7F50]/10 border-[#FF7F50]/50 text-[#FF7F50]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF7F50]'}`}
           >
-            [ Inject: Momentum ]
+            Inject: Momentum
           </button>
           <button 
             onClick={() => setSimulationMode('chaos')}
             className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'chaos' ? 'bg-[#FF5F56]/10 border-[#FF5F56]/50 text-[#FF5F56]' : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:text-[#FF5F56]'}`}
           >
-            [ Inject: Chaos (VAR) ]
+            Inject: Chaos (VAR)
           </button>
         </div>
 
@@ -544,9 +545,9 @@ function TerminalSection() {
                     pillText = currentAlert.pill;
                     pillBg = `${currentAlert.bg} border ${currentAlert.border} ${currentAlert.color}`;
                   } else if (match.emtn >= 80) {
-                    scoreColor = "text-[#FF4F00]";
+                    scoreColor = "text-[#FF7F50]";
                     pillText = "CRITICAL";
-                    pillBg = "bg-[#FF4F00]/10 border-[#FF4F00]/20 text-[#FF4F00]";
+                    pillBg = "bg-[#FF7F50]/10 border-[#FF7F50]/20 text-[#FF7F50]";
                   } else if (match.emtn >= 50) {
                     scoreColor = "text-[#00E5FF]";
                     pillText = "RISING";
@@ -586,12 +587,12 @@ function TerminalSection() {
                              <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 object-contain" alt="ARS" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" className="w-5 h-5 object-contain" alt="PSG" />
                            </span>
                          )}
-                         {match.teams === 'JUV vs MIL' && (
+                         {match.teams === 'INT vs MIL' && (
                            <span className="inline-flex items-center gap-2 w-[120px] justify-center">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" className="w-5 h-5 object-contain drop-shadow-md filter dark:invert-0 invert" alt="JUV" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-5 h-5 object-contain" alt="MIL" />
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" className="w-5 h-5 object-contain drop-shadow-md" alt="INT" /> <span className="text-[10px] text-gray-500 font-black">VS</span> <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-5 h-5 object-contain" alt="MIL" />
                            </span>
                          )}
-                         {!['RMA vs MCI', 'ARS vs PSG', 'JUV vs MIL'].includes(match.teams) && match.teams}
+                         {!['RMA vs MCI', 'ARS vs PSG', 'INT vs MIL'].includes(match.teams) && match.teams}
 
                          <span className="opacity-30 mx-4 text-black dark:text-white shrink-0">|</span> 
                          {match.score}
@@ -624,7 +625,7 @@ function TerminalSection() {
 function SocialProofSection() {
   const stats = [
     { label: "Fan Reactions Parsed", value: "10M+", trend: "Live", icon: <Activity className="w-5 h-5 text-[#00E5FF]" /> },
-    { label: "Matches Analyzed", value: "500+", trend: "Global", icon: <Globe className="w-5 h-5 text-[#FF4F00]" /> },
+    { label: "Matches Analyzed", value: "500+", trend: "Global", icon: <Globe className="w-5 h-5 text-[#FF7F50]" /> },
     { label: "Communities Engaged", value: "100+", trend: "Active", icon: <Users className="w-5 h-5 text-[#A855F7]" /> }
   ];
 
@@ -686,37 +687,43 @@ function WaitlistSection() {
          />
       </div>
       
-      <div className="max-w-xl mx-auto text-center relative z-10">
-        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white tracking-tighter drop-shadow-md dark:drop-shadow-2xl transition-colors">Join the Future of Football Discovery</h2>
-        <p className="text-[#00E5FF] font-mono text-xs tracking-[0.4em] uppercase mb-16 flex justify-center items-center gap-4">
-           <span className="w-8 h-[1px] bg-[#00E5FF]" /> Enter the Waitlist <span className="w-8 h-[1px] bg-[#00E5FF]" />
-        </p>
-        
-        <form className="space-y-6 text-left p-10 backdrop-blur-2xl bg-white/60 dark:bg-white/[0.02] border border-gray-300 dark:border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-colors duration-500" onSubmit={(e) => e.preventDefault()}>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          <div className="text-center lg:text-left">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-gray-900 dark:text-white tracking-tighter drop-shadow-md dark:drop-shadow-2xl transition-colors leading-[1.1]">Join the Future of Football Discovery</h2>
+            <p className="text-[#00E5FF] font-mono text-xs tracking-[0.4em] uppercase mb-12 lg:mb-0 flex justify-center lg:justify-start items-center gap-4">
+               <span className="w-8 h-[1px] bg-[#00E5FF]" /> Enter the Waitlist <span className="w-8 h-[1px] bg-[#00E5FF]" />
+            </p>
+          </div>
+          
+          <div className="w-full max-w-xl mx-auto lg:mx-0">
+            <form className="space-y-6 text-left p-10 backdrop-blur-2xl bg-white/60 dark:bg-white/[0.02] border border-gray-300 dark:border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-colors duration-500" onSubmit={(e) => e.preventDefault()}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="relative group">
               <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 px-0 py-4 text-gray-900 dark:text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Name" id="name" />
-              <label htmlFor="name" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">[ Name ]</label>
+              <label htmlFor="name" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">Name</label>
               <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
             </div>
             <div className="relative group">
               <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 px-0 py-4 text-gray-900 dark:text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Club" id="club" />
-              <label htmlFor="club" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">[ Favourite Club ]</label>
+              <label htmlFor="club" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">Favourite Club</label>
               <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
             </div>
           </div>
           <div className="relative group mt-8">
             <input type="email" className="w-full bg-transparent border-b border-gray-300 dark:border-white/20 px-0 py-4 text-gray-900 dark:text-white font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Email" id="email" />
-            <label htmlFor="email" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">[ Email Address ]</label>
+            <label htmlFor="email" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-gray-400 uppercase tracking-widest">Email Address</label>
             <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
           </div>
           
           <button className="relative w-full mt-12 bg-[#00E5FF] text-black font-black tracking-[0.3em] text-sm py-6 rounded-none hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all uppercase overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 dark:opacity-20 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 dark:via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-            [ SECURE ACCESS ]
-          </button>
-        </form>
+            SECURE ACCESS
+            </button>
+          </form>
+          </div>
+        </div>
       </div>
     </section>
   );

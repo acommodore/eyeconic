@@ -318,7 +318,7 @@ export default function StandsPage() {
                  
                  <div className="relative z-20 p-5 h-full flex flex-col justify-between">
                     <div>
-                      <span className="px-2 py-1 rounded-full bg-black/50 border border-[#FF4F00]/30 text-[10px] font-bold text-[#FF4F00] mb-3 inline-block">
+                      <span className="px-2 py-1 rounded-full bg-black/50 border border-[#FF7F50]/30 text-[10px] font-bold text-[#FF7F50] mb-3 inline-block">
                         8:30 PM
                       </span>
                       <h4 className="font-bold text-lg text-white leading-tight mb-1">Transfer Deadline Live Talk</h4>

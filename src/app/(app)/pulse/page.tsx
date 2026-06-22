@@ -17,7 +17,7 @@ const matchEvents = [
 ];
 
 const mockVoiceNotes = [
-  { id: 1, user: '@jdoe_88', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop', mood: 'ANGRY', moodColor: 'text-[#FF4F00] bg-[#FF4F00]/10', dotColor: 'bg-[#FF4F00]', comment: '"Unbelievable! How did he even see that through the crowd?! The defense was nowhere to be found."', echoes: 12 },
+  { id: 1, user: '@jdoe_88', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop', mood: 'ANGRY', moodColor: 'text-[#FF7F50] bg-[#FF7F50]/10', dotColor: 'bg-[#FF7F50]', comment: '"Unbelievable! How did he even see that through the crowd?! The defense was nowhere to be found."', echoes: 12 },
   { id: 2, user: '@tactics_guy', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop', mood: 'HYPE', moodColor: 'text-[#00E5FF] bg-[#00E5FF]/10', dotColor: 'bg-[#00E5FF]', comment: '"Notice how he shifts his weight right before the moment... absolute class."', echoes: 8 },
   { id: 3, user: '@cityfan_99', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=100&auto=format&fit=crop', mood: 'SHOCKED', moodColor: 'text-yellow-500 bg-yellow-500/10', dotColor: 'bg-yellow-500', comment: '"I thought that was in for sure... you have to be kidding me."', echoes: 45 },
   { id: 4, user: '@sarah_k', avatar: 'https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=100&auto=format&fit=crop', mood: 'SAD', moodColor: 'text-gray-400 bg-gray-400/10', dotColor: 'bg-gray-400', comment: '"We need to finish those chances if we want to take anything from this game."', echoes: 2 },
@@ -99,7 +99,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
       
       <div className="flex items-center gap-4">
         <div className="inline-flex items-center gap-1.5 bg-white/5 px-4 py-2 rounded-full text-xs font-bold text-gray-300">
-          <Flame className="w-4 h-4 text-[#FF4F00]"/> {event.likes}
+          <Flame className="w-4 h-4 text-[#FF7F50]"/> {event.likes}
         </div>
         
         <button onClick={onRecordClick} className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/30 hover:bg-red-500/20 hover:scale-105 transition-all text-red-500 group relative">
@@ -185,8 +185,8 @@ export default function MatchPulsePage() {
   };
 
   const handlePostReaction = () => {
-    let colorClass = 'text-[#FF4F00] bg-[#FF4F00]/10';
-    let dotColor = 'bg-[#FF4F00]';
+    let colorClass = 'text-[#FF7F50] bg-[#FF7F50]/10';
+    let dotColor = 'bg-[#FF7F50]';
     if (selectedReaction === 'HYPE') { colorClass = 'text-[#00E5FF] bg-[#00E5FF]/10'; dotColor = 'bg-[#00E5FF]'; }
     if (selectedReaction === 'BORING') { colorClass = 'text-gray-400 bg-gray-400/10'; dotColor = 'bg-gray-400'; }
 
@@ -242,7 +242,7 @@ export default function MatchPulsePage() {
     if (parseFloat(p.rating) >= 8.0) {
       ratingColorClass = "text-[#00E5FF]"; // Seafoam Green
     } else if (parseFloat(p.rating) < 7.0 && p.rating !== '-') {
-      ratingColorClass = "text-[#FF4F00]"; // Chaos Orange
+      ratingColorClass = "text-[#FF7F50]"; // Chaos Orange
     } else if (p.rating !== '-') {
       ratingColorClass = "text-yellow-500";
     }
@@ -271,7 +271,7 @@ export default function MatchPulsePage() {
                </div>
             )}
             {p.position === 'COACH' && (
-               <div className="absolute top-0 right-0 bg-[#FF4F00] px-1.5 py-0.5 rounded-bl shadow-lg">
+               <div className="absolute top-0 right-0 bg-[#FF7F50] px-1.5 py-0.5 rounded-bl shadow-lg">
                  <span className="text-[6px] md:text-[8px] font-black text-white uppercase tracking-widest">COACH</span>
                </div>
             )}
@@ -414,7 +414,7 @@ export default function MatchPulsePage() {
                   +99
                 </div>
               </div>
-              <Link href="/stands/2" className="bg-[#FF4F00] text-white rounded-lg px-6 py-3 flex items-center gap-3 hover:brightness-110 transition-all shadow-lg relative z-10 whitespace-nowrap w-full md:w-auto justify-center">
+              <Link href="/stands/2" className="bg-[#FF7F50] text-white rounded-lg px-6 py-3 flex items-center gap-3 hover:brightness-110 transition-all shadow-lg relative z-10 whitespace-nowrap w-full md:w-auto justify-center">
                    <span className="font-black tracking-widest text-[10px] uppercase">JOIN THE STAND</span>
                    <div className="flex items-center justify-center gap-0.5 ml-2">
                       <div className="w-0.5 h-2 bg-white rounded-full" />
@@ -701,7 +701,7 @@ export default function MatchPulsePage() {
             <button 
               onClick={handlePostReaction}
               disabled={!selectedReaction}
-              className={`w-full bg-[#FF4F00] text-black font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-[0_0_20px_rgba(255,79,0,0.3)] ${!selectedReaction ? 'opacity-50 cursor-not-allowed saturate-0' : 'hover:bg-[#FF4F00]/90 hover:scale-[1.02]'}`}
+              className={`w-full bg-[#FF7F50] text-black font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-[0_0_20px_rgba(255,79,0,0.3)] ${!selectedReaction ? 'opacity-50 cursor-not-allowed saturate-0' : 'hover:bg-[#FF7F50]/90 hover:scale-[1.02]'}`}
             >
               POST REACTION
             </button>

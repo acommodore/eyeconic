@@ -40,7 +40,7 @@ export default function AppLayout({
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF4F00] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)]">
                 <Activity className="w-5 h-5 text-black" />
               </div>
               <span className="text-xl font-bold tracking-wider">EYECONIC</span>

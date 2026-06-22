@@ -188,7 +188,7 @@ export default function MatchDetailsPage() {
                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">EYE TEST</span>
                   </div>
                   <div className="bg-[#1A1A1A] rounded-2xl p-4 min-w-[90px] flex flex-col items-center">
-                    <Shield className="w-5 h-5 text-[#FF4F00] mb-2" />
+                    <Shield className="w-5 h-5 text-[#FF7F50] mb-2" />
                     <span className="text-lg font-black">15%</span>
                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">SOLID</span>
                   </div>
@@ -247,8 +247,8 @@ export default function MatchDetailsPage() {
 
               <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-[#FF4F00]/20 flex items-center justify-center">
-                    <Activity className="w-4 h-4 text-[#FF4F00]" />
+                  <div className="w-8 h-8 rounded-full bg-[#FF7F50]/20 flex items-center justify-center">
+                    <Activity className="w-4 h-4 text-[#FF7F50]" />
                   </div>
                   <h3 className="text-[10px] font-black tracking-widest text-white uppercase">CONTROVERSY</h3>
                 </div>

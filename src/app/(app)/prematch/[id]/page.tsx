@@ -136,11 +136,11 @@ export default function PreMatchDetails() {
            <div className="flex gap-4">
               <div 
                 onClick={() => handleVote('chaos')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#FF4F00]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
+                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#FF7F50]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
               >
-                 <div className="absolute bottom-0 left-0 w-full bg-[#FF4F00]/10 transition-all duration-300" style={{ height: `${votes.chaos}%` }} />
-                 <Flame className="w-6 h-6 text-[#FF4F00] mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-[#FF4F00] mb-1 relative z-10">CHAOS</span>
+                 <div className="absolute bottom-0 left-0 w-full bg-[#FF7F50]/10 transition-all duration-300" style={{ height: `${votes.chaos}%` }} />
+                 <Flame className="w-6 h-6 text-[#FF7F50] mb-3 relative z-10 group-active:scale-110 transition-transform" />
+                 <span className="text-[10px] font-black tracking-widest text-[#FF7F50] mb-1 relative z-10">CHAOS</span>
                  <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.chaos}%</span>
               </div>
               <div 
@@ -347,10 +347,10 @@ function LineupTab() {
             {/* LIV Players */}
             {livPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF4F00] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#FF4F00] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
               </div>
             ))}
          </div>
@@ -375,7 +375,7 @@ function LineupTab() {
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=3" className="w-full h-full object-cover"/></div>
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=4" className="w-full h-full object-cover"/></div>
               </div>
-              <div className="w-1 h-4 bg-[#FF4F00]" />
+              <div className="w-1 h-4 bg-[#FF7F50]" />
             </div>
          </div>
       </div>

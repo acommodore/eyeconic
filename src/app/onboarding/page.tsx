@@ -17,7 +17,7 @@ const TEAMS = [
   { id: "atm", name: "Atletico", short: "ATM", league: "LALIGA EA SPORTS", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
   { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg" },
   { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", bg: "bg-yellow-400", text: "text-black", border: "border-black/20", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
-  { id: "juv", name: "Juventus", short: "JUV", league: "SERIE A", bg: "bg-black", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo_%28white%29.svg" },
+  { id: "int", name: "Inter Milan", short: "INT", league: "SERIE A", bg: "bg-blue-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" },
   { id: "mil", name: "AC Milan", short: "MIL", league: "SERIE A", bg: "bg-red-600", text: "text-black", border: "border-black/50", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" },
   { id: "psg", name: "PSG", short: "PSG", league: "LIGUE 1", bg: "bg-white", text: "text-black", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" }
 ];
@@ -34,8 +34,8 @@ const SUGGESTED_RIVALS: Record<string, string[]> = {
   atm: ["rma", "bar"],
   bay: ["dor"],
   dor: ["bay"],
-  juv: ["mil"],
-  mil: ["juv"],
+  int: ["mil"],
+  mil: ["int"],
   psg: []
 };
 
@@ -106,14 +106,13 @@ export default function OnboardingPage() {
             <button onClick={handleBack} className="p-2 -ml-2 text-gray-400 hover:text-white transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </button>
-            <div className="font-bold text-xs tracking-widest text-gray-400">STEP {step}</div>
             <div className="font-bold text-xs tracking-widest text-gray-400">{step}/3</div>
           </div>
           
           {/* Progress Bar */}
           <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
             <motion.div 
-              className="h-full bg-[#FF4F00]"
+              className="h-full bg-[#FF7F50]"
               initial={{ width: step === 1 ? "0%" : step === 2 ? "33%" : "66%" }}
               animate={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
               transition={{ duration: 0.3 }}
@@ -130,7 +129,7 @@ export default function OnboardingPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center text-center h-full my-auto"
               >
-                 <div className="w-16 h-16 border-4 border-white/10 border-t-[#FF4F00] rounded-full animate-spin mb-8" />
+                 <div className="w-16 h-16 border-4 border-white/10 border-t-[#FF7F50] rounded-full animate-spin mb-8" />
                  <h2 className="text-3xl font-black uppercase mb-4 tracking-tighter">Building Your Profile</h2>
                  <p className="text-gray-400">Tuning the emotion engine to your preferences...</p>
               </motion.div>
@@ -145,7 +144,7 @@ export default function OnboardingPage() {
               >
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                   <div>
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2">
+                    <h1 className={`font-black tracking-tighter mb-2 ${step === 3 ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'}`}>
                       {step === 1 && "Where's your loyalty?"}
                       {step === 2 && "Now pick your rival"}
                       {step === 3 && "Is this right?"}
@@ -153,7 +152,6 @@ export default function OnboardingPage() {
                     <p className="text-gray-400 text-lg">
                       {step === 1 && "Choose your club to anchor your feed."}
                       {step === 2 && "This is where it gets personal."}
-                      {step === 3 && "Your entire feed will be tuned to this rivalry."}
                     </p>
                   </div>
                   
@@ -166,7 +164,7 @@ export default function OnboardingPage() {
                         placeholder="Find your club" 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-[#121212] border border-white/10 rounded-xl py-4 pl-11 pr-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF4F00] transition-colors"
+                        className="w-full bg-[#121212] border border-white/10 rounded-xl py-4 pl-11 pr-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF7F50] transition-colors"
                       />
                     </div>
                   )}
@@ -174,38 +172,48 @@ export default function OnboardingPage() {
 
                 {/* Step 3 Confirmation Graphic */}
                 {step === 3 && favoriteTeam && rivalTeam && (
-                  <div className="flex flex-col items-center justify-center py-10">
-                     <div className="flex items-center gap-6 md:gap-12 w-full justify-center max-w-2xl">
+                  <div className="flex flex-col items-center justify-center py-10 relative">
+                     <div className="flex items-center gap-6 md:gap-12 w-full justify-center max-w-2xl relative z-10">
                        
-                       <div className="flex flex-col items-center gap-4 flex-1">
-                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,255,255,0.1)] border border-white/20 ${favoriteTeam.bg}`}>
-                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-md ${favoriteTeam.id === 'tot' || favoriteTeam.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
+                       {/* Left Side (Your Club) */}
+                       <motion.div 
+                         initial={{ opacity: 0, y: 20 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         transition={{ duration: 0.4 }}
+                         className="flex flex-col items-center gap-4 flex-1"
+                       >
+                         <span className="text-xs text-gray-400 font-medium tracking-wide">My Club</span>
+                         <div className={`w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center p-5 shadow-[0_0_30px_rgba(255,255,255,0.05)] border border-white/20 ${favoriteTeam.bg}`}>
+                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-md ${favoriteTeam.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <div className="text-center">
-                           <span className="text-[10px] text-[#00E5FF] font-bold tracking-widest uppercase mb-1 block">YOUR CLUB</span>
-                           <span className="text-xl font-black tracking-wide">{favoriteTeam.name}</span>
-                         </div>
-                       </div>
+                         <span className="text-xl md:text-2xl font-bold tracking-wide text-white">{favoriteTeam.name}</span>
+                       </motion.div>
 
-                       <div className="flex flex-col items-center">
-                         <span className="text-4xl md:text-6xl font-black tracking-tighter text-gray-500">VS</span>
-                       </div>
+                       {/* Center Divier Graphic */}
+                       <motion.div 
+                         initial={{ opacity: 0 }}
+                         animate={{ opacity: 1 }}
+                         transition={{ duration: 0.5, delay: 0.2 }}
+                         className="flex flex-col items-center justify-center z-20 shrink-0"
+                       >
+                         <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-gray-500 to-transparent" />
+                       </motion.div>
 
-                       <div className="flex flex-col items-center gap-4 flex-1">
-                         <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center p-4 shadow-[0_0_30px_rgba(255,79,0,0.1)] border border-[#FF4F00]/50 ${rivalTeam.bg}`}>
-                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-md ${rivalTeam.id === 'tot' || rivalTeam.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
+                       {/* Right Side (Arch Rival) */}
+                       <motion.div 
+                         initial={{ opacity: 0, y: 20 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         transition={{ duration: 0.4, delay: 0.1 }}
+                         className="flex flex-col items-center gap-4 flex-1"
+                       >
+                         <span className="text-xs text-gray-400 font-medium tracking-wide">Arch Rival</span>
+                         <div className={`w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center p-5 shadow-[0_0_30px_rgba(255,79,0,0.1)] border border-white/20 ${rivalTeam.bg}`}>
+                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-md ${rivalTeam.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <div className="text-center">
-                           <span className="text-[10px] text-[#FF4F00] font-bold tracking-widest uppercase mb-1 block">YOUR RIVAL</span>
-                           <span className="text-xl font-black tracking-wide">{rivalTeam.name}</span>
-                         </div>
-                       </div>
+                         <span className="text-xl md:text-2xl font-bold tracking-wide text-white">{rivalTeam.name}</span>
+                       </motion.div>
 
                      </div>
-                     
-                     <p className="text-center text-sm text-gray-400 mt-16 max-w-md">
-                       Your dashboard, alerts, and discover feed will prioritize updates from this historic matchup.
-                     </p>
                   </div>
                 )}
 
@@ -215,9 +223,9 @@ export default function OnboardingPage() {
                     
                     {/* Suggested Rivals Section (Step 2 Only) */}
                     {step === 2 && !searchQuery && suggestedRivalTeams.length > 0 && (
-                      <div className="bg-[#121212]/50 border border-[#FF4F00]/20 rounded-2xl p-6 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#FF4F00]/10 via-transparent to-transparent pointer-events-none" />
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded bg-[#FF4F00]/10 border border-[#FF4F00]/30 text-[#FF4F00] text-xs font-bold tracking-widest uppercase relative z-10">
+                      <div className="bg-[#121212]/50 border border-[#FF7F50]/20 rounded-2xl p-6 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#FF7F50]/10 via-transparent to-transparent pointer-events-none" />
+                        <div className="inline-block px-4 py-1.5 mb-6 rounded bg-[#FF7F50]/10 border border-[#FF7F50]/30 text-[#FF7F50] text-xs font-bold tracking-widest uppercase relative z-10">
                           SUGGESTED RIVALS
                         </div>
                         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 relative z-10">
@@ -235,18 +243,18 @@ export default function OnboardingPage() {
                                 }}
                                 className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
                                   isSelected 
-                                    ? 'border-[#FF4F00] bg-[#FF4F00]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
-                                    : 'border-[#FF4F00]/20 bg-[#121212] hover:bg-white/10'
+                                    ? 'border-[#FF7F50] bg-[#FF7F50]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
+                                    : 'border-[#FF7F50]/20 bg-[#121212] hover:bg-white/10'
                                 }`}
                               >
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
-                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' || team.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
+                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
                                 <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                                   {team.name}
                                 </span>
                                 {isSelected && (
-                                  <motion.div layoutId="outline2" className="absolute inset-0 border-2 border-[#FF4F00] rounded-xl pointer-events-none" />
+                                  <motion.div layoutId="outline2" className="absolute inset-0 border-2 border-[#FF7F50] rounded-xl pointer-events-none" />
                                 )}
                               </button>
                             );
@@ -288,18 +296,18 @@ export default function OnboardingPage() {
                                 }}
                                 className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
                                   isSelected 
-                                    ? 'border-[#FF4F00] bg-[#FF4F00]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
+                                    ? 'border-[#FF7F50] bg-[#FF7F50]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
                                     : 'border-white/5 bg-[#121212] hover:bg-white/10'
                                 }`}
                               >
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
-                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' || team.id === 'juv' ? 'filter dark:invert-0 invert' : ''}`} />
+                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
                                 <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
                                   {team.name}
                                 </span>
                                 {isSelected && (
-                                  <motion.div layoutId={`outline${step}`} className="absolute inset-0 border-2 border-[#FF4F00] rounded-xl pointer-events-none" />
+                                  <motion.div layoutId={`outline${step}`} className="absolute inset-0 border-2 border-[#FF7F50] rounded-xl pointer-events-none" />
                                 )}
                               </button>
                             );
@@ -322,11 +330,11 @@ export default function OnboardingPage() {
               disabled={!rival}
               className={`w-full py-4 rounded-xl font-bold text-sm tracking-widest uppercase transition-all duration-300 ${
                 rival
-                  ? 'bg-[#FF4F00] text-white hover:bg-[#FF4F00]/90 shadow-[0_0_20px_rgba(255,79,0,0.3)]' 
+                  ? 'bg-[#FF7F50] text-white hover:bg-[#FF7F50]/90 shadow-[0_0_20px_rgba(255,79,0,0.3)]' 
                   : 'bg-[#121212] text-gray-500 border border-white/5 cursor-not-allowed'
               }`}
             >
-              {step === 3 ? "CONFIRM & ENTER" : "CONTINUE"}
+              {step === 3 ? "LOCK IT IN" : "CONTINUE"}
             </button>
           </div>
         )}

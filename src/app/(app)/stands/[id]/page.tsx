@@ -150,7 +150,7 @@ export default function ActiveStandPage() {
               <span className="text-lg">🍳</span>
               <span className="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Cooking</span>
             </button>
-            <button className="flex-1 flex items-center justify-center gap-2 bg-[#FF4F00] text-black rounded-xl px-4 py-3 hover:bg-[#FF4F00]/90 transition-all font-bold text-xs tracking-widest shadow-[0_0_20px_rgba(255,79,0,0.3)]">
+            <button className="flex-1 flex items-center justify-center gap-2 bg-[#FF7F50] text-black rounded-xl px-4 py-3 hover:bg-[#FF7F50]/90 transition-all font-bold text-xs tracking-widest shadow-[0_0_20px_rgba(255,79,0,0.3)]">
               <Hand className="w-4 h-4 fill-black" />
               REQUEST TO SPEAK
             </button>
@@ -164,7 +164,7 @@ export default function ActiveStandPage() {
               className="bg-transparent border-none outline-none text-sm w-full px-4 text-white placeholder:text-gray-600"
             />
             <button className="p-3 hover:bg-white/5 rounded-xl transition-colors">
-              <Send className="w-5 h-5 text-[#FF4F00]" />
+              <Send className="w-5 h-5 text-[#FF7F50]" />
             </button>
           </div>
 

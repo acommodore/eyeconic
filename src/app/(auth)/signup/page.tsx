@@ -77,7 +77,7 @@ export default function SignupPage() {
           </div>
         </div>
 
-        <button type="submit" className="w-full mt-8 bg-[#FF4F00] text-[#050505] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-[#FF4F00]/90 transition-all shadow-[0_0_20px_rgba(255,79,0,0.3)]">
+        <button type="submit" className="w-full mt-8 bg-[#FF7F50] text-[#050505] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-[#FF7F50]/90 transition-all shadow-[0_0_20px_rgba(255,79,0,0.3)]">
           STEP IN
         </button>
       </form>
