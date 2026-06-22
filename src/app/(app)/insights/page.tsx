@@ -118,15 +118,19 @@ const baseOverviewMatches = [
   {
     id: 1,
     league: 'Premier',
-    team1Score: 3,
-    team1Color: 'bg-[#00E5FF]',
-    team2Score: 1,
-    team2Color: 'bg-teal-800',
-    time: "90'",
-    mvpName: "Haaland",
-    mvpImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
+    team1: 'Arsenal',
+    team1Logo: 'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg',
+    team1Score: 4,
+    team1Color: 'bg-red-600',
+    team2: 'Chelsea',
+    team2Logo: 'https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg',
+    team2Score: 0,
+    team2Color: 'bg-blue-600',
+    time: "FT",
+    mvpName: "Saka",
+    mvpImage: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop",
     timeline: [
-      { type: 'gray', left: '15%' },
+      { type: 'cyan', left: '15%' },
       { type: 'cyan', left: '50%' },
       { type: 'yellow', left: '75%' },
       { type: 'cyan', left: '85%' },
@@ -134,14 +138,18 @@ const baseOverviewMatches = [
   },
   {
     id: 2,
-    league: 'Premier',
+    league: 'LaLiga',
+    team1: 'Real Madrid',
+    team1Logo: 'https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg',
     team1Score: 2,
-    team1Color: 'bg-[#FF4F00]',
+    team1Color: 'bg-white',
+    team2: 'Barcelona',
+    team2Logo: 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg',
     team2Score: 2,
-    team2Color: 'bg-orange-800',
-    time: "FT",
-    mvpName: "Saka",
-    mvpImage: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop",
+    team2Color: 'bg-red-500',
+    time: "89'",
+    mvpName: "Vinicius",
+    mvpImage: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop",
     timeline: [
       { type: 'orange', left: '25%' },
       { type: 'gray', left: '40%' },
@@ -151,43 +159,32 @@ const baseOverviewMatches = [
   },
   {
     id: 3,
-    league: 'LaLiga',
-    team1Score: 4,
-    team1Color: 'bg-purple-500',
+    league: 'Serie A',
+    team1: 'Juventus',
+    team1Logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Juventus_FC_2017_icon_%28black%29.svg',
+    team1Score: 1,
+    team1Color: 'bg-white',
+    team2: 'Milan',
+    team2Logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg',
     team2Score: 0,
-    team2Color: 'bg-purple-900',
+    team2Color: 'bg-red-600',
     time: "FT",
-    mvpName: "Vinicius",
-    mvpImage: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop",
+    mvpName: "Leao",
+    mvpImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
     timeline: [
       { type: 'yellow', left: '20%' },
       { type: 'purple', left: '40%' },
-      { type: 'purple', left: '60%' },
-      { type: 'purple', left: '80%' },
-      { type: 'purple', left: '95%' },
     ]
   },
   {
     id: 4,
-    league: 'Serie A',
-    team1Score: 1,
-    team1Color: 'bg-blue-500',
-    team2Score: 0,
-    team2Color: 'bg-red-500',
-    time: "82'",
-    mvpName: "Leao",
-    mvpImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-    timeline: [
-      { type: 'blue', left: '33%' },
-      { type: 'yellow', left: '55%' },
-      { type: 'gray', left: '70%' },
-    ]
-  },
-  {
-    id: 5,
     league: 'Bundesliga',
-    team1Score: 2,
+    team1: 'Bayern',
+    team1Logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg',
+    team1Score: 3,
     team1Color: 'bg-red-600',
+    team2: 'Dortmund',
+    team2Logo: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg',
     team2Score: 1,
     team2Color: 'bg-yellow-400',
     time: "FT",
@@ -454,13 +451,13 @@ export default function InsightsPage() {
               <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${match.team1Color}`} />
               
               {/* Score */}
-              <div className="flex flex-col gap-6 w-16 shrink-0 relative z-10">
+              <div className="flex flex-col gap-6 w-20 shrink-0 relative z-10">
                  <div className="flex items-center gap-4">
-                   <div className={`w-3.5 h-3.5 ${match.team1Color} rotate-45 shrink-0`} />
+                   <img src={match.team1Logo} alt={match.team1} className="w-5 h-5 object-contain" />
                    <span className="text-2xl font-black">{match.team1Score}</span>
                  </div>
                  <div className="flex items-center gap-4">
-                   <div className={`w-3.5 h-3.5 ${match.team2Color} rotate-45 shrink-0`} />
+                   <img src={match.team2Logo} alt={match.team2} className="w-5 h-5 object-contain" />
                    <span className="text-2xl font-black">{match.team2Score}</span>
                  </div>
               </div>
