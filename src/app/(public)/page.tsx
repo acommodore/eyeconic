@@ -78,7 +78,7 @@ function HeroSection() {
               <span className="dark:hidden text-gray-900 pb-2">
                 WORTH WATCHING.
               </span>
-              <span className="hidden dark:inline text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600 pb-2">
+              <span className="hidden dark:inline text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600 pb-2">
                 WORTH WATCHING.
               </span>
             </h1>
