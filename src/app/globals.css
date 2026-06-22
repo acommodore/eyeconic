@@ -9,6 +9,11 @@
   --color-light: #ffffff;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --animate-shimmer: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
 }
 
 :root {

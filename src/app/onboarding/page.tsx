@@ -3,23 +3,23 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ArrowLeft } from "lucide-react";
+import { Search, ArrowLeft, ChevronRight, Zap } from "lucide-react";
 
 const TEAMS = [
-  { id: "mci", name: "Man City", short: "MCI", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#4FC3F7]", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" },
-  { id: "ars", name: "Arsenal", short: "ARS", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" },
-  { id: "liv", name: "Liverpool", short: "LIV", league: "ENGLISH PREMIER LEAGUE", bg: "bg-[#D32F2F]", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" },
-  { id: "che", name: "Chelsea", short: "CHE", league: "ENGLISH PREMIER LEAGUE", bg: "bg-blue-700", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" },
-  { id: "mun", name: "Man United", short: "MUN", league: "ENGLISH PREMIER LEAGUE", bg: "bg-red-700", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
-  { id: "tot", name: "Spurs", short: "TOT", league: "ENGLISH PREMIER LEAGUE", bg: "bg-white", text: "text-black", border: "border-gray-200", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" },
-  { id: "rma", name: "Real Madrid", short: "RMA", league: "LALIGA EA SPORTS", bg: "bg-white", text: "text-black", border: "border-gray-200", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
-  { id: "bar", name: "Barcelona", short: "BAR", league: "LALIGA EA SPORTS", bg: "bg-blue-800", text: "text-red-500", border: "border-red-500/50", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
-  { id: "atm", name: "Atletico", short: "ATM", league: "LALIGA EA SPORTS", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
-  { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", bg: "bg-red-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg" },
-  { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", bg: "bg-yellow-400", text: "text-black", border: "border-black/20", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
-  { id: "int", name: "Inter Milan", short: "INT", league: "SERIE A", bg: "bg-blue-600", text: "text-white", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" },
-  { id: "mil", name: "AC Milan", short: "MIL", league: "SERIE A", bg: "bg-red-600", text: "text-black", border: "border-black/50", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" },
-  { id: "psg", name: "PSG", short: "PSG", league: "LIGUE 1", bg: "bg-white", text: "text-black", border: "border-white/20", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" }
+  { id: "mci", name: "Man City", short: "MCI", league: "PREMIER LEAGUE", color: "#4FC3F7", logo: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" },
+  { id: "ars", name: "Arsenal", short: "ARS", league: "PREMIER LEAGUE", color: "#EF0107", logo: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" },
+  { id: "liv", name: "Liverpool", short: "LIV", league: "PREMIER LEAGUE", color: "#C8102E", logo: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" },
+  { id: "che", name: "Chelsea", short: "CHE", league: "PREMIER LEAGUE", color: "#034694", logo: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg" },
+  { id: "mun", name: "Man United", short: "MUN", league: "PREMIER LEAGUE", color: "#DA291C", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
+  { id: "tot", name: "Spurs", short: "TOT", league: "PREMIER LEAGUE", color: "#FFFFFF", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg", invert: true },
+  { id: "rma", name: "Real Madrid", short: "RMA", league: "LALIGA", color: "#FFFFFF", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
+  { id: "bar", name: "Barcelona", short: "BAR", league: "LALIGA", color: "#A50044", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
+  { id: "atm", name: "Atletico", short: "ATM", league: "LALIGA", color: "#CB3524", logo: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg" },
+  { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", color: "#DC052D", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg" },
+  { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", color: "#FDE100", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
+  { id: "int", name: "Inter Milan", short: "INT", league: "SERIE A", color: "#010E80", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" },
+  { id: "mil", name: "AC Milan", short: "MIL", league: "SERIE A", color: "#FB090B", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" },
+  { id: "psg", name: "PSG", short: "PSG", league: "LIGUE 1", color: "#004170", logo: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" }
 ];
 
 const SUGGESTED_RIVALS: Record<string, string[]> = {
@@ -51,10 +51,10 @@ export default function OnboardingPage() {
     if (step === 1 && favorite) {
       setStep(2);
       setSearchQuery("");
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (step === 2 && rival) {
       setStep(3);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (step === 3) {
       finishOnboarding();
     }
@@ -75,7 +75,7 @@ export default function OnboardingPage() {
     setIsFinishing(true);
     setTimeout(() => {
       router.push("/discover");
-    }, 2000);
+    }, 2500);
   };
 
   const filteredTeams = TEAMS.filter(t => 
@@ -83,7 +83,6 @@ export default function OnboardingPage() {
     t.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Group teams by league
   const leagues = Array.from(new Set(filteredTeams.map(t => t.league)));
 
   const suggestedRivalIds = favorite && SUGGESTED_RIVALS[favorite] ? SUGGESTED_RIVALS[favorite] : [];
@@ -95,122 +94,189 @@ export default function OnboardingPage() {
   const favoriteTeam = TEAMS.find(t => t.id === favorite);
   const rivalTeam = TEAMS.find(t => t.id === rival);
 
+  // Dynamic ambient glow colors based on selection
+  const ambientColor1 = step === 1 && favoriteTeam ? favoriteTeam.color : (step === 3 && favoriteTeam ? favoriteTeam.color : "#333333");
+  const ambientColor2 = step === 2 && rivalTeam ? rivalTeam.color : (step === 3 && rivalTeam ? rivalTeam.color : "#111111");
+
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex justify-center">
-      {/* Expanded container for PC */}
-      <div className="w-full max-w-5xl bg-[#050505] min-h-screen flex flex-col relative px-4 md:px-8">
+    <div className="min-h-screen bg-[#020202] text-white flex justify-center relative overflow-hidden font-sans">
+      
+      {/* Ambient Background Glows */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <motion.div 
+          animate={{ background: `radial-gradient(circle at 20% 30%, ${ambientColor1}33 0%, transparent 50%)` }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute inset-0" 
+        />
+        <motion.div 
+          animate={{ background: `radial-gradient(circle at 80% 70%, ${ambientColor2}33 0%, transparent 50%)` }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+          className="absolute inset-0" 
+        />
+      </div>
+
+      <div className="w-full max-w-6xl z-10 flex flex-col relative px-6 md:px-12">
         
         {/* Header */}
-        <header className="py-6 relative z-10 bg-[#050505] sticky top-0">
-          <div className="flex items-center justify-between mb-4">
-            <button onClick={handleBack} className="p-2 -ml-2 text-gray-400 hover:text-white transition-colors">
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <div className="font-bold text-xs tracking-widest text-gray-400">{step}/3</div>
-          </div>
-          
-          {/* Progress Bar */}
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-            <motion.div 
-              className="h-full bg-[#FF7F50]"
-              initial={{ width: step === 1 ? "0%" : step === 2 ? "33%" : "66%" }}
-              animate={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
-              transition={{ duration: 0.3 }}
-            />
+        <header className="py-8 flex items-center justify-between relative z-20">
+          <button 
+            onClick={handleBack} 
+            className="group flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md transition-all duration-300"
+          >
+            <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+          </button>
+
+          {/* Premium Progress Indicator */}
+          <div className="flex gap-3">
+            {[1, 2, 3].map((idx) => (
+              <div key={idx} className="relative w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="absolute top-0 left-0 h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                  initial={{ width: "0%" }}
+                  animate={{ width: step > idx ? "100%" : step === idx ? "100%" : "0%" }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  style={{ opacity: step >= idx ? 1 : 0 }}
+                />
+              </div>
+            ))}
           </div>
         </header>
 
-        <main className="flex-1 flex flex-col py-8 pb-32 relative z-10 overflow-y-auto">
+        <main className="flex-1 flex flex-col py-4 pb-32 relative z-10">
           <AnimatePresence mode="wait">
             {isFinishing ? (
               <motion.div
                 key="finishing"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                 className="flex flex-col items-center justify-center text-center h-full my-auto"
               >
-                 <div className="w-16 h-16 border-4 border-white/10 border-t-[#FF7F50] rounded-full animate-spin mb-8" />
-                 <h2 className="text-3xl font-black uppercase mb-4 tracking-tighter">Building Your Profile</h2>
-                 <p className="text-gray-400">Tuning the emotion engine to your preferences...</p>
+                 <div className="relative w-32 h-32 mb-10 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full border-2 border-white/10" />
+                    <motion.div 
+                      animate={{ rotate: 360 }} 
+                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 rounded-full border-t-2 border-white" 
+                    />
+                    <Zap className="w-10 h-10 text-white animate-pulse" />
+                 </div>
+                 <h2 className="text-4xl md:text-5xl font-black uppercase mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">
+                   Calibrating Engine
+                 </h2>
+                 <p className="text-gray-400 text-lg font-medium tracking-wide">Tuning narrative tension to your allegiances...</p>
               </motion.div>
             ) : (
               <motion.div
                 key={`step${step}`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="w-full flex flex-col"
+                initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full flex flex-col h-full"
               >
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                  <div>
-                    <h1 className={`font-black tracking-tighter mb-2 ${step === 3 ? 'text-2xl md:text-3xl' : 'text-4xl md:text-5xl'}`}>
-                      {step === 1 && "Where's your loyalty?"}
-                      {step === 2 && "Now pick your rival"}
-                      {step === 3 && "Is this right?"}
-                    </h1>
-                    <p className="text-gray-400 text-lg">
-                      {step === 1 && "Choose your club to anchor your feed."}
-                      {step === 2 && "This is where it gets personal."}
-                    </p>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                  <div className="max-w-2xl">
+                    <motion.h1 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1, duration: 0.5 }}
+                      className="text-5xl md:text-7xl font-black tracking-tighter mb-4 uppercase leading-[0.9]"
+                    >
+                      {step === 1 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Where's your<br/>loyalty?</span>}
+                      {step === 2 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Name your<br/>enemy.</span>}
+                      {step === 3 && <span className="text-white">The Stage is Set.</span>}
+                    </motion.h1>
+                    <motion.p 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-gray-400 text-lg md:text-xl font-medium tracking-wide"
+                    >
+                      {step === 1 && "Select the club that dictates your weekends."}
+                      {step === 2 && "Who boils your blood? Choose your ultimate rival."}
+                      {step === 3 && "Your bias is recorded. The engine is primed."}
+                    </motion.p>
                   </div>
                   
-                  {/* Search Bar (Only step 1 & 2) */}
+                  {/* Premium Search Bar */}
                   {step < 3 && (
-                    <div className="relative w-full md:w-72 shrink-0">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                      <input 
-                        type="text" 
-                        placeholder="Find your club" 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-[#121212] border border-white/10 rounded-xl py-4 pl-11 pr-4 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF7F50] transition-colors"
-                      />
-                    </div>
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="relative w-full md:w-80 shrink-0 group"
+                    >
+                      <div className="absolute inset-0 bg-white/5 rounded-2xl blur-md transition-all duration-300 group-focus-within:bg-white/10" />
+                      <div className="relative bg-[#0A0A0A] border border-white/10 rounded-2xl flex items-center overflow-hidden transition-all duration-300 group-focus-within:border-white/30 group-focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                        <Search className="absolute left-4 w-5 h-5 text-gray-500" />
+                        <input 
+                          type="text" 
+                          placeholder="Search clubs..." 
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="w-full bg-transparent py-4 pl-12 pr-4 text-white placeholder-gray-600 focus:outline-none font-medium tracking-wide"
+                        />
+                      </div>
+                    </motion.div>
                   )}
                 </div>
 
-                {/* Step 3 Confirmation Graphic */}
+                {/* Step 3: Dramatic Showdown */}
                 {step === 3 && favoriteTeam && rivalTeam && (
-                  <div className="flex flex-col items-center justify-center py-10 relative">
-                     <div className="flex items-center gap-6 md:gap-12 w-full justify-center max-w-2xl relative z-10">
+                  <div className="flex-1 flex flex-col items-center justify-center py-10 relative">
+                     <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24 w-full justify-center max-w-4xl relative z-10">
                        
                        {/* Left Side (Your Club) */}
                        <motion.div 
-                         initial={{ opacity: 0, y: 20 }}
-                         animate={{ opacity: 1, y: 0 }}
-                         transition={{ duration: 0.4 }}
-                         className="flex flex-col items-center gap-4 flex-1"
+                         initial={{ opacity: 0, x: -50, scale: 0.9 }}
+                         animate={{ opacity: 1, x: 0, scale: 1 }}
+                         transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
+                         className="flex flex-col items-center gap-6 relative"
                        >
-                         <span className="text-xs text-gray-400 font-medium tracking-wide">My Club</span>
-                         <div className={`w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center p-5 shadow-[0_0_30px_rgba(255,255,255,0.05)] border border-white/20 ${favoriteTeam.bg}`}>
-                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-md ${favoriteTeam.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
+                         <div 
+                           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 blur-[60px] rounded-full pointer-events-none"
+                           style={{ backgroundColor: favoriteTeam.color }}
+                         />
+                         <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs text-white font-bold tracking-widest uppercase backdrop-blur-md">
+                           My Club
+                         </span>
+                         <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
+                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] ${favoriteTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <span className="text-xl md:text-2xl font-bold tracking-wide text-white">{favoriteTeam.name}</span>
+                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-md">{favoriteTeam.name}</span>
                        </motion.div>
 
-                       {/* Center Divier Graphic */}
+                       {/* Epic VS Divider */}
                        <motion.div 
-                         initial={{ opacity: 0 }}
-                         animate={{ opacity: 1 }}
-                         transition={{ duration: 0.5, delay: 0.2 }}
-                         className="flex flex-col items-center justify-center z-20 shrink-0"
+                         initial={{ opacity: 0, scale: 0 }}
+                         animate={{ opacity: 1, scale: 1 }}
+                         transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
+                         className="flex flex-col items-center justify-center z-20 shrink-0 relative"
                        >
-                         <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-gray-500 to-transparent" />
+                         <div className="absolute w-[1px] h-32 md:h-64 bg-gradient-to-b from-transparent via-white/30 to-transparent -rotate-12" />
+                         <div className="bg-[#020202] p-4 rounded-full border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.8)] z-10">
+                            <span className="text-2xl font-black italic tracking-tighter text-gray-500">VS</span>
+                         </div>
                        </motion.div>
 
                        {/* Right Side (Arch Rival) */}
                        <motion.div 
-                         initial={{ opacity: 0, y: 20 }}
-                         animate={{ opacity: 1, y: 0 }}
-                         transition={{ duration: 0.4, delay: 0.1 }}
-                         className="flex flex-col items-center gap-4 flex-1"
+                         initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                         animate={{ opacity: 1, x: 0, scale: 1 }}
+                         transition={{ duration: 0.6, delay: 0.2, type: "spring", bounce: 0.4 }}
+                         className="flex flex-col items-center gap-6 relative"
                        >
-                         <span className="text-xs text-gray-400 font-medium tracking-wide">Arch Rival</span>
-                         <div className={`w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center p-5 shadow-[0_0_30px_rgba(255,79,0,0.1)] border border-white/20 ${rivalTeam.bg}`}>
-                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-md ${rivalTeam.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
+                         <div 
+                           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 blur-[60px] rounded-full pointer-events-none"
+                           style={{ backgroundColor: rivalTeam.color }}
+                         />
+                         <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs text-red-400 font-bold tracking-widest uppercase backdrop-blur-md">
+                           The Enemy
+                         </span>
+                         <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
+                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.2)] ${rivalTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <span className="text-xl md:text-2xl font-bold tracking-wide text-white">{rivalTeam.name}</span>
+                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-md">{rivalTeam.name}</span>
                        </motion.div>
 
                      </div>
@@ -219,16 +285,20 @@ export default function OnboardingPage() {
 
                 {/* Teams Grid by League */}
                 {step < 3 && (
-                  <div className="flex flex-col gap-10">
+                  <div className="flex flex-col gap-12">
                     
-                    {/* Suggested Rivals Section (Step 2 Only) */}
+                    {/* Suggested Rivals Section */}
                     {step === 2 && !searchQuery && suggestedRivalTeams.length > 0 && (
-                      <div className="bg-[#121212]/50 border border-[#FF7F50]/20 rounded-2xl p-6 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#FF7F50]/10 via-transparent to-transparent pointer-events-none" />
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded bg-[#FF7F50]/10 border border-[#FF7F50]/30 text-[#FF7F50] text-xs font-bold tracking-widest uppercase relative z-10">
-                          SUGGESTED RIVALS
+                      <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="relative"
+                      >
+                        <div className="flex items-center gap-4 mb-6">
+                          <h3 className="text-sm font-bold tracking-widest uppercase text-red-400">Suggested Rivals</h3>
+                          <div className="flex-1 h-[1px] bg-gradient-to-r from-red-500/30 to-transparent" />
                         </div>
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 relative z-10">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                           {suggestedRivalTeams.map(team => {
                             const isSelected = rival === team.id;
                             return (
@@ -236,85 +306,104 @@ export default function OnboardingPage() {
                                 key={`sug-${team.id}`}
                                 onClick={() => {
                                   setRival(team.id);
-                                  setTimeout(() => {
-                                    setStep(3);
-                                    window.scrollTo(0, 0);
-                                  }, 250);
+                                  setTimeout(() => handleNext(), 400);
                                 }}
-                                className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
+                                className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
                                   isSelected 
-                                    ? 'border-[#FF7F50] bg-[#FF7F50]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
-                                    : 'border-[#FF7F50]/20 bg-[#121212] hover:bg-white/10'
+                                    ? 'bg-white/10 border-white/40 shadow-[0_0_30px_rgba(255,255,255,0.1)] scale-[1.02]' 
+                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1'
                                 }`}
+                                style={{
+                                  borderWidth: '1px',
+                                  borderStyle: 'solid'
+                                }}
                               >
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
-                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
+                                {isSelected && (
+                                  <motion.div 
+                                    layoutId="selectedRival"
+                                    className="absolute inset-0 bg-gradient-to-b from-transparent to-white/5 pointer-events-none" 
+                                  />
+                                )}
+                                <div className="w-16 h-16 relative z-10 transition-transform duration-300 group-hover:scale-110">
+                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.invert ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
-                                <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
+                                <span className={`text-sm font-bold tracking-wide text-center w-full z-10 ${isSelected ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
                                   {team.name}
                                 </span>
-                                {isSelected && (
-                                  <motion.div layoutId="outline2" className="absolute inset-0 border-2 border-[#FF7F50] rounded-xl pointer-events-none" />
-                                )}
                               </button>
                             );
                           })}
                         </div>
-                      </div>
+                      </motion.div>
                     )}
 
-                    {leagues.map(league => (
-                      <div key={league}>
-                        {/* League Pill */}
-                        <div className="inline-block px-4 py-1.5 mb-6 rounded bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] text-xs font-bold tracking-widest uppercase">
-                          {league}
-                        </div>
-                        
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
-                          {filteredTeams.filter(t => t.league === league).map(team => {
-                            const isSelected = step === 1 ? favorite === team.id : rival === team.id;
-                            return (
-                              <button
-                                key={team.id}
-                                onClick={() => {
-                                  if (step === 1) {
-                                    setFavorite(team.id);
-                                    // Auto advance
-                                    setTimeout(() => {
-                                      setStep(2);
-                                      setSearchQuery("");
-                                      window.scrollTo(0, 0);
-                                    }, 250);
-                                  } else {
-                                    setRival(team.id);
-                                    // Auto advance
-                                    setTimeout(() => {
-                                      setStep(3);
-                                      window.scrollTo(0, 0);
-                                    }, 250);
-                                  }
-                                }}
-                                className={`relative p-3 rounded-xl flex flex-col items-center justify-center gap-3 transition-all duration-200 border ${
-                                  isSelected 
-                                    ? 'border-[#FF7F50] bg-[#FF7F50]/10 shadow-[0_0_20px_rgba(255,79,0,0.15)]' 
-                                    : 'border-white/5 bg-[#121212] hover:bg-white/10'
-                                }`}
-                              >
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center p-1.5 shadow-md border ${team.border} ${team.bg}`}>
-                                  <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.id === 'tot' ? 'filter dark:invert-0 invert' : ''}`} />
-                                </div>
-                                <span className={`text-[10px] font-bold tracking-wide text-center truncate w-full ${isSelected ? 'text-white' : 'text-gray-400'}`}>
-                                  {team.name}
-                                </span>
-                                {isSelected && (
-                                  <motion.div layoutId={`outline${step}`} className="absolute inset-0 border-2 border-[#FF7F50] rounded-xl pointer-events-none" />
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
+                    {leagues.map((league, lIndex) => {
+                      const teamsInLeague = filteredTeams.filter(t => t.league === league);
+                      if (teamsInLeague.length === 0) return null;
+                      
+                      return (
+                        <motion.div 
+                          key={league}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: lIndex * 0.1 }}
+                        >
+                          <div className="flex items-center gap-4 mb-6">
+                            <h3 className="text-sm font-bold tracking-widest uppercase text-gray-500">{league}</h3>
+                            <div className="flex-1 h-[1px] bg-gradient-to-r from-white/10 to-transparent" />
+                          </div>
+                          
+                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                            {teamsInLeague.map(team => {
+                              const isSelected = step === 1 ? favorite === team.id : rival === team.id;
+                              const hasSelection = step === 1 ? favorite !== null : rival !== null;
+                              const isDimmed = hasSelection && !isSelected;
+
+                              return (
+                                <button
+                                  key={team.id}
+                                  onClick={() => {
+                                    if (step === 1) {
+                                      setFavorite(team.id);
+                                      setTimeout(() => handleNext(), 400);
+                                    } else {
+                                      setRival(team.id);
+                                      setTimeout(() => handleNext(), 400);
+                                    }
+                                  }}
+                                  className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
+                                    isSelected 
+                                      ? 'bg-white/10 border-white/50 shadow-[0_0_40px_rgba(255,255,255,0.1)] scale-[1.02] z-10' 
+                                      : 'bg-[#0A0A0A] border-white/5 hover:bg-white/5 hover:border-white/20 hover:-translate-y-1'
+                                  } ${isDimmed ? 'opacity-40 grayscale hover:grayscale-0 hover:opacity-100' : ''}`}
+                                  style={{ borderWidth: '1px', borderStyle: 'solid' }}
+                                >
+                                  {isSelected && (
+                                    <motion.div 
+                                      layoutId={step === 1 ? "selectedFavorite" : "selectedRival"}
+                                      className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10 pointer-events-none" 
+                                    />
+                                  )}
+                                  
+                                  {/* Dynamic color glow behind logo on hover/select */}
+                                  <div 
+                                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full blur-[30px] opacity-0 transition-opacity duration-500 pointer-events-none ${isSelected ? 'opacity-30' : 'group-hover:opacity-20'}`}
+                                    style={{ backgroundColor: team.color }}
+                                  />
+
+                                  <div className="w-16 h-16 relative z-10 transition-transform duration-500 group-hover:scale-110">
+                                    <img src={team.logo} alt={team.short} className={`w-full h-full object-contain drop-shadow-lg ${team.invert ? 'filter dark:invert-0 invert' : ''}`} />
+                                  </div>
+                                  <span className={`text-sm font-bold tracking-wide text-center w-full z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                                    {team.name}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 )}
               </motion.div>
@@ -322,21 +411,26 @@ export default function OnboardingPage() {
           </AnimatePresence>
         </main>
 
-        {/* Fixed Bottom Bar */}
+        {/* Fixed Bottom Bar for Step 3 */}
         {!isFinishing && step === 3 && (
-          <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-[#050505] via-[#050505] to-transparent z-20">
-            <button
-              onClick={handleNext}
-              disabled={!rival}
-              className={`w-full py-4 rounded-xl font-bold text-sm tracking-widest uppercase transition-all duration-300 ${
-                rival
-                  ? 'bg-[#FF7F50] text-white hover:bg-[#FF7F50]/90 shadow-[0_0_20px_rgba(255,79,0,0.3)]' 
-                  : 'bg-[#121212] text-gray-500 border border-white/5 cursor-not-allowed'
-              }`}
-            >
-              {step === 3 ? "LOCK IT IN" : "CONTINUE"}
-            </button>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="fixed bottom-0 left-0 w-full p-6 md:p-10 bg-gradient-to-t from-[#020202] via-[#020202] to-transparent z-50 flex justify-center pointer-events-none"
+          >
+            <div className="w-full max-w-xl pointer-events-auto">
+              <button
+                onClick={handleNext}
+                className="group relative w-full py-5 rounded-2xl font-black text-sm md:text-base tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 bg-white text-black hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  Lock It In <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </button>
+            </div>
+          </motion.div>
         )}
 
       </div>
