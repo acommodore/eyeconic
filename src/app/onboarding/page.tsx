@@ -14,7 +14,6 @@ const TEAMS = [
   { id: "tot", name: "Spurs", short: "TOT", league: "PREMIER LEAGUE", color: "#FFFFFF", logo: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg", invert: true },
   { id: "rma", name: "Real Madrid", short: "RMA", league: "LALIGA", color: "#FFFFFF", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
   { id: "bar", name: "Barcelona", short: "BAR", league: "LALIGA", color: "#A50044", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
-  { id: "juv", name: "Juventus", short: "JUV", league: "SERIE A", color: "#FFFFFF", logo: "https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_icon_%28black%29.svg", invert: true },
   { id: "bay", name: "Bayern", short: "BAY", league: "BUNDESLIGA", color: "#DC052D", logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg" },
   { id: "dor", name: "Dortmund", short: "DOR", league: "BUNDESLIGA", color: "#FDE100", logo: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" },
   { id: "int", name: "Inter Milan", short: "INT", league: "SERIE A", color: "#010E80", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" },
@@ -31,11 +30,10 @@ const SUGGESTED_RIVALS: Record<string, string[]> = {
   tot: ["ars", "che"],
   rma: ["bar"],
   bar: ["rma"],
-  juv: ["int", "mil"],
   bay: ["dor"],
   dor: ["bay"],
-  int: ["mil", "juv"],
-  mil: ["int", "juv"],
+  int: ["mil"],
+  mil: ["int"],
   psg: []
 };
 
