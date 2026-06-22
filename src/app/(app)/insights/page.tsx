@@ -360,72 +360,52 @@ export default function InsightsPage() {
           <h2 className="text-xs font-black tracking-widest uppercase text-gray-300">TOP STANDS</h2>
         </div>
         
-        <div className="flex overflow-x-auto hover-scrollbar gap-4 px-6 pb-2 snap-x">
-          {liveStands.map(stand => (
-            <div key={stand.id} className="min-w-[360px] md:min-w-[400px] shrink-0 bg-[#121212] border border-white/5 hover:border-white/20 transition-colors rounded-full p-2 pr-6 flex items-center justify-between snap-start cursor-pointer group">
-              
-              <div className="flex items-center gap-4">
-                {/* Icon/Avatar Cluster */}
-                <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]`}>
-                    <Mic className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex items-center -ml-3">
-                    {stand.avatars.slice(0, 2).map((avatar, idx) => (
-                      <img 
-                        key={idx} 
-                        src={avatar} 
-                        className="w-8 h-8 rounded-full border border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all" 
-                        style={{ zIndex: 9 - idx }}
-                      />
-                    ))}
-                  </div>
-                </div>
+        {/* Continuous Ticker Container */}
+        <div className="flex overflow-hidden relative py-2">
+           {/* Fade Masks */}
+           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-                {/* Title */}
-                <div className="flex flex-col justify-center">
-                  <h3 className="text-xs font-bold text-white max-w-[180px] md:max-w-[220px] truncate">{stand.title}</h3>
-                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">{stand.listeners} LISTENING</span>
-                </div>
-              </div>
+           <div className="flex w-max animate-ticker gap-6 items-center hover:cursor-grab active:cursor-grabbing">
+             {[...liveStands, ...liveStands, ...liveStands, ...liveStands].map((stand, i) => (
+               <div key={`${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer group overflow-hidden">
+                 
+                 {/* Color Injection to fix "too dark" issue */}
+                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 group-hover:opacity-60 transition-opacity duration-500`} />
+                 <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
 
-              {/* Join Button */}
-              <button className="text-[10px] font-black tracking-widest uppercase text-[#00E5FF] bg-[#00E5FF]/10 px-3 py-1.5 rounded-full hover:bg-[#00E5FF]/20 transition-colors shrink-0">
-                JOIN
-              </button>
-            </div>
-          ))}
-          {/* Duplicating for visual density of the ticker */}
-          {liveStands.map(stand => (
-            <div key={`dup-${stand.id}`} className="min-w-[360px] md:min-w-[400px] shrink-0 bg-[#121212] border border-white/5 hover:border-white/20 transition-colors rounded-full p-2 pr-6 flex items-center justify-between snap-start cursor-pointer group">
-              
-              <div className="flex items-center gap-4">
-                <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]`}>
-                    <Mic className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex items-center -ml-3">
-                    {stand.avatars.slice(0, 2).map((avatar, idx) => (
-                      <img 
-                        key={idx} 
-                        src={avatar} 
-                        className="w-8 h-8 rounded-full border border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all" 
-                        style={{ zIndex: 9 - idx }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-col justify-center">
-                  <h3 className="text-xs font-bold text-white max-w-[180px] md:max-w-[220px] truncate">{stand.title}</h3>
-                  <span className="text-[10px] text-gray-500 font-mono tracking-wider">{stand.listeners} LISTENING</span>
-                </div>
-              </div>
+                 <div className="flex items-center gap-4 relative z-10">
+                   {/* Icon/Avatar Cluster */}
+                   <div className="flex items-center">
+                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                       <Mic className="w-5 h-5 text-white" />
+                     </div>
+                     <div className="flex items-center -ml-4">
+                       {stand.avatars.slice(0, 3).map((avatar, idx) => (
+                         <img 
+                           key={idx} 
+                           src={avatar} 
+                           className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover:grayscale-0 transition-all duration-500" 
+                           style={{ zIndex: 9 - idx }}
+                         />
+                       ))}
+                     </div>
+                   </div>
 
-              <button className="text-[10px] font-black tracking-widest uppercase text-[#00E5FF] bg-[#00E5FF]/10 px-3 py-1.5 rounded-full hover:bg-[#00E5FF]/20 transition-colors shrink-0">
-                JOIN
-              </button>
-            </div>
-          ))}
+                   {/* Title */}
+                   <div className="flex flex-col justify-center">
+                     <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover:text-[#00E5FF] transition-colors">{stand.title}</h3>
+                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+                   </div>
+                 </div>
+
+                 {/* Join Button */}
+                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 group-hover:border-white/30">
+                   JOIN
+                 </button>
+               </div>
+             ))}
+           </div>
         </div>
       </section>
 
