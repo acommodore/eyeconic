@@ -205,10 +205,18 @@ export default function InsightsPage() {
   const [activeLeague, setActiveLeague] = useState('All Leagues');
   const [activeDate, setActiveDate] = useState("14");
   
-  const isAltDate = activeDate !== "14";
-  const missedHighlights = isAltDate ? [...baseMissedHighlights].reverse() : baseMissedHighlights;
-  const insightsFeed = isAltDate ? [...baseInsightsFeed].reverse() : baseInsightsFeed;
-  const overviewMatches = isAltDate ? [...baseOverviewMatches].reverse() : baseOverviewMatches;
+  // Use the date number to create a pseudo-random rotation of the arrays
+  const offset = parseInt(activeDate) % 3;
+  
+  const rotateArray = (arr: any[]) => {
+    if (offset === 0) return arr;
+    return [...arr.slice(offset), ...arr.slice(0, offset)];
+  };
+
+  const liveStands = rotateArray(baseLiveStands);
+  const missedHighlights = rotateArray(baseMissedHighlights);
+  const insightsFeed = rotateArray(baseInsightsFeed);
+  const overviewMatches = rotateArray(baseOverviewMatches);
 
   const displayedMatches = activeLeague === 'All Leagues' 
     ? overviewMatches.slice(0, 3) 
@@ -373,10 +381,11 @@ export default function InsightsPage() {
            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-           <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
-             {[...liveStands, ...liveStands].map((stand, i) => (
-               <div key={i} className="relative min-w-[380px] shrink-0 border border-white/10 rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
-                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40`} />
+           {/* Seamless Ticker Track */}
+           <div className="flex w-max animate-[ticker_60s_linear_infinite] hover:[animation-play-state:paused] pr-6">
+             {[...liveStands, ...liveStands, ...liveStands].map((stand, i) => (
+               <Link href="/pulse" key={`ticker-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6 group/card hover:border-white/30 transition-all">
+                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 group-hover/card:opacity-60 transition-opacity`} />
                  <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
                  <div className="flex items-center gap-4 relative z-10">
                    <div className="flex items-center">
@@ -385,34 +394,12 @@ export default function InsightsPage() {
                      </div>
                    </div>
                    <div className="flex flex-col justify-center">
-                     <h3 className="text-sm font-bold text-white truncate">{stand.title}</h3>
+                     <h3 className="text-sm font-bold text-white truncate group-hover/card:text-[#00E5FF] transition-colors">{stand.title}</h3>
                      <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
                    </div>
                  </div>
-                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10">JOIN</button>
-               </div>
-             ))}
-           </div>
-
-           {/* Track 2 (Identical for seamless looping) */}
-           <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
-             {[...liveStands, ...liveStands].map((stand, i) => (
-               <div key={`t2-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
-                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40`} />
-                 <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
-                 <div className="flex items-center gap-4 relative z-10">
-                   <div className="flex items-center">
-                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
-                       <Mic className="w-5 h-5 text-white" />
-                     </div>
-                   </div>
-                   <div className="flex flex-col justify-center">
-                     <h3 className="text-sm font-bold text-white truncate">{stand.title}</h3>
-                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
-                   </div>
-                 </div>
-                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10">JOIN</button>
-               </div>
+                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10 group-hover/card:bg-white/20 transition-colors">JOIN</button>
+               </Link>
              ))}
            </div>
         </div>
