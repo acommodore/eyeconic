@@ -75,11 +75,13 @@ function HeroSection() {
             
             <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter leading-[0.9] text-gray-900 dark:text-white mb-6 transition-colors">
               SEE WHAT'S<br/>
-              <span className="dark:hidden text-gray-900 pb-2">
-                WORTH WATCHING.
+              {/* Light Mode */}
+              <span className="dark:hidden">
+                <span className="text-gray-900">WORTH</span> <span className="text-gray-500">WATCHING.</span>
               </span>
-              <span className="hidden dark:inline text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600 pb-2">
-                WORTH WATCHING.
+              {/* Dark Mode */}
+              <span className="hidden dark:inline pb-2">
+                <span className="text-white">WORTH</span> <span className="text-gray-400">WATCHING.</span>
               </span>
             </h1>
             <h2 className="text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)] font-bold">
