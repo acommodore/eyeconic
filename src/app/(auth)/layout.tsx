@@ -4,10 +4,54 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#050505] flex flex-col justify-center items-center p-6 text-white relative">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#00E5FF]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="w-full max-w-sm relative z-10">
-        {children}
+    <div className="min-h-screen bg-[#020202] flex flex-col md:flex-row text-white overflow-hidden font-sans">
+      
+      {/* Left Side: Dramatic Atmosphere (Hidden on mobile) */}
+      <div className="hidden md:flex flex-1 relative items-center justify-center overflow-hidden border-r border-white/5">
+        {/* Deep ambient glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,229,255,0.08)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,127,80,0.05)_0%,transparent_50%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-overlay pointer-events-none" />
+        
+        {/* Massive Typography Graphic */}
+        <div className="relative z-10 flex flex-col items-center justify-center -rotate-12 scale-110 select-none">
+          <h1 className="text-[12rem] font-black leading-[0.8] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/10 to-transparent">
+            EYE
+            <br />
+            CON
+            <br />
+            IC
+          </h1>
+        </div>
+
+        {/* Floating Brand Badge */}
+        <div className="absolute top-10 left-10 flex items-center gap-3 z-20">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.3)]">
+            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <span className="font-bold tracking-widest text-lg uppercase text-white drop-shadow-md">Eyeconic</span>
+        </div>
+      </div>
+
+      {/* Right Side: Auth Forms */}
+      <div className="w-full md:w-[600px] shrink-0 flex flex-col justify-center items-center p-6 md:p-12 relative z-10 bg-[#050505] md:bg-transparent shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
+        {/* Mobile Brand Badge */}
+        <div className="md:hidden flex items-center gap-3 mb-12">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <span className="font-bold tracking-widest text-base uppercase">Eyeconic</span>
+        </div>
+
+        <div className="w-full max-w-sm">
+          {children}
+        </div>
       </div>
     </div>
   );
