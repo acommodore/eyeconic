@@ -388,9 +388,17 @@ export default function InsightsPage() {
                  <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 group-hover/card:opacity-60 transition-opacity`} />
                  <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
                  <div className="flex items-center gap-4 relative z-10">
+                   {/* Microphone Icon */}
+                   <div className="flex items-center">
+                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                       <Mic className="w-5 h-5 text-white" />
+                     </div>
+                   </div>
+                   {/* Text Content */}
                    <div className="flex flex-col justify-center">
                      <h3 className="text-sm font-bold text-white truncate group-hover/card:text-[#00E5FF] transition-colors">{stand.title}</h3>
-                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+                     <p className="text-[11px] text-gray-400 truncate max-w-[200px] mb-0.5">{stand.subtitle.split('\n')[0]}</p>
+                     <span className="text-[10px] text-gray-500 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
                    </div>
                  </div>
 
