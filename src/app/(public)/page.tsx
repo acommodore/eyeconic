@@ -75,7 +75,7 @@ function HeroSection() {
             
             <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-black tracking-tighter leading-[0.9] text-black dark:text-white mb-6 transition-colors">
               SEE WHAT'S<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-gray-800 to-gray-600 dark:from-white dark:via-gray-400 dark:to-gray-600">
+              <span className="text-[#FF7F50] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-gray-400 dark:to-gray-600">
                 WORTH WATCHING.
               </span>
             </h1>
