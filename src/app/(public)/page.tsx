@@ -79,7 +79,7 @@ function HeroSection() {
                 WORTH WATCHING.
               </span>
             </h1>
-            <h2 className="text-blue-700 dark:text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(29,78,216,0.3)] dark:drop-shadow-[0_0_10px_rgba(0,229,255,0.3)] font-bold">
+            <h2 className="text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)] font-bold">
               STATS ARE DECEPTIVE
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium mb-12 tracking-wide max-w-xl leading-relaxed transition-colors">
