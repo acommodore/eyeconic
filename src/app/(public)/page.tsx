@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { 
-  Activity, Flame, ArrowRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, Terminal as TerminalIcon, Globe
+  Activity, Flame, ArrowRight, ChevronRight, Play, Users, CheckCircle2, XCircle, AlertTriangle, Terminal as TerminalIcon, Globe
 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -75,7 +75,10 @@ function HeroSection() {
             
             <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-bold tracking-tighter leading-[0.9] text-gray-900 dark:text-white mb-6 transition-colors">
               SEE WHAT'S<br/>
-              <span className="bg-clip-text text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-gray-400 dark:to-gray-600">
+              <span className="dark:hidden text-gray-900">
+                WORTH WATCHING.
+              </span>
+              <span className="hidden dark:inline text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-400 to-gray-600">
                 WORTH WATCHING.
               </span>
             </h1>
