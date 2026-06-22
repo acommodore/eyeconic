@@ -1,7 +1,77 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Eye, Bell, Zap, GitBranch, Bookmark, Crosshair, Star, Swords, Dices, Mic } from "lucide-react";
+
+function AISentimentEngine() {
+  const [step, setStep] = useState(0);
+  const [text, setText] = useState("");
+  const fullText = "High defensive panic detected in MCI backline. Tension index spiking to 84%. Volatility expected.";
+
+  useEffect(() => {
+    // Reset steps if needed, but here it runs once
+    const t1 = setTimeout(() => setStep(1), 1500);
+    const t2 = setTimeout(() => setStep(2), 3500);
+    const t3 = setTimeout(() => {
+      setStep(3);
+      let i = 0;
+      const interval = setInterval(() => {
+        setText(fullText.slice(0, i));
+        i++;
+        if (i > fullText.length) clearInterval(interval);
+      }, 30);
+    }, 5500);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, []);
+
+  return (
+    <div className="mb-10 bg-black border border-[#00E5FF]/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+      <div className="bg-[#00E5FF]/10 border-b border-[#00E5FF]/20 px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse" />
+          <span className="text-[10px] font-mono font-bold text-[#00E5FF] tracking-widest">EYECONIC_AI // LIVE SENTIMENT</span>
+        </div>
+        <Mic className="w-3 h-3 text-[#00E5FF]" />
+      </div>
+      <div className="p-4 font-mono text-[11px] text-gray-300 flex flex-col gap-2 min-h-[140px]">
+        {step >= 0 && (
+          <div className="flex items-center gap-2">
+            <span className="text-gray-500 shrink-0">{'>'}</span> 
+            <span className={step === 0 ? "animate-pulse" : ""}>Connecting to data streams... {step === 0 && "█"}</span>
+          </div>
+        )}
+        {step >= 1 && (
+          <div className="flex items-center gap-2">
+            <span className="text-[#FF4F00] shrink-0">{'>'}</span> 
+            <span className={step === 1 ? "animate-pulse" : ""}>Parsing 14,204 live tweets & audio feeds... {step === 1 && "█"}</span>
+          </div>
+        )}
+        {step >= 2 && (
+          <div className="flex items-center gap-2">
+            <span className="text-purple-500 shrink-0">{'>'}</span> 
+            <span className={step === 2 ? "animate-pulse" : ""}>Analyzing crowd noise frequency... {step === 2 && "█"}</span>
+          </div>
+        )}
+        {step >= 3 && (
+          <div className="flex items-start gap-2 mt-2 pt-2 border-t border-white/10">
+            <span className="text-[#00E5FF] shrink-0 pt-0.5">{'>'}</span> 
+            <span className="text-white font-bold leading-relaxed">
+              <span className="text-[#00E5FF] mr-2">[OUTPUT]</span> 
+              {text}
+              <span className="animate-pulse ml-1 text-[#00E5FF]">█</span>
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function DiscoverPage() {
   return (
@@ -507,7 +577,10 @@ export default function DiscoverPage() {
         </div>
 
         {/* Right Pane */}
-        <div className="xl:col-span-4">
+        <div className="xl:col-span-4 flex flex-col">
+           
+           <AISentimentEngine />
+
            <div className="flex items-center justify-between mb-6">
               <h2 className="text-xs font-black tracking-widest text-white uppercase">MORE TONIGHT</h2>
               <span className="text-[10px] text-[#00E5FF] font-bold hover:text-white cursor-pointer transition-colors tracking-widest">See full schedule &gt;</span>
