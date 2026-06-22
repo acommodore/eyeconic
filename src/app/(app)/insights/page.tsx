@@ -1,17 +1,17 @@
 "use client";
 
-import { ChevronRight, Play, Mic, Activity, Globe, Shield } from "lucide-react";
+import { ChevronRight, Play, Mic, Activity, Globe, Shield, Calendar } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
-const dates = [
-  { label: 'THU', date: '08', active: false, dotColor: 'bg-gray-600' },
-  { label: 'FRI', date: '09', active: false, dotColor: 'bg-[#FF4F00]' },
-  { label: 'SAT', date: '10', active: false, dotColor: 'bg-[#00E5FF]' },
-  { label: 'SUN', date: '11', active: false, dotColor: 'bg-purple-500' },
-  { label: 'MON', date: '12', active: false, dotColor: 'bg-gray-600' },
-  { label: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF4F00]' },
-  { label: 'TODAY MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
+const baseDates = [
+  { day: 'THU', date: '08', active: false, dotColor: 'bg-gray-600' },
+  { day: 'FRI', date: '09', active: false, dotColor: 'bg-[#FF4F00]' },
+  { day: 'SAT', date: '10', active: false, dotColor: 'bg-[#00E5FF]' },
+  { day: 'SUN', date: '11', active: false, dotColor: 'bg-purple-500' },
+  { day: 'MON', date: '12', active: false, dotColor: 'bg-gray-600' },
+  { day: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF4F00]' },
+  { day: 'MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
 ];
 
 const liveStands = [
@@ -59,7 +59,7 @@ const liveStands = [
   }
 ];
 
-const missedHighlights = [
+const baseMissedHighlights = [
   {
     id: 1,
     tag: "LATEST DRAMA",
@@ -67,7 +67,7 @@ const missedHighlights = [
     title: "Late drama in Madrid",
     subtitle: "RMD 1 - 1 MC | MVP: BENZEMA 9.0",
     desc: "Benzema's ghost haunts the box in the 94th minute.",
-    image: "https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1518605368461-1e1e38cd1562?q=80&w=800&auto=format&fit=crop",
     stats: [
       { label: "AVG RATING", value: "8.4", color: "text-[#00E5FF]" },
       { label: "CHAOS PEAK", value: "94%", color: "text-[#00E5FF]" },
@@ -90,7 +90,7 @@ const missedHighlights = [
   }
 ];
 
-const insightsFeed = [
+const baseInsightsFeed = [
   {
     id: 1,
     title: "ØDEGAARD: SENTIMENT DIVERGENCE",
@@ -114,7 +114,7 @@ const insightsFeed = [
   }
 ];
 
-const overviewMatches = [
+const baseOverviewMatches = [
   {
     id: 1,
     league: 'Premier',
@@ -203,7 +203,13 @@ const overviewMatches = [
 
 export default function InsightsPage() {
   const [activeLeague, setActiveLeague] = useState('All Leagues');
+  const [activeDate, setActiveDate] = useState("14");
   
+  const isAltDate = activeDate !== "14";
+  const missedHighlights = isAltDate ? [...baseMissedHighlights].reverse() : baseMissedHighlights;
+  const insightsFeed = isAltDate ? [...baseInsightsFeed].reverse() : baseInsightsFeed;
+  const overviewMatches = isAltDate ? [...baseOverviewMatches].reverse() : baseOverviewMatches;
+
   const displayedMatches = activeLeague === 'All Leagues' 
     ? overviewMatches.slice(0, 3) 
     : overviewMatches.filter(m => m.league === activeLeague);
@@ -211,18 +217,26 @@ export default function InsightsPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E5FF]/30 pb-24">
       {/* Date Selector */}
-      <section className="pt-8 px-6 overflow-x-auto hover-scrollbar">
+      <section className="pt-8 px-6 overflow-x-auto hover-scrollbar pb-2 snap-x">
         <div className="flex gap-4 min-w-max">
-          {dates.map((item, idx) => (
-            <button 
-              key={idx}
-              className={`flex flex-col items-center justify-center w-20 h-24 rounded-2xl border transition-all ${item.active ? 'border-[#00E5FF] bg-[#00E5FF]/5' : 'border-white/10 bg-[#121212] hover:border-white/30'}`}
-            >
-              <span className={`text-[10px] font-black tracking-widest uppercase mb-1 ${item.active ? 'text-[#00E5FF]' : 'text-gray-500'}`}>{item.label}</span>
-              <span className={`text-2xl font-bold mb-2 ${item.active ? 'text-white' : 'text-gray-300'}`}>{item.date}</span>
-              <div className={`w-1.5 h-1.5 rounded-full ${item.dotColor}`} />
-            </button>
-          ))}
+          {baseDates.map((d, i) => {
+            const isActive = d.date === activeDate;
+            return (
+              <button 
+                key={i} 
+                onClick={() => setActiveDate(d.date)}
+                className={`snap-start shrink-0 flex flex-col items-center justify-center w-20 h-24 rounded-2xl border transition-all ${
+                  isActive 
+                    ? 'bg-[#00E5FF]/10 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)]' 
+                    : 'bg-[#121212] border-white/5 hover:border-white/20'
+                }`}
+              >
+                <span className={`text-[10px] font-black tracking-widest mb-1 ${isActive ? 'text-[#00E5FF]' : 'text-gray-500'}`}>{d.day}</span>
+                <span className={`text-2xl font-black ${isActive ? 'text-white' : 'text-gray-300'}`}>{d.date}</span>
+                <div className={`w-1.5 h-1.5 rounded-full ${d.dotColor}`} />
+              </button>
+            );
+          })}
         </div>
       </section>
 
@@ -283,7 +297,6 @@ export default function InsightsPage() {
             <h3 className="text-[10px] text-gray-400 font-black tracking-widest uppercase mb-8 text-center">TOP 3 PLAYERS OF THE DAY</h3>
             
             <div className="flex justify-center items-end gap-4 mb-8">
-              {/* 2nd Place */}
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
                   <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
@@ -292,7 +305,6 @@ export default function InsightsPage() {
                 <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
               </div>
               
-              {/* 1st Place */}
               <div className="flex flex-col items-center pb-4">
                 <div className="w-20 h-20 rounded-full border-2 border-[#00E5FF] overflow-hidden mb-2 relative shadow-[0_0_15px_rgba(0,229,255,0.3)]">
                   <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
@@ -301,7 +313,6 @@ export default function InsightsPage() {
                 <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
               </div>
 
-              {/* 3rd Place */}
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
                   <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
@@ -316,7 +327,6 @@ export default function InsightsPage() {
             </button>
           </div>
 
-          {/* Insights Feed */}
           {insightsFeed.map((insight) => (
             <div key={insight.id} className="w-[380px] shrink-0 bg-[#121212] border border-white/5 rounded-[2rem] p-6 flex flex-col">
                 <div className="flex items-center gap-1 mb-4">
@@ -328,13 +338,11 @@ export default function InsightsPage() {
                 </div>
                 <h3 className="text-xs font-black tracking-widest text-[#00E5FF] uppercase leading-relaxed mb-4">{insight.title}</h3>
                 <p className="text-sm text-gray-400 mb-8 leading-relaxed">
-                  {/* Parsing text to make numbers bold */}
                   {insight.desc.split(/(\d\.?\d*%?)/).map((part, i) => 
                     /^\d\.?\d*%?$/.test(part) || part === 'HIGHER' ? <strong key={i} className={part.includes('%') ? 'text-[#00E5FF]' : 'text-white'}>{part}</strong> : part
                   )}
                 </p>
 
-                {/* Slider Visualization */}
                 <div className="mt-auto relative w-full h-1 bg-white/10 rounded-full mb-6">
                   {insight.points.map((pt, i) => (
                      <div key={i} className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_rgba(0,229,255,0.8)]" style={{ left: `${(pt/10)*100}%` }} />
@@ -352,7 +360,7 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Live Now: Top Stands (Ticker Style) */}
+      {/* Live Now */}
       <section className="mt-12 bg-[#0A0A0A] py-6 relative overflow-hidden">
         <div className="flex items-center gap-3 px-6 mb-4">
           <span className="bg-red-500 text-white text-[10px] font-black tracking-wider px-2 py-0.5 rounded flex items-center gap-1">
@@ -361,92 +369,51 @@ export default function InsightsPage() {
           <h2 className="text-xs font-black tracking-widest uppercase text-gray-300">TOP STANDS</h2>
         </div>
         
-        {/* Continuous Ticker Container */}
         <div className="flex overflow-hidden relative py-2">
-           {/* Fade Masks */}
            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
-           <div className="flex w-max hover:cursor-grab active:cursor-grabbing group">
-             {/* Track 1 */}
-             <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
-               {[...liveStands, ...liveStands].map((stand, i) => (
-                 <div key={`t1-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
-                   
-                   {/* Color Injection to fix "too dark" issue */}
-                   <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 hover:opacity-60 transition-opacity duration-500`} />
-                   <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
-
-                   <div className="flex items-center gap-4 relative z-10 group/item">
-                     {/* Icon/Avatar Cluster */}
-                     <div className="flex items-center">
-                       <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
-                         <Mic className="w-5 h-5 text-white" />
-                       </div>
-                       <div className="flex items-center -ml-4">
-                         {stand.avatars.slice(0, 3).map((avatar, idx) => (
-                           <img 
-                             key={idx} 
-                             src={avatar} 
-                             className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover/item:grayscale-0 transition-all duration-500" 
-                             style={{ zIndex: 9 - idx }}
-                           />
-                         ))}
-                       </div>
-                     </div>
-
-                     {/* Title */}
-                     <div className="flex flex-col justify-center">
-                       <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover/item:text-[#00E5FF] transition-colors">{stand.title}</h3>
-                       <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+           <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
+             {[...liveStands, ...liveStands].map((stand, i) => (
+               <div key={i} className="relative min-w-[380px] shrink-0 border border-white/10 rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
+                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40`} />
+                 <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
+                 <div className="flex items-center gap-4 relative z-10">
+                   <div className="flex items-center">
+                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                       <Mic className="w-5 h-5 text-white" />
                      </div>
                    </div>
-
-                   {/* Join Button */}
-                   <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 hover:border-white/30">
-                     JOIN
-                   </button>
+                   <div className="flex flex-col justify-center">
+                     <h3 className="text-sm font-bold text-white truncate">{stand.title}</h3>
+                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+                   </div>
                  </div>
-               ))}
-             </div>
+                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10">JOIN</button>
+               </div>
+             ))}
+           </div>
 
-             {/* Track 2 (Identical for seamless looping) */}
-             <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
-               {[...liveStands, ...liveStands].map((stand, i) => (
-                 <div key={`t2-${stand.id}-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 hover:border-white/30 transition-all rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
-                   
-                   <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 hover:opacity-60 transition-opacity duration-500`} />
-                   <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
-
-                   <div className="flex items-center gap-4 relative z-10 group/item">
-                     <div className="flex items-center">
-                       <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 z-10 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
-                         <Mic className="w-5 h-5 text-white" />
-                       </div>
-                       <div className="flex items-center -ml-4">
-                         {stand.avatars.slice(0, 3).map((avatar, idx) => (
-                           <img 
-                             key={idx} 
-                             src={avatar} 
-                             className="w-10 h-10 rounded-full border-2 border-[#121212] object-cover -ml-2 grayscale group-hover/item:grayscale-0 transition-all duration-500" 
-                             style={{ zIndex: 9 - idx }}
-                           />
-                         ))}
-                       </div>
-                     </div>
-
-                     <div className="flex flex-col justify-center">
-                       <h3 className="text-sm font-bold text-white max-w-[180px] truncate group-hover/item:text-[#00E5FF] transition-colors">{stand.title}</h3>
-                       <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+           {/* Track 2 (Identical for seamless looping) */}
+           <div className="flex w-max animate-[marquee_60s_linear_infinite] group-hover:[animation-play-state:paused] pr-6">
+             {[...liveStands, ...liveStands].map((stand, i) => (
+               <div key={`t2-${i}`} className="relative min-w-[380px] shrink-0 border border-white/10 rounded-full p-2 pr-6 flex items-center justify-between cursor-pointer overflow-hidden mr-6">
+                 <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40`} />
+                 <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
+                 <div className="flex items-center gap-4 relative z-10">
+                   <div className="flex items-center">
+                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
+                       <Mic className="w-5 h-5 text-white" />
                      </div>
                    </div>
-
-                   <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors shrink-0 backdrop-blur-sm border border-white/10 hover:border-white/30">
-                     JOIN
-                   </button>
+                   <div className="flex flex-col justify-center">
+                     <h3 className="text-sm font-bold text-white truncate">{stand.title}</h3>
+                     <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
+                   </div>
                  </div>
-               ))}
-             </div>
+                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10">JOIN</button>
+               </div>
+             ))}
            </div>
         </div>
       </section>
@@ -455,7 +422,6 @@ export default function InsightsPage() {
       <section className="mt-12 px-6 mb-12">
         <h2 className="text-sm font-black tracking-widest uppercase mb-6">ALL LEAGUES OVERVIEW</h2>
         
-        {/* League Filter */}
         <div className="flex gap-4 overflow-x-auto hover-scrollbar mb-8">
           <button 
             onClick={() => setActiveLeague('All Leagues')}
