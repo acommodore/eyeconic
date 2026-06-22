@@ -43,7 +43,7 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Link href="/login" className="hidden sm:block text-xs font-bold text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors uppercase tracking-widest">
+          <Link href="/login" className="hidden sm:block text-xs font-bold text-gray-900 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white transition-colors uppercase tracking-widest">
             Log In
           </Link>
         </div>
