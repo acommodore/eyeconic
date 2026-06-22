@@ -388,17 +388,24 @@ export default function InsightsPage() {
                  <div className={`absolute inset-0 bg-gradient-to-r ${stand.accent} opacity-40 group-hover/card:opacity-60 transition-opacity`} />
                  <div className="absolute inset-0 bg-[#0A0A0A]/70 backdrop-blur-md" />
                  <div className="flex items-center gap-4 relative z-10">
-                   <div className="flex items-center">
-                     <div className={`w-12 h-12 rounded-full ${stand.iconBg} flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.6)]`}>
-                       <Mic className="w-5 h-5 text-white" />
-                     </div>
-                   </div>
                    <div className="flex flex-col justify-center">
                      <h3 className="text-sm font-bold text-white truncate group-hover/card:text-[#00E5FF] transition-colors">{stand.title}</h3>
                      <span className="text-[10px] text-gray-300 font-mono tracking-wider font-bold">{stand.listeners} LISTENING</span>
                    </div>
                  </div>
-                 <button className="relative z-10 text-[10px] font-black tracking-widest uppercase text-white bg-white/10 px-4 py-2 rounded-full border border-white/10 group-hover/card:bg-white/20 transition-colors">JOIN</button>
+
+                 {/* Avatars replacing the JOIN button */}
+                 <div className="relative z-10 flex items-center">
+                   {stand.avatars.slice(0, 3).map((avatar, idx) => (
+                     <img 
+                       key={idx} 
+                       src={avatar} 
+                       alt="Listener"
+                       className="w-8 h-8 rounded-full border-2 border-[#121212] object-cover -ml-3 first:ml-0 group-hover/card:border-[#0A0A0A] transition-colors" 
+                       style={{ zIndex: 9 - idx }}
+                     />
+                   ))}
+                 </div>
                </Link>
              ))}
            </div>
