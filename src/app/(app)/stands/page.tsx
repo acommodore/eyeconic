@@ -231,13 +231,13 @@ export default function StandsPage() {
             </div>
           </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* SCHEDULED & UPCOMING */}
             <section>
                <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled Today
+                  <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled
                 </h2>
                 <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">See all</span>
               </div>
@@ -246,96 +246,145 @@ export default function StandsPage() {
                 
                 {/* Scheduled Item */}
                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#00E5FF]/50 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#00E5FF]/50 transition-colors">
                     <span className="text-xs font-black text-gray-400">7:00</span>
-                    <span className="text-[9px] font-bold text-[#00E5FF]">PM</span>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#00E5FF] transition-colors">UCL Semi-final Preview Show</h4>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 2h 15m</p>
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#00E5FF] transition-colors truncate">UCL Semi-final Preview</h4>
+                    <p className="text-[10px] text-[#00E5FF] font-bold uppercase tracking-widest mt-1">In 2h 15m</p>
                   </div>
-                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
-                    <Bell className="w-4 h-4 text-white" />
+                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                    <Bell className="w-3 h-3 text-white" />
                   </button>
                 </div>
 
                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#FF3B00]/50 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#FF3B00]/50 transition-colors">
                     <span className="text-xs font-black text-gray-400">8:30</span>
-                    <span className="text-[9px] font-bold text-[#FF3B00]">PM</span>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#FF3B00] transition-colors">Transfer Deadline Live Talk</h4>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 3h 45m</p>
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#FF3B00] transition-colors truncate">Transfer Deadline Talk</h4>
+                    <p className="text-[10px] text-[#FF3B00] font-bold uppercase tracking-widest mt-1">In 3h 45m</p>
                   </div>
-                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
-                    <Bell className="w-4 h-4 text-white" />
+                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                    <Bell className="w-3 h-3 text-white" />
                   </button>
                 </div>
 
                  <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
                     <span className="text-xs font-black text-gray-400">10:00</span>
-                    <span className="text-[9px] font-bold text-[#6200EA]">PM</span>
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#6200EA] transition-colors">La Liga Title Race Debate</h4>
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 5h 15m</p>
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#6200EA] transition-colors truncate">La Liga Title Race</h4>
+                    <p className="text-[10px] text-[#6200EA] font-bold uppercase tracking-widest mt-1">In 5h 15m</p>
                   </div>
-                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
-                    <Bell className="w-4 h-4 text-white" />
+                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                    <Bell className="w-3 h-3 text-white" />
                   </button>
                 </div>
 
               </div>
             </section>
 
-            {/* MY CLUBS / COMMUNITIES */}
+            {/* TOP SPACE CREATORS */}
+            <section>
+               <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
+                  <Mic className="w-5 h-5 text-[#6200EA]" /> Top Creators
+                </h2>
+                <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Discover</span>
+              </div>
+              
+              <div className="space-y-4">
+                
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full border border-white/10 shrink-0 overflow-hidden">
+                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Gooner" alt="Creator" className="w-full h-full bg-gray-800" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm">Gooner4Life</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">12.4K Followers</p>
+                  </div>
+                  <button className="px-4 py-1.5 rounded-full bg-white text-black text-xs font-black tracking-widest hover:bg-gray-200 transition-colors shrink-0">
+                    FOLLOW
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full border border-white/10 shrink-0 overflow-hidden">
+                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tactics" alt="Creator" className="w-full h-full bg-gray-800" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm">TacticsGuy</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">8.2K Followers</p>
+                  </div>
+                  <button className="px-4 py-1.5 rounded-full bg-white text-black text-xs font-black tracking-widest hover:bg-gray-200 transition-colors shrink-0">
+                    FOLLOW
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full border border-white/10 shrink-0 overflow-hidden">
+                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=MadridHQ" alt="Creator" className="w-full h-full bg-gray-800" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm">MadridistaHQ</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">5.9K Followers</p>
+                  </div>
+                  <button className="px-4 py-1.5 rounded-full border border-white/20 text-white text-xs font-black tracking-widest hover:bg-white/10 transition-colors shrink-0">
+                    FOLLOWING
+                  </button>
+                </div>
+
+              </div>
+            </section>
+
+            {/* MY CLUBS / COMMUNITIES - COMPACT */}
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-[#00E5FF]" /> My Clubs
+                  <Shield className="w-5 h-5 text-gray-400" /> My Clubs
                 </h2>
                 <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Manage</span>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
                 
-                <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
-                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-2 shrink-0">
                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png" alt="LFC" className="w-full h-full object-contain" />
                   </div>
-                  <h4 className="font-black text-sm text-white tracking-wider">Liverpool FC</h4>
-                  <p className="text-[10px] font-bold text-[#00E5FF] mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-[#00E5FF]/10 px-2 py-1 rounded">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> 2 LIVE
-                  </p>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-sm text-white">Liverpool FC</h4>
+                    <p className="text-[10px] font-bold text-[#00E5FF] mt-1 flex items-center gap-1.5 uppercase tracking-widest">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> 2 LIVE ROOMS
+                    </p>
+                  </div>
                 </div>
 
-                <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
-                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-2 shrink-0">
                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" alt="AFC" className="w-full h-full object-contain" />
                   </div>
-                  <h4 className="font-black text-sm text-white tracking-wider">Arsenal FC</h4>
-                  <p className="text-[10px] font-bold text-[#FF3B00] mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-[#FF3B00]/10 px-2 py-1 rounded">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF3B00] animate-pulse" /> 1 LIVE
-                  </p>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-sm text-white">Arsenal FC</h4>
+                    <p className="text-[10px] font-bold text-[#FF3B00] mt-1 flex items-center gap-1.5 uppercase tracking-widest">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF3B00] animate-pulse" /> 1 LIVE ROOM
+                    </p>
+                  </div>
                 </div>
 
-                 <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
-                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-2 shrink-0">
                     <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="TOT" className="w-full h-full object-contain" />
                   </div>
-                  <h4 className="font-black text-sm text-white tracking-wider">Tottenham</h4>
-                  <p className="text-[10px] font-bold text-gray-500 mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-white/5 px-2 py-1 rounded">
-                    0 LIVE
-                  </p>
-                </div>
-
-                <div className="bg-[#050505] p-5 rounded-[20px] flex flex-col items-center justify-center text-center relative border-2 border-dashed border-white/10 hover:border-white/30 transition-all cursor-pointer group hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2 group-hover:bg-white/10 transition-colors">
-                    <Plus className="w-6 h-6 text-gray-400 group-hover:text-white" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-sm text-white">Tottenham</h4>
+                    <p className="text-[10px] font-bold text-gray-600 mt-1 uppercase tracking-widest">
+                      NO LIVE ROOMS
+                    </p>
                   </div>
-                  <h4 className="font-bold text-xs text-gray-400 group-hover:text-white tracking-wider">Follow Club</h4>
                 </div>
 
               </div>
