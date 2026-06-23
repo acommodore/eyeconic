@@ -1,27 +1,38 @@
+"use client";
+
 import Link from "next/link";
 import { Search, Bell, Mic, Volume2, Play, Plus, Clock, Shield, Flame, Radio, Calendar, Activity } from "lucide-react";
 
 export default function StandsPage() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      // Offset by 100px to account for the sticky header
+      const y = element.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full max-w-[1600px] mx-auto min-h-screen text-white bg-[#020202]">
       
       {/* Top Navigation Tabs - Floating & Glassy */}
       <div className="sticky top-0 z-50 bg-[#020202]/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-8 py-4">
         <div className="flex gap-3 overflow-x-auto pb-2 hover-scrollbar hide-scrollbar-mobile">
-          <button className="px-6 py-2.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] font-black tracking-widest text-xs whitespace-nowrap flex items-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-[#00E5FF]/20 transition-all">
+          <button onClick={() => scrollToSection('live-now')} className="px-6 py-2.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] font-black tracking-widest text-xs whitespace-nowrap flex items-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-[#00E5FF]/20 transition-all cursor-pointer">
             <Radio className="w-4 h-4 animate-pulse" />
             LIVE NOW
           </button>
-          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+          <button onClick={() => scrollToSection('trending')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Activity className="w-4 h-4" /> TRENDING
           </button>
-          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+          <button onClick={() => scrollToSection('my-clubs')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Shield className="w-4 h-4" /> MY CLUBS
           </button>
-          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+          <button onClick={() => scrollToSection('scheduled')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Calendar className="w-4 h-4" /> SCHEDULED
           </button>
-          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all">
+          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all cursor-pointer">
             REPLAYS
           </button>
         </div>
@@ -91,7 +102,7 @@ export default function StandsPage() {
           </section>
 
           {/* LIVE NOW GRID */}
-          <section>
+          <section id="live-now" className="scroll-mt-32">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-black tracking-widest text-white flex items-center gap-3 uppercase">
                 <Flame className="w-5 h-5 text-[#FF3B00]" />
@@ -232,7 +243,7 @@ export default function StandsPage() {
           </section>
 
           {/* SCHEDULED & UPCOMING */}
-          <section className="mb-12">
+          <section id="scheduled" className="mb-12 scroll-mt-32">
              <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
                 <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled Today
@@ -290,7 +301,7 @@ export default function StandsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             {/* TRENDING VOICES */}
-            <section>
+            <section id="trending" className="scroll-mt-32">
                <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
                   <Mic className="w-5 h-5 text-[#6200EA]" /> Trending Voices
@@ -343,7 +354,7 @@ export default function StandsPage() {
             </section>
 
             {/* MY CLUBS / COMMUNITIES - COMPACT */}
-            <section>
+            <section id="my-clubs" className="scroll-mt-32">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
                   <Shield className="w-5 h-5 text-gray-400" /> My Clubs
