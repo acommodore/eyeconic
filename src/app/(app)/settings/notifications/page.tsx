@@ -17,11 +17,11 @@ export default function SettingsNotificationsPage() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 md:p-8 text-white pb-24">
+    <div className="w-full max-w-4xl mx-auto p-4 md:p-8 text-white pb-24">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
-        <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group" iconClassName="w-6 h-6 text-[#00E5FF] group-hover:-translate-x-1 transition-transform" />
-        <h1 className="text-xl font-black tracking-widest uppercase">NOTIFICATIONS</h1>
+      <div className="flex items-center gap-4 mb-12 relative z-10">
+        <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-white/5 border border-white/10" iconClassName="w-5 h-5 text-[#FF7F50] group-hover:-translate-x-1 transition-transform" />
+        <h1 className="text-3xl md:text-4xl font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">Notifications</h1>
       </div>
 
       <div className="space-y-8">
