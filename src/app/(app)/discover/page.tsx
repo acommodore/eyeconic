@@ -296,16 +296,21 @@ export default function DiscoverPage() {
                     <span className="text-lg font-black text-white">20:45</span>
                     <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
                   </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex items-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="ARS" />
-                        <span className="font-bold text-sm">ARS</span>
-                     </div>
-                     <span className="text-gray-600 text-xs font-black">VS</span>
-                     <div className="flex items-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg" className="w-6 h-6 object-contain bg-[#003399] rounded-full p-0.5" alt="EVE" />
-                        <span className="font-bold text-sm">EVE</span>
-                     </div>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-4">
+                       <div className="flex items-center gap-2">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="ARS" />
+                          <span className="font-bold text-sm">ARS</span>
+                       </div>
+                       <span className="text-gray-600 text-xs font-black">VS</span>
+                       <div className="flex items-center gap-2">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg" className="w-6 h-6 object-contain bg-[#003399] rounded-full p-0.5" alt="EVE" />
+                          <span className="font-bold text-sm">EVE</span>
+                       </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase">
+                       <GitBranch className="w-3 h-3 text-[#00E5FF]" /> <span className="text-gray-500">EXPECTED:</span> <span className="text-[#00E5FF]">TACTICAL</span>
+                    </div>
                   </div>
                </div>
                <div className="flex flex-col items-end gap-1">
@@ -323,16 +328,21 @@ export default function DiscoverPage() {
                     <span className="text-lg font-black text-white">21:00</span>
                     <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
                   </div>
-                  <div className="flex items-center gap-4">
-                     <div className="flex items-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest_%282016%29.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="AVL" />
-                        <span className="font-bold text-sm">AVL</span>
-                     </div>
-                     <span className="text-gray-600 text-xs font-black">VS</span>
-                     <div className="flex items-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="WHU" />
-                        <span className="font-bold text-sm">WHU</span>
-                     </div>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-4">
+                       <div className="flex items-center gap-2">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest_%282016%29.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="AVL" />
+                          <span className="font-bold text-sm">AVL</span>
+                       </div>
+                       <span className="text-gray-600 text-xs font-black">VS</span>
+                       <div className="flex items-center gap-2">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="WHU" />
+                          <span className="font-bold text-sm">WHU</span>
+                       </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase">
+                       <Zap className="w-3 h-3 text-[#FF7F50]" /> <span className="text-gray-500">EXPECTED:</span> <span className="text-[#FF7F50]">CHAOS</span>
+                    </div>
                   </div>
                </div>
                <div className="flex flex-col items-end gap-1">
