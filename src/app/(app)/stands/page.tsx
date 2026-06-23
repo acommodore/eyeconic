@@ -23,14 +23,14 @@ export default function StandsPage() {
             <Radio className="w-4 h-4 animate-pulse" />
             LIVE NOW
           </button>
+          <button onClick={() => scrollToSection('scheduled')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+            <Calendar className="w-4 h-4" /> SCHEDULED
+          </button>
           <button onClick={() => scrollToSection('trending')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Activity className="w-4 h-4" /> TOP VOICES
           </button>
           <button onClick={() => scrollToSection('my-clubs')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Shield className="w-4 h-4" /> MY CLUBS
-          </button>
-          <button onClick={() => scrollToSection('scheduled')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-            <Calendar className="w-4 h-4" /> SCHEDULED
           </button>
           <button onClick={() => scrollToSection('highlights')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Zap className="w-4 h-4 text-yellow-500" /> HIGHLIGHTS
