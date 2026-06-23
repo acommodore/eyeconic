@@ -14,9 +14,9 @@ export default function ProfilePage() {
             <span className="text-[10px] text-[#00E5FF] font-mono tracking-widest uppercase">ID: 8492-AX</span>
           </div>
         </div>
-        <button className="text-gray-400 hover:text-white transition-all duration-300 p-3 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 hover:rotate-90">
+        <Link href="/settings" className="text-gray-400 hover:text-white transition-all duration-300 p-3 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 hover:rotate-90 inline-block">
           <Settings className="w-5 h-5" />
-        </button>
+        </Link>
       </div>
 
       {/* 1. CINEMATIC HERO IDENTITY CARD */}
