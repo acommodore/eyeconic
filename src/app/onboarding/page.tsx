@@ -45,12 +45,12 @@ export default function OnboardingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFinishing, setIsFinishing] = useState(false);
 
-  const handleNext = () => {
-    if (step === 1 && favorite) {
+  const handleNext = (overrideTeamId?: string) => {
+    if (step === 1 && (favorite || overrideTeamId)) {
       setStep(2);
       setSearchQuery("");
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (step === 2 && rival) {
+    } else if (step === 2 && (rival || overrideTeamId)) {
       setStep(3);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (step === 3) {
@@ -304,7 +304,7 @@ export default function OnboardingPage() {
                                 key={`sug-${team.id}`}
                                 onClick={() => {
                                   setRival(team.id);
-                                  setTimeout(() => handleNext(), 400);
+                                  setTimeout(() => handleNext(team.id), 400);
                                 }}
                                 className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
                                   isSelected 
@@ -363,10 +363,10 @@ export default function OnboardingPage() {
                                   onClick={() => {
                                     if (step === 1) {
                                       setFavorite(team.id);
-                                      setTimeout(() => handleNext(), 400);
+                                      setTimeout(() => handleNext(team.id), 400);
                                     } else {
                                       setRival(team.id);
-                                      setTimeout(() => handleNext(), 400);
+                                      setTimeout(() => handleNext(team.id), 400);
                                     }
                                   }}
                                   className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
@@ -419,7 +419,7 @@ export default function OnboardingPage() {
           >
             <div className="w-full max-w-xl pointer-events-auto">
               <button
-                onClick={handleNext}
+                onClick={() => handleNext()}
                 className="group relative w-full py-5 rounded-2xl font-black text-sm md:text-base tracking-[0.2em] uppercase overflow-hidden transition-all duration-300 bg-white text-black hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
