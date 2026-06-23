@@ -118,150 +118,172 @@ export default function PreMatchDetails() {
         </div>
       </div>
 
-      <div className="px-4 md:px-6 max-w-4xl mx-auto space-y-6">
+      <div className="px-4 md:px-8 max-w-[1200px] mx-auto mt-[-20px] relative z-30 pb-24">
         
-        {/* 2. Crowdcast */}
-        <section className="bg-[#121212] rounded-3xl p-6 border border-white/5">
-           <div className="flex justify-between items-center mb-6">
-              <div>
-                <h2 className="text-sm font-black tracking-widest uppercase mb-1">CROWDCAST: SET THE VIBE</h2>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" /> 12.4K fans voting now
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+          {/* Left Column - Match Center */}
+          <div className="xl:col-span-8 space-y-8">
+            {/* 4. Match Center */}
+            <section className="bg-[#121212]/90 backdrop-blur-md rounded-[32px] border border-white/10 p-6 md:p-8 overflow-hidden shadow-2xl">
+               <div className="flex justify-between items-center mb-8">
+                 <div className="flex items-center gap-3">
+                    <h2 className="text-sm font-black tracking-widest uppercase flex items-center gap-2">
+                      <Target className="w-5 h-5 text-[#00E5FF]" /> MATCH CENTER
+                    </h2>
+                 </div>
+                 <span className="text-[10px] text-gray-500 font-bold uppercase hidden md:block">Interactive Match Details</span>
+               </div>
+
+               {/* Tabs */}
+               <div className="flex bg-[#0A0A0A] rounded-full p-1.5 mb-8 overflow-x-auto hide-scrollbar border border-white/5">
+                 {['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
+                    <button 
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className={`flex-1 min-w-[100px] py-3 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${activeTab === tab ? 'bg-[#00E5FF]/15 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.1)]' : 'text-gray-500 hover:text-white hover:bg-white/5'}`}
+                    >
+                      {tab}
+                    </button>
+                 ))}
+               </div>
+
+               {/* Dynamic Content based on Active Tab */}
+               <div className="min-h-[500px]">
+                  {activeTab === 'LINEUP' && <LineupTab />}
+                  {activeTab === 'H2H' && <H2HTab />}
+                  {activeTab === 'STANDINGS' && <StandingsTab />}
+                  {activeTab === 'FORM' && <FormTab />}
+                  {activeTab === 'KEY BATTLES' && <KeyBattlesTab />}
+               </div>
+            </section>
+          </div>
+
+          {/* Right Column - Social & Interactive */}
+          <div className="xl:col-span-4 space-y-6">
+            
+            {/* 2. Crowdcast */}
+            <section className="bg-[#121212]/90 backdrop-blur-md rounded-[32px] p-6 md:p-8 border border-white/10 shadow-2xl">
+               <div className="flex justify-between items-center mb-6">
+                  <div>
+                    <h2 className="text-sm font-black tracking-widest uppercase mb-1">CROWDCAST</h2>
+                    <div className="flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> 12.4K voting
+                    </div>
+                  </div>
+                  <span className="text-[#00E5FF] text-[10px] font-black tracking-widest uppercase px-3 py-1.5 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/30">Live</span>
+               </div>
+
+               <div className="flex flex-col gap-3">
+                  <div 
+                    onClick={() => handleVote('chaos')}
+                    className="w-full bg-[#0A0A0A] rounded-2xl p-4 flex items-center justify-between border border-[#FF7F50]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
+                  >
+                     <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
+                     <div className="flex items-center gap-3 relative z-10">
+                       <Flame className="w-5 h-5 text-[#FF7F50] group-active:scale-110 transition-transform" />
+                       <span className="text-xs font-black tracking-widest text-[#FF7F50]">CHAOS</span>
+                     </div>
+                     <span className="text-xl font-black relative z-10 text-white transition-all">{votes.chaos}%</span>
+                  </div>
+                  
+                  <div 
+                    onClick={() => handleVote('tactical')}
+                    className="w-full bg-[#0A0A0A] rounded-2xl p-4 flex items-center justify-between border border-[#00E5FF]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
+                  >
+                     <div className="absolute left-0 top-0 h-full bg-[#00E5FF]/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
+                     <div className="flex items-center gap-3 relative z-10">
+                       <Shield className="w-5 h-5 text-[#00E5FF] group-active:scale-110 transition-transform" />
+                       <span className="text-xs font-black tracking-widest text-[#00E5FF]">TACTICAL</span>
+                     </div>
+                     <span className="text-xl font-black relative z-10 text-white transition-all">{votes.tactical}%</span>
+                  </div>
+
+                  <div 
+                    onClick={() => handleVote('tension')}
+                    className="w-full bg-[#0A0A0A] rounded-2xl p-4 flex items-center justify-between border border-purple-500/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
+                  >
+                     <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
+                     <div className="flex items-center gap-3 relative z-10">
+                       <Zap className="w-5 h-5 text-purple-500 group-active:scale-110 transition-transform" />
+                       <span className="text-xs font-black tracking-widest text-purple-500">TENSION</span>
+                     </div>
+                     <span className="text-xl font-black relative z-10 text-white transition-all">{votes.tension}%</span>
+                  </div>
+               </div>
+            </section>
+
+            {/* 3. Join the Discussion */}
+            <Link href="/stands/2" className="block cursor-pointer">
+              <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-[32px] p-6 md:p-8 flex justify-between items-center border border-white/10 relative overflow-hidden hover:border-white/20 transition-colors shadow-2xl group">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen group-hover:opacity-20 transition-opacity" />
+                <div className="relative z-10">
+                   <h2 className="text-lg font-black tracking-tighter mb-1 uppercase">JOIN THE STANDS</h2>
+                   <p className="text-xs text-[#00E5FF] font-bold tracking-widest uppercase">12.4K fans inside</p>
                 </div>
-              </div>
-              <span className="text-[#00E5FF] text-xs font-bold tracking-widest uppercase px-3 py-1 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/30">Live</span>
-           </div>
+                <div className="relative z-10 w-12 h-12 rounded-full bg-[#00E5FF] group-hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] group-hover:scale-110">
+                   <Mic className="w-5 h-5 text-black" fill="currentColor" />
+                </div>
+              </section>
+            </Link>
 
-           <div className="flex gap-4">
-              <div 
-                onClick={() => handleVote('chaos')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#FF7F50]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-[#FF7F50]/10 transition-all duration-300" style={{ height: `${votes.chaos}%` }} />
-                 <Flame className="w-6 h-6 text-[#FF7F50] mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-[#FF7F50] mb-1 relative z-10">CHAOS</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.chaos}%</span>
-              </div>
-              <div 
-                onClick={() => handleVote('tactical')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#00E5FF]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-[#00E5FF]/10 transition-all duration-300" style={{ height: `${votes.tactical}%` }} />
-                 <Shield className="w-6 h-6 text-[#00E5FF] mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-[#00E5FF] mb-1 relative z-10">TACTICAL</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.tactical}%</span>
-              </div>
-              <div 
-                onClick={() => handleVote('tension')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-purple-500/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-purple-500/10 transition-all duration-300" style={{ height: `${votes.tension}%` }} />
-                 <Zap className="w-6 h-6 text-purple-500 mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-purple-500 mb-1 relative z-10">TENSION</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.tension}%</span>
-              </div>
-           </div>
-        </section>
+            {/* 5. Player Spotlight */}
+            <section className="flex flex-col gap-4">
+               {/* MVP Watch */}
+               <div className="w-full bg-[#121212]/90 backdrop-blur-md border border-[#00E5FF]/20 rounded-[32px] p-6 flex items-center gap-4 relative overflow-hidden shadow-2xl group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                  <div className="absolute right-0 bottom-0 w-40 h-40 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none translate-y-4">
+                     <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                     <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                  </div>
+                  <div className="relative z-10 w-full">
+                     <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4 flex items-center gap-2">
+                       <Activity className="w-3 h-3" /> MVP WATCH
+                     </h3>
+                     <select 
+                       value={mvpWatchPlayer}
+                       onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                       className="w-full bg-transparent text-2xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                     >
+                       {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                     </select>
+                     <p className="text-xs text-gray-400 mb-4 mt-2 font-bold uppercase tracking-widest">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                     <div className="flex items-end gap-2">
+                       <span className="text-3xl font-black text-[#00E5FF]">8.7</span>
+                       <span className="text-[10px] text-gray-500 uppercase pb-1 font-bold tracking-widest">Season avg</span>
+                     </div>
+                  </div>
+               </div>
 
-        {/* 3. Join the Discussion */}
-        <Link href="/stands/2" className="block cursor-pointer">
-          <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-3xl p-6 flex justify-between items-center border border-white/5 relative overflow-hidden hover:border-white/10 transition-colors">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
-            <div className="relative z-10">
-               <h2 className="text-xl font-black tracking-tighter mb-1 uppercase">JOIN THE DISCUSSION</h2>
-               <p className="text-xs text-gray-400">12.4K active in stands</p>
-            </div>
-            <div className="relative z-10 w-14 h-14 rounded-full bg-[#00E5FF] hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)]">
-               <Mic className="w-6 h-6 text-black" fill="currentColor" />
-            </div>
-          </section>
-        </Link>
+               {/* Fraud Watch */}
+               <div className="w-full bg-[#121212]/90 backdrop-blur-md border border-[#D32F2F]/20 rounded-[32px] p-6 flex items-center gap-4 relative overflow-hidden shadow-2xl group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                  <div className="absolute right-0 bottom-0 w-40 h-40 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none translate-y-4">
+                     <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                     <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                  </div>
+                  <div className="relative z-10 w-full">
+                     <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
+                       <Target className="w-3 h-3" /> FRAUD WATCH
+                     </h3>
+                     <select 
+                       value={fraudWatchPlayer}
+                       onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                       className="w-full bg-transparent text-2xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                     >
+                       {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                     </select>
+                     <p className="text-xs text-gray-400 mb-4 mt-2 font-bold uppercase tracking-widest">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                     <div className="flex items-end gap-2">
+                       <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest max-w-[140px] leading-tight">Must prove haters wrong tonight</span>
+                     </div>
+                  </div>
+               </div>
+            </section>
+          </div>
 
-        {/* 4. Match Center */}
-        <section className="bg-[#121212] rounded-3xl border border-white/5 p-6 overflow-hidden">
-           <div className="flex justify-between items-center mb-6">
-             <div className="flex items-center gap-2">
-                <h2 className="text-sm font-black tracking-widest uppercase">MATCH CENTER</h2>
-                <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[10px] text-gray-400">i</div>
-             </div>
-             <span className="text-[10px] text-gray-500 font-bold uppercase">Swipe or tap to explore</span>
-           </div>
-
-           {/* Tabs */}
-           <div className="flex bg-[#0A0A0A] rounded-full p-1 mb-8 overflow-x-auto hide-scrollbar">
-             {['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
-                <button 
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`flex-1 min-w-[80px] py-2.5 rounded-full text-[10px] md:text-xs font-bold tracking-widest transition-colors ${activeTab === tab ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'text-gray-500 hover:text-white'}`}
-                >
-                  {tab}
-                </button>
-             ))}
-           </div>
-
-           {/* Dynamic Content based on Active Tab */}
-           <div className="min-h-[450px]">
-              {activeTab === 'LINEUP' && <LineupTab />}
-              {activeTab === 'H2H' && <H2HTab />}
-              {activeTab === 'STANDINGS' && <StandingsTab />}
-              {activeTab === 'FORM' && <FormTab />}
-              {activeTab === 'KEY BATTLES' && <KeyBattlesTab />}
-           </div>
-        </section>
-
-        {/* 5. Player Spotlight */}
-        <section className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory">
-           {/* MVP Watch */}
-           <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#00E5FF]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                 <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-              </div>
-              <div className="relative z-10 w-full">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">MVP WATCH</h3>
-                 <select 
-                   value={mvpWatchPlayer}
-                   onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
-                 >
-                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                 </select>
-                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
-                 <div className="flex items-end gap-2">
-                   <span className="text-2xl font-black text-[#00E5FF]">8.7</span>
-                   <span className="text-[10px] text-gray-500 uppercase pb-1">Season rating</span>
-                 </div>
-              </div>
-           </div>
-
-           {/* Fraud Watch */}
-           <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#D32F2F]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                 <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-              </div>
-              <div className="relative z-10 w-full">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">FRAUD WATCH</h3>
-                 <select 
-                   value={fraudWatchPlayer}
-                   onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
-                 >
-                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                 </select>
-                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
-                 <div className="flex items-end gap-2">
-                   <span className="text-sm font-bold text-gray-300 max-w-[100px] leading-tight">Needs a big performance</span>
-                 </div>
-              </div>
-           </div>
-        </section>
-
+        </div>
       </div>
     </div>
   );
@@ -336,20 +358,20 @@ function LineupTab() {
             {/* MCI Players */}
             {mciPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${p.glow ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#00E5FF] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] md:text-[10px] font-black tracking-wider text-[#00E5FF] drop-shadow-md">{p.name}</span>
               </div>
             ))}
 
             {/* LIV Players */}
             {livPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] md:text-[10px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
               </div>
             ))}
          </div>
