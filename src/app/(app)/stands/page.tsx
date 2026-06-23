@@ -24,7 +24,7 @@ export default function StandsPage() {
             LIVE NOW
           </button>
           <button onClick={() => scrollToSection('trending')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-            <Activity className="w-4 h-4" /> TRENDING
+            <Activity className="w-4 h-4" /> TOP VOICES
           </button>
           <button onClick={() => scrollToSection('my-clubs')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Shield className="w-4 h-4" /> MY CLUBS
@@ -106,7 +106,7 @@ export default function StandsPage() {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-black tracking-widest text-white flex items-center gap-3 uppercase">
                 <Flame className="w-5 h-5 text-[#FF3B00]" />
-                Trending Live
+                Live Stands
               </h2>
               <span className="text-xs text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">View All</span>
             </div>
@@ -300,11 +300,11 @@ export default function StandsPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
-            {/* TRENDING VOICES */}
+            {/* TOP VOICES */}
             <section id="trending" className="scroll-mt-32">
                <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                  <Mic className="w-5 h-5 text-[#6200EA]" /> Trending Voices
+                  <Mic className="w-5 h-5 text-[#6200EA]" /> Top Voices
                 </h2>
                 <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Discover</span>
               </div>
