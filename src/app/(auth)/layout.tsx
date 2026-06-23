@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function AuthLayout({
   children,
 }: {
@@ -25,7 +27,7 @@ export default function AuthLayout({
         </div>
 
         {/* Floating Brand Badge */}
-        <div className="absolute top-10 left-10 flex items-center gap-3 z-20">
+        <Link href="/" className="absolute top-10 left-10 flex items-center gap-3 z-20 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.3)]">
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -33,13 +35,13 @@ export default function AuthLayout({
             </svg>
           </div>
           <span className="font-bold tracking-widest text-lg uppercase text-white drop-shadow-md">Eyeconic</span>
-        </div>
+        </Link>
       </div>
 
       {/* Right Side: Auth Forms */}
       <div className="w-full md:w-[600px] shrink-0 flex flex-col justify-center items-center p-6 md:p-12 relative z-10 bg-[#050505] md:bg-transparent shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
         {/* Mobile Brand Badge */}
-        <div className="md:hidden flex items-center gap-3 mb-12">
+        <Link href="/" className="md:hidden flex items-center gap-3 mb-12 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.3)]">
             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -47,7 +49,7 @@ export default function AuthLayout({
             </svg>
           </div>
           <span className="font-bold tracking-widest text-base uppercase">Eyeconic</span>
-        </div>
+        </Link>
 
         <div className="w-full max-w-sm">
           {children}

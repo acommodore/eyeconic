@@ -23,12 +23,15 @@ export default function AppLayout({
     <div className="min-h-screen bg-[#050505] text-white flex flex-col md:flex-row">
       {/* Mobile Top Bar */}
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-6 h-6 rounded bg-[#00E5FF] flex items-center justify-center">
-            <Activity className="w-4 h-4 text-black" />
+            <svg className="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
           </div>
           <span className="font-bold tracking-wider">EYECONIC</span>
-        </div>
+        </Link>
         <Link href="/profile" className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-[#121212]">
            {/* Avatar placeholder */}
            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
@@ -39,12 +42,15 @@ export default function AppLayout({
       <aside className={`hidden md:flex flex-col border-r border-white/5 bg-[#0a0a0a] h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? 'w-24 p-4 items-center' : 'w-64 p-6'}`}>
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-                <Activity className="w-5 h-5 text-black" />
+                <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
               </div>
               <span className="text-xl font-bold tracking-wider">EYECONIC</span>
-            </div>
+            </Link>
           )}
           <button 
             onClick={() => setIsCollapsed(!isCollapsed)} 
