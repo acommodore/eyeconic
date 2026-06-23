@@ -66,31 +66,31 @@ const highlights = [
 ];
 
 const pitchLIV = [
-  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", top: "90%", left: "50%" },
-  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", top: "78%", left: "85%" },
-  { id: 3, name: "Konate", num: 5, pos: "CB", rating: "8.2", top: "82%", left: "65%" },
-  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", top: "82%", left: "35%" },
-  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", top: "78%", left: "15%" },
-  { id: 6, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", top: "65%", left: "65%" },
-  { id: 7, name: "Endo", num: 3, pos: "CDM", rating: "7.8", top: "72%", left: "50%" },
-  { id: 8, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", top: "65%", left: "35%" },
-  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", top: "52%", left: "80%" },
-  { id: 10, name: "Nunez", num: 9, pos: "ST", rating: "7.1", top: "48%", left: "50%" },
-  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", top: "52%", left: "20%" },
+  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", left: "10%", top: "50%" },
+  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", left: "22%", top: "15%" },
+  { id: 3, name: "Konate", num: 5, pos: "CB", rating: "8.2", left: "18%", top: "35%" },
+  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", left: "18%", top: "65%" },
+  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", left: "22%", top: "85%" },
+  { id: 6, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", left: "35%", top: "35%" },
+  { id: 7, name: "Endo", num: 3, pos: "CDM", rating: "7.8", left: "28%", top: "50%" },
+  { id: 8, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", left: "35%", top: "65%" },
+  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", left: "48%", top: "20%" },
+  { id: 10, name: "Nunez", num: 9, pos: "ST", rating: "7.1", left: "52%", top: "50%" },
+  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", left: "48%", top: "80%" },
 ];
 
 const pitchMCI = [
-  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", top: "10%", left: "50%" },
-  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", top: "22%", left: "20%" },
-  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", top: "18%", left: "35%" },
-  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", top: "18%", left: "65%" },
-  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", top: "22%", left: "80%" },
-  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", top: "28%", left: "50%" },
-  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", top: "35%", left: "20%" },
-  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", top: "35%", left: "35%" },
-  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", top: "35%", left: "65%" },
-  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", top: "35%", left: "80%" },
-  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", top: "45%", left: "50%" },
+  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", left: "90%", top: "50%" },
+  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", left: "78%", top: "85%" },
+  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", left: "82%", top: "65%" },
+  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", left: "82%", top: "35%" },
+  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", left: "78%", top: "15%" },
+  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", left: "72%", top: "50%" },
+  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", left: "65%", top: "80%" },
+  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", left: "65%", top: "65%" },
+  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", left: "65%", top: "35%" },
+  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", left: "65%", top: "20%" },
+  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", left: "55%", top: "50%" },
 ];
 
 const subsLIV = [
@@ -196,125 +196,6 @@ export default function MatchDetailsPage() {
       {activeTab === 'OVERVIEW' && (
         <div className="space-y-12">
           
-          {/* Pitch View Roster */}
-          <section className="mt-12">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Shield className="w-5 h-5 text-green-500" /> PITCH RATINGS
-              </h2>
-            </div>
-
-            <div className="flex flex-col xl:flex-row gap-8">
-              {/* Pitch */}
-              <div className="flex-1 relative bg-gradient-to-b from-[#113A1E] to-[#1A4A28] rounded-[24px] border border-white/20 shadow-2xl overflow-hidden min-h-[600px] xl:min-h-[800px]">
-                {/* Field Lines */}
-                <div className="absolute inset-4 border border-white/30 rounded-lg pointer-events-none" />
-                <div className="absolute top-1/2 left-4 right-4 h-px bg-white/30 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 border border-white/30 rounded-full pointer-events-none" />
-                
-                {/* Penalty Boxes */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-40 sm:w-56 h-16 sm:h-24 border border-white/30 border-t-0 pointer-events-none" />
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-6 sm:h-8 border border-white/30 border-t-0 pointer-events-none" />
-                
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-40 sm:w-56 h-16 sm:h-24 border border-white/30 border-b-0 pointer-events-none" />
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-20 sm:w-28 h-6 sm:h-8 border border-white/30 border-b-0 pointer-events-none" />
-
-                {/* Team Labels */}
-                <div className="absolute top-6 left-6 text-white/20 font-black text-3xl uppercase tracking-widest rotate-90 origin-left pointer-events-none">MCI</div>
-                <div className="absolute bottom-6 right-6 text-white/20 font-black text-3xl uppercase tracking-widest -rotate-90 origin-right pointer-events-none">LIV</div>
-
-                {/* Players */}
-                {[...pitchMCI, ...pitchLIV].map(player => {
-                  const isLiv = pitchLIV.some(p => p.id === player.id);
-                  const isHighRating = parseFloat(player.rating) >= 8.0;
-                  const isLowRating = parseFloat(player.rating) <= 6.3;
-                  
-                  return (
-                    <div 
-                      key={player.id} 
-                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
-                      style={{ top: player.top, left: player.left }}
-                    >
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-black border-[3px] shadow-lg transition-transform group-hover:scale-110 ${
-                        isLiv 
-                          ? 'bg-[#D32F2F] border-white/90 text-white shadow-[0_0_15px_rgba(211,47,47,0.5)]' 
-                          : 'bg-[#4FC3F7] border-white/90 text-[#020202] shadow-[0_0_15px_rgba(79,195,247,0.5)]'
-                      }`}>
-                        {player.num}
-                      </div>
-                      
-                      <div className="bg-[#0A0A0A]/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded-md text-center shadow-lg group-hover:border-white/30 transition-colors">
-                        <div className="text-[9px] sm:text-[10px] font-bold text-white whitespace-nowrap mb-0.5">{player.name}</div>
-                        <div className={`text-[10px] sm:text-xs font-black ${
-                          isHighRating ? 'text-[#00E5FF]' : isLowRating ? 'text-[#FF3B00]' : 'text-yellow-400'
-                        }`}>
-                          {player.rating}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Sidebar (Subs & Coaches) */}
-              <div className="w-full xl:w-80 flex flex-col gap-6">
-                {/* Coaches */}
-                <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6">
-                   <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-4">Coaches</h3>
-                   <div className="flex flex-col gap-4">
-                     <div className="flex items-center justify-between">
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-[#D32F2F]/20 flex items-center justify-center border border-[#D32F2F]/50 text-[#D32F2F] font-black text-xs">LIV</div>
-                         <span className="text-sm font-bold text-white">{coaches.liv.name}</span>
-                       </div>
-                       <span className="text-sm font-black text-[#00E5FF]">{coaches.liv.rating}</span>
-                     </div>
-                     <div className="flex items-center justify-between">
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-[#4FC3F7]/20 flex items-center justify-center border border-[#4FC3F7]/50 text-[#4FC3F7] font-black text-xs">MCI</div>
-                         <span className="text-sm font-bold text-white">{coaches.mci.name}</span>
-                       </div>
-                       <span className="text-sm font-black text-[#FF3B00]">{coaches.mci.rating}</span>
-                     </div>
-                   </div>
-                </div>
-
-                {/* Subs Liverpool */}
-                <div className="bg-[#0A0A0A] border border-[#D32F2F]/20 rounded-[24px] p-6 flex-1">
-                   <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
-                     Liverpool Bench
-                   </h3>
-                   <div className="flex flex-col gap-3">
-                     {subsLIV.map((sub, i) => (
-                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                       </div>
-                     ))}
-                   </div>
-                </div>
-
-                {/* Subs Man City */}
-                <div className="bg-[#0A0A0A] border border-[#4FC3F7]/20 rounded-[24px] p-6 flex-1">
-                   <h3 className="text-[10px] font-black tracking-widest text-[#4FC3F7] uppercase mb-4 flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-[#4FC3F7]" />
-                     Man City Bench
-                   </h3>
-                   <div className="flex flex-col gap-3">
-                     {subsMCI.map((sub, i) => (
-                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                       </div>
-                     ))}
-                   </div>
-                </div>
-              </div>
-
-            </div>
-          </section>
-
           {/* Fan Voted MVP - Redesigned */}
           <section className="bg-gradient-to-r from-[#121212] to-[#0A0A0A] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden group">
             {/* Background Heatmap Graphic */}
@@ -467,6 +348,125 @@ export default function MatchDetailsPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* Pitch View Roster */}
+          <section className="mt-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Shield className="w-5 h-5 text-green-500" /> PITCH RATINGS
+              </h2>
+            </div>
+
+            <div className="flex flex-col xl:flex-row gap-8">
+              {/* Pitch */}
+              <div className="flex-1 relative bg-gradient-to-r from-[#113A1E] to-[#1A4A28] rounded-[24px] border border-white/20 shadow-2xl overflow-hidden min-h-[400px] xl:min-h-[500px]">
+                {/* Field Lines (Horizontal) */}
+                <div className="absolute inset-4 border border-white/30 rounded-lg pointer-events-none" />
+                <div className="absolute top-4 bottom-4 left-1/2 w-px bg-white/30 pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 border border-white/30 rounded-full pointer-events-none" />
+                
+                {/* Penalty Boxes (Horizontal) */}
+                <div className="absolute top-1/2 left-4 -translate-y-1/2 h-40 sm:h-56 w-16 sm:w-24 border border-white/30 border-l-0 pointer-events-none" />
+                <div className="absolute top-1/2 left-4 -translate-y-1/2 h-20 sm:h-28 w-6 sm:w-8 border border-white/30 border-l-0 pointer-events-none" />
+                
+                <div className="absolute top-1/2 right-4 -translate-y-1/2 h-40 sm:h-56 w-16 sm:w-24 border border-white/30 border-r-0 pointer-events-none" />
+                <div className="absolute top-1/2 right-4 -translate-y-1/2 h-20 sm:h-28 w-6 sm:w-8 border border-white/30 border-r-0 pointer-events-none" />
+
+                {/* Team Labels */}
+                <div className="absolute top-6 left-6 text-white/20 font-black text-3xl uppercase tracking-widest pointer-events-none">LIV</div>
+                <div className="absolute bottom-6 right-6 text-white/20 font-black text-3xl uppercase tracking-widest pointer-events-none">MCI</div>
+
+                {/* Players */}
+                {[...pitchMCI, ...pitchLIV].map(player => {
+                  const isLiv = pitchLIV.some(p => p.id === player.id);
+                  const isHighRating = parseFloat(player.rating) >= 8.0;
+                  const isLowRating = parseFloat(player.rating) <= 6.3;
+                  
+                  return (
+                    <div 
+                      key={player.id} 
+                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                      style={{ top: player.top, left: player.left }}
+                    >
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-black border-[3px] shadow-lg transition-transform group-hover:scale-110 ${
+                        isLiv 
+                          ? 'bg-[#D32F2F] border-white/90 text-white shadow-[0_0_15px_rgba(211,47,47,0.5)]' 
+                          : 'bg-[#4FC3F7] border-white/90 text-[#020202] shadow-[0_0_15px_rgba(79,195,247,0.5)]'
+                      }`}>
+                        {player.num}
+                      </div>
+                      
+                      <div className="bg-[#0A0A0A]/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded-md text-center shadow-lg group-hover:border-white/30 transition-colors">
+                        <div className="text-[9px] sm:text-[10px] font-bold text-white whitespace-nowrap mb-0.5">{player.name}</div>
+                        <div className={`text-[10px] sm:text-xs font-black ${
+                          isHighRating ? 'text-[#00E5FF]' : isLowRating ? 'text-[#FF3B00]' : 'text-yellow-400'
+                        }`}>
+                          {player.rating}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Sidebar (Subs & Coaches) */}
+              <div className="w-full xl:w-80 flex flex-col gap-6">
+                {/* Coaches */}
+                <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6">
+                   <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-4">Coaches</h3>
+                   <div className="flex flex-col gap-4">
+                     <div className="flex items-center justify-between">
+                       <div className="flex items-center gap-3">
+                         <div className="w-8 h-8 rounded-full bg-[#D32F2F]/20 flex items-center justify-center border border-[#D32F2F]/50 text-[#D32F2F] font-black text-xs">LIV</div>
+                         <span className="text-sm font-bold text-white">{coaches.liv.name}</span>
+                       </div>
+                       <span className="text-sm font-black text-[#00E5FF]">{coaches.liv.rating}</span>
+                     </div>
+                     <div className="flex items-center justify-between">
+                       <div className="flex items-center gap-3">
+                         <div className="w-8 h-8 rounded-full bg-[#4FC3F7]/20 flex items-center justify-center border border-[#4FC3F7]/50 text-[#4FC3F7] font-black text-xs">MCI</div>
+                         <span className="text-sm font-bold text-white">{coaches.mci.name}</span>
+                       </div>
+                       <span className="text-sm font-black text-[#FF3B00]">{coaches.mci.rating}</span>
+                     </div>
+                   </div>
+                </div>
+
+                {/* Subs Liverpool */}
+                <div className="bg-[#0A0A0A] border border-[#D32F2F]/20 rounded-[24px] p-6 flex-1">
+                   <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
+                     <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
+                     Liverpool Bench
+                   </h3>
+                   <div className="flex flex-col gap-3">
+                     {subsLIV.map((sub, i) => (
+                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
+                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
+                       </div>
+                     ))}
+                   </div>
+                </div>
+
+                {/* Subs Man City */}
+                <div className="bg-[#0A0A0A] border border-[#4FC3F7]/20 rounded-[24px] p-6 flex-1">
+                   <h3 className="text-[10px] font-black tracking-widest text-[#4FC3F7] uppercase mb-4 flex items-center gap-2">
+                     <div className="w-2 h-2 rounded-full bg-[#4FC3F7]" />
+                     Man City Bench
+                   </h3>
+                   <div className="flex flex-col gap-3">
+                     {subsMCI.map((sub, i) => (
+                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
+                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
+                       </div>
+                     ))}
+                   </div>
+                </div>
+              </div>
+
             </div>
           </section>
 
