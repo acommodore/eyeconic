@@ -48,17 +48,17 @@ export default function ProfilePage() {
 
           {/* User Info */}
           <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start w-full mt-4 md:mt-0">
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase text-white leading-none drop-shadow-2xl">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white leading-none drop-shadow-2xl">
               MAXIMUS<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">PRIME</span>
             </h2>
             
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-6">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#FF7F50] bg-[#FF7F50]/10 backdrop-blur-md px-4 py-2 rounded-xl border border-[#FF7F50]/30 shadow-[0_0_15px_rgba(255,127,80,0.2)]">
-                <Flame className="w-4 h-4" /> ELITE INSTIGATOR
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-4">
+              <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#FF7F50] tracking-widest uppercase">
+                <Flame className="w-3 h-3" /> ELITE INSTIGATOR
               </div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#00E5FF] bg-[#00E5FF]/10 backdrop-blur-md px-4 py-2 rounded-xl border border-[#00E5FF]/30">
-                <Shield className="w-4 h-4" /> TACTICAL MASTER
+              <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#00E5FF] tracking-widest uppercase">
+                <Shield className="w-3 h-3" /> TACTICAL MASTER
               </div>
             </div>
           </div>
