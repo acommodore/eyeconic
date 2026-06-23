@@ -294,13 +294,7 @@ export default function ActiveStandPage() {
       {/* Right Pane: Interaction Zone & Chat */}
       <div className="w-full xl:w-[480px] flex flex-col h-[600px] xl:h-screen border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)]">
         
-        {/* Chat Header */}
-        <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-black/40 backdrop-blur">
-          <h3 className="text-xs font-black tracking-widest text-white uppercase flex items-center gap-2">
-            <Zap className="w-4 h-4 text-[#00E5FF]" /> Live Stand Chat
-          </h3>
-          {/* Removed the redundant '284 ONLINE' counter here */}
-        </div>
+
 
         {/* Live Chat Feed */}
         <div className="flex-1 overflow-y-auto space-y-6 p-6 scrollbar-hide relative bg-gradient-to-b from-[#0A0A0A] to-[#050505]">
