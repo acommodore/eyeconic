@@ -1,510 +1,348 @@
 import Link from "next/link";
-import { Search, Bell, Mic, Volume2, Play, Plus, Clock, Shield } from "lucide-react";
+import { Search, Bell, Mic, Volume2, Play, Plus, Clock, Shield, Flame, Radio, Calendar, Activity } from "lucide-react";
 
 export default function StandsPage() {
   return (
-    <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white">
+    <div className="w-full max-w-[1600px] mx-auto min-h-screen text-white bg-[#020202]">
       
-      {/* Top Navigation Tabs */}
-      <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar">
-        <button className="px-5 py-2.5 rounded-full bg-[#00603A] border border-[#00C853]/50 text-white font-bold text-sm whitespace-nowrap flex items-center gap-2 shadow-[0_0_15px_rgba(0,200,83,0.2)]">
-          <div className="flex gap-0.5 items-center">
-             <div className="w-0.5 h-2 bg-white rounded-full" />
-             <div className="w-0.5 h-3 bg-white rounded-full" />
-             <div className="w-0.5 h-2 bg-white rounded-full" />
-          </div>
-          Live Now
-        </button>
-        <button className="px-5 py-2.5 rounded-full border border-white/10 text-gray-400 font-semibold text-sm whitespace-nowrap hover:bg-white/5 transition-colors flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full border border-gray-400 flex items-center justify-center">
-            <div className="w-1 h-1 rounded-full bg-gray-400" />
-          </div>
-          Following
-        </button>
-        <button className="px-5 py-2.5 rounded-full border border-white/10 text-gray-400 font-semibold text-sm whitespace-nowrap hover:bg-white/5 transition-colors flex items-center gap-2">
-          <Shield className="w-4 h-4" /> Clubs
-        </button>
-        <button className="px-5 py-2.5 rounded-full border border-white/10 text-gray-400 font-semibold text-sm whitespace-nowrap hover:bg-white/5 transition-colors">
-          All Rooms
-        </button>
-        <button className="px-5 py-2.5 rounded-full border border-white/10 text-gray-400 font-semibold text-sm whitespace-nowrap hover:bg-white/5 transition-colors">
-          Replays
-        </button>
+      {/* Top Navigation Tabs - Floating & Glassy */}
+      <div className="sticky top-0 z-50 bg-[#020202]/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-8 py-4">
+        <div className="flex gap-3 overflow-x-auto pb-2 hover-scrollbar hide-scrollbar-mobile">
+          <button className="px-6 py-2.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] font-black tracking-widest text-xs whitespace-nowrap flex items-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-[#00E5FF]/20 transition-all">
+            <Radio className="w-4 h-4 animate-pulse" />
+            LIVE NOW
+          </button>
+          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+            <Activity className="w-4 h-4" /> TRENDING
+          </button>
+          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+            <Shield className="w-4 h-4" /> MY CLUBS
+          </button>
+          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2">
+            <Calendar className="w-4 h-4" /> SCHEDULED
+          </button>
+          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all">
+            REPLAYS
+          </button>
+        </div>
       </div>
 
-      <div className="space-y-12 mt-4">
+      <div className="p-4 md:p-8 space-y-16">
           
-          {/* LIVE NOW SECTION */}
-          <section>
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-bold tracking-widest text-white flex items-center gap-2 uppercase">
-                  <div className="w-2 h-2 bg-red-600 rounded-full" />
-                  LIVE NOW
-                </h2>
-                <p className="text-xs text-gray-400 mt-1">Join the biggest conversations right now</p>
-              </div>
-              <span className="text-xs text-[#00C853] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
-            </div>
-
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
+          {/* HERO SECTION: Featured Live Stand */}
+          <section className="relative w-full rounded-[32px] overflow-hidden group cursor-pointer border border-white/10 shadow-2xl">
+            {/* Animated Ambient Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#6200EA]/20 via-[#020202] to-[#FF3B00]/20 z-0" />
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000 z-0 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/80 to-transparent z-10" />
+            
+            <div className="relative z-20 p-6 md:p-12 flex flex-col md:flex-row items-end justify-between gap-8 h-full min-h-[400px]">
               
-              {/* Card 1: Arsenal */}
-              <div className="min-w-[280px] w-[280px] md:min-w-[320px] md:w-[320px] aspect-[4/5] rounded-[24px] overflow-hidden relative group snap-start shrink-0 border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A0B2E] via-[#050505]/60 to-[#050505]/40 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-700" />
+              <div className="max-w-2xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="px-3 py-1.5 rounded-md bg-red-600 text-[10px] font-black tracking-widest text-white flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.5)]">
+                    <span className="w-2 h-2 rounded-full bg-white animate-pulse" /> ON AIR
+                  </span>
+                  <span className="text-xs font-bold text-[#00E5FF] tracking-widest bg-[#00E5FF]/10 px-3 py-1.5 rounded-md border border-[#00E5FF]/20">
+                    12.4K LISTENING
+                  </span>
+                </div>
                 
-                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[10px] font-bold text-white flex items-center gap-1">
-                      <Mic className="w-3 h-3" /> LIVE
-                    </span>
-                    <span className="text-[10px] font-bold text-white tracking-wider">
-                      8.4K listening
-                    </span>
-                  </div>
+                <h1 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-wide">
+                  Arsenal vs Man City:<br/>Title Decider Post-Match
+                </h1>
+                <p className="text-gray-400 font-medium md:text-lg line-clamp-2 max-w-xl mb-8">
+                  The biggest game of the season just ended. Tactical breakdowns, controversial VAR calls, and fan meltdowns. Join the debate.
+                </p>
 
-                  <div className="mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-[#6200EA] flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(98,0,234,0.5)]">
-                      <Mic className="w-5 h-5 text-white" />
-                    </div>
-                    
-                    <h3 className="text-lg font-bold text-white leading-tight mb-2">
-                      Arsenal fans debating Saka's 9.2 rating
-                    </h3>
-                    <p className="text-xs font-medium text-gray-300 mb-4 line-clamp-2">
-                      Was he really MVP? Title race implications, stats & more
-                    </p>
-
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="flex -space-x-2">
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=A" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=B" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=C" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=D" alt="user"/>
-                      </div>
-                      <span className="text-xs text-gray-400 font-bold">+8.1K</span>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Link href="/stands/2" className="flex-1 bg-[#6200EA] text-white font-bold py-2.5 rounded-xl hover:bg-[#6200EA]/90 transition-all text-sm shadow-[0_0_15px_rgba(98,0,234,0.3)] flex items-center justify-center">
-                        Join Stand
-                      </Link>
-                      <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 transition-colors backdrop-blur">
-                        <Volume2 className="w-4 h-4 text-white" />
-                      </button>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <Link href="/stands/1" className="bg-white text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-gray-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95">
+                    JOIN STAND
+                  </Link>
+                  <div className="flex -space-x-3">
+                    <img className="w-10 h-10 rounded-full border-2 border-[#020202] shadow-lg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host1" alt="Host"/>
+                    <img className="w-10 h-10 rounded-full border-2 border-[#020202] shadow-lg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host2" alt="Host"/>
+                    <img className="w-10 h-10 rounded-full border-2 border-[#020202] shadow-lg" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host3" alt="Host"/>
                   </div>
                 </div>
               </div>
 
-              {/* Card 2: Liverpool */}
-              <div className="min-w-[280px] w-[280px] md:min-w-[320px] md:w-[320px] aspect-[4/5] rounded-[24px] overflow-hidden relative group snap-start shrink-0 border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#003B2E] via-[#050505]/60 to-[#050505]/40 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-700" />
+              {/* Featured Speakers Mini-list */}
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 w-full md:w-auto min-w-[250px]">
+                <h4 className="text-[10px] font-black text-gray-500 tracking-widest uppercase mb-4">On Stage</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                     <div className="w-8 h-8 rounded-full bg-[#00E5FF] p-0.5"><img className="w-full h-full rounded-full bg-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host1" /></div>
+                     <div><p className="text-xs font-bold text-white">Gooner4Life</p><p className="text-[9px] text-[#00E5FF] font-bold">HOST</p></div>
+                     <Mic className="w-3 h-3 text-[#00E5FF] ml-auto" />
+                  </div>
+                  <div className="flex items-center gap-3">
+                     <div className="w-8 h-8 rounded-full bg-white/10 p-0.5"><img className="w-full h-full rounded-full bg-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host2" /></div>
+                     <div><p className="text-xs font-bold text-gray-300">CityZenX</p><p className="text-[9px] text-gray-500 font-bold">CO-HOST</p></div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                     <div className="w-8 h-8 rounded-full bg-white/10 p-0.5"><img className="w-full h-full rounded-full bg-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Host3" /></div>
+                     <div><p className="text-xs font-bold text-gray-300">TacticsGuy</p><p className="text-[9px] text-gray-500 font-bold">SPEAKER</p></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* LIVE NOW GRID */}
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-black tracking-widest text-white flex items-center gap-3 uppercase">
+                <Flame className="w-5 h-5 text-[#FF3B00]" />
+                Trending Live
+              </h2>
+              <span className="text-xs text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">View All</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              
+              {/* Card 1 */}
+              <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
                 
                 <div className="relative z-20 p-5 flex flex-col h-full justify-between">
                   <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[10px] font-bold text-white flex items-center gap-1">
-                      <Mic className="w-3 h-3" /> LIVE
+                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                      Live
                     </span>
-                    <span className="text-[10px] font-bold text-white tracking-wider">
-                      5.2K listening
+                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                      5.2K LISTENING
                     </span>
                   </div>
 
                   <div className="mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-[#00C853] flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(0,200,83,0.5)]">
-                      <Mic className="w-5 h-5 text-white" />
-                    </div>
-                    
-                    <h3 className="text-lg font-bold text-white leading-tight mb-2">
+                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
                       Liverpool post-match: Salah MVP debate
                     </h3>
-                    <p className="text-xs font-medium text-gray-300 mb-4 line-clamp-2">
-                      Brilliance, stats & what it means for the title
-                    </p>
-
-                    <div className="flex items-center gap-2 mb-4">
+                    
+                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
                       <div className="flex -space-x-2">
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=E" alt="user"/>
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=F" alt="user"/>
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=G" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=H" alt="user"/>
                       </div>
-                      <span className="text-xs text-gray-400 font-bold">+4.9K</span>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Link href="/stands/2" className="flex-1 bg-[#00603A] text-[#00C853] font-bold py-2.5 rounded-xl hover:bg-[#00C853] hover:text-black transition-all text-sm border border-[#00C853]/50 shadow-[0_0_15px_rgba(0,200,83,0.2)] flex items-center justify-center">
-                        Join Stand
-                      </Link>
-                      <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 transition-colors backdrop-blur">
-                        <Volume2 className="w-4 h-4 text-white" />
-                      </button>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by LFCFanTV</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-               {/* Card 3: VAR Controversy */}
-               <div className="min-w-[280px] w-[280px] md:min-w-[320px] md:w-[320px] aspect-[4/5] rounded-[24px] overflow-hidden relative group snap-start shrink-0 border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4A1E00] via-[#050505]/60 to-[#050505]/40 z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-700" />
+               {/* Card 2 */}
+               <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
                 
                 <div className="relative z-20 p-5 flex flex-col h-full justify-between">
                   <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[10px] font-bold text-white flex items-center gap-1">
-                      <Mic className="w-3 h-3" /> LIVE
+                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                      Live
                     </span>
-                    <span className="text-[10px] font-bold text-white tracking-wider">
-                      3.2K listening
+                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                      3.1K LISTENING
                     </span>
                   </div>
 
                   <div className="mt-auto">
-                    <div className="w-10 h-10 rounded-full bg-[#FF6D00] flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(255,109,0,0.5)]">
-                      <Mic className="w-5 h-5 text-white" />
-                    </div>
-                    
-                    <h3 className="text-lg font-bold text-white leading-tight mb-2">
+                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
                       VAR controversy: Every big call discussed
                     </h3>
-                    <p className="text-xs font-medium text-gray-300 mb-4 line-clamp-2">
-                      All matches, all big decisions
-                    </p>
-
-                    <div className="flex items-center gap-2 mb-4">
+                    
+                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
                       <div className="flex -space-x-2">
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=I" alt="user"/>
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=J" alt="user"/>
                         <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=K" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=L" alt="user"/>
                       </div>
-                      <span className="text-xs text-gray-400 font-bold">+3.6K</span>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Link href="/stands/2" className="flex-1 bg-[#FF6D00] text-black font-bold py-2.5 rounded-xl hover:bg-[#FF6D00]/90 transition-all text-sm shadow-[0_0_15px_rgba(255,109,0,0.3)] flex items-center justify-center">
-                        Join Stand
-                      </Link>
-                      <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 hover:bg-white/10 transition-colors backdrop-blur">
-                        <Volume2 className="w-4 h-4 text-white" />
-                      </button>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by TheRef</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-            </div>
-            
-            {/* Pagination dots */}
-            <div className="flex justify-center gap-1.5 mt-4">
-               <div className="w-1.5 h-1.5 rounded-full bg-[#00C853]" />
-               <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-               <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-               <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-            </div>
-          </section>
+               {/* Card 3 */}
+               <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                
+                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                  <div className="flex justify-between items-start">
+                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                      Live
+                    </span>
+                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                      1.8K LISTENING
+                    </span>
+                  </div>
 
-          {/* MY CLUBS */}
-          <section className="mt-8">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-bold tracking-widest text-white uppercase">MY CLUBS</h2>
-                <p className="text-xs text-gray-400 mt-1">Rooms from your clubs and leagues</p>
-              </div>
-              <span className="text-xs text-[#00C853] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
-            </div>
-            
-            <div className="flex gap-3 overflow-x-auto pb-2 hover-scrollbar snap-x">
-              <div className="min-w-[220px] bg-[#121212] p-4 rounded-[20px] flex items-center gap-4 relative border border-white/5 hover:bg-white/5 transition-colors cursor-pointer snap-start">
-                <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png" alt="LFC" className="w-10 h-10 object-contain drop-shadow-md" />
-                </div>
-                <div>
-                  <p className="font-bold text-sm text-white">Liverpool FC</p>
-                  <p className="text-xs text-gray-400 mt-0.5">Fan Room</p>
-                  <p className="text-[10px] text-[#00C853] font-bold mt-1 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00C853]" /> 2.9K online
-                  </p>
+                  <div className="mt-auto">
+                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
+                      Transfer Rumors: Mbappe to Madrid?
+                    </h3>
+                    
+                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+                      <div className="flex -space-x-2">
+                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M1" alt="user"/>
+                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M2" alt="user"/>
+                      </div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by MadridistaHQ</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="min-w-[220px] bg-[#121212] p-4 rounded-[20px] flex items-center gap-4 relative border border-white/5 hover:bg-white/5 transition-colors cursor-pointer snap-start">
-                <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                   <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" alt="AFC" className="w-10 h-10 object-contain drop-shadow-md" />
-                </div>
-                <div>
-                  <p className="font-bold text-sm text-white">Arsenal FC</p>
-                  <p className="text-xs text-gray-400 mt-0.5">Fan Room</p>
-                  <p className="text-[10px] text-[#00E5FF] font-bold mt-1 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" /> 1.7K online
-                  </p>
-                </div>
-              </div>
-
-              <div className="min-w-[220px] bg-[#121212] p-4 rounded-[20px] flex items-center gap-4 relative border border-white/5 hover:bg-white/5 transition-colors cursor-pointer snap-start">
-                <div className="w-12 h-12 flex items-center justify-center shrink-0 bg-white/5 rounded-full">
-                   <Shield className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="font-bold text-sm text-white">UEFA Champions</p>
-                  <p className="text-xs text-gray-400 mt-0.5">League Room</p>
-                  <p className="text-[10px] text-[#00C853] font-bold mt-1 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00C853]" /> 4.3K online
-                  </p>
-                </div>
-              </div>
-
-              <div className="min-w-[220px] bg-[#0a0a0a] p-4 rounded-[20px] flex items-center gap-4 relative border border-dashed border-white/20 hover:bg-white/5 transition-colors cursor-pointer snap-start border-spacing-2">
-                <div>
-                  <div className="flex gap-1 mb-1">
-                     <div className="w-1 h-1 bg-gray-500 rounded-full"/>
-                     <div className="w-1 h-1 bg-gray-500 rounded-full"/>
-                     <div className="w-1 h-1 bg-gray-500 rounded-full"/>
+              {/* Card 4 - Hidden on smaller screens to balance grid */}
+               <div className="hidden xl:block aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                
+                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                  <div className="flex justify-between items-start">
+                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                      Live
+                    </span>
+                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                      950 LISTENING
+                    </span>
                   </div>
-                  <p className="font-bold text-sm text-white">Add Clubs</p>
-                  <p className="text-[10px] text-gray-400 mt-1">Follow clubs to see their rooms here</p>
+
+                  <div className="mt-auto">
+                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
+                      Serie A Title Race: Inter's dominance
+                    </h3>
+                    
+                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+                      <div className="flex -space-x-2">
+                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S1" alt="user"/>
+                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S2" alt="user"/>
+                      </div>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by CalcioTalk</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </section>
 
-          {/* SCHEDULED TODAY */}
-          <section className="mt-12">
-             <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-bold tracking-widest text-white uppercase">SCHEDULED TODAY</h2>
-                <p className="text-xs text-gray-400 mt-1">Upcoming spaces you won't want to miss</p>
-              </div>
-              <span className="text-xs text-[#00C853] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
+            {/* SCHEDULED & UPCOMING */}
+            <section>
+               <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled Today
+                </h2>
+                <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">See all</span>
+              </div>
               
-              <div className="min-w-[260px] md:min-w-[300px] h-[200px] rounded-[24px] relative overflow-hidden group snap-start shrink-0 border border-white/5">
-                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-transparent z-10" />
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-right opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                 
-                 <div className="relative z-20 p-5 h-full flex flex-col justify-between">
-                    <div>
-                      <span className="px-2 py-1 rounded-full bg-black/50 border border-[#00E5FF]/30 text-[10px] font-bold text-[#00E5FF] mb-3 inline-block">
-                        7:00 PM
-                      </span>
-                      <h4 className="font-bold text-lg text-white leading-tight mb-1">UCL Semi-final Preview Show</h4>
-                      <p className="text-[10px] text-gray-400 font-medium">Starts in 2h 15m</p>
-                    </div>
-
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2">
-                        <div className="flex -space-x-2">
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=N" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=O" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=P" alt="user"/>
-                        </div>
-                        <span className="text-[10px] text-gray-400 font-bold">+1.2K</span>
-                      </div>
-                      <button className="w-full py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-white/10 transition-colors flex justify-center items-center gap-2">
-                         <Bell className="w-3 h-3" /> Remind Me
-                      </button>
-                    </div>
-                 </div>
-              </div>
-
-              <div className="min-w-[260px] md:min-w-[300px] h-[200px] rounded-[24px] relative overflow-hidden group snap-start shrink-0 border border-white/5">
-                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-[#2e1505]/40 z-10" />
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=800&auto=format&fit=crop')] bg-cover bg-right opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                 
-                 <div className="relative z-20 p-5 h-full flex flex-col justify-between">
-                    <div>
-                      <span className="px-2 py-1 rounded-full bg-black/50 border border-[#FF7F50]/30 text-[10px] font-bold text-[#FF7F50] mb-3 inline-block">
-                        8:30 PM
-                      </span>
-                      <h4 className="font-bold text-lg text-white leading-tight mb-1">Transfer Deadline Live Talk</h4>
-                      <p className="text-[10px] text-gray-400 font-medium">Starts in 3h 45m</p>
-                    </div>
-
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2">
-                        <div className="flex -space-x-2">
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Q" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=R" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S" alt="user"/>
-                        </div>
-                        <span className="text-[10px] text-gray-400 font-bold">+2.3K</span>
-                      </div>
-                      <button className="w-full py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-white/10 transition-colors flex justify-center items-center gap-2">
-                         <Bell className="w-3 h-3" /> Remind Me
-                      </button>
-                    </div>
-                 </div>
-              </div>
-
-               <div className="min-w-[260px] md:min-w-[300px] h-[200px] rounded-[24px] relative overflow-hidden group snap-start shrink-0 border border-white/5">
-                 <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/90 to-[#1e0a2b]/40 z-10" />
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop')] bg-cover bg-right opacity-40 group-hover:scale-105 transition-transform duration-700" />
-                 
-                 <div className="relative z-20 p-5 h-full flex flex-col justify-between">
-                    <div>
-                      <span className="px-2 py-1 rounded-full bg-black/50 border border-[#6200EA]/30 text-[10px] font-bold text-[#6200EA] mb-3 inline-block">
-                        10:00 PM
-                      </span>
-                      <h4 className="font-bold text-lg text-white leading-tight mb-1">La Liga Title Race Debate</h4>
-                      <p className="text-[10px] text-gray-400 font-medium">Starts in 5h 15m</p>
-                    </div>
-
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-2">
-                        <div className="flex -space-x-2">
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=T" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=U" alt="user"/>
-                          <img className="w-5 h-5 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=V" alt="user"/>
-                        </div>
-                        <span className="text-[10px] text-gray-400 font-bold">+980</span>
-                      </div>
-                      <button className="w-full py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold hover:bg-white/10 transition-colors flex justify-center items-center gap-2">
-                         <Bell className="w-3 h-3" /> Remind Me
-                      </button>
-                    </div>
-                 </div>
-              </div>
-
-            </div>
-          </section>
-
-          {/* HIGHLIGHTS & REPLAYS */}
-          <section className="mt-12">
-             <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-bold tracking-widest text-white uppercase">HIGHLIGHTS & REPLAYS</h2>
-                <p className="text-xs text-gray-400 mt-1">Catch the best moments from past stands</p>
-              </div>
-              <span className="text-xs text-[#00C853] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
-            </div>
-            
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
-              <div className="min-w-[240px] md:min-w-[280px] space-y-3 group cursor-pointer snap-start shrink-0">
-                <div className="w-full aspect-video rounded-2xl bg-gray-800 relative overflow-hidden border border-white/5 group-hover:border-white/20 transition-colors">
-                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-60" />
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur rounded text-[10px] font-bold border border-white/10">31:45</div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-[#00C853] flex items-center justify-center shadow-[0_0_20px_rgba(0,200,83,0.4)] group-hover:scale-110 transition-transform">
-                      <Play className="w-4 h-4 text-black ml-0.5" />
-                    </div>
+              <div className="space-y-4">
+                
+                {/* Scheduled Item */}
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#00E5FF]/50 transition-colors">
+                    <span className="text-xs font-black text-gray-400">7:00</span>
+                    <span className="text-[9px] font-bold text-[#00E5FF]">PM</span>
                   </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm leading-tight text-white mb-1">Man City fans react to the derby defeat</h4>
-                  <p className="text-[10px] text-gray-500">Yesterday • 12K plays</p>
-                </div>
-              </div>
-
-               <div className="min-w-[240px] md:min-w-[280px] space-y-3 group cursor-pointer snap-start shrink-0">
-                <div className="w-full aspect-video rounded-2xl bg-gray-800 relative overflow-hidden border border-white/5 group-hover:border-white/20 transition-colors">
-                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-60" />
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur rounded text-[10px] font-bold border border-white/10">28:12</div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-[#00C853] flex items-center justify-center shadow-[0_0_20px_rgba(0,200,83,0.4)] group-hover:scale-110 transition-transform">
-                      <Play className="w-4 h-4 text-black ml-0.5" />
-                    </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#00E5FF] transition-colors">UCL Semi-final Preview Show</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 2h 15m</p>
                   </div>
+                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
+                    <Bell className="w-4 h-4 text-white" />
+                  </button>
                 </div>
-                <div>
-                  <h4 className="font-bold text-sm leading-tight text-white mb-1">Arteta post-match tactical breakdown</h4>
-                  <p className="text-[10px] text-gray-500">Yesterday • 8.7K plays</p>
-                </div>
-              </div>
 
-               <div className="min-w-[240px] md:min-w-[280px] space-y-3 group cursor-pointer snap-start shrink-0">
-                <div className="w-full aspect-video rounded-2xl bg-gray-800 relative overflow-hidden border border-white/5 group-hover:border-white/20 transition-colors">
-                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-60" />
-                  <div className="absolute top-2 left-2 px-2 py-1 bg-black/60 backdrop-blur rounded text-[10px] font-bold border border-white/10">45:10</div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-[#00C853] flex items-center justify-center shadow-[0_0_20px_rgba(0,200,83,0.4)] group-hover:scale-110 transition-transform">
-                      <Play className="w-4 h-4 text-black ml-0.5" />
-                    </div>
+                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#FF3B00]/50 transition-colors">
+                    <span className="text-xs font-black text-gray-400">8:30</span>
+                    <span className="text-[9px] font-bold text-[#FF3B00]">PM</span>
                   </div>
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm leading-tight text-white mb-1">Was the VAR call a robbery?</h4>
-                  <p className="text-[10px] text-gray-500">2d ago • 15K plays</p>
-                </div>
-              </div>
-
-            </div>
-          </section>
-
-          {/* TRENDING VOICES */}
-          <section className="mt-12 pb-12">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-sm font-bold tracking-widest text-white uppercase">TRENDING VOICES</h2>
-                <p className="text-xs text-gray-400 mt-1">Top fan hosts and voices on The Stand</p>
-              </div>
-              <span className="text-xs text-[#00C853] font-bold hover:text-white cursor-pointer transition-colors">See all &gt;</span>
-            </div>
-
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
-              <div className="min-w-[160px] bg-[#121212] rounded-2xl p-4 flex flex-col items-center border border-white/5 snap-start">
-                <div className="relative mb-3">
-                  <img className="w-14 h-14 rounded-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Pundit" alt="User" />
-                  <div className="absolute -right-2 -top-2 w-6 h-6 rounded-full bg-[#6200EA] border-2 border-[#121212] flex items-center justify-center">
-                    <Mic className="w-3 h-3 text-white" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#FF3B00] transition-colors">Transfer Deadline Live Talk</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 3h 45m</p>
                   </div>
+                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
+                    <Bell className="w-4 h-4 text-white" />
+                  </button>
                 </div>
-                <h4 className="font-bold text-[11px] text-center mb-0.5">Football Pundit</h4>
-                <p className="text-[9px] text-gray-500 mb-4">23.4K followers</p>
-                <button className="w-full py-2 rounded-lg bg-[#00603A] text-[#00C853] border border-[#00C853]/30 text-[10px] font-bold hover:bg-[#00C853] hover:text-black transition-colors flex items-center justify-center gap-1">
-                  <Bell className="w-3 h-3" /> Follow
-                </button>
-              </div>
 
-              <div className="min-w-[160px] bg-[#121212] rounded-2xl p-4 flex flex-col items-center border border-white/5 snap-start">
-                <div className="relative mb-3">
-                  <img className="w-14 h-14 rounded-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Analyst" alt="User" />
-                  <div className="absolute -right-2 -top-2 w-6 h-6 rounded-full bg-[#FF6D00] border-2 border-[#121212] flex items-center justify-center">
-                    <Mic className="w-3 h-3 text-white" />
+                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                  <div className="w-14 h-14 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
+                    <span className="text-xs font-black text-gray-400">10:00</span>
+                    <span className="text-[9px] font-bold text-[#6200EA]">PM</span>
                   </div>
-                </div>
-                <h4 className="font-bold text-[11px] text-center mb-0.5">The Footy Analyst</h4>
-                <p className="text-[9px] text-gray-500 mb-4">18.7K followers</p>
-                <button className="w-full py-2 rounded-lg bg-[#00603A] text-[#00C853] border border-[#00C853]/30 text-[10px] font-bold hover:bg-[#00C853] hover:text-black transition-colors flex items-center justify-center gap-1">
-                  <Bell className="w-3 h-3" /> Follow
-                </button>
-              </div>
-
-              <div className="min-w-[160px] bg-[#121212] rounded-2xl p-4 flex flex-col items-center border border-white/5 snap-start">
-                <div className="relative mb-3">
-                  <img className="w-14 h-14 rounded-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tomi" alt="User" />
-                  <div className="absolute -right-2 -top-2 w-6 h-6 rounded-full bg-[#00C853] border-2 border-[#121212] flex items-center justify-center">
-                    <Mic className="w-3 h-3 text-black" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-white text-sm group-hover:text-[#6200EA] transition-colors">La Liga Title Race Debate</h4>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1">Starts in 5h 15m</p>
                   </div>
+                  <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
+                    <Bell className="w-4 h-4 text-white" />
+                  </button>
                 </div>
-                <h4 className="font-bold text-[11px] text-center mb-0.5">Tactical Tomi</h4>
-                <p className="text-[9px] text-gray-500 mb-4">15.2K followers</p>
-                <button className="w-full py-2 rounded-lg bg-[#00603A] text-[#00C853] border border-[#00C853]/30 text-[10px] font-bold hover:bg-[#00C853] hover:text-black transition-colors flex items-center justify-center gap-1">
-                  <Bell className="w-3 h-3" /> Follow
-                </button>
-              </div>
 
-               <div className="min-w-[160px] bg-[#121212] rounded-2xl p-4 flex flex-col items-center border border-white/5 snap-start">
-                <div className="relative mb-3">
-                  <img className="w-14 h-14 rounded-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=UTD" alt="User" />
-                  <div className="absolute -right-2 -top-2 w-6 h-6 rounded-full bg-[#6200EA] border-2 border-[#121212] flex items-center justify-center">
-                    <Mic className="w-3 h-3 text-white" />
+              </div>
+            </section>
+
+            {/* MY CLUBS / COMMUNITIES */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
+                  <Shield className="w-5 h-5 text-[#00E5FF]" /> My Clubs
+                </h2>
+                <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Manage</span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                
+                <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png" alt="LFC" className="w-full h-full object-contain" />
                   </div>
+                  <h4 className="font-black text-sm text-white tracking-wider">Liverpool FC</h4>
+                  <p className="text-[10px] font-bold text-[#00E5FF] mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-[#00E5FF]/10 px-2 py-1 rounded">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> 2 LIVE
+                  </p>
                 </div>
-                <h4 className="font-bold text-[11px] text-center mb-0.5">UTD Faithful</h4>
-                <p className="text-[9px] text-gray-500 mb-4">21.1K followers</p>
-                <button className="w-full py-2 rounded-lg bg-[#00603A] text-[#00C853] border border-[#00C853]/30 text-[10px] font-bold hover:bg-[#00C853] hover:text-black transition-colors flex items-center justify-center gap-1">
-                  <Bell className="w-3 h-3" /> Follow
-                </button>
-              </div>
-            </div>
-          </section>
 
-    </div>
+                <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" alt="AFC" className="w-full h-full object-contain" />
+                  </div>
+                  <h4 className="font-black text-sm text-white tracking-wider">Arsenal FC</h4>
+                  <p className="text-[10px] font-bold text-[#FF3B00] mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-[#FF3B00]/10 px-2 py-1 rounded">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF3B00] animate-pulse" /> 1 LIVE
+                  </p>
+                </div>
+
+                 <div className="bg-[#0A0A0A] p-5 rounded-[20px] flex flex-col items-center text-center relative border border-white/5 hover:border-white/20 transition-all cursor-pointer group hover:-translate-y-1">
+                  <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3 shadow-[0_0_20px_rgba(255,255,255,0.1)] p-2 group-hover:scale-110 transition-transform">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" alt="TOT" className="w-full h-full object-contain" />
+                  </div>
+                  <h4 className="font-black text-sm text-white tracking-wider">Tottenham</h4>
+                  <p className="text-[10px] font-bold text-gray-500 mt-2 flex items-center gap-1.5 uppercase tracking-widest bg-white/5 px-2 py-1 rounded">
+                    0 LIVE
+                  </p>
+                </div>
+
+                <div className="bg-[#050505] p-5 rounded-[20px] flex flex-col items-center justify-center text-center relative border-2 border-dashed border-white/10 hover:border-white/30 transition-all cursor-pointer group hover:-translate-y-1">
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2 group-hover:bg-white/10 transition-colors">
+                    <Plus className="w-6 h-6 text-gray-400 group-hover:text-white" />
+                  </div>
+                  <h4 className="font-bold text-xs text-gray-400 group-hover:text-white tracking-wider">Follow Club</h4>
+                </div>
+
+              </div>
+            </section>
+          </div>
+
+      </div>
     </div>
   );
 }
