@@ -355,7 +355,7 @@ export default function StandsPage() {
                 
                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-2 shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png" alt="LFC" className="w-full h-full object-contain" />
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="LFC" className="w-full h-full object-contain" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-sm text-white">Liverpool FC</h4>
@@ -367,7 +367,7 @@ export default function StandsPage() {
 
                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-2 shrink-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/1200px-Arsenal_FC.svg.png" alt="AFC" className="w-full h-full object-contain" />
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="AFC" className="w-full h-full object-contain" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-bold text-sm text-white">Arsenal FC</h4>
