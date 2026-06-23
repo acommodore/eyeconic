@@ -79,7 +79,7 @@ export default function ActiveStandPage() {
   };
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto min-h-screen text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
+    <div className="w-full max-w-[1600px] mx-auto h-[100dvh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
       
       {/* Floating Animations CSS */}
       <style>{`
@@ -110,7 +110,7 @@ export default function ActiveStandPage() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00E5FF]/5 via-[#020202] to-[#020202] pointer-events-none" />
 
       {/* Left Pane: The Stage */}
-      <div className="flex-1 space-y-8 flex flex-col p-4 md:p-8 relative z-10">
+      <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col p-4 md:p-8 relative z-10 pb-4">
         
         {/* Stage Header */}
         <header className="flex items-center justify-between border-b border-white/5 pb-6">
@@ -150,20 +150,20 @@ export default function ActiveStandPage() {
         </header>
 
         {/* Speakers Grid */}
-        <div className="flex-1 flex flex-col justify-center py-10">
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16 max-w-5xl mx-auto w-full">
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-10">
+          <div className="grid grid-cols-3 lg:grid-cols-3 gap-x-2 md:gap-x-6 gap-y-10 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
               {/* Soundwave effect */}
               {!mutedUsers['GOONER4LIFE'] && (
                 <>
-                  <div className="absolute top-0 w-32 h-32 md:w-44 md:h-44 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
-                  <div className="absolute top-0 w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
+                  <div className="absolute top-0 w-20 h-20 md:w-44 md:h-44 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
+                  <div className="absolute top-0 w-20 h-20 md:w-44 md:h-44 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
                 </>
               )}
               
-              <div className={`w-32 h-32 md:w-44 md:h-44 rounded-full bg-gray-800 border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+              <div className={`w-20 h-20 md:w-44 md:h-44 rounded-full bg-gray-800 border-[3px] md:border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 {mutedUsers['GOONER4LIFE'] && (
@@ -179,8 +179,8 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-10 h-10 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF]'} border-[3px] border-[#020202] flex items-center justify-center shadow-lg mb-1 transition-colors`}>
+              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center shadow-lg mb-0.5 md:mb-1 transition-colors`}>
                   {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-5 h-5 text-white" /> : <Mic className="w-5 h-5 text-black" />}
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['GOONER4LIFE'] ? 'border-red-500/50' : 'border-[#00E5FF]/50'} px-3 py-1 rounded-full shadow-lg`}>
@@ -190,8 +190,8 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 2: Muted */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
-              <div className={`w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative mt-2 md:mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
+              <div className={`w-20 h-20 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['BLUEMASON'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -206,8 +206,8 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-8 h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-[3px] border-[#020202] flex items-center justify-center mb-1 transition-colors`}>
+              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['BLUEMASON'] ? 'border-red-500/50' : 'border-white/10'} px-3 py-1 rounded-full`}>
@@ -217,8 +217,8 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 3: Muted */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
-              <div className={`w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative mt-2 md:mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
+              <div className={`w-20 h-20 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['SPURSY_10'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -233,8 +233,8 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-8 h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-[3px] border-[#020202] flex items-center justify-center mb-1 transition-colors`}>
+              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['SPURSY_10'] ? 'border-red-500/50' : 'border-white/10'} px-3 py-1 rounded-full`}>
@@ -244,8 +244,8 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 4: Empty Slot */}
-            <div className="flex flex-col items-center gap-4 relative mt-8">
-              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
+            <div className="flex flex-col items-center gap-2 md:gap-4 relative mt-2 md:mt-8">
+              <div className="w-20 h-20 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
                   <MicOff className="w-6 h-6 text-gray-800" />
                 </div>
@@ -254,8 +254,8 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 5: Active Mic, Non-Speaking */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8" onClick={() => toggleMute('GUNNERVIC')}>
-              <div className={`w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative mt-2 md:mt-8" onClick={() => toggleMute('GUNNERVIC')}>
+              <div className={`w-20 h-20 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['GUNNERVIC'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -270,8 +270,8 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-8 h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500' : 'bg-[#00C853]'} border-[3px] border-[#020202] flex items-center justify-center mb-1 transition-colors ${!mutedUsers['GUNNERVIC'] && 'shadow-[0_0_10px_rgba(0,200,83,0.5)]'}`}>
+              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500' : 'bg-[#00C853]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors ${!mutedUsers['GUNNERVIC'] && 'shadow-[0_0_10px_rgba(0,200,83,0.5)]'}`}>
                   {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['GUNNERVIC'] ? 'border-red-500/50' : 'border-[#00C853]/50'} px-3 py-1 rounded-full`}>
@@ -281,8 +281,8 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 6: Empty */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8">
-              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative mt-2 md:mt-8">
+              <div className="w-20 h-20 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
                 <MoreHorizontal className="w-8 h-8 text-gray-800" />
               </div>
             </div>
@@ -292,12 +292,12 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[600px] xl:h-screen border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)]">
+      <div className="w-full xl:w-[480px] flex flex-col h-[50vh] md:h-[55vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
         {/* Live Chat Feed */}
-        <div className="flex-1 overflow-y-auto space-y-6 p-6 scrollbar-hide relative bg-gradient-to-b from-[#0A0A0A] to-[#050505]">
+        <div className="flex-1 overflow-y-auto space-y-6 p-6 relative bg-gradient-to-b from-[#0A0A0A] to-[#050505]">
           {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-3">
               <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_10px_rgba(0,200,83,0.3)]' : 'border-white/20'} p-1 mt-0.5`}>

@@ -45,238 +45,205 @@ export default function PreMatchDetails() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E5FF]/30 pb-24 overflow-x-hidden">
       
-      {/* 1. Hero Header */}
-      <div className="relative w-full md:h-[550px] flex flex-col pt-12 overflow-hidden bg-[#0A0A0A]">
+      {/* 1. Sleek Hero Header */}
+      <div className="relative w-full pt-16 pb-32 flex flex-col items-center justify-center overflow-hidden bg-[#050505]">
         {/* Background Image & Gradients */}
         <div className="absolute inset-0 z-0">
-           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
-           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-[#050505] to-[#050505]" />
-           <div className="absolute top-0 left-0 right-0 h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00E5FF]/15 via-transparent to-transparent" />
+           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-5 mix-blend-screen" />
+           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/80 to-[#050505]" />
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00E5FF]/10 via-transparent to-transparent blur-3xl pointer-events-none" />
         </div>
 
-        <div className="relative w-full max-w-[1400px] mx-auto h-full flex flex-col px-4 md:px-6">
-          
-          {/* Player Cutouts - Anchored to max-w container */}
-          <div className="absolute bottom-0 left-[-20px] md:left-10 w-[220px] md:w-[380px] h-[300px] md:h-[480px] z-10 opacity-60 md:opacity-100 transition-all duration-500 hover:scale-105 origin-bottom">
-             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10" />
-             <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent z-10" />
-             <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity drop-shadow-2xl" alt="Man City Player" />
-          </div>
-          <div className="absolute bottom-0 right-[-20px] md:right-10 w-[220px] md:w-[380px] h-[300px] md:h-[480px] z-10 opacity-60 md:opacity-100 transition-all duration-500 hover:scale-105 origin-bottom">
-             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10" />
-             <div className="absolute inset-0 bg-gradient-to-l from-[#050505] via-transparent to-transparent z-10" />
-             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity drop-shadow-2xl" alt="Liverpool Player" />
-          </div>
-
-          {/* Top Nav */}
-          <div className="relative z-30 flex justify-between items-center mb-10 w-full">
-            <BackButton containerClassName="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md" iconClassName="w-6 h-6" />
-            <div className="flex gap-3">
-              <button className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
-                <Bell className="w-6 h-6" />
-              </button>
-              <button className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
-                <Share className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-
-          {/* Central Match Info */}
-          <div className="relative z-20 flex flex-col items-center flex-1 w-full pb-8">
-             <div className="px-4 py-1.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 backdrop-blur-md mb-8 flex items-center gap-2">
-               <div className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
-               <span className="text-[10px] text-[#00E5FF] font-black tracking-widest uppercase">PRE-MATCH BUILDUP</span>
+        <div className="relative w-full max-w-[1200px] mx-auto z-20 flex flex-col px-4 md:px-6">
+           {/* Top Nav */}
+           <div className="flex justify-between items-center mb-12 md:mb-16 w-full">
+             <BackButton containerClassName="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md" iconClassName="w-5 h-5" />
+             <div className="flex gap-2">
+               <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
+                 <Bell className="w-4 h-4" />
+               </button>
+               <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
+                 <Share className="w-4 h-4" />
+               </button>
              </div>
-             
-             <div className="flex items-center justify-center gap-4 md:gap-12 w-full max-w-3xl mb-8">
-                <h1 className="text-3xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 drop-shadow-lg text-right flex-1">MAN CITY</h1>
-                
-                <div className="flex flex-col items-center gap-2 shrink-0">
-                   <div className="flex items-center gap-2">
-                     <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border-2 border-white/20 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] shadow-[0_0_30px_rgba(108,171,221,0.4)] flex items-center justify-center">
-                       <span className="text-white font-black text-xs md:text-xl tracking-tighter drop-shadow-md">MCI</span>
-                     </div>
-                     <span className="text-xl md:text-3xl font-black text-[#00E5FF] px-2 italic">VS</span>
-                     <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border-2 border-white/20 bg-gradient-to-b from-[#C8102E] to-[#600816] shadow-[0_0_30px_rgba(200,16,46,0.4)] flex items-center justify-center">
-                       <span className="text-white font-black text-xs md:text-xl tracking-tighter drop-shadow-md">LIV</span>
-                     </div>
-                   </div>
-                </div>
+           </div>
 
-                <h1 className="text-3xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-bl from-white to-gray-500 drop-shadow-lg text-left flex-1">LIVERPOOL</h1>
-             </div>
+           {/* Central Match Info */}
+           <div className="flex flex-col items-center w-full">
+              <div className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-10 flex items-center gap-2 shadow-lg">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+                <span className="text-[9px] text-gray-300 font-bold tracking-widest uppercase">PRE-MATCH BUILDUP</span>
+              </div>
+              
+              <div className="flex items-center justify-center gap-6 md:gap-24 w-full mb-12">
+                 {/* Team 1 */}
+                 <div className="flex flex-col items-center gap-5 flex-1">
+                    <div className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center drop-shadow-[0_0_40px_rgba(108,171,221,0.15)] transition-transform hover:scale-105">
+                      <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain" alt="MCI" />
+                    </div>
+                    <h1 className="text-xl md:text-3xl font-black tracking-tight text-white text-center uppercase">Man City</h1>
+                 </div>
+                 
+                 {/* VS */}
+                 <div className="flex flex-col items-center shrink-0">
+                    <span className="text-sm md:text-lg font-black text-gray-700 italic tracking-widest mb-6">VS</span>
+                 </div>
 
-             <div className="flex flex-col items-center mb-6">
-                <span className="text-[10px] font-black text-[#00E5FF] tracking-[0.3em] uppercase mb-1 drop-shadow-md">KICKOFF IN</span>
-                <span className="text-6xl md:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.2)]" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
-             </div>
+                 {/* Team 2 */}
+                 <div className="flex flex-col items-center gap-5 flex-1">
+                    <div className="w-24 h-24 md:w-36 md:h-36 flex items-center justify-center drop-shadow-[0_0_40px_rgba(200,16,46,0.15)] transition-transform hover:scale-105">
+                      <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" alt="LIV" />
+                    </div>
+                    <h1 className="text-xl md:text-3xl font-black tracking-tight text-white text-center uppercase">Liverpool</h1>
+                 </div>
+              </div>
 
-             <div className="flex gap-4 overflow-x-auto w-full justify-center hide-scrollbar py-2">
-                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
-                   <Trophy className="w-4 h-4 text-purple-400" /> Premier League
-                </span>
-                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
-                   <Target className="w-4 h-4 text-gray-400" /> Matchday 28
-                </span>
-                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
-                   <Activity className="w-4 h-4 text-[#00E5FF]" /> Sun, 12 May • 5:30 PM
-                </span>
-             </div>
-          </div>
+              <div className="flex flex-col items-center mb-6">
+                 <span className="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase mb-2">KICKOFF IN</span>
+                 <span className="text-6xl md:text-7xl font-black tracking-tighter text-white drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+              </div>
+
+              <span className="text-[10px] md:text-xs font-medium flex items-center gap-2 text-gray-400">
+                 <Activity className="w-3.5 h-3.5 text-[#00E5FF]" /> Sun, 12 May • 5:30 PM
+              </span>
+           </div>
         </div>
       </div>
 
-      <div className="px-4 md:px-6 max-w-[1400px] mx-auto pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          
-          {/* Main Content Area */}
-          <div className="lg:col-span-7 xl:col-span-8 space-y-6">
+      <div className="px-4 md:px-6 max-w-[1400px] mx-auto pb-12 relative z-30 -mt-16 md:-mt-28">
         
-        {/* 2. Crowdcast */}
-        <section className="bg-[#121212] rounded-3xl p-6 border border-white/5">
-           <div className="flex justify-between items-center mb-6">
-              <div>
-                <h2 className="text-sm font-black tracking-widest uppercase mb-1">CROWDCAST: SET THE VIBE</h2>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" /> 12.4K fans voting now
-                </div>
-              </div>
-              <span className="text-[#00E5FF] text-xs font-bold tracking-widest uppercase px-3 py-1 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/30">Live</span>
-           </div>
-
-           <div className="flex gap-4">
-              <div 
-                onClick={() => handleVote('chaos')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#FF7F50]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-[#FF7F50]/10 transition-all duration-300" style={{ height: `${votes.chaos}%` }} />
-                 <Flame className="w-6 h-6 text-[#FF7F50] mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-[#FF7F50] mb-1 relative z-10">CHAOS</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.chaos}%</span>
-              </div>
-              <div 
-                onClick={() => handleVote('tactical')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-[#00E5FF]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-[#00E5FF]/10 transition-all duration-300" style={{ height: `${votes.tactical}%` }} />
-                 <Shield className="w-6 h-6 text-[#00E5FF] mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-[#00E5FF] mb-1 relative z-10">TACTICAL</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.tactical}%</span>
-              </div>
-              <div 
-                onClick={() => handleVote('tension')}
-                className="flex-1 bg-[#0A0A0A] rounded-2xl p-4 flex flex-col items-center justify-center border border-purple-500/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group"
-              >
-                 <div className="absolute bottom-0 left-0 w-full bg-purple-500/10 transition-all duration-300" style={{ height: `${votes.tension}%` }} />
-                 <Zap className="w-6 h-6 text-purple-500 mb-3 relative z-10 group-active:scale-110 transition-transform" />
-                 <span className="text-[10px] font-black tracking-widest text-purple-500 mb-1 relative z-10">TENSION</span>
-                 <span className="text-2xl font-black relative z-10 text-white transition-all">{votes.tension}%</span>
-              </div>
-           </div>
-        </section>
-
-        {/* 4. Match Center */}
-        <section className="bg-[#121212] rounded-3xl border border-white/5 p-6 overflow-hidden">
-           <div className="flex justify-between items-center mb-6">
-             <div className="flex items-center gap-2">
-                <h2 className="text-sm font-black tracking-widest uppercase">MATCH CENTER</h2>
-                <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[10px] text-gray-400">i</div>
-             </div>
-             <span className="text-[10px] text-gray-500 font-bold uppercase">Swipe or tap to explore</span>
-           </div>
-
-           {/* Tabs */}
-           <div className="flex bg-[#0A0A0A] rounded-full p-1 mb-8 overflow-x-auto hide-scrollbar">
-             {['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
-                <button 
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`flex-1 min-w-[80px] py-2.5 rounded-full text-[10px] md:text-xs font-bold tracking-widest transition-colors ${activeTab === tab ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'text-gray-500 hover:text-white'}`}
-                >
-                  {tab}
-                </button>
-             ))}
-           </div>
-
-           {/* Dynamic Content based on Active Tab */}
-           <div className="min-h-[450px]">
-              {activeTab === 'LINEUP' && <LineupTab />}
-              {activeTab === 'H2H' && <H2HTab />}
-              {activeTab === 'STANDINGS' && <StandingsTab />}
-              {activeTab === 'FORM' && <FormTab />}
-              {activeTab === 'KEY BATTLES' && <KeyBattlesTab />}
-           </div>
-        </section>
-          </div>
-
-          {/* Sidebar Area */}
-          <div className="lg:col-span-5 xl:col-span-4 space-y-6">
-             {/* 3. Join the Discussion */}
-             <Link href="/stands/2" className="block cursor-pointer">
-               <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-3xl p-6 flex justify-between items-center border border-white/5 relative overflow-hidden hover:border-white/10 transition-colors">
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
-                 <div className="relative z-10">
-                    <h2 className="text-xl font-black tracking-tighter mb-1 uppercase">JOIN THE DISCUSSION</h2>
-                    <p className="text-xs text-gray-400">12.4K active in stands</p>
+        {/* Top 4 Info Cards overlapping Hero */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+           {/* 2. Crowdcast */}
+           <section className="bg-[#121212]/80 backdrop-blur-xl rounded-3xl p-5 border border-white/10 shadow-2xl flex flex-col">
+              <div className="flex justify-between items-center mb-4">
+                 <div>
+                   <h2 className="text-[10px] font-black tracking-widest uppercase mb-1">CROWDCAST</h2>
+                   <div className="flex items-center gap-1.5 text-[9px] text-gray-400">
+                     <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> 12.4K voting
+                   </div>
                  </div>
-                 <div className="relative z-10 w-14 h-14 rounded-full bg-[#00E5FF] hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)]">
-                    <Mic className="w-6 h-6 text-black" fill="currentColor" />
+                 <span className="text-[#00E5FF] text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/30">Live</span>
+              </div>
+
+              <div className="flex gap-2 flex-1">
+                 <div onClick={() => handleVote('chaos')} className="flex-1 bg-[#0A0A0A] rounded-2xl flex flex-col items-center justify-center border border-[#FF7F50]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group p-2">
+                    <div className="absolute bottom-0 left-0 w-full bg-[#FF7F50]/10 transition-all duration-300" style={{ height: `${votes.chaos}%` }} />
+                    <Flame className="w-4 h-4 text-[#FF7F50] mb-1 relative z-10 group-active:scale-110 transition-transform" />
+                    <span className="text-xl font-black relative z-10 text-white transition-all">{votes.chaos}%</span>
                  </div>
-               </section>
-             </Link>
+                 <div onClick={() => handleVote('tactical')} className="flex-1 bg-[#0A0A0A] rounded-2xl flex flex-col items-center justify-center border border-[#00E5FF]/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group p-2">
+                    <div className="absolute bottom-0 left-0 w-full bg-[#00E5FF]/10 transition-all duration-300" style={{ height: `${votes.tactical}%` }} />
+                    <Shield className="w-4 h-4 text-[#00E5FF] mb-1 relative z-10 group-active:scale-110 transition-transform" />
+                    <span className="text-xl font-black relative z-10 text-white transition-all">{votes.tactical}%</span>
+                 </div>
+                 <div onClick={() => handleVote('tension')} className="flex-1 bg-[#0A0A0A] rounded-2xl flex flex-col items-center justify-center border border-purple-500/20 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group p-2">
+                    <div className="absolute bottom-0 left-0 w-full bg-purple-500/10 transition-all duration-300" style={{ height: `${votes.tension}%` }} />
+                    <Zap className="w-4 h-4 text-purple-500 mb-1 relative z-10 group-active:scale-110 transition-transform" />
+                    <span className="text-xl font-black relative z-10 text-white transition-all">{votes.tension}%</span>
+                 </div>
+              </div>
+           </section>
 
-             {/* 5. Player Spotlight */}
-             <section className="flex lg:flex-col gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory lg:snap-none">
-                {/* MVP Watch */}
-                <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#00E5FF]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                      <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-                   </div>
-                   <div className="relative z-10 w-full">
-                      <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">MVP WATCH</h3>
-                      <select 
-                        value={mvpWatchPlayer}
-                        onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                        className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
-                      >
-                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                      </select>
-                      <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
-                      <div className="flex items-end gap-2">
-                        <span className="text-2xl font-black text-[#00E5FF]">8.7</span>
-                        <span className="text-[10px] text-gray-500 uppercase pb-1">Season rating</span>
-                      </div>
-                   </div>
-                </div>
-
-                {/* Fraud Watch */}
-                <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#D32F2F]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                      <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-                   </div>
-                   <div className="relative z-10 w-full">
-                      <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">FRAUD WATCH</h3>
-                      <select 
-                        value={fraudWatchPlayer}
-                        onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                        className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
-                      >
-                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                      </select>
-                      <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
-                      <div className="flex items-end gap-2">
-                        <span className="text-sm font-bold text-gray-300 max-w-[100px] leading-tight">Needs a big performance</span>
-                      </div>
-                   </div>
-                </div>
+           {/* 3. Join the Discussion */}
+           <Link href="/stands/2" className="block cursor-pointer">
+             <section className="bg-gradient-to-r from-[#121212]/90 to-[#1a1a1a]/90 backdrop-blur-xl rounded-3xl p-5 h-full flex flex-col justify-center border border-white/10 relative overflow-hidden hover:border-white/20 transition-colors shadow-2xl">
+               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-screen" />
+               <div className="relative z-10 flex justify-between items-center h-full">
+                  <div>
+                     <h2 className="text-lg font-black tracking-tighter mb-1 uppercase">JOIN THE<br/>DISCUSSION</h2>
+                     <p className="text-[10px] text-gray-400">12.4K active in stands</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-[#00E5FF] hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] shrink-0">
+                     <Mic className="w-5 h-5 text-black" fill="currentColor" />
+                  </div>
+               </div>
              </section>
-          </div>
+           </Link>
+
+           {/* MVP Watch */}
+           <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#00E5FF]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                 <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+              </div>
+              <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                 <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-2">MVP WATCH</h3>
+                 <select 
+                   value={mvpWatchPlayer}
+                   onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                   className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                 >
+                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                 </select>
+                 <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                 <div className="flex items-end gap-1.5 mt-auto">
+                   <span className="text-xl font-black text-[#00E5FF] leading-none">8.7</span>
+                   <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
+                 </div>
+              </div>
+           </div>
+
+           {/* Fraud Watch */}
+           <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                 <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+              </div>
+              <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                 <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-2">FRAUD WATCH</h3>
+                 <select 
+                   value={fraudWatchPlayer}
+                   onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                   className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                 >
+                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                 </select>
+                 <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                 <div className="flex items-end gap-1.5 mt-auto">
+                   <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* Match Center */}
+        <div className="max-w-4xl mx-auto">
+          <section className="bg-[#121212] rounded-3xl border border-white/5 p-6 overflow-hidden">
+             <div className="flex justify-between items-center mb-6">
+               <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-black tracking-widest uppercase">MATCH CENTER</h2>
+                  <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[10px] text-gray-400">i</div>
+               </div>
+               <span className="text-[10px] text-gray-500 font-bold uppercase">Swipe or tap to explore</span>
+             </div>
+
+             {/* Tabs */}
+             <div className="flex bg-[#0A0A0A] rounded-full p-1 mb-8 overflow-x-auto hide-scrollbar">
+               {['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
+                  <button 
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`flex-1 min-w-[80px] py-2.5 rounded-full text-[10px] md:text-xs font-bold tracking-widest transition-colors ${activeTab === tab ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'text-gray-500 hover:text-white'}`}
+                  >
+                    {tab}
+                  </button>
+               ))}
+             </div>
+
+             {/* Dynamic Content based on Active Tab */}
+             <div className="min-h-[450px]">
+                {activeTab === 'LINEUP' && <LineupTab />}
+                {activeTab === 'H2H' && <H2HTab />}
+                {activeTab === 'STANDINGS' && <StandingsTab />}
+                {activeTab === 'FORM' && <FormTab />}
+                {activeTab === 'KEY BATTLES' && <KeyBattlesTab />}
+             </div>
+          </section>
         </div>
       </div>
     </div>

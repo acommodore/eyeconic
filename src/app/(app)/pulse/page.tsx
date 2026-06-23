@@ -342,39 +342,39 @@ export default function MatchPulsePage() {
            
            <span className="text-[#00E5FF] font-mono font-bold text-xl mb-4">78'</span>
 
-           <div className="flex items-center justify-center gap-8 md:gap-16 w-full max-w-3xl">
+           <div className="flex flex-row items-center justify-center gap-2 md:gap-16 w-full max-w-3xl">
               {/* LIVERPOOL */}
-              <div className="flex flex-col items-center gap-4 flex-1">
+              <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full" />
-                  <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-4 flex items-center justify-center relative z-10 border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)]">
-                    <span className="text-white font-black text-2xl md:text-4xl tracking-tighter filter drop-shadow-md">LIV</span>
+                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-2 md:p-4 flex items-center justify-center relative z-10 border-2 md:border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)]">
+                    <span className="text-white font-black text-xl md:text-4xl tracking-tighter filter drop-shadow-md">LIV</span>
                   </div>
                 </div>
-                <span className="text-xl font-bold tracking-widest text-gray-400">LIVERPOOL</span>
+                <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">LIVERPOOL</span>
               </div>
               
               {/* SCORE */}
               <div className="flex flex-col items-center shrink-0">
-                <div className="flex items-center gap-6 text-6xl md:text-8xl font-black tracking-tighter text-white">
+                <div className="flex items-center gap-2 md:gap-6 text-4xl md:text-8xl font-black tracking-tighter text-white">
                   <span>2</span>
-                  <span className="text-gray-700 text-5xl">-</span>
+                  <span className="text-gray-700 text-3xl md:text-5xl">-</span>
                   <span>0</span>
                 </div>
-                <div className="mt-6 px-4 py-1.5 border border-[#00E5FF]/30 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] text-[10px] font-black tracking-widest">
+                <div className="mt-3 md:mt-6 px-3 md:px-4 py-1 md:py-1.5 border border-[#00E5FF]/30 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] text-[8px] md:text-[10px] font-black tracking-widest">
                   TACTICAL
                 </div>
               </div>
 
               {/* MAN CITY */}
-              <div className="flex flex-col items-center gap-4 flex-1">
+              <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-                  <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-4 flex items-center justify-center relative z-10 border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)]">
-                    <span className="text-white font-black text-2xl md:text-4xl tracking-tighter filter drop-shadow-md">MCI</span>
+                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-2 md:p-4 flex items-center justify-center relative z-10 border-2 md:border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)]">
+                    <span className="text-white font-black text-xl md:text-4xl tracking-tighter filter drop-shadow-md">MCI</span>
                   </div>
                 </div>
-                <span className="text-xl font-bold tracking-widest text-gray-400">MAN CITY</span>
+                <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">MAN CITY</span>
               </div>
            </div>
 

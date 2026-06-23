@@ -145,8 +145,8 @@ export default function MatchDetailsPage() {
 
             {/* SCORE */}
             <div className="flex flex-col items-center justify-center shrink-0">
-              <div className="text-5xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
-                2 <span className="text-gray-600 font-normal mx-2">-</span> 0
+              <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
+                2 <span className="text-gray-600 font-normal mx-1 md:mx-2">-</span> 0
               </div>
             </div>
 
@@ -456,47 +456,47 @@ export default function MatchDetailsPage() {
               </div>
 
               {/* Subs & Coaches (Horizontal Strip) */}
-              <div className="bg-[#1A1A1A] px-4 py-5 flex items-center justify-between w-full rounded-b-[24px]">
+              <div className="bg-[#1A1A1A] px-4 py-5 flex flex-col md:flex-row items-center justify-between w-full rounded-b-[24px] gap-4 overflow-hidden">
                 {/* Left side (LIV Subs & Coach) */}
-                <div className="flex items-center gap-2 md:gap-3">
-                  <div className="w-1.5 h-10 bg-[#FF7F50] rounded-full mr-1 md:mr-2 shadow-[0_0_10px_rgba(255,127,80,0.4)]" />
+                <div className="flex items-center gap-2 md:gap-3 w-full overflow-x-auto hide-scrollbar pb-2 md:pb-0">
+                  <div className="w-1.5 h-10 bg-[#FF7F50] rounded-full mr-1 md:mr-2 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
                   
                   {/* Coach */}
-                  <div className="relative group cursor-pointer" title={`Coach: ${coaches.liv.name}`}>
+                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.liv.name}`}>
                     <img src={coaches.liv.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
                   </div>
                   
                   {/* Subs */}
                   {subsLIV.map(sub => (
-                    <div className="relative group cursor-pointer" key={sub.name} title={sub.name}>
+                    <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
                       <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
                   ))}
                   
                   {/* Empty slots */}
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
                 </div>
 
                 {/* Right side (MCI Subs & Coach) */}
-                <div className="flex items-center gap-2 md:gap-3">
+                <div className="flex items-center gap-2 md:gap-3 w-full md:justify-end overflow-x-auto hide-scrollbar pb-2 md:pb-0">
                   {/* Empty slots */}
-                  <div className="hidden sm:block w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
+                  <div className="hidden sm:block w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
                   
                   {/* Subs */}
                   {subsMCI.map(sub => (
-                    <div className="relative group cursor-pointer" key={sub.name} title={sub.name}>
+                    <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
                       <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
                   ))}
                   
                   {/* Coach */}
-                  <div className="relative group cursor-pointer" title={`Coach: ${coaches.mci.name}`}>
+                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.mci.name}`}>
                     <img src={coaches.mci.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
                   </div>
 
-                  <div className="w-1.5 h-10 bg-[#4FC3F7] rounded-full ml-1 md:ml-2 shadow-[0_0_10px_rgba(79,195,247,0.4)]" />
+                  <div className="w-1.5 h-10 bg-[#4FC3F7] rounded-full ml-1 md:ml-2 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
                 </div>
               </div>
             </div>

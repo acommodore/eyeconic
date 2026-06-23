@@ -114,130 +114,158 @@ export default function StandsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               
               {/* Card 1 */}
-              <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-                
-                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
-                      Live
-                    </span>
-                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
-                      5.2K LISTENING
-                    </span>
-                  </div>
+              <Link href="/stands/1" className="block">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-[#00E5FF]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
+                  
+                  <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                    <div className="flex justify-between items-start">
+                      <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Live
+                      </span>
+                      <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                        5.2K LISTENING
+                      </span>
+                    </div>
 
-                  <div className="mt-auto">
-                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
-                      Liverpool post-match: Salah MVP debate
-                    </h3>
-                    
-                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
-                      <div className="flex -space-x-2">
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=E" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=F" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=G" alt="user"/>
+                    <div className="mt-auto">
+                      <h3 className="text-lg font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors line-clamp-2">
+                        Liverpool post-match: Salah MVP debate
+                      </h3>
+                      
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center gap-3">
+                          <div className="flex -space-x-2">
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=E" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=F" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=G" alt="user"/>
+                          </div>
+                          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest hidden sm:block">Hosted by LFCFanTV</span>
+                        </div>
+                        <button className="px-4 py-1.5 bg-white/10 hover:bg-[#00E5FF] text-white hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                          Join
+                        </button>
                       </div>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by LFCFanTV</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
                {/* Card 2 */}
-               <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-                
-                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
-                      Live
-                    </span>
-                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
-                      3.1K LISTENING
-                    </span>
-                  </div>
+               <Link href="/stands/2" className="block">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-[#00E5FF]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
+                  
+                  <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                    <div className="flex justify-between items-start">
+                      <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Live
+                      </span>
+                      <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                        3.1K LISTENING
+                      </span>
+                    </div>
 
-                  <div className="mt-auto">
-                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
-                      VAR controversy: Every big call discussed
-                    </h3>
-                    
-                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
-                      <div className="flex -space-x-2">
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=I" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=J" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=K" alt="user"/>
+                    <div className="mt-auto">
+                      <h3 className="text-lg font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors line-clamp-2">
+                        VAR controversy: Every big call discussed
+                      </h3>
+                      
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center gap-3">
+                          <div className="flex -space-x-2">
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=I" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=J" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=K" alt="user"/>
+                          </div>
+                          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest hidden sm:block">Hosted by TheRef</span>
+                        </div>
+                        <button className="px-4 py-1.5 bg-white/10 hover:bg-[#00E5FF] text-white hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                          Join
+                        </button>
                       </div>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by TheRef</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
                {/* Card 3 */}
-               <div className="aspect-square md:aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-                
-                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
-                      Live
-                    </span>
-                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
-                      1.8K LISTENING
-                    </span>
-                  </div>
+               <Link href="/stands/3" className="block">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-[#00E5FF]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
+                  
+                  <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                    <div className="flex justify-between items-start">
+                      <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Live
+                      </span>
+                      <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                        1.8K LISTENING
+                      </span>
+                    </div>
 
-                  <div className="mt-auto">
-                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
-                      Transfer Rumors: Mbappe to Madrid?
-                    </h3>
-                    
-                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
-                      <div className="flex -space-x-2">
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M1" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M2" alt="user"/>
+                    <div className="mt-auto">
+                      <h3 className="text-lg font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors line-clamp-2">
+                        Transfer Rumors: Mbappe to Madrid?
+                      </h3>
+                      
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center gap-3">
+                          <div className="flex -space-x-2">
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M1" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=M2" alt="user"/>
+                          </div>
+                          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest hidden sm:block">Hosted by MadridistaHQ</span>
+                        </div>
+                        <button className="px-4 py-1.5 bg-white/10 hover:bg-[#00E5FF] text-white hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                          Join
+                        </button>
                       </div>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by MadridistaHQ</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
               
               {/* Card 4 - Hidden on smaller screens to balance grid */}
-               <div className="hidden xl:block aspect-[4/5] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent z-10" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
-                
-                <div className="relative z-20 p-5 flex flex-col h-full justify-between">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
-                      Live
-                    </span>
-                    <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
-                      950 LISTENING
-                    </span>
-                  </div>
+               <Link href="/stands/4" className="hidden xl:block">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-white/5 hover:border-[#00E5FF]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
+                  
+                  <div className="relative z-20 p-5 flex flex-col h-full justify-between">
+                    <div className="flex justify-between items-start">
+                      <span className="px-2 py-1 rounded bg-red-600 text-[9px] font-black text-white flex items-center gap-1 uppercase tracking-widest">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Live
+                      </span>
+                      <span className="px-2 py-1 rounded bg-black/50 backdrop-blur text-[9px] font-bold text-white tracking-widest border border-white/10">
+                        950 LISTENING
+                      </span>
+                    </div>
 
-                  <div className="mt-auto">
-                    <h3 className="text-xl font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors">
-                      Serie A Title Race: Inter's dominance
-                    </h3>
-                    
-                    <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
-                      <div className="flex -space-x-2">
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S1" alt="user"/>
-                        <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S2" alt="user"/>
+                    <div className="mt-auto">
+                      <h3 className="text-lg font-black text-white leading-tight mb-2 group-hover:text-[#00E5FF] transition-colors line-clamp-2">
+                        Serie A Title Race: Inter's dominance
+                      </h3>
+                      
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
+                        <div className="flex items-center gap-3">
+                          <div className="flex -space-x-2">
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S1" alt="user"/>
+                            <img className="w-6 h-6 rounded-full border border-black" src="https://api.dicebear.com/7.x/avataaars/svg?seed=S2" alt="user"/>
+                          </div>
+                          <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest hidden sm:block">Hosted by CalcioTalk</span>
+                        </div>
+                        <button className="px-4 py-1.5 bg-white/10 hover:bg-[#00E5FF] text-white hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                          Join
+                        </button>
                       </div>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Hosted by CalcioTalk</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
             </div>
           </section>
