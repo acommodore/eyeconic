@@ -46,75 +46,83 @@ export default function PreMatchDetails() {
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E5FF]/30 pb-24 overflow-x-hidden">
       
       {/* 1. Hero Header */}
-      <div className="relative w-full h-[500px] flex flex-col pt-12 px-6">
+      <div className="relative w-full md:h-[550px] flex flex-col pt-12 overflow-hidden bg-[#0A0A0A]">
         {/* Background Image & Gradients */}
         <div className="absolute inset-0 z-0">
-           {/* Fallback pattern/gradient if no image */}
-           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#050505] to-[#050505] opacity-90" />
-           <div className="absolute top-0 left-0 right-0 h-[400px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00E5FF]/10 via-[#050505]/50 to-[#050505]" />
+           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
+           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-[#050505] to-[#050505]" />
+           <div className="absolute top-0 left-0 right-0 h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#00E5FF]/15 via-transparent to-transparent" />
         </div>
 
-        {/* Player Cutouts (Left & Right) */}
-        {/* Using placeholder images with gradient fades to blend them in */}
-        <div className="absolute bottom-0 left-[-40px] w-[280px] h-[380px] z-10 opacity-80 md:opacity-100">
-           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent z-10" />
-           <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity" alt="Haaland" />
-        </div>
-        <div className="absolute bottom-0 right-[-40px] w-[280px] h-[380px] z-10 opacity-80 md:opacity-100">
-           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10" />
-           <div className="absolute inset-0 bg-gradient-to-l from-[#050505] via-transparent to-transparent z-10" />
-           <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity" alt="Salah" />
-        </div>
-
-        {/* Top Nav */}
-        <div className="relative z-20 flex justify-between items-center mb-8">
-          <BackButton containerClassName="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" iconClassName="w-5 h-5" />
-          <div className="flex gap-3">
-            <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
-              <Bell className="w-5 h-5" />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
-              <Share className="w-5 h-5" />
-            </button>
+        <div className="relative w-full max-w-[1400px] mx-auto h-full flex flex-col px-4 md:px-6">
+          
+          {/* Player Cutouts - Anchored to max-w container */}
+          <div className="absolute bottom-0 left-[-20px] md:left-10 w-[220px] md:w-[380px] h-[300px] md:h-[480px] z-10 opacity-60 md:opacity-100 transition-all duration-500 hover:scale-105 origin-bottom">
+             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10" />
+             <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent z-10" />
+             <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity drop-shadow-2xl" alt="Man City Player" />
           </div>
-        </div>
+          <div className="absolute bottom-0 right-[-20px] md:right-10 w-[220px] md:w-[380px] h-[300px] md:h-[480px] z-10 opacity-60 md:opacity-100 transition-all duration-500 hover:scale-105 origin-bottom">
+             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10" />
+             <div className="absolute inset-0 bg-gradient-to-l from-[#050505] via-transparent to-transparent z-10" />
+             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover object-top mix-blend-luminosity drop-shadow-2xl" alt="Liverpool Player" />
+          </div>
 
-        {/* Central Match Info */}
-        <div className="relative z-20 flex flex-col items-center flex-1">
-           <span className="text-[10px] text-[#00E5FF] font-black tracking-widest mb-4 px-3 py-1 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30">PRE-MATCH</span>
-           
-           <div className="flex items-center gap-4 mb-8">
-              <h1 className="text-3xl md:text-4xl font-black tracking-tighter">MAN CITY</h1>
-              <div className="flex items-center gap-2">
-                 <div className="w-12 h-12 rounded-full border-2 border-white/20 bg-[#4FC3F7] shadow-[0_0_20px_rgba(79,195,247,0.3)]"></div>
-                 <span className="text-xl font-black text-[#00E5FF]">VS</span>
-                 <div className="w-12 h-12 rounded-full border-2 border-white/20 bg-[#D32F2F] shadow-[0_0_20px_rgba(211,47,47,0.3)]"></div>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-black tracking-tighter">LIVERPOOL</h1>
-           </div>
+          {/* Top Nav */}
+          <div className="relative z-30 flex justify-between items-center mb-10 w-full">
+            <BackButton containerClassName="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md" iconClassName="w-6 h-6" />
+            <div className="flex gap-3">
+              <button className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
+                <Bell className="w-6 h-6" />
+              </button>
+              <button className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md">
+                <Share className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
 
-           <div className="flex flex-col items-center mb-4">
-              <span className="text-xs font-black text-[#00E5FF] tracking-widest uppercase mb-1">KO IN</span>
-              <span className="text-6xl font-black tracking-tighter text-[#00E5FF] drop-shadow-[0_0_20px_rgba(0,229,255,0.4)]">45:00</span>
-           </div>
+          {/* Central Match Info */}
+          <div className="relative z-20 flex flex-col items-center flex-1 w-full pb-8">
+             <div className="px-4 py-1.5 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 backdrop-blur-md mb-8 flex items-center gap-2">
+               <div className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
+               <span className="text-[10px] text-[#00E5FF] font-black tracking-widest uppercase">PRE-MATCH BUILDUP</span>
+             </div>
+             
+             <div className="flex items-center justify-center gap-4 md:gap-12 w-full max-w-3xl mb-8">
+                <h1 className="text-3xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 drop-shadow-lg text-right flex-1">MAN CITY</h1>
+                
+                <div className="flex flex-col items-center gap-2 shrink-0">
+                   <div className="flex items-center gap-2">
+                     <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border-2 border-white/20 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] shadow-[0_0_30px_rgba(108,171,221,0.4)] flex items-center justify-center">
+                       <span className="text-white font-black text-xs md:text-xl tracking-tighter drop-shadow-md">MCI</span>
+                     </div>
+                     <span className="text-xl md:text-3xl font-black text-[#00E5FF] px-2 italic">VS</span>
+                     <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border-2 border-white/20 bg-gradient-to-b from-[#C8102E] to-[#600816] shadow-[0_0_30px_rgba(200,16,46,0.4)] flex items-center justify-center">
+                       <span className="text-white font-black text-xs md:text-xl tracking-tighter drop-shadow-md">LIV</span>
+                     </div>
+                   </div>
+                </div>
 
-           <div className="flex flex-col items-center gap-1 mb-8">
-              <span className="text-sm font-bold">Today • 5:30 PM</span>
-              <span className="text-xs text-gray-400 font-medium tracking-widest uppercase">Etihad Stadium</span>
-           </div>
+                <h1 className="text-3xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-bl from-white to-gray-500 drop-shadow-lg text-left flex-1">LIVERPOOL</h1>
+             </div>
 
-           <div className="flex gap-3 overflow-x-auto w-full justify-center hide-scrollbar">
-              <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300">
-                 <Trophy className="w-4 h-4 text-purple-400" /> Premier League
-              </span>
-              <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300">
-                 <Target className="w-4 h-4 text-gray-400" /> Matchday 28
-              </span>
-              <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300">
-                 <Activity className="w-4 h-4 text-[#00E5FF]" /> Sun, 12 May • 5:30 PM
-              </span>
-           </div>
+             <div className="flex flex-col items-center mb-6">
+                <span className="text-[10px] font-black text-[#00E5FF] tracking-[0.3em] uppercase mb-1 drop-shadow-md">KICKOFF IN</span>
+                <span className="text-6xl md:text-8xl font-black tracking-tighter text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.2)]" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+             </div>
+
+             <div className="flex gap-4 overflow-x-auto w-full justify-center hide-scrollbar py-2">
+                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
+                   <Trophy className="w-4 h-4 text-purple-400" /> Premier League
+                </span>
+                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
+                   <Target className="w-4 h-4 text-gray-400" /> Matchday 28
+                </span>
+                <span className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-bold whitespace-nowrap flex items-center gap-2 text-gray-300 backdrop-blur-md hover:bg-white/10 transition-colors">
+                   <Activity className="w-4 h-4 text-[#00E5FF]" /> Sun, 12 May • 5:30 PM
+                </span>
+             </div>
+          </div>
         </div>
       </div>
 
