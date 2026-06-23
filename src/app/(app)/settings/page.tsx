@@ -37,10 +37,10 @@ export default function SettingsGridPage() {
       </div>
 
       <div className="mt-12 max-w-md mx-auto md:mx-0">
-        <button className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold tracking-widest uppercase bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.1)]">
+        <Link href="/" className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl font-bold tracking-widest uppercase bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.1)]">
           <LogOut className="w-5 h-5" />
           Sign Out
-        </button>
+        </Link>
       </div>
     </div>
   );

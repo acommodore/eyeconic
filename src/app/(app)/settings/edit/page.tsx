@@ -12,6 +12,16 @@ export default function EditProfilePage() {
   // Form states
   const [name, setName] = useState("MARCUS VANCE");
   const [email, setEmail] = useState("m.vance@fan-hq.io");
+  
+  // Allegiance states
+  const availableClubs = [
+    { id: "madrid", name: "Real Madrid CF", logo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
+    { id: "united", name: "Manchester United", logo: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" },
+    { id: "barca", name: "FC Barcelona", logo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" },
+  ];
+
+  const [favoriteClub, setFavoriteClub] = useState(availableClubs[0]);
+  const [rivalClub, setRivalClub] = useState(availableClubs[2]);
 
   const handleSave = () => {
     // In a real app, we'd check if primary club changed.
@@ -91,15 +101,22 @@ export default function EditProfilePage() {
                 <div className="space-y-3">
                   <label className="text-[10px] text-gray-500 font-bold tracking-widest uppercase pl-1">FAVORITE CLUB</label>
                   <div className="flex gap-3">
-                     <div className="w-16 h-16 rounded-xl bg-[#121212] border-2 border-[#00E5FF] flex items-center justify-center p-2 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
-                       <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-full h-full object-contain" alt="Selected" />
-                     </div>
-                     <div className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 flex items-center justify-center p-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer hover:-translate-y-1">
-                       <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg" className="w-full h-full object-contain" alt="Option 1" />
-                     </div>
-                     <div className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
+                     {availableClubs.map(club => (
+                       <button
+                         key={`fav-${club.id}`}
+                         onClick={() => setFavoriteClub(club)}
+                         className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all cursor-pointer hover:-translate-y-1 ${
+                           favoriteClub.id === club.id 
+                             ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)] opacity-100' 
+                             : 'border border-white/10 opacity-50 hover:opacity-100'
+                         }`}
+                       >
+                         <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
+                       </button>
+                     ))}
+                     <button className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
                        <Plus className="w-6 h-6 text-gray-500" />
-                     </div>
+                     </button>
                   </div>
                 </div>
 
@@ -107,12 +124,22 @@ export default function EditProfilePage() {
                 <div className="space-y-3">
                   <label className="text-[10px] text-gray-500 font-bold tracking-widest uppercase pl-1">RIVAL CLUB</label>
                   <div className="flex gap-3">
-                     <div className="w-16 h-16 rounded-xl bg-[#121212] border-2 border-[#FF3B00] flex items-center justify-center p-2 shadow-[0_0_15px_rgba(255,59,0,0.2)]">
-                       <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" className="w-full h-full object-contain" alt="Rival" />
-                     </div>
-                     <div className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
+                     {availableClubs.map(club => (
+                       <button
+                         key={`rival-${club.id}`}
+                         onClick={() => setRivalClub(club)}
+                         className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all cursor-pointer hover:-translate-y-1 ${
+                           rivalClub.id === club.id 
+                             ? 'border-2 border-[#FF3B00] shadow-[0_0_15px_rgba(255,59,0,0.2)] opacity-100' 
+                             : 'border border-white/10 opacity-50 hover:opacity-100'
+                         }`}
+                       >
+                         <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
+                       </button>
+                     ))}
+                     <button className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
                        <Search className="w-6 h-6 text-gray-500" />
-                     </div>
+                     </button>
                   </div>
                 </div>
              </div>
