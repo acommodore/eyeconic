@@ -10,7 +10,6 @@ const CATEGORIES = [
   { id: "LIVE", label: "LIVE NOW", icon: null, color: "text-[#00E5FF]" },
   { id: "CHAOS", label: "HIGH CHAOS", icon: Zap, color: "text-[#FF7F50]" },
   { id: "TACTICAL", label: "TACTICAL", icon: GitBranch, color: "text-[#00E5FF]" },
-  { id: "STAR_WATCH", label: "STAR WATCH", icon: Star, color: "text-[#6200EA]" },
   { id: "RIVALRIES", label: "RIVALRIES", icon: Swords, color: "text-[#D32F2F]" },
   { id: "SURPRISE", label: "SURPRISE ME", icon: Dices, color: "text-gray-400" },
   { id: "BOOKMARKS", label: "BOOKMARKS", icon: Bookmark, color: "text-gray-300" },
