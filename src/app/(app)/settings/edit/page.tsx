@@ -21,8 +21,8 @@ export default function EditProfilePage() {
 
   return (
     <div className="w-full max-w-2xl mx-auto p-4 md:p-8 min-h-screen text-white relative">
-      {/* Mobile Header */}
-      <div className="flex md:hidden items-center gap-4 mb-10 relative z-10">
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-10 relative z-10">
         <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group" iconClassName="w-6 h-6 text-[#00E5FF] group-hover:-translate-x-1 transition-transform" />
         <h1 className="text-xl font-black tracking-widest uppercase">EDIT PROFILE</h1>
       </div>
