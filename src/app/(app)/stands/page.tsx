@@ -32,8 +32,8 @@ export default function StandsPage() {
           <button onClick={() => scrollToSection('scheduled')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Calendar className="w-4 h-4" /> SCHEDULED
           </button>
-          <button className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all cursor-pointer">
-            REPLAYS
+          <button onClick={() => scrollToSection('replays')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+            <Play className="w-4 h-4" /> REPLAYS
           </button>
         </div>
       </div>
@@ -403,6 +403,107 @@ export default function StandsPage() {
               </div>
             </section>
           </div>
+
+          {/* REPLAYS SECTION */}
+          <section id="replays" className="mt-12 scroll-mt-32">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Play className="w-5 h-5 text-gray-400" /> Recent Replays
+              </h2>
+              <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Browse Archive</span>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Replay 1 */}
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                <div className="aspect-video relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Play className="w-5 h-5 text-white ml-1" />
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
+                    45:20
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">El Clasico Fallout: Did Barca get robbed?</h4>
+                  <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
+                    <Calendar className="w-3 h-3" /> YESTERDAY
+                  </p>
+                </div>
+              </div>
+
+              {/* Replay 2 */}
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                <div className="aspect-video relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Play className="w-5 h-5 text-white ml-1" />
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
+                    1:12:05
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">The state of Man United: Ten Hag In or Out?</h4>
+                  <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
+                    <Calendar className="w-3 h-3" /> 2 DAYS AGO
+                  </p>
+                </div>
+              </div>
+
+               {/* Replay 3 */}
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                <div className="aspect-video relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1628891435222-06592ce29663?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Play className="w-5 h-5 text-white ml-1" />
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
+                    58:30
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Messi vs Ronaldo: The Final Verdict</h4>
+                  <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
+                    <Calendar className="w-3 h-3" /> LAST WEEK
+                  </p>
+                </div>
+              </div>
+
+              {/* Replay 4 */}
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hidden lg:block">
+                <div className="aspect-video relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="w-12 h-12 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <Play className="w-5 h-5 text-white ml-1" />
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
+                    32:15
+                  </span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Best young talents in the world right now</h4>
+                  <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
+                    <Calendar className="w-3 h-3" /> LAST WEEK
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </section>
 
       </div>
     </div>
