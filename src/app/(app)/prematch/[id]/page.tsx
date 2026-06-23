@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Bell, Share, Shield, Zap, Mic, Flame, ChevronRight, Trophy, Target, Activity } from "lucide-react";
 import { useState } from "react";
+import { BackButton } from "@/components/ui/BackButton";
 
 const playerOptions = [
   { name: 'DE BRUYNE', team: 'Man City', img: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop' },
@@ -68,9 +69,7 @@ export default function PreMatchDetails() {
 
         {/* Top Nav */}
         <div className="relative z-20 flex justify-between items-center mb-8">
-          <Link href="/discover" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
+          <BackButton containerClassName="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" iconClassName="w-5 h-5" />
           <div className="flex gap-3">
             <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
               <Bell className="w-5 h-5" />

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic } from "lucide-react";
 import { useState } from "react";
+import { BackButton } from "@/components/ui/BackButton";
 
 const hotTakes = [
   {
@@ -84,9 +85,7 @@ export default function MatchDetailsPage() {
     <div className="w-full max-w-[1000px] mx-auto p-4 md:p-6 bg-[#050505] min-h-screen text-white pb-24">
       {/* Top Header */}
       <div className="flex items-center justify-between mb-8">
-        <Link href="/insights" className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
-          <ArrowLeft className="w-5 h-5 text-[#00E5FF]" />
-        </Link>
+        <BackButton containerClassName="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors" iconClassName="w-5 h-5 text-[#00E5FF]" />
         
         <div className="flex items-center gap-6 md:gap-12">
           {/* LIV */}

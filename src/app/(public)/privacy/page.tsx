@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Activity } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BackButton } from "@/components/ui/BackButton";
 
 export default function PrivacyPage() {
   return (
@@ -8,10 +9,9 @@ export default function PrivacyPage() {
       <nav className="fixed top-0 w-full z-50 bg-transparent border-b border-gray-200 dark:border-white/5 transition-colors">
         <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
-          <Link href="/" className="flex items-center gap-3 group">
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-bold tracking-widest uppercase">Back to Home</span>
-          </Link>
+          <BackButton containerClassName="flex items-center gap-3 group" iconClassName="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+            <span className="text-sm font-bold tracking-widest uppercase">Back</span>
+          </BackButton>
           <div className="flex items-center gap-4">
             <ThemeToggle />
           </div>

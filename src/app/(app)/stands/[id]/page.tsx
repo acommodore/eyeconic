@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, Share2, Mic, Hand, Send, MoreHorizontal } from "lucide-react";
+import { BackButton } from "@/components/ui/BackButton";
 
 export default function ActiveStandPage() {
   return (
@@ -13,9 +14,7 @@ export default function ActiveStandPage() {
         {/* Stage Header */}
         <header className="flex items-center justify-between border-b border-white/5 pb-6">
           <div className="flex items-center gap-4">
-            <Link href="/stands" className="p-2 hover:bg-white/10 rounded-full transition-colors group">
-              <ArrowLeft className="w-6 h-6 text-[#00E5FF] group-hover:-translate-x-1 transition-transform" />
-            </Link>
+            <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group" iconClassName="w-6 h-6 text-[#00E5FF] group-hover:-translate-x-1 transition-transform" />
             <div className="flex items-center gap-3">
               <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-md" alt="ARS" />
               <span className="text-xl md:text-2xl font-black text-gray-500 tracking-widest">V</span>

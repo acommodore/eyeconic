@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail, ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { BackButton } from "@/components/ui/BackButton";
 import { motion } from "framer-motion";
 
 export default function ForgotPasswordPage() {
@@ -24,9 +25,9 @@ export default function ForgotPasswordPage() {
       className="w-full flex flex-col"
     >
       <div className="mb-10">
-        <Link href="/login" className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-500 hover:text-white transition-colors mb-6">
-          <ArrowLeft className="w-4 h-4" /> Back to Login
-        </Link>
+        <BackButton containerClassName="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-gray-500 hover:text-white transition-colors mb-6" iconClassName="w-4 h-4">
+          Back
+        </BackButton>
         <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
           Reset Password
         </h1>
