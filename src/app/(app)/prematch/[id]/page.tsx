@@ -118,7 +118,11 @@ export default function PreMatchDetails() {
         </div>
       </div>
 
-      <div className="px-4 md:px-6 max-w-4xl mx-auto space-y-6">
+      <div className="px-4 md:px-6 max-w-[1400px] mx-auto pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          
+          {/* Main Content Area */}
+          <div className="lg:col-span-7 xl:col-span-8 space-y-6">
         
         {/* 2. Crowdcast */}
         <section className="bg-[#121212] rounded-3xl p-6 border border-white/5">
@@ -163,20 +167,6 @@ export default function PreMatchDetails() {
            </div>
         </section>
 
-        {/* 3. Join the Discussion */}
-        <Link href="/stands/2" className="block cursor-pointer">
-          <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-3xl p-6 flex justify-between items-center border border-white/5 relative overflow-hidden hover:border-white/10 transition-colors">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
-            <div className="relative z-10">
-               <h2 className="text-xl font-black tracking-tighter mb-1 uppercase">JOIN THE DISCUSSION</h2>
-               <p className="text-xs text-gray-400">12.4K active in stands</p>
-            </div>
-            <div className="relative z-10 w-14 h-14 rounded-full bg-[#00E5FF] hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)]">
-               <Mic className="w-6 h-6 text-black" fill="currentColor" />
-            </div>
-          </section>
-        </Link>
-
         {/* 4. Match Center */}
         <section className="bg-[#121212] rounded-3xl border border-white/5 p-6 overflow-hidden">
            <div className="flex justify-between items-center mb-6">
@@ -209,59 +199,77 @@ export default function PreMatchDetails() {
               {activeTab === 'KEY BATTLES' && <KeyBattlesTab />}
            </div>
         </section>
+          </div>
 
-        {/* 5. Player Spotlight */}
-        <section className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory">
-           {/* MVP Watch */}
-           <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#00E5FF]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                 <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-              </div>
-              <div className="relative z-10 w-full">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">MVP WATCH</h3>
-                 <select 
-                   value={mvpWatchPlayer}
-                   onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
-                 >
-                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                 </select>
-                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
-                 <div className="flex items-end gap-2">
-                   <span className="text-2xl font-black text-[#00E5FF]">8.7</span>
-                   <span className="text-[10px] text-gray-500 uppercase pb-1">Season rating</span>
+          {/* Sidebar Area */}
+          <div className="lg:col-span-5 xl:col-span-4 space-y-6">
+             {/* 3. Join the Discussion */}
+             <Link href="/stands/2" className="block cursor-pointer">
+               <section className="bg-gradient-to-r from-[#121212] to-[#1a1a1a] rounded-3xl p-6 flex justify-between items-center border border-white/5 relative overflow-hidden hover:border-white/10 transition-colors">
+                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-screen" />
+                 <div className="relative z-10">
+                    <h2 className="text-xl font-black tracking-tighter mb-1 uppercase">JOIN THE DISCUSSION</h2>
+                    <p className="text-xs text-gray-400">12.4K active in stands</p>
                  </div>
-              </div>
-           </div>
-
-           {/* Fraud Watch */}
-           <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#D32F2F]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-              <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
-                 <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-              </div>
-              <div className="relative z-10 w-full">
-                 <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">FRAUD WATCH</h3>
-                 <select 
-                   value={fraudWatchPlayer}
-                   onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                   className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
-                 >
-                   {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                 </select>
-                 <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
-                 <div className="flex items-end gap-2">
-                   <span className="text-sm font-bold text-gray-300 max-w-[100px] leading-tight">Needs a big performance</span>
+                 <div className="relative z-10 w-14 h-14 rounded-full bg-[#00E5FF] hover:bg-[#00E5FF]/90 transition-colors flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+                    <Mic className="w-6 h-6 text-black" fill="currentColor" />
                  </div>
-              </div>
-           </div>
-        </section>
+               </section>
+             </Link>
 
+             {/* 5. Player Spotlight */}
+             <section className="flex lg:flex-col gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory lg:snap-none">
+                {/* MVP Watch */}
+                <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#00E5FF]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
+                      <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                   </div>
+                   <div className="relative z-10 w-full">
+                      <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-4">MVP WATCH</h3>
+                      <select 
+                        value={mvpWatchPlayer}
+                        onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                        className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                      >
+                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                      </select>
+                      <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                      <div className="flex items-end gap-2">
+                        <span className="text-2xl font-black text-[#00E5FF]">8.7</span>
+                        <span className="text-[10px] text-gray-500 uppercase pb-1">Season rating</span>
+                      </div>
+                   </div>
+                </div>
+
+                {/* Fraud Watch */}
+                <div className="flex-1 min-w-[280px] bg-[#121212] border border-[#D32F2F]/20 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden snap-center group">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-30 group-hover:opacity-50 transition-opacity pointer-events-none">
+                      <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                   </div>
+                   <div className="relative z-10 w-full">
+                      <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4">FRAUD WATCH</h3>
+                      <select 
+                        value={fraudWatchPlayer}
+                        onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                        className="w-full bg-transparent text-xl font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                      >
+                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                      </select>
+                      <p className="text-xs text-gray-400 mb-4 mt-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                      <div className="flex items-end gap-2">
+                        <span className="text-sm font-bold text-gray-300 max-w-[100px] leading-tight">Needs a big performance</span>
+                      </div>
+                   </div>
+                </div>
+             </section>
+          </div>
+        </div>
       </div>
     </div>
   );
