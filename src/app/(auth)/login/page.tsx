@@ -23,7 +23,7 @@ export default function LoginPage() {
       className="w-full flex flex-col"
     >
       <div className="mb-10">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
           Welcome Back
         </h1>
         <p className="text-gray-400 text-sm md:text-base tracking-wide font-medium">
