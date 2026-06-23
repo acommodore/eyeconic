@@ -8,6 +8,45 @@ import { BackButton } from "@/components/ui/BackButton";
 export default function ActiveStandPage() {
   const [mutedUsers, setMutedUsers] = useState<Record<string, boolean>>({});
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
+  const [inputText, setInputText] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      id: 1,
+      name: "Gooner4Life",
+      color: "text-[#00E5FF]",
+      avatar: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+      time: "1m ago",
+      text: "Absolute shocker from the VAR there. Clear penalty! We are being robbed in broad daylight.",
+      isSpeaker: false
+    },
+    {
+      id: 2,
+      name: "BlueMason",
+      color: "text-[#FF3B00]",
+      avatar: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+      time: "Just now",
+      text: "Never a pen. He dove before the contact even happened. 🤡 Have some shame!",
+      isSpeaker: false
+    },
+    {
+      id: 3,
+      name: "Spursy_10",
+      color: "text-gray-300",
+      avatar: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg",
+      time: "Just now",
+      text: "Host is completely biased as usual. Get him off the mic and let someone objective speak.",
+      isSpeaker: false
+    },
+    {
+      id: 4,
+      name: "GunnerVic (Speaker)",
+      color: "text-[#00C853]",
+      avatar: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+      time: "Just now",
+      text: "Are you blind?! He clearly clipped his heel! Everyone in the stadium saw it.",
+      isSpeaker: true
+    }
+  ]);
 
   const toggleMute = (username: string) => {
     setMutedUsers(prev => ({ ...prev, [username]: !prev[username] }));
@@ -19,6 +58,24 @@ export default function ActiveStandPage() {
     setTimeout(() => {
       setFloatingEmojis(prev => prev.filter(e => e.id !== id));
     }, 2500);
+  };
+
+  const handleSendMessage = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!inputText.trim()) return;
+
+    const newMessage = {
+      id: Date.now(),
+      name: "Maximus (You)",
+      color: "text-[#FF7F50]",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus",
+      time: "Just now",
+      text: inputText.trim(),
+      isSpeaker: false
+    };
+
+    setChatMessages(prev => [...prev, newMessage]);
+    setInputText("");
   };
 
   return (
@@ -82,7 +139,7 @@ export default function ActiveStandPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex px-4 py-2 rounded-full border border-[#FF3B00]/30 bg-[#FF3B00]/10 items-center gap-2">
+            <div className="hidden sm:flex px-4 py-2 rounded-full border border-[#FF3B00]/30 bg-[#FF3B00]/10 items-center gap-2 shadow-[0_0_15px_rgba(255,59,0,0.2)]">
               <Flame className="w-4 h-4 text-[#FF3B00]" />
               <span className="text-[10px] font-bold text-[#FF3B00] tracking-widest">4.2K IN ROOM</span>
             </div>
@@ -225,8 +282,8 @@ export default function ActiveStandPage() {
 
             {/* Speaker 6: Empty */}
             <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8">
-              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-700 relative flex flex-col items-center justify-center group-hover:bg-white/5 transition-colors z-10">
-                <MoreHorizontal className="w-8 h-8 text-gray-700 group-hover:text-white" />
+              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
+                <MoreHorizontal className="w-8 h-8 text-gray-800" />
               </div>
             </div>
 
@@ -242,70 +299,27 @@ export default function ActiveStandPage() {
           <h3 className="text-xs font-black tracking-widest text-white uppercase flex items-center gap-2">
             <Zap className="w-4 h-4 text-[#00E5FF]" /> Live Stand Chat
           </h3>
-          <span className="text-[10px] text-gray-500 font-bold bg-white/5 px-2 py-1 rounded">284 ONLINE</span>
+          {/* Removed the redundant '284 ONLINE' counter here */}
         </div>
 
         {/* Live Chat Feed */}
         <div className="flex-1 overflow-y-auto space-y-6 p-6 scrollbar-hide relative bg-gradient-to-b from-[#0A0A0A] to-[#050505]">
-          <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-white/20 p-1 mt-0.5">
-              <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-full h-full object-contain" alt="ARS" />
-            </div>
-            <div className="bg-[#121212] p-3 rounded-2xl rounded-tl-none border border-white/5 shadow-md flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-black text-[#00E5FF] text-xs tracking-wider">Gooner4Life</span>
-                <span className="text-[9px] text-gray-600 font-bold">1m ago</span>
+          {chatMessages.map((msg) => (
+            <div key={msg.id} className="flex gap-3">
+              <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_10px_rgba(0,200,83,0.3)]' : 'border-white/20'} p-1 mt-0.5`}>
+                <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
               </div>
-              <p className="text-sm text-gray-300 leading-relaxed font-medium">
-                Absolute shocker from the VAR there. Clear penalty! We are being robbed in broad daylight.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-white/20 p-1 mt-0.5">
-              <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" alt="LIV" />
-            </div>
-            <div className="bg-[#121212] p-3 rounded-2xl rounded-tl-none border border-white/5 shadow-md flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-black text-[#FF3B00] text-xs tracking-wider">BlueMason</span>
-                <span className="text-[9px] text-gray-600 font-bold">Just now</span>
+              <div className={`${msg.isSpeaker ? 'bg-[#00C853]/10 border-[#00C853]/30' : 'bg-[#121212] border-white/5'} p-3 rounded-2xl rounded-tl-none border shadow-md flex-1`}>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className={`font-black ${msg.color} text-xs tracking-wider`}>{msg.name}</span>
+                  <span className={`text-[9px] ${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-gray-600'} font-bold`}>{msg.time}</span>
+                </div>
+                <p className={`text-sm ${msg.isSpeaker ? 'text-white' : 'text-gray-300'} leading-relaxed font-medium`}>
+                  {msg.text}
+                </p>
               </div>
-              <p className="text-sm text-gray-300 leading-relaxed font-medium">
-                Never a pen. He dove before the contact even happened. 🤡 Have some shame!
-              </p>
             </div>
-          </div>
-
-          <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-white/20 p-1 mt-0.5">
-              <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-full h-full object-contain" alt="TOT" />
-            </div>
-            <div className="bg-[#121212] p-3 rounded-2xl rounded-tl-none border border-white/5 shadow-md flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-black text-gray-300 text-xs tracking-wider">Spursy_10</span>
-                <span className="text-[9px] text-gray-600 font-bold">Just now</span>
-              </div>
-              <p className="text-sm text-gray-300 leading-relaxed font-medium">
-                Host is completely biased as usual. Get him off the mic and let someone objective speak.
-              </p>
-            </div>
-          </div>
-          
-          <div className="flex gap-3">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-[#00C853] p-1 mt-0.5 shadow-[0_0_10px_rgba(0,200,83,0.3)]">
-              <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-full h-full object-contain" alt="ARS" />
-            </div>
-            <div className="bg-[#00C853]/10 p-3 rounded-2xl rounded-tl-none border border-[#00C853]/30 shadow-md flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="font-black text-[#00C853] text-xs tracking-wider">GunnerVic (Speaker)</span>
-                <span className="text-[9px] text-[#00C853]/60 font-bold">Just now</span>
-              </div>
-              <p className="text-sm text-white leading-relaxed font-bold">
-                Are you blind?! He clearly clipped his heel! Everyone in the stadium saw it.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Action Bar */}
@@ -333,20 +347,33 @@ export default function ActiveStandPage() {
             </button>
           </div>
 
-          {/* Chat Input */}
-          <div className="bg-[#121212] rounded-full p-1.5 border border-white/10 flex items-center focus-within:border-[#00E5FF] transition-all shadow-inner relative z-20">
+          {/* Chat Input Form */}
+          <form 
+            onSubmit={handleSendMessage}
+            className="bg-[#121212] rounded-full p-1.5 border border-white/10 flex items-center focus-within:border-[#00E5FF] transition-all shadow-inner relative z-20"
+          >
             <div className="w-8 h-8 rounded-full bg-gray-800 ml-1 overflow-hidden border border-white/10 shrink-0">
                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
             </div>
             <input 
               type="text" 
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
               placeholder="Join the conversation..." 
               className="bg-transparent border-none outline-none text-sm w-full px-4 text-white placeholder:text-gray-600 font-medium"
             />
-            <button className="w-10 h-10 flex items-center justify-center bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 rounded-full transition-colors mr-0.5 border border-[#00E5FF]/20">
-              <Send className="w-4 h-4 text-[#00E5FF]" />
+            <button 
+              type="submit"
+              disabled={!inputText.trim()}
+              className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors mr-0.5 border ${
+                inputText.trim() 
+                  ? 'bg-[#00E5FF]/20 hover:bg-[#00E5FF]/30 border-[#00E5FF]/40 text-[#00E5FF]' 
+                  : 'bg-[#00E5FF]/5 border-[#00E5FF]/10 text-[#00E5FF]/50'
+              }`}
+            >
+              <Send className="w-4 h-4" />
             </button>
-          </div>
+          </form>
 
         </div>
 
