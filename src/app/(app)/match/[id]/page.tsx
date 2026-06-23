@@ -67,31 +67,31 @@ const highlights = [
 
 // Pitch coordinates
 const pitchLIV = [
-  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", vTop: "90%", vLeft: "50%", hTop: "50%", hLeft: "10%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", vTop: "78%", vLeft: "85%", hTop: "80%", hLeft: "25%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
-  { id: 3, name: "Konaté", num: 5, pos: "CB", rating: "8.2", vTop: "80%", vLeft: "65%", hTop: "65%", hLeft: "22%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
-  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", vTop: "80%", vLeft: "35%", hTop: "35%", hLeft: "22%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
-  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", vTop: "78%", vLeft: "15%", hTop: "20%", hLeft: "25%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
-  { id: 6, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", vTop: "65%", vLeft: "75%", hTop: "70%", hLeft: "38%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
-  { id: 7, name: "Gravenberch", num: 38, pos: "CDM", rating: "7.8", vTop: "68%", vLeft: "50%", hTop: "50%", hLeft: "35%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
-  { id: 8, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", vTop: "65%", vLeft: "25%", hTop: "30%", hLeft: "38%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
-  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", vTop: "48%", vLeft: "82%", hTop: "80%", hLeft: "52%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { id: 10, name: "Jota", num: 20, pos: "ST", rating: "7.1", vTop: "42%", vLeft: "50%", hTop: "50%", hLeft: "58%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
-  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", vTop: "48%", vLeft: "18%", hTop: "20%", hLeft: "52%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", vTop: "92%", vLeft: "50%", hTop: "50%", hLeft: "8%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", vTop: "82%", vLeft: "85%", hTop: "85%", hLeft: "22%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 3, name: "Konaté", num: 5, pos: "CB", rating: "8.2", vTop: "85%", vLeft: "65%", hTop: "65%", hLeft: "18%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", vTop: "85%", vLeft: "35%", hTop: "35%", hLeft: "18%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", vTop: "82%", vLeft: "15%", hTop: "15%", hLeft: "22%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
+  { id: 6, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", vTop: "70%", vLeft: "75%", hTop: "75%", hLeft: "35%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { id: 7, name: "Gravenberch", num: 38, pos: "CDM", rating: "7.8", vTop: "75%", vLeft: "50%", hTop: "50%", hLeft: "28%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
+  { id: 8, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", vTop: "70%", vLeft: "25%", hTop: "25%", hLeft: "35%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
+  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", vTop: "58%", vLeft: "82%", hTop: "82%", hLeft: "46%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 10, name: "Jota", num: 20, pos: "ST", rating: "7.1", vTop: "55%", vLeft: "50%", hTop: "50%", hLeft: "48%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", vTop: "58%", vLeft: "18%", hTop: "18%", hLeft: "46%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
 const pitchMCI = [
-  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", vTop: "10%", vLeft: "50%", hTop: "50%", hLeft: "90%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", vTop: "22%", vLeft: "15%", hTop: "20%", hLeft: "75%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
-  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", vTop: "20%", vLeft: "35%", hTop: "35%", hLeft: "78%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
-  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", vTop: "20%", vLeft: "65%", hTop: "65%", hLeft: "78%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
-  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", vTop: "22%", vLeft: "85%", hTop: "80%", hLeft: "75%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
-  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", vTop: "32%", vLeft: "50%", hTop: "50%", hLeft: "65%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
-  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", vTop: "35%", vLeft: "25%", hTop: "30%", hLeft: "62%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
-  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", vTop: "52%", vLeft: "18%", hTop: "20%", hLeft: "45%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
-  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", vTop: "35%", vLeft: "75%", hTop: "70%", hLeft: "62%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", vTop: "52%", vLeft: "82%", hTop: "80%", hLeft: "45%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
-  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", vTop: "58%", vLeft: "50%", hTop: "50%", hLeft: "42%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", vTop: "8%", vLeft: "50%", hTop: "50%", hLeft: "92%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", vTop: "18%", vLeft: "15%", hTop: "15%", hLeft: "78%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", vTop: "15%", vLeft: "35%", hTop: "35%", hLeft: "82%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", vTop: "15%", vLeft: "65%", hTop: "65%", hLeft: "82%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", vTop: "18%", vLeft: "85%", hTop: "85%", hLeft: "78%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
+  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", vTop: "25%", vLeft: "50%", hTop: "50%", hLeft: "72%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", vTop: "30%", vLeft: "25%", hTop: "25%", hLeft: "65%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
+  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", vTop: "42%", vLeft: "18%", hTop: "18%", hLeft: "54%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
+  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", vTop: "30%", vLeft: "75%", hTop: "75%", hLeft: "65%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", vTop: "42%", vLeft: "82%", hTop: "82%", hLeft: "54%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", vTop: "45%", vLeft: "50%", hTop: "50%", hLeft: "52%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
 const subsLIV = [
