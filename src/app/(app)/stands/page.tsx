@@ -231,62 +231,64 @@ export default function StandsPage() {
             </div>
           </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* SCHEDULED & UPCOMING */}
+          <section className="mb-12">
+             <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled Today
+              </h2>
+              <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">See all</span>
+            </div>
             
-            {/* SCHEDULED & UPCOMING */}
-            <section>
-               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-[#00E5FF]" /> Scheduled
-                </h2>
-                <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">See all</span>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              <div className="space-y-4">
-                
-                {/* Scheduled Item */}
-                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#00E5FF]/50 transition-colors">
-                    <span className="text-xs font-black text-gray-400">7:00</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#00E5FF] transition-colors truncate">UCL Semi-final Preview</h4>
-                    <p className="text-[10px] text-[#00E5FF] font-bold uppercase tracking-widest mt-1">In 2h 15m</p>
-                  </div>
-                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
-                    <Bell className="w-3 h-3 text-white" />
-                  </button>
+              {/* Scheduled Item 1 */}
+              <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#00E5FF]/50 transition-colors">
+                  <span className="text-xs font-black text-gray-400">7:00</span>
                 </div>
-
-                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#FF3B00]/50 transition-colors">
-                    <span className="text-xs font-black text-gray-400">8:30</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#FF3B00] transition-colors truncate">Transfer Deadline Talk</h4>
-                    <p className="text-[10px] text-[#FF3B00] font-bold uppercase tracking-widest mt-1">In 3h 45m</p>
-                  </div>
-                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
-                    <Bell className="w-3 h-3 text-white" />
-                  </button>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-white text-sm group-hover:text-[#00E5FF] transition-colors truncate">UCL Semi-final Preview</h4>
+                  <p className="text-[10px] text-[#00E5FF] font-bold uppercase tracking-widest mt-1">In 2h 15m</p>
                 </div>
-
-                 <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
-                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
-                    <span className="text-xs font-black text-gray-400">10:00</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-bold text-white text-sm group-hover:text-[#6200EA] transition-colors truncate">La Liga Title Race</h4>
-                    <p className="text-[10px] text-[#6200EA] font-bold uppercase tracking-widest mt-1">In 5h 15m</p>
-                  </div>
-                  <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
-                    <Bell className="w-3 h-3 text-white" />
-                  </button>
-                </div>
-
+                <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                  <Bell className="w-3 h-3 text-white" />
+                </button>
               </div>
-            </section>
 
+              {/* Scheduled Item 2 */}
+              <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#FF3B00]/50 transition-colors">
+                  <span className="text-xs font-black text-gray-400">8:30</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-white text-sm group-hover:text-[#FF3B00] transition-colors truncate">Transfer Deadline Talk</h4>
+                  <p className="text-[10px] text-[#FF3B00] font-bold uppercase tracking-widest mt-1">In 3h 45m</p>
+                </div>
+                <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                  <Bell className="w-3 h-3 text-white" />
+                </button>
+              </div>
+
+               {/* Scheduled Item 3 */}
+               <div className="flex items-center gap-4 bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-white/5 transition-colors group cursor-pointer">
+                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-white/10 shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
+                  <span className="text-xs font-black text-gray-400">10:00</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-white text-sm group-hover:text-[#6200EA] transition-colors truncate">La Liga Title Race</h4>
+                  <p className="text-[10px] text-[#6200EA] font-bold uppercase tracking-widest mt-1">In 5h 15m</p>
+                </div>
+                <button className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 shrink-0">
+                  <Bell className="w-3 h-3 text-white" />
+                </button>
+              </div>
+
+            </div>
+          </section>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
             {/* TOP SPACE CREATORS */}
             <section>
                <div className="flex items-center justify-between mb-6">
