@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic } from "lucide-react";
+import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame } from "lucide-react";
 import { useState } from "react";
 import { BackButton } from "@/components/ui/BackButton";
 
@@ -21,7 +21,7 @@ const hotTakes = [
     question: "Was the VAR decision fair?",
     options: [
       { text: "Correct decision", percent: 32, color: "bg-gray-500" },
-      { text: "Robbery!", percent: 58, color: "bg-[#D32F2F]" },
+      { text: "Robbery!", percent: 58, color: "bg-[#FF3B00]" },
       { text: "Too close to call", percent: 10, color: "bg-[#00E5FF]/30" }
     ],
     votes: "7.9K votes"
@@ -68,7 +68,7 @@ const highlights = [
 const rosterLIV = [
   { num: 11, name: "Mo Salah", rating: "9.2", MVP: true, img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
   { num: 4, name: "Virgil van Dijk", rating: "8.4", MVP: false, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
-  { num: 66, name: "Trent Alexander-Arnold", rating: "7.9", MVP: false, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" }
+  { num: 66, name: "Alexander-Arnold", rating: "7.9", MVP: false, img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" }
 ];
 
 const rosterMCI = [
@@ -82,61 +82,84 @@ export default function MatchDetailsPage() {
   const [activeRoster, setActiveRoster] = useState('LIVERPOOL');
 
   return (
-    <div className="w-full max-w-[1000px] mx-auto p-4 md:p-6 bg-[#050505] min-h-screen text-white pb-24">
-      {/* Top Header */}
+    <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
+      
+      {/* Top Header Navigation */}
       <div className="flex items-center justify-between mb-8">
-        <BackButton containerClassName="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors" iconClassName="w-5 h-5 text-[#00E5FF]" />
-        
-        <div className="flex items-center gap-6 md:gap-12">
-          {/* LIV */}
-          <div className="flex flex-col items-center">
-            <div className="w-14 h-14 rounded-full bg-[#D32F2F] flex items-center justify-center text-white font-black text-xl mb-2 shadow-[0_0_20px_rgba(211,47,47,0.4)]">
-              LIV
-            </div>
-            <span className="text-[10px] font-black tracking-widest uppercase">Liverpool</span>
-          </div>
-
-          {/* Score */}
-          <div className="flex flex-col items-center">
-            <div className="text-4xl md:text-5xl font-black tracking-tighter mb-2">
-              2 - 0
-            </div>
-            <span className="text-[10px] text-[#00E5FF] font-black tracking-widest uppercase">FULL TIME</span>
-          </div>
-
-          {/* MCI */}
-          <div className="flex flex-col items-center">
-            <div className="w-14 h-14 rounded-full bg-[#4FC3F7] flex items-center justify-center text-black font-black text-xl mb-2 shadow-[0_0_20px_rgba(79,195,247,0.4)]">
-              MCI
-            </div>
-            <span className="text-[10px] font-black tracking-widest uppercase">Man City</span>
-          </div>
-        </div>
-
-        <button className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors">
-          <Share className="w-5 h-5 text-gray-400" />
+        <BackButton containerClassName="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]" iconClassName="w-5 h-5 text-white" />
+        <h1 className="text-sm font-black tracking-widest text-gray-400 uppercase">Match Center</h1>
+        <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]">
+          <Share className="w-5 h-5 text-white" />
         </button>
       </div>
 
-      {/* Scorers */}
-      <div className="flex items-center justify-center gap-2 text-xs text-gray-400 font-medium mb-8">
-        <div className="flex items-center gap-1.5"><div className="w-3 h-3 border border-gray-400 rounded-full flex items-center justify-center text-[6px]">⚽</div> Salah 2'</div>
-        <span>•</span>
-        <div className="flex items-center gap-1.5"><div className="w-3 h-3 border border-gray-400 rounded-full flex items-center justify-center text-[6px]">⚽</div> Konate 78'</div>
+      {/* Cinematic Scoreboard */}
+      <div className="relative w-full rounded-[32px] overflow-hidden mb-12 border border-white/10 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/20 via-[#020202] to-[#4FC3F7]/20 z-0" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
+        
+        <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
+          <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-8">
+            Full Time
+          </div>
+
+          <div className="flex items-center justify-center gap-6 md:gap-16 w-full max-w-2xl">
+            {/* LIVERPOOL */}
+            <div className="flex flex-col items-center flex-1">
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(211,47,47,0.3)] mb-4">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="LIV" className="w-full h-full object-contain" />
+              </div>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Liverpool</h2>
+            </div>
+
+            {/* SCORE */}
+            <div className="flex flex-col items-center justify-center shrink-0">
+              <div className="text-5xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
+                2 <span className="text-gray-600 font-normal mx-2">-</span> 0
+              </div>
+            </div>
+
+            {/* MAN CITY */}
+            <div className="flex flex-col items-center flex-1">
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain" />
+              </div>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Man City</h2>
+            </div>
+          </div>
+
+          {/* Goal Scorers */}
+          <div className="mt-12 flex flex-col items-center gap-2">
+            <div className="bg-[#0A0A0A]/60 backdrop-blur-md border border-white/10 rounded-xl px-6 py-3 flex items-center gap-4 text-xs font-bold text-gray-300">
+              <div className="flex items-center gap-2">
+                <span className="text-[#00E5FF]">⚽</span> Salah 2'
+              </div>
+              <span className="w-1 h-1 rounded-full bg-gray-600" />
+              <div className="flex items-center gap-2">
+                <span className="text-[#00E5FF]">⚽</span> Konate 78'
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="flex bg-[#121212] rounded-full p-1 mb-8">
-        {['OVERVIEW', 'TIMELINE', 'STATS', 'STAND'].map((tab) => (
+      {/* Tab Navigation - Modern Pills */}
+      <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
+        {['OVERVIEW', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
           <button 
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold tracking-widest transition-colors ${activeTab === tab ? 'bg-[#00E5FF]/10 text-[#00E5FF]' : 'text-gray-500 hover:text-white'}`}
+            className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+              activeTab === tab 
+                ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+            }`}
           >
-            {tab === 'OVERVIEW' && <Activity className="w-4 h-4" />}
+            {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
             {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
             {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
-            {tab === 'STAND' && <Mic className="w-4 h-4" />}
+            {tab === 'STANDS' && <Mic className="w-4 h-4" />}
             {tab}
           </button>
         ))}
@@ -144,97 +167,91 @@ export default function MatchDetailsPage() {
 
       {/* Overview Content */}
       {activeTab === 'OVERVIEW' && (
-        <div className="space-y-10">
+        <div className="space-y-12">
           
-          {/* Fan Voted MVP */}
-          <section className="bg-[#121212] border border-white/5 rounded-3xl p-6 relative overflow-hidden">
+          {/* Fan Voted MVP - Redesigned */}
+          <section className="bg-gradient-to-r from-[#121212] to-[#0A0A0A] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden group">
             {/* Background Heatmap Graphic */}
-            <div className="absolute top-0 right-0 w-2/3 h-full opacity-30 pointer-events-none">
+            <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 pointer-events-none transition-transform duration-1000 group-hover:scale-105">
                <div className="w-full h-full bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Football_field_blank.svg/800px-Football_field_blank.svg.png')] bg-contain bg-no-repeat bg-right-top" style={{ filter: 'invert(1) opacity(0.3)' }} />
-               <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-red-600 rounded-full blur-3xl opacity-60" />
-               <div className="absolute top-1/3 right-1/3 w-24 h-24 bg-yellow-400 rounded-full blur-2xl opacity-60" />
+               <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-red-600 rounded-full blur-[80px] opacity-60" />
+               <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-[#00E5FF] rounded-full blur-[60px] opacity-40" />
             </div>
 
-            <div className="flex items-center gap-2 mb-6">
-              <h2 className="text-xs font-black tracking-widest text-white uppercase">FAN VOTED MVP</h2>
-              <Eye className="w-3 h-3 text-gray-500" />
+            <div className="flex items-center justify-between mb-8 relative z-10">
+              <h2 className="text-sm font-black tracking-widest text-[#00E5FF] uppercase flex items-center gap-3">
+                <Flame className="w-5 h-5 text-[#00E5FF]" /> FAN VOTED MVP
+              </h2>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
-              {/* Avatar */}
-              <div className="relative">
-                <div className="w-32 h-32 rounded-full border-[3px] border-[#00E5FF] p-1 overflow-hidden shadow-[0_0_30px_rgba(0,229,255,0.3)]">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" className="w-full h-full rounded-full object-cover" />
+            <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
+              {/* Avatar Ultimate Team Style */}
+              <div className="relative shrink-0">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-[2rem] border border-[#00E5FF]/30 p-2 overflow-hidden shadow-[0_0_40px_rgba(0,229,255,0.2)] bg-[#020202]">
+                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-[1.5rem] object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" />
                 </div>
-                <div className="absolute -bottom-2 -right-2 bg-[#00E5FF] text-black font-black text-lg px-3 py-1 rounded-lg">
+                <div className="absolute -bottom-4 -right-4 bg-[#00E5FF] text-black font-black text-2xl px-5 py-2 rounded-xl border-4 border-[#020202] rotate-3 hover:rotate-0 transition-transform">
                   9.2
                 </div>
               </div>
 
               {/* Info */}
               <div className="flex-1 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <h3 className="text-3xl font-black">Mo Salah</h3>
-                  <span className="px-2 py-0.5 border border-[#00E5FF]/50 text-[#00E5FF] text-[10px] font-black rounded tracking-widest">MVP</span>
-                </div>
-                <p className="text-sm text-gray-400 font-medium mb-6">Liverpool • Forward • #11</p>
+                <h3 className="text-4xl md:text-5xl font-black mb-2 tracking-tight">Mo Salah</h3>
+                <p className="text-sm text-[#00E5FF] font-bold tracking-widest uppercase mb-8">Liverpool • Forward • #11</p>
 
-                {/* Vote Breakdown */}
-                <div className="flex gap-4 justify-center md:justify-start">
-                  <div className="bg-[#1A1A1A] rounded-2xl p-4 min-w-[90px] flex flex-col items-center">
-                    <Eye className="w-5 h-5 text-[#00E5FF] mb-2" />
-                    <span className="text-lg font-black">75%</span>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">EYE TEST</span>
+                {/* Bento Box Stats */}
+                <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto md:mx-0">
+                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
+                    <span className="text-2xl font-black text-white">75%</span>
+                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">EYE TEST</span>
                   </div>
-                  <div className="bg-[#1A1A1A] rounded-2xl p-4 min-w-[90px] flex flex-col items-center">
-                    <Shield className="w-5 h-5 text-[#FF7F50] mb-2" />
-                    <span className="text-lg font-black">15%</span>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">SOLID</span>
+                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
+                    <span className="text-2xl font-black text-[#FF3B00]">15%</span>
+                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">SOLID</span>
                   </div>
-                  <div className="bg-[#1A1A1A] rounded-2xl p-4 min-w-[90px] flex flex-col items-center">
-                    <X className="w-5 h-5 text-gray-400 mb-2" />
-                    <span className="text-lg font-black">10%</span>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">POOR</span>
+                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
+                    <span className="text-2xl font-black text-gray-600">10%</span>
+                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">POOR</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-4">
-              <div className="flex items-center gap-2">
+            <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between relative z-10">
+              <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop" className="w-6 h-6 rounded-full border border-black" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" className="w-6 h-6 rounded-full border border-black" />
-                  <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=50&h=50&fit=crop" className="w-6 h-6 rounded-full border border-black" />
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop" className="w-8 h-8 rounded-full border-2 border-[#121212]" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" className="w-8 h-8 rounded-full border-2 border-[#121212]" />
+                  <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-[#1A1A1A] flex items-center justify-center text-[8px] font-black">+12K</div>
                 </div>
-                <span className="text-xs font-bold text-gray-400"><span className="text-white">12.4K</span> fans voted</span>
+                <span className="text-xs font-bold text-gray-400">fans voted</span>
               </div>
-              <button className="text-xs text-gray-400 hover:text-white font-bold flex items-center gap-1">
-                See how it works <ChevronRight className="w-4 h-4" />
+              <button className="text-xs font-black tracking-widest text-white hover:text-[#00E5FF] transition-colors flex items-center gap-2 uppercase">
+                View Breakdown <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </section>
 
-          {/* Match Key Insights */}
+          {/* Match Key Insights - Bento Box Redesign */}
           <section>
-            <h2 className="text-xs font-black tracking-widest text-white uppercase mb-4">MATCH KEY INSIGHTS</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h2 className="text-sm font-black tracking-widest text-white uppercase mb-6 flex items-center gap-3">
+               <Activity className="w-5 h-5 text-purple-500" /> KEY INSIGHTS
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-yellow-400/20 flex items-center justify-center">
-                    <span className="text-yellow-400 text-lg">😃</span>
-                  </div>
-                  <h3 className="text-[10px] font-black tracking-widest text-white uppercase">FAN SENTIMENT</h3>
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+                <div className="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center mb-4">
+                  <span className="text-yellow-400 text-xl">😃</span>
                 </div>
+                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">FAN SENTIMENT</h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-6">
                   Liverpool fans are ecstatic about the midfield control, but concerned about defensive lapses in the first half.
                 </p>
-                <div className="mt-auto h-12 flex items-end justify-between gap-1 w-full relative">
+                <div className="mt-auto h-12 relative w-full opacity-50">
                    <svg className="w-full h-full absolute inset-0" preserveAspectRatio="none" viewBox="0 0 100 40">
                      <path d="M0,30 Q10,35 20,25 T40,20 T60,15 T80,25 T100,10" fill="none" stroke="#00E5FF" strokeWidth="2" />
-                     {/* Dots */}
                      <circle cx="20" cy="25" r="2" fill="#00E5FF" />
                      <circle cx="40" cy="20" r="2" fill="#00E5FF" />
                      <circle cx="60" cy="15" r="2" fill="#00E5FF" />
@@ -244,32 +261,27 @@ export default function MatchDetailsPage() {
                 </div>
               </div>
 
-              <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-[#FF7F50]/20 flex items-center justify-center">
-                    <Activity className="w-4 h-4 text-[#FF7F50]" />
-                  </div>
-                  <h3 className="text-[10px] font-black tracking-widest text-white uppercase">CONTROVERSY</h3>
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+                <div className="w-10 h-10 rounded-xl bg-[#FF3B00]/10 flex items-center justify-center mb-4">
+                  <Activity className="w-5 h-5 text-[#FF3B00]" />
                 </div>
-                <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                  VAR decision on the 35th minute goal remains a hot topic. <span className="text-[#00E5FF] font-bold">68%</span> of neutral fans voted it should have been disallowed.
+                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">CONTROVERSY</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  VAR decision on the 35th min goal remains a hot topic. <span className="text-[#FF3B00] font-bold">68%</span> of neutrals say it was a robbery.
                 </p>
               </div>
 
-              <div className="bg-[#121212] border border-white/5 rounded-3xl p-6 flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
-                    <Zap className="w-4 h-4 text-purple-500 fill-purple-500" />
-                  </div>
-                  <h3 className="text-[10px] font-black tracking-widest text-white uppercase">GAME FLOW</h3>
+              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                  <Zap className="w-5 h-5 text-purple-500" />
                 </div>
+                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">GAME FLOW</h3>
                 <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                  Liverpool dominated possession and territory in the second half after a tight first 30 minutes.
+                  Liverpool dominated possession and territory in the second half.
                 </p>
-                <div className="mt-auto h-12 flex items-end gap-1 w-full">
-                  {/* Random bars to mimic graph */}
+                <div className="mt-auto h-12 flex items-end gap-1 w-full opacity-50">
                   {[2, 3, 4, 3, 2, 5, 4, 3, 4, 6, 5, 8, 5, 4, 10, 8, 9, 7, 5].map((h, i) => (
-                    <div key={i} className="w-full bg-purple-500" style={{ height: `${h*10}%` }} />
+                    <div key={i} className="w-full bg-purple-500 rounded-t-sm hover:bg-purple-400 transition-colors" style={{ height: `${h*10}%` }} />
                   ))}
                 </div>
               </div>
@@ -279,89 +291,33 @@ export default function MatchDetailsPage() {
 
           {/* Hot Takes */}
           <section>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <h2 className="text-xs font-black tracking-widest text-white uppercase">HOT TAKES 🔥</h2>
-                <span className="text-xs text-gray-500">Live fan opinions</span>
-              </div>
-              <button className="text-[#00E5FF] text-xs font-bold hover:underline flex items-center gap-1">
-                See all <ChevronRight className="w-4 h-4" />
-              </button>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Flame className="w-5 h-5 text-[#FF3B00]" /> HOT TAKES
+              </h2>
+              <button className="text-[10px] text-gray-400 font-bold hover:text-white transition-colors uppercase tracking-widest">See all</button>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {hotTakes.map((take) => (
-                <div key={take.id} className="min-w-[280px] md:min-w-[320px] bg-[#121212] border border-white/5 rounded-3xl p-6 snap-start flex flex-col">
-                  <h3 className="text-sm font-bold text-white mb-6">{take.question}</h3>
+                <div key={take.id} className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all">
+                  <h3 className="text-sm font-black text-white mb-6 leading-relaxed">{take.question}</h3>
                   <div className="space-y-4 mb-6 flex-1">
                     {take.options.map((opt, i) => (
                       <div key={i}>
-                        <div className="flex justify-between text-xs font-bold mb-1.5">
+                        <div className="flex justify-between text-xs font-bold mb-2">
                           <span className={opt.percent > 50 ? 'text-white' : 'text-gray-400'}>{opt.text}</span>
-                          <span className={opt.percent > 50 && opt.color.includes('D32F2F') ? 'text-[#D32F2F]' : 'text-white'}>{opt.percent}%</span>
+                          <span className={opt.percent > 50 ? 'text-white' : 'text-gray-500'}>{opt.percent}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
                           <div className={`h-full rounded-full ${opt.color}`} style={{ width: `${opt.percent}%` }} />
                         </div>
                       </div>
                     ))}
                   </div>
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{take.votes}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Highlights from the Stand */}
-          <section>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <h2 className="text-xs font-black tracking-widest text-white uppercase">HIGHLIGHTS FROM THE STAND</h2>
-                <span className="text-xs text-gray-500">Top fan audio & reactions</span>
-              </div>
-              <button className="text-[#00E5FF] text-xs font-bold hover:underline flex items-center gap-1">
-                See all <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="flex gap-4 overflow-x-auto pb-4 hover-scrollbar snap-x">
-              {highlights.map((item) => (
-                <div key={item.id} className="min-w-[280px] bg-[#121212] border border-white/5 rounded-3xl p-5 snap-start flex flex-col">
-                  <div className="flex items-center gap-3 mb-4">
-                    <img src={item.avatar} className="w-10 h-10 rounded-full" />
-                    <div>
-                      <h4 className="text-sm font-bold">{item.user}</h4>
-                      <span className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase">Top Rated Audio</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-4">
-                    <button className="w-10 h-10 rounded-full bg-[#00E5FF] flex items-center justify-center shrink-0 hover:bg-[#00E5FF]/80">
-                      <Play className="w-5 h-5 text-black fill-black ml-0.5" />
-                    </button>
-                    <div className="flex-1 flex gap-0.5 items-end h-6">
-                       {/* Waveform fake */}
-                       {[3, 5, 2, 8, 4, 10, 6, 7, 3, 5, 2, 4, 8].map((h, i) => (
-                         <div key={i} className={`flex-1 w-full bg-[#00E5FF] rounded-sm`} style={{ height: `${h*10}%` }} />
-                       ))}
-                    </div>
-                    <span className="text-[10px] font-bold text-white shrink-0">{item.duration}</span>
-                  </div>
-
-                  <p className="text-sm text-gray-300 leading-relaxed mb-6 flex-1">
-                    {item.text.split(/(#\w+)/).map((part, i) => 
-                      part.startsWith('#') ? <span key={i} className="text-[#00E5FF] font-bold">{part}</span> : part
-                    )}
-                  </p>
-
-                  <div className="flex items-center gap-4 text-gray-400">
-                    <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-                      <ThumbsUp className="w-4 h-4" />
-                      <span className="text-xs font-bold">{item.likes}</span>
-                    </button>
-                    <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-                      <ThumbsDown className="w-4 h-4" />
-                    </button>
+                  <div className="pt-4 border-t border-white/5 flex items-center gap-2">
+                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{take.votes} LIVE</span>
                   </div>
                 </div>
               ))}
@@ -370,67 +326,52 @@ export default function MatchDetailsPage() {
 
           {/* Match Roster & Ratings */}
           <section>
-            <h2 className="text-xs font-black tracking-widest text-white uppercase mb-4">MATCH ROSTER & RATINGS</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Shield className="w-5 h-5 text-gray-400" /> ROSTER & RATINGS
+              </h2>
+            </div>
             
-            <div className="flex bg-[#1A1A1A] rounded-full p-1 mb-6 border border-white/5">
+            <div className="flex bg-[#0A0A0A] border border-white/5 rounded-full p-1 mb-8 max-w-sm">
               <button 
                 onClick={() => setActiveRoster('LIVERPOOL')}
-                className={`flex-1 py-3 rounded-full text-xs font-bold tracking-widest transition-colors ${activeRoster === 'LIVERPOOL' ? 'bg-[#00E5FF] text-black' : 'text-gray-500 hover:text-white'}`}
+                className={`flex-1 py-2.5 rounded-full text-xs font-black tracking-widest transition-all ${activeRoster === 'LIVERPOOL' ? 'bg-[#00E5FF] text-black shadow-[0_0_15px_rgba(0,229,255,0.3)]' : 'text-gray-500 hover:text-white'}`}
               >
                 LIVERPOOL
               </button>
               <button 
                 onClick={() => setActiveRoster('MAN CITY')}
-                className={`flex-1 py-3 rounded-full text-xs font-bold tracking-widest transition-colors ${activeRoster === 'MAN CITY' ? 'bg-[#00E5FF] text-black' : 'text-gray-500 hover:text-white'}`}
+                className={`flex-1 py-2.5 rounded-full text-xs font-black tracking-widest transition-all ${activeRoster === 'MAN CITY' ? 'bg-[#00E5FF] text-black shadow-[0_0_15px_rgba(0,229,255,0.3)]' : 'text-gray-500 hover:text-white'}`}
               >
                 MAN CITY
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-               {activeRoster === 'LIVERPOOL' ? rosterLIV.map((player) => (
-                 <div key={player.num} className="bg-[#121212] border border-white/5 hover:bg-white/5 transition-colors rounded-2xl p-4 flex items-center justify-between cursor-pointer">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+               {(activeRoster === 'LIVERPOOL' ? rosterLIV : rosterMCI).map((player) => (
+                 <div key={player.num} className="bg-[#0A0A0A] border border-white/5 hover:bg-white/5 hover:border-white/20 transition-all rounded-[20px] p-4 flex items-center justify-between group cursor-pointer">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden shrink-0">
+                      <div className="w-12 h-12 rounded-full border border-white/10 overflow-hidden shrink-0 group-hover:scale-110 transition-transform">
                         <img src={player.img} className="w-full h-full object-cover" />
                       </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-black w-6 text-center">{player.num}</span>
+                      <div className="flex flex-col justify-center">
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-bold text-white">{player.name}</span>
-                          {player.MVP && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">MVP</span>}
+                          {player.MVP && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF] bg-[#00E5FF]/10 text-[#00E5FF]">MVP</span>}
                         </div>
+                        <span className="text-[10px] text-gray-500 font-bold mt-1">#{player.num}</span>
                       </div>
                     </div>
-                    <div className={`px-2.5 py-1 rounded-lg text-sm font-black ${parseFloat(player.rating) >= 8.0 ? 'text-[#00E5FF] border border-[#00E5FF]/30' : 'text-gray-300 border border-white/10'}`}>
-                      {player.rating}
-                    </div>
-                 </div>
-               )) : rosterMCI.map((player) => (
-                 <div key={player.num} className="bg-[#121212] border border-white/5 hover:bg-white/5 transition-colors rounded-2xl p-4 flex items-center justify-between cursor-pointer">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full border border-white/10 overflow-hidden shrink-0">
-                        <img src={player.img} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm font-black w-6 text-center">{player.num}</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-bold text-white">{player.name}</span>
-                          {player.MVP && <span className="text-[8px] font-black tracking-widest px-1.5 py-0.5 rounded border border-[#00E5FF]/50 text-[#00E5FF]">MVP</span>}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={`px-2.5 py-1 rounded-lg text-sm font-black ${parseFloat(player.rating) >= 8.0 ? 'text-[#00E5FF] border border-[#00E5FF]/30' : 'text-gray-300 border border-white/10'}`}>
+                    <div className={`px-3 py-1.5 rounded-lg text-sm font-black ${parseFloat(player.rating) >= 8.0 ? 'text-[#00E5FF] bg-[#00E5FF]/10 border border-[#00E5FF]/30' : 'text-gray-300 bg-white/5 border border-white/10'}`}>
                       {player.rating}
                     </div>
                  </div>
                ))}
             </div>
 
-            <button className="w-full mt-6 py-4 rounded-xl border border-white/10 text-sm font-bold text-[#00E5FF] hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
-              View full lineup & ratings <ChevronRight className="w-4 h-4" />
+            <button className="w-full mt-8 py-5 rounded-[20px] border border-white/10 text-xs font-black tracking-widest uppercase text-white hover:bg-white/5 hover:border-white/30 transition-all flex items-center justify-center gap-2">
+              View Full Lineup <ChevronRight className="w-4 h-4" />
             </button>
-
           </section>
 
         </div>
