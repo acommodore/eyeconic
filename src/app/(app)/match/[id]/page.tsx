@@ -359,9 +359,9 @@ export default function MatchDetailsPage() {
               </h2>
             </div>
 
-            <div className="flex flex-col xl:flex-row gap-8">
+            <div className="flex flex-col gap-8">
               {/* Pitch */}
-              <div className="flex-1 relative bg-gradient-to-r from-[#113A1E] to-[#1A4A28] rounded-[24px] border border-white/20 shadow-2xl overflow-hidden min-h-[400px] xl:min-h-[500px]">
+              <div className="w-full relative bg-gradient-to-r from-[#113A1E] to-[#1A4A28] rounded-[24px] border border-white/20 shadow-2xl overflow-hidden min-h-[400px] xl:min-h-[500px]">
                 {/* Field Lines (Horizontal) */}
                 <div className="absolute inset-4 border border-white/30 rounded-lg pointer-events-none" />
                 <div className="absolute top-4 bottom-4 left-1/2 w-px bg-white/30 pointer-events-none" />
@@ -411,62 +411,70 @@ export default function MatchDetailsPage() {
                 })}
               </div>
 
-              {/* Sidebar (Subs & Coaches) */}
-              <div className="w-full xl:w-80 flex flex-col gap-6">
-                {/* Coaches */}
-                <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6">
-                   <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-4">Coaches</h3>
-                   <div className="flex flex-col gap-4">
-                     <div className="flex items-center justify-between">
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-[#D32F2F]/20 flex items-center justify-center border border-[#D32F2F]/50 text-[#D32F2F] font-black text-xs">LIV</div>
+              {/* Subs & Coaches (Split under their teams) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                {/* LIVERPOOL SIDE */}
+                <div className="flex flex-col gap-4">
+                  {/* Coach */}
+                  <div className="bg-[#0A0A0A] border border-[#D32F2F]/30 rounded-[24px] p-6 flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-[#D32F2F]/20 flex items-center justify-center border border-[#D32F2F]/50 text-[#D32F2F] font-black text-xs">LIV</div>
+                       <div>
+                         <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-0.5">Manager</h3>
                          <span className="text-sm font-bold text-white">{coaches.liv.name}</span>
                        </div>
-                       <span className="text-sm font-black text-[#00E5FF]">{coaches.liv.rating}</span>
                      </div>
-                     <div className="flex items-center justify-between">
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-full bg-[#4FC3F7]/20 flex items-center justify-center border border-[#4FC3F7]/50 text-[#4FC3F7] font-black text-xs">MCI</div>
+                     <span className="text-xl font-black text-[#00E5FF]">{coaches.liv.rating}</span>
+                  </div>
+
+                  {/* Bench */}
+                  <div className="bg-[#0A0A0A] border border-[#D32F2F]/20 rounded-[24px] p-6 flex-1">
+                     <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
+                       <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
+                       Bench
+                     </h3>
+                     <div className="flex flex-col gap-3">
+                       {subsLIV.map((sub, i) => (
+                         <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                           <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
+                           <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
+                         </div>
+                       ))}
+                     </div>
+                  </div>
+                </div>
+
+                {/* MAN CITY SIDE */}
+                <div className="flex flex-col gap-4">
+                  {/* Coach */}
+                  <div className="bg-[#0A0A0A] border border-[#4FC3F7]/30 rounded-[24px] p-6 flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-[#4FC3F7]/20 flex items-center justify-center border border-[#4FC3F7]/50 text-[#4FC3F7] font-black text-xs">MCI</div>
+                       <div>
+                         <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-0.5">Manager</h3>
                          <span className="text-sm font-bold text-white">{coaches.mci.name}</span>
                        </div>
-                       <span className="text-sm font-black text-[#FF3B00]">{coaches.mci.rating}</span>
                      </div>
-                   </div>
-                </div>
+                     <span className="text-xl font-black text-[#FF3B00]">{coaches.mci.rating}</span>
+                  </div>
 
-                {/* Subs Liverpool */}
-                <div className="bg-[#0A0A0A] border border-[#D32F2F]/20 rounded-[24px] p-6 flex-1">
-                   <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
-                     Liverpool Bench
-                   </h3>
-                   <div className="flex flex-col gap-3">
-                     {subsLIV.map((sub, i) => (
-                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                       </div>
-                     ))}
-                   </div>
-                </div>
-
-                {/* Subs Man City */}
-                <div className="bg-[#0A0A0A] border border-[#4FC3F7]/20 rounded-[24px] p-6 flex-1">
-                   <h3 className="text-[10px] font-black tracking-widest text-[#4FC3F7] uppercase mb-4 flex items-center gap-2">
-                     <div className="w-2 h-2 rounded-full bg-[#4FC3F7]" />
-                     Man City Bench
-                   </h3>
-                   <div className="flex flex-col gap-3">
-                     {subsMCI.map((sub, i) => (
-                       <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                         <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                         <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                       </div>
-                     ))}
-                   </div>
+                  {/* Bench */}
+                  <div className="bg-[#0A0A0A] border border-[#4FC3F7]/20 rounded-[24px] p-6 flex-1">
+                     <h3 className="text-[10px] font-black tracking-widest text-[#4FC3F7] uppercase mb-4 flex items-center gap-2">
+                       <div className="w-2 h-2 rounded-full bg-[#4FC3F7]" />
+                       Bench
+                     </h3>
+                     <div className="flex flex-col gap-3">
+                       {subsMCI.map((sub, i) => (
+                         <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                           <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
+                           <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
+                         </div>
+                       ))}
+                     </div>
+                  </div>
                 </div>
               </div>
-
             </div>
           </section>
 
