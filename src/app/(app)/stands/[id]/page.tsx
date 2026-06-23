@@ -186,13 +186,13 @@ export default function ActiveStandPage() {
               </div>
             </div>
 
-            {/* Speaker 4: Listening / Invited */}
-            <div className="flex flex-col items-center gap-4 group cursor-pointer relative mt-8">
-              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-700 relative flex flex-col items-center justify-center group-hover:bg-white/5 transition-colors group-hover:border-[#FF7F50] z-10">
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-2 group-hover:bg-[#FF7F50]/20 transition-colors">
-                  <Users className="w-5 h-5 text-gray-500 group-hover:text-[#FF7F50]" />
+            {/* Speaker 4: Empty Slot */}
+            <div className="flex flex-col items-center gap-4 relative mt-8">
+              <div className="w-32 h-32 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                  <MicOff className="w-6 h-6 text-gray-800" />
                 </div>
-                <span className="text-[10px] text-gray-600 font-bold tracking-widest group-hover:text-[#FF7F50]">INVITE CO-HOST</span>
+                <span className="text-[10px] text-gray-800 font-bold tracking-widest">OPEN SLOT</span>
               </div>
             </div>
 
