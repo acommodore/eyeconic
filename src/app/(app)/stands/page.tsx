@@ -289,11 +289,11 @@ export default function StandsPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
-            {/* TOP SPACE CREATORS */}
+            {/* TRENDING VOICES */}
             <section>
                <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                  <Mic className="w-5 h-5 text-[#6200EA]" /> Top Creators
+                  <Mic className="w-5 h-5 text-[#6200EA]" /> Trending Voices
                 </h2>
                 <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Discover</span>
               </div>
