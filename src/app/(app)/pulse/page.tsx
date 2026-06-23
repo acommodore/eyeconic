@@ -163,6 +163,9 @@ export default function MatchPulsePage() {
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [playerRatings, setPlayerRatings] = useState<Record<string, EmojiRating>>({});
 
+  const [isH2HOpen, setIsH2HOpen] = useState(false);
+  const [isStandingsOpen, setIsStandingsOpen] = useState(false);
+
   const [localVoiceNotes, setLocalVoiceNotes] = useState(mockVoiceNotes);
   const [isRecordingModalOpen, setIsRecordingModalOpen] = useState(false);
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
@@ -631,21 +634,107 @@ export default function MatchPulsePage() {
         </div>
 
         <div className="p-4 space-y-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-           <button className="w-full flex items-center justify-between bg-[#121212] p-4 rounded-xl border border-white/5 hover:border-[#00E5FF]/30 transition-colors">
-             <div className="flex items-center gap-3">
-               <ArrowRightLeft className="w-4 h-4 text-[#00E5FF]" />
-               <span className="text-xs font-black tracking-widest uppercase text-gray-300">HEAD TO HEAD</span>
-             </div>
-             <ChevronDown className="w-4 h-4 text-gray-500" />
-           </button>
+           <div className="w-full flex flex-col bg-[#121212] rounded-xl border border-white/5 hover:border-[#00E5FF]/30 transition-colors overflow-hidden">
+             <button 
+               onClick={() => setIsH2HOpen(!isH2HOpen)}
+               className="w-full flex items-center justify-between p-4"
+             >
+               <div className="flex items-center gap-3">
+                 <ArrowRightLeft className="w-4 h-4 text-[#00E5FF]" />
+                 <span className="text-xs font-black tracking-widest uppercase text-gray-300">HEAD TO HEAD</span>
+               </div>
+               <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${isH2HOpen ? 'rotate-180' : ''}`} />
+             </button>
+             {isH2HOpen && (
+               <div className="p-4 pt-0 text-sm text-gray-400 space-y-6 animate-in slide-in-from-top-2 fade-in duration-300">
+                 <div className="flex justify-between items-center text-[10px] md:text-xs font-bold tracking-widest uppercase bg-[#1A1A1A] p-3 rounded-lg border border-white/5">
+                   <span className="text-red-500 text-center flex-1">LIV: 12</span>
+                   <span className="text-gray-500 text-center flex-1 border-x border-white/10">DRAWS: 8</span>
+                   <span className="text-blue-400 text-center flex-1">MCI: 10</span>
+                 </div>
+                 <div className="space-y-2">
+                   <div className="flex items-center justify-between bg-white/5 px-4 py-2.5 rounded-lg border border-white/5">
+                     <span className="w-10 text-right text-white font-black tracking-widest">LIV</span>
+                     <span className="px-3 py-1 bg-[#1A1A1A] rounded text-xs text-white font-mono font-bold tracking-widest">1 - 1</span>
+                     <span className="w-10 text-left text-white font-black tracking-widest">MCI</span>
+                   </div>
+                   <div className="flex items-center justify-between bg-white/5 px-4 py-2.5 rounded-lg border border-white/5">
+                     <span className="w-10 text-right text-gray-500 font-black tracking-widest">MCI</span>
+                     <span className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 text-blue-400 rounded text-xs font-mono font-bold tracking-widest">3 - 2</span>
+                     <span className="w-10 text-left text-white font-black tracking-widest">LIV</span>
+                   </div>
+                   <div className="flex items-center justify-between bg-white/5 px-4 py-2.5 rounded-lg border border-white/5">
+                     <span className="w-10 text-right text-white font-black tracking-widest">LIV</span>
+                     <span className="px-3 py-1 bg-red-500/20 border border-red-500/30 text-red-400 rounded text-xs font-mono font-bold tracking-widest">1 - 0</span>
+                     <span className="w-10 text-left text-gray-500 font-black tracking-widest">MCI</span>
+                   </div>
+                   <div className="flex items-center justify-between bg-white/5 px-4 py-2.5 rounded-lg border border-white/5">
+                     <span className="w-10 text-right text-white font-black tracking-widest">LIV</span>
+                     <span className="px-3 py-1 bg-red-500/20 border border-red-500/30 text-red-400 rounded text-xs font-mono font-bold tracking-widest">3 - 1</span>
+                     <span className="w-10 text-left text-gray-500 font-black tracking-widest">MCI</span>
+                   </div>
+                 </div>
+               </div>
+             )}
+           </div>
 
-           <button className="w-full flex items-center justify-between bg-[#121212] p-4 rounded-xl border border-white/5 hover:border-[#00E5FF]/30 transition-colors">
-             <div className="flex items-center gap-3">
-               <BarChart2 className="w-4 h-4 text-[#00E5FF]" />
-               <span className="text-xs font-black tracking-widest uppercase text-gray-300">LEAGUE STANDINGS</span>
-             </div>
-             <ChevronDown className="w-4 h-4 text-gray-500" />
-           </button>
+           <div className="w-full flex flex-col bg-[#121212] rounded-xl border border-white/5 hover:border-[#00E5FF]/30 transition-colors overflow-hidden">
+             <button 
+               onClick={() => setIsStandingsOpen(!isStandingsOpen)}
+               className="w-full flex items-center justify-between p-4"
+             >
+               <div className="flex items-center gap-3">
+                 <BarChart2 className="w-4 h-4 text-[#00E5FF]" />
+                 <span className="text-xs font-black tracking-widest uppercase text-gray-300">LEAGUE STANDINGS (LIVE)</span>
+               </div>
+               <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${isStandingsOpen ? 'rotate-180' : ''}`} />
+             </button>
+             {isStandingsOpen && (
+               <div className="p-4 pt-0 text-sm overflow-x-auto no-scrollbar animate-in slide-in-from-top-2 fade-in duration-300">
+                 <table className="w-full min-w-[300px] text-left text-gray-400 text-xs">
+                   <thead>
+                     <tr className="border-b border-white/10 uppercase tracking-widest text-[9px] text-gray-500">
+                       <th className="pb-3 font-black">POS</th>
+                       <th className="pb-3 font-black">TEAM</th>
+                       <th className="pb-3 font-black text-center">PLD</th>
+                       <th className="pb-3 font-black text-center">GD</th>
+                       <th className="pb-3 font-black text-right text-white">PTS</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                       <td className="py-3.5 font-bold text-white pl-2">1</td>
+                       <td className="py-3.5 font-bold text-white flex items-center gap-2"><div className="w-1.5 h-1.5 bg-red-600 rounded-full"/> Arsenal</td>
+                       <td className="py-3.5 text-center font-mono">28</td>
+                       <td className="py-3.5 text-center font-mono">+46</td>
+                       <td className="py-3.5 text-right font-black text-white text-sm">64</td>
+                     </tr>
+                     <tr className="border-b border-white/5 bg-[#00E5FF]/10 relative">
+                       <td className="py-3.5 font-bold text-[#00E5FF] pl-2">2</td>
+                       <td className="py-3.5 font-bold text-[#00E5FF] flex items-center gap-2"><div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"/> Liverpool</td>
+                       <td className="py-3.5 text-center text-[#00E5FF] font-mono">28</td>
+                       <td className="py-3.5 text-center text-[#00E5FF] font-mono">+41</td>
+                       <td className="py-3.5 text-right font-black text-[#00E5FF] text-sm">64</td>
+                     </tr>
+                     <tr className="hover:bg-white/5 transition-colors">
+                       <td className="py-3.5 font-bold text-white pl-2">3</td>
+                       <td className="py-3.5 font-bold text-gray-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(59,130,246,0.8)]"/> Man City</td>
+                       <td className="py-3.5 text-center font-mono text-gray-400">28</td>
+                       <td className="py-3.5 text-center font-mono text-gray-400">+35</td>
+                       <td className="py-3.5 text-right font-black text-white text-sm">63</td>
+                     </tr>
+                     <tr className="border-t border-white/5 hover:bg-white/5 transition-colors opacity-50">
+                       <td className="py-3.5 font-bold text-white pl-2">4</td>
+                       <td className="py-3.5 font-bold text-gray-300 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-purple-500 rounded-full"/> Aston Villa</td>
+                       <td className="py-3.5 text-center font-mono text-gray-400">28</td>
+                       <td className="py-3.5 text-center font-mono text-gray-400">+18</td>
+                       <td className="py-3.5 text-right font-black text-gray-300 text-sm">55</td>
+                     </tr>
+                   </tbody>
+                 </table>
+               </div>
+             )}
+           </div>
         </div>
       </section>
 
