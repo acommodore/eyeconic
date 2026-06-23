@@ -24,10 +24,10 @@ export default function LoginPage() {
     >
       <div className="mb-10">
         <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
-          Welcome
+          Welcome Back
         </h1>
         <p className="text-gray-400 text-sm md:text-base tracking-wide font-medium">
-          Sign in to re-enter the arena.
+          Sign in to continue.
         </p>
       </div>
 

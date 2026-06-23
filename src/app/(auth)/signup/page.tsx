@@ -24,10 +24,10 @@ export default function SignupPage() {
     >
       <div className="mb-10">
         <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2 uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500">
-          Lock It In
+          Create Account
         </h1>
         <p className="text-gray-400 text-sm md:text-base tracking-wide font-medium">
-          Prove your football eye.
+          Sign up to continue.
         </p>
       </div>
 
@@ -100,7 +100,7 @@ export default function SignupPage() {
 
         <button type="submit" className="group relative w-full mt-8 bg-[#FF7F50] text-[#020202] font-black text-sm tracking-[0.2em] uppercase py-5 rounded-2xl hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(255,127,80,0.3)] hover:shadow-[0_0_40px_rgba(255,127,80,0.5)] overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-          <span className="relative z-10">STEP IN</span>
+          <span className="relative z-10">SIGN UP</span>
         </button>
       </form>
 
