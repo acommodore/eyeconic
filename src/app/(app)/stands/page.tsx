@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Bell, Mic, Volume2, Play, Plus, Clock, Shield, Flame, Radio, Calendar, Activity } from "lucide-react";
+import { Search, Bell, Mic, Volume2, Play, Plus, Clock, Shield, Flame, Radio, Calendar, Activity, Zap, Scissors } from "lucide-react";
 
 export default function StandsPage() {
   const scrollToSection = (id: string) => {
@@ -32,8 +32,8 @@ export default function StandsPage() {
           <button onClick={() => scrollToSection('scheduled')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
             <Calendar className="w-4 h-4" /> SCHEDULED
           </button>
-          <button onClick={() => scrollToSection('replays')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-            <Play className="w-4 h-4" /> REPLAYS
+          <button onClick={() => scrollToSection('highlights')} className="px-6 py-2.5 rounded-full border border-white/10 text-gray-400 font-bold tracking-widest text-xs whitespace-nowrap hover:bg-white/5 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+            <Zap className="w-4 h-4 text-yellow-500" /> HIGHLIGHTS
           </button>
         </div>
       </div>
@@ -404,17 +404,17 @@ export default function StandsPage() {
             </section>
           </div>
 
-          {/* REPLAYS SECTION */}
-          <section id="replays" className="mt-12 scroll-mt-32">
+          {/* HIGHLIGHTS SECTION */}
+          <section id="highlights" className="mt-12 scroll-mt-32">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Play className="w-5 h-5 text-gray-400" /> Recent Replays
+                <Zap className="w-5 h-5 text-yellow-500" /> Highlights
               </h2>
-              <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Browse Archive</span>
+              <span className="text-[10px] text-gray-400 font-bold hover:text-white cursor-pointer transition-colors uppercase tracking-widest">Browse Clips</span>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Replay 1 */}
+              {/* Highlight 1 */}
               <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
@@ -424,19 +424,19 @@ export default function StandsPage() {
                       <Play className="w-5 h-5 text-white ml-1" />
                     </div>
                   </div>
-                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
-                    45:20
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10 flex items-center gap-1">
+                    <Scissors className="w-3 h-3 text-yellow-500" /> 1:45
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">El Clasico Fallout: Did Barca get robbed?</h4>
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">"That was never a penalty!" - Heated El Clasico Debate</h4>
                   <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
                     <Calendar className="w-3 h-3" /> YESTERDAY
                   </p>
                 </div>
               </div>
 
-              {/* Replay 2 */}
+              {/* Highlight 2 */}
               <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
@@ -446,19 +446,19 @@ export default function StandsPage() {
                       <Play className="w-5 h-5 text-white ml-1" />
                     </div>
                   </div>
-                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
-                    1:12:05
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10 flex items-center gap-1">
+                    <Scissors className="w-3 h-3 text-yellow-500" /> 0:58
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">The state of Man United: Ten Hag In or Out?</h4>
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Roy Keane's brutal takedown of Man United midfield</h4>
                   <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
                     <Calendar className="w-3 h-3" /> 2 DAYS AGO
                   </p>
                 </div>
               </div>
 
-               {/* Replay 3 */}
+               {/* Highlight 3 */}
                <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
@@ -468,19 +468,19 @@ export default function StandsPage() {
                       <Play className="w-5 h-5 text-white ml-1" />
                     </div>
                   </div>
-                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
-                    58:30
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10 flex items-center gap-1">
+                    <Scissors className="w-3 h-3 text-yellow-500" /> 2:15
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Messi vs Ronaldo: The Final Verdict</h4>
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">"Messi wouldn't survive a cold night in Stoke"</h4>
                   <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
                     <Calendar className="w-3 h-3" /> LAST WEEK
                   </p>
                 </div>
               </div>
 
-              {/* Replay 4 */}
+              {/* Highlight 4 */}
               <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hidden lg:block">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
@@ -490,12 +490,12 @@ export default function StandsPage() {
                       <Play className="w-5 h-5 text-white ml-1" />
                     </div>
                   </div>
-                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10">
-                    32:15
+                  <span className="absolute bottom-3 right-3 z-20 px-2 py-1 rounded bg-black/80 text-[10px] font-bold text-white tracking-widest border border-white/10 flex items-center gap-1">
+                    <Scissors className="w-3 h-3 text-yellow-500" /> 1:12
                   </span>
                 </div>
                 <div className="p-4">
-                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Best young talents in the world right now</h4>
+                  <h4 className="font-bold text-white text-sm group-hover:text-gray-300 transition-colors line-clamp-2">Why Bellingham is already better than Zidane</h4>
                   <p className="text-[10px] text-gray-500 font-bold mt-2 uppercase tracking-widest flex items-center gap-2">
                     <Calendar className="w-3 h-3" /> LAST WEEK
                   </p>
