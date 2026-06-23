@@ -65,44 +65,47 @@ const highlights = [
   }
 ];
 
+// Vertical pitch coordinates (LIV playing UP, MCI playing DOWN)
 const pitchLIV = [
-  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", left: "10%", top: "50%" },
-  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", left: "22%", top: "15%" },
-  { id: 3, name: "Konate", num: 5, pos: "CB", rating: "8.2", left: "18%", top: "35%" },
-  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", left: "18%", top: "65%" },
-  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", left: "22%", top: "85%" },
-  { id: 6, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", left: "35%", top: "35%" },
-  { id: 7, name: "Endo", num: 3, pos: "CDM", rating: "7.8", left: "28%", top: "50%" },
-  { id: 8, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", left: "35%", top: "65%" },
-  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", left: "48%", top: "20%" },
-  { id: 10, name: "Nunez", num: 9, pos: "ST", rating: "7.1", left: "52%", top: "50%" },
-  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", left: "48%", top: "80%" },
+  { id: 1, name: "Alisson", num: 1, pos: "GK", rating: "7.5", top: "93%", left: "50%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 2, name: "Trent", num: 66, pos: "RB", rating: "7.9", top: "85%", left: "85%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 3, name: "Konaté", num: 5, pos: "CB", rating: "8.2", top: "85%", left: "65%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+  { id: 4, name: "Van Dijk", num: 4, pos: "CB", rating: "8.4", top: "85%", left: "35%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 5, name: "Robertson", num: 26, pos: "LB", rating: "7.2", top: "85%", left: "15%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
+  { id: 6, name: "Szoboszlai", num: 8, pos: "CM", rating: "7.4", top: "72%", left: "70%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { id: 7, name: "Gravenberch", num: 38, pos: "CDM", rating: "7.8", top: "75%", left: "50%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
+  { id: 8, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", top: "72%", left: "30%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
+  { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", top: "60%", left: "80%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 10, name: "Jota", num: 20, pos: "ST", rating: "7.1", top: "55%", left: "50%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", top: "60%", left: "20%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
 const pitchMCI = [
-  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", left: "90%", top: "50%" },
-  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", left: "78%", top: "85%" },
-  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", left: "82%", top: "65%" },
-  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", left: "82%", top: "35%" },
-  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", left: "78%", top: "15%" },
-  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", left: "72%", top: "50%" },
-  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", left: "65%", top: "80%" },
-  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", left: "65%", top: "65%" },
-  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", left: "65%", top: "35%" },
-  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", left: "65%", top: "20%" },
-  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", left: "55%", top: "50%" },
+  { id: 12, name: "Ederson", num: 31, pos: "GK", rating: "6.5", top: "7%", left: "50%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 13, name: "Walker", num: 2, pos: "RB", rating: "6.2", top: "15%", left: "15%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 14, name: "Dias", num: 3, pos: "CB", rating: "6.8", top: "15%", left: "35%", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+  { id: 15, name: "Ake", num: 6, pos: "CB", rating: "6.4", top: "15%", left: "65%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 16, name: "Gvardiol", num: 24, pos: "LB", rating: "6.0", top: "15%", left: "85%", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" },
+  { id: 17, name: "Rodri", num: 16, pos: "CDM", rating: "7.5", top: "28%", left: "35%", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { id: 20, name: "Silva", num: 20, pos: "CM", rating: "6.4", top: "28%", left: "65%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
+  { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", top: "38%", left: "15%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
+  { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", top: "38%", left: "50%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", top: "38%", left: "85%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", top: "45%", left: "50%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
 const subsLIV = [
-  { name: "Kelleher", rating: "N/A" }, { name: "Gomez", rating: "6.5" }, { name: "Elliott", rating: "7.0" }, { name: "Gakpo", rating: "6.8" }
+  { name: "Kelleher", rating: "N/A", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+  { name: "Gomez", rating: "6.5", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
 ];
 const subsMCI = [
-  { name: "Ortega", rating: "N/A" }, { name: "Akanji", rating: "6.2" }, { name: "Kovacic", rating: "6.5" }, { name: "Alvarez", rating: "6.1" }
+  { name: "Ortega", rating: "N/A", img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop" },
+  { name: "Akanji", rating: "6.2", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
 ];
 
 const coaches = {
-  liv: { name: "Jurgen Klopp", rating: "8.5" },
-  mci: { name: "Pep Guardiola", rating: "6.0" }
+  liv: { name: "Jurgen Klopp", rating: "8.5", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  mci: { name: "Pep Guardiola", rating: "6.0", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" }
 };
 
 export default function MatchDetailsPage() {
@@ -355,34 +358,37 @@ export default function MatchDetailsPage() {
           <section className="mt-12">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Shield className="w-5 h-5 text-green-500" /> PITCH RATINGS
+                <Shield className="w-5 h-5 text-green-500" /> LIVE PITCH RATINGS
               </h2>
             </div>
 
-            <div className="flex flex-col gap-8">
+            <div className="w-full max-w-4xl mx-auto flex flex-col">
               {/* Pitch */}
-              <div className="w-full relative bg-gradient-to-r from-[#113A1E] to-[#1A4A28] rounded-[24px] border border-white/20 shadow-2xl overflow-hidden min-h-[400px] xl:min-h-[500px]">
-                {/* Field Lines (Horizontal) */}
-                <div className="absolute inset-4 border border-white/30 rounded-lg pointer-events-none" />
-                <div className="absolute top-4 bottom-4 left-1/2 w-px bg-white/30 pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 border border-white/30 rounded-full pointer-events-none" />
+              <div className="w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden min-h-[600px] md:min-h-[800px] border border-white/5 border-b-0">
+                {/* Field Lines (Vertical) */}
+                <div className="absolute inset-4 border border-[#1A3A24] pointer-events-none" />
+                <div className="absolute top-1/2 left-4 right-4 h-px bg-[#1A3A24] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#1A3A24] rounded-full pointer-events-none" />
                 
-                {/* Penalty Boxes (Horizontal) */}
-                <div className="absolute top-1/2 left-4 -translate-y-1/2 h-40 sm:h-56 w-16 sm:w-24 border border-white/30 border-l-0 pointer-events-none" />
-                <div className="absolute top-1/2 left-4 -translate-y-1/2 h-20 sm:h-28 w-6 sm:w-8 border border-white/30 border-l-0 pointer-events-none" />
+                {/* Penalty Boxes (Vertical) */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-48 md:w-64 h-24 md:h-32 border border-[#1A3A24] border-t-0 pointer-events-none" />
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 md:w-32 h-8 md:h-12 border border-[#1A3A24] border-t-0 pointer-events-none" />
                 
-                <div className="absolute top-1/2 right-4 -translate-y-1/2 h-40 sm:h-56 w-16 sm:w-24 border border-white/30 border-r-0 pointer-events-none" />
-                <div className="absolute top-1/2 right-4 -translate-y-1/2 h-20 sm:h-28 w-6 sm:w-8 border border-white/30 border-r-0 pointer-events-none" />
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-48 md:w-64 h-24 md:h-32 border border-[#1A3A24] border-b-0 pointer-events-none" />
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 md:w-32 h-8 md:h-12 border border-[#1A3A24] border-b-0 pointer-events-none" />
 
-                {/* Team Labels */}
-                <div className="absolute top-6 left-6 text-white/20 font-black text-3xl uppercase tracking-widest pointer-events-none">LIV</div>
-                <div className="absolute bottom-6 right-6 text-white/20 font-black text-3xl uppercase tracking-widest pointer-events-none">MCI</div>
+                {/* Team Logos */}
+                <div className="absolute top-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain grayscale" />
+                </div>
+                <div className="absolute bottom-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain grayscale" />
+                </div>
 
                 {/* Players */}
                 {[...pitchMCI, ...pitchLIV].map(player => {
                   const isLiv = pitchLIV.some(p => p.id === player.id);
                   const isHighRating = parseFloat(player.rating) >= 8.0;
-                  const isLowRating = parseFloat(player.rating) <= 6.3;
                   
                   return (
                     <div 
@@ -390,89 +396,62 @@ export default function MatchDetailsPage() {
                       className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
                       style={{ top: player.top, left: player.left }}
                     >
-                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-black border-[3px] shadow-lg transition-transform group-hover:scale-110 ${
-                        isLiv 
-                          ? 'bg-[#D32F2F] border-white/90 text-white shadow-[0_0_15px_rgba(211,47,47,0.5)]' 
-                          : 'bg-[#4FC3F7] border-white/90 text-[#020202] shadow-[0_0_15px_rgba(79,195,247,0.5)]'
+                      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full border-2 overflow-hidden shadow-xl transition-transform group-hover:scale-110 ${
+                        isHighRating ? 'border-[#FF7F50] shadow-[0_0_15px_rgba(255,127,80,0.6)]' : 'border-gray-500'
                       }`}>
-                        {player.num}
+                         <img src={player.img} className="w-full h-full object-cover" />
                       </div>
                       
-                      <div className="bg-[#0A0A0A]/80 backdrop-blur-md border border-white/10 px-2 py-1 rounded-md text-center shadow-lg group-hover:border-white/30 transition-colors">
-                        <div className="text-[9px] sm:text-[10px] font-bold text-white whitespace-nowrap mb-0.5">{player.name}</div>
-                        <div className={`text-[10px] sm:text-xs font-black ${
-                          isHighRating ? 'text-[#00E5FF]' : isLowRating ? 'text-[#FF3B00]' : 'text-yellow-400'
-                        }`}>
-                          {player.rating}
-                        </div>
+                      <div className={`text-[10px] md:text-xs font-black uppercase tracking-widest drop-shadow-md ${isLiv ? 'text-[#FF7F50]' : 'text-[#4FC3F7]'}`}>
+                        {player.name}
                       </div>
                     </div>
                   );
                 })}
               </div>
 
-              {/* Subs & Coaches (Split under their teams) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                {/* LIVERPOOL SIDE */}
-                <div className="flex flex-col gap-4">
+              {/* Subs & Coaches (Horizontal Strip) */}
+              <div className="bg-[#1A1A1A] px-4 py-5 flex items-center justify-between w-full rounded-b-[24px]">
+                {/* Left side (LIV Subs & Coach) */}
+                <div className="flex items-center gap-2 md:gap-3">
+                  <div className="w-1.5 h-10 bg-[#00FFFF] rounded-full mr-1 md:mr-2 shadow-[0_0_10px_rgba(0,255,255,0.4)]" />
+                  
                   {/* Coach */}
-                  <div className="bg-[#0A0A0A] border border-[#D32F2F]/30 rounded-[24px] p-6 flex items-center justify-between">
-                     <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-full bg-[#D32F2F]/20 flex items-center justify-center border border-[#D32F2F]/50 text-[#D32F2F] font-black text-xs">LIV</div>
-                       <div>
-                         <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-0.5">Manager</h3>
-                         <span className="text-sm font-bold text-white">{coaches.liv.name}</span>
-                       </div>
-                     </div>
-                     <span className="text-xl font-black text-[#00E5FF]">{coaches.liv.rating}</span>
+                  <div className="relative group cursor-pointer" title={`Coach: ${coaches.liv.name}`}>
+                    <img src={coaches.liv.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#00FFFF] object-cover hover:scale-110 transition-transform" />
                   </div>
-
-                  {/* Bench */}
-                  <div className="bg-[#0A0A0A] border border-[#D32F2F]/20 rounded-[24px] p-6 flex-1">
-                     <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-4 flex items-center gap-2">
-                       <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
-                       Bench
-                     </h3>
-                     <div className="flex flex-col gap-3">
-                       {subsLIV.map((sub, i) => (
-                         <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                           <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                           <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                         </div>
-                       ))}
-                     </div>
-                  </div>
+                  
+                  {/* Subs */}
+                  {subsLIV.map(sub => (
+                    <div className="relative group cursor-pointer" key={sub.name} title={sub.name}>
+                      <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
+                    </div>
+                  ))}
+                  
+                  {/* Empty slots */}
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
                 </div>
 
-                {/* MAN CITY SIDE */}
-                <div className="flex flex-col gap-4">
+                {/* Right side (MCI Subs & Coach) */}
+                <div className="flex items-center gap-2 md:gap-3">
+                  {/* Empty slots */}
+                  <div className="hidden sm:block w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5" />
+                  
+                  {/* Subs */}
+                  {subsMCI.map(sub => (
+                    <div className="relative group cursor-pointer" key={sub.name} title={sub.name}>
+                      <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
+                    </div>
+                  ))}
+                  
                   {/* Coach */}
-                  <div className="bg-[#0A0A0A] border border-[#4FC3F7]/30 rounded-[24px] p-6 flex items-center justify-between">
-                     <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-full bg-[#4FC3F7]/20 flex items-center justify-center border border-[#4FC3F7]/50 text-[#4FC3F7] font-black text-xs">MCI</div>
-                       <div>
-                         <h3 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-0.5">Manager</h3>
-                         <span className="text-sm font-bold text-white">{coaches.mci.name}</span>
-                       </div>
-                     </div>
-                     <span className="text-xl font-black text-[#FF3B00]">{coaches.mci.rating}</span>
+                  <div className="relative group cursor-pointer" title={`Coach: ${coaches.mci.name}`}>
+                    <img src={coaches.mci.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
                   </div>
 
-                  {/* Bench */}
-                  <div className="bg-[#0A0A0A] border border-[#4FC3F7]/20 rounded-[24px] p-6 flex-1">
-                     <h3 className="text-[10px] font-black tracking-widest text-[#4FC3F7] uppercase mb-4 flex items-center gap-2">
-                       <div className="w-2 h-2 rounded-full bg-[#4FC3F7]" />
-                       Bench
-                     </h3>
-                     <div className="flex flex-col gap-3">
-                       {subsMCI.map((sub, i) => (
-                         <div key={i} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
-                           <span className="text-sm text-gray-300 font-medium">{sub.name}</span>
-                           <span className={`text-xs font-black ${sub.rating !== "N/A" ? 'text-yellow-400' : 'text-gray-600'}`}>{sub.rating}</span>
-                         </div>
-                       ))}
-                     </div>
-                  </div>
+                  <div className="w-1.5 h-10 bg-[#FF7F50] rounded-full ml-1 md:ml-2 shadow-[0_0_10px_rgba(255,127,80,0.4)]" />
                 </div>
               </div>
             </div>
