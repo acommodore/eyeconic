@@ -52,15 +52,6 @@ export default function ProfilePage() {
               MAXIMUS<br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">PRIME</span>
             </h2>
-            
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-4">
-              <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#FF7F50] tracking-widest uppercase">
-                <Flame className="w-3 h-3" /> ELITE INSTIGATOR
-              </div>
-              <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#00E5FF] tracking-widest uppercase">
-                <Shield className="w-3 h-3" /> TACTICAL MASTER
-              </div>
-            </div>
           </div>
 
           {/* Right side stats/loyalty */}
