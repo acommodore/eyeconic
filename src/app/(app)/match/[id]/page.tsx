@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame } from "lucide-react";
+import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users } from "lucide-react";
 import { useState } from "react";
 import { BackButton } from "@/components/ui/BackButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
@@ -107,6 +107,34 @@ const coaches = {
   liv: { name: "Jurgen Klopp", rating: "8.5", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
   mci: { name: "Pep Guardiola", rating: "6.0", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" }
 };
+
+const timelineEvents = [
+  { id: 1, time: "2'", team: "LIV", type: "goal", player: "Mohamed Salah", detail: "Right footed shot from the center of the box to the bottom right corner. Assisted by Trent Alexander-Arnold." },
+  { id: 2, time: "18'", team: "MCI", type: "yellow", player: "Rodri", detail: "Foul on Alexis Mac Allister." },
+  { id: 3, time: "35'", team: "LIV", type: "yellow", player: "Wataru Endo", detail: "Foul on Kevin De Bruyne." },
+  { id: 4, time: "45+2'", team: "MCI", type: "sub", playerIn: "Jeremy Doku", playerOut: "Jack Grealish", detail: "Tactical substitution." },
+  { id: 5, time: "60'", team: "LIV", type: "sub", playerIn: "Darwin Nunez", playerOut: "Diogo Jota", detail: "Tactical substitution." },
+  { id: 6, time: "78'", team: "LIV", type: "goal", player: "Ibrahima Konate", detail: "Header from very close range to the bottom left corner. Assisted by Andy Robertson following a corner." },
+  { id: 7, time: "85'", team: "MCI", type: "yellow", player: "Bernardo Silva", detail: "Foul on Luis Diaz." },
+];
+
+const matchStats = [
+  { label: "Possession", liv: 48, mci: 52, type: "percent" },
+  { label: "Shots", liv: 14, mci: 9, type: "number" },
+  { label: "Shots on Target", liv: 6, mci: 2, type: "number" },
+  { label: "Passes", liv: 450, mci: 512, type: "number" },
+  { label: "Pass Accuracy", liv: 82, mci: 88, type: "percent" },
+  { label: "Fouls", liv: 11, mci: 8, type: "number" },
+  { label: "Corners", liv: 7, mci: 4, type: "number" },
+];
+
+const standsFeed = [
+  { id: 1, user: "AnfieldRoar", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop", type: "comment", text: "What a performance from the lads! Konate was an absolute rock at the back today. 🧱🔴", time: "10m ago", upvotes: 342, comments: 24 },
+  { id: 2, user: "SkySportsGHD", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=50&h=50&fit=crop", type: "highlight", text: "Highlights: Konate rises highest to seal the victory for Liverpool! ⚽🔥", time: "15m ago", videoCover: "https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop", upvotes: 1205, comments: 89 },
+  { id: 3, user: "CityBlueMoon", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop", type: "comment", text: "Terrible finishing from us today. Haaland completely isolated up top. Pep needs to rethink this tactic. 🤦‍♂️", time: "22m ago", upvotes: 215, comments: 45 },
+  { id: 4, user: "TacticoGenius", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=50&h=50&fit=crop", type: "comment", text: "The way Mac Allister controlled the tempo in the second half was world class. Unsung hero. 🎯", time: "30m ago", upvotes: 560, comments: 32 },
+  { id: 5, user: "LFC_Official", avatar: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", type: "highlight", text: "A trademark Mo Salah finish to get us underway! 👑🇪🇬", time: "1h ago", videoCover: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop", upvotes: 4500, comments: 320 },
+];
 
 export default function MatchDetailsPage() {
   const [activeTab, setActiveTab] = useState('OVERVIEW');
@@ -232,7 +260,7 @@ export default function MatchDetailsPage() {
 
       {/* Tab Navigation - Modern Pills */}
       <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
-        {['OVERVIEW', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
+        {['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
           <button 
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -243,6 +271,7 @@ export default function MatchDetailsPage() {
             }`}
           >
             {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
+            {tab === 'ROSTER' && <Users className="w-4 h-4" />}
             {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
             {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
             {tab === 'STANDS' && <Mic className="w-4 h-4" />}
@@ -255,124 +284,103 @@ export default function MatchDetailsPage() {
       {activeTab === 'OVERVIEW' && (
         <div className="space-y-12">
           
-          {/* Fan Voted MVP - Redesigned */}
-          <section className="bg-gradient-to-r from-[#121212] to-[#0A0A0A] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden group">
-            {/* Background Heatmap Graphic */}
-            <div className="absolute top-0 right-0 w-2/3 h-full opacity-20 pointer-events-none transition-transform duration-1000 group-hover:scale-105">
-               <div className="w-full h-full bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Football_field_blank.svg/800px-Football_field_blank.svg.png')] bg-contain bg-no-repeat bg-right-top" style={{ filter: 'invert(1) opacity(0.3)' }} />
-               <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-red-600 rounded-full blur-[80px] opacity-60" />
-               <div className="absolute bottom-1/4 right-1/3 w-32 h-32 bg-[#00E5FF] rounded-full blur-[60px] opacity-40" />
-            </div>
-
-            <div className="flex items-center justify-between mb-8 relative z-10">
-              <h2 className="text-sm font-black tracking-widest text-[#00E5FF] uppercase flex items-center gap-3">
-                <Flame className="w-5 h-5 text-[#00E5FF]" /> FAN VOTED MVP
-              </h2>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
-              {/* Avatar Ultimate Team Style */}
-              <div className="relative shrink-0">
-                <div className="w-40 h-40 md:w-48 md:h-48 rounded-[2rem] border border-[#00E5FF]/30 p-2 overflow-hidden shadow-[0_0_40px_rgba(0,229,255,0.2)] bg-[#020202]">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-[1.5rem] object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-[#00E5FF] text-black font-black text-2xl px-5 py-2 rounded-xl border-4 border-[#020202] rotate-3 hover:rotate-0 transition-transform">
-                  9.2
-                </div>
-              </div>
-
-              {/* Info */}
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-4xl md:text-5xl font-black mb-2 tracking-tight">Mo Salah</h3>
-                <p className="text-sm text-[#00E5FF] font-bold tracking-widest uppercase mb-8">Liverpool • Forward • #11</p>
-
-                {/* Bento Box Stats */}
-                <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto md:mx-0">
-                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
-                    <span className="text-2xl font-black text-white">75%</span>
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">EYE TEST</span>
-                  </div>
-                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
-                    <span className="text-2xl font-black text-[#FF3B00]">15%</span>
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">SOLID</span>
-                  </div>
-                  <div className="bg-[#050505] border border-white/5 rounded-2xl p-4 flex flex-col items-center justify-center hover:border-white/20 transition-colors">
-                    <span className="text-2xl font-black text-gray-600">10%</span>
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-1">POOR</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between relative z-10">
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop" className="w-8 h-8 rounded-full border-2 border-[#121212]" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" className="w-8 h-8 rounded-full border-2 border-[#121212]" />
-                  <div className="w-8 h-8 rounded-full border-2 border-[#121212] bg-[#1A1A1A] flex items-center justify-center text-[8px] font-black">+12K</div>
-                </div>
-                <span className="text-xs font-bold text-gray-400">fans voted</span>
-              </div>
-              <button className="text-xs font-black tracking-widest text-white hover:text-[#00E5FF] transition-colors flex items-center gap-2 uppercase">
-                View Breakdown <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </section>
-
-          {/* Match Key Insights - Bento Box Redesign */}
-          <section>
-            <h2 className="text-sm font-black tracking-widest text-white uppercase mb-6 flex items-center gap-3">
-               <Activity className="w-5 h-5 text-purple-500" /> KEY INSIGHTS
+          {/* FANS HAVE SPOKEN - MVP & FAN XI */}
+          <section className="bg-gradient-to-b from-[#111111] to-[#050505] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden flex flex-col items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <h2 className="text-3xl md:text-5xl font-black text-center tracking-tight mb-6 uppercase drop-shadow-2xl">
+              The Fans Have <br/><span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">Spoken.</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
-                <div className="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center mb-4">
-                  <span className="text-yellow-400 text-xl">😃</span>
-                </div>
-                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">FAN SENTIMENT</h3>
-                <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                  Liverpool fans are ecstatic about the midfield control, but concerned about defensive lapses in the first half.
-                </p>
-                <div className="mt-auto h-12 relative w-full opacity-50">
-                   <svg className="w-full h-full absolute inset-0" preserveAspectRatio="none" viewBox="0 0 100 40">
-                     <path d="M0,30 Q10,35 20,25 T40,20 T60,15 T80,25 T100,10" fill="none" stroke="#00E5FF" strokeWidth="2" />
-                     <circle cx="20" cy="25" r="2" fill="#00E5FF" />
-                     <circle cx="40" cy="20" r="2" fill="#00E5FF" />
-                     <circle cx="60" cy="15" r="2" fill="#00E5FF" />
-                     <circle cx="80" cy="25" r="2" fill="#00E5FF" />
-                     <circle cx="100" cy="10" r="2" fill="#00E5FF" />
-                   </svg>
-                </div>
-              </div>
-
-              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
-                <div className="w-10 h-10 rounded-xl bg-[#FF3B00]/10 flex items-center justify-center mb-4">
-                  <Activity className="w-5 h-5 text-[#FF3B00]" />
-                </div>
-                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">CONTROVERSY</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  VAR decision on the 35th min goal remains a hot topic. <span className="text-[#FF3B00] font-bold">68%</span> of neutrals say it was a robbery.
-                </p>
-              </div>
-
-              <div className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.02)]">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
-                  <Zap className="w-5 h-5 text-purple-500" />
-                </div>
-                <h3 className="text-xs font-black tracking-widest text-white uppercase mb-3">GAME FLOW</h3>
-                <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                  Liverpool dominated possession and territory in the second half.
-                </p>
-                <div className="mt-auto h-12 flex items-end gap-1 w-full opacity-50">
-                  {[2, 3, 4, 3, 2, 5, 4, 3, 4, 6, 5, 8, 5, 4, 10, 8, 9, 7, 5].map((h, i) => (
-                    <div key={i} className="w-full bg-purple-500 rounded-t-sm hover:bg-purple-400 transition-colors" style={{ height: `${h*10}%` }} />
-                  ))}
-                </div>
-              </div>
-
+            
+            {/* Score Pill */}
+            <div className="bg-[#1A1A1A] border border-white/10 rounded-full px-6 py-2 flex items-center gap-4 mb-12 shadow-inner">
+               <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 object-contain" />
+               <span className="text-xl font-black tracking-widest text-white">1 - 2</span>
+               <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-6 h-6 object-contain" />
             </div>
+
+            {/* MVP */}
+            <div className="relative mb-6">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-br from-[#00E5FF] to-transparent shadow-[0_0_30px_rgba(0,229,255,0.3)] group cursor-pointer hover:scale-105 transition-transform">
+                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
+              </div>
+              <div className="absolute -top-2 -right-4 bg-[#00E5FF] text-black text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-widest border-2 border-black drop-shadow-md">MVP</div>
+              <div className="absolute -bottom-2 -right-2 bg-black text-[#00E5FF] text-sm font-black px-3 py-1 rounded-full border border-[#00E5FF] drop-shadow-md">9.2</div>
+            </div>
+            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-widest mb-16 drop-shadow-xl">Mo Salah</h3>
+
+            {/* COMBINED FAN XI */}
+            <div className="text-xs text-gray-500 font-bold tracking-[0.3em] uppercase mb-12 relative">
+               <span className="relative z-10 bg-[#080808] px-4">Combined Fan XI</span>
+               <div className="absolute top-1/2 left-[-100%] right-[-100%] h-px bg-white/5 -z-10"></div>
+            </div>
+            
+            <div className="w-full max-w-2xl relative flex flex-col gap-12 md:gap-16 items-center">
+               {/* FWDs (3) */}
+               <div className="flex justify-between w-[80%]">
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Diaz</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.4)] p-0.5">
+                     <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
+                   </div>
+                   <span className="text-[10px] md:text-xs font-black text-[#00E5FF] uppercase tracking-widest drop-shadow-md">Salah</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Haaland</span>
+                 </div>
+               </div>
+
+               {/* MIDs (4) */}
+               <div className="flex justify-between w-full">
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Mac Allister</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">De Bruyne</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Foden</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Doku</span>
+                 </div>
+               </div>
+
+               {/* DEFs (3) */}
+               <div className="flex justify-between w-[80%]">
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Gvardiol</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Van Dijk</span>
+                 </div>
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Trent</span>
+                 </div>
+               </div>
+
+               {/* GK */}
+               <div className="flex justify-center w-full mt-4">
+                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
+                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Alisson</span>
+                 </div>
+               </div>
+            </div>
+            
+            {/* Share Button */}
+            <button className="absolute bottom-6 right-6 w-14 h-14 bg-[#FF3B00] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,59,0,0.5)] hover:scale-110 transition-transform border border-white/20">
+               <Share className="w-6 h-6 text-white" />
+            </button>
           </section>
 
           {/* Hot Takes */}
@@ -413,9 +421,14 @@ export default function MatchDetailsPage() {
               ))}
             </div>
           </section>
+        </div>
+      )}
 
+      {/* ROSTER Content */}
+      {activeTab === 'ROSTER' && (
+        <div className="space-y-12">
           {/* Pitch View Roster */}
-          <section className="mt-12">
+          <section className="mt-4">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
                 <Shield className="w-5 h-5 text-green-500" /> LIVE PITCH RATINGS
@@ -569,7 +582,180 @@ export default function MatchDetailsPage() {
               </div>
             </div>
           </section>
+        </div>
+      )}
 
+      {/* TIMELINE Content */}
+      {activeTab === 'TIMELINE' && (
+        <div className="w-full max-w-3xl mx-auto space-y-12">
+          <div className="relative border-l-2 border-white/10 ml-6 md:ml-1/2 md:border-none">
+            <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-white/10 -translate-x-1/2"></div>
+            
+            {timelineEvents.map((event, index) => {
+              const isLiv = event.team === 'LIV';
+              return (
+                <div key={event.id} className={`relative flex items-center mb-8 ${isLiv ? 'md:flex-row-reverse' : 'md:flex-row'} pl-6 md:pl-0`}>
+                  {/* Timeline Dot */}
+                  <div className="absolute left-[-5px] md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-[#020202] border-2 z-10" style={{ borderColor: isLiv ? '#FF7F50' : '#4FC3F7' }}></div>
+                  
+                  {/* Content Box */}
+                  <div className={`md:w-1/2 ${isLiv ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} w-full`}>
+                    <div className="bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-[#111] transition-colors relative group">
+                      {/* Event Icon */}
+                      <div className={`absolute top-4 ${isLiv ? 'right-4 md:left-4 md:right-auto' : 'right-4'} text-xl opacity-50 group-hover:opacity-100 transition-opacity`}>
+                        {event.type === 'goal' && '⚽'}
+                        {event.type === 'yellow' && '🟨'}
+                        {event.type === 'sub' && '🔄'}
+                      </div>
+                      
+                      <div className="text-[#00E5FF] font-black text-xs tracking-widest mb-1">{event.time}</div>
+                      <div className="text-lg font-black text-white mb-1">
+                        {event.type === 'sub' ? `${event.playerIn} In / ${event.playerOut} Out` : event.player}
+                      </div>
+                      <div className="text-xs text-gray-400 font-medium leading-relaxed">{event.detail}</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* STATS Content */}
+      {activeTab === 'STATS' && (
+        <div className="w-full max-w-4xl mx-auto relative group">
+          {/* Subtle background glow */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#00E5FF]/10 transition-colors duration-1000"></div>
+          
+          <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            
+            {/* Top decorative gradient line */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF7F50] via-white/20 to-[#4FC3F7]"></div>
+
+            <div className="flex justify-between items-center mb-12 pb-8 border-b border-white/5">
+               <div className="flex items-center gap-4 md:gap-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#FF7F50] blur-xl opacity-30 rounded-full"></div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
+                  </div>
+                  <span className="text-2xl md:text-4xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">LIV</span>
+               </div>
+               <div className="flex flex-col items-center">
+                 <span className="text-[10px] md:text-xs font-black tracking-[0.3em] text-gray-500 uppercase">Match Stats</span>
+                 <div className="w-8 h-1 bg-white/10 rounded-full mt-2"></div>
+               </div>
+               <div className="flex items-center gap-4 md:gap-6">
+                  <span className="text-2xl md:text-4xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-white">MCI</span>
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-[#4FC3F7] blur-xl opacity-30 rounded-full"></div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
+                  </div>
+               </div>
+            </div>
+            
+            <div className="space-y-10">
+              {matchStats.map((stat, idx) => {
+                const total = stat.liv + stat.mci;
+                const livPercent = (stat.liv / total) * 100;
+                const mciPercent = (stat.mci / total) * 100;
+                
+                return (
+                  <div key={idx} className="flex flex-col group/stat">
+                    <div className="flex justify-between items-end mb-3">
+                      <span className="text-xl md:text-2xl font-black text-white drop-shadow-md">
+                        {stat.liv}{stat.type === 'percent' ? <span className="text-sm text-gray-400">%</span> : ''}
+                      </span>
+                      <span className="text-gray-400 uppercase tracking-widest text-[10px] md:text-xs font-bold group-hover/stat:text-white transition-colors">{stat.label}</span>
+                      <span className="text-xl md:text-2xl font-black text-white drop-shadow-md">
+                        {stat.mci}{stat.type === 'percent' ? <span className="text-sm text-gray-400">%</span> : ''}
+                      </span>
+                    </div>
+                    <div className="flex w-full h-3 md:h-4 rounded-full overflow-hidden bg-black/50 border border-white/5 gap-1.5 shadow-inner">
+                      <div className="h-full bg-gradient-to-l from-[#FF7F50] to-[#E64A19] shadow-[0_0_15px_rgba(255,127,80,0.5)] relative overflow-hidden" style={{ width: `${livPercent}%` }}>
+                         <div className="absolute inset-0 bg-white/20 w-1/2 -skew-x-12 translate-x-[-150%] group-hover/stat:translate-x-[300%] transition-transform duration-1000"></div>
+                      </div>
+                      <div className="h-full bg-gradient-to-r from-[#4FC3F7] to-[#0288D1] shadow-[0_0_15px_rgba(79,195,247,0.5)] relative overflow-hidden" style={{ width: `${mciPercent}%` }}>
+                         <div className="absolute inset-0 bg-white/20 w-1/2 -skew-x-12 translate-x-[-150%] group-hover/stat:translate-x-[300%] transition-transform duration-1000 delay-100"></div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* STANDS Content */}
+      {activeTab === 'STANDS' && (
+        <div className="w-full max-w-3xl mx-auto space-y-6">
+          
+          {/* Feed */}
+          {standsFeed.map(post => (
+            <div key={post.id} className="relative group/post">
+               {/* Premium Glow effect behind the card */}
+               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7F50]/0 via-white/5 to-[#4FC3F7]/0 rounded-2xl blur opacity-0 group-hover/post:opacity-100 transition duration-500"></div>
+               
+               <div className="relative bg-gradient-to-br from-[#111111]/80 to-[#050505]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl transition-all duration-300">
+                 
+                 {/* Top header: User & Time */}
+                 <div className="flex items-center gap-4 mb-4">
+                   <div className="relative">
+                     <div className="absolute inset-0 bg-white/20 rounded-full blur-md opacity-50"></div>
+                     <img src={post.avatar} className={`relative w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-white/10 ${post.user === 'LFC_Official' ? 'bg-white p-1' : ''}`} />
+                   </div>
+                   <div>
+                     <div className="text-sm font-black text-white flex items-center gap-1.5">
+                       {post.user} 
+                       {post.user === 'LFC_Official' && <span className="text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]">✔️</span>}
+                     </div>
+                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">{post.time}</div>
+                   </div>
+                 </div>
+                 
+                 {/* Text Content */}
+                 <p className="text-[15px] text-gray-200 mb-5 leading-relaxed font-medium">{post.text}</p>
+                 
+                 {/* Highlight Video Embed */}
+                 {post.type === 'highlight' && (
+                   <div className="w-full relative rounded-xl overflow-hidden mb-5 border border-white/10 group/video cursor-pointer shadow-2xl">
+                     <img src={post.videoCover} className="w-full h-56 md:h-72 object-cover group-hover/video:scale-105 transition-transform duration-700 ease-out" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center transition-colors">
+                       <div className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(0,0,0,0.5)] group-hover/video:bg-[#00E5FF] group-hover/video:border-transparent transition-all duration-300 group-hover/video:scale-110">
+                         <Play className="w-6 h-6 text-white group-hover/video:text-black transition-colors" />
+                       </div>
+                     </div>
+                     <div className="absolute bottom-4 left-4 text-xs font-black tracking-widest uppercase text-white drop-shadow-md flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#FF3B00] animate-pulse"></span>
+                        Watch Highlight
+                     </div>
+                   </div>
+                 )}
+                 
+                 {/* Action Bar */}
+                 <div className="flex items-center gap-6 pt-4 border-t border-white/5">
+                   <button className="flex items-center gap-2 text-gray-400 hover:text-[#00E5FF] transition-all group/btn">
+                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-[#00E5FF]/20 group-hover/btn:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all">
+                       <ThumbsUp className="w-4 h-4" />
+                     </div>
+                     <span className="text-xs font-black">{post.upvotes}</span>
+                   </button>
+                   <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-all group/btn">
+                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-white/20 transition-all">
+                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                     </div>
+                     <span className="text-xs font-black">{post.comments}</span>
+                   </button>
+                   <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-all group/btn ml-auto">
+                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-white/20 transition-all">
+                       <Share className="w-4 h-4" />
+                     </div>
+                   </button>
+                 </div>
+               </div>
+            </div>
+          ))}
         </div>
       )}
 
