@@ -1,11 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users } from "lucide-react";
+import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
+
+const playerOptions = [
+  { name: 'DE BRUYNE', team: 'Man City', img: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop' },
+  { name: 'HAALAND', team: 'Man City', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+  { name: 'SALAH', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop' },
+  { name: 'DARWIN NÚÑEZ', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
+  { name: 'VAN DIJK', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop' },
+];
 
 const initialHotTakes = [
   {
@@ -137,10 +145,34 @@ const activeStands = [
 ];
 
 export default function MatchDetailsPage() {
+  const [matchState, setMatchState] = useState<'prematch' | 'postmatch'>('postmatch');
   const [activeTab, setActiveTab] = useState('OVERVIEW');
+  const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState(initialHotTakes);
   const [votedTakes, setVotedTakes] = useState<Record<number, boolean>>({});
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+
+  const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
+  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('DE BRUYNE');
+  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('DARWIN NÚÑEZ');
+
+  const handlePrematchVote = (type: 'chaos' | 'tactical' | 'tension') => {
+    setVotes(prev => {
+      const others = (['chaos', 'tactical', 'tension'] as const).filter(t => t !== type);
+      if (prev[others[0]] === 0 && prev[others[1]] === 0) return prev;
+      let newVotes = { ...prev };
+      newVotes[type] += 2;
+      if (newVotes[others[0]] > 0 && newVotes[others[1]] > 0) {
+        newVotes[others[0]] -= 1;
+        newVotes[others[1]] -= 1;
+      } else if (newVotes[others[0]] > 0) {
+        newVotes[others[0]] -= 2;
+      } else {
+        newVotes[others[1]] -= 2;
+      }
+      return newVotes;
+    });
+  };
 
   const allPitchPlayers = [...pitchLIV, ...pitchMCI];
   
@@ -198,8 +230,24 @@ export default function MatchDetailsPage() {
   return (
     <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
       
+      {/* State Toggle for Demo Purposes */}
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-md border border-white/10 p-1 rounded-full flex items-center shadow-2xl">
+         <button 
+           onClick={() => setMatchState('prematch')}
+           className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors ${matchState === 'prematch' ? 'bg-[#00E5FF] text-black' : 'text-white hover:bg-white/10'}`}
+         >
+           PRE-MATCH
+         </button>
+         <button 
+           onClick={() => setMatchState('postmatch')}
+           className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors ${matchState === 'postmatch' ? 'bg-[#FF7F50] text-black' : 'text-white hover:bg-white/10'}`}
+         >
+           LIVE / POST
+         </button>
+      </div>
+
       {/* Top Header Navigation */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-8 mt-12">
         <BackButton containerClassName="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]" iconClassName="w-5 h-5 text-white" />
         <h1 className="text-sm font-black tracking-widest text-gray-400 uppercase">Match Center</h1>
         <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]">
@@ -208,14 +256,14 @@ export default function MatchDetailsPage() {
       </div>
 
       {/* Cinematic Scoreboard */}
-      <div className="relative w-full rounded-[32px] overflow-hidden mb-12 border border-white/10 shadow-2xl">
+      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-12 border border-white/10 shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/20 via-[#020202] to-[#4FC3F7]/20 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
           <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-8">
-            Full Time
+            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : 'Full Time'}
           </div>
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
@@ -226,22 +274,31 @@ export default function MatchDetailsPage() {
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">Liverpool</h2>
               
-              {/* Goal Scorers (Left Side for LIV) */}
-              <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
-                <div className="flex items-center justify-center gap-1.5">
-                  <span className="text-[#00E5FF]">⚽</span> Salah 2'
+              {/* Goal Scorers - Only show in postmatch */}
+              {matchState === 'postmatch' && (
+                <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="text-[#00E5FF]">⚽</span> Salah 2'
+                  </div>
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="text-[#00E5FF]">⚽</span> Konate 78'
+                  </div>
                 </div>
-                <div className="flex items-center justify-center gap-1.5">
-                  <span className="text-[#00E5FF]">⚽</span> Konate 78'
-                </div>
-              </div>
+              )}
             </div>
 
-            {/* SCORE */}
+            {/* SCORE / TIME */}
             <div className="flex flex-col items-center justify-start pt-6 md:pt-10 shrink-0">
-              <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
-                2 <span className="text-gray-600 font-normal mx-1 md:mx-2">-</span> 0
-              </div>
+              {matchState === 'prematch' ? (
+                <div className="flex flex-col items-center">
+                  <span className="text-[10px] md:text-[12px] font-bold text-[#00E5FF] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
+                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-white drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+                </div>
+              ) : (
+                <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
+                  2 <span className="text-gray-600 font-normal mx-1 md:mx-2">-</span> 0
+                </div>
+              )}
             </div>
 
             {/* MAN CITY */}
@@ -255,31 +312,176 @@ export default function MatchDetailsPage() {
         </div>
       </div>
 
+      {/* PRE-MATCH WIDGETS */}
+      {matchState === 'prematch' && (
+        <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
+           {/* Join the Discussion */}
+           <Link href="/stands/2" className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
+             <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-[#00E5FF]/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
+                <div className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-[#00E5FF] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+                      <Mic className="w-5 h-5 text-black" fill="currentColor" />
+                   </div>
+                   <div className="flex flex-col justify-center">
+                      <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN THE DISCUSSION</h2>
+                      <p className="text-[10px] text-[#00E5FF] font-medium tracking-wide">12.4K active in the stands</p>
+                   </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-1">
+                   <ChevronRight className="w-4 h-4 text-[#00E5FF]" />
+                </div>
+             </div>
+           </Link>
+
+           {/* Crowdcast - Horizontal Segmented */}
+           <section className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-4 shadow-xl">
+              <div className="flex justify-between items-center mb-3 px-1">
+                 <h2 className="text-[10px] font-black tracking-widest uppercase text-gray-400">CROWDCAST VIBE</h2>
+                 <div className="flex items-center gap-1.5 text-[9px] font-bold text-[#00E5FF] uppercase">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> Live
+                 </div>
+              </div>
+              <div className="flex gap-2 h-12">
+                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
+                    <div className="flex items-center gap-2 relative z-10">
+                       <Flame className="w-4 h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
+                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Chaos</span>
+                    </div>
+                    <span className="text-sm font-black relative z-10 text-white">{votes.chaos}%</span>
+                 </div>
+                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-[#00E5FF]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div className="absolute left-0 top-0 h-full bg-[#00E5FF]/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
+                    <div className="flex items-center gap-2 relative z-10">
+                       <Shield className="w-4 h-4 text-[#00E5FF] group-active:scale-110 transition-transform" />
+                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Tactical</span>
+                    </div>
+                    <span className="text-sm font-black relative z-10 text-white">{votes.tactical}%</span>
+                 </div>
+                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-purple-500/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
+                    <div className="flex items-center gap-2 relative z-10">
+                       <Zap className="w-4 h-4 text-purple-500 group-active:scale-110 transition-transform" />
+                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Tension</span>
+                    </div>
+                    <span className="text-sm font-black relative z-10 text-white">{votes.tension}%</span>
+                 </div>
+              </div>
+           </section>
+        </div>
+      )}
+
       {/* Tab Navigation - Modern Pills */}
       <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
-        {['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
-          <button 
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-              activeTab === tab 
-                ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
-            }`}
-          >
-            {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
-            {tab === 'ROSTER' && <Users className="w-4 h-4" />}
-            {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
-            {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
-            {tab === 'STANDS' && <Mic className="w-4 h-4" />}
-            {tab}
-          </button>
-        ))}
+        {matchState === 'prematch' ? (
+          ['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
+            <button 
+              key={tab}
+              onClick={() => setPrematchTab(tab)}
+              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                prematchTab === tab 
+                  ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                  : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {tab}
+            </button>
+          ))
+        ) : (
+          ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
+            <button 
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                activeTab === tab 
+                  ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                  : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
+              {tab === 'ROSTER' && <Users className="w-4 h-4" />}
+              {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
+              {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
+              {tab === 'STANDS' && <Mic className="w-4 h-4" />}
+              {tab}
+            </button>
+          ))
+        )}
       </div>
 
       <AnimatePresence mode="wait">
-        {/* Overview Content */}
-        {activeTab === 'OVERVIEW' && (
+        {/* PRE-MATCH TAB CONTENT */}
+        {matchState === 'prematch' && (
+          <motion.div 
+            key="prematch-content"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-12"
+          >
+             <div className="max-w-4xl mx-auto min-h-[450px]">
+                {prematchTab === 'LINEUP' && <LineupTab />}
+                {prematchTab === 'H2H' && <H2HTab />}
+                {prematchTab === 'STANDINGS' && <StandingsTab />}
+                {prematchTab === 'FORM' && <FormTab />}
+                {prematchTab === 'KEY BATTLES' && <KeyBattlesTab />}
+             </div>
+
+             {/* Secondary Info Cards (MVP & Fraud Watch) */}
+             <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#00E5FF]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                      <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                   </div>
+                   <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                      <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-2">MVP WATCH</h3>
+                      <select 
+                        value={mvpWatchPlayer}
+                        onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                      >
+                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                      </select>
+                      <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                      <div className="flex items-end gap-1 mt-auto">
+                        <span className="text-xl font-black text-[#00E5FF] leading-none">8.7</span>
+                        <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                      <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                   </div>
+                   <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                      <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-2">FRAUD WATCH</h3>
+                      <select 
+                        value={fraudWatchPlayer}
+                        onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                      >
+                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                      </select>
+                      <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                      <div className="flex items-end gap-1.5 mt-auto">
+                        <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </motion.div>
+        )}
+
+        {/* Overview Content (Post Match) */}
+        {matchState === 'postmatch' && activeTab === 'OVERVIEW' && (
           <motion.div 
             key="overview"
             initial={{ opacity: 0, y: 15 }}
@@ -334,7 +536,7 @@ export default function MatchDetailsPage() {
                     MVP
                   </div>
                   
-                  <div className="absolute -bottom-3 -left-3 md:-bottom-4 md:-left-4 bg-[#020202] text-[#00E5FF] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#00E5FF]/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono">
+                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-[#00E5FF] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#00E5FF]/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono transform -rotate-3">
                     9.2
                   </div>
                   
@@ -788,6 +990,369 @@ export default function MatchDetailsPage() {
           onPrev={handlePrevPlayer}
         />
       )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------
+// Pre-Match Tab Components
+// ---------------------------------------------------------
+
+function LineupTab() {
+  const [vibe, setVibe] = useState(80);
+  const [tactical, setTactical] = useState(45);
+  const [hasVotedAs, setHasVotedAs] = useState<'fan' | 'neutral' | null>(null);
+
+  const mciPlayers = [
+    { name: "EDERSON", x: 50, y: 6 },
+    { name: "WALKER", x: 15, y: 15 },
+    { name: "DIAS", x: 35, y: 15 },
+    { name: "AKANJI", x: 65, y: 15 },
+    { name: "GVARDIOL", x: 85, y: 15 },
+    { name: "DE BRUYNE", x: 30, y: 25, glow: true },
+    { name: "RODRI", x: 50, y: 23 },
+    { name: "SILVA", x: 70, y: 25 },
+    { name: "FODEN", x: 20, y: 35 },
+    { name: "HAALAND", x: 50, y: 38, glow: true },
+    { name: "DOKU", x: 80, y: 35 },
+  ];
+
+  const livPlayers = [
+    { name: "ALISSON", x: 50, y: 94 },
+    { name: "TRENT", x: 15, y: 85 },
+    { name: "VAN DIJK", x: 35, y: 85, glow: true },
+    { name: "KONATÉ", x: 65, y: 85 },
+    { name: "ROBERTSON", x: 85, y: 85 },
+    { name: "MAC ALLISTER", x: 30, y: 75, glow: true },
+    { name: "GRAVENBERCH", x: 50, y: 77 },
+    { name: "SZOBOSZLAI", x: 70, y: 75 },
+    { name: "DIAZ", x: 20, y: 65 },
+    { name: "JOTA", x: 50, y: 62 },
+    { name: "SALAH", x: 80, y: 65, glow: true },
+  ];
+
+  return (
+    <div className="w-full h-full flex flex-col">
+      {/* Pitch & Bench Container */}
+      <div className="w-full max-w-[420px] mx-auto">
+         {/* Pitch Area */}
+         <div className="relative w-full h-[700px] bg-[#070e0a] rounded-t-2xl border border-white/5 border-b-0 overflow-hidden pt-2">
+            {/* Team Logos */}
+            <div className="absolute top-4 left-4 font-black text-white/20 text-xl tracking-tighter flex items-center gap-2">
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 opacity-40 grayscale brightness-200" alt="" />
+              MCI
+            </div>
+            <div className="absolute bottom-4 right-4 font-black text-white/20 text-xl tracking-tighter flex items-center gap-2">
+              <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-5 h-6 opacity-40 grayscale brightness-200" alt="" />
+              LIV
+            </div>
+
+            {/* Pitch Markings */}
+            <div className="absolute inset-4 border border-green-900/30 rounded-lg" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-4 w-40 h-20 border border-t-0 border-green-900/30 rounded-b-lg" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-4 w-20 h-8 border border-t-0 border-green-900/30 rounded-b-lg" />
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-40 h-20 border border-b-0 border-green-900/30 rounded-t-lg" />
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-20 h-8 border border-b-0 border-green-900/30 rounded-t-lg" />
+            <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 h-px bg-green-900/30" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border border-green-900/30" />
+
+            {/* MCI Players */}
+            {mciPlayers.map((p, i) => (
+              <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
+                 </div>
+                 <span className="text-[9px] font-black tracking-wider text-[#00E5FF] drop-shadow-md">{p.name}</span>
+              </div>
+            ))}
+
+            {/* LIV Players */}
+            {livPlayers.map((p, i) => (
+              <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                    <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
+                 </div>
+                 <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
+              </div>
+            ))}
+         </div>
+
+         {/* Bench */}
+         <div className="w-full bg-[#1A1A1A] rounded-b-2xl p-4 border border-white/5 border-t-0 mb-8">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-1 h-4 bg-[#00E5FF]" />
+              <div className="flex gap-1.5">
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=1" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=2" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+              </div>
+            </div>
+            <div className="flex items-center justify-end gap-2">
+              <div className="flex gap-1.5">
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=3" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=4" className="w-full h-full object-cover"/></div>
+              </div>
+              <div className="w-1 h-4 bg-[#FF7F50]" />
+            </div>
+         </div>
+      </div>
+
+      {/* Lineup Confidence */}
+      <div>
+         <h3 className="text-[10px] font-black tracking-widest text-gray-500 mb-6 uppercase">LINEUP CONFIDENCE</h3>
+         
+         <div className="mb-8">
+           <div className="flex justify-between items-end mb-3">
+             <div className="flex items-center gap-2">
+               <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5" alt=""/>
+               <span className="text-[10px] font-black uppercase">YOUR VIBE <span className="text-gray-400">(MCI FANS)</span></span>
+             </div>
+             {hasVotedAs === 'neutral' ? (
+               <div className="flex items-center gap-1.5">
+                 <span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">LOCKED</span>
+                 <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
+               </div>
+             ) : (
+               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
+             )}
+           </div>
+           <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
+             <span>WORRIED</span>
+             <span>CONFIDENT</span>
+           </div>
+           <input 
+             type="range" min="0" max="100" 
+             value={vibe} onChange={(e) => {
+               setVibe(parseInt(e.target.value));
+               if (!hasVotedAs) setHasVotedAs('fan');
+             }}
+             disabled={hasVotedAs === 'neutral'}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+           />
+         </div>
+
+         <div className="mb-10">
+           <div className="flex justify-between items-end mb-3">
+             <div className="flex items-center gap-2">
+               <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-4 h-5" alt=""/>
+               <span className="text-[10px] font-black uppercase text-gray-400">LIVERPOOL FANS</span>
+             </div>
+             <div className="flex items-center gap-1.5">
+               <span className="text-[10px] font-black text-[#D32F2F] tracking-widest">42% WORRIED</span>
+               <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
+             </div>
+           </div>
+           <div className="w-full h-1 bg-white/10 rounded-full">
+             <div className="h-full bg-[#D32F2F] rounded-full" style={{ width: '42%' }} />
+           </div>
+         </div>
+
+         <div>
+           <div className="flex justify-between items-end mb-4">
+             <span className="text-[10px] font-black uppercase">NEUTRAL: WHO HAS THE TACTICAL EDGE?</span>
+             {hasVotedAs === 'fan' ? (
+               <div className="flex items-center gap-1.5">
+                 <span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">LOCKED</span>
+                 <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
+               </div>
+             ) : (
+               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
+             )}
+           </div>
+           <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
+             <span>MCI</span>
+             <span>LIV</span>
+           </div>
+           <input 
+             type="range" min="0" max="100" 
+             value={tactical} onChange={(e) => {
+               setTactical(parseInt(e.target.value));
+               if (!hasVotedAs) setHasVotedAs('neutral');
+             }}
+             disabled={hasVotedAs === 'fan'}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+           />
+         </div>
+      </div>
+    </div>
+  );
+}
+
+function H2HTab() {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
+        <h3 className="text-[10px] font-black text-center text-gray-400 tracking-widest mb-6">LAST 5 MEETINGS</h3>
+        
+        <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col items-center">
+               <div className="w-12 h-12 rounded-full bg-[#4FC3F7] mb-2" />
+               <span className="text-[10px] font-bold">MAN CITY</span>
+            </div>
+            <div className="flex gap-6 text-center">
+               <div><div className="text-2xl font-black text-[#00E5FF]">3</div><div className="text-[8px] text-[#00E5FF] tracking-widest">WINS</div></div>
+               <div><div className="text-2xl font-black text-white">1</div><div className="text-[8px] text-gray-400 tracking-widest">DRAW</div></div>
+               <div><div className="text-2xl font-black text-[#D32F2F]">1</div><div className="text-[8px] text-[#D32F2F] tracking-widest">WIN</div></div>
+            </div>
+            <div className="flex flex-col items-center">
+               <div className="w-12 h-12 rounded-full bg-[#D32F2F] mb-2" />
+               <span className="text-[10px] font-bold">LIVERPOOL</span>
+            </div>
+        </div>
+
+        <div className="space-y-4">
+           {[
+             { d: "Dec '23", h: "Man City", s: "1 - 1", a: "Liverpool" },
+             { d: "Nov '23", h: "Liverpool", s: "1 - 1", a: "Man City" },
+             { d: "Apr '23", h: "Man City", s: "4 - 1", a: "Liverpool" },
+             { d: "Oct '22", h: "Liverpool", s: "1 - 0", a: "Man City" },
+             { d: "Apr '22", h: "Man City", s: "2 - 1", a: "Liverpool" },
+           ].map((m, i) => (
+             <div key={i} className="flex items-center justify-between text-xs border-b border-white/5 pb-2 last:border-0">
+               <span className="text-gray-500 w-12">{m.d}</span>
+               <span className="flex-1 text-right text-gray-300">{m.h}</span>
+               <span className="font-black px-4">{m.s}</span>
+               <span className="flex-1 text-left text-gray-300">{m.a}</span>
+             </div>
+           ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StandingsTab() {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="bg-[#0A0A0A] rounded-2xl p-4 border border-white/5 overflow-x-auto hide-scrollbar">
+         <div className="text-[9px] font-black text-gray-500 tracking-widest uppercase mb-4 px-2">Premier League</div>
+         <table className="w-full text-xs text-left">
+           <thead>
+             <tr className="text-[9px] text-gray-500 border-b border-white/5">
+               <th className="pb-2 font-normal w-6 text-center">#</th>
+               <th className="pb-2 font-normal">TEAM</th>
+               <th className="pb-2 font-normal text-right">P</th>
+               <th className="pb-2 font-normal text-right">GD</th>
+               <th className="pb-2 font-normal text-right pr-2">PTS</th>
+             </tr>
+           </thead>
+           <tbody>
+             {[
+               { p: 1, t: "Liverpool", icon: "bg-[#D32F2F]", ply: 35, gd: "+41", pts: 80, hl: false },
+               { p: 2, t: "Man City", icon: "bg-[#4FC3F7]", ply: 35, gd: "+37", pts: 79, hl: true },
+               { p: 3, t: "Arsenal", icon: "bg-red-500", ply: 35, gd: "+29", pts: 68, hl: false },
+               { p: 4, t: "Aston Villa", icon: "bg-purple-900", ply: 35, gd: "+20", pts: 66, hl: false },
+               { p: 5, t: "Tottenham", icon: "bg-white", ply: 35, gd: "+13", pts: 60, hl: false },
+             ].map((r, i) => (
+               <tr key={i} className={`border-b border-white/5 last:border-0 ${r.hl ? 'bg-[#00E5FF]/5' : ''}`}>
+                 <td className={`py-3 text-center ${r.hl ? 'text-[#00E5FF] font-bold' : 'text-gray-400'}`}>{r.p}</td>
+                 <td className="py-3 flex items-center gap-2">
+                   <div className={`w-4 h-4 rounded-full ${r.icon}`} />
+                   <span className={r.hl ? 'text-[#00E5FF] font-bold' : 'text-gray-200'}>{r.t}</span>
+                 </td>
+                 <td className="py-3 text-right text-gray-400">{r.ply}</td>
+                 <td className="py-3 text-right text-gray-400">{r.gd}</td>
+                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-[#00E5FF]' : 'text-white'}`}>{r.pts}</td>
+               </tr>
+             ))}
+           </tbody>
+         </table>
+      </div>
+    </div>
+  );
+}
+
+function FormTab() {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
+         <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-black uppercase text-gray-400 mb-3">MAN CITY</span>
+              <div className="flex gap-2">
+                 {['W','W','W','D','W'].map((r,i) => (
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-red-500/20 text-red-500'}`}>{r}</div>
+                 ))}
+              </div>
+              <div className="flex gap-4 mt-4 text-[10px] text-gray-500">
+                <span>Last 5</span>
+                <span>GF <strong className="text-white">14</strong></span>
+                <span>GA <strong className="text-white">4</strong></span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] font-black uppercase text-[#D32F2F] mb-3">LIVERPOOL</span>
+              <div className="flex gap-2">
+                 {['W','W','L','W','D'].map((r,i) => (
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-red-500/20 text-red-500'}`}>{r}</div>
+                 ))}
+              </div>
+              <div className="flex gap-4 mt-4 text-[10px] text-gray-500">
+                <span>Last 5</span>
+                <span>GF <strong className="text-white">9</strong></span>
+                <span>GA <strong className="text-white">5</strong></span>
+              </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  );
+}
+
+function KeyBattlesTab() {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="space-y-4">
+         <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-sm font-bold">Haaland</span>
+                 <span className="text-[10px] text-gray-500">Man City</span>
+               </div>
+            </div>
+            <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
+            <div className="flex items-center gap-3 text-right flex-row-reverse">
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-sm font-bold">Van Dijk</span>
+                 <span className="text-[10px] text-[#D32F2F]">Liverpool</span>
+               </div>
+            </div>
+         </div>
+
+         <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-sm font-bold">De Bruyne</span>
+                 <span className="text-[10px] text-gray-500">Man City</span>
+               </div>
+            </div>
+            <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
+            <div className="flex items-center gap-3 text-right flex-row-reverse">
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-sm font-bold">Mac Allister</span>
+                 <span className="text-[10px] text-[#D32F2F]">Liverpool</span>
+               </div>
+            </div>
+         </div>
+      </div>
     </div>
   );
 }

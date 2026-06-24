@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Eye, Bell, Zap, GitBranch, Bookmark, Mic, Star, Swords, Dices } from "lucide-react";
+import { Eye, Bell, Zap, GitBranch, Bookmark, Mic, Star, Swords, Dices, ChevronRight, Activity, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const CATEGORIES = [
@@ -13,6 +13,40 @@ const CATEGORIES = [
   { id: "RIVALRIES", label: "RIVALRIES", icon: Swords, color: "text-[#D32F2F]" },
   { id: "SURPRISE", label: "SURPRISE ME", icon: Dices, color: "text-gray-400" },
   { id: "BOOKMARKS", label: "BOOKMARKS", icon: Bookmark, color: "text-gray-300" },
+];
+
+const CALENDAR_DAYS = [
+  { day: "MON", date: "22", isToday: false },
+  { day: "TUE", date: "23", isToday: false },
+  { day: "WED", date: "24", isToday: false },
+  { day: "TODAY", date: "25", isToday: true },
+  { day: "FRI", date: "26", isToday: false },
+  { day: "SAT", date: "27", isToday: false },
+  { day: "SUN", date: "28", isToday: false },
+];
+
+const baseInsightsFeed = [
+  {
+    id: 1,
+    title: "ØDEGAARD: SENTIMENT DIVERGENCE",
+    desc: "Neutral fans rated his creativity at 8.2, while Arsenal fans' frustration led to 5.2.",
+    points: [6.2, 8.2],
+    ratingText: "12.4K fan ratings"
+  },
+  {
+    id: 2,
+    title: "SAKA: 9.2 RATING ANOMALY",
+    desc: "Saka is currently rated 9.2, which is 40% HIGHER than his season average.",
+    points: [6.8, 9.2],
+    ratingText: "12.4K fan ratings"
+  },
+  {
+    id: 3,
+    title: "ROMERO: PEAK 88",
+    desc: "A 3-minute spell of dominance...",
+    points: [8.8],
+    ratingText: "12.4K fan ratings"
+  }
 ];
 
 export default function DiscoverPage() {
@@ -33,37 +67,58 @@ export default function DiscoverPage() {
   return (
     <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white space-y-8">
       
-      {/* 1. LIVELY PILL NAVIGATION */}
-      <div className="flex items-center gap-3 overflow-x-auto pb-4 hover-scrollbar no-scrollbar">
-        {CATEGORIES.map((cat) => {
-          const Icon = cat.icon;
-          const isActive = activeTab === cat.id;
-          
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setActiveTab(cat.id)}
-              className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-black tracking-widest uppercase whitespace-nowrap transition-all duration-300 ${
-                isActive 
-                  ? "text-black scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]" 
-                  : `bg-white/5 border border-white/5 hover:bg-white/10 ${cat.color}`
-              }`}
-              style={isActive ? { backgroundColor: "#fff" } : {}}
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="activeTabGlow"
-                  className="absolute inset-0 bg-white rounded-full z-0"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-1.5">
-                {Icon && <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-black' : cat.color}`} />}
-                {cat.label}
-              </span>
-            </button>
-          );
-        })}
+      {/* 1. TOP CONTROLS: CALENDAR & PILLS */}
+      <div className="flex flex-col xl:flex-row xl:items-center gap-4 pb-4">
+        
+        {/* Calendar Strip */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+           <button className="flex flex-col items-center justify-center p-2 rounded-xl text-gray-500 hover:bg-white/5 transition-colors shrink-0 w-12">
+             <Calendar className="w-5 h-5" />
+           </button>
+           {CALENDAR_DAYS.map((d, i) => (
+             <button 
+                key={i} 
+                className={`flex flex-col items-center justify-center py-2 px-4 rounded-xl shrink-0 transition-colors ${d.isToday ? 'bg-white text-black font-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10'}`}
+             >
+                <span className={`text-[10px] font-black tracking-widest ${d.isToday ? 'text-gray-800' : 'text-gray-500'}`}>{d.day}</span>
+                <span className={`text-xl font-mono font-black ${d.isToday ? 'text-black' : 'text-white'}`}>{d.date}</span>
+             </button>
+           ))}
+           <div className="w-px h-10 bg-white/10 mx-2 hidden xl:block" />
+        </div>
+
+        {/* Pill Navigation */}
+        <div className="flex items-center gap-3 overflow-x-auto hover-scrollbar no-scrollbar flex-1 pb-2 xl:pb-0">
+          {CATEGORIES.map((cat) => {
+            const Icon = cat.icon;
+            const isActive = activeTab === cat.id;
+            
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
+                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-black tracking-widest uppercase whitespace-nowrap transition-all duration-300 ${
+                  isActive 
+                    ? "text-black scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]" 
+                    : `bg-white/5 border border-white/5 hover:bg-white/10 ${cat.color}`
+                }`}
+                style={isActive ? { backgroundColor: "#fff" } : {}}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabGlow"
+                    className="absolute inset-0 bg-white rounded-full z-0"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  {Icon && <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-black' : cat.color}`} />}
+                  {cat.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* 2. CINEMATIC HERO SHOWDOWN */}
@@ -168,6 +223,7 @@ export default function DiscoverPage() {
 
         </div>
       </section>
+
 
       {/* 3. GRID SYSTEM - LIVE FIRST */}
       <section className="pt-4">
@@ -323,7 +379,7 @@ export default function DiscoverPage() {
                  </span>
                  <span className="text-[10px] font-mono font-bold text-gray-300">Midfield Control</span>
                </div>
-               <Link href="/prematch/1" className="w-full block text-center bg-[#00E5FF] text-black text-xs font-bold tracking-widest py-3.5 rounded-xl hover:scale-[1.02] transition-transform shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+               <Link href="/match/1" className="w-full block text-center bg-[#00E5FF] text-black text-xs font-bold tracking-widest py-3.5 rounded-xl hover:scale-[1.02] transition-transform shadow-[0_0_15px_rgba(0,229,255,0.2)]">
                  MATCH DETAILS
                </Link>
              </div>
@@ -381,9 +437,9 @@ export default function DiscoverPage() {
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <div className="flex items-center gap-4">
-                       <div className="flex items-center gap-2">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/f/f9/Aston_Villa_FC_crest_%282016%29.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="AVL" />
-                          <span className="font-bold text-sm">AVL</span>
+                         <div className="flex items-center gap-2">
+                            <img src="https://a.espncdn.com/i/teamlogos/soccer/500/362.png" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="AVL" />
+                            <span className="font-bold text-sm">AVL</span>
                        </div>
                        <span className="text-gray-600 text-xs font-black">VS</span>
                        <div className="flex items-center gap-2">
@@ -405,6 +461,79 @@ export default function DiscoverPage() {
             </div>
 
          </div>
+      </section>
+
+      {/* DAILY DEBRIEF */}
+      <section className="pt-8">
+        <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase mb-6 pl-2">DAILY DEBRIEF</h2>
+        
+        <div className="overflow-x-auto hover-scrollbar flex gap-6 pb-4">
+          {/* Top 3 Players */}
+          <div className="bg-[#121212] border border-white/5 rounded-[2rem] p-6 w-[380px] shrink-0 flex flex-col">
+            <h3 className="text-[10px] text-gray-400 font-black tracking-widest uppercase mb-8 text-center">TOP 3 PLAYERS OF THE DAY</h3>
+            
+            <div className="flex justify-center items-end gap-4 mb-8">
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
+                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
+                  <div className="absolute -bottom-1 -right-1 bg-[#00E5FF] text-black text-[10px] font-black px-1.5 rounded">8.8</div>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
+              </div>
+              
+              <div className="flex flex-col items-center pb-4">
+                <div className="w-20 h-20 rounded-full border-2 border-[#00E5FF] overflow-hidden mb-2 relative shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#00E5FF] text-black text-xs font-black px-2 py-0.5 rounded">9.2</div>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
+                  <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
+                  <div className="absolute -bottom-1 -right-1 bg-[#00E5FF] text-black text-[10px] font-black px-1.5 rounded">8.5</div>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 1 <div className="w-1.5 h-1.5 rounded-full bg-[#FF7F50]"/> 1</div>
+              </div>
+            </div>
+
+            <button className="mt-auto w-full flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors p-4 rounded-xl text-sm font-bold text-gray-300">
+              See full rankings <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {baseInsightsFeed.map((insight) => (
+            <div key={insight.id} className="w-[380px] shrink-0 bg-[#121212] border border-white/5 rounded-[2rem] p-6 flex flex-col">
+                <div className="flex items-center gap-1 mb-4">
+                  <span className="text-[#00E5FF] font-black">2 - 2</span>
+                  <div className="flex gap-0.5">
+                    <div className="w-2 h-2 bg-[#00E5FF] rotate-45" />
+                    <div className="w-2 h-2 bg-gray-600 rotate-45" />
+                  </div>
+                </div>
+                <h3 className="text-xs font-black tracking-widest text-[#00E5FF] uppercase leading-relaxed mb-4">{insight.title}</h3>
+                <p className="text-sm text-gray-400 mb-8 leading-relaxed">
+                  {insight.desc.split(/(\d\.?\d*%?)/).map((part, i) => 
+                    /^\d\.?\d*%?$/.test(part) || part === 'HIGHER' ? <strong key={i} className={part.includes('%') ? 'text-[#00E5FF]' : 'text-white'}>{part}</strong> : part
+                  )}
+                </p>
+
+                <div className="mt-auto relative w-full h-1 bg-white/10 rounded-full mb-6">
+                  {insight.points.map((pt, i) => (
+                     <div key={i} className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_rgba(0,229,255,0.8)]" style={{ left: `${(pt/10)*100}%` }} />
+                  ))}
+                  {insight.points.length > 1 && (
+                    <div className="absolute top-1/2 -translate-y-1/2 h-1 bg-[#00E5FF]/30" style={{ left: `${(insight.points[0]/10)*100}%`, right: `${100 - (insight.points[1]/10)*100}%` }} />
+                  )}
+                  <span className="absolute -bottom-5 text-[8px] font-bold text-gray-500" style={{ left: 0 }}>6.0</span>
+                  <span className="absolute -bottom-5 text-[8px] font-bold text-gray-500" style={{ right: 0 }}>9.2</span>
+                </div>
+                
+                <p className="text-[10px] text-gray-500 font-bold">{insight.ratingText}</p>
+              </div>
+            ))}
+        </div>
       </section>
 
     </div>

@@ -46,7 +46,6 @@ export default function AppLayout({
 
   const navItems = [
     { icon: <Compass className="w-6 h-6" />, label: "Discover", href: "/discover" },
-    { icon: <Activity className="w-6 h-6" />, label: "Insights", href: "/insights" },
     { icon: <User className="w-6 h-6" />, label: "The Stand", href: "/stands" },
   ];
 
