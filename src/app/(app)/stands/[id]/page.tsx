@@ -273,8 +273,8 @@ export default function ActiveStandPage() {
           
           {isVideoPlaying ? (
             <div className="w-full flex flex-row xl:flex-col gap-2 md:gap-4 px-2 xl:px-0">
-              {/* The Video Area (70% width on mobile) */}
-              <div className="flex-[7] xl:flex-none xl:w-full aspect-video bg-black relative overflow-hidden rounded-xl xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
+              {/* The Video Area */}
+              <div className="flex-1 xl:flex-none xl:w-full aspect-video bg-black relative overflow-hidden rounded-xl xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
                 <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-2 md:p-6 pointer-events-none">
                   <h2 className="text-[10px] md:text-3xl font-black text-white drop-shadow-lg mb-0.5 md:mb-2 leading-tight">Arteta's Post-Match Interview</h2>
@@ -289,8 +289,8 @@ export default function ActiveStandPage() {
                 </div>
               </div>
 
-              {/* The Speakers Area (30% width on mobile, locked height) */}
-              <div className="flex-[3] xl:flex-none xl:w-full relative shrink-0">
+              {/* The Speakers Area (Fixed width perfectly hugging the avatars) */}
+              <div className="w-14 md:w-16 xl:w-full relative shrink-0">
                 <div className="absolute inset-0 xl:relative xl:inset-auto xl:w-full overflow-y-auto xl:overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   <div className="flex flex-col items-center xl:flex-row gap-1 md:gap-2">
                     {renderSpeakers(true)}
