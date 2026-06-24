@@ -336,9 +336,14 @@ export default function ActiveStandPage() {
               className="flex items-center justify-between cursor-pointer group/toggle"
               onClick={() => setIsPollExpanded(!isPollExpanded)}
             >
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 relative">
                 <Zap className="w-4 h-4 text-[#00E5FF]" />
                 <h3 className="text-sm font-black text-white group-hover/toggle:text-[#00E5FF] transition-colors">Live Poll</h3>
+                {!hasVoted && (
+                  <div className="flex items-center justify-center w-4 h-4 bg-[#FF3B00] rounded-full text-[9px] font-black text-white shadow-[0_0_10px_rgba(255,59,0,0.5)] animate-bounce ml-0.5">
+                    1
+                  </div>
+                )}
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[9px] font-bold text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">1m 24s left</span>
