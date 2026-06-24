@@ -99,7 +99,7 @@ export default function ActiveStandPage() {
 
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
-      ? "relative w-full aspect-square xl:w-24 xl:h-24 md:w-32 md:h-32 shrink-0 rounded-xl xl:rounded-2xl" 
+      ? "relative w-full aspect-square xl:w-24 xl:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
       : "relative h-full w-full min-h-0 rounded-xl";
 
     return (
@@ -259,25 +259,29 @@ export default function ActiveStandPage() {
           
           {isVideoPlaying ? (
             <div className="w-full flex flex-row xl:flex-col gap-2 md:gap-4 px-2 xl:px-0">
-              {/* The Video Area */}
-              <div className="flex-1 xl:w-full aspect-video bg-black relative overflow-hidden rounded-xl xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
+              {/* The Video Area (70% width on mobile) */}
+              <div className="flex-[7] xl:flex-none xl:w-full aspect-video bg-black relative overflow-hidden rounded-xl xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
                 <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-2 md:p-6 pointer-events-none">
-                  <h2 className="text-sm md:text-3xl font-black text-white drop-shadow-lg mb-1 md:mb-2 leading-tight">Arteta's Post-Match Interview</h2>
+                  <h2 className="text-[10px] md:text-3xl font-black text-white drop-shadow-lg mb-0.5 md:mb-2 leading-tight">Arteta's Post-Match Interview</h2>
                   <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
                     <div className="h-full bg-[#00E5FF] w-1/3" />
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center">
-                    <MonitorPlay className="w-4 h-4 md:w-6 md:h-6 text-white" />
+                  <div className="w-8 h-8 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center">
+                    <MonitorPlay className="w-3 h-3 md:w-6 md:h-6 text-white" />
                   </div>
                 </div>
               </div>
 
-              {/* The Speakers Area (Horizontal/Vertical Scroll) */}
-              <div className="w-20 md:w-32 xl:w-full flex flex-col xl:flex-row overflow-y-auto xl:overflow-x-auto gap-2 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                {renderSpeakers(true)}
+              {/* The Speakers Area (30% width on mobile, locked height) */}
+              <div className="flex-[3] xl:flex-none xl:w-full relative shrink-0">
+                <div className="absolute inset-0 xl:relative xl:inset-auto xl:w-full overflow-y-auto xl:overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  <div className="grid grid-cols-2 xl:flex xl:flex-row gap-1 md:gap-2">
+                    {renderSpeakers(true)}
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
