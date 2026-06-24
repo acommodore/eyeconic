@@ -429,12 +429,6 @@ export default function MatchDetailsPage() {
         <div className="space-y-12">
           {/* Pitch View Roster */}
           <section className="mt-4">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Shield className="w-5 h-5 text-green-500" /> LIVE PITCH RATINGS
-              </h2>
-            </div>
-
             <div className="w-full max-w-5xl mx-auto flex flex-col">
               {/* MOBILE / TABLET PITCH (Vertical) */}
               <div className="xl:hidden w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden min-h-[600px] md:min-h-[800px] border border-white/5 border-b-0">
