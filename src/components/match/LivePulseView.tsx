@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft } from "lucide-react";
+import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight } from "lucide-react";
 
 // --- Data Models ---
 const matchEvents = [
@@ -117,6 +117,23 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
       {event.player && <strong className="text-white block mb-1">{event.player}</strong>}
       {event.desc}
     </p>
+
+    {event.type === 'half' && (
+      <div className="mb-6">
+        <Link href="/stands/2" className="w-full bg-[#121212] border border-[#00E5FF]/30 hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/10 transition-all rounded-xl p-4 flex items-center justify-between group">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-[#00E5FF]/20 flex items-center justify-center">
+              <Mic className="w-5 h-5 text-[#00E5FF]" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-black tracking-widest text-xs uppercase text-white group-hover:text-[#00E5FF] transition-colors">Halftime Stand Open</span>
+              <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5">12.4K FANS ACTIVE</span>
+            </div>
+          </div>
+          <ChevronRight className="w-5 h-5 text-[#00E5FF] group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </div>
+    )}
     
     {/* Voice Notes List */}
     <div className="mt-4 flex flex-col">
@@ -340,14 +357,6 @@ export default function LivePulseView() {
                   +99
                 </div>
               </div>
-              <Link href="/stands/2" className="bg-[#FF7F50] text-white rounded-lg px-6 py-3 flex items-center gap-3 hover:brightness-110 transition-all shadow-lg relative z-10 whitespace-nowrap w-full md:w-auto justify-center">
-                   <span className="font-black tracking-widest text-[10px] uppercase">JOIN THE STAND</span>
-                   <div className="flex items-center justify-center gap-0.5 ml-2">
-                      <div className="w-0.5 h-2 bg-white rounded-full" />
-                      <div className="w-0.5 h-3 bg-white rounded-full" />
-                      <div className="w-0.5 h-2 bg-white rounded-full" />
-                   </div>
-              </Link>
             </div>
           </div>
         </div>
