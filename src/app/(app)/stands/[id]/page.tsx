@@ -449,7 +449,7 @@ export default function ActiveStandPage() {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Join the conversation..." 
-              className="bg-transparent border-none outline-none text-sm w-full px-4 text-white placeholder:text-gray-600 font-medium"
+              className="bg-transparent border-none outline-none text-[16px] md:text-sm w-full px-4 text-white placeholder:text-gray-600 font-medium"
             />
             <button 
               type="submit"
