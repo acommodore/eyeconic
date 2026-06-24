@@ -108,13 +108,20 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Dynamic Background for the Stage */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00E5FF]/5 via-[#020202] to-[#020202] pointer-events-none" />
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2000&auto=format&fit=crop" 
+          alt="Stadium stands" 
+          className="w-full h-full object-cover opacity-20 grayscale"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020202]/60 via-[#020202]/80 to-[#020202] pointer-events-none" />
+      </div>
 
       {/* Left Pane: The Stage */}
-      <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col p-4 md:p-8 relative z-10 pb-4">
+      <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col p-2 md:p-8 relative z-10 pb-2">
         
         {/* Stage Header */}
-        <header className="flex items-center justify-between border-b border-white/5 pb-6">
+        <header className="flex items-center justify-between border-b border-white/5 pb-2">
           <div className="flex items-center gap-4">
             <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-white/5 backdrop-blur z-20 relative" iconClassName="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform" />
             
@@ -148,7 +155,7 @@ export default function ActiveStandPage() {
         </header>
 
         {/* Speakers Grid */}
-        <div className="flex-1 flex flex-col justify-start md:justify-center py-4 md:py-10 overflow-hidden w-full">
+        <div className="flex-1 flex flex-col justify-start md:justify-center pt-2 pb-0 md:py-10 overflow-hidden w-full">
           <div className="grid grid-cols-3 gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
@@ -290,7 +297,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[45vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[50vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
