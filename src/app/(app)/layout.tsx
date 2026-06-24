@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Activity, Compass, User, Menu, ChevronLeft } from "lucide-react";
@@ -13,25 +13,36 @@ export default function AppLayout({
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showNav, setShowNav] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+  const isNavVisible = useRef(true);
 
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
         const currentScrollY = window.scrollY;
-        // If scrolling down and we have scrolled past 50px, hide the nav
-        if (currentScrollY > lastScrollY && currentScrollY > 50) {
-          setShowNav(false);
-        } else {
-          setShowNav(true);
+        
+        // Ignore iOS rubber-band bounce
+        if (currentScrollY < 0) return;
+        
+        if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+          if (isNavVisible.current) {
+            setShowNav(false);
+            isNavVisible.current = false;
+          }
+        } else if (currentScrollY < lastScrollY.current) {
+          if (!isNavVisible.current) {
+            setShowNav(true);
+            isNavVisible.current = true;
+          }
         }
-        setLastScrollY(currentScrollY);
+        
+        lastScrollY.current = currentScrollY;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const navItems = [
     { icon: <Compass className="w-6 h-6" />, label: "Discover", href: "/discover" },
