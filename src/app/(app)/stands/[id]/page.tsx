@@ -108,10 +108,13 @@ export default function ActiveStandPage() {
       </div>
       
       {/* Left Pane: The Stage */}
-      <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-[#050505]">
+      <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-[#050505] xl:p-8">
         
-        {/* Info Section (Premium Header) */}
-        <div className="px-4 py-3 md:px-8 md:py-6 xl:mx-8 xl:mt-6 relative overflow-hidden bg-white/5 border-b xl:border border-white/10 xl:rounded-2xl flex flex-col gap-3 shrink-0 backdrop-blur-md">
+        {/* Container to center stage on desktop */}
+        <div className="w-full flex flex-col xl:m-auto xl:max-w-6xl gap-6">
+          
+          {/* Info Section (Premium Header) */}
+          <div className="px-4 py-3 md:px-8 md:py-6 relative overflow-hidden bg-white/5 border-b xl:border border-white/10 xl:rounded-2xl flex flex-col gap-3 shrink-0 backdrop-blur-md">
           {/* Subtle glowing orbs behind the header */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#00E5FF]/20 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FF3B00]/20 rounded-full blur-[80px] pointer-events-none" />
@@ -148,8 +151,8 @@ export default function ActiveStandPage() {
           </div>
         </div>
 
-        {/* The Stream Player (Moved below Info Section) */}
-        <div className="w-full aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:mx-8 xl:mt-6 xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
+          {/* The Stream Player */}
+          <div className="w-full aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
           {/* Dynamic Premium Background */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -254,73 +257,6 @@ export default function ActiveStandPage() {
             </div>
 
           </div>
-        </div>
-
-        {/* Desktop Only: Stand Details / Stats (Fills the empty space below player) */}
-        <div className="hidden xl:flex xl:mx-8 xl:my-6 gap-6 flex-1 shrink-0 pb-6">
-          
-          {/* About Stand Card */}
-          <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-lg">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00E5FF]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#00E5FF]/20 transition-all duration-500" />
-            <h3 className="text-lg font-black text-white mb-2 flex items-center gap-2">
-              <Mic className="w-5 h-5 text-[#00E5FF]" />
-              About this Stand
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              A heated post-match debate following the explosive North London Derby. Discussing the controversial penalty call on Bukayo Saka, the red card, and what this means for the title race.
-            </p>
-            
-            <div className="mt-auto space-y-3">
-               <h4 className="text-xs font-black text-gray-500 uppercase tracking-widest">Key Topics</h4>
-               <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">Penalty Call</span>
-                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">VAR Decisions</span>
-                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">Title Race</span>
-               </div>
-            </div>
-          </div>
-
-          {/* Leaderboard Card */}
-          <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-lg">
-            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#FF3B00]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#FF3B00]/20 transition-all duration-500" />
-            <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2">
-              <Flame className="w-5 h-5 text-[#FF3B00]" />
-              Reaction Leaders
-            </h3>
-            
-            <div className="space-y-4 flex-1">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group/item">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-[#FF3B00] p-0.5 shadow-[0_0_15px_rgba(255,59,0,0.3)] group-hover/item:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover rounded-full" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-black text-white">GOONER4LIFE</span>
-                    <span className="text-[10px] text-[#00E5FF] font-bold uppercase tracking-wider">Top Speaker</span>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-xs font-black text-white flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-lg border border-white/10">1.2k <span className="text-base drop-shadow-md">🔥</span></span>
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group/item">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-700 p-0.5 group-hover/item:scale-105 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover rounded-full" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-black text-gray-300">BLUEMASON</span>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Waffler</span>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-xs font-black text-white flex items-center gap-1.5 bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/5">840 <span className="text-base drop-shadow-md">🤡</span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
         </div>
       </div>
 
