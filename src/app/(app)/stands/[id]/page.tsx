@@ -118,7 +118,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Left Pane: The Stage */}
-      <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col p-2 md:p-8 relative z-10 pb-2">
+      <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col px-2 pt-2 pb-0 md:px-8 md:pt-8 md:pb-0 relative z-10">
         
         {/* Stage Header */}
         <header className="flex items-center justify-between border-b border-white/5 pb-2">
@@ -155,8 +155,8 @@ export default function ActiveStandPage() {
         </header>
 
         {/* Speakers Grid */}
-        <div className="flex-1 flex flex-col justify-center py-4 md:py-10 overflow-hidden w-full">
-          <div className="grid grid-cols-3 items-start gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
+        <div className="flex-1 flex flex-col justify-center overflow-hidden w-full">
+          <div className="grid grid-cols-3 items-start gap-x-2 gap-y-6 px-2 md:px-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
             <div className="flex flex-col items-center group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
