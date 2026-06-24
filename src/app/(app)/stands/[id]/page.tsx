@@ -156,37 +156,38 @@ export default function ActiveStandPage() {
 
         {/* Speakers Grid */}
         <div className="flex-1 flex flex-col justify-center py-4 md:py-10 overflow-hidden w-full">
-          <div className="grid grid-cols-3 gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
+          <div className="grid grid-cols-3 items-start gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
-              {/* Soundwave effect */}
-              {!mutedUsers['GOONER4LIFE'] && (
-                <>
-                  <div className="absolute top-0 w-12 h-12 md:w-44 md:h-44 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
-                  <div className="absolute top-0 w-12 h-12 md:w-44 md:h-44 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
-                </>
-              )}
-              
-              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-gray-800 border-[3px] md:border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                {mutedUsers['GOONER4LIFE'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <MicOff className="w-12 h-12 text-red-500" />
-                  </div>
-                )}
-                {/* Overlay mute icon on hover if not muted */}
+            <div className="flex flex-col items-center group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
+              <div className="relative">
+                {/* Soundwave effect */}
                 {!mutedUsers['GOONER4LIFE'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MicOff className="w-12 h-12 text-white" />
-                  </div>
+                  <>
+                    <div className="absolute inset-0 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
+                    <div className="absolute inset-0 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
+                  </>
                 )}
+                
+                <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-gray-800 border-[3px] md:border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  {mutedUsers['GOONER4LIFE'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                      <MicOff className="w-12 h-12 text-red-500" />
+                    </div>
+                  )}
+                  {!mutedUsers['GOONER4LIFE'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <MicOff className="w-12 h-12 text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
               
-              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center shadow-lg mb-0.5 md:mb-1 transition-colors`}>
-                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-5 h-5 text-white" /> : <Mic className="w-5 h-5 text-black" />}
+              <div className="relative z-20 flex flex-col items-center -mt-3 md:-mt-5">
+                <div className={`w-6 h-6 md:w-10 md:h-10 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center shadow-lg mb-0.5 md:mb-1 transition-colors`}>
+                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-4 h-4 text-white" /> : <Mic className="w-4 h-4 text-black" />}
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['GOONER4LIFE'] ? 'border-red-500/50' : 'border-[#00E5FF]/50'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full shadow-lg`}>
                   <span className={`text-[8px] md:text-xs font-black ${mutedUsers['GOONER4LIFE'] ? 'text-red-500' : 'text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]'} tracking-widest`}>GOONER4LIFE</span>
@@ -195,24 +196,25 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 2: Muted */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
-              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
-                {mutedUsers['BLUEMASON'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <MicOff className="w-12 h-12 text-red-500" />
-                  </div>
-                )}
-                {/* Overlay mute icon on hover if not muted */}
-                {!mutedUsers['BLUEMASON'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MicOff className="w-12 h-12 text-white" />
-                  </div>
-                )}
+            <div className="flex flex-col items-center group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
+              <div className="relative">
+                <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
+                  {mutedUsers['BLUEMASON'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                      <MicOff className="w-12 h-12 text-red-500" />
+                    </div>
+                  )}
+                  {!mutedUsers['BLUEMASON'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <MicOff className="w-12 h-12 text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
               
-              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
+              <div className="relative z-20 flex flex-col items-center -mt-3 md:-mt-5">
+                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['BLUEMASON'] ? 'border-red-500/50' : 'border-white/10'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full`}>
@@ -222,24 +224,25 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 3: Muted */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
-              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
-                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
-                {mutedUsers['SPURSY_10'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <MicOff className="w-12 h-12 text-red-500" />
-                  </div>
-                )}
-                {/* Overlay mute icon on hover if not muted */}
-                {!mutedUsers['SPURSY_10'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MicOff className="w-12 h-12 text-white" />
-                  </div>
-                )}
+            <div className="flex flex-col items-center group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
+              <div className="relative">
+                <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+                  <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
+                  {mutedUsers['SPURSY_10'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                      <MicOff className="w-12 h-12 text-red-500" />
+                    </div>
+                  )}
+                  {!mutedUsers['SPURSY_10'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <MicOff className="w-12 h-12 text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
               
-              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
+              <div className="relative z-20 flex flex-col items-center -mt-3 md:-mt-5">
+                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
                 <div className={`bg-[#121212] border ${mutedUsers['SPURSY_10'] ? 'border-red-500/50' : 'border-white/10'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full`}>
@@ -249,30 +252,33 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 4: Empty Slot */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 relative md:mt-8">
-              <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
-                <MoreHorizontal className="w-4 h-4 md:w-8 md:h-8 text-gray-800" />
+            <div className="flex flex-col items-center relative md:mt-8">
+              <div className="relative">
+                <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
+                  <MoreHorizontal className="w-4 h-4 md:w-8 md:h-8 text-gray-800" />
+                </div>
               </div>
             </div>
 
             {/* Speaker 5: Active Mic, Non-Speaking */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8" onClick={() => toggleMute('GUNNERVIC')}>
-              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
-                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
-                {mutedUsers['GUNNERVIC'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <MicOff className="w-12 h-12 text-red-500" />
-                  </div>
-                )}
-                {/* Overlay mute icon on hover if not muted */}
-                {!mutedUsers['GUNNERVIC'] && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MicOff className="w-12 h-12 text-white" />
-                  </div>
-                )}
+            <div className="flex flex-col items-center group cursor-pointer relative md:mt-8" onClick={() => toggleMute('GUNNERVIC')}>
+              <div className="relative">
+                <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+                  <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
+                  {mutedUsers['GUNNERVIC'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                      <MicOff className="w-12 h-12 text-red-500" />
+                    </div>
+                  )}
+                  {!mutedUsers['GUNNERVIC'] && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <MicOff className="w-12 h-12 text-white" />
+                    </div>
+                  )}
+                </div>
               </div>
               
-              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
+              <div className="relative z-20 flex flex-col items-center -mt-3 md:-mt-5">
                 <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500' : 'bg-[#00C853]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors ${!mutedUsers['GUNNERVIC'] && 'shadow-[0_0_10px_rgba(0,200,83,0.5)]'}`}>
                   {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
                 </div>
@@ -282,10 +288,12 @@ export default function ActiveStandPage() {
               </div>
             </div>
 
-            {/* Speaker 6: Empty */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8">
-              <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
-                <MoreHorizontal className="w-8 h-8 text-gray-800" />
+            {/* Speaker 6: Empty Slot */}
+            <div className="flex flex-col items-center relative md:mt-8">
+              <div className="relative">
+                <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
+                  <MoreHorizontal className="w-4 h-4 md:w-8 md:h-8 text-gray-800" />
+                </div>
               </div>
             </div>
 
