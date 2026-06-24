@@ -323,9 +323,6 @@ export default function DiscoverPage() {
       <section className="pt-8">
          <div className="flex items-center justify-between mb-6 pl-2">
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">MORE TONIGHT</h2>
-            <Link href="/schedule" className="text-[10px] text-[#00E5FF] font-bold hover:text-white transition-colors tracking-widest uppercase">
-               View Full Schedule &gt;
-            </Link>
          </div>
 
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

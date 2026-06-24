@@ -186,7 +186,7 @@ export default function ActiveStandPage() {
   };
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto h-[calc(100dvh-9rem)] md:h-[100dvh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
+    <div className="w-full max-w-[1600px] mx-auto h-[calc(100vh-9rem)] md:h-[100vh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
       
       {/* Custom Animations CSS */}
       <style>{`
