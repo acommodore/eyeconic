@@ -52,6 +52,7 @@ const baseInsightsFeed = [
 export default function DiscoverPage() {
   const [activeTab, setActiveTab] = useState(CATEGORIES[0].id);
   const [aiText, setAiText] = useState("");
+  const [showCalendar, setShowCalendar] = useState(false);
   const fullText = "High defensive panic detected in MCI backline. Tension index spiking to 84%. Volatility expected.";
 
   useEffect(() => {
@@ -72,7 +73,10 @@ export default function DiscoverPage() {
         
         {/* Calendar Strip */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
-           <button className="flex flex-col items-center justify-center p-2 rounded-xl text-gray-500 hover:bg-white/5 transition-colors shrink-0 w-12">
+           <button 
+             onClick={() => setShowCalendar(true)}
+             className="flex flex-col items-center justify-center p-2 rounded-xl text-gray-500 hover:bg-white/5 transition-colors shrink-0 w-12"
+           >
              <Calendar className="w-5 h-5" />
            </button>
            {CALENDAR_DAYS.map((d, i) => (
@@ -535,6 +539,69 @@ export default function DiscoverPage() {
             ))}
         </div>
       </section>
+
+      {/* MONTHLY CALENDAR MODAL */}
+      <AnimatePresence>
+        {showCalendar && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4"
+            onClick={() => setShowCalendar(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm bg-[#121212] border border-white/10 rounded-[32px] p-6 shadow-[0_0_50px_rgba(0,229,255,0.15)] relative overflow-hidden"
+            >
+              <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#00E5FF]/10 to-transparent pointer-events-none" />
+              
+              <div className="flex items-center justify-between mb-6 relative z-10">
+                <h3 className="text-sm font-black tracking-widest text-white uppercase">OCTOBER 2026</h3>
+                <div className="flex gap-2">
+                  <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors"><ChevronRight className="w-4 h-4 rotate-180" /></button>
+                  <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-7 gap-2 mb-2 relative z-10">
+                {['M','T','W','T','F','S','S'].map((d,i) => (
+                  <div key={i} className="text-center text-[10px] font-bold text-gray-500">{d}</div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-2 relative z-10">
+                {Array.from({length: 31}).map((_, i) => {
+                  const day = i + 1;
+                  const isToday = day === 25;
+                  return (
+                    <button 
+                      key={day}
+                      className={`h-10 rounded-xl flex items-center justify-center text-xs font-mono font-bold transition-all ${
+                        isToday 
+                          ? 'bg-[#00E5FF] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' 
+                          : 'text-gray-300 hover:bg-white/10'
+                      }`}
+                    >
+                      {day}
+                    </button>
+                  )
+                })}
+              </div>
+
+              <button 
+                onClick={() => setShowCalendar(false)}
+                className="w-full mt-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold tracking-widest uppercase transition-colors border border-white/5 relative z-10"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

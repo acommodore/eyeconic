@@ -231,7 +231,7 @@ export default function MatchDetailsPage() {
     <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
       
       {/* State Toggle for Demo Purposes */}
-      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-md border border-white/10 p-1 rounded-full flex items-center shadow-2xl">
+      <div className="fixed top-20 md:top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-md border border-white/10 p-1 rounded-full flex items-center shadow-2xl">
          <button 
            onClick={() => setMatchState('prematch')}
            className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors ${matchState === 'prematch' ? 'bg-[#00E5FF] text-black' : 'text-white hover:bg-white/10'}`}
