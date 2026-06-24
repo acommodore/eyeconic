@@ -12,6 +12,7 @@ const baseDates = [
   { day: 'MON', date: '12', active: false, dotColor: 'bg-gray-600' },
   { day: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF7F50]' },
   { day: 'MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
+  { day: 'WED', date: '15', active: false, dotColor: 'bg-transparent', disabled: true },
 ];
 
 const baseLiveStands = [
@@ -234,14 +235,18 @@ export default function InsightsPage() {
         <div className="flex gap-4 min-w-max">
           {baseDates.map((d, i) => {
             const isActive = d.date === activeDate;
+            const isDisabled = d.disabled;
             return (
               <button 
                 key={i} 
-                onClick={() => setActiveDate(d.date)}
+                onClick={() => !isDisabled && setActiveDate(d.date)}
+                disabled={isDisabled}
                 className={`snap-end shrink-0 flex flex-col items-center justify-center w-20 h-24 rounded-2xl border transition-all ${
                   isActive 
                     ? 'bg-[#00E5FF]/10 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)]' 
-                    : 'bg-[#121212] border-white/5 hover:border-white/20'
+                    : isDisabled 
+                      ? 'bg-transparent border-white/5 border-dashed opacity-30 cursor-not-allowed'
+                      : 'bg-[#121212] border-white/5 hover:border-white/20'
                 }`}
               >
                 <span className={`text-[10px] font-black tracking-widest mb-1 ${isActive ? 'text-[#00E5FF]' : 'text-gray-500'}`}>{d.day}</span>
