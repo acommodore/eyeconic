@@ -351,7 +351,7 @@ export default function ActiveStandPage() {
               </div>
             </div>
             
-            <div className={`transition-all duration-500 overflow-hidden ${isPollExpanded ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0 md:max-h-64 md:opacity-100 md:mt-4'}`}>
+            <div className={`transition-all duration-500 overflow-hidden ${isPollExpanded ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
               <p className="text-gray-300 text-xs font-medium mb-4">Was it a clear penalty on Saka?</p>
               
               <div className="space-y-3">
