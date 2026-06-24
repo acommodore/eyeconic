@@ -79,7 +79,7 @@ export default function ActiveStandPage() {
   };
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto h-[100dvh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
+    <div className="w-full max-w-[1600px] mx-auto h-[calc(100dvh-9rem)] md:h-[100dvh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
       
       {/* Floating Animations CSS */}
       <style>{`
@@ -292,7 +292,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[45vh] md:h-[55vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[40vh] md:h-[55vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
