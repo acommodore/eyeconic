@@ -151,20 +151,20 @@ export default function ActiveStandPage() {
         </header>
 
         {/* Speakers Grid */}
-        <div className="flex-1 flex flex-col justify-center py-2 md:py-10 overflow-hidden w-full">
-          <div className="grid grid-cols-3 gap-x-2 gap-y-8 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
+        <div className="flex-1 flex flex-col justify-start md:justify-center py-4 md:py-10 overflow-hidden w-full">
+          <div className="grid grid-cols-3 gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
             <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
               {/* Soundwave effect */}
               {!mutedUsers['GOONER4LIFE'] && (
                 <>
-                  <div className="absolute top-0 w-14 h-14 md:w-44 md:h-44 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
-                  <div className="absolute top-0 w-14 h-14 md:w-44 md:h-44 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
+                  <div className="absolute top-0 w-12 h-12 md:w-44 md:h-44 rounded-full border-2 border-[#00E5FF] animate-ping opacity-20" />
+                  <div className="absolute top-0 w-12 h-12 md:w-44 md:h-44 rounded-full border-4 border-[#00E5FF]/40 animate-pulse" />
                 </>
               )}
               
-              <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-gray-800 border-[3px] md:border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-gray-800 border-[3px] md:border-4 ${mutedUsers['GOONER4LIFE'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00E5FF] shadow-[0_0_40px_rgba(0,229,255,0.4)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 {mutedUsers['GOONER4LIFE'] && (
@@ -192,7 +192,7 @@ export default function ActiveStandPage() {
 
             {/* Speaker 2: Muted */}
             <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
-              <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['BLUEMASON'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -219,7 +219,7 @@ export default function ActiveStandPage() {
 
             {/* Speaker 3: Muted */}
             <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
-              <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
+              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['SPURSY_10'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -246,7 +246,7 @@ export default function ActiveStandPage() {
 
             {/* Speaker 4: Empty Slot */}
             <div className="flex flex-col items-center gap-2 md:gap-4 relative md:mt-8">
-              <div className="w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
+              <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
                   <MicOff className="w-6 h-6 text-gray-800" />
                 </div>
@@ -256,7 +256,7 @@ export default function ActiveStandPage() {
 
             {/* Speaker 5: Active Mic, Non-Speaking */}
             <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8" onClick={() => toggleMute('GUNNERVIC')}>
-              <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
+              <div className={`w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['GUNNERVIC'] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -283,7 +283,7 @@ export default function ActiveStandPage() {
 
             {/* Speaker 6: Empty */}
             <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8">
-              <div className="w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
+              <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
                 <MoreHorizontal className="w-8 h-8 text-gray-800" />
               </div>
             </div>
@@ -293,7 +293,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[55vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[48vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
