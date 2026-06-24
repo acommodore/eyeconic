@@ -188,7 +188,7 @@ export default function ActiveStandPage() {
   return (
     <div className="w-full max-w-[1600px] mx-auto h-[calc(100dvh-9rem)] md:h-[100dvh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
       
-      {/* Floating Animations CSS */}
+      {/* Custom Animations CSS */}
       <style>{`
         @keyframes floatUp {
           0% { transform: translateY(0px) scale(0.5); opacity: 0; }
@@ -197,6 +197,13 @@ export default function ActiveStandPage() {
         }
         .animate-float {
           animation: floatUp 2.5s ease-out forwards;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          animation: marquee 12s linear infinite;
         }
       `}</style>
 
@@ -223,7 +230,7 @@ export default function ActiveStandPage() {
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FF3B00]/20 rounded-full blur-[80px] pointer-events-none" />
           
           <div className="flex items-center justify-between relative z-10">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3 shrink-0">
               <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-black/40 border border-white/10 backdrop-blur" iconClassName="w-5 h-5 text-white" />
               <div className="flex flex-col justify-center">
                  <div className="flex items-center">
@@ -235,7 +242,14 @@ export default function ActiveStandPage() {
               </div>
             </div>
             
-            <div className="flex items-center gap-2 md:gap-3">
+            {/* Scrolling Title */}
+            <div className="flex-1 overflow-hidden mx-2 md:mx-4 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
+              <div className="whitespace-nowrap animate-marquee pl-[100%] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 tracking-widest text-[10px] md:text-sm uppercase">
+                Arsenal vs Tottenham Hotspur • Live Post-Match Debate
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 md:gap-3 shrink-0">
               <button 
                 onClick={() => setIsVideoPlaying(!isVideoPlaying)}
                 className={`flex px-3 py-1.5 rounded-full border items-center gap-1.5 transition-colors shadow-lg backdrop-blur ${isVideoPlaying ? 'bg-[#00E5FF]/20 border-[#00E5FF]/50 text-[#00E5FF]' : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'}`}
