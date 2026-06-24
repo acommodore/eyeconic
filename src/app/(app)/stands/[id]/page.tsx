@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay } from "lucide-react";
+import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 
 export default function ActiveStandPage() {
@@ -52,6 +52,7 @@ export default function ActiveStandPage() {
   const [pollVotes, setPollVotes] = useState({ yes: 780, no: 220 });
   const [hasVoted, setHasVoted] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isPollExpanded, setIsPollExpanded] = useState(false);
 
   const totalVotes = pollVotes.yes + pollVotes.no;
   const yesPercentage = Math.round((pollVotes.yes / totalVotes) * 100);
@@ -282,7 +283,7 @@ export default function ActiveStandPage() {
               </div>
 
               {/* The Speakers Area (Horizontal Row) */}
-              <div className="w-full flex overflow-x-auto hide-scrollbar gap-2 px-4 pb-2 xl:px-0 xl:pb-0 scroll-smooth">
+              <div className="w-full flex overflow-x-auto gap-2 px-4 pb-2 xl:px-0 xl:pb-0 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {renderSpeakers(true)}
               </div>
             </div>
@@ -320,38 +321,46 @@ export default function ActiveStandPage() {
           <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-white/20 transition-all duration-300">
             <div className="absolute top-0 right-0 w-24 h-24 bg-[#00E5FF]/10 rounded-full blur-[30px] pointer-events-none group-hover:bg-[#00E5FF]/20 transition-all duration-500" />
             
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-black text-white flex items-center gap-1.5">
+            <div 
+              className="flex items-center justify-between cursor-pointer group/toggle"
+              onClick={() => setIsPollExpanded(!isPollExpanded)}
+            >
+              <div className="flex items-center gap-1.5">
                 <Zap className="w-4 h-4 text-[#00E5FF]" />
-                Live Poll
-              </h3>
-              <span className="text-[9px] font-bold text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">1m 24s left</span>
+                <h3 className="text-sm font-black text-white group-hover/toggle:text-[#00E5FF] transition-colors">Live Poll</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] font-bold text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">1m 24s left</span>
+                {isPollExpanded ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400 group-hover/toggle:text-white transition-colors" />}
+              </div>
             </div>
             
-            <p className="text-gray-300 text-xs font-medium mb-4">Was it a clear penalty on Saka?</p>
-            
-            <div className="space-y-3">
-              {/* Option 1 */}
-              <div 
-                onClick={() => handleVote('yes')}
-                className={`relative h-8 rounded-lg bg-black/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-white/5' : 'cursor-pointer border-white/10 hover:border-[#00E5FF]/50'}`}
-              >
-                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#00E5FF]/40 to-[#00E5FF]/20 transition-all duration-1000" style={{ width: `${yesPercentage}%` }} />
-                <div className="absolute inset-0 flex items-center justify-between px-3">
-                  <span className="text-xs font-bold text-white z-10 drop-shadow-md">Yes, clear foul</span>
-                  <span className="text-[10px] font-black text-[#00E5FF] z-10 drop-shadow-md">{yesPercentage}%</span>
-                </div>
-              </div>
+            <div className={`transition-all duration-500 overflow-hidden ${isPollExpanded ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0 md:max-h-64 md:opacity-100 md:mt-4'}`}>
+              <p className="text-gray-300 text-xs font-medium mb-4">Was it a clear penalty on Saka?</p>
               
-              {/* Option 2 */}
-              <div 
-                onClick={() => handleVote('no')}
-                className={`relative h-8 rounded-lg bg-black/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-white/5' : 'cursor-pointer border-white/10 hover:border-[#FF3B00]/50'}`}
-              >
-                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#FF3B00]/40 to-[#FF3B00]/20 transition-all duration-1000" style={{ width: `${noPercentage}%` }} />
-                <div className="absolute inset-0 flex items-center justify-between px-3">
-                  <span className="text-xs font-bold text-white z-10 drop-shadow-md">No, he dove</span>
-                  <span className="text-[10px] font-black text-[#FF3B00] z-10 drop-shadow-md">{noPercentage}%</span>
+              <div className="space-y-3">
+                {/* Option 1 */}
+                <div 
+                  onClick={() => handleVote('yes')}
+                  className={`relative h-8 rounded-lg bg-black/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-white/5' : 'cursor-pointer border-white/10 hover:border-[#00E5FF]/50'}`}
+                >
+                  <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#00E5FF]/40 to-[#00E5FF]/20 transition-all duration-1000" style={{ width: `${yesPercentage}%` }} />
+                  <div className="absolute inset-0 flex items-center justify-between px-3">
+                    <span className="text-xs font-bold text-white z-10 drop-shadow-md">Yes, clear foul</span>
+                    <span className="text-[10px] font-black text-[#00E5FF] z-10 drop-shadow-md">{yesPercentage}%</span>
+                  </div>
+                </div>
+                
+                {/* Option 2 */}
+                <div 
+                  onClick={() => handleVote('no')}
+                  className={`relative h-8 rounded-lg bg-black/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-white/5' : 'cursor-pointer border-white/10 hover:border-[#FF3B00]/50'}`}
+                >
+                  <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#FF3B00]/40 to-[#FF3B00]/20 transition-all duration-1000" style={{ width: `${noPercentage}%` }} />
+                  <div className="absolute inset-0 flex items-center justify-between px-3">
+                    <span className="text-xs font-bold text-white z-10 drop-shadow-md">No, he dove</span>
+                    <span className="text-[10px] font-black text-[#FF3B00] z-10 drop-shadow-md">{noPercentage}%</span>
+                  </div>
                 </div>
               </div>
             </div>
