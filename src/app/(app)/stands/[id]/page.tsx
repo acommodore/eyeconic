@@ -62,7 +62,7 @@ export default function ActiveStandPage() {
     if (hasVoted) return;
     setPollVotes(prev => ({
       ...prev,
-      [option]: prev[option] + 1
+      [option]: prev[option] + 50
     }));
     setHasVoted(true);
   };
@@ -105,20 +105,20 @@ export default function ActiveStandPage() {
     return (
       <>
         {/* Speaker 1: Active Talking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-white/10' : 'border-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GOONER4LIFE')}>
+        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-white/10' : 'border-[#FF3B00] shadow-[0_0_20px_rgba(255,59,0,0.4)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GOONER4LIFE')}>
           <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-          {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[#00E5FF]/40 rounded-xl animate-pulse pointer-events-none" />}
+          {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[#FF3B00]/40 rounded-xl animate-pulse pointer-events-none" />}
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00E5FF]/90 backdrop-blur shadow-[0_0_15px_rgba(0,229,255,0.5)]'} flex items-center justify-center`}>
+            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#FF3B00]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]'} flex items-center justify-center`}>
               {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
             </div>
           </div>
           
           <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF] animate-pulse'} shadow-lg`} />
+             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#FF3B00] animate-pulse'} shadow-lg`} />
              <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-white'} drop-shadow-md truncate`}>GOONER4LIFE</span>
           </div>
         </div>
@@ -162,12 +162,12 @@ export default function ActiveStandPage() {
         </div>
 
         {/* Speaker 5: Active Mic, Non-Speaking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-white/10' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.2)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GUNNERVIC')}>
+        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-white/10' : 'border-[#FF3B00] shadow-[0_0_20px_rgba(255,59,0,0.2)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GUNNERVIC')}>
           <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00C853]/90 backdrop-blur shadow-[0_0_15px_rgba(0,200,83,0.4)]'} flex items-center justify-center`}>
+            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#FF3B00]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.4)]'} flex items-center justify-center`}>
               {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
             </div>
           </div>
