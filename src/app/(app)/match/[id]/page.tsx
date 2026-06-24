@@ -2,6 +2,7 @@
 
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 
@@ -280,9 +281,17 @@ export default function MatchDetailsPage() {
         ))}
       </div>
 
-      {/* Overview Content */}
-      {activeTab === 'OVERVIEW' && (
-        <div className="space-y-12">
+      <AnimatePresence mode="wait">
+        {/* Overview Content */}
+        {activeTab === 'OVERVIEW' && (
+          <motion.div 
+            key="overview"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-12"
+          >
           
           {/* FANS HAVE SPOKEN - MVP & FAN XI */}
           <section className="bg-gradient-to-b from-[#111111] to-[#050505] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden flex flex-col items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
@@ -421,12 +430,19 @@ export default function MatchDetailsPage() {
               ))}
             </div>
           </section>
-        </div>
+        </motion.div>
       )}
 
       {/* ROSTER Content */}
       {activeTab === 'ROSTER' && (
-        <div className="space-y-12">
+        <motion.div 
+          key="roster"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3 }}
+          className="space-y-12"
+        >
           {/* Pitch View Roster */}
           <section className="mt-4">
             <div className="w-full max-w-5xl mx-auto flex flex-col">
@@ -576,12 +592,19 @@ export default function MatchDetailsPage() {
               </div>
             </div>
           </section>
-        </div>
+        </motion.div>
       )}
 
       {/* TIMELINE Content */}
       {activeTab === 'TIMELINE' && (
-        <div className="w-full max-w-3xl mx-auto space-y-12">
+        <motion.div 
+          key="timeline"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-3xl mx-auto space-y-12"
+        >
           <div className="relative border-l-2 border-white/10 ml-6 md:ml-1/2 md:border-none">
             <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-white/10 -translate-x-1/2"></div>
             
@@ -613,12 +636,19 @@ export default function MatchDetailsPage() {
               );
             })}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* STATS Content */}
       {activeTab === 'STATS' && (
-        <div className="w-full max-w-4xl mx-auto relative group">
+        <motion.div 
+          key="stats"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-4xl mx-auto relative group"
+        >
           {/* Subtle background glow */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#00E5FF]/10 transition-colors duration-1000"></div>
           
@@ -678,12 +708,19 @@ export default function MatchDetailsPage() {
               })}
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* STANDS Content */}
       {activeTab === 'STANDS' && (
-        <div className="w-full max-w-3xl mx-auto space-y-6">
+        <motion.div 
+          key="stands"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-3xl mx-auto space-y-6"
+        >
           
           {/* Feed */}
           {standsFeed.map(post => (
@@ -750,8 +787,9 @@ export default function MatchDetailsPage() {
                </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
 
       {selectedPlayer && (
         <PlayerSummaryModal 
