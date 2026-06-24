@@ -115,7 +115,7 @@ export default function DiscoverPage() {
                
                {/* MCI Left */}
                <div className="flex flex-col items-center gap-4 md:gap-6">
-                 <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter drop-shadow-[0_0_30px_rgba(0,229,255,0.4)] bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40 leading-none">MCI</span>
+                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-20 h-20 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.4)]" alt="MCI" />
                  <div className="flex flex-col items-center gap-1 bg-black/40 backdrop-blur-sm px-6 py-2 rounded-xl border border-white/5">
                     <span className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase">Possession</span>
                     <span className="text-2xl font-mono font-black text-white drop-shadow-md">64%</span>
@@ -138,7 +138,7 @@ export default function DiscoverPage() {
 
                {/* LIV Right */}
                <div className="flex flex-col items-center gap-4 md:gap-6">
-                 <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter drop-shadow-[0_0_30px_rgba(200,16,46,0.4)] bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40 leading-none">LIV</span>
+                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-20 h-20 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(200,16,46,0.4)]" alt="LIV" />
                  <div className="flex flex-col items-center gap-1 bg-black/40 backdrop-blur-sm px-6 py-2 rounded-xl border border-white/5">
                     <span className="text-[10px] font-black tracking-widest text-[#C8102E] uppercase">xG Danger</span>
                     <span className="text-2xl font-mono font-black text-white drop-shadow-md">2.4</span>

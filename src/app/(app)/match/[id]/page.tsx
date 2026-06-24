@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -129,12 +130,10 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-const standsFeed = [
-  { id: 1, user: "AnfieldRoar", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop", type: "comment", text: "What a performance from the lads! Konate was an absolute rock at the back today. 🧱🔴", time: "10m ago", upvotes: 342, comments: 24 },
-  { id: 2, user: "SkySportsGHD", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=50&h=50&fit=crop", type: "highlight", text: "Highlights: Konate rises highest to seal the victory for Liverpool! ⚽🔥", time: "15m ago", videoCover: "https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=800&auto=format&fit=crop", upvotes: 1205, comments: 89 },
-  { id: 3, user: "CityBlueMoon", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=50&h=50&fit=crop", type: "comment", text: "Terrible finishing from us today. Haaland completely isolated up top. Pep needs to rethink this tactic. 🤦‍♂️", time: "22m ago", upvotes: 215, comments: 45 },
-  { id: 4, user: "TacticoGenius", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=50&h=50&fit=crop", type: "comment", text: "The way Mac Allister controlled the tempo in the second half was world class. Unsung hero. 🎯", time: "30m ago", upvotes: 560, comments: 32 },
-  { id: 5, user: "LFC_Official", avatar: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", type: "highlight", text: "A trademark Mo Salah finish to get us underway! 👑🇪🇬", time: "1h ago", videoCover: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop", upvotes: 4500, comments: 320 },
+const activeStands = [
+  { id: 1, title: "VAR Robbery! Let's talk about it.", host: "Gooner4Life", listeners: "4.2K", tag: "Hot Debate" },
+  { id: 2, title: "Midfield Masterclass from Macca", host: "TacticoGenius", listeners: "1.8K", tag: "Tactical" },
+  { id: 3, title: "City's finishing was poor today", host: "CityBlueMoon", listeners: "850", tag: "Post-match" },
 ];
 
 export default function MatchDetailsPage() {
@@ -719,73 +718,36 @@ export default function MatchDetailsPage() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-3xl mx-auto space-y-6"
+          className="w-full max-w-3xl mx-auto space-y-4"
         >
-          
-          {/* Feed */}
-          {standsFeed.map(post => (
-            <div key={post.id} className="relative group/post">
-               {/* Premium Glow effect behind the card */}
+          <div className="flex items-center justify-between mb-6">
+             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">Live Match Stands</h2>
+             <button className="text-[10px] bg-[#00E5FF]/10 text-[#00E5FF] px-4 py-2 rounded-full font-bold uppercase tracking-widest border border-[#00E5FF]/20 hover:bg-[#00E5FF]/20 transition-colors">Start a Stand</button>
+          </div>
+
+          {activeStands.map(stand => (
+            <Link href={`/stands/${stand.id}`} key={stand.id} className="block relative group/post cursor-pointer">
                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7F50]/0 via-white/5 to-[#4FC3F7]/0 rounded-2xl blur opacity-0 group-hover/post:opacity-100 transition duration-500"></div>
-               
-               <div className="relative bg-gradient-to-br from-[#111111]/80 to-[#050505]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl transition-all duration-300">
-                 
-                 {/* Top header: User & Time */}
-                 <div className="flex items-center gap-4 mb-4">
-                   <div className="relative">
-                     <div className="absolute inset-0 bg-white/20 rounded-full blur-md opacity-50"></div>
-                     <img src={post.avatar} className={`relative w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-white/10 ${post.user === 'LFC_Official' ? 'bg-white p-1' : ''}`} />
+               <div className="relative bg-[#0A0A0A] hover:bg-[#121212] border border-white/5 group-hover/post:border-white/10 rounded-2xl p-6 shadow-xl transition-all duration-300 flex items-center justify-between">
+                 <div className="flex flex-col gap-2">
+                   <div className="flex items-center gap-3">
+                     <span className="flex items-center gap-1.5 text-[9px] text-[#FF3B00] font-bold tracking-widest uppercase bg-[#FF3B00]/10 px-2 py-1 rounded-full border border-[#FF3B00]/20">
+                       <div className="w-1.5 h-1.5 rounded-full bg-[#FF3B00] animate-pulse" /> LIVE
+                     </span>
+                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{stand.tag}</span>
                    </div>
-                   <div>
-                     <div className="text-sm font-black text-white flex items-center gap-1.5">
-                       {post.user} 
-                       {post.user === 'LFC_Official' && <span className="text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]">✔️</span>}
-                     </div>
-                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">{post.time}</div>
-                   </div>
+                   <h3 className="text-lg font-bold text-white mt-1 group-hover/post:text-[#00E5FF] transition-colors">{stand.title}</h3>
+                   <div className="text-xs text-gray-400 font-medium">Hosted by <span className="text-white font-bold">{stand.host}</span></div>
                  </div>
-                 
-                 {/* Text Content */}
-                 <p className="text-[15px] text-gray-200 mb-5 leading-relaxed font-medium">{post.text}</p>
-                 
-                 {/* Highlight Video Embed */}
-                 {post.type === 'highlight' && (
-                   <div className="w-full relative rounded-xl overflow-hidden mb-5 border border-white/10 group/video cursor-pointer shadow-2xl">
-                     <img src={post.videoCover} className="w-full h-56 md:h-72 object-cover group-hover/video:scale-105 transition-transform duration-700 ease-out" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-center justify-center transition-colors">
-                       <div className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(0,0,0,0.5)] group-hover/video:bg-[#00E5FF] group-hover/video:border-transparent transition-all duration-300 group-hover/video:scale-110">
-                         <Play className="w-6 h-6 text-white group-hover/video:text-black transition-colors" />
-                       </div>
-                     </div>
-                     <div className="absolute bottom-4 left-4 text-xs font-black tracking-widest uppercase text-white drop-shadow-md flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#FF3B00] animate-pulse"></span>
-                        Watch Highlight
-                     </div>
+                 <div className="flex flex-col items-center gap-2">
+                   <div className="flex items-center gap-1.5 text-gray-300">
+                     <Users className="w-4 h-4" />
+                     <span className="text-sm font-bold font-mono">{stand.listeners}</span>
                    </div>
-                 )}
-                 
-                 {/* Action Bar */}
-                 <div className="flex items-center gap-6 pt-4 border-t border-white/5">
-                   <button className="flex items-center gap-2 text-gray-400 hover:text-[#00E5FF] transition-all group/btn">
-                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-[#00E5FF]/20 group-hover/btn:shadow-[0_0_15px_rgba(0,229,255,0.3)] transition-all">
-                       <ThumbsUp className="w-4 h-4" />
-                     </div>
-                     <span className="text-xs font-black">{post.upvotes}</span>
-                   </button>
-                   <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-all group/btn">
-                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-white/20 transition-all">
-                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                     </div>
-                     <span className="text-xs font-black">{post.comments}</span>
-                   </button>
-                   <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-all group/btn ml-auto">
-                     <div className="p-2 rounded-full bg-white/5 group-hover/btn:bg-white/20 transition-all">
-                       <Share className="w-4 h-4" />
-                     </div>
-                   </button>
+                   <span className="text-[9px] text-[#00E5FF] font-black tracking-widest uppercase opacity-0 group-hover/post:opacity-100 transition-opacity">Join</span>
                  </div>
                </div>
-            </div>
+            </Link>
           ))}
         </motion.div>
       )}
