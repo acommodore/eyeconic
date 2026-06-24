@@ -223,14 +223,14 @@ export default function InsightsPage() {
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E5FF]/30 pb-24">
       {/* Date Selector */}
       <section className="pt-8 px-6 overflow-x-auto hover-scrollbar pb-2 snap-x">
-        <div className="flex gap-4 min-w-max">
-          {baseDates.map((d, i) => {
+        <div className="flex flex-row-reverse gap-4 min-w-max">
+          {[...baseDates].reverse().map((d, i) => {
             const isActive = d.date === activeDate;
             return (
               <button 
                 key={i} 
                 onClick={() => setActiveDate(d.date)}
-                className={`snap-start shrink-0 flex flex-col items-center justify-center w-20 h-24 rounded-2xl border transition-all ${
+                className={`snap-end shrink-0 flex flex-col items-center justify-center w-20 h-24 rounded-2xl border transition-all ${
                   isActive 
                     ? 'bg-[#00E5FF]/10 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)]' 
                     : 'bg-[#121212] border-white/5 hover:border-white/20'
