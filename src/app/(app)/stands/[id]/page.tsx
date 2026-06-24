@@ -259,39 +259,25 @@ export default function ActiveStandPage() {
         {/* Desktop Only: Stand Details / Stats (Fills the empty space below player) */}
         <div className="hidden xl:flex xl:mx-8 xl:my-6 gap-6 flex-1 shrink-0 pb-6">
           
-          {/* Live Poll Card */}
+          {/* About Stand Card */}
           <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-lg">
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00E5FF]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#00E5FF]/20 transition-all duration-500" />
             <h3 className="text-lg font-black text-white mb-2 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#00E5FF]" />
-              Live Poll
+              <Mic className="w-5 h-5 text-[#00E5FF]" />
+              About this Stand
             </h3>
-            <p className="text-gray-400 text-sm font-medium mb-6">Was it a clear penalty on Saka?</p>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              A heated post-match debate following the explosive North London Derby. Discussing the controversial penalty call on Bukayo Saka, the red card, and what this means for the title race.
+            </p>
             
-            <div className="space-y-5 mt-auto">
-              <div>
-                <div className="flex justify-between text-xs font-bold mb-2">
-                  <span className="text-white">Yes, clear foul</span>
-                  <span className="text-[#00E5FF]">78%</span>
-                </div>
-                <div className="h-2.5 w-full bg-black/40 border border-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-[#00E5FF]/80 to-[#00E5FF] w-[78%] rounded-full shadow-[0_0_15px_rgba(0,229,255,0.6)]" />
-                </div>
-              </div>
-              
-              <div>
-                <div className="flex justify-between text-xs font-bold mb-2">
-                  <span className="text-white">No, he dove</span>
-                  <span className="text-[#FF3B00]">22%</span>
-                </div>
-                <div className="h-2.5 w-full bg-black/40 border border-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-[#FF3B00]/80 to-[#FF3B00] w-[22%] rounded-full shadow-[0_0_15px_rgba(255,59,0,0.6)]" />
-                </div>
-              </div>
+            <div className="mt-auto space-y-3">
+               <h4 className="text-xs font-black text-gray-500 uppercase tracking-widest">Key Topics</h4>
+               <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">Penalty Call</span>
+                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">VAR Decisions</span>
+                  <span className="px-3 py-1.5 bg-black/40 border border-white/5 rounded-lg text-xs font-bold text-gray-300">Title Race</span>
+               </div>
             </div>
-            <button className="w-full mt-6 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-black text-white tracking-wider uppercase transition-all active:scale-95 shadow-sm">
-              Cast Vote
-            </button>
           </div>
 
           {/* Leaderboard Card */}
@@ -341,8 +327,45 @@ export default function ActiveStandPage() {
       {/* Right Pane: Interaction Zone & Chat */}
       <div className="w-full xl:w-[480px] flex-1 xl:flex-none flex flex-col h-auto xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#020202] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0 overflow-hidden">
         
+        {/* Poll Pop-up (Top of Chat) */}
+        <div className="p-4 bg-gradient-to-b from-[#050505] to-transparent relative z-10 shrink-0">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-white/20 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#00E5FF]/10 rounded-full blur-[30px] pointer-events-none group-hover:bg-[#00E5FF]/20 transition-all duration-500" />
+            
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-black text-white flex items-center gap-1.5">
+                <Zap className="w-4 h-4 text-[#00E5FF]" />
+                Live Poll
+              </h3>
+              <span className="text-[9px] font-bold text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">1m 24s left</span>
+            </div>
+            
+            <p className="text-gray-300 text-xs font-medium mb-4">Was it a clear penalty on Saka?</p>
+            
+            <div className="space-y-3">
+              {/* Option 1 */}
+              <div className="relative h-8 rounded-lg bg-black/40 border border-white/5 overflow-hidden group/opt cursor-pointer hover:border-[#00E5FF]/50 transition-colors">
+                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#00E5FF]/40 to-[#00E5FF]/20 w-[78%] transition-all" />
+                <div className="absolute inset-0 flex items-center justify-between px-3">
+                  <span className="text-xs font-bold text-white z-10 drop-shadow-md">Yes, clear foul</span>
+                  <span className="text-[10px] font-black text-[#00E5FF] z-10 drop-shadow-md">78%</span>
+                </div>
+              </div>
+              
+              {/* Option 2 */}
+              <div className="relative h-8 rounded-lg bg-black/40 border border-white/5 overflow-hidden group/opt cursor-pointer hover:border-[#FF3B00]/50 transition-colors">
+                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#FF3B00]/40 to-[#FF3B00]/20 w-[22%] transition-all" />
+                <div className="absolute inset-0 flex items-center justify-between px-3">
+                  <span className="text-xs font-bold text-white z-10 drop-shadow-md">No, he dove</span>
+                  <span className="text-[10px] font-black text-[#FF3B00] z-10 drop-shadow-md">22%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Live Chat Feed */}
-        <div className="flex-1 overflow-y-auto space-y-6 p-6 relative bg-gradient-to-b from-[#020202] via-[#050505] to-[#0A0A0A]">
+        <div className="flex-1 overflow-y-auto space-y-6 px-6 pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
           {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-3 group">
               <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-1 mt-0.5 transition-transform duration-300 group-hover:scale-110`}>
