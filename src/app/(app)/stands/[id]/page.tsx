@@ -151,10 +151,10 @@ export default function ActiveStandPage() {
 
         {/* Speakers Grid */}
         <div className="flex-1 flex flex-col justify-center py-2 md:py-10 overflow-hidden w-full">
-          <div className="flex overflow-x-auto hide-scrollbar gap-x-4 px-4 pb-4 md:grid md:grid-cols-3 lg:grid-cols-3 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full snap-x">
+          <div className="grid grid-cols-3 gap-x-2 gap-y-8 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative shrink-0 snap-center" onClick={() => toggleMute('GOONER4LIFE')}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative" onClick={() => toggleMute('GOONER4LIFE')}>
               {/* Soundwave effect */}
               {!mutedUsers['GOONER4LIFE'] && (
                 <>
@@ -190,7 +190,7 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 2: Muted */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0 shrink-0 snap-center" onClick={() => toggleMute('BLUEMASON')}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('BLUEMASON')}>
               <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['BLUEMASON'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['BLUEMASON'] && (
@@ -217,7 +217,7 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 3: Muted */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0 shrink-0 snap-center" onClick={() => toggleMute('SPURSY_10')}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 lg:mt-0" onClick={() => toggleMute('SPURSY_10')}>
               <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['SPURSY_10'] ? 'border-red-500 opacity-50 grayscale' : 'border-white/10 opacity-80 hover:opacity-100 grayscale hover:grayscale-0'} relative overflow-hidden flex items-center justify-center group-hover:border-white/30 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['SPURSY_10'] && (
@@ -244,7 +244,7 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 4: Empty Slot */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 relative md:mt-8 shrink-0 snap-center">
+            <div className="flex flex-col items-center gap-2 md:gap-4 relative md:mt-8">
               <div className="w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
                   <MicOff className="w-6 h-6 text-gray-800" />
@@ -254,7 +254,7 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 5: Active Mic, Non-Speaking */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 shrink-0 snap-center" onClick={() => toggleMute('GUNNERVIC')}>
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8" onClick={() => toggleMute('GUNNERVIC')}>
               <div className={`w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#121212] border-2 ${mutedUsers['GUNNERVIC'] ? 'border-red-500 opacity-50 grayscale' : 'border-[#00C853] shadow-[0_0_20px_rgba(0,200,83,0.15)]'} relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all z-10`}>
                 <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" alt="User" className="w-full h-full object-cover" />
                 {mutedUsers['GUNNERVIC'] && (
@@ -281,7 +281,7 @@ export default function ActiveStandPage() {
             </div>
 
             {/* Speaker 6: Empty */}
-            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8 shrink-0 snap-center">
+            <div className="flex flex-col items-center gap-2 md:gap-4 group cursor-pointer relative md:mt-8">
               <div className="w-14 h-14 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center transition-colors z-10">
                 <MoreHorizontal className="w-8 h-8 text-gray-800" />
               </div>
