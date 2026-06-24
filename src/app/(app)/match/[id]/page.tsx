@@ -218,17 +218,29 @@ export default function MatchDetailsPage() {
             Full Time
           </div>
 
-          <div className="flex items-center justify-center gap-6 md:gap-16 w-full max-w-2xl">
+          <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* LIVERPOOL */}
             <div className="flex flex-col items-center flex-1">
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(211,47,47,0.3)] mb-4">
                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="LIV" className="w-full h-full object-contain" />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Liverpool</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">Liverpool</h2>
+              
+              {/* Goal Scorers (Left Side for LIV) */}
+              <div className="flex flex-col items-center gap-2">
+                <div className="bg-[#0A0A0A]/60 backdrop-blur-md border border-white/10 rounded-lg px-3 py-2 md:px-4 md:py-2.5 flex flex-col items-center gap-1.5 text-[10px] md:text-xs font-bold text-gray-300 w-full text-center">
+                  <div className="flex items-center justify-center gap-1.5 w-full">
+                    <span className="text-[#00E5FF]">⚽</span> Salah 2'
+                  </div>
+                  <div className="flex items-center justify-center gap-1.5 w-full">
+                    <span className="text-[#00E5FF]">⚽</span> Konate 78'
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* SCORE */}
-            <div className="flex flex-col items-center justify-center shrink-0">
+            <div className="flex flex-col items-center justify-start pt-6 md:pt-10 shrink-0">
               <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
                 2 <span className="text-gray-600 font-normal mx-1 md:mx-2">-</span> 0
               </div>
@@ -240,19 +252,6 @@ export default function MatchDetailsPage() {
                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain" />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Man City</h2>
-            </div>
-          </div>
-
-          {/* Goal Scorers */}
-          <div className="mt-12 flex flex-col items-center gap-2">
-            <div className="bg-[#0A0A0A]/60 backdrop-blur-md border border-white/10 rounded-xl px-6 py-3 flex items-center gap-4 text-xs font-bold text-gray-300">
-              <div className="flex items-center gap-2">
-                <span className="text-[#00E5FF]">⚽</span> Salah 2'
-              </div>
-              <span className="w-1 h-1 rounded-full bg-gray-600" />
-              <div className="flex items-center gap-2">
-                <span className="text-[#00E5FF]">⚽</span> Konate 78'
-              </div>
             </div>
           </div>
         </div>
