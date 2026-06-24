@@ -110,110 +110,8 @@ export default function ActiveStandPage() {
       {/* Left Pane: The Stage */}
       <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-[#050505]">
         
-        {/* The 16:9 Stream Player */}
-        <div className="w-full aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-b-2xl shadow-2xl xl:mx-8 xl:mt-8 xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
-          {/* Dynamic Background */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2000&auto=format&fit=crop" 
-              alt="Stadium stands" 
-              className="w-full h-full object-cover opacity-20 grayscale blur-[2px]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#020202]/60 via-[#020202]/80 to-[#020202] pointer-events-none" />
-          </div>
-
-          {/* Speakers Grid inside Player */}
-          <div className="relative z-10 flex-1 grid grid-cols-3 gap-1 md:gap-4 p-2 md:p-6">
-            
-            {/* Speaker 1: Active Talking */}
-            <div className={`relative rounded-xl overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-white/10' : 'border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.3)]'} group cursor-pointer transition-all`} onClick={() => toggleMute('GOONER4LIFE')}>
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={`w-full h-full object-cover ${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-90'}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-              {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[#00E5FF]/40 rounded-xl animate-pulse pointer-events-none" />}
-              
-              {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00E5FF]/80 backdrop-blur'} flex items-center justify-center`}>
-                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
-                </div>
-              </div>
-              
-              {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <div className={`w-2 h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF] animate-pulse'} shadow-lg`} />
-                 <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-white'} drop-shadow-md truncate`}>GOONER4LIFE</span>
-              </div>
-            </div>
-
-            {/* Speaker 2: Muted */}
-            <div className={`relative rounded-xl overflow-hidden border-2 ${mutedUsers['BLUEMASON'] ? 'border-white/10' : 'border-white/30'} group cursor-pointer transition-all`} onClick={() => toggleMute('BLUEMASON')}>
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className={`w-full h-full object-cover ${mutedUsers['BLUEMASON'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
-                  <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-400'}`} />
-                </div>
-              </div>
-              
-              {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>BLUEMASON</span>
-              </div>
-            </div>
-
-            {/* Speaker 3: Muted */}
-            <div className={`relative rounded-xl overflow-hidden border-2 ${mutedUsers['SPURSY_10'] ? 'border-white/10' : 'border-white/30'} group cursor-pointer transition-all`} onClick={() => toggleMute('SPURSY_10')}>
-              <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" className={`w-full h-full object-cover ${mutedUsers['SPURSY_10'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
-                  <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-400'}`} />
-                </div>
-              </div>
-              
-              {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>SPURSY_10</span>
-              </div>
-            </div>
-
-            {/* Speaker 4: Empty Slot */}
-            <div className="relative rounded-xl border-2 border-dashed border-white/10 bg-white/5 flex items-center justify-center">
-              <MoreHorizontal className="w-6 h-6 text-white/20" />
-            </div>
-
-            {/* Speaker 5: Active Mic, Non-Speaking */}
-            <div className={`relative rounded-xl overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-white/10' : 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.15)]'} group cursor-pointer transition-all`} onClick={() => toggleMute('GUNNERVIC')}>
-              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={`w-full h-full object-cover ${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-90'}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00C853]/80 backdrop-blur'} flex items-center justify-center`}>
-                  {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
-                </div>
-              </div>
-              
-              {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>GUNNERVIC</span>
-              </div>
-            </div>
-
-            {/* Speaker 6: Empty Slot */}
-            <div className="relative rounded-xl border-2 border-dashed border-white/10 bg-white/5 flex items-center justify-center">
-              <MoreHorizontal className="w-6 h-6 text-white/20" />
-            </div>
-
-          </div>
-        </div>
-
-        {/* Info Section (Header moved below) */}
-        <div className="px-4 py-3 md:px-8 md:py-6 xl:mx-8 xl:mt-4 xl:bg-white/5 xl:border xl:border-white/10 xl:rounded-2xl border-b border-white/5 flex flex-col gap-3 shrink-0">
+        {/* Info Section (Header moved to top) */}
+        <div className="px-4 py-3 md:px-8 md:py-6 xl:mx-8 xl:mt-6 xl:bg-white/5 xl:border xl:border-white/10 xl:rounded-2xl border-b border-white/5 flex flex-col gap-3 shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-white/5" iconClassName="w-5 h-5 text-white" />
@@ -243,6 +141,108 @@ export default function ActiveStandPage() {
                 <Share2 className="w-4 h-4" />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* The Stream Player (Moved below Info Section) */}
+        <div className="w-full aspect-[4/3] md:aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:mx-8 xl:mt-6 xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
+          {/* Dynamic Background */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2000&auto=format&fit=crop" 
+              alt="Stadium stands" 
+              className="w-full h-full object-cover opacity-20 grayscale blur-[2px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#020202]/60 via-[#020202]/80 to-[#020202] pointer-events-none" />
+          </div>
+
+          {/* Speakers Grid inside Player */}
+          <div className="relative z-10 flex-1 grid grid-cols-3 grid-rows-2 gap-1 md:gap-4 p-2 md:p-6 h-full w-full">
+            
+            {/* Speaker 1: Active Talking */}
+            <div className={`relative h-full w-full min-h-0 rounded-xl overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-white/10' : 'border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.3)]'} group cursor-pointer transition-all`} onClick={() => toggleMute('GOONER4LIFE')}>
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover ${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-90'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[#00E5FF]/40 rounded-xl animate-pulse pointer-events-none" />}
+              
+              {/* Mic Status */}
+              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00E5FF]/80 backdrop-blur'} flex items-center justify-center`}>
+                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
+                </div>
+              </div>
+              
+              {/* Name */}
+              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
+                 <div className={`w-2 h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF] animate-pulse'} shadow-lg`} />
+                 <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-white'} drop-shadow-md truncate`}>GOONER4LIFE</span>
+              </div>
+            </div>
+
+            {/* Speaker 2: Muted */}
+            <div className={`relative h-full w-full min-h-0 rounded-xl overflow-hidden border-2 ${mutedUsers['BLUEMASON'] ? 'border-white/10' : 'border-white/30'} group cursor-pointer transition-all`} onClick={() => toggleMute('BLUEMASON')}>
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover ${mutedUsers['BLUEMASON'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Mic Status */}
+              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
+                  <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-400'}`} />
+                </div>
+              </div>
+              
+              {/* Name */}
+              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
+                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>BLUEMASON</span>
+              </div>
+            </div>
+
+            {/* Speaker 3: Muted */}
+            <div className={`relative h-full w-full min-h-0 rounded-xl overflow-hidden border-2 ${mutedUsers['SPURSY_10'] ? 'border-white/10' : 'border-white/30'} group cursor-pointer transition-all`} onClick={() => toggleMute('SPURSY_10')}>
+              <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover ${mutedUsers['SPURSY_10'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Mic Status */}
+              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
+                  <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-400'}`} />
+                </div>
+              </div>
+              
+              {/* Name */}
+              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
+                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>SPURSY_10</span>
+              </div>
+            </div>
+
+            {/* Speaker 4: Empty Slot */}
+            <div className="relative h-full w-full min-h-0 rounded-xl border-2 border-dashed border-white/10 bg-white/5 flex items-center justify-center">
+              <MoreHorizontal className="w-6 h-6 text-white/20" />
+            </div>
+
+            {/* Speaker 5: Active Mic, Non-Speaking */}
+            <div className={`relative h-full w-full min-h-0 rounded-xl overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-white/10' : 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.15)]'} group cursor-pointer transition-all`} onClick={() => toggleMute('GUNNERVIC')}>
+              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover ${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-90'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Mic Status */}
+              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00C853]/80 backdrop-blur'} flex items-center justify-center`}>
+                  {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
+                </div>
+              </div>
+              
+              {/* Name */}
+              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
+                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>GUNNERVIC</span>
+              </div>
+            </div>
+
+            {/* Speaker 6: Empty Slot */}
+            <div className="relative h-full w-full min-h-0 rounded-xl border-2 border-dashed border-white/10 bg-white/5 flex items-center justify-center">
+              <MoreHorizontal className="w-6 h-6 text-white/20" />
+            </div>
+
           </div>
         </div>
 
