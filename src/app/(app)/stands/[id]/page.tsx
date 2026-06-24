@@ -118,23 +118,20 @@ export default function ActiveStandPage() {
           <div className="flex items-center gap-4">
             <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-white/5 backdrop-blur z-20 relative" iconClassName="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform" />
             
-            <div className="flex items-center bg-[#0A0A0A] border border-white/10 rounded-full px-2 py-1 pr-4 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-white rounded-full p-1 flex items-center justify-center shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-full h-full object-contain" alt="ARS" />
-                </div>
-                <span className="text-sm font-black text-gray-500 tracking-widest italic">VS</span>
-                <div className="w-8 h-8 bg-white rounded-full p-1 flex items-center justify-center shrink-0">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-full h-full object-contain" alt="TOT" />
-                </div>
-              </div>
-              <div className="w-px h-6 bg-white/10 mx-4" />
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
+            <div className="flex flex-col items-start gap-1 bg-[#1A1A1A] px-3 py-1.5 rounded-xl border border-white/5">
+              <div className="flex items-center gap-1.5 bg-[#00E5FF]/10 border border-[#00E5FF]/30 rounded px-1.5 py-0.5 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+                <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00E5FF]"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#00E5FF]"></span>
                 </span>
-                <span className="text-[10px] font-bold text-white tracking-widest uppercase">Live Debate</span>
+                <span className="text-[7px] font-bold text-[#00E5FF] tracking-widest uppercase">Live Debate</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 md:w-8 md:h-8 bg-white rounded-full border border-[#0A0A0A] z-10 p-0.5" />
+                  <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-5 h-5 md:w-8 md:h-8 bg-white rounded-full border border-[#0A0A0A] z-0 p-0.5" />
+                </div>
+                <span className="text-xs md:text-sm font-black text-white tracking-wider">ARS vs TOT</span>
               </div>
             </div>
           </div>
@@ -180,12 +177,12 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
                 <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center shadow-lg mb-0.5 md:mb-1 transition-colors`}>
                   {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-5 h-5 text-white" /> : <Mic className="w-5 h-5 text-black" />}
                 </div>
-                <div className={`bg-[#121212] border ${mutedUsers['GOONER4LIFE'] ? 'border-red-500/50' : 'border-[#00E5FF]/50'} px-3 py-1 rounded-full shadow-lg`}>
-                  <span className={`text-xs font-black ${mutedUsers['GOONER4LIFE'] ? 'text-red-500' : 'text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]'} tracking-widest`}>GOONER4LIFE</span>
+                <div className={`bg-[#121212] border ${mutedUsers['GOONER4LIFE'] ? 'border-red-500/50' : 'border-[#00E5FF]/50'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full shadow-lg`}>
+                  <span className={`text-[8px] md:text-xs font-black ${mutedUsers['GOONER4LIFE'] ? 'text-red-500' : 'text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]'} tracking-widest`}>GOONER4LIFE</span>
                 </div>
               </div>
             </div>
@@ -207,12 +204,12 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
+              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
-                <div className={`bg-[#121212] border ${mutedUsers['BLUEMASON'] ? 'border-red-500/50' : 'border-white/10'} px-3 py-1 rounded-full`}>
-                  <span className={`text-[10px] font-bold ${mutedUsers['BLUEMASON'] ? 'text-red-500' : 'text-gray-400'} tracking-widest uppercase`}>BLUEMASON</span>
+                <div className={`bg-[#121212] border ${mutedUsers['BLUEMASON'] ? 'border-red-500/50' : 'border-white/10'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full`}>
+                  <span className={`text-[8px] md:text-[10px] font-bold ${mutedUsers['BLUEMASON'] ? 'text-red-500' : 'text-gray-400'} tracking-widest uppercase`}>BLUEMASON</span>
                 </div>
               </div>
             </div>
@@ -234,12 +231,12 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
-                <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
+              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
+                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500' : 'bg-[#222]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors`}>
                   <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-500'}`} />
                 </div>
-                <div className={`bg-[#121212] border ${mutedUsers['SPURSY_10'] ? 'border-red-500/50' : 'border-white/10'} px-3 py-1 rounded-full`}>
-                  <span className={`text-[10px] font-bold ${mutedUsers['SPURSY_10'] ? 'text-red-500' : 'text-gray-400'} tracking-widest uppercase`}>SPURSY_10</span>
+                <div className={`bg-[#121212] border ${mutedUsers['SPURSY_10'] ? 'border-red-500/50' : 'border-white/10'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full`}>
+                  <span className={`text-[8px] md:text-[10px] font-bold ${mutedUsers['SPURSY_10'] ? 'text-red-500' : 'text-gray-400'} tracking-widest uppercase`}>SPURSY_10</span>
                 </div>
               </div>
             </div>
@@ -250,7 +247,7 @@ export default function ActiveStandPage() {
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
                   <MicOff className="w-6 h-6 text-gray-800" />
                 </div>
-                <span className="text-[10px] text-gray-800 font-bold tracking-widest">OPEN SLOT</span>
+                <span className="text-[8px] md:text-[10px] text-gray-800 font-bold tracking-widest">OPEN SLOT</span>
               </div>
             </div>
 
@@ -271,12 +268,12 @@ export default function ActiveStandPage() {
                 )}
               </div>
               
-              <div className="absolute -bottom-3 md:-bottom-4 z-20 flex flex-col items-center">
+              <div className="absolute -bottom-2 md:-bottom-4 z-20 flex flex-col items-center">
                 <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500' : 'bg-[#00C853]'} border-2 md:border-[3px] border-[#020202] flex items-center justify-center mb-0.5 md:mb-1 transition-colors ${!mutedUsers['GUNNERVIC'] && 'shadow-[0_0_10px_rgba(0,200,83,0.5)]'}`}>
                   {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
                 </div>
-                <div className={`bg-[#121212] border ${mutedUsers['GUNNERVIC'] ? 'border-red-500/50' : 'border-[#00C853]/50'} px-3 py-1 rounded-full`}>
-                  <span className={`text-[10px] font-bold ${mutedUsers['GUNNERVIC'] ? 'text-red-500' : 'text-white'} tracking-widest uppercase`}>GUNNERVIC</span>
+                <div className={`bg-[#121212] border ${mutedUsers['GUNNERVIC'] ? 'border-red-500/50' : 'border-[#00C853]/50'} px-1.5 py-0.5 md:px-3 md:py-1 rounded-full`}>
+                  <span className={`text-[8px] md:text-[10px] font-bold ${mutedUsers['GUNNERVIC'] ? 'text-red-500' : 'text-white'} tracking-widest uppercase`}>GUNNERVIC</span>
                 </div>
               </div>
             </div>
@@ -293,7 +290,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[48vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[40vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
@@ -318,28 +315,28 @@ export default function ActiveStandPage() {
         </div>
 
         {/* Action Bar */}
-        <div className="p-4 border-t border-white/10 bg-[#0A0A0A] space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div className="p-2 md:p-4 border-t border-white/10 bg-[#0A0A0A] space-y-2 md:space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
           
           {/* Reaction Buttons */}
           <div className="flex gap-3">
             <button 
               onClick={() => spawnEmoji('🤡')}
-              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-2xl py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
+              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1.5 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
             >
-              <span className="text-2xl drop-shadow-md">🤡</span>
-              <span className="text-[9px] font-black text-gray-400 tracking-widest uppercase">Waffling</span>
+              <span className="text-xl md:text-2xl drop-shadow-md">🤡</span>
+              <span className="text-[8px] md:text-[9px] font-black text-gray-400 tracking-widest uppercase">Waffling</span>
             </button>
             <button 
               onClick={() => spawnEmoji('🍳')}
-              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-2xl py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
+              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1.5 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
             >
-              <span className="text-2xl drop-shadow-md">🍳</span>
-              <span className="text-[9px] font-black text-gray-400 tracking-widest uppercase">Cooking</span>
+              <span className="text-xl md:text-2xl drop-shadow-md">🍳</span>
+              <span className="text-[8px] md:text-[9px] font-black text-gray-400 tracking-widest uppercase">Cooking</span>
             </button>
             <button 
               onClick={() => setIsMicPending(true)}
               disabled={isMicPending}
-              className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-2xl py-3 hover:scale-[1.02] active:scale-95 transition-all font-black cursor-pointer ${
+              className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-1.5 md:py-3 hover:scale-[1.02] active:scale-95 transition-all font-black cursor-pointer ${
                 isMicPending 
                   ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-gray-400 border border-white/10' 
                   : 'bg-gradient-to-br from-[#FF7F50] to-[#FF3B00] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)]'
@@ -368,7 +365,7 @@ export default function ActiveStandPage() {
             <button 
               type="submit"
               disabled={!inputText.trim()}
-              className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors mr-0.5 border ${
+              className={`w-9 h-9 md:w-10 md:h-10 flex items-center justify-center rounded-xl transition-colors mr-0.5 border ${
                 inputText.trim() 
                   ? 'bg-[#00E5FF]/20 hover:bg-[#00E5FF]/30 border-[#00E5FF]/40 text-[#00E5FF]' 
                   : 'bg-[#00E5FF]/5 border-[#00E5FF]/10 text-[#00E5FF]/50'
