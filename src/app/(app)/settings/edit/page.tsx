@@ -24,9 +24,11 @@ export default function EditProfilePage() {
   const [rivalClub, setRivalClub] = useState(availableClubs[2]);
 
   const handleSave = () => {
-    // In a real app, we'd check if primary club changed.
-    // For this prototype, we'll just show the confirm modal to demonstrate the flow.
-    setShowConfirmModal(true);
+    if (favoriteClub.id !== availableClubs[0].id || rivalClub.id !== availableClubs[2].id) {
+      setShowConfirmModal(true);
+    } else {
+      alert("Profile updated successfully!");
+    }
   };
 
   return (
@@ -82,8 +84,8 @@ export default function EditProfilePage() {
                 <input 
                   type="email" 
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#121212] border border-white/10 rounded-xl px-4 py-4 text-sm font-medium text-white focus:outline-none focus:border-[#00E5FF] transition-colors shadow-inner"
+                  disabled
+                  className="w-full bg-[#121212]/50 border border-white/5 rounded-xl px-4 py-4 text-sm font-medium text-gray-500 cursor-not-allowed shadow-inner"
                 />
               </div>
             </div>

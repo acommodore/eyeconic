@@ -460,11 +460,11 @@ export default function MatchDetailsPage() {
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 md:w-32 h-8 md:h-12 border border-[#1A3A24] border-b-0 pointer-events-none" />
 
                 {/* Team Logos */}
-                <div className="absolute top-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain grayscale" />
+                <div className="absolute top-8 right-8 w-16 h-16 opacity-30 pointer-events-none drop-shadow-xl">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain" />
                 </div>
-                <div className="absolute bottom-8 right-8 w-16 h-16 opacity-10 pointer-events-none">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain grayscale" />
+                <div className="absolute bottom-8 right-8 w-16 h-16 opacity-30 pointer-events-none drop-shadow-xl">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" />
                 </div>
 
                 {/* Players */}
@@ -510,11 +510,11 @@ export default function MatchDetailsPage() {
                 <div className="absolute top-1/2 right-4 -translate-y-1/2 w-12 h-32 border border-[#1A3A24] border-r-0 pointer-events-none" />
 
                 {/* Team Logos */}
-                <div className="absolute top-1/2 left-24 -translate-y-1/2 w-32 h-32 opacity-5 pointer-events-none">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain grayscale" />
+                <div className="absolute top-1/2 left-24 -translate-y-1/2 w-32 h-32 opacity-20 pointer-events-none drop-shadow-xl">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" />
                 </div>
-                <div className="absolute top-1/2 right-24 -translate-y-1/2 w-32 h-32 opacity-5 pointer-events-none">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain grayscale" />
+                <div className="absolute top-1/2 right-24 -translate-y-1/2 w-32 h-32 opacity-20 pointer-events-none drop-shadow-xl">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain" />
                 </div>
 
                 {/* Players */}

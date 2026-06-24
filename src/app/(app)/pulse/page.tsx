@@ -226,7 +226,7 @@ export default function MatchPulsePage() {
     setSelectedPlayerId(null);
   };
 
-  const renderPlayer = (p: Player) => {
+  const renderPlayer = (p: Player, index: number, array: Player[]) => {
     const isSelected = selectedPlayerId === p.id;
     const ratingStatus = playerRatings[p.id];
     
@@ -252,10 +252,17 @@ export default function MatchPulsePage() {
 
     const borderColor = isSelected ? 'border-white' : ratingStatus === 'positive' ? 'border-green-500' : ratingStatus === 'negative' ? 'border-red-500' : ratingStatus === 'neutral' ? 'border-yellow-500' : 'border-white/10';
 
+    let positionClass = "left-1/2 -translate-x-1/2";
+    if (index === 0 && array.length > 1) {
+      positionClass = "left-0 translate-x-0";
+    } else if (index === array.length - 1 && array.length > 1) {
+      positionClass = "right-0 translate-x-0";
+    }
+
     return (
       <div key={p.id} className="flex flex-col items-center cursor-pointer group relative shrink-0" onClick={() => setSelectedPlayerId(isSelected ? null : p.id)}>
         {isSelected && (
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-[#121212] border border-white/20 rounded-full px-3 py-1.5 flex items-center gap-2 z-50 shadow-2xl animate-in fade-in zoom-in duration-200 whitespace-nowrap">
+          <div className={`absolute -top-12 ${positionClass} bg-[#121212] border border-white/20 rounded-full px-3 py-1.5 flex items-center gap-2 z-50 shadow-2xl animate-in fade-in zoom-in duration-200 whitespace-nowrap`}>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'positive'); }} className="hover:scale-125 transition-transform text-lg">🔥</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'positive'); }} className="hover:scale-125 transition-transform text-lg">🧠</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'neutral'); }} className="hover:scale-125 transition-transform text-lg">🧱</button>
@@ -347,8 +354,8 @@ export default function MatchPulsePage() {
               <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full" />
-                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-2 md:p-4 flex items-center justify-center relative z-10 border-2 md:border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)]">
-                    <span className="text-white font-black text-xl md:text-4xl tracking-tighter filter drop-shadow-md">LIV</span>
+                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-3 md:p-6 flex items-center justify-center relative z-10 border-2 md:border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)] overflow-hidden">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain filter drop-shadow-md" alt="LIV" />
                   </div>
                 </div>
                 <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">LIVERPOOL</span>
@@ -370,8 +377,8 @@ export default function MatchPulsePage() {
               <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-2 md:p-4 flex items-center justify-center relative z-10 border-2 md:border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)]">
-                    <span className="text-white font-black text-xl md:text-4xl tracking-tighter filter drop-shadow-md">MCI</span>
+                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-3 md:p-6 flex items-center justify-center relative z-10 border-2 md:border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)] overflow-hidden">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain filter drop-shadow-md" alt="MCI" />
                   </div>
                 </div>
                 <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">MAN CITY</span>
