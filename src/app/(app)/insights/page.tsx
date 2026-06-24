@@ -11,8 +11,8 @@ const baseDates = [
   { day: 'SUN', date: '11', active: false, dotColor: 'bg-purple-500' },
   { day: 'MON', date: '12', active: false, dotColor: 'bg-gray-600' },
   { day: 'TUE', date: '13', active: false, dotColor: 'bg-[#FF7F50]' },
-  { day: 'MAY', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
-  { day: 'WED', date: '15', active: false, dotColor: 'bg-transparent', disabled: true },
+  { day: 'WED', date: '14', active: true, dotColor: 'bg-[#00E5FF]' },
+  { day: 'THU', date: '15', active: false, dotColor: 'bg-transparent', disabled: true },
 ];
 
 const baseLiveStands = [
