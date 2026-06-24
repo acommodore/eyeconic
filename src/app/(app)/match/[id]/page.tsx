@@ -640,6 +640,44 @@ export default function MatchDetailsPage() {
             </div>
           </section>
 
+          {/* Key Insights */}
+          <section className="mb-16">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Activity className="w-5 h-5 text-[#00E5FF]" /> KEY INSIGHTS
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
+                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Liverpool's second-half introduction of Diaz forced Walker to drop 15 yards deeper, fundamentally breaking Man City's high press structure and isolating De Bruyne in the right half-space.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
+                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Mac Allister won 82% of his ground duels against Rodri, an unusually high success rate that allowed Liverpool to transition from defense to attack in under 4 seconds on average.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
+                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Van Dijk maintained a 2-meter buffer from Haaland throughout the match, denying him the space for his signature runs behind. Haaland finished with just 14 touches, his lowest of the season.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
+                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Despite having an xG of only 1.2, Liverpool managed to score twice through sheer clinical finishing, converting half-chances into key goals when momentum was heavily against them.
+                </p>
+              </div>
+            </div>
+          </section>
           {/* Hot Takes */}
           <section>
             <div className="flex items-center justify-between mb-6">
