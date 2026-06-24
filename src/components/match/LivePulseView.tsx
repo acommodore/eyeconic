@@ -155,7 +155,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
 );
 
 
-export default function MatchPulsePage() {
+export default function LivePulseView() {
   const [activeMinute, setActiveMinute] = useState(78);
   const [activeFilter, setActiveFilter] = useState('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -318,91 +318,7 @@ export default function MatchPulsePage() {
   const nextEvent = activeEventIndex < matchEvents.length - 1 ? matchEvents[activeEventIndex + 1] : null;
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white space-y-10">
-      
-      {/* 1. HERO HEADER */}
-      <section className="w-full rounded-3xl border border-white/5 relative overflow-hidden bg-[#0A0A0A] shadow-[0_0_50px_rgba(0,0,0,0.3)]">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/80 to-[#050505] z-10" />
-        
-        {/* Top Nav Row */}
-        <div className="relative z-20 flex justify-between items-center p-6 pb-0">
-          <Link href="/discover" className="p-2 hover:bg-white/10 rounded-full transition-colors cursor-pointer">
-            <ChevronLeft className="w-6 h-6" />
-          </Link>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-            <span className="font-bold tracking-widest text-sm">Live</span>
-          </div>
-          <div className="flex gap-4 items-center">
-             <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
-               <Share2 className="w-5 h-5" />
-             </button>
-             <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
-               <Bell className="w-5 h-5" />
-             </button>
-          </div>
-        </div>
-
-        {/* Scoreboard Area */}
-        <div className="relative z-20 flex flex-col items-center justify-center pt-4 pb-8">
-           
-           <span className="text-[#00E5FF] font-mono font-bold text-xl mb-4">78'</span>
-
-           <div className="flex flex-row items-center justify-center gap-2 md:gap-16 w-full max-w-3xl">
-              {/* LIVERPOOL */}
-              <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full" />
-                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#C8102E] to-[#600816] rounded-full p-3 md:p-6 flex items-center justify-center relative z-10 border-2 md:border-4 border-red-500/30 shadow-[0_0_40px_rgba(200,16,46,0.5)] overflow-hidden">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain filter drop-shadow-md" alt="LIV" />
-                  </div>
-                </div>
-                <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">LIVERPOOL</span>
-              </div>
-              
-              {/* SCORE */}
-              <div className="flex flex-col items-center shrink-0">
-                <div className="flex items-center gap-2 md:gap-6 text-4xl md:text-8xl font-black tracking-tighter text-white">
-                  <span>2</span>
-                  <span className="text-gray-700 text-3xl md:text-5xl">-</span>
-                  <span>0</span>
-                </div>
-                <div className="mt-3 md:mt-6 px-3 md:px-4 py-1 md:py-1.5 border border-[#00E5FF]/30 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] text-[8px] md:text-[10px] font-black tracking-widest">
-                  TACTICAL
-                </div>
-              </div>
-
-              {/* MAN CITY */}
-              <div className="flex flex-col items-center gap-2 md:gap-4 flex-1">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
-                  <div className="w-16 h-16 md:w-32 md:h-32 bg-gradient-to-b from-[#6CABDD] to-[#002A5A] rounded-full p-3 md:p-6 flex items-center justify-center relative z-10 border-2 md:border-4 border-blue-400/30 shadow-[0_0_40px_rgba(108,171,221,0.5)] overflow-hidden">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain filter drop-shadow-md" alt="MCI" />
-                  </div>
-                </div>
-                <span className="text-[10px] md:text-xl font-bold tracking-widest text-gray-400">MAN CITY</span>
-              </div>
-           </div>
-
-           {/* Momentum Bar */}
-           <div className="w-full max-w-xl mt-12 flex flex-col items-center">
-             <span className="text-[9px] text-gray-600 font-bold tracking-[0.3em] mb-3">MOMENTUM</span>
-             <div className="flex items-center w-full gap-4">
-               <span className="text-red-500 text-xs font-bold w-8">LIV</span>
-               <div className="flex-1 flex items-end justify-center h-8 gap-0.5">
-                  {[...Array(20)].map((_, i) => <div key={`r1-${i}`} className="w-1 bg-red-600/40 rounded-t-sm" style={{height: `${Math.random() * 40 + 10}%`}} />)}
-                  {[...Array(15)].map((_, i) => <div key={`r2-${i}`} className="w-1 bg-red-600 rounded-t-sm" style={{height: `${Math.random() * 60 + 40}%`}} />)}
-                  {[...Array(15)].map((_, i) => <div key={`r3-${i}`} className="w-1 bg-red-500 rounded-t-sm" style={{height: `${Math.random() * 40 + 60}%`}} />)}
-                  {[...Array(10)].map((_, i) => <div key={`b1-${i}`} className="w-1 bg-blue-600 rounded-t-sm" style={{height: `${Math.random() * 50 + 20}%`}} />)}
-                  {[...Array(15)].map((_, i) => <div key={`b2-${i}`} className="w-1 bg-[#00E5FF] rounded-t-sm" style={{height: `${Math.random() * 30 + 10}%`}} />)}
-               </div>
-               <span className="text-[#00E5FF] text-xs font-bold w-8 text-right">MCI</span>
-             </div>
-           </div>
-        </div>
-
-      </section>
+    <div className="w-full space-y-10">
 
       {/* 2. ACTIVE FANS BANNER (Full Width) */}
       <section className="bg-[#1A1A1A] border border-white/5 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden shrink-0 w-full">

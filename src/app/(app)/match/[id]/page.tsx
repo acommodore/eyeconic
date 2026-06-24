@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
+import LivePulseView from "@/components/match/LivePulseView";
 
 const playerOptions = [
   { name: 'DE BRUYNE', team: 'Man City', img: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop' },
@@ -145,7 +146,7 @@ const activeStands = [
 ];
 
 export default function MatchDetailsPage() {
-  const [matchState, setMatchState] = useState<'prematch' | 'postmatch'>('postmatch');
+  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('live');
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState(initialHotTakes);
@@ -230,21 +231,6 @@ export default function MatchDetailsPage() {
   return (
     <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
       
-      {/* State Toggle for Demo Purposes */}
-      <div className="fixed top-20 md:top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-md border border-white/10 p-1 rounded-full flex items-center shadow-2xl">
-         <button 
-           onClick={() => setMatchState('prematch')}
-           className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors ${matchState === 'prematch' ? 'bg-[#00E5FF] text-black' : 'text-white hover:bg-white/10'}`}
-         >
-           PRE-MATCH
-         </button>
-         <button 
-           onClick={() => setMatchState('postmatch')}
-           className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest transition-colors ${matchState === 'postmatch' ? 'bg-[#FF7F50] text-black' : 'text-white hover:bg-white/10'}`}
-         >
-           LIVE / POST
-         </button>
-      </div>
 
       {/* Top Header Navigation */}
       <div className="flex items-center justify-between mb-8 mt-12">
@@ -263,7 +249,7 @@ export default function MatchDetailsPage() {
         
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
           <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-8">
-            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : 'Full Time'}
+            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : matchState === 'live' ? 'LIVE NOW' : 'Full Time'}
           </div>
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
@@ -312,6 +298,26 @@ export default function MatchDetailsPage() {
         </div>
       </div>
 
+      {/* Main 3-Tab Navigation */}
+      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-white/10 rounded-2xl mb-8 max-w-lg mx-auto shadow-2xl">
+        {['prematch', 'live', 'postmatch'].map((state) => (
+          <button
+            key={state}
+            onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
+            className={`flex-1 py-3 px-4 rounded-xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
+              matchState === state 
+                ? 'bg-[#00E5FF] text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]' 
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE (PULSE)' : 'POST-MATCH'}
+          </button>
+        ))}
+      </div>
+
+      {matchState === 'live' && (
+        <LivePulseView />
+      )}
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (
         <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
@@ -372,42 +378,44 @@ export default function MatchDetailsPage() {
       )}
 
       {/* Tab Navigation - Modern Pills */}
-      <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
-        {matchState === 'prematch' ? (
-          ['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
-            <button 
-              key={tab}
-              onClick={() => setPrematchTab(tab)}
-              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-                prematchTab === tab 
-                  ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                  : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              {tab}
-            </button>
-          ))
-        ) : (
-          ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
-            <button 
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-                activeTab === tab 
-                  ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                  : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
-              {tab === 'ROSTER' && <Users className="w-4 h-4" />}
-              {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
-              {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
-              {tab === 'STANDS' && <Mic className="w-4 h-4" />}
-              {tab}
-            </button>
-          ))
-        )}
-      </div>
+      {matchState !== 'live' && (
+        <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
+          {matchState === 'prematch' ? (
+            ['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
+              <button 
+                key={tab}
+                onClick={() => setPrematchTab(tab)}
+                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                  prematchTab === tab 
+                    ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                    : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                {tab}
+              </button>
+            ))
+          ) : (
+            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
+              <button 
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                  activeTab === tab 
+                    ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                    : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
+                {tab === 'ROSTER' && <Users className="w-4 h-4" />}
+                {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
+                {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
+                {tab === 'STANDS' && <Mic className="w-4 h-4" />}
+                {tab}
+              </button>
+            ))
+          )}
+        </div>
+      )}
 
       <AnimatePresence mode="wait">
         {/* PRE-MATCH TAB CONTENT */}
