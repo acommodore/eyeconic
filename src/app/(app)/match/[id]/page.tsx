@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame } from "lucide-react";
 import { useState } from "react";
 import { BackButton } from "@/components/ui/BackButton";
+import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 
-const hotTakes = [
+const initialHotTakes = [
   {
     id: 1,
     question: "Was Salah the right MVP?",
@@ -76,7 +76,7 @@ const pitchLIV = [
   { id: 7, name: "Gravenberch", num: 38, pos: "CDM", rating: "7.8", vTop: "75%", vLeft: "50%", hTop: "50%", hLeft: "28%", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
   { id: 8, name: "Mac Allister", num: 10, pos: "CM", rating: "8.1", vTop: "70%", vLeft: "25%", hTop: "25%", hLeft: "35%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
   { id: 9, name: "Salah", num: 11, pos: "RW", rating: "9.2", vTop: "58%", vLeft: "82%", hTop: "82%", hLeft: "46%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
-  { id: 10, name: "Jota", num: 20, pos: "ST", rating: "7.1", vTop: "55%", vLeft: "50%", hTop: "50%", hLeft: "48%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
+  { id: 10, name: "Jota", num: 20, pos: "ST", rating: "7.1", vTop: "60%", vLeft: "50%", hTop: "50%", hLeft: "44%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
   { id: 11, name: "Diaz", num: 7, pos: "LW", rating: "8.0", vTop: "58%", vLeft: "18%", hTop: "18%", hLeft: "46%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
@@ -91,7 +91,7 @@ const pitchMCI = [
   { id: 18, name: "Foden", num: 47, pos: "RM", rating: "6.9", vTop: "42%", vLeft: "18%", hTop: "18%", hLeft: "54%", img: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
   { id: 19, name: "De Bruyne", num: 17, pos: "CM", rating: "6.3", vTop: "30%", vLeft: "75%", hTop: "75%", hLeft: "65%", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
   { id: 21, name: "Doku", num: 11, pos: "LM", rating: "6.6", vTop: "42%", vLeft: "82%", hTop: "82%", hLeft: "54%", img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop" },
-  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", vTop: "45%", vLeft: "50%", hTop: "50%", hLeft: "52%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+  { id: 22, name: "Haaland", num: 9, pos: "ST", rating: "6.1", vTop: "40%", vLeft: "50%", hTop: "50%", hLeft: "56%", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
 ];
 
 const subsLIV = [
@@ -110,6 +110,62 @@ const coaches = {
 
 export default function MatchDetailsPage() {
   const [activeTab, setActiveTab] = useState('OVERVIEW');
+  const [takes, setTakes] = useState(initialHotTakes);
+  const [votedTakes, setVotedTakes] = useState<Record<number, boolean>>({});
+  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+
+  const allPitchPlayers = [...pitchLIV, ...pitchMCI];
+  
+  const handleNextPlayer = () => {
+    if (!selectedPlayer) return;
+    const currentIndex = allPitchPlayers.findIndex(p => p.id.toString() === selectedPlayer);
+    if (currentIndex !== -1 && currentIndex < allPitchPlayers.length - 1) {
+      setSelectedPlayer(allPitchPlayers[currentIndex + 1].id.toString());
+    } else {
+      setSelectedPlayer(allPitchPlayers[0].id.toString());
+    }
+  };
+
+  const handlePrevPlayer = () => {
+    if (!selectedPlayer) return;
+    const currentIndex = allPitchPlayers.findIndex(p => p.id.toString() === selectedPlayer);
+    if (currentIndex !== -1 && currentIndex > 0) {
+      setSelectedPlayer(allPitchPlayers[currentIndex - 1].id.toString());
+    } else {
+      setSelectedPlayer(allPitchPlayers[allPitchPlayers.length - 1].id.toString());
+    }
+  };
+
+  const handleVote = (takeId: number, optionIndex: number) => {
+    if (votedTakes[takeId]) return;
+
+    setTakes(currentTakes => currentTakes.map(take => {
+      if (take.id !== takeId) return take;
+
+      const newOptions = [...take.options];
+      newOptions[optionIndex] = {
+        ...newOptions[optionIndex],
+        percent: newOptions[optionIndex].percent + 1
+      };
+      
+      const otherIndices = [0, 1, 2].filter(i => i !== optionIndex);
+      otherIndices.forEach(i => {
+        if (newOptions[i]) {
+          newOptions[i] = {
+            ...newOptions[i],
+            percent: Math.max(0, newOptions[i].percent - 0.5)
+          };
+        }
+      });
+
+      return {
+        ...take,
+        options: newOptions
+      };
+    }));
+
+    setVotedTakes(prev => ({ ...prev, [takeId]: true }));
+  };
 
   return (
     <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
@@ -329,18 +385,22 @@ export default function MatchDetailsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {hotTakes.map((take) => (
+              {takes.map((take) => (
                 <div key={take.id} className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all">
                   <h3 className="text-sm font-black text-white mb-6 leading-relaxed">{take.question}</h3>
                   <div className="space-y-4 mb-6 flex-1">
                     {take.options.map((opt, i) => (
-                      <div key={i}>
+                      <div 
+                        key={i}
+                        onClick={() => handleVote(take.id, i)}
+                        className={`group ${votedTakes[take.id] ? 'cursor-default' : 'cursor-pointer'}`}
+                      >
                         <div className="flex justify-between text-xs font-bold mb-2">
-                          <span className={opt.percent > 50 ? 'text-white' : 'text-gray-400'}>{opt.text}</span>
+                          <span className={`${votedTakes[take.id] ? '' : 'group-hover:text-white transition-colors'} ${opt.percent > 50 ? 'text-white' : 'text-gray-400'}`}>{opt.text}</span>
                           <span className={opt.percent > 50 ? 'text-white' : 'text-gray-500'}>{opt.percent}%</span>
                         </div>
                         <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                          <div className={`h-full rounded-full ${opt.color}`} style={{ width: `${opt.percent}%` }} />
+                          <div className={`h-full rounded-full transition-all duration-500 ${opt.color}`} style={{ width: `${opt.percent}%` }} />
                         </div>
                       </div>
                     ))}
@@ -392,16 +452,20 @@ export default function MatchDetailsPage() {
                   
                   return (
                     <div 
+                      onClick={() => setSelectedPlayer(player.id.toString())}
                       key={player.id} 
-                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10"
                       style={{ top: player.vTop, left: player.vLeft }}
                     >
-                      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full border-2 overflow-hidden shadow-xl transition-transform group-hover:scale-110 ${
+                      <div className={`w-12 h-12 md:w-14 md:h-14 relative rounded-full border-2 shadow-xl transition-transform group-hover:scale-110 ${
                         isHighRating ? 'border-[#FF7F50] shadow-[0_0_15px_rgba(255,127,80,0.6)]' : 'border-gray-500'
                       }`}>
-                         <img src={player.img} className="w-full h-full object-cover" />
+                         <img src={player.img} className="w-full h-full object-cover rounded-full" />
+                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-white ${isHighRating ? 'border-[#FF7F50]' : 'border-white/20'}`}>
+                           {player.rating}
+                         </div>
                       </div>
-                      <div className={`text-[10px] md:text-xs font-black uppercase tracking-widest drop-shadow-md ${isLiv ? 'text-[#FF7F50]' : 'text-[#4FC3F7]'}`}>
+                      <div className={`text-[10px] md:text-xs font-black uppercase tracking-widest drop-shadow-md mt-1 ${isLiv ? 'text-[#FF7F50]' : 'text-[#4FC3F7]'}`}>
                         {player.name}
                       </div>
                     </div>
@@ -438,16 +502,20 @@ export default function MatchDetailsPage() {
                   
                   return (
                     <div 
+                      onClick={() => setSelectedPlayer(player.id.toString())}
                       key={player.id} 
-                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10"
                       style={{ top: player.hTop, left: player.hLeft }}
                     >
-                      <div className={`w-14 h-14 rounded-full border-2 overflow-hidden shadow-xl transition-transform group-hover:scale-110 ${
+                      <div className={`w-14 h-14 relative rounded-full border-2 shadow-xl transition-transform group-hover:scale-110 ${
                         isHighRating ? 'border-[#FF7F50] shadow-[0_0_15px_rgba(255,127,80,0.6)]' : 'border-gray-500'
                       }`}>
-                         <img src={player.img} className="w-full h-full object-cover" />
+                         <img src={player.img} className="w-full h-full object-cover rounded-full" />
+                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-white ${isHighRating ? 'border-[#FF7F50]' : 'border-white/20'}`}>
+                           {player.rating}
+                         </div>
                       </div>
-                      <div className={`text-xs font-black uppercase tracking-widest drop-shadow-md ${isLiv ? 'text-[#FF7F50]' : 'text-[#4FC3F7]'}`}>
+                      <div className={`text-xs font-black uppercase tracking-widest drop-shadow-md mt-1 ${isLiv ? 'text-[#FF7F50]' : 'text-[#4FC3F7]'}`}>
                         {player.name}
                       </div>
                     </div>
@@ -458,45 +526,45 @@ export default function MatchDetailsPage() {
               {/* Subs & Coaches (Horizontal Strip) */}
               <div className="bg-[#1A1A1A] px-4 py-5 flex flex-col md:flex-row items-center justify-between w-full rounded-b-[24px] gap-4 overflow-hidden">
                 {/* Left side (LIV Subs & Coach) */}
-                <div className="flex items-center gap-2 md:gap-3 w-full overflow-x-auto hide-scrollbar pb-2 md:pb-0">
-                  <div className="w-1.5 h-10 bg-[#FF7F50] rounded-full mr-1 md:mr-2 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
+                <div className="flex items-center gap-1.5 md:gap-2 w-full pb-2 md:pb-0">
+                  <div className="w-1.5 h-8 md:h-10 bg-[#FF7F50] rounded-full mr-1 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
                   
                   {/* Coach */}
                   <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.liv.name}`}>
-                    <img src={coaches.liv.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
+                    <img src={coaches.liv.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
                   </div>
                   
                   {/* Subs */}
                   {subsLIV.map(sub => (
                     <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
-                      <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
+                      <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
                   ))}
                   
                   {/* Empty slots */}
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                 </div>
 
                 {/* Right side (MCI Subs & Coach) */}
-                <div className="flex items-center gap-2 md:gap-3 w-full md:justify-end overflow-x-auto hide-scrollbar pb-2 md:pb-0">
+                <div className="flex items-center gap-1.5 md:gap-2 w-full md:justify-end pb-2 md:pb-0">
                   {/* Empty slots */}
-                  <div className="hidden sm:block w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="hidden sm:block w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                   
                   {/* Subs */}
                   {subsMCI.map(sub => (
                     <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
-                      <img src={sub.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
+                      <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
                   ))}
                   
                   {/* Coach */}
                   <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.mci.name}`}>
-                    <img src={coaches.mci.img} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
+                    <img src={coaches.mci.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
                   </div>
 
-                  <div className="w-1.5 h-10 bg-[#4FC3F7] rounded-full ml-1 md:ml-2 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
+                  <div className="w-1.5 h-8 md:h-10 bg-[#4FC3F7] rounded-full ml-1 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
                 </div>
               </div>
             </div>
@@ -505,6 +573,14 @@ export default function MatchDetailsPage() {
         </div>
       )}
 
+      {selectedPlayer && (
+        <PlayerSummaryModal 
+          playerId={selectedPlayer} 
+          onClose={() => setSelectedPlayer(null)}
+          onNext={handleNextPlayer}
+          onPrev={handlePrevPlayer}
+        />
+      )}
     </div>
   );
 }
