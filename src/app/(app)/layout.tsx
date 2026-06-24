@@ -50,10 +50,10 @@ export default function AppLayout({
     { icon: <User className="w-6 h-6" />, label: "The Stand", href: "/stands" },
   ];
 
-  const isStandsPage = pathname.startsWith('/stands');
+  const isStandRoom = /^\/stands\/[^/]+$/.test(pathname);
 
   return (
-    <div className={`${isStandsPage ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}>
+    <div className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}>
       {/* Mobile Top Bar */}
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">

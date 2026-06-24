@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { Camera, HeartCrack, AlertTriangle, Search, Plus } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BackButton } from "@/components/ui/BackButton";
 
 export default function EditProfilePage() {
+  const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -103,19 +105,25 @@ export default function EditProfilePage() {
                 <div className="space-y-3">
                   <label className="text-[10px] text-gray-500 font-bold tracking-widest uppercase pl-1">FAVORITE CLUB</label>
                   <div className="flex gap-3">
-                     {availableClubs.map(club => (
-                       <button
-                         key={`fav-${club.id}`}
-                         onClick={() => setFavoriteClub(club)}
-                         className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all cursor-pointer hover:-translate-y-1 ${
-                           favoriteClub.id === club.id 
-                             ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)] opacity-100' 
-                             : 'border border-white/10 opacity-50 hover:opacity-100'
-                         }`}
-                       >
-                         <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
-                       </button>
-                     ))}
+                     {availableClubs.map(club => {
+                       const isRival = rivalClub.id === club.id;
+                       return (
+                         <button
+                           key={`fav-${club.id}`}
+                           disabled={isRival}
+                           onClick={() => setFavoriteClub(club)}
+                           className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all ${
+                             isRival ? 'opacity-20 cursor-not-allowed grayscale' : 'cursor-pointer hover:-translate-y-1'
+                           } ${
+                             favoriteClub.id === club.id 
+                               ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.2)] opacity-100' 
+                               : !isRival ? 'border border-white/10 opacity-50 hover:opacity-100' : 'border border-white/5'
+                           }`}
+                         >
+                           <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
+                         </button>
+                       );
+                     })}
                      <button className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
                        <Plus className="w-6 h-6 text-gray-500" />
                      </button>
@@ -126,19 +134,25 @@ export default function EditProfilePage() {
                 <div className="space-y-3">
                   <label className="text-[10px] text-gray-500 font-bold tracking-widest uppercase pl-1">RIVAL CLUB</label>
                   <div className="flex gap-3">
-                     {availableClubs.map(club => (
-                       <button
-                         key={`rival-${club.id}`}
-                         onClick={() => setRivalClub(club)}
-                         className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all cursor-pointer hover:-translate-y-1 ${
-                           rivalClub.id === club.id 
-                             ? 'border-2 border-[#FF3B00] shadow-[0_0_15px_rgba(255,59,0,0.2)] opacity-100' 
-                             : 'border border-white/10 opacity-50 hover:opacity-100'
-                         }`}
-                       >
-                         <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
-                       </button>
-                     ))}
+                     {availableClubs.map(club => {
+                       const isFavorite = favoriteClub.id === club.id;
+                       return (
+                         <button
+                           key={`rival-${club.id}`}
+                           disabled={isFavorite}
+                           onClick={() => setRivalClub(club)}
+                           className={`w-16 h-16 rounded-xl bg-[#121212] flex items-center justify-center p-2 transition-all ${
+                             isFavorite ? 'opacity-20 cursor-not-allowed grayscale' : 'cursor-pointer hover:-translate-y-1'
+                           } ${
+                             rivalClub.id === club.id 
+                               ? 'border-2 border-[#FF3B00] shadow-[0_0_15px_rgba(255,59,0,0.2)] opacity-100' 
+                               : !isFavorite ? 'border border-white/10 opacity-50 hover:opacity-100' : 'border border-white/5'
+                           }`}
+                         >
+                           <img src={club.logo} className="w-full h-full object-contain" alt={club.name} />
+                         </button>
+                       );
+                     })}
                      <button className="w-16 h-16 rounded-xl bg-[#121212] border border-white/10 border-dashed flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer hover:-translate-y-1">
                        <Search className="w-6 h-6 text-gray-500" />
                      </button>
@@ -187,6 +201,7 @@ export default function EditProfilePage() {
               onClick={() => {
                 console.log("Account deleted via frontend stub.");
                 setShowDeleteModal(false);
+                router.push("/");
               }}
               className="w-full py-4 text-gray-500 hover:text-[#FF3B00] font-bold tracking-widest text-xs uppercase rounded-xl transition-colors"
             >
