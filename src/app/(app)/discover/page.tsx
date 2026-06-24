@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const CATEGORIES = [
   { id: "ALL", label: "ALL MATCHES", icon: null, color: "text-white" },
   { id: "LIVE", label: "LIVE NOW", icon: null, color: "text-[#00E5FF]" },
-  { id: "CHAOS", label: "HIGH CHAOS", icon: Zap, color: "text-[#FF7F50]" },
+  { id: "CHAOS", label: "CHAOS", icon: Zap, color: "text-[#FF7F50]" },
   { id: "TACTICAL", label: "TACTICAL", icon: GitBranch, color: "text-[#00E5FF]" },
   { id: "RIVALRIES", label: "RIVALRIES", icon: Swords, color: "text-[#D32F2F]" },
   { id: "SURPRISE", label: "SURPRISE ME", icon: Dices, color: "text-gray-400" },
