@@ -186,7 +186,7 @@ export default function ActiveStandPage() {
   };
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto h-[calc(100vh-9rem)] md:h-[100vh] text-white flex flex-col xl:flex-row relative bg-[#020202] overflow-hidden">
+    <div className="fixed inset-0 z-50 w-full h-[100dvh] md:static md:max-w-[1600px] md:mx-auto md:h-[100vh] text-white flex flex-col xl:flex-row bg-[#020202] overflow-hidden">
       
       {/* Custom Animations CSS */}
       <style>{`
@@ -324,8 +324,8 @@ export default function ActiveStandPage() {
         
       </div>
 
-      {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex-1 xl:flex-none flex flex-col h-auto xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#020202] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0 overflow-hidden">
+      {/* Right Pane: Live Chat & Polls */}
+      <div className="flex-1 xl:h-full xl:w-[400px] 2xl:w-[480px] bg-[#0A0A0A] flex flex-col border-t xl:border-t-0 xl:border-l border-white/10 shrink-0 relative z-20 overflow-hidden">
         
         {/* Poll Pop-up (Top of Chat) */}
         <div className="p-4 bg-gradient-to-b from-[#050505] to-transparent relative z-10 shrink-0">
