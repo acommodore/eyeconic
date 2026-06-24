@@ -172,10 +172,13 @@ export default function DiscoverPage() {
       {/* 3. GRID SYSTEM - LIVE FIRST */}
       <section className="pt-4">
         <div className="flex items-center justify-between mb-6 pl-2">
-           <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">ACTIVE SESSIONS</h2>
+           <h2 className="text-xs font-black tracking-widest text-[#00E5FF] uppercase flex items-center gap-2">
+             <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+             ACTIVE SESSIONS
+           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           {/* Match Card 1 (Live) */}
           <div className="rounded-[24px] p-6 bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors group relative overflow-hidden flex flex-col h-[360px]">
@@ -275,6 +278,16 @@ export default function DiscoverPage() {
              </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* 4. UPCOMING MATCHES */}
+      <section className="pt-8">
+        <div className="flex items-center justify-between mb-6 pl-2">
+           <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">UPCOMING MATCHES</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {/* Match Card 3 (Upcoming) */}
           <div className="rounded-[24px] p-6 bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors group relative overflow-hidden flex flex-col h-[360px]">
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 filter grayscale group-hover:grayscale-0" />
@@ -319,7 +332,7 @@ export default function DiscoverPage() {
         </div>
       </section>
 
-      {/* 4. MORE TONIGHT (Secondary List) */}
+      {/* 5. MORE TONIGHT (Secondary List) */}
       <section className="pt-8">
          <div className="flex items-center justify-between mb-6 pl-2">
             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">MORE TONIGHT</h2>

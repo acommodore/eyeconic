@@ -227,14 +227,12 @@ export default function MatchDetailsPage() {
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">Liverpool</h2>
               
               {/* Goal Scorers (Left Side for LIV) */}
-              <div className="flex flex-col items-center gap-2">
-                <div className="bg-[#0A0A0A]/60 backdrop-blur-md border border-white/10 rounded-lg px-3 py-2 md:px-4 md:py-2.5 flex flex-col items-center gap-1.5 text-[10px] md:text-xs font-bold text-gray-300 w-full text-center">
-                  <div className="flex items-center justify-center gap-1.5 w-full">
-                    <span className="text-[#00E5FF]">⚽</span> Salah 2'
-                  </div>
-                  <div className="flex items-center justify-center gap-1.5 w-full">
-                    <span className="text-[#00E5FF]">⚽</span> Konate 78'
-                  </div>
+              <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-[#00E5FF]">⚽</span> Salah 2'
+                </div>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span className="text-[#00E5FF]">⚽</span> Konate 78'
                 </div>
               </div>
             </div>
@@ -292,102 +290,144 @@ export default function MatchDetailsPage() {
           >
           
           {/* FANS HAVE SPOKEN - MVP & FAN XI */}
-          <section className="bg-gradient-to-b from-[#111111] to-[#050505] border border-white/5 rounded-[32px] p-8 md:p-12 relative overflow-hidden flex flex-col items-center shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <h2 className="text-3xl md:text-5xl font-black text-center tracking-tight mb-6 uppercase drop-shadow-2xl">
-              The Fans Have <br/><span className="text-[#00E5FF] drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">Spoken.</span>
-            </h2>
-            
-            {/* Score Pill */}
-            <div className="bg-[#1A1A1A] border border-white/10 rounded-full px-6 py-2 flex items-center gap-4 mb-12 shadow-inner">
-               <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 object-contain" />
-               <span className="text-xl font-black tracking-widest text-white">1 - 2</span>
-               <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-6 h-6 object-contain" />
-            </div>
+          <section className="relative w-full rounded-[32px] overflow-hidden border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
+            {/* Dark Cinematic Background */}
+            <div className="absolute inset-0 bg-[#020202] z-0" />
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay z-0" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/30 to-transparent opacity-50" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/30 to-transparent opacity-50" />
 
-            {/* MVP */}
-            <div className="relative mb-6">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full p-1 bg-gradient-to-br from-[#00E5FF] to-transparent shadow-[0_0_30px_rgba(0,229,255,0.3)] group cursor-pointer hover:scale-105 transition-transform">
-                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
+            <div className="relative z-10 p-6 md:p-16 flex flex-col items-center">
+              
+              {/* Premium Header */}
+              <div className="flex flex-col items-center mb-12 md:mb-16 relative w-full mt-4 md:mt-0">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-24 md:h-32 bg-[#00E5FF]/20 blur-[80px] pointer-events-none" />
+                <h2 className="text-3xl md:text-6xl font-black text-center tracking-tighter uppercase leading-[0.9] drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
+                  The Fans Have <br/>
+                  <span className="text-[#00E5FF] drop-shadow-[0_0_20px_rgba(0,229,255,0.6)]">Spoken.</span>
+                </h2>
               </div>
-              <div className="absolute -top-2 -right-4 bg-[#00E5FF] text-black text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-widest border-2 border-black drop-shadow-md">MVP</div>
-              <div className="absolute -bottom-2 -right-2 bg-black text-[#00E5FF] text-sm font-black px-3 py-1 rounded-full border border-[#00E5FF] drop-shadow-md">9.2</div>
+
+              {/* Score Pill */}
+              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-6 py-2 md:px-8 md:py-3 flex items-center gap-4 md:gap-6 mb-16 md:mb-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                 <div className="absolute inset-0 bg-gradient-to-r from-[#4FC3F7]/10 to-[#FF7F50]/10" />
+                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
+                 <span className="text-2xl md:text-3xl font-black tracking-widest text-white relative z-10 font-mono">1 - 2</span>
+                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
+              </div>
+
+              {/* MVP SHOWCASE */}
+              <div className="w-full max-w-lg mx-auto flex flex-col items-center relative mb-12">
+                {/* Massive Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#00E5FF]/20 blur-[80px] rounded-full pointer-events-none" />
+                
+                <div className="relative">
+                  {/* Rotating Rings */}
+                  <div className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-[#00E5FF]/30 rounded-full animate-[spin_12s_linear_infinite]" />
+                  <div className="absolute -inset-8 md:-inset-10 border border-[#00E5FF]/10 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+                  
+                  <div className="w-40 h-40 md:w-56 md:h-56 rounded-full p-1 md:p-1.5 bg-gradient-to-br from-[#00E5FF] via-[#00E5FF]/20 to-transparent shadow-[0_0_50px_rgba(0,229,255,0.3)] relative z-10">
+                     <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500&fit=crop" className="w-full h-full rounded-full object-cover border-4 border-[#020202]" />
+                  </div>
+                  
+                  <div className="absolute -top-3 -right-4 md:-top-4 md:-right-6 bg-gradient-to-r from-[#00E5FF] to-[#00B4D8] text-[#020202] text-[10px] md:text-xs font-black px-3 py-1 md:px-4 md:py-1.5 rounded-full uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(0,229,255,0.4)] z-20 border border-[#020202] transform rotate-6">
+                    MVP
+                  </div>
+                  
+                  <div className="absolute -bottom-3 -left-3 md:-bottom-4 md:-left-4 bg-[#020202] text-[#00E5FF] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#00E5FF]/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono">
+                    9.2
+                  </div>
+                  
+                  {/* Name Overlaid without taking extra vertical space */}
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 z-20 shadow-xl">
+                    <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-widest whitespace-nowrap">Mo Salah</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* COMBINED FAN XI */}
+              <div className="w-full max-w-3xl relative flex flex-col items-center bg-[#080808]/80 backdrop-blur-xl border border-white/5 rounded-[40px] py-12 md:py-16 px-2 md:px-8 shadow-2xl mt-12 md:mt-16">
+                 
+                 {/* Header Line */}
+                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#020202] px-4 md:px-6 border border-white/10 rounded-full whitespace-nowrap">
+                   <span className="text-[10px] md:text-xs text-gray-400 font-black tracking-[0.3em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-gray-400 to-white">Combined Fan XI</span>
+                 </div>
+
+                 {/* Subtle Pitch Lines */}
+                 <div className="absolute inset-4 md:inset-8 border-2 border-white/5 rounded-3xl pointer-events-none" />
+                 <div className="absolute top-4 md:top-8 bottom-4 md:bottom-8 left-1/2 w-0.5 bg-white/5 -translate-x-1/2 pointer-events-none" />
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 border-2 border-white/5 rounded-full pointer-events-none" />
+
+                 <div className="w-full relative flex flex-col gap-12 md:gap-20 items-center z-10 mt-6 md:mt-8">
+                    {/* GK */}
+                    <div className="flex justify-center w-full">
+                      <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        </div>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Alisson</span>
+                      </div>
+                    </div>
+
+                    {/* DEFs (3) */}
+                    <div className="flex justify-between w-[90%] md:w-[85%]">
+                      {['Gvardiol', 'Van Dijk', 'Trent'].map(player => (
+                        <div key={player} className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
+                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                            <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
+                            <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                          </div>
+                          <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">{player}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* MIDs (4) */}
+                    <div className="flex justify-between w-full px-2 md:px-4">
+                      {['Mac Allister', 'De Bruyne', 'Foden', 'Doku'].map(player => (
+                        <div key={player} className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
+                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                            <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
+                            <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                          </div>
+                          <span className="text-[8px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors whitespace-nowrap">{player}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* FWDs (3) */}
+                    <div className="flex justify-between w-[90%] md:w-[85%] relative">
+                      <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        </div>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Diaz</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform relative">
+                        <div className="absolute -inset-2 bg-[#00E5FF]/20 rounded-full blur-md" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] p-0.5 md:p-1 bg-[#020202] relative z-10">
+                          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
+                        </div>
+                        <span className="text-[9px] md:text-xs font-black text-[#00E5FF] uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        </div>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Haaland</span>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+              
+              {/* Floating Action Button */}
+              <button className="hidden md:flex absolute top-12 right-12 w-14 h-14 bg-[#111] hover:bg-[#222] rounded-full items-center justify-center shadow-2xl transition-all border border-white/10 group cursor-pointer z-50">
+                 <Share className="w-5 h-5 text-gray-400 group-hover:text-white" />
+              </button>
             </div>
-            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-widest mb-16 drop-shadow-xl">Mo Salah</h3>
-
-            {/* COMBINED FAN XI */}
-            <div className="text-xs text-gray-500 font-bold tracking-[0.3em] uppercase mb-12 relative">
-               <span className="relative z-10 bg-[#080808] px-4">Combined Fan XI</span>
-               <div className="absolute top-1/2 left-[-100%] right-[-100%] h-px bg-white/5 -z-10"></div>
-            </div>
-            
-            <div className="w-full max-w-2xl relative flex flex-col gap-12 md:gap-16 items-center">
-               {/* FWDs (3) */}
-               <div className="flex justify-between w-[80%]">
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Diaz</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.4)] p-0.5">
-                     <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
-                   </div>
-                   <span className="text-[10px] md:text-xs font-black text-[#00E5FF] uppercase tracking-widest drop-shadow-md">Salah</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Haaland</span>
-                 </div>
-               </div>
-
-               {/* MIDs (4) */}
-               <div className="flex justify-between w-full">
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Mac Allister</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">De Bruyne</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Foden</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Doku</span>
-                 </div>
-               </div>
-
-               {/* DEFs (3) */}
-               <div className="flex justify-between w-[80%]">
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Gvardiol</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Van Dijk</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Trent</span>
-                 </div>
-               </div>
-
-               {/* GK */}
-               <div className="flex justify-center w-full mt-4">
-                 <div className="flex flex-col items-center gap-2 group cursor-pointer hover:scale-110 transition-transform">
-                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm"></div>
-                   <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:text-white transition-colors">Alisson</span>
-                 </div>
-               </div>
-            </div>
-            
-            {/* Share Button */}
-            <button className="absolute bottom-6 right-6 w-14 h-14 bg-[#FF3B00] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,59,0,0.5)] hover:scale-110 transition-transform border border-white/20">
-               <Share className="w-6 h-6 text-white" />
-            </button>
           </section>
 
           {/* Hot Takes */}
@@ -544,48 +584,36 @@ export default function MatchDetailsPage() {
                 })}
               </div>
 
-              {/* Subs & Coaches (Horizontal Strip) */}
-              <div className="bg-[#1A1A1A] px-4 py-5 flex flex-col md:flex-row items-center justify-between w-full rounded-b-[24px] gap-4 overflow-hidden">
-                {/* Left side (MCI Subs & Coach) */}
-                <div className="flex items-center gap-1.5 md:gap-2 w-full pb-2 md:pb-0">
-                  <div className="w-1.5 h-8 md:h-10 bg-[#4FC3F7] rounded-full mr-1 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
-                  
-                  {/* Coach */}
-                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.mci.name}`}>
-                    <img src={coaches.mci.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
+              {/* Subs (Horizontal Strip) */}
+              <div className="flex flex-col md:flex-row justify-between items-center bg-[#0A0A0A] border-t border-white/5 p-4 rounded-b-[24px] gap-4 w-full mt-4 md:mt-0 relative z-20">
+                {/* Left side (MCI) */}
+                <div className="flex items-center gap-2 w-full">
+                  <div className="w-1 h-4 bg-[#4FC3F7]" />
+                  <div className="flex gap-1.5">
+                    {subsMCI.map(sub => (
+                      <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10 shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
+                        <img src={sub.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                      </div>
+                    ))}
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
                   </div>
-                  
-                  {/* Subs */}
-                  {subsMCI.map(sub => (
-                    <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
-                      <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
-                    </div>
-                  ))}
-                  
-                  {/* Empty slots */}
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                 </div>
 
-                {/* Right side (LIV Subs & Coach) */}
-                <div className="flex items-center gap-1.5 md:gap-2 w-full md:justify-end pb-2 md:pb-0">
-                  {/* Empty slots */}
-                  <div className="hidden sm:block w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
-                  
-                  {/* Subs */}
-                  {subsLIV.map(sub => (
-                    <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
-                      <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
-                    </div>
-                  ))}
-                  
-                  {/* Coach */}
-                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.liv.name}`}>
-                    <img src={coaches.liv.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
+                {/* Right side (LIV) */}
+                <div className="flex items-center justify-end gap-2 w-full">
+                  <div className="flex gap-1.5">
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    {subsLIV.map(sub => (
+                      <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10 shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
+                        <img src={sub.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                      </div>
+                    ))}
                   </div>
-
-                  <div className="w-1.5 h-8 md:h-10 bg-[#FF7F50] rounded-full ml-1 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
+                  <div className="w-1 h-4 bg-[#FF7F50]" />
                 </div>
               </div>
             </div>
