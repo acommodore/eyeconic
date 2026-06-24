@@ -30,31 +30,7 @@ export default function AppLayout({
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // iOS Safari keyboard scroll fix for Stands page
-    const handleViewportChange = () => {
-      if (window.visualViewport) {
-        document.documentElement.style.setProperty('--viewport-height', `${window.visualViewport.height}px`);
-        if (window.location.pathname.startsWith('/stands')) {
-          window.scrollTo(0, 0);
-          document.body.scrollTop = 0;
-        }
-      }
-    };
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleViewportChange);
-      window.visualViewport.addEventListener('scroll', handleViewportChange);
-      handleViewportChange();
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', handleViewportChange);
-        window.visualViewport.removeEventListener('scroll', handleViewportChange);
-      }
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   const navItems = [
@@ -66,10 +42,7 @@ export default function AppLayout({
   const isStandsPage = pathname.startsWith('/stands');
 
   return (
-    <div 
-      className={`${isStandsPage ? 'overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}
-      style={isStandsPage ? { height: 'var(--viewport-height, 100dvh)' } : undefined}
-    >
+    <div className={`${isStandsPage ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}>
       {/* Mobile Top Bar */}
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
