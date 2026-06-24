@@ -288,10 +288,6 @@ function LineupTab() {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
-         <span className="text-xs font-black tracking-widest text-[#00E5FF]">1</span>
-         <span className="text-sm font-bold">LINEUP</span>
-      </div>
       
       {/* Pitch & Bench Container */}
       <div className="w-full max-w-[420px] mx-auto">
@@ -423,12 +419,6 @@ function LineupTab() {
 function H2HTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
-         <span className="text-xs font-black tracking-widest text-[#00E5FF]">2</span>
-         <div className="flex flex-col justify-center">
-            <span className="text-sm font-bold">H2H</span>
-         </div>
-      </div>
       
       <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
         <h3 className="text-[10px] font-black text-center text-gray-400 tracking-widest mb-6">LAST 5 MEETINGS</h3>
@@ -473,12 +463,6 @@ function H2HTab() {
 function StandingsTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
-         <span className="text-xs font-black tracking-widest text-[#00E5FF]">3</span>
-         <div className="flex flex-col justify-center">
-            <span className="text-sm font-bold">STANDINGS</span>
-         </div>
-      </div>
       
       <div className="bg-[#0A0A0A] rounded-2xl p-4 border border-white/5 overflow-x-auto hide-scrollbar">
          <div className="text-[9px] font-black text-gray-500 tracking-widest uppercase mb-4 px-2">Premier League</div>
@@ -521,12 +505,6 @@ function StandingsTab() {
 function FormTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
-         <span className="text-xs font-black tracking-widest text-[#00E5FF]">4</span>
-         <div className="flex flex-col justify-center">
-            <span className="text-sm font-bold">FORM</span>
-         </div>
-      </div>
       
       <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
          <div className="flex justify-between items-center mb-8">
@@ -566,12 +544,6 @@ function FormTab() {
 function KeyBattlesTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex items-center gap-2 mb-6">
-         <span className="text-xs font-black tracking-widest text-[#00E5FF]">5</span>
-         <div className="flex flex-col justify-center">
-            <span className="text-sm font-bold">KEY BATTLES</span>
-         </div>
-      </div>
       
       <div className="space-y-4">
          <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
