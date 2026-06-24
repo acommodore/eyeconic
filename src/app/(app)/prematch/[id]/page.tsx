@@ -425,9 +425,8 @@ function H2HTab() {
     <div className="w-full h-full flex flex-col">
       <div className="flex items-center gap-2 mb-6">
          <span className="text-xs font-black tracking-widest text-[#00E5FF]">2</span>
-         <div className="flex flex-col">
+         <div className="flex flex-col justify-center">
             <span className="text-sm font-bold">H2H</span>
-            <span className="text-[10px] text-gray-400">A quick look at recent head-to-head history.</span>
          </div>
       </div>
       
@@ -476,9 +475,8 @@ function StandingsTab() {
     <div className="w-full h-full flex flex-col">
       <div className="flex items-center gap-2 mb-6">
          <span className="text-xs font-black tracking-widest text-[#00E5FF]">3</span>
-         <div className="flex flex-col">
+         <div className="flex flex-col justify-center">
             <span className="text-sm font-bold">STANDINGS</span>
-            <span className="text-[10px] text-gray-400">See where both teams stand in the league.</span>
          </div>
       </div>
       
@@ -525,9 +523,8 @@ function FormTab() {
     <div className="w-full h-full flex flex-col">
       <div className="flex items-center gap-2 mb-6">
          <span className="text-xs font-black tracking-widest text-[#00E5FF]">4</span>
-         <div className="flex flex-col">
+         <div className="flex flex-col justify-center">
             <span className="text-sm font-bold">FORM</span>
-            <span className="text-[10px] text-gray-400">Check both teams' recent form at a glance.</span>
          </div>
       </div>
       
@@ -571,9 +568,8 @@ function KeyBattlesTab() {
     <div className="w-full h-full flex flex-col">
       <div className="flex items-center gap-2 mb-6">
          <span className="text-xs font-black tracking-widest text-[#00E5FF]">5</span>
-         <div className="flex flex-col">
+         <div className="flex flex-col justify-center">
             <span className="text-sm font-bold">KEY BATTLES</span>
-            <span className="text-[10px] text-gray-400">The matchups that could decide the game.</span>
          </div>
       </div>
       
