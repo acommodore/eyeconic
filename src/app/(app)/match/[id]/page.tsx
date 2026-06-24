@@ -547,17 +547,17 @@ export default function MatchDetailsPage() {
 
               {/* Subs & Coaches (Horizontal Strip) */}
               <div className="bg-[#1A1A1A] px-4 py-5 flex flex-col md:flex-row items-center justify-between w-full rounded-b-[24px] gap-4 overflow-hidden">
-                {/* Left side (LIV Subs & Coach) */}
+                {/* Left side (MCI Subs & Coach) */}
                 <div className="flex items-center gap-1.5 md:gap-2 w-full pb-2 md:pb-0">
-                  <div className="w-1.5 h-8 md:h-10 bg-[#FF7F50] rounded-full mr-1 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
+                  <div className="w-1.5 h-8 md:h-10 bg-[#4FC3F7] rounded-full mr-1 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
                   
                   {/* Coach */}
-                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.liv.name}`}>
-                    <img src={coaches.liv.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
+                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.mci.name}`}>
+                    <img src={coaches.mci.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
                   </div>
                   
                   {/* Subs */}
-                  {subsLIV.map(sub => (
+                  {subsMCI.map(sub => (
                     <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
                       <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
@@ -568,25 +568,25 @@ export default function MatchDetailsPage() {
                   <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                 </div>
 
-                {/* Right side (MCI Subs & Coach) */}
+                {/* Right side (LIV Subs & Coach) */}
                 <div className="flex items-center gap-1.5 md:gap-2 w-full md:justify-end pb-2 md:pb-0">
                   {/* Empty slots */}
                   <div className="hidden sm:block w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                   <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 border border-white/5 shrink-0" />
                   
                   {/* Subs */}
-                  {subsMCI.map(sub => (
+                  {subsLIV.map(sub => (
                     <div className="relative group cursor-pointer shrink-0" key={sub.name} title={sub.name}>
                       <img src={sub.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 object-cover hover:scale-110 transition-transform hover:border-white/50" />
                     </div>
                   ))}
                   
                   {/* Coach */}
-                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.mci.name}`}>
-                    <img src={coaches.mci.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#4FC3F7] object-cover hover:scale-110 transition-transform" />
+                  <div className="relative group cursor-pointer shrink-0" title={`Coach: ${coaches.liv.name}`}>
+                    <img src={coaches.liv.img} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-[#FF7F50] object-cover hover:scale-110 transition-transform" />
                   </div>
 
-                  <div className="w-1.5 h-8 md:h-10 bg-[#4FC3F7] rounded-full ml-1 shadow-[0_0_10px_rgba(79,195,247,0.4)] shrink-0" />
+                  <div className="w-1.5 h-8 md:h-10 bg-[#FF7F50] rounded-full ml-1 shadow-[0_0_10px_rgba(255,127,80,0.4)] shrink-0" />
                 </div>
               </div>
             </div>
