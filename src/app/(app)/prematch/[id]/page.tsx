@@ -257,6 +257,7 @@ export default function PreMatchDetails() {
 function LineupTab() {
   const [vibe, setVibe] = useState(80);
   const [tactical, setTactical] = useState(45);
+  const [hasVotedAs, setHasVotedAs] = useState<'fan' | 'neutral' | null>(null);
 
   const mciPlayers = [
     { name: "EDERSON", x: 50, y: 6 },
@@ -368,7 +369,14 @@ function LineupTab() {
                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5" alt=""/>
                <span className="text-[10px] font-black uppercase">YOUR VIBE <span className="text-gray-400">(MCI FANS)</span></span>
              </div>
-             <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">FEELING GOOD</span>
+             {hasVotedAs === 'neutral' ? (
+               <div className="flex items-center gap-1.5">
+                 <span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">LOCKED</span>
+                 <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
+               </div>
+             ) : (
+               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
+             )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
              <span>WORRIED</span>
@@ -376,8 +384,12 @@ function LineupTab() {
            </div>
            <input 
              type="range" min="0" max="100" 
-             value={vibe} onChange={(e) => setVibe(parseInt(e.target.value))}
-             className="w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full cursor-pointer"
+             value={vibe} onChange={(e) => {
+               setVibe(parseInt(e.target.value));
+               if (!hasVotedAs) setHasVotedAs('fan');
+             }}
+             disabled={hasVotedAs === 'neutral'}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 
@@ -400,6 +412,14 @@ function LineupTab() {
          <div>
            <div className="flex justify-between items-end mb-4">
              <span className="text-[10px] font-black uppercase">NEUTRAL: WHO HAS THE TACTICAL EDGE?</span>
+             {hasVotedAs === 'fan' ? (
+               <div className="flex items-center gap-1.5">
+                 <span className="text-[10px] font-black text-gray-500 tracking-widest uppercase">LOCKED</span>
+                 <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
+               </div>
+             ) : (
+               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
+             )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
              <span>MCI</span>
@@ -407,8 +427,12 @@ function LineupTab() {
            </div>
            <input 
              type="range" min="0" max="100" 
-             value={tactical} onChange={(e) => setTactical(parseInt(e.target.value))}
-             className="w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full cursor-pointer"
+             value={tactical} onChange={(e) => {
+               setTactical(parseInt(e.target.value));
+               if (!hasVotedAs) setHasVotedAs('neutral');
+             }}
+             disabled={hasVotedAs === 'fan'}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
       </div>
