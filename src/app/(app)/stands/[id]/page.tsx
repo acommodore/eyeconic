@@ -155,7 +155,7 @@ export default function ActiveStandPage() {
         </header>
 
         {/* Speakers Grid */}
-        <div className="flex-1 flex flex-col justify-start md:justify-center pt-2 pb-0 md:py-10 overflow-hidden w-full">
+        <div className="flex-1 flex flex-col justify-center py-4 md:py-10 overflow-hidden w-full">
           <div className="grid grid-cols-3 gap-x-2 gap-y-6 px-2 md:px-4 pb-4 md:gap-x-6 md:gap-y-16 max-w-5xl mx-auto w-full">
             
             {/* Speaker 1: Active Talking */}
@@ -251,10 +251,7 @@ export default function ActiveStandPage() {
             {/* Speaker 4: Empty Slot */}
             <div className="flex flex-col items-center gap-2 md:gap-4 relative md:mt-8">
               <div className="w-12 h-12 md:w-44 md:h-44 rounded-full bg-[#0A0A0A] border-2 border-dashed border-gray-800 relative flex flex-col items-center justify-center z-10">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2">
-                  <MicOff className="w-6 h-6 text-gray-800" />
-                </div>
-                <span className="text-[8px] md:text-[10px] text-gray-800 font-bold tracking-widest">OPEN SLOT</span>
+                <MoreHorizontal className="w-4 h-4 md:w-8 md:h-8 text-gray-800" />
               </div>
             </div>
 
