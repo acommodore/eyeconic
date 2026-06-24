@@ -100,7 +100,7 @@ export default function ActiveStandPage() {
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
       ? "relative w-full aspect-square xl:w-24 xl:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
-      : "relative h-full w-full min-h-0 rounded-xl";
+      : "relative aspect-square h-full md:w-full md:h-full md:aspect-auto shrink-0 min-h-0 rounded-xl";
 
     return (
       <>
@@ -285,7 +285,7 @@ export default function ActiveStandPage() {
               </div>
             </div>
           ) : (
-            <div className="w-full aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
+            <div className="w-full h-24 md:h-auto md:aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
               {/* The Stream Player */}
               {/* Dynamic Premium Background */}
               <div className="absolute inset-0 z-0">
@@ -300,7 +300,7 @@ export default function ActiveStandPage() {
               </div>
 
               {/* Speakers Grid inside Player */}
-              <div className="relative z-10 flex-1 grid grid-cols-3 grid-rows-2 gap-1 md:gap-4 p-1.5 md:p-6 h-full w-full">
+              <div className="relative z-10 flex-1 flex flex-row items-center overflow-x-auto gap-2 p-2 md:grid md:grid-cols-3 md:grid-rows-2 md:gap-4 md:p-6 h-full w-full scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {renderSpeakers(false)}
               </div>
             </div>
