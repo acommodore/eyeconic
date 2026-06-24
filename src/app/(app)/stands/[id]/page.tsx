@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap } from "lucide-react";
+import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2 } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 
 export default function ActiveStandPage() {
   const [mutedUsers, setMutedUsers] = useState<Record<string, boolean>>({});
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
   const [inputText, setInputText] = useState("");
+  const [isMicPending, setIsMicPending] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     {
       id: 1,
@@ -292,7 +293,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[40vh] md:h-[55vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[55vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
@@ -335,9 +336,17 @@ export default function ActiveStandPage() {
               <span className="text-2xl drop-shadow-md">🍳</span>
               <span className="text-[9px] font-black text-gray-400 tracking-widest uppercase">Cooking</span>
             </button>
-            <button className="flex-[2] flex flex-col items-center justify-center gap-1 bg-gradient-to-br from-[#FF7F50] to-[#FF3B00] text-black rounded-2xl py-3 hover:scale-[1.02] active:scale-95 transition-all font-black shadow-[0_0_20px_rgba(255,127,80,0.4)] cursor-pointer">
-              <Hand className="w-5 h-5 fill-black drop-shadow-sm" />
-              <span className="text-[10px] tracking-widest uppercase">Request Mic</span>
+            <button 
+              onClick={() => setIsMicPending(true)}
+              disabled={isMicPending}
+              className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-2xl py-3 hover:scale-[1.02] active:scale-95 transition-all font-black cursor-pointer ${
+                isMicPending 
+                  ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-gray-400 border border-white/10' 
+                  : 'bg-gradient-to-br from-[#FF7F50] to-[#FF3B00] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)]'
+              }`}
+            >
+              {isMicPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Hand className="w-5 h-5 fill-black drop-shadow-sm" />}
+              <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
             </button>
           </div>
 
