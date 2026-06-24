@@ -110,38 +110,38 @@ export default function DiscoverPage() {
              </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto flex-1 mt-8">
-             <div className="flex items-center justify-between w-full">
+          <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto flex-1 mt-6 md:mt-8">
+             <div className="flex items-center justify-between w-full px-2 md:px-0">
                
                {/* MCI Left */}
-               <div className="flex flex-col items-center gap-4 md:gap-6">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-20 h-20 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.4)]" alt="MCI" />
-                 <div className="flex flex-col items-center gap-1 bg-black/40 backdrop-blur-sm px-6 py-2 rounded-xl border border-white/5">
-                    <span className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase">Possession</span>
-                    <span className="text-2xl font-mono font-black text-white drop-shadow-md">64%</span>
+               <div className="flex flex-col items-center gap-2 md:gap-6 shrink-0">
+                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-16 h-16 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.4)]" alt="MCI" />
+                 <div className="flex flex-col items-center gap-0.5 md:gap-1 bg-black/40 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-2 rounded-lg md:rounded-xl border border-white/5">
+                    <span className="text-[8px] md:text-[10px] font-black tracking-widest text-[#00E5FF] uppercase">Possession</span>
+                    <span className="text-sm md:text-2xl font-mono font-black text-white drop-shadow-md">64%</span>
                  </div>
                </div>
                
                {/* Center Score */}
-               <div className="flex flex-col items-center relative z-30 mx-4">
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#00E5FF]/20 blur-[60px] rounded-full pointer-events-none" />
-                 <div className="flex items-center justify-center gap-4 md:gap-12 text-8xl md:text-[140px] font-mono font-black tracking-tighter drop-shadow-2xl">
+               <div className="flex flex-col items-center relative z-30 mx-2 md:mx-4 shrink-0">
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-48 md:h-48 bg-[#00E5FF]/20 blur-[60px] rounded-full pointer-events-none" />
+                 <div className="flex items-center justify-center gap-2 md:gap-12 text-5xl md:text-[140px] font-mono font-black tracking-tighter drop-shadow-2xl">
                    <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">2</span>
-                   <span className="text-white/20 text-6xl md:text-8xl">-</span>
+                   <span className="text-white/20 text-3xl md:text-8xl">-</span>
                    <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">1</span>
                  </div>
-                 <div className="flex items-center gap-3 mt-4 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
+                 <div className="flex items-center gap-1.5 md:gap-3 mt-2 md:mt-4 bg-black/60 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-white/10">
                    <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                   <span className="text-red-500 font-mono font-bold text-xl tracking-widest">68:12</span>
+                   <span className="text-red-500 font-mono font-bold text-xs md:text-xl tracking-widest">68:12</span>
                  </div>
                </div>
 
                {/* LIV Right */}
-               <div className="flex flex-col items-center gap-4 md:gap-6">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-20 h-20 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(200,16,46,0.4)]" alt="LIV" />
-                 <div className="flex flex-col items-center gap-1 bg-black/40 backdrop-blur-sm px-6 py-2 rounded-xl border border-white/5">
-                    <span className="text-[10px] font-black tracking-widest text-[#C8102E] uppercase">xG Danger</span>
-                    <span className="text-2xl font-mono font-black text-white drop-shadow-md">2.4</span>
+               <div className="flex flex-col items-center gap-2 md:gap-6 shrink-0">
+                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-16 h-16 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(200,16,46,0.4)]" alt="LIV" />
+                 <div className="flex flex-col items-center gap-0.5 md:gap-1 bg-black/40 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-2 rounded-lg md:rounded-xl border border-white/5">
+                    <span className="text-[8px] md:text-[10px] font-black tracking-widest text-[#C8102E] uppercase">xG Danger</span>
+                    <span className="text-sm md:text-2xl font-mono font-black text-white drop-shadow-md">2.4</span>
                  </div>
                </div>
              </div>
