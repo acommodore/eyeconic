@@ -139,12 +139,6 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-const activeStands = [
-  { id: 1, title: "VAR Robbery! Let's talk about it.", host: "Gooner4Life", listeners: "4.2K", tag: "Hot Debate" },
-  { id: 2, title: "Midfield Masterclass from Macca", host: "TacticoGenius", listeners: "1.8K", tag: "Tactical" },
-  { id: 3, title: "City's finishing was poor today", host: "CityBlueMoon", listeners: "850", tag: "Post-match" },
-];
-
 export default function MatchDetailsPage() {
   const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('live');
   const [activeTab, setActiveTab] = useState('OVERVIEW');
@@ -295,6 +289,28 @@ export default function MatchDetailsPage() {
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Man City</h2>
             </div>
           </div>
+
+          {/* Join Stands Action (Hidden during live match) */}
+          {matchState !== 'live' && (
+            <div className="mt-8 md:mt-12 w-full max-w-md mx-auto">
+               <Link href="/stands/2" className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
+                 <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-[#00E5FF]/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
+                    <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 rounded-full bg-[#00E5FF] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+                          <Mic className="w-5 h-5 text-black" fill="currentColor" />
+                       </div>
+                       <div className="flex flex-col justify-center text-left">
+                          <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN THE DISCUSSION</h2>
+                          <p className="text-[10px] text-[#00E5FF] font-medium tracking-wide">12.4K active in the stands</p>
+                       </div>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-1">
+                       <ChevronRight className="w-4 h-4 text-[#00E5FF]" />
+                    </div>
+                 </div>
+               </Link>
+            </div>
+          )}
         </div>
       </div>
 
@@ -321,24 +337,6 @@ export default function MatchDetailsPage() {
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (
         <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
-           {/* Join the Discussion */}
-           <Link href="/stands/2" className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
-             <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-[#00E5FF]/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
-                <div className="flex items-center gap-4">
-                   <div className="w-10 h-10 rounded-full bg-[#00E5FF] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-                      <Mic className="w-5 h-5 text-black" fill="currentColor" />
-                   </div>
-                   <div className="flex flex-col justify-center">
-                      <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN THE DISCUSSION</h2>
-                      <p className="text-[10px] text-[#00E5FF] font-medium tracking-wide">12.4K active in the stands</p>
-                   </div>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-1">
-                   <ChevronRight className="w-4 h-4 text-[#00E5FF]" />
-                </div>
-             </div>
-           </Link>
-
            {/* Crowdcast - Horizontal Segmented */}
            <section className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-4 shadow-xl">
               <div className="flex justify-between items-center mb-3 px-1">
@@ -395,7 +393,7 @@ export default function MatchDetailsPage() {
               </button>
             ))
           ) : (
-            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
+            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -409,7 +407,6 @@ export default function MatchDetailsPage() {
                 {tab === 'ROSTER' && <Users className="w-4 h-4" />}
                 {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
                 {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
-                {tab === 'STANDS' && <Mic className="w-4 h-4" />}
                 {tab}
               </button>
             ))
@@ -985,47 +982,6 @@ export default function MatchDetailsPage() {
         </motion.div>
       )}
 
-      {/* STANDS Content */}
-      {activeTab === 'STANDS' && (
-        <motion.div 
-          key="stands"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -15 }}
-          transition={{ duration: 0.3 }}
-          className="w-full max-w-3xl mx-auto space-y-4"
-        >
-          <div className="flex items-center justify-between mb-6">
-             <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">Live Match Stands</h2>
-             <button className="text-[10px] bg-[#00E5FF]/10 text-[#00E5FF] px-4 py-2 rounded-full font-bold uppercase tracking-widest border border-[#00E5FF]/20 hover:bg-[#00E5FF]/20 transition-colors">Start a Stand</button>
-          </div>
-
-          {activeStands.map(stand => (
-            <Link href={`/stands/${stand.id}`} key={stand.id} className="block relative group/post cursor-pointer">
-               <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF7F50]/0 via-white/5 to-[#4FC3F7]/0 rounded-2xl blur opacity-0 group-hover/post:opacity-100 transition duration-500"></div>
-               <div className="relative bg-[#0A0A0A] hover:bg-[#121212] border border-white/5 group-hover/post:border-white/10 rounded-2xl p-6 shadow-xl transition-all duration-300 flex items-center justify-between">
-                 <div className="flex flex-col gap-2">
-                   <div className="flex items-center gap-3">
-                     <span className="flex items-center gap-1.5 text-[9px] text-[#FF3B00] font-bold tracking-widest uppercase bg-[#FF3B00]/10 px-2 py-1 rounded-full border border-[#FF3B00]/20">
-                       <div className="w-1.5 h-1.5 rounded-full bg-[#FF3B00] animate-pulse" /> LIVE
-                     </span>
-                     <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{stand.tag}</span>
-                   </div>
-                   <h3 className="text-lg font-bold text-white mt-1 group-hover/post:text-[#00E5FF] transition-colors">{stand.title}</h3>
-                   <div className="text-xs text-gray-400 font-medium">Hosted by <span className="text-white font-bold">{stand.host}</span></div>
-                 </div>
-                 <div className="flex flex-col items-center gap-2">
-                   <div className="flex items-center gap-1.5 text-gray-300">
-                     <Users className="w-4 h-4" />
-                     <span className="text-sm font-bold font-mono">{stand.listeners}</span>
-                   </div>
-                   <span className="text-[9px] text-[#00E5FF] font-black tracking-widest uppercase opacity-0 group-hover/post:opacity-100 transition-opacity">Join</span>
-                 </div>
-               </div>
-            </Link>
-          ))}
-        </motion.div>
-      )}
       </AnimatePresence>
 
       {selectedPlayer && (
