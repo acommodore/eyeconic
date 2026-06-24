@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRight, Play, Mic, Activity, Globe, Shield, Calendar } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 const baseDates = [
@@ -201,6 +201,14 @@ const baseOverviewMatches = [
 export default function InsightsPage() {
   const [activeLeague, setActiveLeague] = useState('All Leagues');
   const [activeDate, setActiveDate] = useState("14");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Safely scroll to the right-most element on mount
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, []);
   
   // Use the date number to create a pseudo-random rotation of the arrays
   const offset = parseInt(activeDate) % 3;
@@ -222,9 +230,9 @@ export default function InsightsPage() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E5FF]/30 pb-24">
       {/* Date Selector */}
-      <section className="pt-8 px-6 overflow-x-auto hover-scrollbar pb-2 snap-x">
-        <div className="flex flex-row-reverse gap-4 min-w-max">
-          {[...baseDates].reverse().map((d, i) => {
+      <section ref={scrollRef} className="pt-8 px-6 overflow-x-auto hover-scrollbar pb-2 snap-x">
+        <div className="flex gap-4 min-w-max">
+          {baseDates.map((d, i) => {
             const isActive = d.date === activeDate;
             return (
               <button 
