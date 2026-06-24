@@ -99,7 +99,7 @@ export default function ActiveStandPage() {
 
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
-      ? "relative w-24 h-24 md:w-32 md:h-32 shrink-0 rounded-2xl" 
+      ? "relative w-full aspect-square xl:w-24 xl:h-24 md:w-32 md:h-32 shrink-0 rounded-xl xl:rounded-2xl" 
       : "relative h-full w-full min-h-0 rounded-xl";
 
     return (
@@ -217,7 +217,7 @@ export default function ActiveStandPage() {
       <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-[#050505] xl:p-8">
         
         {/* Info Section (Premium Header) */}
-        <div className="px-4 py-3 md:px-8 md:py-6 relative overflow-hidden bg-white/5 border-b xl:border border-white/10 xl:rounded-2xl flex flex-col gap-3 shrink-0 backdrop-blur-md z-20">
+        <div className="px-3 py-2 md:px-6 md:py-4 relative overflow-hidden bg-white/5 border-b xl:border border-white/10 xl:rounded-2xl flex flex-col gap-2 shrink-0 backdrop-blur-md z-20">
           {/* Subtle glowing orbs behind the header */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#00E5FF]/20 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FF3B00]/20 rounded-full blur-[80px] pointer-events-none" />
@@ -225,20 +225,13 @@ export default function ActiveStandPage() {
           <div className="flex items-center justify-between relative z-10">
             <div className="flex items-center gap-3">
               <BackButton containerClassName="p-2 hover:bg-white/10 rounded-full transition-colors group bg-black/40 border border-white/10 backdrop-blur" iconClassName="w-5 h-5 text-white" />
-              <div className="flex flex-col">
-                 <div className="flex items-center gap-2 mb-0.5">
-                   <div className="flex items-center gap-1.5 bg-[#00E5FF]/10 px-2 py-0.5 rounded border border-[#00E5FF]/30 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
-                     <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#00E5FF]"></span></span>
-                     <span className="text-[9px] font-black text-[#00E5FF] tracking-widest uppercase">Live Debate</span>
+              <div className="flex flex-col justify-center">
+                 <div className="flex items-center">
+                   <div className="flex -space-x-3">
+                     <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10" />
+                     <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0" />
                    </div>
                  </div>
-                 <h1 className="text-lg md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 tracking-wider flex items-center gap-2 drop-shadow-sm">
-                   ARS vs TOT
-                   <div className="flex -space-x-2 ml-1">
-                     <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg" />
-                     <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-5 h-5 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg" />
-                   </div>
-                 </h1>
               </div>
             </div>
             
@@ -265,25 +258,25 @@ export default function ActiveStandPage() {
         <div className="w-full flex flex-col xl:m-auto xl:max-w-6xl mt-4 xl:mt-auto">
           
           {isVideoPlaying ? (
-            <div className="w-full flex flex-col gap-3 md:gap-4">
+            <div className="w-full flex flex-row xl:flex-col gap-2 md:gap-4 px-2 xl:px-0">
               {/* The Video Area */}
-              <div className="w-full aspect-video bg-black relative overflow-hidden xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
+              <div className="flex-1 xl:w-full aspect-video bg-black relative overflow-hidden rounded-xl xl:rounded-2xl shadow-2xl border-b xl:border border-white/10 shrink-0 group">
                 <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 md:p-6 pointer-events-none">
-                  <h2 className="text-xl md:text-3xl font-black text-white drop-shadow-lg mb-2">Arteta's Post-Match Interview</h2>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-2 md:p-6 pointer-events-none">
+                  <h2 className="text-sm md:text-3xl font-black text-white drop-shadow-lg mb-1 md:mb-2 leading-tight">Arteta's Post-Match Interview</h2>
                   <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
                     <div className="h-full bg-[#00E5FF] w-1/3" />
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-16 h-16 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center">
-                    <MonitorPlay className="w-6 h-6 text-white" />
+                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur border border-white/20 flex items-center justify-center">
+                    <MonitorPlay className="w-4 h-4 md:w-6 md:h-6 text-white" />
                   </div>
                 </div>
               </div>
 
-              {/* The Speakers Area (Horizontal Row) */}
-              <div className="w-full flex overflow-x-auto gap-2 px-4 pb-2 xl:px-0 xl:pb-0 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {/* The Speakers Area (Horizontal/Vertical Scroll) */}
+              <div className="w-20 md:w-32 xl:w-full flex flex-col xl:flex-row overflow-y-auto xl:overflow-x-auto gap-2 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {renderSpeakers(true)}
               </div>
             </div>
@@ -368,18 +361,18 @@ export default function ActiveStandPage() {
         </div>
 
         {/* Live Chat Feed */}
-        <div className="flex-1 overflow-y-auto space-y-6 px-6 pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
+        <div className="flex-1 overflow-y-auto space-y-4 md:space-y-6 px-4 md:px-6 pb-4 md:pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
           {chatMessages.map((msg) => (
-            <div key={msg.id} className="flex gap-3 group">
-              <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-1 mt-0.5 transition-transform duration-300 group-hover:scale-110`}>
+            <div key={msg.id} className="flex gap-2 md:gap-3 group">
+              <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-0.5 md:p-1 mt-0.5 transition-transform duration-300 group-hover:scale-110`}>
                 <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
               </div>
-              <div className={`${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30 shadow-[0_4px_20px_rgba(0,200,83,0.1)]' : 'bg-white/5 border-white/10 hover:bg-white/10'} p-3 rounded-2xl rounded-tl-none border backdrop-blur-sm transition-colors flex-1`}>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className={`font-black ${msg.color} text-xs tracking-wider drop-shadow-sm`}>{msg.name}</span>
-                  <span className={`text-[9px] ${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-gray-500'} font-bold`}>{msg.time}</span>
+              <div className={`${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30 shadow-[0_4px_20px_rgba(0,200,83,0.1)]' : 'bg-white/5 border-white/10 hover:bg-white/10'} p-2 md:p-3 rounded-2xl rounded-tl-none border backdrop-blur-sm transition-colors flex-1`}>
+                <div className="flex items-center gap-2 mb-0.5 md:mb-1">
+                  <span className={`font-black ${msg.color} text-[10px] md:text-xs tracking-wider drop-shadow-sm`}>{msg.name}</span>
+                  <span className={`text-[8px] md:text-[9px] ${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-gray-500'} font-bold`}>{msg.time}</span>
                 </div>
-                <p className={`text-sm ${msg.isSpeaker ? 'text-white' : 'text-gray-300'} leading-relaxed font-medium`}>
+                <p className={`text-xs md:text-sm ${msg.isSpeaker ? 'text-white' : 'text-gray-300'} leading-snug md:leading-relaxed font-medium`}>
                   {msg.text}
                 </p>
               </div>
