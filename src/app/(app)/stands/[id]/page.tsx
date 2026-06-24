@@ -290,7 +290,7 @@ export default function ActiveStandPage() {
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
-      <div className="w-full xl:w-[480px] flex flex-col h-[40vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
+      <div className="w-full xl:w-[480px] flex flex-col h-[45vh] md:h-[50vh] xl:h-full border-t xl:border-t-0 xl:border-l border-white/10 bg-[#050505] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.5)] shrink-0">
         
 
 
@@ -315,20 +315,20 @@ export default function ActiveStandPage() {
         </div>
 
         {/* Action Bar */}
-        <div className="p-2 md:p-4 border-t border-white/10 bg-[#0A0A0A] space-y-2 md:space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div className="p-1.5 md:p-4 border-t border-white/10 bg-[#0A0A0A] space-y-1.5 md:space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
           
           {/* Reaction Buttons */}
           <div className="flex gap-3">
             <button 
               onClick={() => spawnEmoji('🤡')}
-              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1.5 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
+              className="flex-1 flex flex-col items-center justify-center gap-0 md:gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
             >
               <span className="text-xl md:text-2xl drop-shadow-md">🤡</span>
               <span className="text-[8px] md:text-[9px] font-black text-gray-400 tracking-widest uppercase">Waffling</span>
             </button>
             <button 
               onClick={() => spawnEmoji('🍳')}
-              className="flex-1 flex flex-col items-center justify-center gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1.5 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
+              className="flex-1 flex flex-col items-center justify-center gap-0 md:gap-1 bg-[#1A1A1A] border border-white/5 rounded-xl py-1 md:py-3 hover:bg-white/10 hover:-translate-y-1 active:scale-95 transition-all shadow-md"
             >
               <span className="text-xl md:text-2xl drop-shadow-md">🍳</span>
               <span className="text-[8px] md:text-[9px] font-black text-gray-400 tracking-widest uppercase">Cooking</span>
@@ -336,7 +336,7 @@ export default function ActiveStandPage() {
             <button 
               onClick={() => setIsMicPending(true)}
               disabled={isMicPending}
-              className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-1.5 md:py-3 hover:scale-[1.02] active:scale-95 transition-all font-black cursor-pointer ${
+              className={`flex-[2] flex flex-col items-center justify-center gap-0 md:gap-1 rounded-xl py-1 md:py-3 hover:scale-[1.02] active:scale-95 transition-all font-black cursor-pointer ${
                 isMicPending 
                   ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-gray-400 border border-white/10' 
                   : 'bg-gradient-to-br from-[#FF7F50] to-[#FF3B00] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)]'
@@ -350,7 +350,7 @@ export default function ActiveStandPage() {
           {/* Chat Input Form */}
           <form 
             onSubmit={handleSendMessage}
-            className="bg-[#121212] rounded-full p-1.5 border border-white/10 flex items-center focus-within:border-[#00E5FF] transition-all shadow-inner relative z-20"
+            className="bg-[#121212] rounded-full p-1 border border-white/10 flex items-center focus-within:border-[#00E5FF] transition-all shadow-inner relative z-20"
           >
             <div className="w-8 h-8 rounded-full bg-gray-800 ml-1 overflow-hidden border border-white/10 shrink-0">
                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
