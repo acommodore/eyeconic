@@ -145,7 +145,7 @@ export default function ActiveStandPage() {
         </div>
 
         {/* The Stream Player (Moved below Info Section) */}
-        <div className="w-full aspect-[4/3] md:aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:mx-8 xl:mt-6 xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
+        <div className="w-full aspect-video relative bg-black overflow-hidden flex flex-col xl:rounded-2xl shadow-2xl xl:mx-8 xl:mt-6 xl:w-auto xl:aspect-video border-b xl:border border-white/10 shrink-0">
           {/* Dynamic Background */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -157,7 +157,7 @@ export default function ActiveStandPage() {
           </div>
 
           {/* Speakers Grid inside Player */}
-          <div className="relative z-10 flex-1 grid grid-cols-3 grid-rows-2 gap-1 md:gap-4 p-2 md:p-6 h-full w-full">
+          <div className="relative z-10 flex-1 grid grid-cols-3 grid-rows-2 gap-1 md:gap-4 p-1.5 md:p-6 h-full w-full">
             
             {/* Speaker 1: Active Talking */}
             <div className={`relative h-full w-full min-h-0 rounded-xl overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-white/10' : 'border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.3)]'} group cursor-pointer transition-all`} onClick={() => toggleMute('GOONER4LIFE')}>
@@ -166,16 +166,16 @@ export default function ActiveStandPage() {
               {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[#00E5FF]/40 rounded-xl animate-pulse pointer-events-none" />}
               
               {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00E5FF]/80 backdrop-blur'} flex items-center justify-center`}>
-                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
+              <div className="absolute top-1 right-1 md:top-3 md:right-3">
+                <div className={`w-4 h-4 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00E5FF]/80 backdrop-blur'} flex items-center justify-center`}>
+                  {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-2.5 h-2.5 text-white" /> : <Mic className="w-2.5 h-2.5 text-black" />}
                 </div>
               </div>
               
               {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <div className={`w-2 h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF] animate-pulse'} shadow-lg`} />
-                 <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-white'} drop-shadow-md truncate`}>GOONER4LIFE</span>
+              <div className="absolute bottom-1 left-1 md:bottom-3 md:left-3 flex items-center gap-1">
+                 <div className={`w-1.5 h-1.5 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[#00E5FF] animate-pulse'} shadow-lg`} />
+                 <span className={`text-[8px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-white'} drop-shadow-md truncate`}>GOONER4LIFE</span>
               </div>
             </div>
 
@@ -185,15 +185,15 @@ export default function ActiveStandPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
               
               {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
-                  <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-400'}`} />
+              <div className="absolute top-1 right-1 md:top-3 md:right-3">
+                <div className={`w-4 h-4 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
+                  <MicOff className={`w-2.5 h-2.5 ${mutedUsers['BLUEMASON'] ? 'text-white' : 'text-gray-400'}`} />
                 </div>
               </div>
               
               {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>BLUEMASON</span>
+              <div className="absolute bottom-1 left-1 md:bottom-3 md:left-3 flex items-center gap-1">
+                 <span className={`text-[8px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>BLUEMASON</span>
               </div>
             </div>
 
@@ -203,15 +203,15 @@ export default function ActiveStandPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
               
               {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
-                  <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-400'}`} />
+              <div className="absolute top-1 right-1 md:top-3 md:right-3">
+                <div className={`w-4 h-4 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur'} flex items-center justify-center`}>
+                  <MicOff className={`w-2.5 h-2.5 ${mutedUsers['SPURSY_10'] ? 'text-white' : 'text-gray-400'}`} />
                 </div>
               </div>
               
               {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>SPURSY_10</span>
+              <div className="absolute bottom-1 left-1 md:bottom-3 md:left-3 flex items-center gap-1">
+                 <span className={`text-[8px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>SPURSY_10</span>
               </div>
             </div>
 
@@ -226,15 +226,15 @@ export default function ActiveStandPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
               
               {/* Mic Status */}
-              <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-                <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00C853]/80 backdrop-blur'} flex items-center justify-center`}>
-                  {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-white" /> : <Mic className="w-3 h-3 text-black" />}
+              <div className="absolute top-1 right-1 md:top-3 md:right-3">
+                <div className={`w-4 h-4 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#00C853]/80 backdrop-blur'} flex items-center justify-center`}>
+                  {mutedUsers['GUNNERVIC'] ? <MicOff className="w-2.5 h-2.5 text-white" /> : <Mic className="w-2.5 h-2.5 text-black" />}
                 </div>
               </div>
               
               {/* Name */}
-              <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-                 <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>GUNNERVIC</span>
+              <div className="absolute bottom-1 left-1 md:bottom-3 md:left-3 flex items-center gap-1">
+                 <span className={`text-[8px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-gray-400' : 'text-white'} drop-shadow-md truncate`}>GUNNERVIC</span>
               </div>
             </div>
 
