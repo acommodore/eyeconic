@@ -111,7 +111,7 @@ export default function ActiveStandPage() {
       <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-[#050505]">
         
         {/* Info Section (Premium Header) */}
-        <div className="px-4 py-3 md:px-8 md:py-6 xl:mx-8 xl:mt-6 relative overflow-hidden xl:bg-white/5 xl:border xl:border-white/10 xl:rounded-2xl border-b border-white/5 flex flex-col gap-3 shrink-0 backdrop-blur-md">
+        <div className="px-4 py-3 md:px-8 md:py-6 xl:mx-8 xl:mt-6 relative overflow-hidden bg-white/5 border-b xl:border border-white/10 xl:rounded-2xl flex flex-col gap-3 shrink-0 backdrop-blur-md">
           {/* Subtle glowing orbs behind the header */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#00E5FF]/20 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FF3B00]/20 rounded-full blur-[80px] pointer-events-none" />
@@ -256,8 +256,86 @@ export default function ActiveStandPage() {
           </div>
         </div>
 
-        {/* Space filler on desktop, mobile doesn't need it because chat is flex-1 */}
-        <div className="hidden xl:block flex-1 shrink-0"></div>
+        {/* Desktop Only: Stand Details / Stats (Fills the empty space below player) */}
+        <div className="hidden xl:flex xl:mx-8 xl:my-6 gap-6 flex-1 shrink-0 pb-6">
+          
+          {/* Live Poll Card */}
+          <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-lg">
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00E5FF]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#00E5FF]/20 transition-all duration-500" />
+            <h3 className="text-lg font-black text-white mb-2 flex items-center gap-2">
+              <Zap className="w-5 h-5 text-[#00E5FF]" />
+              Live Poll
+            </h3>
+            <p className="text-gray-400 text-sm font-medium mb-6">Was it a clear penalty on Saka?</p>
+            
+            <div className="space-y-5 mt-auto">
+              <div>
+                <div className="flex justify-between text-xs font-bold mb-2">
+                  <span className="text-white">Yes, clear foul</span>
+                  <span className="text-[#00E5FF]">78%</span>
+                </div>
+                <div className="h-2.5 w-full bg-black/40 border border-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-[#00E5FF]/80 to-[#00E5FF] w-[78%] rounded-full shadow-[0_0_15px_rgba(0,229,255,0.6)]" />
+                </div>
+              </div>
+              
+              <div>
+                <div className="flex justify-between text-xs font-bold mb-2">
+                  <span className="text-white">No, he dove</span>
+                  <span className="text-[#FF3B00]">22%</span>
+                </div>
+                <div className="h-2.5 w-full bg-black/40 border border-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-[#FF3B00]/80 to-[#FF3B00] w-[22%] rounded-full shadow-[0_0_15px_rgba(255,59,0,0.6)]" />
+                </div>
+              </div>
+            </div>
+            <button className="w-full mt-6 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-black text-white tracking-wider uppercase transition-all active:scale-95 shadow-sm">
+              Cast Vote
+            </button>
+          </div>
+
+          {/* Leaderboard Card */}
+          <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-lg">
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#FF3B00]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#FF3B00]/20 transition-all duration-500" />
+            <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2">
+              <Flame className="w-5 h-5 text-[#FF3B00]" />
+              Reaction Leaders
+            </h3>
+            
+            <div className="space-y-4 flex-1">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group/item">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-[#FF3B00] p-0.5 shadow-[0_0_15px_rgba(255,59,0,0.3)] group-hover/item:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover rounded-full" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-black text-white">GOONER4LIFE</span>
+                    <span className="text-[10px] text-[#00E5FF] font-bold uppercase tracking-wider">Top Speaker</span>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-xs font-black text-white flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-lg border border-white/10">1.2k <span className="text-base drop-shadow-md">🔥</span></span>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group/item">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gray-700 p-0.5 group-hover/item:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className="w-full h-full object-cover rounded-full" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-black text-gray-300">BLUEMASON</span>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Waffler</span>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-xs font-black text-white flex items-center gap-1.5 bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/5">840 <span className="text-base drop-shadow-md">🤡</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
