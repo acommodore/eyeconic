@@ -310,9 +310,6 @@ export default function ActiveStandPage() {
           
         </div>
         
-        {/* End of centered stage container */}
-        </div>
-        
       </div>
 
       {/* Right Pane: Interaction Zone & Chat */}
