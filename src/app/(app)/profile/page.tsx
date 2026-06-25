@@ -19,6 +19,9 @@ export default function ProfilePage() {
             <span className="text-[10px] text-teal font-mono tracking-widest uppercase">ID: 8492-AX</span>
           </div>
         </div>
+        <Link href="/settings" className="text-muted-foreground hover:text-foreground transition-all duration-300 p-3 bg-black/5 dark:bg-white/5 rounded-full border border-border hover:bg-black/10 dark:hover:bg-white/10 hover:rotate-90 inline-block">
+          <Settings className="w-5 h-5" />
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

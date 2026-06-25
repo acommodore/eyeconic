@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Zap, HeartPulse, Swords, ArrowRight, Play } from "lucide-react";
 
 export function OnboardingModal() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(0);
 
@@ -17,6 +19,7 @@ export function OnboardingModal() {
   const handleClose = () => {
     localStorage.setItem("eyeconic_has_seen_onboarding", "true");
     setIsOpen(false);
+    router.push('/discover');
   };
 
   const handleNext = () => {
