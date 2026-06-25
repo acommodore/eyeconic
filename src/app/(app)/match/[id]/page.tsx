@@ -243,7 +243,7 @@ export default function MatchDetailsPage() {
         
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
           <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-teal uppercase mb-8">
-            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : matchState === 'live' ? 'LIVE NOW' : 'Full Time'}
+            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : matchState === 'live' ? 'LIVE PULSE DETONATING' : 'POST-MATCH FALLOUT'}
           </div>
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
@@ -327,7 +327,7 @@ export default function MatchDetailsPage() {
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
             }`}
           >
-            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE (PULSE)' : 'POST-MATCH'}
+            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE (VOLATILE)' : 'THE FALLOUT (FT)'}
           </button>
         ))}
       </div>
@@ -681,6 +681,92 @@ export default function MatchDetailsPage() {
                  <Share className="w-5 h-5 text-gray-400 group-hover:text-white" />
               </button>
             </div>
+          </section>
+
+          {/* AGENDA SETTLEMENT ENGINE & FINAL DAMAGE REPORT */}
+          <section className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
+             {/* Final Damage Report / Narrative Curve */}
+             <div className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 blur-[80px] rounded-full pointer-events-none" />
+                
+                <div>
+                   <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
+                     <Activity className="w-3.5 h-3.5" /> Match Narrative Curve
+                   </h3>
+                   <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-8">
+                     Final Damage Report
+                   </h2>
+                </div>
+                
+                {/* Static Narrative Curve Mockup */}
+                <div className="w-full h-32 md:h-48 relative border-b border-l border-white/10 flex items-end justify-between px-2 pb-1 mb-6">
+                   <span className="absolute -left-6 top-0 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Euphoria</span>
+                   <span className="absolute -left-6 bottom-4 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Despair</span>
+                   
+                   {/* Data Points (Bars) */}
+                   {[
+                     { h: '40%', c: 'bg-teal/20', t: '15\'' },
+                     { h: '60%', c: 'bg-teal/40', t: '30\'' },
+                     { h: '30%', c: 'bg-coral/40', t: 'HT' },
+                     { h: '20%', c: 'bg-coral/80', t: '60\'' },
+                     { h: '15%', c: 'bg-[#D32F2F]', t: '75\'' },
+                     { h: '85%', c: 'bg-teal/80', t: 'FT' },
+                   ].map((bar, i) => (
+                     <div key={i} className="flex flex-col items-center gap-2 w-8 md:w-12 group">
+                        <div className={`w-full ${bar.c} rounded-t-sm transition-all group-hover:brightness-150`} style={{ height: bar.h }} />
+                        <span className="text-[8px] md:text-[10px] text-gray-500 font-bold">{bar.t}</span>
+                     </div>
+                   ))}
+
+                   {/* Connecting Line Mock */}
+                   <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                     <polyline points="5,60 22,40 40,70 58,80 75,85 92,15" fill="none" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" strokeDasharray="4 2" />
+                   </svg>
+                </div>
+
+                {/* Sustained Sentiment Crash */}
+                <div className="bg-[#121212] border border-[#D32F2F]/20 rounded-2xl p-4 flex items-center justify-between shadow-inner">
+                   <div className="flex flex-col">
+                      <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Sustained Sentiment Crash</span>
+                      <span className="text-sm font-black text-white">Man City Post-Match Velocity</span>
+                   </div>
+                   <div className="bg-[#D32F2F]/20 text-[#FF3B00] px-3 py-1.5 rounded-lg text-sm font-black animate-pulse flex items-center gap-1">
+                      <Flame className="w-3.5 h-3.5" /> -18% Spiking
+                   </div>
+                </div>
+             </div>
+
+             {/* Agenda Settlement Checklist */}
+             <div className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-6 lg:p-10 shadow-2xl relative">
+                <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
+                   <Target className="w-3.5 h-3.5" /> Autopsy
+                </h3>
+                <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-8">
+                   Agenda Settlements
+                </h2>
+
+                <div className="flex flex-col gap-4">
+                   {[
+                     { state: 'debunked', text: 'Man City Midfield Capitulation', sub: 'Rodri completed 92% of passes under pressure.' },
+                     { state: 'proven', text: 'Liverpool Tactical Masterclass', sub: 'Diaz introduction directly broke the high press.' },
+                     { state: 'proven', text: 'Haaland Big Game Disappearance', sub: '0 shots on target, 12 touches in 90 mins.' },
+                     { state: 'debunked', text: 'Van Dijk is Washed', sub: 'Won 100% of aerial duels against Haaland.' }
+                   ].map((agenda, i) => (
+                      <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-teal/5 border-teal/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
+                         <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-teal/20 text-teal' : 'bg-coral/20 text-coral'}`}>
+                            {agenda.state === 'proven' ? '✓' : '✗'}
+                         </div>
+                         <div className="flex flex-col">
+                            <span className="text-[10px] font-black tracking-widest uppercase mb-1">
+                               {agenda.state === 'proven' ? <span className="text-teal">AGENDA PROVEN</span> : <span className="text-coral">AGENDA DEBUNKED</span>}
+                            </span>
+                            <span className="text-sm font-bold text-white mb-1">{agenda.text}</span>
+                            <span className="text-[10px] text-gray-400 font-medium leading-relaxed">{agenda.sub}</span>
+                         </div>
+                      </div>
+                   ))}
+                </div>
+             </div>
           </section>
 
           {/* Hot Takes */}
