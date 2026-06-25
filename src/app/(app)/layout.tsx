@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Activity, Compass, User, Menu, ChevronLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { OnboardingModal } from "@/components/ui/OnboardingModal";
 
 export default function AppLayout({
   children,
@@ -163,6 +164,8 @@ export default function AppLayout({
           );
         })}
       </nav>
+
+      <OnboardingModal />
     </div>
   );
 }
