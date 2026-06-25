@@ -257,6 +257,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
 
 export default function DiscoverPage() {
   const [activeFilter, setActiveFilter] = useState("Chaos"); // Chaos, Tactical, Rivalries, Surprise Me, Bookmarks
+  const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
 
   const toggleMatch = (id: number) => {
@@ -300,19 +301,37 @@ export default function DiscoverPage() {
     { name: "Bookmarks", icon: Bookmark },
   ];
 
-  // Group all matches (except hero) by League
-  // We'll tag them with their match status so we know how to render the time/score
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const groupedMatches: Record<string, any[]> = [
+  // Tag matches with status
+  const allCurrentMatches = [
     ...remainingLiveMatches.map(m => ({ ...m, status: 'live' })),
     ...upcomingTableData.map(m => ({ ...m, status: 'upcoming' })),
     ...finishedTableData.map(m => ({ ...m, status: 'finished' }))
-  ].reduce((acc, match) => {
+  ];
+
+  // Group by League
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const groupedMatches: Record<string, any[]> = allCurrentMatches.reduce((acc, match) => {
     const league = match.league || "Other Competitions";
     if (!acc[league]) acc[league] = [];
     acc[league].push(match);
     return acc;
   }, {} as Record<string, any[]>);
+
+  // Group by Watchability (Status > Volatility)
+  const watchabilityMatches = [
+    {
+      groupName: "Live Matches",
+      matches: allCurrentMatches.filter(m => m.status === 'live').sort((a, b) => b.volatility - a.volatility)
+    },
+    {
+      groupName: "Upcoming Matches",
+      matches: allCurrentMatches.filter(m => m.status === 'upcoming').sort((a, b) => b.volatility - a.volatility)
+    },
+    {
+      groupName: "Finished Matches",
+      matches: allCurrentMatches.filter(m => m.status === 'finished').sort((a, b) => b.volatility - a.volatility)
+    }
+  ].filter(group => group.matches.length > 0);
 
   return (
     <main className="min-h-screen bg-[#050505] text-white font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
@@ -464,38 +483,89 @@ export default function DiscoverPage() {
         </section>
         )}
 
-        {/* 2. TERMINAL FEED GROUPED BY LEAGUE */}
+        {/* 2. TERMINAL FEED SORTING CONTROLS */}
+        <div className="flex items-center justify-between mb-8">
+           <h2 className="text-xl font-black uppercase tracking-widest text-white drop-shadow-md hidden md:block">Terminal Feed</h2>
+           
+           <div className="flex bg-[#0A0A0A] rounded-full p-1 border border-white/10 w-full md:w-auto">
+             <button 
+               onClick={() => setSortMode('watchability')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-gray-500 hover:text-white'}`}>
+                <Activity className="w-3.5 h-3.5" />
+                WATCHABILITY
+             </button>
+             <button 
+               onClick={() => setSortMode('league')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-gray-500 hover:text-white'}`}>
+                <Swords className="w-3.5 h-3.5" />
+                LEAGUE
+             </button>
+           </div>
+        </div>
+
+        {/* 3. TERMINAL FEED LIST */}
         <section className="space-y-12">
-          {Object.entries(groupedMatches).map(([league, matches]) => (
-            <div key={league} className="flex flex-col">
-               {/* League Header */}
-               <div className="flex items-center gap-4 mb-4 pl-2">
-                 <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
-                 <h2 className="text-lg font-black uppercase tracking-widest text-white drop-shadow-md">{league}</h2>
-                 <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
-               </div>
+          {sortMode === 'league' ? (
+             Object.entries(groupedMatches).map(([league, matches]) => (
+               <div key={league} className="flex flex-col">
+                  {/* League Header */}
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-white drop-shadow-md">{league}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
 
-               {/* League Container */}
-               <div className="bg-[#0A0A0A]/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
-                 <div className="flex flex-col">
-                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                   {matches.map((match: any, index: number) => (
-                     <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
-                        <TerminalRow 
-                          match={match} 
-                          isExpanded={expandedMatches.has(match.id)} 
-                          onToggle={toggleMatch} 
-                          isLive={match.status === 'live'}
-                          isFinished={match.status === 'finished'} 
-                        />
-                     </div>
-                   ))}
-                 </div>
+                  {/* League Container */}
+                  <div className="bg-[#0A0A0A]/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
+                           <TerminalRow 
+                             match={match} 
+                             isExpanded={expandedMatches.has(match.id)} 
+                             onToggle={toggleMatch} 
+                             isLive={match.status === 'live'}
+                             isFinished={match.status === 'finished'} 
+                           />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                </div>
-            </div>
-          ))}
+             ))
+          ) : (
+             watchabilityMatches.map((group) => (
+               <div key={group.groupName} className="flex flex-col">
+                  {/* Group Header */}
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-white drop-shadow-md">{group.groupName}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
 
-          {Object.keys(groupedMatches).length === 0 && (
+                  {/* Group Container */}
+                  <div className="bg-[#0A0A0A]/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {group.matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-white/5" : ""}>
+                           <TerminalRow 
+                             match={match} 
+                             isExpanded={expandedMatches.has(match.id)} 
+                             onToggle={toggleMatch} 
+                             isLive={match.status === 'live'}
+                             isFinished={match.status === 'finished'} 
+                           />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+             ))
+          )}
+
+          {allCurrentMatches.length === 0 && (
             <div className="p-16 text-center bg-[#0A0A0A]/50 rounded-2xl border border-white/5 backdrop-blur-md">
               <span className="text-gray-500 text-sm font-mono tracking-widest uppercase">No matches found matching this criteria.</span>
             </div>

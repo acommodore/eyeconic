@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight, Activity } from "lucide-react";
 
 // --- Data Models ---
 const matchEvents = [
@@ -179,6 +179,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, ha
 
 
 export default function LivePulseView({ isMatchFinished = false }: { isMatchFinished?: boolean }) {
+  const [activeMobileView, setActiveMobileView] = useState<'feed' | 'pulse'>('feed');
   const [activeMinute, setActiveMinute] = useState(78);
   const [activeFilter, setActiveFilter] = useState('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -379,11 +380,46 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
   return (
     <div className="w-full space-y-10">
 
+      {/* Mobile Sticky Toggles */}
+      {!isMatchFinished && activeMobileView === 'feed' && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] w-full max-w-[90%] md:max-w-md xl:hidden">
+           <button 
+             onClick={() => { setActiveMobileView('pulse'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
+             className="w-full bg-[#121212]/90 backdrop-blur-xl border border-teal/30 shadow-[0_0_30px_rgba(0,229,255,0.2)] rounded-full py-4 px-6 flex items-center justify-between group"
+           >
+              <div className="flex items-center gap-3">
+                 <div className="w-8 h-8 rounded-full bg-teal/20 flex items-center justify-center border border-teal/50">
+                    <Activity className="w-4 h-4 text-teal" />
+                 </div>
+                 <span className="text-xs font-black tracking-widest text-white uppercase">Player Pulse Live</span>
+              </div>
+              <ChevronDown className="w-5 h-5 text-teal animate-bounce" />
+           </button>
+        </div>
+      )}
+
+      {!isMatchFinished && activeMobileView === 'pulse' && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[90] w-full max-w-[90%] md:max-w-md xl:hidden mt-4">
+           <button 
+             onClick={() => { setActiveMobileView('feed'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
+             className="w-full bg-[#121212]/90 backdrop-blur-xl border border-white/10 shadow-2xl rounded-full py-4 px-6 flex items-center justify-between group"
+           >
+              <ChevronDown className="w-5 h-5 text-gray-400 rotate-180 animate-bounce" />
+              <div className="flex items-center gap-3">
+                 <span className="text-xs font-black tracking-widest text-white uppercase">Back to Action Feed</span>
+                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                    <Activity className="w-4 h-4 text-gray-400" />
+                 </div>
+              </div>
+           </button>
+        </div>
+      )}
+
       {/* 3. SPLIT LAYOUT */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 overflow-hidden">
+      <div className={`grid grid-cols-1 xl:grid-cols-12 gap-8 overflow-hidden ${!isMatchFinished && activeMobileView === 'feed' ? 'pb-24 xl:pb-0' : ''}`}>
         
         {/* LEFT PANE: Match Pulse Timeline */}
-        <div className={`flex flex-col gap-8 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
+        <div className={`flex flex-col gap-8 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'} ${!isMatchFinished && activeMobileView === 'pulse' ? 'hidden xl:flex' : 'flex'}`}>
 
           {/* Action Feed */}
           <section className="bg-[#0A0A0A] rounded-[2rem] border border-white/5 p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
@@ -510,7 +546,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
 
         {/* RIGHT PANE: Deep Stats & Impact (col-span-5) */}
         {!isMatchFinished && (
-        <div className="xl:col-span-5 space-y-8">
+        <div className={`xl:col-span-5 space-y-8 pt-16 xl:pt-0 ${activeMobileView === 'feed' ? 'hidden xl:block' : 'block'}`}>
            
            {/* Player Impact - TACTICAL VIEW */}
            <section className="bg-[#0A0A0A] rounded-[2rem] border border-white/5 p-6 shadow-xl relative overflow-visible">
