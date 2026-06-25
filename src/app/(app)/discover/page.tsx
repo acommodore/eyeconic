@@ -1,608 +1,487 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Eye, Bell, Zap, GitBranch, Bookmark, Mic, Star, Swords, Dices, ChevronRight, Activity, Calendar } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from 'react';
+import Link from 'next/link';
+import { Flame, Zap, Brain, Crosshair, ArrowRight, Star, ChevronRight, Activity, Clock, Calendar as CalendarIcon, Bookmark, Shuffle, ShieldAlert, Swords } from 'lucide-react';
 
-const CATEGORIES = [
-  { id: "ALL", label: "ALL MATCHES", icon: null, color: "text-white" },
-  { id: "LIVE", label: "LIVE NOW", icon: null, color: "text-[#00E5FF]" },
-  { id: "CHAOS", label: "CHAOS", icon: Zap, color: "text-[#FF7F50]" },
-  { id: "TACTICAL", label: "TACTICAL", icon: GitBranch, color: "text-[#00E5FF]" },
-  { id: "RIVALRIES", label: "RIVALRIES", icon: Swords, color: "text-[#D32F2F]" },
-  { id: "SURPRISE", label: "SURPRISE ME", icon: Dices, color: "text-gray-400" },
-  { id: "BOOKMARKS", label: "BOOKMARKS", icon: Bookmark, color: "text-gray-300" },
-];
+// --- MOCK DATA ---
 
-const CALENDAR_DAYS = [
-  { day: "MON", date: "22", isToday: false },
-  { day: "TUE", date: "23", isToday: false },
-  { day: "WED", date: "24", isToday: false },
-  { day: "TODAY", date: "25", isToday: true },
-  { day: "FRI", date: "26", isToday: false },
-  { day: "SAT", date: "27", isToday: false },
-  { day: "SUN", date: "28", isToday: false },
-];
-
-const baseInsightsFeed = [
+const allLiveMatches = [
   {
     id: 1,
-    title: "ØDEGAARD: SENTIMENT DIVERGENCE",
-    desc: "Neutral fans rated his creativity at 8.2, while Arsenal fans' frustration led to 5.2.",
-    points: [6.2, 8.2],
-    ratingText: "12.4K fan ratings"
+    team1: "Liverpool",
+    team2: "Man City",
+    score: "1 - 2",
+    time: "74'",
+    logo1: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+    logo2: "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+    pulseStatus: "Volatile",
+    pulseEmoji: "⚡",
+    pulseColor: "text-coral",
+    insight: "Liverpool fans have grown frustrated with the midfield after repeated turnovers.",
+    emotionalMvp: "De Bruyne",
+    polarizingPlayer: "Mac Allister",
+    fanMood: "Anxious",
+    fanMoodEmoji: "😬",
+    metrics: { chaos: 95, tactical: 80, rivalry: 90, surprise: 40 },
+    bookmarked: true
   },
   {
     id: 2,
-    title: "SAKA: 9.2 RATING ANOMALY",
-    desc: "Saka is currently rated 9.2, which is 40% HIGHER than his season average.",
-    points: [6.8, 9.2],
-    ratingText: "12.4K fan ratings"
+    team1: "Real Madrid",
+    team2: "Barcelona",
+    score: "2 - 2",
+    time: "82'",
+    logo1: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+    logo2: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+    pulseStatus: "Heating Up",
+    pulseEmoji: "🔥",
+    pulseColor: "text-coral",
+    insight: "Fans are split on Vinicius despite his assist.",
+    emotionalMvp: "Bellingham",
+    polarizingPlayer: "Vinicius Jr",
+    fanMood: "Electric",
+    fanMoodEmoji: "🤩",
+    metrics: { chaos: 85, tactical: 85, rivalry: 99, surprise: 30 },
+    bookmarked: true
   },
   {
     id: 3,
-    title: "ROMERO: PEAK 88",
-    desc: "A 3-minute spell of dominance...",
-    points: [8.8],
-    ratingText: "12.4K fan ratings"
+    team1: "Arsenal",
+    team2: "Bayern",
+    score: "0 - 0",
+    time: "45'",
+    logo1: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+    logo2: "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_München_logo_%282017%29.svg",
+    pulseStatus: "Tense",
+    pulseEmoji: "😬",
+    pulseColor: "text-blue-400",
+    insight: "Nervous energy dominates the Emirates.",
+    emotionalMvp: "Saliba",
+    polarizingPlayer: "Havertz",
+    fanMood: "Nervous",
+    fanMoodEmoji: "😰",
+    metrics: { chaos: 40, tactical: 95, rivalry: 70, surprise: 20 },
+    bookmarked: false
+  },
+  {
+    id: 7,
+    team1: "Aston Villa",
+    team2: "Ajax",
+    score: "3 - 0",
+    time: "60'",
+    logo1: "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    logo2: "https://upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam.svg",
+    pulseStatus: "Domination",
+    pulseEmoji: "🔥",
+    pulseColor: "text-green-400",
+    insight: "Villa Park is rocking. Complete surprise demolition.",
+    emotionalMvp: "Watkins",
+    polarizingPlayer: "Henderson",
+    fanMood: "Euphoric",
+    fanMoodEmoji: "🎉",
+    metrics: { chaos: 70, tactical: 60, rivalry: 40, surprise: 98 },
+    bookmarked: false
   }
 ];
 
-export default function DiscoverPage() {
-  const [activeTab, setActiveTab] = useState(CATEGORIES[0].id);
-  const [aiText, setAiText] = useState("");
-  const [showCalendar, setShowCalendar] = useState(false);
-  const fullText = "High defensive panic detected in MCI backline. Tension index spiking to 84%. Volatility expected.";
+const upcomingTableData = [
+  { id: 4, team1: "Arsenal", team2: "Everton", time: "14:00", mood: "Tactical Battle 🧠", hyped: true },
+  { id: 5, team1: "Barcelona", team2: "Atletico", time: "16:30", mood: "High Tension 😬", hyped: true },
+  { id: 6, team1: "Man United", team2: "Liverpool", time: "19:00", mood: "Chaos ⚡", hyped: true },
+  { id: 8, team1: "Chelsea", team2: "Newcastle", time: "20:00", mood: "Desperation 😰", hyped: false },
+  { id: 9, team1: "Juventus", team2: "Milan", time: "21:00", mood: "Strategic ♟️", hyped: false },
+];
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setAiText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) clearInterval(interval);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
+const finishedTableData = [
+  { id: 10, team1: "Dortmund", team2: "PSG", score: "1 - 1", mood: "Relief 😮‍💨", hyped: true },
+  { id: 11, team1: "Inter", team2: "Roma", score: "2 - 0", mood: "Clinical 🎯", hyped: false },
+];
+
+const upcomingPulses = [
+  { id: 4, match: "Arsenal vs Everton", mood: "Tactical Battle", emoji: "🧠" },
+  { id: 5, match: "Barcelona vs Atletico Madrid", mood: "High Tension", emoji: "😬" },
+  { id: 6, match: "Man United vs Liverpool", mood: "Chaos", emoji: "⚡" },
+];
+
+const tickerItems = [
+  "📈 ARS Fans: +15% Optimism (Saka sub)",
+  "📉 MUN Fans: -30% Patience (Ten Hag)",
+  "⚠️ RMA Fans: Tension Spiking (0-0 80')",
+  "🔥 LIV Fans: Roaring (+45% Momentum)",
+  "🧊 CHE Fans: Complete silence at Stamford Bridge",
+  "📈 JUV Fans: Tactical approval rising (+12%)",
+];
+
+const marketMovers = {
+  surging: [
+    { team: "Aston Villa", change: "+45%", reason: "Total Domination" },
+    { team: "Arsenal", change: "+15%", reason: "Attacking Sustained" },
+  ],
+  crashing: [
+    { team: "Man United", change: "-30%", reason: "Defensive Chaos" },
+    { team: "Chelsea", change: "-18%", reason: "Frustration Spiking" },
+  ]
+};
+
+export default function DiscoverPage() {
+  const [activeFilter, setActiveFilter] = useState("Chaos"); // Chaos, Tactical, Rivalries, Surprise Me, Bookmarks
+  const [activeTab, setActiveTab] = useState("Hyped"); // Hyped, All Matches
+
+  // Sorting logic for Live Matches based on Active Filter
+  const sortedLiveMatches = [...allLiveMatches].sort((a, b) => {
+    if (activeFilter === "Bookmarks") return (b.bookmarked ? 1 : 0) - (a.bookmarked ? 1 : 0);
+    if (activeFilter === "Chaos") return b.metrics.chaos - a.metrics.chaos;
+    if (activeFilter === "Tactical") return b.metrics.tactical - a.metrics.tactical;
+    if (activeFilter === "Rivalries") return b.metrics.rivalry - a.metrics.rivalry;
+    if (activeFilter === "Surprise Me") return b.metrics.surprise - a.metrics.surprise;
+    return 0;
+  });
+
+  const heroMatch = sortedLiveMatches[0];
+  const remainingLiveMatches = sortedLiveMatches.slice(1);
+
+  // Calendar Days
+  const days = [
+    { label: "Mon", date: "12" },
+    { label: "Tue", date: "13" },
+    { label: "Wed", date: "14", active: true },
+    { label: "Thu", date: "15" },
+    { label: "Fri", date: "16" },
+    { label: "Sat", date: "17" },
+    { label: "Sun", date: "18" },
+  ];
+
+  const filters = [
+    { name: "Chaos", icon: Zap },
+    { name: "Tactical", icon: Brain },
+    { name: "Rivalries", icon: Swords },
+    { name: "Surprise Me", icon: Shuffle },
+    { name: "Bookmarks", icon: Bookmark },
+  ];
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 bg-[#050505] min-h-screen text-white space-y-8">
+    <main className="min-h-screen bg-[#050505] text-white font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden">
       
-      {/* 1. TOP CONTROLS: CALENDAR & PILLS */}
-      <div className="flex flex-col xl:flex-row xl:items-center gap-4 pb-4">
-        
-        {/* Calendar Strip */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
-           <button 
-             onClick={() => setShowCalendar(true)}
-             className="flex flex-col items-center justify-center p-2 rounded-xl text-gray-500 hover:bg-white/5 transition-colors shrink-0 w-12"
-           >
-             <Calendar className="w-5 h-5" />
-           </button>
-           {CALENDAR_DAYS.map((d, i) => (
-             <button 
-                key={i} 
-                className={`flex flex-col items-center justify-center py-2 px-4 rounded-xl shrink-0 transition-colors ${d.isToday ? 'bg-white text-black font-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10'}`}
-             >
-                <span className={`text-[10px] font-black tracking-widest ${d.isToday ? 'text-gray-800' : 'text-gray-500'}`}>{d.day}</span>
-                <span className={`text-xl font-mono font-black ${d.isToday ? 'text-black' : 'text-white'}`}>{d.date}</span>
-             </button>
-           ))}
-           <div className="w-px h-10 bg-white/10 mx-2 hidden xl:block" />
-        </div>
-
-        {/* Pill Navigation */}
-        <div className="flex items-center gap-3 overflow-x-auto hover-scrollbar no-scrollbar flex-1 pb-2 xl:pb-0">
-          {CATEGORIES.map((cat) => {
-            const Icon = cat.icon;
-            const isActive = activeTab === cat.id;
-            
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-black tracking-widest uppercase whitespace-nowrap transition-all duration-300 ${
-                  isActive 
-                    ? "text-black scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]" 
-                    : `bg-white/5 border border-white/5 hover:bg-white/10 ${cat.color}`
-                }`}
-                style={isActive ? { backgroundColor: "#fff" } : {}}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTabGlow"
-                    className="absolute inset-0 bg-white rounded-full z-0"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10 flex items-center gap-1.5">
-                  {Icon && <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-black' : cat.color}`} />}
-                  {cat.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+      {/* 0. TERMINAL TICKER TAPE */}
+      <div className="sticky top-0 z-50 w-full h-8 bg-black/80 backdrop-blur-md border-b border-teal/30 flex items-center overflow-hidden">
+         <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+            {/* First sequence */}
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <span key={`ticker-1-${idx}`} className="text-[10px] font-bold tracking-widest uppercase text-teal px-8">
+                   {item}
+                 </span>
+               ))}
+            </div>
+            {/* Duplicated sequence for infinite scroll */}
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <span key={`ticker-2-${idx}`} className="text-[10px] font-bold tracking-widest uppercase text-teal px-8">
+                   {item}
+                 </span>
+               ))}
+            </div>
+         </div>
       </div>
 
-      {/* 2. CINEMATIC HERO SHOWDOWN */}
-      <section className="w-full h-[600px] md:h-[700px] rounded-[32px] border border-white/10 overflow-hidden relative group shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-        
-        {/* Dynamic Split Background */}
-        <div className="absolute inset-0 flex">
-          <div className="w-1/2 h-full relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1431324155629-1a6d0a11f4ee?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center opacity-40 group-hover:scale-105 group-hover:opacity-60 transition-all duration-1000 origin-right" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/30 to-[#050505]/90 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]" />
-          </div>
-          <div className="w-1/2 h-full relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1e12a43b2f53?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center opacity-40 group-hover:scale-105 group-hover:opacity-60 transition-all duration-1000 origin-left" />
-            <div className="absolute inset-0 bg-gradient-to-l from-[#C8102E]/30 to-[#050505]/90 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]" />
-          </div>
-        </div>
+      {/* Dynamic Ambient Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+         <div className="absolute top-0 left-1/4 w-[50vw] h-[50vw] bg-teal/5 rounded-full blur-[120px]" />
+         <div className="absolute bottom-0 right-1/4 w-[40vw] h-[40vw] bg-[#14B8A6]/5 rounded-full blur-[100px]" />
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay opacity-20" />
+      </div>
 
-        {/* Tension Graph Overlay (SVG) */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none mix-blend-screen">
-           <svg className="w-full h-full text-[#00E5FF]" preserveAspectRatio="none" viewBox="0 0 100 100">
-              <path d="M0,50 Q10,60 20,40 T40,50 T60,30 T80,60 T100,50" fill="none" stroke="currentColor" strokeWidth="0.2" className="animate-[dash_3s_linear_infinite]" strokeDasharray="2,2" />
-              <path d="M0,55 Q15,65 25,45 T45,55 T65,35 T85,65 T100,55" fill="none" stroke="#FF7F50" strokeWidth="0.2" className="animate-[dash_4s_linear_infinite_reverse]" strokeDasharray="1,2" />
-           </svg>
-        </div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent z-10 pointer-events-none" />
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 pt-8">
         
-        <div className="relative z-20 p-6 md:p-12 flex flex-col h-full justify-between items-center text-center">
-          
-          <div className="w-full flex justify-between items-start">
-             <div className="flex items-center gap-2 px-4 py-2 bg-black/60 backdrop-blur-md border border-[#00E5FF]/30 rounded-full font-mono shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-               <div className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]" />
-               <span className="text-[#00E5FF] text-[10px] font-black tracking-widest uppercase">Live Premier League</span>
-             </div>
-             <div className="flex items-center gap-4">
-               <span className="flex items-center gap-2 text-xs font-bold bg-black/60 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
-                 <Eye className="w-4 h-4 text-[#00E5FF]" /> 12.4K
-               </span>
-               <button className="w-10 h-10 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-md border border-white/10 hover:bg-white/20 hover:scale-110 transition-all">
-                 <Bell className="w-4 h-4 text-white" />
+        {/* CALENDAR HEADER */}
+        <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+           <div className="flex items-center gap-2">
+             <CalendarIcon className="w-5 h-5 text-teal" />
+             <span className="text-sm font-black tracking-widest uppercase text-gray-400">Match Calendar</span>
+           </div>
+
+           <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0">
+              {days.map(day => (
+                <div key={day.date} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border ${day.active ? 'bg-teal/10 border-teal/50 text-teal' : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10'} cursor-pointer transition-colors`}>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">{day.label}</span>
+                  <span className={`text-lg font-black ${day.active ? 'text-white' : ''}`}>{day.date}</span>
+                </div>
+              ))}
+           </div>
+        </header>
+
+        {/* EMOTIONAL FILTERS */}
+        <div className="flex flex-wrap items-center gap-3 mb-10 border-b border-white/5 pb-6">
+           <span className="text-xs font-bold text-gray-500 uppercase tracking-widest mr-2">Optimize For:</span>
+           {filters.map(f => {
+             const Icon = f.icon;
+             const isActive = activeFilter === f.name;
+             return (
+               <button 
+                 key={f.name}
+                 onClick={() => setActiveFilter(f.name)}
+                 className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'bg-teal text-black border-teal shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'bg-transparent border-white/10 text-gray-400 hover:border-white/30'}`}
+               >
+                 <Icon className="w-3.5 h-3.5" /> {f.name}
                </button>
-             </div>
-          </div>
-
-          <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto flex-1 mt-6 md:mt-8">
-             <div className="flex items-center justify-between w-full px-2 md:px-0">
-               
-               {/* MCI Left */}
-               <div className="flex flex-col items-center gap-2 md:gap-6 shrink-0">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-16 h-16 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.4)]" alt="MCI" />
-                 <div className="flex flex-col items-center gap-0.5 md:gap-1 bg-black/40 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-2 rounded-lg md:rounded-xl border border-white/5">
-                    <span className="text-[8px] md:text-[10px] font-black tracking-widest text-[#00E5FF] uppercase">Possession</span>
-                    <span className="text-sm md:text-2xl font-mono font-black text-white drop-shadow-md">64%</span>
-                 </div>
-               </div>
-               
-               {/* Center Score */}
-               <div className="flex flex-col items-center relative z-30 mx-2 md:mx-4 shrink-0">
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-48 md:h-48 bg-[#00E5FF]/20 blur-[60px] rounded-full pointer-events-none" />
-                 <div className="flex items-center justify-center gap-2 md:gap-12 text-5xl md:text-[140px] font-mono font-black tracking-tighter drop-shadow-2xl">
-                   <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">2</span>
-                   <span className="text-white/20 text-3xl md:text-8xl">-</span>
-                   <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">1</span>
-                 </div>
-                 <div className="flex items-center gap-1.5 md:gap-3 mt-2 md:mt-4 bg-black/60 backdrop-blur-md px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-white/10">
-                   <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                   <span className="text-red-500 font-mono font-bold text-xs md:text-xl tracking-widest">68:12</span>
-                 </div>
-               </div>
-
-               {/* LIV Right */}
-               <div className="flex flex-col items-center gap-2 md:gap-6 shrink-0">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-16 h-16 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain drop-shadow-[0_0_30px_rgba(200,16,46,0.4)]" alt="LIV" />
-                 <div className="flex flex-col items-center gap-0.5 md:gap-1 bg-black/40 backdrop-blur-sm px-3 py-1.5 md:px-6 md:py-2 rounded-lg md:rounded-xl border border-white/5">
-                    <span className="text-[8px] md:text-[10px] font-black tracking-widest text-[#C8102E] uppercase">xG Danger</span>
-                    <span className="text-sm md:text-2xl font-mono font-black text-white drop-shadow-md">2.4</span>
-                 </div>
-               </div>
-             </div>
-          </div>
-
-          <div className="w-full max-w-2xl flex flex-col items-center gap-6 mt-8">
-             {/* Integrated AI Sentiment */}
-             <div className="w-full bg-black/60 backdrop-blur-xl border border-[#00E5FF]/30 rounded-2xl p-5 flex flex-col shadow-[0_0_30px_rgba(0,229,255,0.1)] relative overflow-hidden group-hover:border-[#00E5FF]/60 transition-colors">
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00E5FF]/5 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
-               <div className="flex items-center gap-2 mb-2 relative z-10">
-                 <Mic className="w-3.5 h-3.5 text-[#00E5FF] animate-pulse" />
-                 <span className="text-[10px] font-mono font-black text-[#00E5FF] tracking-widest uppercase">AI Tactical Feed</span>
-               </div>
-               <p className="text-sm md:text-base font-mono text-gray-200 relative z-10">
-                 {aiText}<span className="animate-pulse text-[#00E5FF] ml-1">█</span>
-               </p>
-             </div>
-
-             <Link href="/pulse" className="w-full group/btn relative bg-white text-[#050505] font-black tracking-[0.2em] uppercase py-5 rounded-2xl hover:scale-[1.02] transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.2)] overflow-hidden">
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#050505] to-transparent opacity-10 -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]" />
-               <span className="relative z-10 flex items-center justify-center gap-3">ENTER MATCH PULSE <Zap className="w-4 h-4" /></span>
-             </Link>
-          </div>
-
+             )
+           })}
         </div>
-      </section>
 
-
-      {/* 3. GRID SYSTEM - LIVE FIRST */}
-      <section className="pt-4">
-        <div className="flex items-center justify-between mb-6 pl-2">
-           <h2 className="text-xs font-black tracking-widest text-[#00E5FF] uppercase flex items-center gap-2">
-             <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
-             ACTIVE SESSIONS
-           </h2>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
-          {/* Match Card 1 (Live) */}
-          <div className="rounded-[24px] p-6 bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors group relative overflow-hidden flex flex-col h-[360px]">
-             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 filter grayscale group-hover:grayscale-0" />
-             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-[#FF7F50]/20 z-0" />
+        {/* 1. HERO SECTION (Ranked #1 by Filter) */}
+        {heroMatch && (
+        <section className="mb-12">
+          <div className="relative rounded-[32px] md:rounded-[40px] overflow-hidden bg-[#0A0A0A] border border-white/5 shadow-2xl group">
+             {/* Deep glow background */}
+             <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF]/10 to-transparent opacity-50 pointer-events-none" />
+             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000')] bg-cover bg-center opacity-10 mix-blend-overlay transition-transform duration-[2s] group-hover:scale-105" />
              
-             <div className="relative z-10 flex justify-between items-start mb-auto">
-               <div className="flex flex-col gap-1">
-                 <span className="flex items-center gap-1.5 text-[9px] text-[#FF7F50] font-bold tracking-widest uppercase">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#FF7F50] animate-pulse" /> Live La Liga
-                 </span>
-                 <span className="text-[10px] text-gray-400 font-mono">55' • Santiago Bernabéu</span>
-               </div>
-               <button className="text-gray-500 hover:text-white transition-colors"><Bookmark className="w-5 h-5" /></button>
+             <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                <span className="text-[10px] font-black uppercase tracking-widest text-teal">Match of the Day // {activeFilter}</span>
              </div>
 
-             <div className="relative z-10 flex justify-between items-center w-full px-2 my-4">
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" className="w-14 h-14 object-contain drop-shadow-md" alt="RMA" />
-                 <span className="text-sm font-bold drop-shadow-md">RMA</span>
-               </div>
-               <span className="text-4xl font-mono font-black text-white drop-shadow-lg">1 - 1</span>
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg" className="w-14 h-14 object-contain drop-shadow-md" alt="BAR" />
-                 <span className="text-sm font-bold drop-shadow-md">BAR</span>
-               </div>
-             </div>
-
-             <div className="relative z-10 mt-auto">
-               {/* MVP DOMINANCE */}
-               <div className="flex items-center justify-between bg-black/60 backdrop-blur-md border border-white/5 rounded-xl p-2.5 mb-3 shadow-lg">
-                 <div className="flex items-center gap-3">
-                   <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" className="w-8 h-8 rounded-full border border-[#FF7F50] object-cover" alt="MVP" />
-                   <div className="flex flex-col">
-                     <span className="text-[8px] font-black text-[#FF7F50] tracking-widest uppercase">MVP Leader</span>
-                     <span className="text-xs font-bold text-white">Vinicius Jr.</span>
-                   </div>
-                 </div>
-                 <div className="text-right">
-                   <span className="block text-xs font-mono font-bold text-white">9.4</span>
-                   <span className="block text-[8px] text-gray-500 uppercase tracking-widest">Rating</span>
-                 </div>
-               </div>
-
-               <Link href="/pulse" className="w-full block text-center bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-widest py-3.5 rounded-xl transition-colors border border-white/10">
-                 JOIN PULSE
-               </Link>
-             </div>
-          </div>
-
-          {/* Match Card 2 (Live) */}
-          <div className="rounded-[24px] p-6 bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors group relative overflow-hidden flex flex-col h-[360px]">
-             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 filter grayscale group-hover:grayscale-0" />
-             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-[#6200EA]/20 z-0" />
-             
-             <div className="relative z-10 flex justify-between items-start mb-auto">
-               <div className="flex flex-col gap-1">
-                 <span className="flex items-center gap-1.5 text-[9px] text-[#6200EA] font-bold tracking-widest uppercase">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#6200EA] animate-pulse" /> Live Serie A
-                 </span>
-                 <span className="text-[10px] text-gray-400 font-mono">24' • San Siro</span>
-               </div>
-               <button className="text-gray-500 hover:text-white transition-colors"><Bookmark className="w-5 h-5" /></button>
-             </div>
-
-             <div className="relative z-10 flex justify-between items-center w-full px-2 my-4">
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg" className="w-14 h-14 object-contain bg-blue-600 rounded-full p-1 drop-shadow-md" alt="INT" />
-                 <span className="text-sm font-bold drop-shadow-md">INT</span>
-               </div>
-               <span className="text-4xl font-mono font-black text-white drop-shadow-lg">0 - 0</span>
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg" className="w-14 h-14 object-contain bg-white rounded-full p-1 drop-shadow-md" alt="MIL" />
-                 <span className="text-sm font-bold drop-shadow-md">MIL</span>
-               </div>
-             </div>
-
-             <div className="relative z-10 mt-auto">
-               {/* MVP DOMINANCE */}
-               <div className="flex items-center justify-between bg-black/60 backdrop-blur-md border border-white/5 rounded-xl p-2.5 mb-3 shadow-lg">
-                 <div className="flex items-center gap-3">
-                   <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=100&auto=format&fit=crop" className="w-8 h-8 rounded-full border border-[#6200EA] object-cover" alt="MVP" />
-                   <div className="flex flex-col">
-                     <span className="text-[8px] font-black text-[#6200EA] tracking-widest uppercase">MVP Leader</span>
-                     <span className="text-xs font-bold text-white">R. Leão</span>
-                   </div>
-                 </div>
-                 <div className="text-right">
-                   <span className="block text-xs font-mono font-bold text-white">8.2</span>
-                   <span className="block text-[8px] text-gray-500 uppercase tracking-widest">Rating</span>
-                 </div>
-               </div>
-
-               <Link href="/pulse" className="w-full block text-center bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-xs font-bold tracking-widest py-3.5 rounded-xl transition-colors border border-white/10">
-                 JOIN PULSE
-               </Link>
-             </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. UPCOMING MATCHES */}
-      <section className="pt-8">
-        <div className="flex items-center justify-between mb-6 pl-2">
-           <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">UPCOMING MATCHES</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {/* Match Card 3 (Upcoming) */}
-          <div className="rounded-[24px] p-6 bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors group relative overflow-hidden flex flex-col h-[360px]">
-             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 filter grayscale group-hover:grayscale-0" />
-             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-[#00E5FF]/20 z-0" />
-             
-             <div className="relative z-10 flex justify-between items-start mb-auto">
-               <div className="flex flex-col gap-1">
-                 <span className="flex items-center gap-1.5 text-[9px] text-[#00E5FF] font-bold tracking-widest uppercase">
-                   Scheduled • UCL
-                 </span>
-                 <span className="text-[10px] text-gray-400 font-mono">Today, 21:00 • Parc des Princes</span>
-               </div>
-               <button className="text-gray-500 hover:text-white transition-colors"><Bookmark className="w-5 h-5" /></button>
-             </div>
-
-             <div className="relative z-10 flex justify-between items-center w-full px-2 my-4 opacity-80 group-hover:opacity-100 transition-opacity">
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" className="w-14 h-14 object-contain drop-shadow-md" alt="PSG" />
-                 <span className="text-sm font-bold drop-shadow-md">PSG</span>
-               </div>
-               <span className="text-2xl font-black text-gray-500 drop-shadow-lg">VS</span>
-               <div className="flex flex-col items-center gap-3">
-                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg" className="w-14 h-14 object-contain drop-shadow-md" alt="DOR" />
-                 <span className="text-sm font-bold drop-shadow-md">BVB</span>
-               </div>
-             </div>
-
-             <div className="relative z-10 mt-auto">
-               {/* TACTICAL FORECAST (Instead of MVP since it's upcoming) */}
-               <div className="flex items-center justify-between bg-black/60 backdrop-blur-md border border-white/5 rounded-xl p-3 mb-3 shadow-lg">
-                 <span className="text-[10px] text-gray-400 font-bold tracking-widest flex items-center gap-2">
-                    <GitBranch className="w-3 h-3 text-[#00E5FF]" /> TACTICAL FOCUS
-                 </span>
-                 <span className="text-[10px] font-mono font-bold text-gray-300">Midfield Control</span>
-               </div>
-               <Link href="/match/1" className="w-full block text-center bg-[#00E5FF] text-black text-xs font-bold tracking-widest py-3.5 rounded-xl hover:scale-[1.02] transition-transform shadow-[0_0_15px_rgba(0,229,255,0.2)]">
-                 MATCH DETAILS
-               </Link>
-             </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 5. MORE TONIGHT (Secondary List) */}
-      <section className="pt-8">
-         <div className="flex items-center justify-between mb-6 pl-2">
-            <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase">MORE TONIGHT</h2>
-         </div>
-
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            
-            {/* List Item 1 */}
-            <div className="flex items-center justify-between p-4 bg-[#0A0A0A] border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer group">
-               <div className="flex items-center gap-6">
-                  <div className="flex flex-col w-12 shrink-0">
-                    <span className="text-lg font-black text-white">20:45</span>
-                    <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex items-center gap-4">
-                       <div className="flex items-center gap-2">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="ARS" />
-                          <span className="font-bold text-sm">ARS</span>
-                       </div>
-                       <span className="text-gray-600 text-xs font-black">VS</span>
-                       <div className="flex items-center gap-2">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg" className="w-6 h-6 object-contain bg-[#003399] rounded-full p-0.5" alt="EVE" />
-                          <span className="font-bold text-sm">EVE</span>
-                       </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase">
-                       <GitBranch className="w-3 h-3 text-[#00E5FF]" /> <span className="text-gray-500">EXPECTED:</span> <span className="text-[#00E5FF]">TACTICAL</span>
-                    </div>
-                  </div>
-               </div>
-               <div className="flex flex-col items-end gap-1">
-                  <span className="text-[8px] bg-white/10 px-2 py-0.5 rounded text-gray-300 font-bold tracking-widest">EPL</span>
-                  <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                     <span className="text-[10px] text-[#00E5FF] font-bold tracking-widest">DETAILS</span>
-                  </div>
-               </div>
-            </div>
-
-            {/* List Item 2 */}
-            <div className="flex items-center justify-between p-4 bg-[#0A0A0A] border border-white/5 rounded-2xl hover:bg-white/5 transition-colors cursor-pointer group">
-               <div className="flex items-center gap-6">
-                  <div className="flex flex-col w-12 shrink-0">
-                    <span className="text-lg font-black text-white">21:00</span>
-                    <span className="text-[9px] text-gray-500 font-bold tracking-widest">TODAY</span>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex items-center gap-4">
-                         <div className="flex items-center gap-2">
-                            <img src="https://a.espncdn.com/i/teamlogos/soccer/500/362.png" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="AVL" />
-                            <span className="font-bold text-sm">AVL</span>
-                       </div>
-                       <span className="text-gray-600 text-xs font-black">VS</span>
-                       <div className="flex items-center gap-2">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/c/c2/West_Ham_United_FC_logo.svg" className="w-6 h-6 object-contain bg-white rounded-full p-0.5" alt="WHU" />
-                          <span className="font-bold text-sm">WHU</span>
-                       </div>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase">
-                       <Zap className="w-3 h-3 text-[#FF7F50]" /> <span className="text-gray-500">EXPECTED:</span> <span className="text-[#FF7F50]">CHAOS</span>
-                    </div>
-                  </div>
-               </div>
-               <div className="flex flex-col items-end gap-1">
-                  <span className="text-[8px] bg-white/10 px-2 py-0.5 rounded text-gray-300 font-bold tracking-widest">EPL</span>
-                  <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                     <span className="text-[10px] text-[#00E5FF] font-bold tracking-widest">DETAILS</span>
-                  </div>
-               </div>
-            </div>
-
-         </div>
-      </section>
-
-      {/* DAILY DEBRIEF */}
-      <section className="pt-8">
-        <h2 className="text-xs font-black tracking-widest text-gray-500 uppercase mb-6 pl-2">DAILY DEBRIEF</h2>
-        
-        <div className="overflow-x-auto hover-scrollbar flex gap-6 pb-4">
-          {/* Top 3 Players */}
-          <div className="bg-[#121212] border border-white/5 rounded-[2rem] p-6 w-[380px] shrink-0 flex flex-col">
-            <h3 className="text-[10px] text-gray-400 font-black tracking-widest uppercase mb-8 text-center">TOP 3 PLAYERS OF THE DAY</h3>
-            
-            <div className="flex justify-center items-end gap-4 mb-8">
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
-                  <div className="absolute -bottom-1 -right-1 bg-[#00E5FF] text-black text-[10px] font-black px-1.5 rounded">8.8</div>
-                </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
-              </div>
-              
-              <div className="flex flex-col items-center pb-4">
-                <div className="w-20 h-20 rounded-full border-2 border-[#00E5FF] overflow-hidden mb-2 relative shadow-[0_0_15px_rgba(0,229,255,0.3)]">
-                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-[#00E5FF] text-black text-xs font-black px-2 py-0.5 rounded">9.2</div>
-                </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 2 <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"/> 1</div>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full border-2 border-white/20 overflow-hidden mb-2 relative">
-                  <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=100&h=100&fit=crop" className="w-full h-full object-cover" />
-                  <div className="absolute -bottom-1 -right-1 bg-[#00E5FF] text-black text-[10px] font-black px-1.5 rounded">8.5</div>
-                </div>
-                <div className="flex items-center gap-1 text-[10px] font-bold text-gray-500"><Activity className="w-3 h-3 text-gray-500"/> 1 <div className="w-1.5 h-1.5 rounded-full bg-[#FF7F50]"/> 1</div>
-              </div>
-            </div>
-
-            <button className="mt-auto w-full flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors p-4 rounded-xl text-sm font-bold text-gray-300">
-              See full rankings <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {baseInsightsFeed.map((insight) => (
-            <div key={insight.id} className="w-[380px] shrink-0 bg-[#121212] border border-white/5 rounded-[2rem] p-6 flex flex-col">
-                <div className="flex items-center gap-1 mb-4">
-                  <span className="text-[#00E5FF] font-black">2 - 2</span>
-                  <div className="flex gap-0.5">
-                    <div className="w-2 h-2 bg-[#00E5FF] rotate-45" />
-                    <div className="w-2 h-2 bg-gray-600 rotate-45" />
-                  </div>
-                </div>
-                <h3 className="text-xs font-black tracking-widest text-[#00E5FF] uppercase leading-relaxed mb-4">{insight.title}</h3>
-                <p className="text-sm text-gray-400 mb-8 leading-relaxed">
-                  {insight.desc.split(/(\d\.?\d*%?)/).map((part, i) => 
-                    /^\d\.?\d*%?$/.test(part) || part === 'HIGHER' ? <strong key={i} className={part.includes('%') ? 'text-[#00E5FF]' : 'text-white'}>{part}</strong> : part
-                  )}
-                </p>
-
-                <div className="mt-auto relative w-full h-1 bg-white/10 rounded-full mb-6">
-                  {insight.points.map((pt, i) => (
-                     <div key={i} className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#00E5FF] shadow-[0_0_8px_rgba(0,229,255,0.8)]" style={{ left: `${(pt/10)*100}%` }} />
-                  ))}
-                  {insight.points.length > 1 && (
-                    <div className="absolute top-1/2 -translate-y-1/2 h-1 bg-[#00E5FF]/30" style={{ left: `${(insight.points[0]/10)*100}%`, right: `${100 - (insight.points[1]/10)*100}%` }} />
-                  )}
-                  <span className="absolute -bottom-5 text-[8px] font-bold text-gray-500" style={{ left: 0 }}>6.0</span>
-                  <span className="absolute -bottom-5 text-[8px] font-bold text-gray-500" style={{ right: 0 }}>9.2</span>
-                </div>
+             <div className="relative z-10 p-6 md:p-12 pt-20 flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-stretch">
                 
-                <p className="text-[10px] text-gray-500 font-bold">{insight.ratingText}</p>
-              </div>
-            ))}
-        </div>
-      </section>
+                {/* Scoreboard Column */}
+                <div className="flex-1 flex flex-col items-center justify-center bg-black/40 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 w-full max-w-lg shadow-xl relative">
+                   {heroMatch.bookmarked && <Bookmark className="absolute top-4 right-4 w-5 h-5 text-teal" fill="currentColor" />}
+                   
+                   <div className="flex items-center gap-3 bg-white/5 px-4 py-1.5 rounded-full border border-white/10 mb-8">
+                      <div className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                      <span className="text-xs font-black tracking-widest uppercase text-white">{heroMatch.time}</span>
+                   </div>
 
-      {/* MONTHLY CALENDAR MODAL */}
-      <AnimatePresence>
-        {showCalendar && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4"
-            onClick={() => setShowCalendar(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-sm bg-[#121212] border border-white/10 rounded-[32px] p-6 shadow-[0_0_50px_rgba(0,229,255,0.15)] relative overflow-hidden"
-            >
-              <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#00E5FF]/10 to-transparent pointer-events-none" />
-              
-              <div className="flex items-center justify-between mb-6 relative z-10">
-                <h3 className="text-sm font-black tracking-widest text-white uppercase">OCTOBER 2026</h3>
-                <div className="flex gap-2">
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors"><ChevronRight className="w-4 h-4 rotate-180" /></button>
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                   <div className="flex items-center justify-between w-full mb-8">
+                      <div className="flex flex-col items-center gap-3 w-1/3">
+                         <img src={heroMatch.logo1} className="w-16 h-16 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+                         <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-wider text-center">{heroMatch.team1}</span>
+                      </div>
+                      <span className="text-4xl md:text-6xl font-black text-white font-mono tracking-tighter w-1/3 text-center whitespace-nowrap">{heroMatch.score}</span>
+                      <div className="flex flex-col items-center gap-3 w-1/3">
+                         <img src={heroMatch.logo2} className="w-16 h-16 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+                         <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-wider text-center">{heroMatch.team2}</span>
+                      </div>
+                   </div>
+
+                   <Link href={`/match/${heroMatch.id}`} className="w-full mt-4">
+                      <button className="w-full bg-teal text-black hover:bg-white transition-colors py-4 rounded-2xl font-black uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(0,229,255,0.3)] flex items-center justify-center gap-2">
+                        Match Centre <ArrowRight className="w-4 h-4" />
+                      </button>
+                   </Link>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-7 gap-2 mb-2 relative z-10">
-                {['M','T','W','T','F','S','S'].map((d,i) => (
-                  <div key={i} className="text-center text-[10px] font-bold text-gray-500">{d}</div>
-                ))}
-              </div>
+                {/* Emotional Insight Column */}
+                <div className="flex-1 flex flex-col justify-center w-full">
+                   <div className="flex items-center gap-2 mb-4">
+                      <span className="text-2xl">{heroMatch.pulseEmoji}</span>
+                      <h2 className="text-lg md:text-xl font-black tracking-widest uppercase text-white">Live Match Pulse: <span className={heroMatch.pulseColor}>{heroMatch.pulseStatus}</span></h2>
+                   </div>
+                   
+                   <div className="bg-[#121212]/80 backdrop-blur-md border border-teal/20 border-l-4 border-l-[#00E5FF] rounded-2xl p-6 mb-8 shadow-lg">
+                      <p className="text-sm md:text-base text-gray-300 leading-relaxed font-medium">"{heroMatch.insight}"</p>
+                   </div>
 
-              <div className="grid grid-cols-7 gap-2 relative z-10">
-                {Array.from({length: 31}).map((_, i) => {
-                  const day = i + 1;
-                  const isToday = day === 25;
-                  return (
-                    <button 
-                      key={day}
-                      className={`h-10 rounded-xl flex items-center justify-center text-xs font-mono font-bold transition-all ${
-                        isToday 
-                          ? 'bg-[#00E5FF] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' 
-                          : 'text-gray-300 hover:bg-white/10'
-                      }`}
-                    >
-                      {day}
-                    </button>
-                  )
-                })}
-              </div>
+                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="bg-black/50 border border-white/5 rounded-2xl p-4 flex flex-col">
+                        <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5"><Star className="w-3 h-3 text-coral" /> MVP</span>
+                        <span className="text-sm font-black text-white">{heroMatch.emotionalMvp}</span>
+                      </div>
+                      <div className="bg-black/50 border border-white/5 rounded-2xl p-4 flex flex-col">
+                        <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5"><Zap className="w-3 h-3 text-coral" /> Most Polarizing</span>
+                        <span className="text-sm font-black text-white">{heroMatch.polarizingPlayer}</span>
+                      </div>
+                      <div className="bg-black/50 border border-white/5 rounded-2xl p-4 flex flex-col">
+                        <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-1.5"><Activity className="w-3 h-3 text-purple-400" /> Fan Mood</span>
+                        <span className="text-sm font-black text-white flex items-center gap-2">{heroMatch.fanMoodEmoji} {heroMatch.fanMood}</span>
+                      </div>
+                   </div>
+                </div>
 
-              <button 
-                onClick={() => setShowCalendar(false)}
-                className="w-full mt-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold tracking-widest uppercase transition-colors border border-white/5 relative z-10"
-              >
-                Close
-              </button>
-            </motion.div>
-          </motion.div>
+             </div>
+          </div>
+        </section>
         )}
-      </AnimatePresence>
 
-    </div>
+        {/* 2. REMAINING LIVE MATCHES */}
+        {remainingLiveMatches.length > 0 && (
+        <section className="mb-16">
+           <div className="flex items-center gap-2 mb-6 px-2">
+              <Activity className="w-5 h-5 text-[#14B8A6]" />
+              <h3 className="text-sm font-black tracking-widest uppercase text-gray-400">More Live Pulses</h3>
+           </div>
+           
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {remainingLiveMatches.map((match, idx) => (
+                <div key={match.id} className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-6 shadow-xl hover:border-white/10 transition-colors flex flex-col group relative">
+                   {match.bookmarked && <Bookmark className="absolute top-6 right-6 w-4 h-4 text-teal" fill="currentColor" />}
+                   <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-black border border-white/10 flex items-center justify-center text-[10px] font-black text-gray-500">#{idx + 2}</div>
+                   
+                   <div className="flex justify-between items-center mb-6 pl-4">
+                      <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest ${match.pulseColor}`}>
+                         {match.pulseEmoji} {match.pulseStatus}
+                      </div>
+                      <div className="text-[10px] font-black text-coral bg-coral/10 px-2 py-1 rounded animate-pulse mr-8">{match.time}</div>
+                   </div>
+
+                   <div className="flex items-center justify-between mb-8 px-4">
+                     <div className="flex flex-col items-center gap-2">
+                       <img src={match.logo1} className="w-10 h-10 object-contain" />
+                     </div>
+                     <span className="text-xl font-black text-white font-mono">{match.score}</span>
+                     <div className="flex flex-col items-center gap-2">
+                       <img src={match.logo2} className="w-10 h-10 object-contain" />
+                     </div>
+                   </div>
+
+                   <div className="bg-[#121212] rounded-2xl p-4 border border-white/5 mb-6 flex-1">
+                     <p className="text-xs text-gray-400 italic mb-3 line-clamp-2">"{match.insight}"</p>
+                     <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                       <Star className="w-3 h-3 text-coral" /> MVP: <span className="text-gray-300">{match.emotionalMvp}</span>
+                     </div>
+                   </div>
+
+                   <Link href={`/match/${match.id}`} className="mt-auto">
+                     <button className="w-full bg-white/5 hover:bg-white/10 text-white transition-colors py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-between px-6 border border-white/5">
+                       Match Centre <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                     </button>
+                   </Link>
+                </div>
+              ))}
+           </div>
+        </section>
+        )}
+
+        {/* BOTTOM SECTION: MATCH DIRECTORY & MARKET MOVERS */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+           
+           {/* LEFT: MATCH DIRECTORY (Takes up 2 columns) */}
+           <section className="lg:col-span-2">
+              <div className="flex items-center gap-6 mb-6 border-b border-white/10">
+              {['Hyped', 'All Matches'].map(tab => (
+                 <button 
+                   key={tab} 
+                   onClick={() => setActiveTab(tab)}
+                   className={`pb-4 text-sm font-black uppercase tracking-widest transition-colors relative ${activeTab === tab ? 'text-white' : 'text-gray-600 hover:text-gray-300'}`}
+                 >
+                   {tab}
+                   {activeTab === tab && (
+                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal shadow-[0_0_10px_rgba(0,229,255,0.5)]" />
+                   )}
+                 </button>
+              ))}
+           </div>
+
+           <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl overflow-hidden">
+              <table className="w-full text-left border-collapse">
+                 <thead>
+                    <tr className="border-b border-white/5 bg-white/5">
+                       <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-500">Status</th>
+                       <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-500">Match</th>
+                       <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-500">Expected Mood / Pulse</th>
+                       <th className="px-6 py-4 text-right text-[10px] font-black uppercase tracking-widest text-gray-500">Action</th>
+                    </tr>
+                 </thead>
+                 <tbody className="divide-y divide-white/5 text-sm font-medium">
+                    {/* UPCOMING MATCHES */}
+                    {upcomingTableData.filter(m => activeTab === 'All Matches' || m.hyped).map(m => (
+                       <tr key={m.id} className="hover:bg-white/5 transition-colors group">
+                          <td className="px-6 py-4">
+                             <span className="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-gray-400">{m.time}</span>
+                          </td>
+                          <td className="px-6 py-4 text-white font-bold">{m.team1} vs {m.team2}</td>
+                          <td className="px-6 py-4 text-gray-400 text-xs">{m.mood}</td>
+                          <td className="px-6 py-4 text-right">
+                             <Link href={`/match/${m.id}`}>
+                                <button className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white/10 text-white rounded text-[10px] font-black uppercase tracking-widest transition-all hover:bg-white/20">Preview</button>
+                             </Link>
+                          </td>
+                       </tr>
+                    ))}
+                    
+                    {/* FINISHED MATCHES */}
+                    {finishedTableData.filter(m => activeTab === 'All Matches' || m.hyped).map(m => (
+                       <tr key={m.id} className="hover:bg-white/5 transition-colors group opacity-60 hover:opacity-100">
+                          <td className="px-6 py-4">
+                             <span className="px-2 py-1 bg-white/5 rounded text-[10px] font-black uppercase tracking-widest text-gray-500">FT</span>
+                          </td>
+                          <td className="px-6 py-4 text-white font-bold flex items-center gap-3">
+                             <span>{m.team1}</span>
+                             <span className="font-mono text-gray-500">{m.score}</span>
+                             <span>{m.team2}</span>
+                          </td>
+                          <td className="px-6 py-4 text-gray-400 text-xs">{m.mood}</td>
+                          <td className="px-6 py-4 text-right">
+                             <Link href={`/match/${m.id}`}>
+                                <button className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-teal/20 text-teal rounded text-[10px] font-black uppercase tracking-widest transition-all hover:bg-teal/40">Recap</button>
+                             </Link>
+                          </td>
+                       </tr>
+                    ))}
+                 </tbody>
+              </table>
+              {upcomingTableData.filter(m => activeTab === 'All Matches' || m.hyped).length === 0 && finishedTableData.filter(m => activeTab === 'All Matches' || m.hyped).length === 0 && (
+                <div className="p-12 text-center text-gray-500 text-sm font-bold tracking-widest uppercase">
+                  No matches found for this filter.
+                </div>
+              )}
+           </div>
+        </section>
+
+        {/* RIGHT: MARKET MOVERS WIDGET (Takes up 1 column) */}
+        <section className="lg:col-span-1">
+           <div className="flex items-center gap-2 mb-6 border-b border-white/10 pb-4">
+              <Activity className="w-5 h-5 text-teal" />
+              <h3 className="text-sm font-black tracking-widest uppercase text-white">Market Movers</h3>
+           </div>
+
+           <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col gap-8">
+              
+              {/* Top Gainers */}
+              <div>
+                 <h4 className="text-[10px] font-black uppercase tracking-widest text-green-400 mb-4 flex items-center gap-2">
+                    <Zap className="w-3 h-3" /> Surging Momentum
+                 </h4>
+                 <div className="flex flex-col gap-4">
+                    {marketMovers.surging.map((item, idx) => (
+                      <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                         <div>
+                            <div className="text-sm font-bold text-white mb-1">{item.team}</div>
+                            <div className="text-[10px] text-gray-500 uppercase tracking-widest">{item.reason}</div>
+                         </div>
+                         <div className="text-sm font-black text-green-400 bg-green-400/10 px-2 py-1 rounded">
+                            {item.change}
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+
+              {/* Top Losers */}
+              <div>
+                 <h4 className="text-[10px] font-black uppercase tracking-widest text-coral mb-4 flex items-center gap-2">
+                    <Flame className="w-3 h-3" /> Crashing Sentiment
+                 </h4>
+                 <div className="flex flex-col gap-4">
+                    {marketMovers.crashing.map((item, idx) => (
+                      <div key={idx} className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
+                         <div>
+                            <div className="text-sm font-bold text-white mb-1">{item.team}</div>
+                            <div className="text-[10px] text-gray-500 uppercase tracking-widest">{item.reason}</div>
+                         </div>
+                         <div className="text-sm font-black text-coral bg-coral/10 px-2 py-1 rounded">
+                            {item.change}
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+
+           </div>
+        </section>
+
+        </div>
+      </div>
+    </main>
   );
 }

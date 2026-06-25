@@ -21,9 +21,9 @@ const initialHotTakes = [
     id: 1,
     question: "Was Salah the right MVP?",
     options: [
-      { text: "Yes, 100% deserved", percent: 72, color: "bg-[#00E5FF]" },
-      { text: "No, Van Dijk deserved it", percent: 18, color: "bg-[#00E5FF]/30" },
-      { text: "Someone else", percent: 10, color: "bg-[#00E5FF]/30" }
+      { text: "Yes, 100% deserved", percent: 72, color: "bg-teal" },
+      { text: "No, Van Dijk deserved it", percent: 18, color: "bg-teal/30" },
+      { text: "Someone else", percent: 10, color: "bg-teal/30" }
     ],
     votes: "8.7K votes"
   },
@@ -32,8 +32,8 @@ const initialHotTakes = [
     question: "Was the VAR decision fair?",
     options: [
       { text: "Correct decision", percent: 32, color: "bg-gray-500" },
-      { text: "Robbery!", percent: 58, color: "bg-[#FF3B00]" },
-      { text: "Too close to call", percent: 10, color: "bg-[#00E5FF]/30" }
+      { text: "Robbery!", percent: 58, color: "bg-coral" },
+      { text: "Too close to call", percent: 10, color: "bg-teal/30" }
     ],
     votes: "7.9K votes"
   },
@@ -41,9 +41,9 @@ const initialHotTakes = [
     id: 3,
     question: "What won Liverpool the game?",
     options: [
-      { text: "Midfield control", percent: 41, color: "bg-[#00E5FF]" },
-      { text: "Salah's brilliance", percent: 37, color: "bg-[#00E5FF]/80" },
-      { text: "City's poor finishing", percent: 22, color: "bg-[#00E5FF]/50" }
+      { text: "Midfield control", percent: 41, color: "bg-teal" },
+      { text: "Salah's brilliance", percent: 37, color: "bg-teal/80" },
+      { text: "City's poor finishing", percent: 22, color: "bg-teal/50" }
     ],
     votes: "6.3K votes"
   }
@@ -242,7 +242,7 @@ export default function MatchDetailsPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
-          <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-8">
+          <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-teal uppercase mb-8">
             {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : matchState === 'live' ? 'LIVE NOW' : 'Full Time'}
           </div>
 
@@ -258,10 +258,10 @@ export default function MatchDetailsPage() {
               {matchState === 'postmatch' && (
                 <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-[#00E5FF]">⚽</span> Salah 2'
+                    <span className="text-teal">⚽</span> Salah 2'
                   </div>
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-[#00E5FF]">⚽</span> Konate 78'
+                    <span className="text-teal">⚽</span> Konate 78'
                   </div>
                 </div>
               )}
@@ -271,7 +271,7 @@ export default function MatchDetailsPage() {
             <div className="flex flex-col items-center justify-start pt-6 md:pt-10 shrink-0">
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
-                  <span className="text-[10px] md:text-[12px] font-bold text-[#00E5FF] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
+                  <span className="text-[10px] md:text-[12px] font-bold text-teal tracking-[0.2em] uppercase mb-1">Kickoff In</span>
                   <span className="text-4xl md:text-5xl font-black tracking-tighter text-white drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
@@ -292,25 +292,26 @@ export default function MatchDetailsPage() {
 
           {/* Join Stands Action (Hidden during live match) */}
           {matchState !== 'live' && (
-            <div className="mt-8 md:mt-12 w-full max-w-md mx-auto">
+            <div className="mt-8 w-full max-w-md mx-auto">
                <Link href="/stands/2" className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
-                 <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-[#00E5FF]/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
+                 <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
                     <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-full bg-[#00E5FF] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+                       <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
                           <Mic className="w-5 h-5 text-black" fill="currentColor" />
                        </div>
                        <div className="flex flex-col justify-center text-left">
                           <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN THE DISCUSSION</h2>
-                          <p className="text-[10px] text-[#00E5FF] font-medium tracking-wide">12.4K active in the stands</p>
+                          <p className="text-[10px] text-teal font-medium tracking-wide">12.4K active in the stands</p>
                        </div>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-1">
-                       <ChevronRight className="w-4 h-4 text-[#00E5FF]" />
+                       <ChevronRight className="w-4 h-4 text-teal" />
                     </div>
                  </div>
                </Link>
             </div>
           )}
+
         </div>
       </div>
 
@@ -322,7 +323,7 @@ export default function MatchDetailsPage() {
             onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
             className={`flex-1 py-3 px-4 rounded-xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
               matchState === state 
-                ? 'bg-[#00E5FF] text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]' 
+                ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]' 
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
             }`}
           >
@@ -341,8 +342,8 @@ export default function MatchDetailsPage() {
            <section className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-4 shadow-xl">
               <div className="flex justify-between items-center mb-3 px-1">
                  <h2 className="text-[10px] font-black tracking-widest uppercase text-gray-400">CROWDCAST VIBE</h2>
-                 <div className="flex items-center gap-1.5 text-[9px] font-bold text-[#00E5FF] uppercase">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" /> Live
+                 <div className="flex items-center gap-1.5 text-[9px] font-bold text-teal uppercase">
+                   <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" /> Live
                  </div>
               </div>
               <div className="flex gap-2 h-12">
@@ -354,10 +355,10 @@ export default function MatchDetailsPage() {
                     </div>
                     <span className="text-sm font-black relative z-10 text-white">{votes.chaos}%</span>
                  </div>
-                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-[#00E5FF]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
-                    <div className="absolute left-0 top-0 h-full bg-[#00E5FF]/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
+                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-teal/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div className="absolute left-0 top-0 h-full bg-teal/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
-                       <Shield className="w-4 h-4 text-[#00E5FF] group-active:scale-110 transition-transform" />
+                       <Shield className="w-4 h-4 text-teal group-active:scale-110 transition-transform" />
                        <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Tactical</span>
                     </div>
                     <span className="text-sm font-black relative z-10 text-white">{votes.tactical}%</span>
@@ -385,7 +386,7 @@ export default function MatchDetailsPage() {
                 onClick={() => setPrematchTab(tab)}
                 className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
                   prematchTab === tab 
-                    ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                    ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
                     : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
                 }`}
               >
@@ -393,13 +394,13 @@ export default function MatchDetailsPage() {
               </button>
             ))
           ) : (
-            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS'].map((tab) => (
+            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
                   activeTab === tab 
-                    ? 'bg-[#00E5FF]/10 border border-[#00E5FF]/30 text-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                    ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
                     : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
                 }`}
               >
@@ -407,6 +408,7 @@ export default function MatchDetailsPage() {
                 {tab === 'ROSTER' && <Users className="w-4 h-4" />}
                 {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
                 {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
+                {tab === 'STANDS' && <Mic className="w-4 h-4" />}
                 {tab}
               </button>
             ))
@@ -435,7 +437,7 @@ export default function MatchDetailsPage() {
 
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
              <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#00E5FF]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                <div className="bg-[#121212]/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                    <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                    <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                       <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -443,17 +445,17 @@ export default function MatchDetailsPage() {
                       <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
                    </div>
                    <div className="relative z-10 w-full h-full flex flex-col justify-center">
-                      <h3 className="text-[10px] font-black tracking-widest text-[#00E5FF] uppercase mb-2">MVP WATCH</h3>
+                      <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2">MVP WATCH</h3>
                       <select 
                         value={mvpWatchPlayer}
                         onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#00E5FF] transition-colors pb-1 border-b border-white/10"
+                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-white/10"
                       >
                         {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
                       </select>
                       <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
                       <div className="flex items-end gap-1 mt-auto">
-                        <span className="text-xl font-black text-[#00E5FF] leading-none">8.7</span>
+                        <span className="text-xl font-black text-teal leading-none">8.7</span>
                         <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
                       </div>
                    </div>
@@ -485,6 +487,48 @@ export default function MatchDetailsPage() {
           </motion.div>
         )}
 
+        {/* STANDS TAB */}
+        {activeTab === 'STANDS' && (
+          <motion.div
+             initial={{ opacity: 0, y: 15 }}
+             animate={{ opacity: 1, y: 0 }}
+             exit={{ opacity: 0, y: -15 }}
+             className="space-y-8"
+          >
+            <div className="flex items-center gap-2 mb-4">
+               <Mic className="w-5 h-5 text-teal" />
+               <h3 className="text-sm font-black tracking-widest text-teal uppercase">Highlights from the Stands</h3>
+            </div>
+            <div className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-[32px] p-6 shadow-2xl space-y-4">
+               {[
+                 { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#00E5FF] to-blue-500" },
+                 { id: 2, name: "AnfieldRed", time: "68'", text: "That decision is shocking. Absolute madness from the ref there.", color: "from-[#C8102E] to-red-500" },
+                 { id: 3, name: "NeutralFan", time: "FT", text: "Incredible match. A masterclass in tactical adaptability in the second half.", color: "from-gray-400 to-gray-600" }
+               ].map(note => (
+                  <div key={note.id} className="bg-black/40 rounded-2xl p-4 md:p-5 border border-white/5 flex gap-4 items-start hover:bg-white/5 transition-colors cursor-pointer group">
+                     <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${note.color} shrink-0`} />
+                     <div className="flex-1">
+                        <div className="flex justify-between items-center mb-2">
+                           <span className="font-bold text-gray-300">{note.name}</span>
+                           <span className="text-[10px] text-gray-500 font-mono tracking-widest">{note.time}</span>
+                        </div>
+                        <p className="text-sm text-gray-400 italic">"{note.text}"</p>
+                        
+                        <div className="flex items-center gap-3 md:gap-4 mt-4 bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
+                          <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                            <Play className="w-3 h-3 md:w-4 md:h-4 text-black fill-black ml-0.5" />
+                          </button>
+                          <div className="flex-1 flex items-center gap-0.5 md:gap-1 h-4 md:h-6 opacity-50 overflow-hidden">
+                            {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-teal rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+               ))}
+            </div>
+          </motion.div>
+        )}
+
         {/* Overview Content (Post Match) */}
         {matchState === 'postmatch' && activeTab === 'OVERVIEW' && (
           <motion.div 
@@ -508,10 +552,10 @@ export default function MatchDetailsPage() {
               
               {/* Premium Header */}
               <div className="flex flex-col items-center mb-12 md:mb-16 relative w-full mt-4 md:mt-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-24 md:h-32 bg-[#00E5FF]/20 blur-[80px] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-24 md:h-32 bg-teal/20 blur-[80px] pointer-events-none" />
                 <h2 className="text-3xl md:text-6xl font-black text-center tracking-tighter uppercase leading-[0.9] drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
                   The Fans Have <br/>
-                  <span className="text-[#00E5FF] drop-shadow-[0_0_20px_rgba(0,229,255,0.6)]">Spoken.</span>
+                  <span className="text-teal drop-shadow-[0_0_20px_rgba(0,229,255,0.6)]">Spoken.</span>
                 </h2>
               </div>
 
@@ -526,12 +570,12 @@ export default function MatchDetailsPage() {
               {/* MVP SHOWCASE */}
               <div className="w-full max-w-lg mx-auto flex flex-col items-center relative mb-12">
                 {/* Massive Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#00E5FF]/20 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-teal/20 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div className="relative">
                   {/* Rotating Rings */}
-                  <div className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-[#00E5FF]/30 rounded-full animate-[spin_12s_linear_infinite]" />
-                  <div className="absolute -inset-8 md:-inset-10 border border-[#00E5FF]/10 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+                  <div className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-teal/30 rounded-full animate-[spin_12s_linear_infinite]" />
+                  <div className="absolute -inset-8 md:-inset-10 border border-teal/10 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
                   
                   <div className="w-40 h-40 md:w-56 md:h-56 rounded-full p-1 md:p-1.5 bg-gradient-to-br from-[#00E5FF] via-[#00E5FF]/20 to-transparent shadow-[0_0_50px_rgba(0,229,255,0.3)] relative z-10">
                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500&fit=crop" className="w-full h-full rounded-full object-cover border-4 border-[#020202]" />
@@ -541,7 +585,7 @@ export default function MatchDetailsPage() {
                     MVP
                   </div>
                   
-                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-[#00E5FF] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#00E5FF]/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono transform -rotate-3">
+                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-teal text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-teal/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono transform -rotate-3">
                     9.2
                   </div>
                   
@@ -613,11 +657,11 @@ export default function MatchDetailsPage() {
                         <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Diaz</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform relative">
-                        <div className="absolute -inset-2 bg-[#00E5FF]/20 rounded-full blur-md" />
-                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] p-0.5 md:p-1 bg-[#020202] relative z-10">
+                        <div className="absolute -inset-2 bg-teal/20 rounded-full blur-md" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-teal shadow-[0_0_20px_rgba(0,229,255,0.4)] p-0.5 md:p-1 bg-[#020202] relative z-10">
                           <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
                         </div>
-                        <span className="text-[9px] md:text-xs font-black text-[#00E5FF] uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
+                        <span className="text-[9px] md:text-xs font-black text-teal uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
                         <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
@@ -641,34 +685,34 @@ export default function MatchDetailsPage() {
           <section className="mb-16">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Activity className="w-5 h-5 text-[#00E5FF]" /> KEY INSIGHTS
+                <Activity className="w-5 h-5 text-teal" /> KEY INSIGHTS
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
-                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
                 <p className="text-sm text-gray-400 leading-relaxed relative z-10">
                   Liverpool's second-half introduction of Diaz forced Walker to drop 15 yards deeper, fundamentally breaking Man City's high press structure and isolating De Bruyne in the right half-space.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
-                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
                 <p className="text-sm text-gray-400 leading-relaxed relative z-10">
                   Mac Allister won 82% of his ground duels against Rodri, an unusually high success rate that allowed Liverpool to transition from defense to attack in under 4 seconds on average.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
-                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
                 <p className="text-sm text-gray-400 leading-relaxed relative z-10">
                   Van Dijk maintained a 2-meter buffer from Haaland throughout the match, denying him the space for his signature runs behind. Haaland finished with just 14 touches, his lowest of the season.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-[#00E5FF]/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5FF]/10 blur-[40px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors pointer-events-none" />
-                <h3 className="text-[#00E5FF] font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
                 <p className="text-sm text-gray-400 leading-relaxed relative z-10">
                   Despite having an xG of only 1.2, Liverpool managed to score twice through sheer clinical finishing, converting half-chances into key goals when momentum was heavily against them.
                 </p>
@@ -896,7 +940,7 @@ export default function MatchDetailsPage() {
                         {event.type === 'sub' && '🔄'}
                       </div>
                       
-                      <div className="text-[#00E5FF] font-black text-xs tracking-widest mb-1">{event.time}</div>
+                      <div className="text-teal font-black text-xs tracking-widest mb-1">{event.time}</div>
                       <div className="text-lg font-black text-white mb-1">
                         {event.type === 'sub' ? `${event.playerIn} In / ${event.playerOut} Out` : event.player}
                       </div>
@@ -1061,10 +1105,10 @@ function LineupTab() {
             {/* MCI Players */}
             {mciPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-teal shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#00E5FF] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] font-black tracking-wider text-teal drop-shadow-md">{p.name}</span>
               </div>
             ))}
 
@@ -1082,7 +1126,7 @@ function LineupTab() {
          {/* Bench */}
          <div className="w-full bg-[#1A1A1A] rounded-b-2xl p-4 border border-white/5 border-t-0 mb-8">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-1 h-4 bg-[#00E5FF]" />
+              <div className="w-1 h-4 bg-teal" />
               <div className="flex gap-1.5">
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=1" className="w-full h-full object-cover"/></div>
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=2" className="w-full h-full object-cover"/></div>
@@ -1120,7 +1164,7 @@ function LineupTab() {
                  <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
                </div>
              ) : (
-               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
+               <span className="text-[10px] font-black text-teal tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
              )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
@@ -1134,7 +1178,7 @@ function LineupTab() {
                if (!hasVotedAs) setHasVotedAs('fan');
              }}
              disabled={hasVotedAs === 'neutral'}
-             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 
@@ -1163,7 +1207,7 @@ function LineupTab() {
                  <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
                </div>
              ) : (
-               <span className="text-[10px] font-black text-[#00E5FF] tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
+               <span className="text-[10px] font-black text-teal tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
              )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
@@ -1177,7 +1221,7 @@ function LineupTab() {
                if (!hasVotedAs) setHasVotedAs('neutral');
              }}
              disabled={hasVotedAs === 'fan'}
-             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#00E5FF] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
       </div>
@@ -1197,7 +1241,7 @@ function H2HTab() {
                <span className="text-[10px] font-bold">MAN CITY</span>
             </div>
             <div className="flex gap-6 text-center">
-               <div><div className="text-2xl font-black text-[#00E5FF]">3</div><div className="text-[8px] text-[#00E5FF] tracking-widest">WINS</div></div>
+               <div><div className="text-2xl font-black text-teal">3</div><div className="text-[8px] text-teal tracking-widest">WINS</div></div>
                <div><div className="text-2xl font-black text-white">1</div><div className="text-[8px] text-gray-400 tracking-widest">DRAW</div></div>
                <div><div className="text-2xl font-black text-[#D32F2F]">1</div><div className="text-[8px] text-[#D32F2F] tracking-widest">WIN</div></div>
             </div>
@@ -1247,19 +1291,19 @@ function StandingsTab() {
              {[
                { p: 1, t: "Liverpool", icon: "bg-[#D32F2F]", ply: 35, gd: "+41", pts: 80, hl: false },
                { p: 2, t: "Man City", icon: "bg-[#4FC3F7]", ply: 35, gd: "+37", pts: 79, hl: true },
-               { p: 3, t: "Arsenal", icon: "bg-red-500", ply: 35, gd: "+29", pts: 68, hl: false },
+               { p: 3, t: "Arsenal", icon: "bg-coral", ply: 35, gd: "+29", pts: 68, hl: false },
                { p: 4, t: "Aston Villa", icon: "bg-purple-900", ply: 35, gd: "+20", pts: 66, hl: false },
                { p: 5, t: "Tottenham", icon: "bg-white", ply: 35, gd: "+13", pts: 60, hl: false },
              ].map((r, i) => (
-               <tr key={i} className={`border-b border-white/5 last:border-0 ${r.hl ? 'bg-[#00E5FF]/5' : ''}`}>
-                 <td className={`py-3 text-center ${r.hl ? 'text-[#00E5FF] font-bold' : 'text-gray-400'}`}>{r.p}</td>
+               <tr key={i} className={`border-b border-white/5 last:border-0 ${r.hl ? 'bg-teal/5' : ''}`}>
+                 <td className={`py-3 text-center ${r.hl ? 'text-teal font-bold' : 'text-gray-400'}`}>{r.p}</td>
                  <td className="py-3 flex items-center gap-2">
                    <div className={`w-4 h-4 rounded-full ${r.icon}`} />
-                   <span className={r.hl ? 'text-[#00E5FF] font-bold' : 'text-gray-200'}>{r.t}</span>
+                   <span className={r.hl ? 'text-teal font-bold' : 'text-gray-200'}>{r.t}</span>
                  </td>
                  <td className="py-3 text-right text-gray-400">{r.ply}</td>
                  <td className="py-3 text-right text-gray-400">{r.gd}</td>
-                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-[#00E5FF]' : 'text-white'}`}>{r.pts}</td>
+                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-teal' : 'text-white'}`}>{r.pts}</td>
                </tr>
              ))}
            </tbody>
@@ -1278,7 +1322,7 @@ function FormTab() {
               <span className="text-[10px] font-black uppercase text-gray-400 mb-3">MAN CITY</span>
               <div className="flex gap-2">
                  {['W','W','W','D','W'].map((r,i) => (
-                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-red-500/20 text-red-500'}`}>{r}</div>
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-coral/20 text-coral'}`}>{r}</div>
                  ))}
               </div>
               <div className="flex gap-4 mt-4 text-[10px] text-gray-500">
@@ -1292,7 +1336,7 @@ function FormTab() {
               <span className="text-[10px] font-black uppercase text-[#D32F2F] mb-3">LIVERPOOL</span>
               <div className="flex gap-2">
                  {['W','W','L','W','D'].map((r,i) => (
-                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-red-500/20 text-red-500'}`}>{r}</div>
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-coral/20 text-coral'}`}>{r}</div>
                  ))}
               </div>
               <div className="flex gap-4 mt-4 text-[10px] text-gray-500">

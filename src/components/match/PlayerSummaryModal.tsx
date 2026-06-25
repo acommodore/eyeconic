@@ -48,7 +48,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
   if (loading) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-        <div className="w-10 h-10 border-4 border-[#00E5FF] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-teal border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
         {/* Top Header */}
         <div className="shrink-0 flex items-center justify-between p-4 border-b border-white/5 bg-[#050505]">
           <h1 className="text-[10px] md:text-xs font-black tracking-widest text-gray-400 uppercase flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse"></span>
             POST-MATCH SUMMARY
           </h1>
           <div className="flex items-center gap-1.5 md:gap-2">
@@ -88,7 +88,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
             <button className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors">
               <Share className="w-3.5 h-3.5 text-white" />
             </button>
-            <button onClick={onClose} className="w-8 h-8 rounded-full bg-[#FF3B00]/10 border border-[#FF3B00]/20 flex items-center justify-center hover:bg-[#FF3B00]/20 transition-colors text-[#FF3B00]">
+            <button onClick={onClose} className="w-8 h-8 rounded-full bg-coral/10 border border-[#FF3B00]/20 flex items-center justify-center hover:bg-coral/20 transition-colors text-[#FF3B00]">
               <X className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -138,7 +138,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Pass Acc</span>
                </div>
                <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
-                  <span className="text-base font-black text-[#00E5FF]">{player.stats.touches}</span>
+                  <span className="text-base font-black text-teal">{player.stats.touches}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Touches</span>
                </div>
                <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
@@ -160,8 +160,8 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
               <div className="flex items-center justify-between mb-2.5">
                 <h3 className="text-[9px] font-black tracking-widest text-gray-500 uppercase">FAN SENTIMENT</h3>
                 <div className="flex items-center gap-2.5 text-[8px] font-bold tracking-widest uppercase">
-                  <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]"></span> POS</div>
-                  <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#FF3B00]"></span> NEG</div>
+                  <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-teal"></span> POS</div>
+                  <div className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-coral"></span> NEG</div>
                 </div>
               </div>
               
@@ -208,7 +208,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
                 {player.keyMoments.map((moment: any) => (
                   <div key={moment.id} className="bg-[#050505] border border-white/5 rounded-lg p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors">
                     <div className="flex items-center gap-1.5 shrink-0 mt-0.5 w-8">
-                      <span className={`w-1.5 h-1.5 rounded-full ${moment.type === 'pos' ? 'bg-[#00E5FF]' : 'bg-[#FF3B00]'}`}></span>
+                      <span className={`w-1.5 h-1.5 rounded-full ${moment.type === 'pos' ? 'bg-teal' : 'bg-coral'}`}></span>
                       <span className="text-[8px] font-bold text-white tracking-widest">{moment.time}</span>
                     </div>
                     <p className="text-[11px] text-gray-300 font-medium leading-relaxed">{moment.text}</p>
