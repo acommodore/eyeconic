@@ -352,10 +352,10 @@ export default function DiscoverPage() {
               {days.map(day => {
                 const isActive = day.date === activeDate;
                 return (
-                  <div key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border ${isActive ? 'bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-white/5 text-gray-400 hover:border-white/20'} cursor-pointer transition-all`}>
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-white/5 text-gray-400 hover:border-white/20'} cursor-pointer transition-all`}>
                     <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
                     <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-white drop-shadow-md' : ''}`}>{day.date}</span>
-                  </div>
+                  </button>
                 );
               })}
            </div>
