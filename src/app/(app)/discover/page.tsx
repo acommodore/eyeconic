@@ -368,7 +368,7 @@ export default function DiscoverPage() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 pt-8">
         
         {/* CALENDAR & THEME HEADER */}
-        <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <header className="mb-8 flex flex-row items-center justify-between gap-4">
            <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0 flex-1">
               {days.map(day => {
                 const isActive = day.date === activeDate;

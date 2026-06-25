@@ -232,7 +232,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
     const touchEndY = e.changedTouches[0].clientY;
     const diff = touchEndY - drawerTouchStart; // positive diff means swipe down
     
-    if (diff > 50 && activeMobileView === 'pulse') {
+    if (diff > 30 && activeMobileView === 'pulse') {
       setActiveMobileView('feed');
     }
     setDrawerTouchStart(null);
@@ -534,7 +534,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
             className={`
               xl:col-span-5 xl:space-y-8
               xl:relative xl:translate-y-0 xl:h-auto xl:bg-transparent xl:border-none xl:shadow-none xl:p-0 xl:overflow-visible
-              fixed inset-x-0 bottom-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] bg-card rounded-t-[2rem] border-t border-x border-border shadow-[0_-20px_50px_rgba(0,0,0,0.9)] px-4 pb-8 pt-4 h-[85vh] overflow-y-auto
+              fixed inset-x-0 bottom-0 z-[100] transition-transform duration-200 ease-out bg-card rounded-t-[2rem] border-t border-x border-border shadow-[0_-20px_50px_rgba(0,0,0,0.9)] px-4 pb-8 pt-4 h-[85vh] overflow-y-auto
               ${activeMobileView === 'pulse' ? 'translate-y-0' : 'translate-y-[calc(100%-100px)] cursor-pointer hover:bg-muted'}
             `}
           onClick={(e) => {
