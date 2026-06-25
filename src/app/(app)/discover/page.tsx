@@ -203,7 +203,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               <div className="col-span-1">
                  <h4 className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-2">Live Context</h4>
                  <p className="text-xs text-gray-300 leading-relaxed font-mono">
-                    {match.insight || match.mood || "Awaiting significant narrative developments..."}
+                    {match.insight || (isFinished ? "Post-match fallout and analysis ongoing." : isLive ? "Awaiting significant narrative developments..." : "Pre-match buildup is intensifying...")}
                  </p>
                  <Link href={`/match/${match.id}`} className="mt-4 md:hidden inline-flex items-center gap-2 text-[10px] font-mono text-teal uppercase tracking-widest">
                     Enter Match Centre <ArrowRight className="w-3 h-3" />
