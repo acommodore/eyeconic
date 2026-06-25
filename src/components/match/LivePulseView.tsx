@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight } from "lucide-react";
 
@@ -338,6 +338,18 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
   
   const prevEvent = activeEventIndex > 0 ? matchEvents[activeEventIndex - 1] : null;
   const nextEvent = activeEventIndex < matchEvents.length - 1 ? matchEvents[activeEventIndex + 1] : null;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && prevEvent) {
+        setActiveMinute(prevEvent.minute);
+      } else if (e.key === 'ArrowRight' && nextEvent) {
+        setActiveMinute(nextEvent.minute);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [prevEvent, nextEvent]);
 
   return (
     <div className="w-full space-y-10">
