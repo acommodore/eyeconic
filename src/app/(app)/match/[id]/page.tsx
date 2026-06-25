@@ -394,7 +394,7 @@ export default function MatchDetailsPage() {
               </button>
             ))
           ) : (
-            ['OVERVIEW', 'ROSTER', 'TIMELINE', 'STATS', 'STANDS'].map((tab) => (
+            ['OVERVIEW', 'ROSTER', 'STATS', 'STANDS'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)}
