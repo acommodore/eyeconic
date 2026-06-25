@@ -424,11 +424,11 @@ export default function DiscoverPage() {
            </div>
         </section>
 
-        {/* RIGHT: MARKET MOVERS WIDGET (Takes up 1 column) */}
+        {/* RIGHT: MOOD INDEX WIDGET (Takes up 1 column) */}
         <section className="lg:col-span-1">
            <div className="flex items-center gap-2 mb-6 border-b border-white/10 pb-4">
               <Activity className="w-5 h-5 text-teal" />
-              <h3 className="text-sm font-black tracking-widest uppercase text-white">Market Movers</h3>
+              <h3 className="text-sm font-black tracking-widest uppercase text-white">Mood Index</h3>
            </div>
 
            <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col gap-8">
