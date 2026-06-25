@@ -126,7 +126,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
               <Mic className="w-8 h-8 text-white" />
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-black tracking-widest text-lg md:text-xl uppercase text-white mb-1">JOIN HALFTIME STAND</span>
+              <span className="font-black tracking-widest text-lg md:text-xl uppercase text-white mb-1">JOIN STAND</span>
               <span className="text-xs text-white/80 font-bold uppercase tracking-widest flex items-center gap-2">
                  <span className="w-2 h-2 rounded-full bg-white animate-pulse" /> 12.4K FANS ACTIVE
               </span>
