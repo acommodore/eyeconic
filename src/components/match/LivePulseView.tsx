@@ -92,10 +92,10 @@ const getDotColor = (type: string) => {
 };
 
 // --- Sub-components ---
-const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void }) => (
+const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, handleEcho }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void, echoedNotes: Set<number>, handleEcho: (id: number) => void }) => (
   <div className={`w-full bg-[#0A0A0A] rounded-[2rem] border ${isActive ? 'border-teal/50 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'border-white/10'} p-6 md:p-8 relative transition-all duration-500 flex flex-col overflow-hidden`}>
     <div className="flex items-center justify-between mb-4">
-      <span className="text-teal font-mono font-bold text-xl">{event.minute}'</span>
+      <span className="text-teal font-mono font-bold text-xl">{event.minute}&apos;</span>
       
       <div className="flex items-center gap-4">
         <div className="inline-flex items-center gap-1.5 bg-white/5 px-4 py-2 rounded-full text-xs font-bold text-gray-300">
@@ -450,7 +450,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                     />
                     
                     <div className={`absolute -top-7 text-xs font-bold transition-colors ${isActive ? 'text-teal' : 'text-gray-500'}`}>
-                      {event.minute}'
+                      {event.minute}&apos;
                     </div>
                     
                     {isActive && (
@@ -480,12 +480,18 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                     className={`hidden md:flex col-span-1 transition-all duration-500 cursor-pointer flex-col ${prevEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
                     onClick={() => prevEvent && setActiveMinute(prevEvent.minute)}
                  >
-                    {prevEvent && <EventCard event={prevEvent} isActive={false} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />}
+                    {prevEvent && <EventCard event={prevEvent} isActive={false} voiceNotes={localVoiceNotes} echoedNotes={echoedNotes} handleEcho={handleEcho} onRecordClick={() => setIsRecordingModalOpen(true)} />}
                  </div>
 
                  {/* Active Card */}
                  <div className="col-span-1 md:col-span-3 z-10 transition-all duration-500 flex flex-col">
-                    <EventCard event={activeEvent} isActive={true} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />
+                    <EventCard 
+                    event={activeEvent} 
+                    isActive={true} 
+                    voiceNotes={localVoiceNotes}
+                    echoedNotes={echoedNotes}
+                    handleEcho={handleEcho}
+                    onRecordClick={() => setIsRecordingModalOpen(true)} />
                  </div>
 
                  {/* Next Card */}
@@ -493,7 +499,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                     className={`hidden md:flex col-span-1 transition-all duration-500 cursor-pointer flex-col ${nextEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
                     onClick={() => nextEvent && setActiveMinute(nextEvent.minute)}
                  >
-                    {nextEvent && <EventCard event={nextEvent} isActive={false} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />}
+                    {nextEvent && <EventCard event={nextEvent} isActive={false} voiceNotes={localVoiceNotes} echoedNotes={echoedNotes} handleEcho={handleEcho} onRecordClick={() => setIsRecordingModalOpen(true)} />}
                  </div>
 
                </div>
@@ -604,7 +610,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                <div className="flex items-center gap-1.5 flex-1 justify-center">
                  {/* Soundwave bars (animated) */}
                  {[...Array(6)].map((_, i) => (
-                   <div key={i} className={`w-1.5 ${isRecording ? 'bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]' : 'bg-white/10'} rounded-full transition-colors`} style={{ height: isRecording ? `${Math.max(12, Math.random() * 45)}px` : '12px', animationDelay: isRecording ? `${i * 0.15}s` : '0s' }} />
+                   <div key={i} className={`w-1.5 ${isRecording ? 'bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]' : 'bg-white/10'} rounded-full transition-colors`} style={{ height: isRecording ? `${Math.max(12, ((i * 17) % 45))}px` : '12px', animationDelay: isRecording ? `${i * 0.15}s` : '0s' }} />
                  ))}
                </div>
                <div className="flex flex-col gap-1.5 justify-end h-12 shrink-0">

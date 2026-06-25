@@ -26,6 +26,18 @@ const fetchPlayerStats = async (playerId: string) => {
   };
 };
 
+// --- Sub-components ---
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, handleEcho }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void, echoedNotes: Set<number>, handleEcho: (id: number) => void }) => (
+  <div className={`bg-[#050505] border border-white/5 rounded-lg p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors ${isActive ? 'ring-1 ring-teal/50' : ''}`}>
+    <div className="flex items-center gap-1.5 shrink-0 mt-0.5 w-8">
+      <span className={`w-1.5 h-1.5 rounded-full ${event.type === 'pos' ? 'bg-teal' : 'bg-coral'}`}></span>
+      <span className="text-[8px] font-bold text-white tracking-widest">{event.time}</span>
+    </div>
+    <p className="text-[11px] text-gray-300 font-medium leading-relaxed">{event.text}</p>
+  </div>
+);
+
 interface PlayerSummaryModalProps {
   playerId: string;
   onClose: () => void;
@@ -34,15 +46,22 @@ interface PlayerSummaryModalProps {
 }
 
 export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }: PlayerSummaryModalProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [player, setPlayer] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetchPlayerStats(playerId).then(data => {
-      setPlayer(data);
-      setLoading(false);
-    });
+    let ignore = false;
+    const fetchStats = async () => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const data = await fetchPlayerStats(playerId);
+      if (!ignore) {
+        setPlayer(data);
+        setLoading(false);
+      }
+    };
+    fetchStats();
+    return () => { ignore = true; };
   }, [playerId]);
 
   if (loading) {
@@ -194,7 +213,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
                   </svg>
                 </div>
                 <div className="relative z-20 flex justify-between text-[7px] font-bold text-gray-600 tracking-widest mt-auto px-1">
-                  <span>0'</span><span>15'</span><span>30'</span><span>HT</span><span>60'</span><span>75'</span><span>FT</span>
+                  <span>0&apos;</span><span>15&apos;</span><span>30&apos;</span><span>HT</span><span>60&apos;</span><span>75&apos;</span><span>FT</span>
                 </div>
               </div>
             </div>
@@ -205,13 +224,13 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
                 <h3 className="text-[9px] font-black tracking-widest text-gray-500 uppercase">KEY MOMENTS</h3>
               </div>
               <div className="space-y-1.5 overflow-y-auto hide-scrollbar pb-2">
-                {player.keyMoments.map((moment: any) => (
+                {player.keyMoments.map((moment: { id: string; minute: number; type: string; desc: string; }) => (
                   <div key={moment.id} className="bg-[#050505] border border-white/5 rounded-lg p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors">
                     <div className="flex items-center gap-1.5 shrink-0 mt-0.5 w-8">
                       <span className={`w-1.5 h-1.5 rounded-full ${moment.type === 'pos' ? 'bg-teal' : 'bg-coral'}`}></span>
-                      <span className="text-[8px] font-bold text-white tracking-widest">{moment.time}</span>
+                      <span className="text-[8px] font-bold text-white tracking-widest">{moment.minute}'</span>
                     </div>
-                    <p className="text-[11px] text-gray-300 font-medium leading-relaxed">{moment.text}</p>
+                    <p className="text-[11px] text-gray-300 font-medium leading-relaxed">{moment.desc}</p>
                   </div>
                 ))}
               </div>
