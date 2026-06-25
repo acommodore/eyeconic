@@ -196,10 +196,7 @@ export default function DiscoverPage() {
         
         {/* CALENDAR HEADER */}
         <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-           <div className="flex items-center gap-2">
-             <CalendarIcon className="w-5 h-5 text-teal" />
-             <span className="text-sm font-black tracking-widest uppercase text-gray-400">Match Calendar</span>
-           </div>
+
 
            <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0">
               {days.map(day => (
@@ -212,8 +209,7 @@ export default function DiscoverPage() {
         </header>
 
         {/* EMOTIONAL FILTERS */}
-        <div className="flex flex-wrap items-center gap-3 mb-10 border-b border-white/5 pb-6">
-           <span className="text-xs font-bold text-gray-500 uppercase tracking-widest mr-2">Optimize For:</span>
+        <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mb-10 border-b border-white/5 pb-6">
            {filters.map(f => {
              const Icon = f.icon;
              const isActive = activeFilter === f.name;
@@ -221,7 +217,7 @@ export default function DiscoverPage() {
                <button 
                  key={f.name}
                  onClick={() => setActiveFilter(f.name)}
-                 className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'bg-teal text-black border-teal shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'bg-transparent border-white/10 text-gray-400 hover:border-white/30'}`}
+                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest transition-colors ${isActive ? 'bg-teal text-black border-teal shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'bg-transparent border-white/10 text-gray-400 hover:border-white/30'}`}
                >
                  <Icon className="w-3.5 h-3.5" /> {f.name}
                </button>
