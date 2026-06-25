@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Activity, Compass, User, Menu, ChevronLeft } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function AppLayout({
   children,
@@ -64,10 +65,13 @@ export default function AppLayout({
           </div>
           <span className="font-black tracking-widest uppercase">EYECONIC</span>
         </Link>
-        <Link href="/profile" className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-[#121212]">
-           {/* Avatar placeholder */}
-           <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
-        </Link>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Link href="/profile" className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-[#121212]">
+             {/* Avatar placeholder */}
+             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
+          </Link>
+        </div>
       </header>
 
       {/* Desktop Sidebar */}
@@ -113,7 +117,11 @@ export default function AppLayout({
           })}
         </nav>
 
-        <Link href="/profile" className={`mt-auto flex items-center gap-3 rounded-xl bg-[#121212] border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
+        <div className="mt-auto flex flex-col gap-4 w-full">
+          <div className={`flex ${isCollapsed ? 'justify-center' : 'justify-start px-2'}`}>
+            <ThemeToggle />
+          </div>
+          <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-[#121212] border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
           <div className="w-10 h-10 shrink-0 rounded-full border border-[#00E5FF] overflow-hidden p-0.5 group-hover:border-white transition-colors">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
               <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
@@ -127,6 +135,7 @@ export default function AppLayout({
             </div>
           )}
         </Link>
+        </div>
       </aside>
 
       {/* Main Content Area */}

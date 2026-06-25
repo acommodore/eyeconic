@@ -4,8 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'lucide-react';
 
-import { ThemeToggle } from '@/components/ThemeToggle';
-
 // --- MOCK DATA ---
 
 const allLiveMatches = [
@@ -379,10 +377,6 @@ export default function DiscoverPage() {
                   </button>
                 );
               })}
-           </div>
-           
-           <div className="flex items-center justify-end shrink-0">
-             <ThemeToggle />
            </div>
         </header>
 
