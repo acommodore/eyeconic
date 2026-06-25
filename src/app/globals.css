@@ -2,13 +2,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-teal: #00E5FF;
-  --color-coral: #FF7F50;
+  --color-teal: var(--teal);
+  --color-coral: var(--coral);
   --color-dark: #050505;
   --color-dark-card: #121212;
   --color-light: #ffffff;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
   --animate-shimmer: shimmer 1.5s infinite;
 }
 
@@ -17,13 +25,47 @@
 }
 
 :root {
-  --background: #f9fafb; /* gray-50 */
-  --foreground: #111827; /* gray-900 */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.05);
+
+  --teal: #00E5FF;
+  --teal-muted: rgba(0, 229, 255, 0.1);
+  
+  --coral: #FF7F50;
 }
 
 .dark {
   --background: #050505;
   --foreground: #ffffff;
+  
+  --card: #0A0A0A;
+  --card-foreground: #ffffff;
+  
+  --border: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.1);
+  
+  --muted: #121212;
+  --muted-foreground: #9ca3af;
+  
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  
+  --teal: #00E5FF;
+  --teal-muted: rgba(0, 229, 255, 0.1);
+  
+  --coral: #FF7F50;
 }
 
 body {

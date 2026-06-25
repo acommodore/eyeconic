@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'lucide-react';
 
+import { ThemeToggle } from '@/components/ThemeToggle';
+
 // --- MOCK DATA ---
 
 const allLiveMatches = [
@@ -132,7 +134,7 @@ const getVolatilityColor = (volatility: number) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished = false }: { match: any, isExpanded: boolean, onToggle: (id: number) => void, isLive?: boolean, isFinished?: boolean }) => {
   return (
-    <div className={`border-b border-white/5 bg-[#0A0A0A]/40 backdrop-blur-sm hover:bg-white/[0.04] transition-colors overflow-hidden ${isExpanded ? 'bg-white/[0.04]' : ''}`}>
+    <div className={`border-b border-border bg-card/40 backdrop-blur-sm hover:bg-white/[0.04] transition-colors overflow-hidden ${isExpanded ? 'bg-white/[0.04]' : ''}`}>
       <div 
         className="flex flex-col md:flex-row md:items-center justify-between p-4 cursor-pointer gap-4 md:gap-6"
         onClick={() => onToggle(match.id)}
@@ -142,16 +144,16 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               {isLive ? (
                  <span className="text-[10px] font-mono text-coral animate-pulse font-bold">{match.time}</span>
               ) : isFinished ? (
-                 <span className="text-[10px] font-mono text-gray-500 font-bold">FT</span>
+                 <span className="text-[10px] font-mono text-muted-foreground font-bold">FT</span>
               ) : (
-                 <span className="text-[10px] font-mono text-gray-400 font-bold">{match.time}</span>
+                 <span className="text-[10px] font-mono text-muted-foreground font-bold">{match.time}</span>
               )}
            </div>
 
            <div className="flex-1 min-w-0 w-full md:w-auto">
               <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0">
                  <div className="flex items-center gap-2 justify-end min-w-0">
-                    <span className="text-sm font-bold text-white uppercase tracking-wider text-right truncate">{match.team1}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate">{match.team1}</span>
                     {match.logo1 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={match.logo1} alt={match.team1} className={`w-5 h-5 object-contain shrink-0 ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
@@ -160,7 +162,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
 
                  <div className="flex items-center justify-center min-w-[48px] px-2 shrink-0">
                     {isLive || isFinished ? (
-                       <span className="text-lg font-mono font-black text-white tabular-nums whitespace-nowrap">{match.score || "0 - 0"}</span>
+                       <span className="text-lg font-mono font-black text-foreground tabular-nums whitespace-nowrap">{match.score || "0 - 0"}</span>
                     ) : (
                        <span className="text-sm font-mono text-gray-600 font-bold">VS</span>
                     )}
@@ -171,7 +173,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                        /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={match.logo2} alt={match.team2} className={`w-5 h-5 object-contain shrink-0 ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
                     )}
-                    <span className="text-sm font-bold text-white uppercase tracking-wider text-left truncate">{match.team2}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate">{match.team2}</span>
                  </div>
               </div>
               
@@ -187,10 +189,10 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  <span className={`font-mono text-lg font-black tabular-nums ${getVolatilityColor(match.volatility)}`}>
                     {match.volatility}%
                  </span>
-                 <span className="text-[9px] uppercase tracking-widest text-gray-500 hidden sm:block">VOL</span>
+                 <span className="text-[9px] uppercase tracking-widest text-muted-foreground hidden sm:block">VOL</span>
               </div>
               
-              <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+              <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors border border-border">
                  <ArrowRight className="w-4 h-4 text-teal group-hover:translate-x-0.5 transition-transform" />
               </Link>
            </div>
@@ -198,11 +200,11 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
       </div>
 
       {isExpanded && (
-        <div className="px-4 pb-5 pt-3 border-t border-white/5 bg-black/40 shadow-inner">
+        <div className="px-4 pb-5 pt-3 border-t border-border bg-black/5 dark:bg-black/40 shadow-inner">
            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="col-span-1">
-                 <h4 className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-2">Live Context</h4>
-                 <p className="text-xs text-gray-300 leading-relaxed font-mono">
+                 <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Live Context</h4>
+                 <p className="text-xs text-muted-foreground leading-relaxed font-mono">
                     {match.insight || (isFinished ? "Post-match fallout and analysis ongoing." : isLive ? "Awaiting significant narrative developments..." : "Pre-match buildup is intensifying...")}
                  </p>
                  <Link href={`/match/${match.id}`} className="mt-4 md:hidden inline-flex items-center gap-2 text-[10px] font-mono text-teal uppercase tracking-widest">
@@ -212,18 +214,18 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
 
               {(match.emotionalMvp || match.polarizingPlayer) && (
                  <div className="col-span-1">
-                    <h4 className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-2">Key Actors</h4>
+                    <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Key Actors</h4>
                     <div className="flex flex-col gap-2">
                        {match.emotionalMvp && (
-                          <div className="flex items-center justify-between pb-1 border-b border-white/5">
+                          <div className="flex items-center justify-between pb-1 border-b border-border">
                              <span className="text-[10px] font-mono uppercase tracking-widest text-teal">Hero</span>
-                             <span className="text-xs font-bold text-white uppercase">{match.emotionalMvp}</span>
+                             <span className="text-xs font-bold text-foreground uppercase">{match.emotionalMvp}</span>
                           </div>
                        )}
                        {match.polarizingPlayer && (
-                          <div className="flex items-center justify-between pb-1 border-b border-white/5">
+                          <div className="flex items-center justify-between pb-1 border-b border-border">
                              <span className="text-[10px] font-mono uppercase tracking-widest text-coral">Villain</span>
-                             <span className="text-xs font-bold text-white uppercase">{match.polarizingPlayer}</span>
+                             <span className="text-xs font-bold text-foreground uppercase">{match.polarizingPlayer}</span>
                           </div>
                        )}
                     </div>
@@ -231,19 +233,19 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               )}
 
               <div className="col-span-1">
-                 <h4 className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-2">Audience State</h4>
+                 <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Audience State</h4>
                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between pb-1 border-b border-white/5">
-                       <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400">Dominant Emotion</span>
-                       <div className="flex items-center gap-1.5 text-xs font-bold text-white uppercase">
+                    <div className="flex items-center justify-between pb-1 border-b border-border">
+                       <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Dominant Emotion</span>
+                       <div className="flex items-center gap-1.5 text-xs font-bold text-foreground uppercase">
                           <span>{match.fanMoodEmoji || "🔥"}</span>
                           <span>{match.fanMood || match.mood || "Electric"}</span>
                        </div>
                     </div>
                     {match.agenda && (
-                       <div className="flex items-center justify-between pb-1 border-b border-white/5">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-gray-400">Active Agenda</span>
-                          <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-white truncate max-w-[120px]">{match.agenda}</span>
+                       <div className="flex items-center justify-between pb-1 border-b border-border">
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Active Agenda</span>
+                          <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-foreground truncate max-w-[120px]">{match.agenda}</span>
                        </div>
                     )}
                  </div>
@@ -334,7 +336,7 @@ export default function DiscoverPage() {
   ].filter(group => group.matches.length > 0);
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
+    <main className="min-h-screen bg-background text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
       
       {/* Dynamic Ambient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
@@ -344,18 +346,18 @@ export default function DiscoverPage() {
       </div>
 
       {/* 0. TERMINAL TICKER TAPE */}
-      <div className="sticky top-0 z-50 w-full bg-[#050505]/80 backdrop-blur-xl border-b border-white/5 flex items-center overflow-hidden py-1.5 shadow-2xl">
+      <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-white hover:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
             </div>
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-white hover:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
@@ -365,18 +367,22 @@ export default function DiscoverPage() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 pt-8">
         
-        {/* CALENDAR HEADER */}
+        {/* CALENDAR & THEME HEADER */}
         <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-           <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0">
+           <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0 flex-1">
               {days.map(day => {
                 const isActive = day.date === activeDate;
                 return (
-                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-white/5 text-gray-400 hover:border-white/20'} cursor-pointer transition-all`}>
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
                     <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
-                    <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-white drop-shadow-md' : ''}`}>{day.date}</span>
+                    <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-black dark:text-foreground drop-shadow-md' : ''}`}>{day.date}</span>
                   </button>
                 );
               })}
+           </div>
+           
+           <div className="flex items-center justify-end shrink-0">
+             <ThemeToggle />
            </div>
         </header>
 
@@ -389,7 +395,7 @@ export default function DiscoverPage() {
                <button 
                  key={f.name}
                  onClick={() => setActiveFilter(f.name)}
-                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-[#0A0A0A] border-white/10 text-gray-400 hover:border-white/30 hover:bg-white/5'}`}
+                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-white/5'}`}
                >
                  <Icon className="w-3.5 h-3.5" /> {f.name}
                </button>
@@ -400,7 +406,7 @@ export default function DiscoverPage() {
         {/* 1. HERO SECTION (Ranked #1 by Filter) */}
         {heroMatch && (
         <section className="mb-16">
-          <div className="relative rounded-[40px] border border-white/5 bg-[#0A0A0A]/60 backdrop-blur-md overflow-hidden group shadow-2xl">
+          <div className="relative rounded-[40px] border border-border bg-card/60 backdrop-blur-md overflow-hidden group shadow-2xl">
             {/* Subtle Image background for Hero */}
             <div 
                className="absolute inset-0 bg-cover bg-center opacity-[0.03] mix-blend-screen group-hover:opacity-[0.06] transition-opacity duration-1000" 
@@ -422,16 +428,16 @@ export default function DiscoverPage() {
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md truncate">{heroMatch.team1}</h2>
-                        <span className="text-5xl md:text-6xl font-mono font-black text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team1}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[0] : ''}
                         </span>
                      </div>
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md truncate">{heroMatch.team2}</h2>
-                        <span className="text-5xl md:text-6xl font-mono font-black text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team2}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[1] : ''}
                         </span>
                      </div>
@@ -441,7 +447,7 @@ export default function DiscoverPage() {
                   <div className="flex items-center gap-6 mb-10">
                      <span className="text-lg font-mono text-coral animate-pulse font-bold tabular-nums drop-shadow-[0_0_8px_rgba(255,107,107,0.6)]">{heroMatch.time}</span>
                      <div className="w-px h-6 bg-white/20"></div>
-                     <div className={`flex items-center gap-3 text-sm font-mono uppercase tracking-widest ${getVolatilityColor(heroMatch.volatility)} bg-white/5 px-4 py-2 rounded-full border border-white/5`}>
+                     <div className={`flex items-center gap-3 text-sm font-mono uppercase tracking-widest ${getVolatilityColor(heroMatch.volatility)} bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full border border-border`}>
                         <span className="text-xl">{heroMatch.pulseEmoji}</span>
                         <span>{heroMatch.pulseStatus}</span>
                      </div>
@@ -453,9 +459,9 @@ export default function DiscoverPage() {
                   </Link>
                </div>
 
-               <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-3xl border border-white/5 backdrop-blur-xl">
+               <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-3xl border border-border backdrop-blur-xl">
                   {/* Narrative (Unboxed, separated by fine lines) */}
-                  <div className="pb-5 border-b border-white/10">
+                  <div className="pb-5 border-b border-border">
                      <h3 className="text-[9px] font-mono uppercase tracking-widest text-teal mb-3 flex items-center gap-2">
                         <Activity className="w-3 h-3" /> Live Context
                      </h3>
@@ -465,11 +471,11 @@ export default function DiscoverPage() {
                   {/* Key Data */}
                   <div className="flex items-start justify-between">
                      <div className="flex flex-col gap-2">
-                        <span className="text-[9px] font-mono uppercase tracking-widest text-gray-500">Volatility Index</span>
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">Volatility Index</span>
                         <span className={`text-5xl font-mono font-black tabular-nums ${getVolatilityColor(heroMatch.volatility)}`}>{heroMatch.volatility}%</span>
                      </div>
                      <div className="flex flex-col items-end gap-2">
-                        <span className="text-[9px] font-mono uppercase tracking-widest text-gray-500">Active Triggers</span>
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">Active Triggers</span>
                         <div className="flex flex-col gap-1.5 items-end">
                            {heroMatch.triggers?.map((t, i) => (
                               <span key={i} className="text-[10px] font-mono text-coral bg-coral/10 border border-coral/30 px-2.5 py-1 rounded-md uppercase tracking-widest">{t}</span>
@@ -485,18 +491,18 @@ export default function DiscoverPage() {
 
         {/* 2. TERMINAL FEED SORTING CONTROLS */}
         <div className="flex items-center justify-between mb-8">
-           <h2 className="text-xl font-black uppercase tracking-widest text-white drop-shadow-md hidden md:block">Terminal Feed</h2>
+           <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-md hidden md:block">Terminal Feed</h2>
            
-           <div className="flex bg-[#0A0A0A] rounded-full p-1 border border-white/10 w-full md:w-auto">
+           <div className="flex bg-card rounded-full p-1 border border-border w-full md:w-auto">
              <button 
                onClick={() => setSortMode('watchability')}
-               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-gray-500 hover:text-white'}`}>
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                 <Activity className="w-3.5 h-3.5" />
                 WATCHABILITY
              </button>
              <button 
                onClick={() => setSortMode('league')}
-               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-gray-500 hover:text-white'}`}>
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                 <Swords className="w-3.5 h-3.5" />
                 LEAGUE
              </button>
@@ -511,16 +517,16 @@ export default function DiscoverPage() {
                   {/* League Header */}
                   <div className="flex items-center gap-4 mb-4 pl-2">
                     <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
-                    <h2 className="text-lg font-black uppercase tracking-widest text-white drop-shadow-md">{league}</h2>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
                   </div>
 
                   {/* League Container */}
-                  <div className="bg-[#0A0A0A]/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
                     <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
+                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-border" : ""}>
                            <TerminalRow 
                              match={match} 
                              isExpanded={expandedMatches.has(match.id)} 
@@ -540,16 +546,16 @@ export default function DiscoverPage() {
                   {/* Group Header */}
                   <div className="flex items-center gap-4 mb-4 pl-2">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
-                    <h2 className="text-lg font-black uppercase tracking-widest text-white drop-shadow-md">{group.groupName}</h2>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
                   </div>
 
                   {/* Group Container */}
-                  <div className="bg-[#0A0A0A]/50 backdrop-blur-md rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
                     <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {group.matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-white/5" : ""}>
+                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-border" : ""}>
                            <TerminalRow 
                              match={match} 
                              isExpanded={expandedMatches.has(match.id)} 
@@ -566,8 +572,8 @@ export default function DiscoverPage() {
           )}
 
           {allCurrentMatches.length === 0 && (
-            <div className="p-16 text-center bg-[#0A0A0A]/50 rounded-2xl border border-white/5 backdrop-blur-md">
-              <span className="text-gray-500 text-sm font-mono tracking-widest uppercase">No matches found matching this criteria.</span>
+            <div className="p-16 text-center bg-card/50 rounded-2xl border border-border backdrop-blur-md">
+              <span className="text-muted-foreground text-sm font-mono tracking-widest uppercase">No matches found matching this criteria.</span>
             </div>
           )}
         </section>
