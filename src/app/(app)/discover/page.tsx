@@ -106,7 +106,7 @@ const upcomingTableData = [
   { id: 5, team1: "Barcelona", team2: "Atletico", time: "16:30", logo1: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg", league: "La Liga", mood: "High Tension 😬", hyped: true, volatility: 91, triggers: ["[TITLE DECIDER]"] },
   { id: 6, team1: "Man United", team2: "Liverpool", time: "19:00", logo1: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", league: "Premier League", mood: "Chaos ⚡", hyped: true, volatility: 98, triggers: ["[DERBY]"] },
   { id: 8, team1: "Chelsea", team2: "Newcastle", time: "20:00", logo1: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg", league: "Premier League", mood: "Desperation 😰", hyped: false, volatility: 65, triggers: [] },
-  { id: 9, team1: "Juventus", team2: "Milan", time: "21:00", logo1: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juventus_FC_2017_icon_%28black%29.svg", logo2: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg", league: "Serie A", mood: "Strategic ♟️", hyped: false, volatility: 55, triggers: [] },
+  { id: 9, team1: "Inter Milan", team2: "Milan", time: "21:00", logo1: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg", logo2: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg", league: "Serie A", mood: "Strategic ♟️", hyped: false, volatility: 55, triggers: [] },
 ];
 
 const finishedTableData = [
