@@ -178,7 +178,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
 );
 
 
-export default function LivePulseView() {
+export default function LivePulseView({ isMatchFinished = false }: { isMatchFinished?: boolean }) {
   const [activeMinute, setActiveMinute] = useState(78);
   const [activeFilter, setActiveFilter] = useState('All');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -345,8 +345,8 @@ export default function LivePulseView() {
       {/* 3. SPLIT LAYOUT */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 overflow-hidden">
         
-        {/* LEFT PANE: Action & Audio (col-span-7) */}
-        <div className="xl:col-span-7 space-y-8 flex flex-col">
+        {/* LEFT PANE: Match Pulse Timeline */}
+        <div className={`flex flex-col gap-8 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
 
           {/* Action Feed */}
           <section className="bg-[#0A0A0A] rounded-[2rem] border border-white/5 p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
@@ -462,6 +462,7 @@ export default function LivePulseView() {
         </div>
 
         {/* RIGHT PANE: Deep Stats & Impact (col-span-5) */}
+        {!isMatchFinished && (
         <div className="xl:col-span-5 space-y-8">
            
            {/* Player Impact - TACTICAL VIEW */}
@@ -535,6 +536,7 @@ export default function LivePulseView() {
            </section>
 
         </div>
+        )}
 
       </div>
 

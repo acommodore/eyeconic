@@ -333,7 +333,7 @@ export default function MatchDetailsPage() {
       </div>
 
       {matchState === 'live' && (
-        <LivePulseView />
+        <LivePulseView isMatchFinished={true} />
       )}
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (
