@@ -234,7 +234,7 @@ export default function DiscoverPage() {
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000')] bg-cover bg-center opacity-10 mix-blend-overlay transition-transform duration-[2s] group-hover:scale-105" />
              
              <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                <span className="text-[10px] font-black uppercase tracking-widest text-teal">Match of the Day // {activeFilter}</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-teal">Match of the Day</span>
              </div>
 
              <div className="relative z-10 p-6 md:p-12 pt-20 flex flex-col lg:flex-row gap-8 lg:gap-16 items-center lg:items-stretch">
