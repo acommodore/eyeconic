@@ -291,8 +291,7 @@ export default function LivePulseView() {
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'neutral'); }} className="hover:scale-125 transition-transform text-lg">🧱</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'neutral'); }} className="hover:scale-125 transition-transform text-lg">😐</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'negative'); }} className="hover:scale-125 transition-transform text-lg">😤</button>
-             <div className="w-px h-4 bg-white/20 mx-1" />
-             <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, null); }} className="hover:scale-125 transition-transform text-lg">❌</button>
+             <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'negative'); }} className="hover:scale-125 transition-transform text-lg">❌</button>
           </div>
         )}
         <div className={`flex flex-col items-center bg-[#0a0a0a] border ${borderColor} rounded-lg overflow-hidden w-12 md:w-16 shadow-xl transition-all duration-300 relative z-20`}>
