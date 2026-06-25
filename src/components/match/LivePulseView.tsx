@@ -511,13 +511,19 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
 
         {/* RIGHT PANE: Deep Stats & Impact (col-span-5) */}
         {!isMatchFinished && (
-        <div 
-          className={`
-            xl:col-span-5 xl:space-y-8
-            xl:relative xl:translate-y-0 xl:h-auto xl:bg-transparent xl:border-none xl:shadow-none xl:p-0 xl:overflow-visible
-            fixed inset-x-0 bottom-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] bg-[#0A0A0A] rounded-t-[2rem] border-t border-x border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.9)] px-4 pb-8 pt-4 h-[85vh] overflow-y-auto
-            ${activeMobileView === 'pulse' ? 'translate-y-0' : 'translate-y-[calc(100%-100px)] cursor-pointer hover:bg-[#121212]'}
-          `}
+        <>
+          {/* Mobile Overlay to close drawer when clicking outside */}
+          <div 
+            className={`xl:hidden fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${activeMobileView === 'pulse' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            onClick={() => setActiveMobileView('feed')}
+          />
+          <div 
+            className={`
+              xl:col-span-5 xl:space-y-8
+              xl:relative xl:translate-y-0 xl:h-auto xl:bg-transparent xl:border-none xl:shadow-none xl:p-0 xl:overflow-visible
+              fixed inset-x-0 bottom-0 z-[100] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] bg-[#0A0A0A] rounded-t-[2rem] border-t border-x border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.9)] px-4 pb-8 pt-4 h-[85vh] overflow-y-auto
+              ${activeMobileView === 'pulse' ? 'translate-y-0' : 'translate-y-[calc(100%-100px)] cursor-pointer hover:bg-[#121212]'}
+            `}
           onClick={(e) => {
             if (window.innerWidth < 1280 && activeMobileView === 'feed') {
               setActiveMobileView('pulse');
@@ -551,7 +557,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                 <div className="w-1 h-6 bg-teal" />
                 <h2 className="text-sm font-black tracking-widest text-white uppercase">PLAYER IMPACT LIVE</h2>
               </div>
-              <p className="text-[10px] text-gray-500 mb-8 uppercase tracking-widest relative z-10">Select player to see rating. Tap again to rate.</p>
+              <p className="text-[10px] text-gray-500 mb-8 uppercase tracking-widest relative z-10">Tap player to rate action</p>
 
               <div className="flex justify-center mb-10 relative z-10">
                 <div className="flex bg-[#121212] rounded-full p-1 border border-white/10">
