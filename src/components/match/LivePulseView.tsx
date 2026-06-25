@@ -433,24 +433,24 @@ export default function LivePulseView() {
                <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#0A0A0A] to-transparent z-20 pointer-events-none" />
                <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#0A0A0A] to-transparent z-20 pointer-events-none" />
 
-               <div className="grid grid-cols-5 gap-6 w-full relative flex-1 mt-2">
+               <div className="grid grid-cols-1 md:grid-cols-5 gap-6 w-full relative flex-1 mt-2">
                  
                  {/* Prev Card */}
                  <div 
-                    className={`col-span-1 transition-all duration-500 cursor-pointer flex flex-col ${prevEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
+                    className={`hidden md:flex col-span-1 transition-all duration-500 cursor-pointer flex-col ${prevEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
                     onClick={() => prevEvent && setActiveMinute(prevEvent.minute)}
                  >
                     {prevEvent && <EventCard event={prevEvent} isActive={false} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />}
                  </div>
 
                  {/* Active Card */}
-                 <div className="col-span-3 z-10 transition-all duration-500 flex flex-col">
+                 <div className="col-span-1 md:col-span-3 z-10 transition-all duration-500 flex flex-col">
                     <EventCard event={activeEvent} isActive={true} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />
                  </div>
 
                  {/* Next Card */}
                  <div 
-                    className={`col-span-1 transition-all duration-500 cursor-pointer flex flex-col ${nextEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
+                    className={`hidden md:flex col-span-1 transition-all duration-500 cursor-pointer flex-col ${nextEvent ? 'opacity-30 scale-95 blur-[2px] hover:blur-none hover:opacity-50' : 'opacity-0 pointer-events-none'}`}
                     onClick={() => nextEvent && setActiveMinute(nextEvent.minute)}
                  >
                     {nextEvent && <EventCard event={nextEvent} isActive={false} voiceNotes={localVoiceNotes} onRecordClick={() => setIsRecordingModalOpen(true)} />}

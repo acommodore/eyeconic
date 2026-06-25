@@ -436,59 +436,61 @@ export default function MatchDetailsPage() {
              </div>
 
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
-             <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                <div className="bg-[#121212]/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
-                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-                      <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-                   </div>
-                   <div className="relative z-10 w-full h-full flex flex-col justify-center">
-                      <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2">MVP WATCH</h3>
-                      <select 
-                        value={mvpWatchPlayer}
-                        onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-white/10"
-                      >
-                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                      </select>
-                      <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
-                      <div className="flex items-end gap-1 mt-auto">
-                        <span className="text-xl font-black text-teal leading-none">8.7</span>
-                        <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
-                      </div>
-                   </div>
-                </div>
+             {prematchTab === 'LINEUP' && (
+               <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+                  <div className="bg-[#121212]/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                     <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                     <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                        <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                     </div>
+                     <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                        <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2">MVP WATCH</h3>
+                        <select 
+                          value={mvpWatchPlayer}
+                          onChange={(e) => setMvpWatchPlayer(e.target.value)}
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-white/10"
+                        >
+                          {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                        </select>
+                        <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                        <div className="flex items-end gap-1 mt-auto">
+                          <span className="text-xl font-black text-teal leading-none">8.7</span>
+                          <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
+                        </div>
+                     </div>
+                  </div>
 
-                <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
-                   <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
-                   <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-                      <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
-                   </div>
-                   <div className="relative z-10 w-full h-full flex flex-col justify-center">
-                      <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-2">FRAUD WATCH</h3>
-                      <select 
-                        value={fraudWatchPlayer}
-                        onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                        className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
-                      >
-                        {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
-                      </select>
-                      <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
-                      <div className="flex items-end gap-1.5 mt-auto">
-                        <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
-                      </div>
-                   </div>
-                </div>
-             </div>
+                  <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                     <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
+                     <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
+                        <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
+                     </div>
+                     <div className="relative z-10 w-full h-full flex flex-col justify-center">
+                        <h3 className="text-[10px] font-black tracking-widest text-[#D32F2F] uppercase mb-2">FRAUD WATCH</h3>
+                        <select 
+                          value={fraudWatchPlayer}
+                          onChange={(e) => setFraudWatchPlayer(e.target.value)}
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                        >
+                          {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                        </select>
+                        <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                        <div className="flex items-end gap-1.5 mt-auto">
+                          <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+             )}
           </motion.div>
         )}
 
         {/* STANDS TAB */}
-        {activeTab === 'STANDS' && (
+        {matchState === 'postmatch' && activeTab === 'STANDS' && (
           <motion.div
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
@@ -681,46 +683,8 @@ export default function MatchDetailsPage() {
             </div>
           </section>
 
-          {/* Key Insights */}
-          <section className="mb-16">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Activity className="w-5 h-5 text-teal" /> KEY INSIGHTS
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Liverpool's second-half introduction of Diaz forced Walker to drop 15 yards deeper, fundamentally breaking Man City's high press structure and isolating De Bruyne in the right half-space.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Mac Allister won 82% of his ground duels against Rodri, an unusually high success rate that allowed Liverpool to transition from defense to attack in under 4 seconds on average.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Van Dijk maintained a 2-meter buffer from Haaland throughout the match, denying him the space for his signature runs behind. Haaland finished with just 14 touches, his lowest of the season.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Despite having an xG of only 1.2, Liverpool managed to score twice through sheer clinical finishing, converting half-chances into key goals when momentum was heavily against them.
-                </p>
-              </div>
-            </div>
-          </section>
           {/* Hot Takes */}
-          <section>
+          <section className="mb-16">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
                 <Flame className="w-5 h-5 text-[#FF3B00]" /> HOT TAKES
@@ -757,11 +721,50 @@ export default function MatchDetailsPage() {
               ))}
             </div>
           </section>
+
+          {/* Key Insights */}
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+                <Activity className="w-5 h-5 text-teal" /> KEY INSIGHTS
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Liverpool's second-half introduction of Diaz forced Walker to drop 15 yards deeper, fundamentally breaking Man City's high press structure and isolating De Bruyne in the right half-space.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Mac Allister won 82% of his ground duels against Rodri, an unusually high success rate that allowed Liverpool to transition from defense to attack in under 4 seconds on average.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Van Dijk maintained a 2-meter buffer from Haaland throughout the match, denying him the space for his signature runs behind. Haaland finished with just 14 touches, his lowest of the season.
+                </p>
+              </div>
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
+                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
+                  Despite having an xG of only 1.2, Liverpool managed to score twice through sheer clinical finishing, converting half-chances into key goals when momentum was heavily against them.
+                </p>
+              </div>
+            </div>
+          </section>
         </motion.div>
       )}
 
       {/* ROSTER Content */}
-      {activeTab === 'ROSTER' && (
+      {matchState === 'postmatch' && activeTab === 'ROSTER' && (
         <motion.div 
           key="roster"
           initial={{ opacity: 0, y: 15 }}
