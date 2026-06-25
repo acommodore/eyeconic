@@ -327,7 +327,7 @@ export default function MatchDetailsPage() {
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
             }`}
           >
-            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE (VOLATILE)' : 'THE FALLOUT (FT)'}
+            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE' : 'THE FALLOUT'}
           </button>
         ))}
       </div>
@@ -748,9 +748,10 @@ export default function MatchDetailsPage() {
                 <div className="flex flex-col gap-4">
                    {[
                      { state: 'debunked', text: 'Man City Midfield Capitulation', sub: 'Rodri completed 92% of passes under pressure.' },
-                     { state: 'proven', text: 'Liverpool Tactical Masterclass', sub: 'Diaz introduction directly broke the high press.' },
-                     { state: 'proven', text: 'Haaland Big Game Disappearance', sub: '0 shots on target, 12 touches in 90 mins.' },
-                     { state: 'debunked', text: 'Van Dijk is Washed', sub: 'Won 100% of aerial duels against Haaland.' }
+                     { state: 'proven', text: 'Tactical Shift', sub: 'Diaz\'s entry forced Walker deeper, breaking City\'s high press structure.' },
+                     { state: 'proven', text: 'The Midfield Battle', sub: 'Mac Allister won 82% of ground duels, sparking sub-4-second transitions.' },
+                     { state: 'proven', text: 'Haaland Nullified', sub: 'Van Dijk restricted Haaland to a season-low 14 touches.' },
+                     { state: 'debunked', text: 'xG Overperformance', sub: 'Liverpool converted 1.2 xG into 2 goals against the run of play.' }
                    ].map((agenda, i) => (
                       <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-teal/5 border-teal/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
                          <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-teal/20 text-teal' : 'bg-coral/20 text-coral'}`}>
@@ -808,43 +809,6 @@ export default function MatchDetailsPage() {
             </div>
           </section>
 
-          {/* Key Insights */}
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
-                <Activity className="w-5 h-5 text-teal" /> KEY INSIGHTS
-              </h2>
-            </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">Tactical Shift</h3>
-                <p className="text-sm text-gray-400 relative z-10 font-medium">
-                  Diaz's entry forced Walker deeper, breaking City's high press structure.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">The Midfield Battle</h3>
-                <p className="text-sm text-gray-400 relative z-10 font-medium">
-                  Mac Allister won 82% of ground duels, sparking sub-4-second transitions.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">Haaland Nullified</h3>
-                <p className="text-sm text-gray-400 relative z-10 font-medium">
-                  Van Dijk restricted Haaland to a season-low 14 touches.
-                </p>
-              </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">xG Overperformance</h3>
-                <p className="text-sm text-gray-400 relative z-10 font-medium">
-                  Liverpool converted 1.2 xG into 2 goals against the run of play.
-                </p>
-              </div>
-            </div>
-          </section>
         </motion.div>
       )}
 

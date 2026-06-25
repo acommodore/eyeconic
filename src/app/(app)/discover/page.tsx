@@ -301,7 +301,7 @@ export default function DiscoverPage() {
                    <div className="flex-1">
                       <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3">Live Narrative</h3>
                       <div className="bg-[#121212]/80 backdrop-blur-md border border-teal/20 border-l-4 border-l-[#00E5FF] rounded-xl p-6 shadow-lg h-full flex items-center">
-                         <p className="text-sm md:text-base text-gray-300 leading-relaxed font-medium">"{heroMatch.insight}"</p>
+                         <p className="text-sm md:text-base text-gray-300 leading-relaxed font-medium">&quot;{heroMatch.insight}&quot;</p>
                       </div>
                    </div>
 
