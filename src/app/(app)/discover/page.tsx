@@ -148,9 +148,9 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               )}
            </div>
 
-           <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-4 min-w-0">
-              <div className="flex items-center flex-1 min-w-0 w-full md:w-auto">
-                 <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
+           <div className="flex-1 min-w-0 w-full md:w-auto">
+              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0">
+                 <div className="flex items-center gap-2 justify-end min-w-0">
                     <span className="text-sm font-bold text-white uppercase tracking-wider text-right truncate">{match.team1}</span>
                     {match.logo1 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
@@ -158,13 +158,15 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                     )}
                  </div>
 
-                 {isLive || isFinished ? (
-                    <span className="text-lg font-mono font-black text-white tabular-nums mx-3 shrink-0 whitespace-nowrap">{match.score || "0 - 0"}</span>
-                 ) : (
-                    <span className="text-sm font-mono text-gray-600 mx-3 font-bold shrink-0">VS</span>
-                 )}
+                 <div className="flex items-center justify-center min-w-[48px] px-2 shrink-0">
+                    {isLive || isFinished ? (
+                       <span className="text-lg font-mono font-black text-white tabular-nums whitespace-nowrap">{match.score || "0 - 0"}</span>
+                    ) : (
+                       <span className="text-sm font-mono text-gray-600 font-bold">VS</span>
+                    )}
+                 </div>
 
-                 <div className="flex items-center gap-2 flex-1 justify-start min-w-0">
+                 <div className="flex items-center gap-2 justify-start min-w-0">
                     {match.logo2 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={match.logo2} alt={match.team2} className="w-5 h-5 object-contain shrink-0" />
@@ -397,17 +399,22 @@ export default function DiscoverPage() {
                   </div>
 
                   {/* Scoreline */}
-                  <div className="flex flex-wrap items-center gap-6 mb-8">
-                     <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-4 mb-8">
+                     <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={heroMatch.logo1} alt={heroMatch.team1} className="w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg" />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md">{heroMatch.team1}</h2>
+                        <img src={heroMatch.logo1} alt={heroMatch.team1} className="w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0" />
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md truncate">{heroMatch.team1}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                           {heroMatch.score ? heroMatch.score.split(' - ')[0] : ''}
+                        </span>
                      </div>
-                     <span className="text-6xl md:text-7xl font-mono font-black text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">{heroMatch.score}</span>
-                     <div className="flex items-center gap-3">
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md">{heroMatch.team2}</h2>
+                     <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={heroMatch.logo2} alt={heroMatch.team2} className="w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg" />
+                        <img src={heroMatch.logo2} alt={heroMatch.team2} className="w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0" />
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-white drop-shadow-md truncate">{heroMatch.team2}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-white tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                           {heroMatch.score ? heroMatch.score.split(' - ')[1] : ''}
+                        </span>
                      </div>
                   </div>
 
