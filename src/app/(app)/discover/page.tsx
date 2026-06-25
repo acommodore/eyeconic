@@ -462,7 +462,7 @@ export default function DiscoverPage() {
                     <tbody className="divide-y divide-white/5 text-sm font-medium">
                        {/* UPCOMING MATCHES */}
                        {upcomingTableData.filter(m => activeTab === 'All Matches' || m.hyped).map(m => (
-                          <tr key={m.id} className="hover:bg-white/5 transition-colors group">
+                          <tr key={m.id} className="hover:bg-white/5 transition-colors group h-20">
                              <td className="px-6 py-4">
                                 <span className="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-gray-400">{m.time}</span>
                              </td>
@@ -492,7 +492,7 @@ export default function DiscoverPage() {
                        
                        {/* FINISHED MATCHES */}
                        {finishedTableData.filter(m => activeTab === 'All Matches' || m.hyped).map(m => (
-                          <tr key={m.id} className="hover:bg-white/5 transition-colors group opacity-60 hover:opacity-100">
+                          <tr key={m.id} className="hover:bg-white/5 transition-colors group opacity-60 hover:opacity-100 h-20">
                              <td className="px-6 py-4">
                                 <span className="px-2 py-1 bg-white/5 rounded text-[10px] font-black uppercase tracking-widest text-gray-500">FT</span>
                              </td>
