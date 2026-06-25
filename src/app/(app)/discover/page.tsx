@@ -154,11 +154,13 @@ export default function DiscoverPage() {
   const heroMatch = sortedLiveMatches[0];
   const remainingLiveMatches = sortedLiveMatches.slice(1);
 
+  const [activeDate, setActiveDate] = useState("14");
+
   // Calendar Days
   const days = [
     { label: "Mon", date: "12" },
     { label: "Tue", date: "13" },
-    { label: "Wed", date: "14", active: true },
+    { label: "Wed", date: "14" },
     { label: "Thu", date: "15" },
     { label: "Fri", date: "16" },
     { label: "Sat", date: "17" },
@@ -212,12 +214,15 @@ export default function DiscoverPage() {
 
 
            <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0">
-              {days.map(day => (
-                <div key={day.date} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border ${day.active ? 'bg-teal/10 border-teal/50 text-teal' : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10'} cursor-pointer transition-colors`}>
-                  <span className="text-[10px] font-bold uppercase tracking-widest">{day.label}</span>
-                  <span className={`text-lg font-black ${day.active ? 'text-white' : ''}`}>{day.date}</span>
-                </div>
-              ))}
+              {days.map(day => {
+                const isActive = day.date === activeDate;
+                return (
+                  <div key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border ${isActive ? 'bg-teal/10 border-teal/50 text-teal' : 'bg-white/5 border-white/5 text-gray-400 hover:bg-white/10'} cursor-pointer transition-colors`}>
+                    <span className="text-[10px] font-bold uppercase tracking-widest">{day.label}</span>
+                    <span className={`text-lg font-black ${isActive ? 'text-white' : ''}`}>{day.date}</span>
+                  </div>
+                );
+              })}
            </div>
         </header>
 

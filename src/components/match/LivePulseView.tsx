@@ -165,8 +165,8 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick }: { event: any,
               <div className="flex-1 flex items-center gap-0.5 md:gap-1 h-4 md:h-6 opacity-50 min-w-0 pr-2 overflow-hidden">
                 {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-teal rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
               </div>
-              <button className="flex items-center gap-1.5 bg-teal/10 text-teal px-3 py-1.5 rounded-lg border border-teal/30 text-[10px] font-bold hover:bg-teal/20 transition-colors shrink-0">
-                <Mic className="w-3 h-3" /> ECHO • {note.echoes}
+              <button onClick={() => handleEcho(note.id)} className={`flex items-center gap-1.5 ${echoedNotes.has(note.id) ? 'bg-teal text-black hover:bg-teal/90' : 'bg-teal/10 text-teal hover:bg-teal/20'} px-3 py-1.5 rounded-lg border border-teal/30 text-[10px] font-bold transition-colors shrink-0`}>
+                <Mic className="w-3 h-3" /> ECHO • {note.echoes + (echoedNotes.has(note.id) ? 1 : 0)}
               </button>
             </div>
           </div>
@@ -194,6 +194,31 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
   const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(10);
+  const [echoedNotes, setEchoedNotes] = useState<Set<number>>(new Set());
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const handleEcho = (noteId: number) => {
+    setEchoedNotes(prev => {
+      const next = new Set(prev);
+      if (next.has(noteId)) next.delete(noteId);
+      else next.add(noteId);
+      return next;
+    });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    
+    if (diff > 50 && nextEvent) setActiveMinute(nextEvent.minute); // Swipe left -> next
+    if (diff < -50 && prevEvent) setActiveMinute(prevEvent.minute); // Swipe right -> prev
+    setTouchStart(null);
+  };
 
   const startRecording = () => {
     setIsRecording(true);
@@ -439,7 +464,11 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
             </div>
 
             {/* Carousel of Cards */}
-            <div className="relative w-full flex-1 flex flex-col overflow-hidden">
+            <div 
+              className="relative w-full flex-1 flex flex-col overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
                {/* Fading Gradients for Carousel edges */}
                <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#0A0A0A] to-transparent z-20 pointer-events-none" />
                <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#0A0A0A] to-transparent z-20 pointer-events-none" />

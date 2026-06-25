@@ -8,13 +8,9 @@ import { BackButton } from "@/components/ui/BackButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 import LivePulseView from "@/components/match/LivePulseView";
 
-const playerOptions = [
-  { name: 'DE BRUYNE', team: 'Man City', img: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=200&auto=format&fit=crop' },
-  { name: 'HAALAND', team: 'Man City', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
-  { name: 'SALAH', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop' },
-  { name: 'DARWIN NÚÑEZ', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop' },
-  { name: 'VAN DIJK', team: 'Liverpool', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop' },
-];
+const getTeamPlayers = () => {
+  return [...pitchLIV.map(p => ({...p, team: 'Liverpool'})), ...pitchMCI.map(p => ({...p, team: 'Man City'}))];
+};
 
 const initialHotTakes = [
   {
@@ -148,10 +144,13 @@ export default function MatchDetailsPage() {
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
 
   const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
-  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('DE BRUYNE');
-  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('DARWIN NÚÑEZ');
+  const [hasVotedVibe, setHasVotedVibe] = useState(false);
+  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('De Bruyne');
+  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('Darwin Núñez');
 
   const handlePrematchVote = (type: 'chaos' | 'tactical' | 'tension') => {
+    if (hasVotedVibe) return;
+    setHasVotedVibe(true);
     setVotes(prev => {
       const others = (['chaos', 'tactical', 'tension'] as const).filter(t => t !== type);
       if (prev[others[0]] === 0 && prev[others[1]] === 0) return prev;
@@ -438,7 +437,7 @@ export default function MatchDetailsPage() {
                   <div className="bg-[#121212]/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-                        <img src={playerOptions.find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                        <img src={getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
                      </div>
@@ -449,9 +448,9 @@ export default function MatchDetailsPage() {
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-white/10"
                         >
-                          {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
                         </select>
-                        <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === mvpWatchPlayer)?.team}</p>
+                        <p className="text-[10px] text-gray-400 mb-2">{getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.team}</p>
                         <div className="flex items-end gap-1 mt-auto">
                           <span className="text-xl font-black text-teal leading-none">8.7</span>
                           <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
@@ -462,7 +461,7 @@ export default function MatchDetailsPage() {
                   <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
-                        <img src={playerOptions.find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
+                        <img src={getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#121212] to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
                      </div>
@@ -473,9 +472,9 @@ export default function MatchDetailsPage() {
                           onChange={(e) => setFraudWatchPlayer(e.target.value)}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
                         >
-                          {playerOptions.map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
                         </select>
-                        <p className="text-[10px] text-gray-400 mb-2">{playerOptions.find(p => p.name === fraudWatchPlayer)?.team}</p>
+                        <p className="text-[10px] text-gray-400 mb-2">{getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.team}</p>
                         <div className="flex items-end gap-1.5 mt-auto">
                           <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
                         </div>
@@ -696,9 +695,9 @@ export default function MatchDetailsPage() {
                 </div>
                 
                 {/* Static Narrative Curve Mockup */}
-                <div className="w-full h-32 md:h-48 relative border-b border-l border-white/10 flex items-end justify-between px-2 pb-1 mb-6">
-                   <span className="absolute -left-6 top-0 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Euphoria</span>
-                   <span className="absolute -left-6 bottom-4 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Despair</span>
+                <div className="w-full h-32 md:h-48 relative border-b border-l border-white/10 flex items-end justify-between px-2 pb-1 mb-6 ml-6 md:ml-8 mt-6">
+                   <span className="absolute -left-6 md:-left-8 top-0 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Euphoria</span>
+                   <span className="absolute -left-6 md:-left-8 bottom-4 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Despair</span>
                    
                    {/* Data Points (Bars) */}
                    {[

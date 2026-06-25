@@ -88,6 +88,11 @@ body {
 .animate-ticker {
   animation: ticker 40s linear infinite;
 }
-.animate-ticker:hover {
+@media (hover: hover) and (pointer: fine) {
+  .animate-ticker:hover {
+    animation-play-state: paused;
+  }
+}
+.animate-ticker:active {
   animation-play-state: paused;
 }
