@@ -148,28 +148,28 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               )}
            </div>
 
-           <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
-              <div className="flex items-center gap-3">
-                 <div className="flex items-center gap-2 w-[120px] justify-end">
-                    <span className="text-sm font-bold text-white uppercase tracking-wider text-right">{match.team1}</span>
+           <div className="flex-1 flex flex-col md:flex-row md:items-center gap-2 md:gap-4 min-w-0">
+              <div className="flex items-center flex-1 min-w-0 w-full md:w-auto">
+                 <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
+                    <span className="text-sm font-bold text-white uppercase tracking-wider text-right truncate">{match.team1}</span>
                     {match.logo1 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
-                       <img src={match.logo1} alt={match.team1} className="w-5 h-5 object-contain" />
+                       <img src={match.logo1} alt={match.team1} className="w-5 h-5 object-contain shrink-0" />
                     )}
                  </div>
 
                  {isLive || isFinished ? (
-                    <span className="text-lg font-mono font-black text-white tabular-nums mx-2">{match.score || "0 - 0"}</span>
+                    <span className="text-lg font-mono font-black text-white tabular-nums mx-3 shrink-0 whitespace-nowrap">{match.score || "0 - 0"}</span>
                  ) : (
-                    <span className="text-sm font-mono text-gray-600 mx-2 font-bold">VS</span>
+                    <span className="text-sm font-mono text-gray-600 mx-3 font-bold shrink-0">VS</span>
                  )}
 
-                 <div className="flex items-center gap-2 w-[120px] justify-start">
+                 <div className="flex items-center gap-2 flex-1 justify-start min-w-0">
                     {match.logo2 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
-                       <img src={match.logo2} alt={match.team2} className="w-5 h-5 object-contain" />
+                       <img src={match.logo2} alt={match.team2} className="w-5 h-5 object-contain shrink-0" />
                     )}
-                    <span className="text-sm font-bold text-white uppercase tracking-wider text-left">{match.team2}</span>
+                    <span className="text-sm font-bold text-white uppercase tracking-wider text-left truncate">{match.team2}</span>
                  </div>
               </div>
               
