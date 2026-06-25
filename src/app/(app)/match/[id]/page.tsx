@@ -815,33 +815,32 @@ export default function MatchDetailsPage() {
                 <Activity className="w-5 h-5 text-teal" /> KEY INSIGHTS
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Tactical Shift</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Liverpool's second-half introduction of Diaz forced Walker to drop 15 yards deeper, fundamentally breaking Man City's high press structure and isolating De Bruyne in the right half-space.
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">Tactical Shift</h3>
+                <p className="text-sm text-gray-400 relative z-10 font-medium">
+                  Diaz's entry forced Walker deeper, breaking City's high press structure.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">The Midfield Battle</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Mac Allister won 82% of his ground duels against Rodri, an unusually high success rate that allowed Liverpool to transition from defense to attack in under 4 seconds on average.
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">The Midfield Battle</h3>
+                <p className="text-sm text-gray-400 relative z-10 font-medium">
+                  Mac Allister won 82% of ground duels, sparking sub-4-second transitions.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">Haaland Nullified</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Van Dijk maintained a 2-meter buffer from Haaland throughout the match, denying him the space for his signature runs behind. Haaland finished with just 14 touches, his lowest of the season.
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">Haaland Nullified</h3>
+                <p className="text-sm text-gray-400 relative z-10 font-medium">
+                  Van Dijk restricted Haaland to a season-low 14 touches.
                 </p>
               </div>
-              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group">
+              <div className="bg-[#121212]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-teal/30 transition-colors relative overflow-hidden group flex flex-col justify-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-teal/10 blur-[40px] rounded-full group-hover:bg-teal/20 transition-colors pointer-events-none" />
-                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-3 relative z-10">xG Overperformance</h3>
-                <p className="text-sm text-gray-400 leading-relaxed relative z-10">
-                  Despite having an xG of only 1.2, Liverpool managed to score twice through sheer clinical finishing, converting half-chances into key goals when momentum was heavily against them.
+                <h3 className="text-teal font-black uppercase tracking-widest text-xs mb-1.5 relative z-10">xG Overperformance</h3>
+                <p className="text-sm text-gray-400 relative z-10 font-medium">
+                  Liverpool converted 1.2 xG into 2 goals against the run of play.
                 </p>
               </div>
             </div>
