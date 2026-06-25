@@ -221,6 +221,23 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
     setTouchStart(null);
   };
 
+  const [drawerTouchStart, setDrawerTouchStart] = useState<number | null>(null);
+  
+  const handleDrawerTouchStart = (e: React.TouchEvent) => {
+    setDrawerTouchStart(e.touches[0].clientY);
+  };
+
+  const handleDrawerTouchEnd = (e: React.TouchEvent) => {
+    if (drawerTouchStart === null) return;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diff = touchEndY - drawerTouchStart; // positive diff means swipe down
+    
+    if (diff > 50 && activeMobileView === 'pulse') {
+      setActiveMobileView('feed');
+    }
+    setDrawerTouchStart(null);
+  };
+
   const startRecording = () => {
     setIsRecording(true);
     setRecordingTime(10);
@@ -512,11 +529,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
         {/* RIGHT PANE: Deep Stats & Impact (col-span-5) */}
         {!isMatchFinished && (
         <>
-          {/* Mobile Overlay to close drawer when clicking outside */}
-          <div 
-            className={`xl:hidden fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${activeMobileView === 'pulse' ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-            onClick={() => setActiveMobileView('feed')}
-          />
+          {/* Mobile Overlay Removed */}
           <div 
             className={`
               xl:col-span-5 xl:space-y-8
@@ -529,6 +542,8 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
               setActiveMobileView('pulse');
             }
           }}
+          onTouchStart={handleDrawerTouchStart}
+          onTouchEnd={handleDrawerTouchEnd}
         >
            {/* Mobile Drawer Handle */}
            <div className="xl:hidden w-full flex flex-col items-center justify-center mb-8 relative pb-4" 
