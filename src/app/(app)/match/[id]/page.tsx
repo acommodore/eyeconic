@@ -242,9 +242,6 @@ export default function MatchDetailsPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
-          <div className="px-4 py-1.5 rounded-md bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-widest text-teal uppercase mb-8">
-            {matchState === 'prematch' ? 'PRE-MATCH BUILDUP' : matchState === 'live' ? 'LIVE PULSE DETONATING' : 'POST-MATCH FALLOUT'}
-          </div>
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* LIVERPOOL */}

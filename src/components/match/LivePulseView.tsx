@@ -288,7 +288,7 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
           <div className={`absolute -top-12 ${positionClass} bg-[#121212] border border-white/20 rounded-full px-3 py-1.5 flex items-center gap-2 z-50 shadow-2xl animate-in fade-in zoom-in duration-200 whitespace-nowrap`}>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'positive'); }} className="hover:scale-125 transition-transform text-lg">🔥</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'positive'); }} className="hover:scale-125 transition-transform text-lg">🧠</button>
-             <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'neutral'); }} className="hover:scale-125 transition-transform text-lg">🧱</button>
+             <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'positive'); }} className="hover:scale-125 transition-transform text-lg">🧱</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'neutral'); }} className="hover:scale-125 transition-transform text-lg">😐</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'negative'); }} className="hover:scale-125 transition-transform text-lg">😤</button>
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'negative'); }} className="hover:scale-125 transition-transform text-lg">❌</button>
