@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
@@ -137,7 +137,13 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-export default function MatchDetailsPage({ params }: { params: { id: string } }) {
+import { allLiveMatches } from "@/lib/mockData";
+
+export default function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = use(params);
+  const matchId = unwrappedParams.id;
+  const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
+  
   const supabase = createClient();
   const [matchData, setMatchData] = useState<any>(null);
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
@@ -293,21 +299,18 @@ export default function MatchDetailsPage({ params }: { params: { id: string } })
         <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
-            {/* LIVERPOOL */}
+            {/* TEAM 1 */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(211,47,47,0.3)] mb-4">
-                <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" alt="LIV" className="w-full h-full object-contain" />
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-4 group-hover:scale-105 transition-transform">
+                <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">Liverpool</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">{matchInfo?.team1 || "Team 1"}</h2>
               
               {/* Goal Scorers - Only show in postmatch */}
               {matchState === 'postmatch' && (
                 <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-teal">⚽</span> Salah 2'
-                  </div>
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-teal">⚽</span> Konate 78'
+                    <span className="text-teal">⚽</span> 2'
                   </div>
                 </div>
               )}
@@ -322,24 +325,24 @@ export default function MatchDetailsPage({ params }: { params: { id: string } })
                 </div>
               ) : (
                 <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
-                  2 <span className="text-gray-600 font-normal mx-1 md:mx-2">-</span> 0
+                  {matchInfo?.score || "0 - 0"}
                 </div>
               )}
             </div>
 
-            {/* MAN CITY */}
+            {/* TEAM 2 */}
             <div className="flex flex-col items-center flex-1">
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
-                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain" />
+                <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">Man City</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Team 2"}</h2>
             </div>
           </div>
 
           {/* Stands Actions */}
           <div className="mt-8 w-full max-w-lg mx-auto flex flex-col md:flex-row gap-4 justify-center items-center">
-             <StartStandButton matchId={params.id} />
-             <Link href="/stands/2" className="block w-full md:w-auto cursor-pointer hover:-translate-y-0.5 transition-transform">
+             <StartStandButton matchId={matchId} />
+             <Link href={`/stands/${matchId}`} className="block w-full md:w-auto cursor-pointer hover:-translate-y-0.5 transition-transform">
                <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
                   <div className="flex items-center gap-4">
                      <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">

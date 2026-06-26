@@ -9,8 +9,10 @@ import Link from "next/link";
 import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
+import { allLiveMatches } from "@/lib/mockData";
 
 function StandRoomLayout({ matchId }: { matchId: string }) {
+  const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
   const supabase = createClient();
   const participants = useParticipants();
   const { localParticipant } = useLocalParticipant();
@@ -329,13 +331,13 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               <div className="flex items-center gap-2 shrink-0">
                 <BackButton containerClassName="p-2 hover:bg-card text-card-foreground/10 rounded-full transition-colors group bg-card text-card-foreground/40 border border-border backdrop-blur" iconClassName="w-4 h-4 text-foreground" />
                 <div className="flex -space-x-3">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10" />
-                  <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0" />
+                  <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"} className={`w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10 ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
+                  <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"} className={`w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0 ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
                 </div>
               </div>
               <div className="flex-1 overflow-hidden mx-2 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
                 <div className="whitespace-nowrap animate-marquee pl-[100%] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 tracking-widest text-[10px] uppercase">
-                  Arsenal vs Tottenham Hotspur • Live
+                  {matchInfo ? `${matchInfo.team1} vs ${matchInfo.team2} • Live` : 'Arsenal vs Tottenham Hotspur • Live'}
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -403,7 +405,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
             </div>
         </div>
         {/* Action Bar on mobile */}
-        <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + var(--nav-height))` }}>
+        <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + 8px)` }}>
           <div className="flex gap-2">
             <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-lg py-1 transition-all">
               <span className="text-xl">🤡</span>
@@ -443,15 +445,15 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                 <div className="flex flex-col justify-center">
                    <div className="flex items-center">
                      <div className="flex -space-x-3">
-                       <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10" />
-                       <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0" />
+                       <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"} className={`w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10 ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
+                       <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"} className={`w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0 ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
                      </div>
                    </div>
                 </div>
               </div>
               <div className="flex-1 overflow-hidden mx-4 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
                 <div className="whitespace-nowrap animate-marquee pl-[100%] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 tracking-widest text-sm uppercase">
-                  Arsenal vs Tottenham Hotspur • Live Post-Match Debate
+                  {matchInfo ? `${matchInfo.team1} vs ${matchInfo.team2} • Live Post-Match Debate` : 'Arsenal vs Tottenham Hotspur • Live Post-Match Debate'}
                 </div>
               </div>
               <div className="flex items-center gap-3 shrink-0">

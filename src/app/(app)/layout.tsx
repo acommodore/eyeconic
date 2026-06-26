@@ -67,7 +67,7 @@ export default function AppLayout({
   }, []);
 
   const navItems = [
-    { icon: <Compass className="w-6 h-6" />, label: "Discover", href: "/discover" },
+    { icon: <Compass className="w-6 h-6" />, label: "Home", href: "/home" },
     { icon: <User className="w-6 h-6" />, label: "The Stand", href: "/stands" },
   ];
 
@@ -79,6 +79,7 @@ export default function AppLayout({
       style={{ '--mobile-nav-height': showNav ? '80px' : '0px' } as React.CSSProperties}
     >
       {/* Mobile Top Bar */}
+      {!isStandRoom && (
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-6 h-6 rounded bg-[#00E5FF] flex items-center justify-center">
@@ -97,6 +98,7 @@ export default function AppLayout({
           </Link>
         </div>
       </header>
+      )}
 
       {/* Desktop Sidebar */}
       <aside className={`hidden md:flex flex-col border-r border-white/5 bg-[#0a0a0a] h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? 'w-24 p-4 items-center' : 'w-64 p-6'}`}>
@@ -168,6 +170,7 @@ export default function AppLayout({
       </main>
 
       {/* Mobile Bottom Navigation */}
+      {!isStandRoom && (
       <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -187,6 +190,7 @@ export default function AppLayout({
           );
         })}
       </nav>
+      )}
 
       <OnboardingModal />
     </div>
