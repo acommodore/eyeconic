@@ -20,7 +20,20 @@ export const allLiveMatches = [
     bookmarked: true,
     agenda: "VAR Check / Absolute Chaos",
     volatility: 100,
-    triggers: ["[94' EQUALIZER]", "[VAR CHECK]"]
+    triggers: ["[94' EQUALIZER]", "[VAR CHECK]"],
+    timelineEvents: [
+      { id: 1, time: "12'", team: "Chelsea", type: "goal", player: "Cole Palmer", detail: "Penalty scored after a foul in the box." },
+      { id: 2, time: "34'", team: "Arsenal", type: "goal", player: "Bukayo Saka", detail: "Brilliant solo run and finish into the top corner." },
+      { id: 3, time: "45+2'", team: "Chelsea", type: "yellow", player: "Moises Caicedo", detail: "Foul on Odegaard." },
+      { id: 4, time: "58'", team: "Arsenal", type: "goal", player: "Gabriel Martinelli", detail: "Counter attack goal assisted by Rice." },
+      { id: 5, time: "77'", team: "Chelsea", type: "goal", player: "Nicolas Jackson", detail: "Tap in from close range after a rebound." },
+      { id: 6, time: "89'", team: "Arsenal", type: "goal", player: "Declan Rice", detail: "Long range strike to take the lead late on!" },
+      { id: 7, time: "90+4'", team: "Chelsea", type: "goal", player: "Cole Palmer", detail: "Last minute dramatic equalizer! Absolute scenes." }
+    ],
+    hotTakes: [
+      { state: 'debunked', text: 'Arsenal Defensive Collapse', sub: 'Saliba missed 3 crucial interceptions.' },
+      { state: 'verified', text: 'Palmer is inevitable', sub: '2 goals from 2 shots on target. Lethal.' }
+    ]
   },
   {
     id: 13,
@@ -43,7 +56,20 @@ export const allLiveMatches = [
     bookmarked: true,
     agenda: "High Line Exposed / Fan Meltdown",
     volatility: 92,
-    triggers: ["[RED CARD]", "[PENALTY CLAIM]"]
+    triggers: ["[RED CARD]", "[PENALTY CLAIM]"],
+    timelineEvents: [
+      { id: 1, time: "14'", team: "Newcastle", type: "goal", player: "Alexander Isak", detail: "Runs behind the high line and scores easily." },
+      { id: 2, time: "22'", team: "Spurs", type: "yellow", player: "Cristian Romero", detail: "Rash challenge." },
+      { id: 3, time: "30'", team: "Newcastle", type: "goal", player: "Anthony Gordon", detail: "Another ball over the top, rounds the keeper." },
+      { id: 4, time: "44'", team: "Spurs", type: "goal", player: "Heung-min Son", detail: "Pulls one back before half time." },
+      { id: 5, time: "65'", team: "Newcastle", type: "goal", player: "Alexander Isak", detail: "Header from a corner." },
+      { id: 6, time: "78'", team: "Newcastle", type: "goal", player: "Harvey Barnes", detail: "Curler from outside the box." },
+      { id: 7, time: "80'", team: "Spurs", type: "yellow", player: "Destiny Udogie", detail: "Frustration foul." }
+    ],
+    hotTakes: [
+      { state: 'verified', text: 'Angeball Exposed', sub: 'High line punished ruthlessly by Isak.' },
+      { state: 'debunked', text: 'Spurs Midfield Control', sub: 'Bissouma lost possession 12 times.' }
+    ]
   },
   {
     id: 1,
@@ -66,7 +92,19 @@ export const allLiveMatches = [
     bookmarked: true,
     agenda: "Midfield Capitulation / Tension Spiking",
     volatility: 95,
-    triggers: ["[82' RED CARD]", "[VAR DISALLOWED GOAL]"]
+    triggers: ["[82' RED CARD]", "[VAR DISALLOWED GOAL]"],
+    timelineEvents: [
+      { id: 1, time: "2'", team: "Liverpool", type: "goal", player: "Mohamed Salah", detail: "Right footed shot from the center of the box to the bottom right corner. Assisted by Trent Alexander-Arnold." },
+      { id: 2, time: "18'", team: "Man City", type: "yellow", player: "Rodri", detail: "Foul on Alexis Mac Allister." },
+      { id: 3, time: "35'", team: "Liverpool", type: "yellow", player: "Wataru Endo", detail: "Foul on Kevin De Bruyne." },
+      { id: 4, time: "45+2'", team: "Man City", type: "sub", playerIn: "Jeremy Doku", playerOut: "Jack Grealish", detail: "Tactical substitution." },
+      { id: 5, time: "60'", team: "Man City", type: "goal", player: "Kevin De Bruyne", detail: "Brilliant strike from distance." },
+      { id: 6, time: "70'", team: "Man City", type: "goal", player: "Erling Haaland", detail: "Tap in from close range. City take the lead!" }
+    ],
+    hotTakes: [
+      { state: 'debunked', text: 'Man City Midfield Capitulation', sub: 'Rodri completed 92% of passes under pressure.' },
+      { state: 'debunked', text: 'xG Overperformance', sub: 'Liverpool converted 1.2 xG into 2 goals against the run of play.' }
+    ]
   },
   {
     id: 2,
@@ -89,7 +127,17 @@ export const allLiveMatches = [
     bookmarked: true,
     agenda: "Vinicius Backlash / Boiling Point",
     volatility: 88,
-    triggers: ["[CROWD UNREST]"]
+    triggers: ["[CROWD UNREST]"],
+    timelineEvents: [
+      { id: 1, time: "12'", team: "Barcelona", type: "goal", player: "Robert Lewandowski", detail: "Header from a corner." },
+      { id: 2, time: "32'", team: "Real Madrid", type: "goal", player: "Jude Bellingham", detail: "Tap in from a Vinicius cross." },
+      { id: 3, time: "55'", team: "Barcelona", type: "goal", player: "Lamine Yamal", detail: "Sensational solo goal." },
+      { id: 4, time: "75'", team: "Real Madrid", type: "goal", player: "Rodrygo", detail: "Fast counter attack." }
+    ],
+    hotTakes: [
+      { state: 'verified', text: 'El Clasico Delivers', sub: '4 goals in a thrilling encounter.' },
+      { state: 'debunked', text: 'Barca Defense Solid', sub: 'Conceded 2 goals from fast breaks.' }
+    ]
   },
   {
     id: 3,
@@ -112,7 +160,14 @@ export const allLiveMatches = [
     bookmarked: false,
     agenda: "Tactical Stalemate / Nervous Energy",
     volatility: 42,
-    triggers: ["[0 SHOTS ON TARGET]"]
+    triggers: ["[0 SHOTS ON TARGET]"],
+    timelineEvents: [
+      { id: 1, time: "15'", team: "Bayern", type: "yellow", player: "Joshua Kimmich", detail: "Tactical foul." },
+      { id: 2, time: "30'", team: "Arsenal", type: "yellow", player: "Declan Rice", detail: "Late challenge." }
+    ],
+    hotTakes: [
+      { state: 'verified', text: 'Tactical Masterclass', sub: 'Both teams cancelling each other out.' }
+    ]
   },
   {
     id: 7,
@@ -135,6 +190,14 @@ export const allLiveMatches = [
     bookmarked: false,
     agenda: "Total Demolition / Euphoria",
     volatility: 75,
-    triggers: ["[HAT-TRICK HERO]"]
+    triggers: ["[HAT-TRICK HERO]"],
+    timelineEvents: [
+      { id: 1, time: "10'", team: "Aston Villa", type: "goal", player: "Ollie Watkins", detail: "Early breakthrough." },
+      { id: 2, time: "35'", team: "Aston Villa", type: "goal", player: "Leon Bailey", detail: "Curled into the top corner." },
+      { id: 3, time: "55'", team: "Aston Villa", type: "goal", player: "Ollie Watkins", detail: "Brilliant team move." }
+    ],
+    hotTakes: [
+      { state: 'verified', text: 'Ajax Humiliation', sub: '3-0 down in 60 mins.' }
+    ]
   }
 ];

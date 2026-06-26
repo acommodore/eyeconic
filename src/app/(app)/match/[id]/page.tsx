@@ -117,7 +117,7 @@ const coaches = {
   mci: { name: "Pep Guardiola", rating: "6.0", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" }
 };
 
-const timelineEvents = [
+const defaultTimelineEvents = [
   { id: 1, time: "2'", team: "LIV", type: "goal", player: "Mohamed Salah", detail: "Right footed shot from the center of the box to the bottom right corner. Assisted by Trent Alexander-Arnold." },
   { id: 2, time: "18'", team: "MCI", type: "yellow", player: "Rodri", detail: "Foul on Alexis Mac Allister." },
   { id: 3, time: "35'", team: "LIV", type: "yellow", player: "Wataru Endo", detail: "Foul on Kevin De Bruyne." },
@@ -143,6 +143,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
   const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
+  const timelineEvents = matchInfo?.timelineEvents || defaultTimelineEvents;
   
   const supabase = createClient();
   const [matchData, setMatchData] = useState<any>(null);
@@ -790,13 +791,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 </h2>
 
                 <div className="flex flex-col gap-4">
-                   {[
+                   {(matchInfo?.hotTakes || [
                      { state: 'debunked', text: 'Man City Midfield Capitulation', sub: 'Rodri completed 92% of passes under pressure.' },
                      { state: 'proven', text: 'Tactical Shift', sub: 'Diaz\'s entry forced Walker deeper, breaking City\'s high press structure.' },
                      { state: 'proven', text: 'The Midfield Battle', sub: 'Mac Allister won 82% of ground duels, sparking sub-4-second transitions.' },
                      { state: 'proven', text: 'Haaland Nullified', sub: 'Van Dijk restricted Haaland to a season-low 14 touches.' },
                      { state: 'debunked', text: 'xG Overperformance', sub: 'Liverpool converted 1.2 xG into 2 goals against the run of play.' }
-                   ].map((agenda, i) => (
+                   ]).map((agenda: any, i: number) => (
                       <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-teal/5 border-teal/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
                          <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-teal/20 text-teal' : 'bg-coral/20 text-coral'}`}>
                             {agenda.state === 'proven' ? '✓' : '✗'}
@@ -1019,18 +1020,18 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <div className="relative border-l-2 border-white/10 ml-6 md:ml-1/2 md:border-none">
             <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-white/10 -translate-x-1/2"></div>
             
-            {timelineEvents.map((event, index) => {
-              const isLiv = event.team === 'LIV';
+            {timelineEvents.map((event: any, index: number) => {
+              const isTeam1 = event.team === matchInfo?.team1 || event.team === 'LIV';
               return (
-                <div key={event.id} className={`relative flex items-center mb-8 ${isLiv ? 'md:flex-row-reverse' : 'md:flex-row'} pl-6 md:pl-0`}>
+                <div key={event.id} className={`relative flex items-center mb-8 ${isTeam1 ? 'md:flex-row-reverse' : 'md:flex-row'} pl-6 md:pl-0`}>
                   {/* Timeline Dot */}
-                  <div className="absolute left-[-5px] md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-[#020202] border-2 z-10" style={{ borderColor: isLiv ? '#FF7F50' : '#4FC3F7' }}></div>
+                  <div className="absolute left-[-5px] md:left-1/2 md:-translate-x-1/2 w-3 h-3 rounded-full bg-[#020202] border-2 z-10" style={{ borderColor: isTeam1 ? '#FF7F50' : '#4FC3F7' }}></div>
                   
                   {/* Content Box */}
-                  <div className={`md:w-1/2 ${isLiv ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} w-full`}>
+                  <div className={`md:w-1/2 ${isTeam1 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} w-full`}>
                     <div className="bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-[#111] transition-colors relative group">
                       {/* Event Icon */}
-                      <div className={`absolute top-4 ${isLiv ? 'right-4 md:left-4 md:right-auto' : 'right-4'} text-xl opacity-50 group-hover:opacity-100 transition-opacity`}>
+                      <div className={`absolute top-4 ${isTeam1 ? 'right-4 md:left-4 md:right-auto' : 'right-4'} text-xl opacity-50 group-hover:opacity-100 transition-opacity`}>
                         {event.type === 'goal' && '⚽'}
                         {event.type === 'yellow' && '🟨'}
                         {event.type === 'sub' && '🔄'}
