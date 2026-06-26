@@ -19,9 +19,10 @@ export default function AppLayout({
   const isNavVisible = useRef(true);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (e: Event) => {
       if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
+        const target = e.target as HTMLElement | Document;
+        const currentScrollY = target === document ? window.scrollY : (target as HTMLElement).scrollTop;
         
         // Ignore iOS rubber-band bounce
         if (currentScrollY < 0) return;
@@ -42,7 +43,7 @@ export default function AppLayout({
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -54,7 +55,10 @@ export default function AppLayout({
   const isStandRoom = /^\/stands\/[^/]+$/.test(pathname);
 
   return (
-    <div className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}>
+    <div 
+      className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}
+      style={{ '--nav-height': showNav ? '80px' : '0px' } as React.CSSProperties}
+    >
       {/* Mobile Top Bar */}
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -140,13 +144,12 @@ export default function AppLayout({
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex flex-col relative ${isStandRoom ? '' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
+      <main className={`flex-1 flex flex-col relative ${isStandRoom ? 'pb-0' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
         {children}
       </main>
 
       {/* Mobile Bottom Navigation */}
-      {!isStandRoom && (
-        <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
+      <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
@@ -165,7 +168,6 @@ export default function AppLayout({
           );
         })}
       </nav>
-      )}
 
       <OnboardingModal />
     </div>
