@@ -1,4 +1,6 @@
+const fs = require('fs');
 
+const code = `
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -9,10 +11,8 @@ import Link from "next/link";
 import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
-import { allLiveMatches } from "@/lib/mockData";
 
 function StandRoomLayout({ matchId }: { matchId: string }) {
-  const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
   const supabase = createClient();
   const participants = useParticipants();
   const { localParticipant } = useLocalParticipant();
@@ -35,7 +35,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     fetchMsgs();
 
     const channel = supabase.channel('stand_chat')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stand_messages', filter: `stand_id=eq.${matchId}` }, async (payload) => {
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stand_messages', filter: \`stand_id=eq.\${matchId}\` }, async (payload) => {
         const { data: prof } = await supabase.from('profiles').select('*').eq('id', payload.new.profile_id).single();
         if (prof) {
           setChatMessages(prev => [...prev, {
@@ -142,86 +142,86 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
-      ? "relative w-14 h-14 md:w-24 md:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
+      ? "relative w-14 h-14 xl:w-24 xl:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
       : "relative aspect-square h-full md:w-full md:h-full md:aspect-auto shrink-0 min-h-0 rounded-xl";
 
     return (
       <>
         {/* Speaker 1: Active Talking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GOONER4LIFE')}>
-          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
+        <div className={\`\${speakerClass} overflow-hidden border-2 \${mutedUsers['GOONER4LIFE'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]\`} onClick={() => toggleMute('GOONER4LIFE')}>
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={\`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 \${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-100'}\`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
           {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-xl animate-pulse pointer-events-none" />}
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]'} flex items-center justify-center`}>
+            <div className={\`w-5 h-5 md:w-8 md:h-8 rounded-full \${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]'} flex items-center justify-center\`}>
               {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className="w-3 h-3 text-black" />}
             </div>
           </div>
           
           <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg`} />
-             <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-foreground'} drop-shadow-md truncate`}>GOONER4LIFE</span>
+             <div className={\`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full \${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg\`} />
+             <span className={\`text-[9px] md:text-sm font-black \${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-foreground'} drop-shadow-md truncate\`}>GOONER4LIFE</span>
           </div>
         </div>
 
         {/* Speaker 2: Muted */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['BLUEMASON'] ? 'border-border' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('BLUEMASON')}>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['BLUEMASON'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
+        <div className={\`\${speakerClass} overflow-hidden border-2 \${mutedUsers['BLUEMASON'] ? 'border-border' : 'border-white/20 hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]\`} onClick={() => toggleMute('BLUEMASON')}>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className={\`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 \${mutedUsers['BLUEMASON'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}\`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
-              <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-foreground' : 'text-muted-foreground'}`} />
+            <div className={\`w-5 h-5 md:w-8 md:h-8 rounded-full \${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center\`}>
+              <MicOff className={\`w-3 h-3 \${mutedUsers['BLUEMASON'] ? 'text-foreground' : 'text-muted-foreground'}\`} />
             </div>
           </div>
           
           <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>BLUEMASON</span>
+             <span className={\`text-[9px] md:text-sm font-bold \${mutedUsers['BLUEMASON'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate\`}>BLUEMASON</span>
           </div>
         </div>
 
         {/* Speaker 3: Muted */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['SPURSY_10'] ? 'border-border' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('SPURSY_10')}>
-          <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['SPURSY_10'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
+        <div className={\`\${speakerClass} overflow-hidden border-2 \${mutedUsers['SPURSY_10'] ? 'border-border' : 'border-white/20 hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]\`} onClick={() => toggleMute('SPURSY_10')}>
+          <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" className={\`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 \${mutedUsers['SPURSY_10'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}\`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
-              <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-foreground' : 'text-muted-foreground'}`} />
+            <div className={\`w-5 h-5 md:w-8 md:h-8 rounded-full \${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center\`}>
+              <MicOff className={\`w-3 h-3 \${mutedUsers['SPURSY_10'] ? 'text-foreground' : 'text-muted-foreground'}\`} />
             </div>
           </div>
           
           <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>SPURSY_10</span>
+             <span className={\`text-[9px] md:text-sm font-bold \${mutedUsers['SPURSY_10'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate\`}>SPURSY_10</span>
           </div>
         </div>
 
         {/* Speaker 4: Empty Slot */}
-        <div className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
+        <div className={\`\${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-white/5 flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-white/10 cursor-pointer\`}>
           <MoreHorizontal className="w-6 h-6 text-foreground/20" />
         </div>
 
         {/* Speaker 5: Active Mic, Non-Speaking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.2)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GUNNERVIC')}>
-          <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
+        <div className={\`\${speakerClass} overflow-hidden border-2 \${mutedUsers['GUNNERVIC'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.2)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]\`} onClick={() => toggleMute('GUNNERVIC')}>
+          <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={\`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 \${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-100'}\`} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
           
           <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.4)]'} flex items-center justify-center`}>
+            <div className={\`w-5 h-5 md:w-8 md:h-8 rounded-full \${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.4)]'} flex items-center justify-center\`}>
               {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className="w-3 h-3 text-black" />}
             </div>
           </div>
           
           <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>GUNNERVIC</span>
+             <span className={\`text-[9px] md:text-sm font-bold \${mutedUsers['GUNNERVIC'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate\`}>GUNNERVIC</span>
           </div>
         </div>
 
         {/* Speaker 6: Empty Slot */}
-        <div className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
+        <div className={\`\${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-white/5 flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-white/10 cursor-pointer\`}>
           <MoreHorizontal className="w-6 h-6 text-foreground/20" />
         </div>
       </>
@@ -230,7 +230,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
   const renderPoll = () => (
     <div className="p-3 md:p-4 bg-gradient-to-b from-[#050505] to-transparent shrink-0">
-      <div className="bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-xl p-3 md:p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-border-strong transition-all duration-300">
+      <div className="bg-card text-card-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3 md:p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-white/20 transition-all duration-300">
         <div className="absolute top-0 right-0 w-24 h-24 bg-[teal]/10 rounded-full blur-[30px] pointer-events-none group-hover:bg-[teal]/20 transition-all duration-500" />
         
         <div 
@@ -247,20 +247,20 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
             )}
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[9px] font-bold text-muted-foreground bg-card text-card-foreground/5 dark:bg-muted px-2 py-0.5 rounded-full border border-border">1m 24s left</span>
+            <span className="text-[9px] font-bold text-muted-foreground bg-card text-card-foreground/5 dark:bg-white/5 px-2 py-0.5 rounded-full border border-border">1m 24s left</span>
             {isPollExpanded ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground group-hover/toggle:text-foreground transition-colors" />}
           </div>
         </div>
         
-        <div className={`transition-all duration-500 overflow-hidden ${isPollExpanded ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+        <div className={\`transition-all duration-500 overflow-hidden \${isPollExpanded ? 'max-h-64 opacity-100 mt-4' : 'max-h-0 opacity-0'}\`}>
           <p className="text-gray-300 text-xs font-medium mb-4">Was it a clear penalty on Saka?</p>
           
           <div className="space-y-3">
             <div 
               onClick={() => handleVote('yes')}
-              className={`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[teal]/50'}`}
+              className={\`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors \${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[teal]/50'}\`}
             >
-              <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[teal]/40 to-[teal]/20 transition-all duration-1000" style={{ width: `${yesPercentage}%` }} />
+              <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[teal]/40 to-[teal]/20 transition-all duration-1000" style={{ width: \`\${yesPercentage}%\` }} />
               <div className="absolute inset-0 flex items-center justify-between px-3">
                 <span className="text-xs font-bold text-foreground z-10 drop-shadow-md">Yes, clear foul</span>
                 <span className="text-[10px] font-black text-[teal] z-10 drop-shadow-md">{yesPercentage}%</span>
@@ -268,9 +268,9 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
             </div>
             <div 
               onClick={() => handleVote('no')}
-              className={`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[coral]/50'}`}
+              className={\`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors \${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[coral]/50'}\`}
             >
-              <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[coral]/40 to-[coral]/20 transition-all duration-1000" style={{ width: `${noPercentage}%` }} />
+              <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[coral]/40 to-[coral]/20 transition-all duration-1000" style={{ width: \`\${noPercentage}%\` }} />
               <div className="absolute inset-0 flex items-center justify-between px-3">
                 <span className="text-xs font-bold text-foreground z-10 drop-shadow-md">No, he dove</span>
                 <span className="text-[10px] font-black text-[coral] z-10 drop-shadow-md">{noPercentage}%</span>
@@ -283,10 +283,10 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   );
 
   return (
-    <div className="flex-1 min-h-0 w-full md:max-w-[1600px] md:mx-auto text-foreground flex flex-col md:flex-row bg-background overflow-hidden relative">
+    <div className="flex-1 min-h-0 w-full md:max-w-[1600px] md:mx-auto text-foreground flex flex-col xl:flex-row bg-background overflow-hidden relative">
       
       {/* Custom Animations CSS */}
-      <style>{`
+      <style>{\`
         @keyframes floatUp {
           0% { transform: translateY(0px) scale(0.5); opacity: 0; }
           15% { transform: translateY(-50px) scale(1.5); opacity: 1; }
@@ -302,7 +302,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         .animate-marquee {
           animation: marquee 12s linear infinite;
         }
-      `}</style>
+      \`}</style>
 
       {/* Floating Emojis Container */}
       <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
@@ -310,7 +310,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           <div 
             key={item.id} 
             className="absolute bottom-32 text-6xl drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] animate-float"
-            style={{ left: `${item.left}%` }}
+            style={{ left: \`\${item.left}%\` }}
           >
             {item.emoji}
           </div>
@@ -320,28 +320,28 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
       {/* MOBILE LAYOUT: Poll -> Stage -> Chat -> Action Bar */}
       {/* DESKTOP LAYOUT: Stage (Left) -> Poll+Chat+Action Bar (Right) */}
       
-      <div className="flex-1 flex flex-col md:hidden overflow-hidden w-full h-full">
+      <div className="flex-1 flex flex-col xl:hidden overflow-hidden w-full h-full">
         {/* Poll at very top on mobile */}
         {renderPoll()}
         
         {/* Stage on mobile */}
         <div className="shrink-0 flex flex-col bg-background px-3 pb-3 border-b border-border z-10">
-          <div className="px-3 py-2 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-xl flex flex-col gap-2 shrink-0 backdrop-blur-md mb-3">
+          <div className="px-3 py-2 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-white/5 border border-border rounded-xl flex flex-col gap-2 shrink-0 backdrop-blur-md mb-3">
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 shrink-0">
                 <BackButton containerClassName="p-2 hover:bg-card text-card-foreground/10 rounded-full transition-colors group bg-card text-card-foreground/40 border border-border backdrop-blur" iconClassName="w-4 h-4 text-foreground" />
                 <div className="flex -space-x-3">
-                  <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"} className={`w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10 ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
-                  <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"} className={`w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0 ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
+                  <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10" />
+                  <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-7 h-7 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0" />
                 </div>
               </div>
               <div className="flex-1 overflow-hidden mx-2 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
                 <div className="whitespace-nowrap animate-marquee pl-[100%] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 tracking-widest text-[10px] uppercase">
-                  {matchInfo ? `${matchInfo.team1} vs ${matchInfo.team2} • Live` : 'Arsenal vs Tottenham Hotspur • Live'}
+                  Arsenal vs Tottenham Hotspur • Live
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={() => setIsVideoPlaying(!isVideoPlaying)} className={`flex px-2.5 py-1 rounded-full border items-center gap-1 transition-colors shadow-lg backdrop-blur ${isVideoPlaying ? 'bg-[teal]/20 border-[teal]/50 text-[teal]' : 'bg-card text-card-foreground/5 border-border text-foreground'}`}>
+                <button onClick={() => setIsVideoPlaying(!isVideoPlaying)} className={\`flex px-2.5 py-1 rounded-full border items-center gap-1 transition-colors shadow-lg backdrop-blur \${isVideoPlaying ? 'bg-[teal]/20 border-[teal]/50 text-[teal]' : 'bg-card text-card-foreground/5 border-border text-foreground'}\`}>
                   <MonitorPlay className="w-3.5 h-3.5" />
                 </button>
                 <div className="flex px-2.5 py-1 rounded-full border border-[coral]/40 bg-[coral]/10 items-center gap-1 shadow-[0_0_15px_rgba(255,59,0,0.3)] backdrop-blur">
@@ -357,7 +357,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               <div className="flex-1 aspect-video bg-card relative overflow-hidden rounded-xl shadow-lg border border-border group">
                 <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-8 h-8 rounded-full bg-card/50 backdrop-blur border border-border-strong flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-card/50 backdrop-blur border border-white/20 flex items-center justify-center">
                     <MonitorPlay className="w-3 h-3 text-foreground" />
                   </div>
                 </div>
@@ -384,28 +384,27 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         </div>
 
         {/* Chat Feed on mobile */}
-        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
-          <div className="space-y-4 space-y-reverse px-3 pb-4 mt-auto pt-16 flex flex-col-reverse">
-            {[...chatMessages].reverse().map((msg) => (
+        <div className="flex-1 min-h-0 overflow-y-auto space-y-4 px-3 pb-4 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A] pt-3" onScroll={handleChatScroll}>
+          {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-2 group">
-              <div className={`w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-border-strong'} p-0.5 mt-0.5`}>
+              <div className={\`w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 border \${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-0.5 mt-0.5\`}>
                 <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
               </div>
-              <div className={`${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30' : 'bg-card text-card-foreground/5 dark:bg-muted border-border'} p-2 rounded-2xl rounded-tl-none border backdrop-blur-sm flex-1`}>
+              <div className={\`\${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30' : 'bg-card text-card-foreground/5 dark:bg-white/5 border-border'} p-2 rounded-2xl rounded-tl-none border backdrop-blur-sm flex-1\`}>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className={`font-black ${msg.color} text-[10px] tracking-wider drop-shadow-sm`}>{msg.name}</span>
-                  <span className={`text-[8px] ${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-muted-foreground/80'} font-bold`}>{msg.time}</span>
+                  <span className={\`font-black \${msg.color} text-[10px] tracking-wider drop-shadow-sm\`}>{msg.name}</span>
+                  <span className={\`text-[8px] \${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-muted-foreground/80'} font-bold\`}>{msg.time}</span>
                 </div>
-                <p className={`text-xs ${msg.isSpeaker ? 'text-foreground' : 'text-gray-300'} leading-snug font-medium`}>
+                <p className={\`text-xs \${msg.isSpeaker ? 'text-foreground' : 'text-gray-300'} leading-snug font-medium\`}>
                   {msg.text}
                 </p>
               </div>
             </div>
           ))}
-            </div>
         </div>
+
         {/* Action Bar on mobile */}
-        <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + 8px)` }}>
+        <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: \`calc(env(safe-area-inset-bottom) + var(--nav-height))\` }}>
           <div className="flex gap-2">
             <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-lg py-1 transition-all">
               <span className="text-xl">🤡</span>
@@ -415,28 +414,28 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               <span className="text-xl">🍳</span>
               <span className="text-[8px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
             </button>
-            <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-lg py-1 font-black ${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}`}>
+            <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={\`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-lg py-1 font-black \${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}\`}>
               {isMicPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Hand className="w-4 h-4 fill-black" />}
               <span className="text-[9px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
             </button>
           </div>
-          <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center relative z-20">
+          <form onSubmit={handleSendMessage} className="bg-[#0A0A0A] rounded-full p-1 border border-border flex items-center relative z-20">
             <div className="w-7 h-7 rounded-full bg-gray-800 ml-1 overflow-hidden shrink-0">
                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
             </div>
             <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Join the conversation..." className="bg-transparent border-none outline-none text-[15px] w-full px-3 text-foreground placeholder:text-gray-600 font-medium" />
-            <button type="submit" disabled={!inputText.trim()} className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] border-[teal] text-black' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
+            <button type="submit" disabled={!inputText.trim()} className={\`w-8 h-8 flex items-center justify-center rounded-lg transition-all mr-0.5 border \${inputText.trim() ? 'bg-[teal] border-[teal] text-black' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}\`}>
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
         </div>
       </div>
       
-      {/* DESKTOP LAYOUT (unchanged functionally, just isolated in md:flex block) */}
-      <div className="hidden md:flex flex-1 w-full h-full overflow-hidden">
+      {/* DESKTOP LAYOUT (unchanged functionally, just isolated in xl:flex block) */}
+      <div className="hidden xl:flex flex-1 w-full h-full overflow-hidden">
         {/* Left Pane: The Stage */}
         <div className="flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-background p-8 shrink-0">
-          <div className="px-6 py-4 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-2xl flex flex-col gap-2 shrink-0 backdrop-blur-md z-20">
+          <div className="px-6 py-4 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-white/5 border border-border rounded-2xl flex flex-col gap-2 shrink-0 backdrop-blur-md z-20">
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-[teal]/20 rounded-full blur-[80px] pointer-events-none" />
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[coral]/20 rounded-full blur-[80px] pointer-events-none" />
             <div className="flex items-center justify-between relative z-10">
@@ -445,19 +444,19 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                 <div className="flex flex-col justify-center">
                    <div className="flex items-center">
                      <div className="flex -space-x-3">
-                       <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg"} className={`w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10 ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
-                       <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg"} className={`w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0 ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
+                       <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-10" />
+                       <img src="https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg" className="w-10 h-10 bg-white rounded-full border-2 border-[#0A0A0A] p-0.5 shadow-lg relative z-0" />
                      </div>
                    </div>
                 </div>
               </div>
               <div className="flex-1 overflow-hidden mx-4 flex items-center" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
                 <div className="whitespace-nowrap animate-marquee pl-[100%] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 tracking-widest text-sm uppercase">
-                  {matchInfo ? `${matchInfo.team1} vs ${matchInfo.team2} • Live Post-Match Debate` : 'Arsenal vs Tottenham Hotspur • Live Post-Match Debate'}
+                  Arsenal vs Tottenham Hotspur • Live Post-Match Debate
                 </div>
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <button onClick={() => setIsVideoPlaying(!isVideoPlaying)} className={`flex px-3 py-1.5 rounded-full border items-center gap-1.5 transition-colors shadow-lg backdrop-blur ${isVideoPlaying ? 'bg-[teal]/20 border-[teal]/50 text-[teal]' : 'bg-card text-card-foreground/5 border-border hover:bg-card text-card-foreground/10 text-foreground'}`}>
+                <button onClick={() => setIsVideoPlaying(!isVideoPlaying)} className={\`flex px-3 py-1.5 rounded-full border items-center gap-1.5 transition-colors shadow-lg backdrop-blur \${isVideoPlaying ? 'bg-[teal]/20 border-[teal]/50 text-[teal]' : 'bg-card text-card-foreground/5 border-border hover:bg-card text-card-foreground/10 text-foreground'}\`}>
                   <MonitorPlay className="w-3.5 h-3.5" />
                   <span className="text-xs font-black tracking-widest block">MEDIA</span>
                 </button>
@@ -477,7 +476,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                 <div className="w-full aspect-video bg-card relative overflow-hidden rounded-2xl shadow-2xl border border-border group">
                   <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-16 h-16 rounded-full bg-card/50 backdrop-blur border border-border-strong flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-card/50 backdrop-blur border border-white/20 flex items-center justify-center">
                       <MonitorPlay className="w-6 h-6 text-foreground" />
                     </div>
                   </div>
@@ -506,49 +505,47 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         </div>
 
         {/* Right Pane: Live Chat & Polls */}
-        <div className="w-[400px] xl:w-[480px] bg-card text-card-foreground flex flex-col border-l border-border shrink-0 relative z-20 overflow-hidden h-full">
+        <div className="w-[400px] 2xl:w-[480px] bg-[#0A0A0A] flex flex-col border-l border-border shrink-0 relative z-20 overflow-hidden h-full">
           {renderPoll()}
-          <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
-            <div className="space-y-6 space-y-reverse px-6 pb-6 mt-auto pt-16 flex flex-col-reverse">
-              {[...chatMessages].reverse().map((msg) => (
+          <div className="flex-1 min-h-0 overflow-y-auto space-y-6 px-6 pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
+            {chatMessages.map((msg) => (
               <div key={msg.id} className="flex gap-3 group">
-                <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-border-strong'} p-1 transition-transform group-hover:scale-110`}>
+                <div className={\`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border \${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-1 transition-transform group-hover:scale-110\`}>
                   <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
                 </div>
-                <div className={`${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30' : 'bg-card text-card-foreground/5 dark:bg-muted border-border hover:bg-card text-card-foreground/10'} p-3 rounded-2xl rounded-tl-none border backdrop-blur-sm flex-1`}>
+                <div className={\`\${msg.isSpeaker ? 'bg-gradient-to-br from-[#00C853]/10 to-[#00C853]/5 border-[#00C853]/30' : 'bg-card text-card-foreground/5 dark:bg-white/5 border-border hover:bg-card text-card-foreground/10'} p-3 rounded-2xl rounded-tl-none border backdrop-blur-sm flex-1\`}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`font-black ${msg.color} text-xs tracking-wider`}>{msg.name}</span>
-                    <span className={`text-[9px] ${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-muted-foreground/80'} font-bold`}>{msg.time}</span>
+                    <span className={\`font-black \${msg.color} text-xs tracking-wider\`}>{msg.name}</span>
+                    <span className={\`text-[9px] \${msg.isSpeaker ? 'text-[#00C853]/60' : 'text-muted-foreground/80'} font-bold\`}>{msg.time}</span>
                   </div>
-                  <p className={`text-sm ${msg.isSpeaker ? 'text-foreground' : 'text-gray-300'} leading-relaxed font-medium`}>
+                  <p className={\`text-sm \${msg.isSpeaker ? 'text-foreground' : 'text-gray-300'} leading-relaxed font-medium\`}>
                     {msg.text}
                   </p>
                 </div>
               </div>
             ))}
-              </div>
           </div>
           <div className="p-4 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] relative z-30">
             <div className="flex gap-3">
-              <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
+              <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-white/20 hover:-translate-y-1 transition-all shadow-lg">
                 <span className="text-2xl">🤡</span>
                 <span className="text-[9px] font-black text-muted-foreground tracking-widest uppercase">Waffling</span>
               </button>
-              <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
+              <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-white/20 hover:-translate-y-1 transition-all shadow-lg">
                 <span className="text-2xl">🍳</span>
                 <span className="text-[9px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
               </button>
-              <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-3 hover:scale-[1.02] font-black cursor-pointer ${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}`}>
+              <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={\`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-3 hover:scale-[1.02] font-black cursor-pointer \${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}\`}>
                 {isMicPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Hand className="w-5 h-5 fill-black" />}
                 <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
               </button>
             </div>
-            <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center focus-within:border-[teal] focus-within:shadow-[0_0_20px_rgba(0,229,255,0.15)] transition-all">
+            <form onSubmit={handleSendMessage} className="bg-[#0A0A0A] rounded-full p-1 border border-border flex items-center focus-within:border-[teal] focus-within:shadow-[0_0_20px_rgba(0,229,255,0.15)] transition-all">
               <div className="w-8 h-8 rounded-full bg-gray-800 ml-1 overflow-hidden shrink-0">
                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
               </div>
               <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Join the conversation..." className="bg-transparent border-none outline-none text-sm w-full px-4 text-foreground placeholder:text-gray-600 font-medium" />
-              <button type="submit" disabled={!inputText.trim()} className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
+              <button type="submit" disabled={!inputText.trim()} className={\`w-10 h-10 flex items-center justify-center rounded-xl transition-all mr-0.5 border \${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}\`}>
                 <Send className="w-4 h-4" />
               </button>
             </form>
@@ -565,8 +562,11 @@ export default function ActiveStandPage() {
   const id = Array.isArray(params?.id) ? params.id[0] : params?.id || "default";
 
   return (
-    <LiveAudioRoom roomName={id} username={`User_${Math.floor(Math.random() * 1000)}`}>
+    <LiveAudioRoom roomName={id} username={\`User_\${Math.floor(Math.random() * 1000)}\`}>
       <StandRoomLayout matchId={id} />
     </LiveAudioRoom>
   );
 }
+`;
+
+fs.writeFileSync('src/app/(app)/stands/[id]/page.tsx', code);

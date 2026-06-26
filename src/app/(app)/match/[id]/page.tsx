@@ -305,7 +305,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-4 group-hover:scale-105 transition-transform">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">{matchInfo?.team1 || "Team 1"}</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">{matchInfo?.team1 || "Home"}</h2>
               
               {/* Goal Scorers - Only show in postmatch */}
               {matchState === 'postmatch' && (
@@ -336,7 +336,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Team 2"}</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Away"}</h2>
             </div>
           </div>
 
@@ -473,11 +473,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             className="space-y-12"
           >
              <div className="max-w-4xl mx-auto min-h-[450px]">
-                {prematchTab === 'LINEUP' && <LineupTab />}
-                {prematchTab === 'H2H' && <H2HTab />}
-                {prematchTab === 'STANDINGS' && <StandingsTab />}
-                {prematchTab === 'FORM' && <FormTab />}
-                {prematchTab === 'KEY BATTLES' && <KeyBattlesTab />}
+                {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
+                {prematchTab === 'H2H' && <H2HTab matchInfo={matchInfo} />}
+                {prematchTab === 'STANDINGS' && <StandingsTab matchInfo={matchInfo} />}
+                {prematchTab === 'FORM' && <FormTab matchInfo={matchInfo} />}
+                {prematchTab === 'KEY BATTLES' && <KeyBattlesTab matchInfo={matchInfo} />}
              </div>
 
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
@@ -609,9 +609,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {/* Score Pill */}
               <div className="bg-black/60 backdrop-blur-xl border border-border rounded-full px-6 py-2 md:px-8 md:py-3 flex items-center gap-4 md:gap-6 mb-16 md:mb-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-r from-[#4FC3F7]/10 to-[#FF7F50]/10" />
-                 <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
+                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
                  <span className="text-2xl md:text-3xl font-black tracking-widest text-foreground relative z-10 font-mono">1 - 2</span>
-                 <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
+                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
               </div>
 
               {/* MVP SHOWCASE */}
@@ -886,10 +886,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
                 {/* Team Logos */}
                 <div className="absolute top-8 right-8 w-16 h-16 opacity-30 pointer-events-none drop-shadow-xl">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain" />
+                  <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-full h-full object-contain" />
                 </div>
                 <div className="absolute bottom-8 right-8 w-16 h-16 opacity-30 pointer-events-none drop-shadow-xl">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" />
+                  <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-full h-full object-contain" />
                 </div>
 
                 {/* Players */}
@@ -936,10 +936,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
                 {/* Team Logos */}
                 <div className="absolute top-1/2 left-24 -translate-y-1/2 w-32 h-32 opacity-20 pointer-events-none drop-shadow-xl">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-full h-full object-contain" />
+                  <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-full h-full object-contain" />
                 </div>
                 <div className="absolute top-1/2 right-24 -translate-y-1/2 w-32 h-32 opacity-20 pointer-events-none drop-shadow-xl">
-                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-full h-full object-contain" />
+                  <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-full h-full object-contain" />
                 </div>
 
                 {/* Players */}
@@ -1073,7 +1073,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                <div className="flex items-center gap-4 md:gap-6">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[#FF7F50] blur-xl opacity-30 rounded-full"></div>
-                    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
+                    <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
                   </div>
                   <span className="text-2xl md:text-4xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400">LIV</span>
                </div>
@@ -1085,7 +1085,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   <span className="text-2xl md:text-4xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-white">MCI</span>
                   <div className="relative">
                     <div className="absolute inset-0 bg-[#4FC3F7] blur-xl opacity-30 rounded-full"></div>
-                    <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
+                    <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-12 h-12 md:w-20 md:h-20 object-contain relative z-10 drop-shadow-2xl" />
                   </div>
                </div>
             </div>
@@ -1141,7 +1141,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 // Pre-Match Tab Components
 // ---------------------------------------------------------
 
-function LineupTab() {
+function LineupTab({ matchInfo }: { matchInfo: any }) {
   const [vibe, setVibe] = useState(80);
   const [tactical, setTactical] = useState(45);
   const [hasVotedAs, setHasVotedAs] = useState<'fan' | 'neutral' | null>(null);
@@ -1182,11 +1182,11 @@ function LineupTab() {
          <div className="relative w-full h-[700px] bg-[#070e0a] rounded-t-2xl border border-border border-b-0 overflow-hidden pt-2">
             {/* Team Logos */}
             <div className="absolute top-4 left-4 font-black text-foreground/20 text-xl tracking-tighter flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 opacity-40 grayscale brightness-200" alt="" />
+              <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-6 h-6 opacity-40 grayscale brightness-200" alt="" />
               MCI
             </div>
             <div className="absolute bottom-4 right-4 font-black text-foreground/20 text-xl tracking-tighter flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-5 h-6 opacity-40 grayscale brightness-200" alt="" />
+              <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-5 h-6 opacity-40 grayscale brightness-200" alt="" />
               LIV
             </div>
 
@@ -1252,7 +1252,7 @@ function LineupTab() {
          <div className="mb-8">
            <div className="flex justify-between items-end mb-3">
              <div className="flex items-center gap-2">
-               <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5" alt=""/>
+               <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-5 h-5" alt=""/>
                <span className="text-[10px] font-black uppercase">YOUR VIBE <span className="text-muted-foreground">(MCI FANS)</span></span>
              </div>
              {hasVotedAs === 'neutral' ? (
@@ -1282,8 +1282,8 @@ function LineupTab() {
          <div className="mb-10">
            <div className="flex justify-between items-end mb-3">
              <div className="flex items-center gap-2">
-               <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-4 h-5" alt=""/>
-               <span className="text-[10px] font-black uppercase text-muted-foreground">LIVERPOOL FANS</span>
+               <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-4 h-5" alt=""/>
+               <span className="text-[10px] font-black uppercase text-muted-foreground">{(matchInfo?.team1?.toUpperCase() || "LIVERPOOL") + " FANS"}</span>
              </div>
              <div className="flex items-center gap-1.5">
                <span className="text-[10px] font-black text-[#D32F2F] tracking-widest">42% WORRIED</span>
@@ -1326,7 +1326,7 @@ function LineupTab() {
   );
 }
 
-function H2HTab() {
+function H2HTab({ matchInfo }: { matchInfo: any }) {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="bg-card text-card-foreground rounded-2xl p-6 border border-border">
@@ -1335,7 +1335,7 @@ function H2HTab() {
         <div className="flex items-center justify-between mb-8">
             <div className="flex flex-col items-center">
                <div className="w-12 h-12 rounded-full bg-[#4FC3F7] mb-2" />
-               <span className="text-[10px] font-bold">MAN CITY</span>
+               <span className="text-[10px] font-bold">{matchInfo?.team2?.toUpperCase() || "MAN CITY"}</span>
             </div>
             <div className="flex gap-6 text-center">
                <div><div className="text-2xl font-black text-teal">3</div><div className="text-[8px] text-teal tracking-widest">WINS</div></div>
@@ -1344,7 +1344,7 @@ function H2HTab() {
             </div>
             <div className="flex flex-col items-center">
                <div className="w-12 h-12 rounded-full bg-[#D32F2F] mb-2" />
-               <span className="text-[10px] font-bold">LIVERPOOL</span>
+               <span className="text-[10px] font-bold">{matchInfo?.team1?.toUpperCase() || "LIVERPOOL"}</span>
             </div>
         </div>
 
@@ -1369,7 +1369,7 @@ function H2HTab() {
   );
 }
 
-function StandingsTab() {
+function StandingsTab({ matchInfo }: { matchInfo: any }) {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="bg-card text-card-foreground rounded-2xl p-4 border border-border overflow-x-auto hide-scrollbar">
@@ -1410,13 +1410,13 @@ function StandingsTab() {
   );
 }
 
-function FormTab() {
+function FormTab({ matchInfo }: { matchInfo: any }) {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="bg-card text-card-foreground rounded-2xl p-6 border border-border">
          <div className="flex justify-between items-center mb-8">
             <div className="flex flex-col">
-              <span className="text-[10px] font-black uppercase text-muted-foreground mb-3">MAN CITY</span>
+              <span className="text-[10px] font-black uppercase text-muted-foreground mb-3">{matchInfo?.team2?.toUpperCase() || "MAN CITY"}</span>
               <div className="flex gap-2">
                  {['W','W','W','D','W'].map((r,i) => (
                    <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-muted-foreground' : 'bg-coral/20 text-coral'}`}>{r}</div>
@@ -1430,7 +1430,7 @@ function FormTab() {
             </div>
 
             <div className="flex flex-col items-end">
-              <span className="text-[10px] font-black uppercase text-[#D32F2F] mb-3">LIVERPOOL</span>
+              <span className="text-[10px] font-black uppercase text-[#D32F2F] mb-3">{matchInfo?.team1?.toUpperCase() || "LIVERPOOL"}</span>
               <div className="flex gap-2">
                  {['W','W','L','W','D'].map((r,i) => (
                    <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-muted-foreground' : 'bg-coral/20 text-coral'}`}>{r}</div>
@@ -1448,7 +1448,7 @@ function FormTab() {
   );
 }
 
-function KeyBattlesTab() {
+function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="space-y-4">
@@ -1459,7 +1459,7 @@ function KeyBattlesTab() {
                </div>
                <div className="flex flex-col">
                  <span className="text-sm font-bold">Haaland</span>
-                 <span className="text-[10px] text-gray-500">Man City</span>
+                 <span className="text-[10px] text-gray-500">{matchInfo?.team2 || "Man City"}</span>
                </div>
             </div>
             <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
@@ -1469,7 +1469,7 @@ function KeyBattlesTab() {
                </div>
                <div className="flex flex-col">
                  <span className="text-sm font-bold">Van Dijk</span>
-                 <span className="text-[10px] text-[#D32F2F]">Liverpool</span>
+                 <span className="text-[10px] text-[#D32F2F]">{matchInfo?.team1 || "Liverpool"}</span>
                </div>
             </div>
          </div>
@@ -1481,7 +1481,7 @@ function KeyBattlesTab() {
                </div>
                <div className="flex flex-col">
                  <span className="text-sm font-bold">De Bruyne</span>
-                 <span className="text-[10px] text-gray-500">Man City</span>
+                 <span className="text-[10px] text-gray-500">{matchInfo?.team2 || "Man City"}</span>
                </div>
             </div>
             <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
@@ -1491,7 +1491,7 @@ function KeyBattlesTab() {
                </div>
                <div className="flex flex-col">
                  <span className="text-sm font-bold">Mac Allister</span>
-                 <span className="text-[10px] text-[#D32F2F]">Liverpool</span>
+                 <span className="text-[10px] text-[#D32F2F]">{matchInfo?.team1 || "Liverpool"}</span>
                </div>
             </div>
          </div>
