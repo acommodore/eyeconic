@@ -140,12 +140,13 @@ export default function AppLayout({
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col relative pb-20 md:pb-0 overflow-x-hidden transition-all duration-300">
+      <main className={`flex-1 flex flex-col relative ${isStandRoom ? '' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
         {children}
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
+      {!isStandRoom && (
+        <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
@@ -164,6 +165,7 @@ export default function AppLayout({
           );
         })}
       </nav>
+      )}
 
       <OnboardingModal />
     </div>
