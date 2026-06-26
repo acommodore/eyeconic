@@ -226,7 +226,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   };
 
   return (
-    <div className="flex-1 w-full md:max-w-[1600px] md:mx-auto text-foreground flex flex-col xl:flex-row bg-background overflow-hidden">
+    <div className="flex-1 min-h-0 w-full md:max-w-[1600px] md:mx-auto text-foreground flex flex-col xl:flex-row bg-background overflow-hidden">
       
       {/* Custom Animations CSS */}
       <style>{`
@@ -261,7 +261,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
       </div>
       
       {/* Left Pane: The Stage */}
-      <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-background xl:p-8" onScroll={handleChatScroll}>
+      <div className="flex-none xl:flex-1 overflow-y-auto hide-scrollbar flex flex-col relative z-10 bg-background xl:p-8">
         
         {/* Info Section (Premium Header) */}
         <div className="px-3 py-2 md:px-6 md:py-4 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-white/5 border-b xl:border border-border xl:rounded-2xl flex flex-col gap-2 shrink-0 backdrop-blur-md z-20">
@@ -365,7 +365,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
       </div>
 
       {/* Right Pane: Live Chat & Polls */}
-      <div className="flex-1 xl:h-full xl:w-[400px] 2xl:w-[480px] bg-[#0A0A0A] flex flex-col border-t xl:border-t-0 xl:border-l border-border shrink-0 relative z-20 overflow-hidden">
+      <div className="flex-1 min-h-0 xl:h-full xl:w-[400px] 2xl:w-[480px] bg-[#0A0A0A] flex flex-col border-t xl:border-t-0 xl:border-l border-border shrink-0 relative z-20 overflow-hidden">
         
         {/* Poll Pop-up (Top of Chat) */}
         <div className="p-4 bg-gradient-to-b from-[#050505] to-transparent relative z-10 shrink-0">
@@ -424,7 +424,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         </div>
 
         {/* Live Chat Feed */}
-        <div className="flex-none space-y-4 md:space-y-6 px-4 md:px-6 pb-4 md:pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A] min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto space-y-4 md:space-y-6 px-4 md:px-6 pb-4 md:pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
           {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-2 md:gap-3 group">
               <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-0.5 md:p-1 mt-0.5 transition-transform duration-300 group-hover:scale-110`}>

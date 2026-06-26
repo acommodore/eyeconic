@@ -163,7 +163,7 @@ export default function AppLayout({
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex flex-col relative ${isStandRoom ? 'pb-0' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
+      <main className={`flex-1 flex flex-col relative min-h-0 ${isStandRoom ? 'pb-0' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
         {children}
       </main>
 
