@@ -392,7 +392,7 @@ export default function DiscoverPage() {
                   {/* Match of the Day indicator */}
                   <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-6 flex items-center gap-2 bg-teal/10 w-max px-3 py-1.5 rounded-full border border-teal/20">
                      <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,1)]"></span>
-                     MATCH OF THE MOMENT // {heroMatch.league}
+                     MATCH OF THE MOMENT
                   </div>
 
                   {/* Scoreline */}
