@@ -6,9 +6,10 @@ import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { login } from "@/app/(auth)/actions";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { motion } from "framer-motion";
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
   const [showPassword, setShowPassword] = useState(false);
@@ -105,3 +106,5 @@ export default function LoginPage() {
     </motion.div>
   );
 }
+
+export default function LoginPage() { return <Suspense fallback={<div>Loading...</div>}><LoginForm /></Suspense>; }
