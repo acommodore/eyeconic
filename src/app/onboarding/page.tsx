@@ -72,7 +72,7 @@ export default function OnboardingPage() {
   const finishOnboarding = () => {
     setIsFinishing(true);
     setTimeout(() => {
-      router.push("/discover");
+      router.push("/home");
     }, 2500);
   };
 
@@ -97,7 +97,7 @@ export default function OnboardingPage() {
   const ambientColor2 = step === 2 && rivalTeam ? rivalTeam.color : (step === 3 && rivalTeam ? rivalTeam.color : "#111111");
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white flex justify-center relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-background text-foreground text-foreground flex justify-center relative overflow-hidden font-sans">
       
       {/* Ambient Background Glows */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
@@ -119,15 +119,15 @@ export default function OnboardingPage() {
         <header className="py-8 flex items-center justify-between relative z-20">
           <button 
             onClick={handleBack} 
-            className="group flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md transition-all duration-300"
+            className="group flex items-center justify-center w-12 h-12 rounded-full bg-muted border border-border hover:bg-muted/80 hover:border-white/30 backdrop-blur-md transition-all duration-300"
           >
-            <ArrowLeft className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
           </button>
 
           {/* Premium Progress Indicator */}
           <div className="flex gap-3">
             {[1, 2, 3].map((idx) => (
-              <div key={idx} className="relative w-16 h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div key={idx} className="relative w-16 h-1.5 bg-muted/80 rounded-full overflow-hidden">
                 <motion.div 
                   className="absolute top-0 left-0 h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                   initial={{ width: "0%" }}
@@ -150,18 +150,18 @@ export default function OnboardingPage() {
                 className="flex flex-col items-center justify-center text-center h-full my-auto"
               >
                  <div className="relative w-32 h-32 mb-10 flex items-center justify-center">
-                    <div className="absolute inset-0 rounded-full border-2 border-white/10" />
+                    <div className="absolute inset-0 rounded-full border-2 border-border" />
                     <motion.div 
                       animate={{ rotate: 360 }} 
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                       className="absolute inset-0 rounded-full border-t-2 border-white" 
                     />
-                    <Zap className="w-10 h-10 text-white animate-pulse" />
+                    <Zap className="w-10 h-10 text-foreground animate-pulse" />
                  </div>
                  <h2 className="text-4xl md:text-5xl font-black uppercase mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">
                    Calibrating Engine
                  </h2>
-                 <p className="text-gray-400 text-lg font-medium tracking-wide">Tuning narrative tension to your allegiances...</p>
+                 <p className="text-muted-foreground text-lg font-medium tracking-wide">Tuning narrative tension to your allegiances...</p>
               </motion.div>
             ) : (
               <motion.div
@@ -182,13 +182,13 @@ export default function OnboardingPage() {
                     >
                       {step === 1 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Where's your<br/>loyalty?</span>}
                       {step === 2 && <span className="bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-500">Name your<br/>rival.</span>}
-                      {step === 3 && <span className="text-white">The Stage is Set.</span>}
+                      {step === 3 && <span className="text-foreground">The Stage is Set.</span>}
                     </motion.h1>
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
-                      className="text-gray-400 text-lg md:text-xl font-medium tracking-wide"
+                      className="text-muted-foreground text-lg md:text-xl font-medium tracking-wide"
                     >
                       {step === 1 && "Select the club that dictates your weekends."}
                       {step === 2 && "Who boils your blood? This is where it gets personal."}
@@ -204,15 +204,15 @@ export default function OnboardingPage() {
                       transition={{ delay: 0.3 }}
                       className="relative w-full md:w-80 shrink-0 group"
                     >
-                      <div className="absolute inset-0 bg-white/5 rounded-2xl blur-md transition-all duration-300 group-focus-within:bg-white/10" />
-                      <div className="relative bg-[#0A0A0A] border border-white/10 rounded-2xl flex items-center overflow-hidden transition-all duration-300 group-focus-within:border-white/30 group-focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                      <div className="absolute inset-0 bg-muted rounded-2xl blur-md transition-all duration-300 group-focus-within:bg-muted/80" />
+                      <div className="relative bg-card text-card-foreground border border-border rounded-2xl flex items-center overflow-hidden transition-all duration-300 group-focus-within:border-white/30 group-focus-within:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                         <Search className="absolute left-4 w-5 h-5 text-gray-500" />
                         <input 
                           type="text" 
                           placeholder="Search clubs..." 
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
-                          className="w-full bg-transparent py-4 pl-12 pr-4 text-white placeholder-gray-600 focus:outline-none font-medium tracking-wide"
+                          className="w-full bg-transparent py-4 pl-12 pr-4 text-foreground placeholder-gray-600 focus:outline-none font-medium tracking-wide"
                         />
                       </div>
                     </motion.div>
@@ -235,13 +235,13 @@ export default function OnboardingPage() {
                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 blur-[60px] rounded-full pointer-events-none"
                            style={{ backgroundColor: favoriteTeam.color }}
                          />
-                         <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs text-white font-bold tracking-widest uppercase backdrop-blur-md">
+                         <span className="inline-block px-4 py-1.5 rounded-full bg-muted/80 border border-border-strong text-xs text-foreground font-bold tracking-widest uppercase backdrop-blur-md">
                            My Club
                          </span>
                          <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
                            <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] ${favoriteTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-md">{favoriteTeam.name}</span>
+                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-foreground drop-shadow-md">{favoriteTeam.name}</span>
                        </motion.div>
 
                        {/* Epic VS Divider */}
@@ -252,7 +252,7 @@ export default function OnboardingPage() {
                          className="flex flex-col items-center justify-center z-20 shrink-0 relative"
                        >
                          <div className="absolute w-[1px] h-32 md:h-64 bg-gradient-to-b from-transparent via-white/30 to-transparent -rotate-12" />
-                         <div className="bg-[#020202] p-4 rounded-full border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.8)] z-10">
+                         <div className="bg-background text-foreground p-4 rounded-full border border-border shadow-[0_0_30px_rgba(0,0,0,0.8)] z-10">
                             <span className="text-2xl font-black italic tracking-tighter text-gray-500">VS</span>
                          </div>
                        </motion.div>
@@ -274,7 +274,7 @@ export default function OnboardingPage() {
                          <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
                            <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.2)] ${rivalTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
                          </div>
-                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-white drop-shadow-md">{rivalTeam.name}</span>
+                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-foreground drop-shadow-md">{rivalTeam.name}</span>
                        </motion.div>
 
                      </div>
@@ -308,8 +308,8 @@ export default function OnboardingPage() {
                                 }}
                                 className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
                                   isSelected 
-                                    ? 'bg-white/10 border-white/40 shadow-[0_0_30px_rgba(255,255,255,0.1)] scale-[1.02]' 
-                                    : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30 hover:-translate-y-1'
+                                    ? 'bg-muted/80 border-white/40 shadow-[0_0_30px_rgba(255,255,255,0.1)] scale-[1.02]' 
+                                    : 'bg-muted border-border hover:bg-muted/80 hover:border-white/30 hover:-translate-y-1'
                                 }`}
                                 style={{
                                   borderWidth: '1px',
@@ -325,7 +325,7 @@ export default function OnboardingPage() {
                                 <div className="w-16 h-16 relative z-10 transition-transform duration-300 group-hover:scale-110">
                                   <img src={team.logo} alt={team.short} className={`w-full h-full object-contain ${team.invert ? 'filter dark:invert-0 invert' : ''}`} />
                                 </div>
-                                <span className={`text-sm font-bold tracking-wide text-center w-full z-10 ${isSelected ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                                <span className={`text-sm font-bold tracking-wide text-center w-full z-10 ${isSelected ? 'text-foreground' : 'text-gray-300 group-hover:text-foreground'}`}>
                                   {team.name}
                                 </span>
                               </button>
@@ -371,8 +371,8 @@ export default function OnboardingPage() {
                                   }}
                                   className={`group relative p-6 rounded-2xl flex flex-col items-center justify-center gap-4 transition-all duration-300 overflow-hidden ${
                                     isSelected 
-                                      ? 'bg-white/10 border-white/50 shadow-[0_0_40px_rgba(255,255,255,0.1)] scale-[1.02] z-10' 
-                                      : 'bg-[#0A0A0A] border-white/5 hover:bg-white/5 hover:border-white/20 hover:-translate-y-1'
+                                      ? 'bg-muted/80 border-border0 shadow-[0_0_40px_rgba(255,255,255,0.1)] scale-[1.02] z-10' 
+                                      : 'bg-card text-card-foreground border-border hover:bg-muted/50 hover:border-border-strong hover:-translate-y-1'
                                   } ${isDimmed ? 'opacity-40 grayscale hover:grayscale-0 hover:opacity-100' : ''}`}
                                   style={{ borderWidth: '1px', borderStyle: 'solid' }}
                                 >
@@ -392,7 +392,7 @@ export default function OnboardingPage() {
                                   <div className="w-16 h-16 relative z-10 transition-transform duration-500 group-hover:scale-110">
                                     <img src={team.logo} alt={team.short} className={`w-full h-full object-contain drop-shadow-lg ${team.invert ? 'filter dark:invert-0 invert' : ''}`} />
                                   </div>
-                                  <span className={`text-sm font-bold tracking-wide text-center w-full z-10 transition-colors duration-300 ${isSelected ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                                  <span className={`text-sm font-bold tracking-wide text-center w-full z-10 transition-colors duration-300 ${isSelected ? 'text-foreground' : 'text-gray-500 group-hover:text-gray-300'}`}>
                                     {team.name}
                                   </span>
                                 </button>

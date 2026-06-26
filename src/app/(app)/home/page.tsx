@@ -98,7 +98,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  <span className="text-[9px] uppercase tracking-widest text-muted-foreground hidden sm:block">VOL</span>
               </div>
               
-              <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors border border-border">
+              <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-muted hover:bg-black/10 dark:bg-muted/80 transition-colors border border-border">
                  <ArrowRight className="w-4 h-4 text-teal group-hover:translate-x-0.5 transition-transform" />
               </Link>
            </div>
@@ -322,14 +322,14 @@ export default function DiscoverPage() {
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
             </div>
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
@@ -345,7 +345,7 @@ export default function DiscoverPage() {
               {days.map(day => {
                 const isActive = day.date === activeDate;
                 return (
-                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-muted border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
                     <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
                     <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-black dark:text-foreground drop-shadow-md' : ''}`}>{day.date}</span>
                   </button>
@@ -363,7 +363,7 @@ export default function DiscoverPage() {
                <button 
                  key={f.name}
                  onClick={() => setActiveFilter(f.name)}
-                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-white/5'}`}
+                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-muted'}`}
                >
                  <Icon className="w-3.5 h-3.5" /> {f.name}
                </button>
@@ -380,7 +380,7 @@ export default function DiscoverPage() {
                className="absolute inset-0 bg-cover bg-center opacity-[0.03] mix-blend-screen group-hover:opacity-[0.06] transition-opacity duration-1000" 
                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
             <div className="absolute -top-40 -right-40 w-96 h-96 bg-teal/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen group-hover:bg-teal/20 transition-colors duration-1000"></div>
             
             <div className="absolute top-8 right-8 z-20 hidden md:block">
@@ -419,7 +419,7 @@ export default function DiscoverPage() {
                   <div className="flex items-center gap-6 mb-10">
                      <span className="text-lg font-mono text-coral animate-pulse font-bold tabular-nums drop-shadow-[0_0_8px_rgba(255,107,107,0.6)]">{heroMatch.time}</span>
                      <div className="w-px h-6 bg-white/20"></div>
-                     <div className={`flex items-center gap-3 text-sm font-mono uppercase tracking-widest ${getVolatilityColor(heroMatch.volatility)} bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full border border-border`}>
+                     <div className={`flex items-center gap-3 text-sm font-mono uppercase tracking-widest ${getVolatilityColor(heroMatch.volatility)} bg-black/5 dark:bg-muted px-4 py-2 rounded-full border border-border`}>
                         <span className="text-xl">{heroMatch.pulseEmoji}</span>
                         <span>{heroMatch.pulseStatus}</span>
                      </div>

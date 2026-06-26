@@ -19,7 +19,7 @@ export function OnboardingModal() {
   const handleClose = () => {
     localStorage.setItem("eyeconic_has_seen_onboarding", "true");
     setIsOpen(false);
-    router.push('/discover');
+    router.push('/home');
   };
 
   const handleNext = () => {

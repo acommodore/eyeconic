@@ -75,12 +75,12 @@ export default function AppLayout({
 
   return (
     <div 
-      className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}
+      className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-background text-foreground flex flex-col md:flex-row`}
       style={{ '--mobile-nav-height': showNav ? '80px' : '0px' } as React.CSSProperties}
     >
       {/* Mobile Top Bar */}
       {!isStandRoom && (
-      <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
+      <header className="md:hidden h-16 border-b border-border flex items-center justify-between px-4 bg-card text-card-foreground">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
           <div className="w-6 h-6 rounded bg-[#00E5FF] flex items-center justify-center">
             <svg className="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -92,7 +92,7 @@ export default function AppLayout({
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Link href="/profile" className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-[#121212]">
+          <Link href="/profile" className="w-8 h-8 rounded-full border border-border overflow-hidden bg-muted">
              {/* Avatar placeholder */}
              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
           </Link>
@@ -101,7 +101,7 @@ export default function AppLayout({
       )}
 
       {/* Desktop Sidebar */}
-      <aside className={`hidden md:flex flex-col border-r border-white/5 bg-[#0a0a0a] h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? 'w-24 p-4 items-center' : 'w-64 p-6'}`}>
+      <aside className={`hidden md:flex flex-col border-r border-border bg-card text-card-foreground h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? 'w-24 p-4 items-center' : 'w-64 p-6'}`}>
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -116,7 +116,7 @@ export default function AppLayout({
           )}
           <button 
             onClick={() => setIsCollapsed(!isCollapsed)} 
-            className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors text-gray-400 hover:text-white"
+            className="p-2 bg-muted hover:bg-muted/80 rounded-full transition-colors text-muted-foreground hover:text-foreground"
           >
              {isCollapsed ? <Menu className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
           </button>
@@ -133,7 +133,7 @@ export default function AppLayout({
                 className={`flex items-center rounded-xl transition-all ${
                   isActive 
                     ? "bg-[#00E5FF]/10 text-[#00E5FF] font-semibold" 
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 } ${isCollapsed ? 'justify-center w-12 h-12 p-0' : 'gap-4 px-4 py-3 w-full'}`}
               >
                 {item.icon}
@@ -147,8 +147,8 @@ export default function AppLayout({
           <div className={`flex ${isCollapsed ? 'justify-center' : 'justify-start px-2'}`}>
             <ThemeToggle />
           </div>
-          <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-[#121212] border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
-          <div className="w-10 h-10 shrink-0 rounded-full border border-[#00E5FF] overflow-hidden p-0.5 group-hover:border-white transition-colors">
+          <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
+          <div className="w-10 h-10 shrink-0 rounded-full border border-[#00E5FF] overflow-hidden p-0.5 group-hover:border-foreground transition-colors">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
               <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
               <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-black" />
@@ -171,7 +171,7 @@ export default function AppLayout({
 
       {/* Mobile Bottom Navigation */}
       {!isStandRoom && (
-      <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-[#0a0a0a] border-t border-white/5 flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
+      <nav className={`md:hidden fixed bottom-0 w-full h-20 bg-card text-card-foreground border-t border-border flex items-center justify-around px-2 z-50 pb-safe transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (

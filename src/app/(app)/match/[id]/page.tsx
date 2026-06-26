@@ -279,20 +279,20 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   };
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-white pb-24">
+    <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-foreground pb-24">
       
 
       {/* Top Header Navigation */}
       <div className="flex items-center justify-between mb-8 mt-2 md:mt-12">
-        <BackButton containerClassName="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]" iconClassName="w-5 h-5 text-white" />
-        <h1 className="text-sm font-black tracking-widest text-gray-400 uppercase">Match Center</h1>
-        <button className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors backdrop-blur-md bg-[#0A0A0A]">
-          <Share className="w-5 h-5 text-white" />
+        <BackButton containerClassName="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground" iconClassName="w-5 h-5 text-foreground" />
+        <h1 className="text-sm font-black tracking-widest text-muted-foreground uppercase">Match Center</h1>
+        <button className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground">
+          <Share className="w-5 h-5 text-foreground" />
         </button>
       </div>
 
       {/* Cinematic Scoreboard */}
-      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-12 border border-white/10 shadow-2xl">
+      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-12 border border-border shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/20 via-[#020202] to-[#4FC3F7]/20 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
@@ -302,14 +302,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-4 group-hover:scale-105 transition-transform">
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-4 group-hover:scale-105 transition-transform">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">{matchInfo?.team1 || "Team 1"}</h2>
               
               {/* Goal Scorers - Only show in postmatch */}
               {matchState === 'postmatch' && (
-                <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-gray-400">
+                <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-muted-foreground">
                   <div className="flex items-center justify-center gap-1.5">
                     <span className="text-teal">⚽</span> 2'
                   </div>
@@ -322,7 +322,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
                   <span className="text-[10px] md:text-[12px] font-bold text-teal tracking-[0.2em] uppercase mb-1">Kickoff In</span>
-                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-white drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
                 <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
@@ -333,7 +333,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
             {/* TEAM 2 */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
+              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Team 2"}</h2>
@@ -350,7 +350,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <Mic className="w-5 h-5 text-black" fill="currentColor" />
                      </div>
                      <div className="flex flex-col justify-center text-left mr-4">
-                        <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN EXISTING STAND</h2>
+                        <h2 className="text-sm font-black tracking-widest uppercase text-foreground leading-tight mb-0.5">JOIN EXISTING STAND</h2>
                      </div>
                   </div>
                </div>
@@ -361,7 +361,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Main 3-Tab Navigation */}
-      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-white/10 rounded-2xl mb-8 max-w-lg mx-auto shadow-2xl">
+      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-8 max-w-lg mx-auto shadow-2xl">
         {['prematch', 'live', 'postmatch'].map((state) => (
           <button
             key={state}
@@ -369,7 +369,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             className={`flex-1 py-3 px-4 rounded-xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
               matchState === state 
                 ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]' 
-                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
           >
             {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE' : 'THE FALLOUT'}
@@ -384,37 +384,37 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       {matchState === 'prematch' && (
         <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
            {/* Crowdcast - Horizontal Segmented */}
-           <section className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-4 shadow-xl">
+           <section className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-3xl p-4 shadow-xl">
               <div className="flex justify-between items-center mb-3 px-1">
-                 <h2 className="text-[10px] font-black tracking-widest uppercase text-gray-400">CROWDCAST VIBE</h2>
+                 <h2 className="text-[10px] font-black tracking-widest uppercase text-muted-foreground">CROWDCAST VIBE</h2>
                  <div className="flex items-center gap-1.5 text-[9px] font-bold text-teal uppercase">
                    <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" /> Live
                  </div>
               </div>
               <div className="flex gap-2 h-12">
-                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Flame className="w-4 h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Chaos</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Chaos</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-white">{votes.chaos}%</span>
+                    <span className="text-sm font-black relative z-10 text-foreground">{votes.chaos}%</span>
                  </div>
-                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-teal/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-teal/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-teal/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Shield className="w-4 h-4 text-teal group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Tactical</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Tactical</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-white">{votes.tactical}%</span>
+                    <span className="text-sm font-black relative z-10 text-foreground">{votes.tactical}%</span>
                  </div>
-                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-[#0A0A0A] rounded-2xl border border-purple-500/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-white/5 transition-colors group">
+                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-purple-500/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Zap className="w-4 h-4 text-purple-500 group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-gray-400 uppercase hidden sm:inline">Tension</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Tension</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-white">{votes.tension}%</span>
+                    <span className="text-sm font-black relative z-10 text-foreground">{votes.tension}%</span>
                  </div>
               </div>
            </section>
@@ -423,7 +423,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* Tab Navigation - Modern Pills */}
       {matchState !== 'live' && (
-        <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-white/5">
+        <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-border">
           {matchState === 'prematch' ? (
             ['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
               <button 
@@ -432,7 +432,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
                   prematchTab === tab 
                     ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                    : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                 }`}
               >
                 {tab}
@@ -446,7 +446,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
                   activeTab === tab 
                     ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                    : 'border border-white/5 text-gray-400 hover:bg-white/5 hover:text-white'
+                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                 }`}
               >
                 {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
@@ -483,7 +483,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
              {prematchTab === 'LINEUP' && (
                <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                  <div className="bg-[#121212]/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                         <img src={getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -495,11 +495,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={mvpWatchPlayer}
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-white/10"
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-border"
                         >
-                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
                         </select>
-                        <p className="text-[10px] text-gray-400 mb-2">{getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.team}</p>
+                        <p className="text-[10px] text-muted-foreground mb-2">{getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.team}</p>
                         <div className="flex items-end gap-1 mt-auto">
                           <span className="text-xl font-black text-teal leading-none">8.7</span>
                           <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
@@ -507,7 +507,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                      </div>
                   </div>
 
-                  <div className="bg-[#121212]/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                         <img src={getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -519,11 +519,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={fraudWatchPlayer}
                           onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-white/10"
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-border"
                         >
-                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-[#121212] text-sm">{p.name}</option>)}
+                          {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
                         </select>
-                        <p className="text-[10px] text-gray-400 mb-2">{getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.team}</p>
+                        <p className="text-[10px] text-muted-foreground mb-2">{getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.team}</p>
                         <div className="flex items-end gap-1.5 mt-auto">
                           <span className="text-[10px] font-bold text-gray-300 leading-tight">Needs a big performance</span>
                         </div>
@@ -546,20 +546,20 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                <Mic className="w-5 h-5 text-teal" />
                <h3 className="text-sm font-black tracking-widest text-teal uppercase">Highlights from the Stands</h3>
             </div>
-            <div className="bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-[32px] p-6 shadow-2xl space-y-4">
+            <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-[32px] p-6 shadow-2xl space-y-4">
                {[
                  { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#00E5FF] to-blue-500" },
                  { id: 2, name: "AnfieldRed", time: "68'", text: "That decision is shocking. Absolute madness from the ref there.", color: "from-[#C8102E] to-red-500" },
                  { id: 3, name: "NeutralFan", time: "FT", text: "Incredible match. A masterclass in tactical adaptability in the second half.", color: "from-gray-400 to-gray-600" }
                ].map(note => (
-                  <div key={note.id} className="bg-black/40 rounded-2xl p-4 md:p-5 border border-white/5 flex gap-4 items-start hover:bg-white/5 transition-colors cursor-pointer group">
+                  <div key={note.id} className="bg-black/40 rounded-2xl p-4 md:p-5 border border-border flex gap-4 items-start hover:bg-muted/50 transition-colors cursor-pointer group">
                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${note.color} shrink-0`} />
                      <div className="flex-1">
                         <div className="flex justify-between items-center mb-2">
                            <span className="font-bold text-gray-300">{note.name}</span>
                            <span className="text-[10px] text-gray-500 font-mono tracking-widest">{note.time}</span>
                         </div>
-                        <p className="text-sm text-gray-400 italic">"{note.text}"</p>
+                        <p className="text-sm text-muted-foreground italic">"{note.text}"</p>
                         
                         <div className="flex items-center gap-3 md:gap-4 mt-4 bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
                           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -588,7 +588,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           >
           
           {/* FANS HAVE SPOKEN - MVP & FAN XI */}
-          <section className="relative w-full rounded-[32px] overflow-hidden border border-white/5 shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
+          <section className="relative w-full rounded-[32px] overflow-hidden border border-border shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
             {/* Dark Cinematic Background */}
             <div className="absolute inset-0 bg-[#020202] z-0" />
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay z-0" />
@@ -607,10 +607,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               </div>
 
               {/* Score Pill */}
-              <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-full px-6 py-2 md:px-8 md:py-3 flex items-center gap-4 md:gap-6 mb-16 md:mb-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
+              <div className="bg-black/60 backdrop-blur-xl border border-border rounded-full px-6 py-2 md:px-8 md:py-3 flex items-center gap-4 md:gap-6 mb-16 md:mb-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-r from-[#4FC3F7]/10 to-[#FF7F50]/10" />
                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
-                 <span className="text-2xl md:text-3xl font-black tracking-widest text-white relative z-10 font-mono">1 - 2</span>
+                 <span className="text-2xl md:text-3xl font-black tracking-widest text-foreground relative z-10 font-mono">1 - 2</span>
                  <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10 drop-shadow-md" />
               </div>
 
@@ -637,34 +637,34 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   </div>
                   
                   {/* Name Overlaid without taking extra vertical space */}
-                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 z-20 shadow-xl">
-                    <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-widest whitespace-nowrap">Mo Salah</span>
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-border z-20 shadow-xl">
+                    <span className="text-[10px] md:text-xs font-bold text-foreground uppercase tracking-widest whitespace-nowrap">Mo Salah</span>
                   </div>
                 </div>
               </div>
 
               {/* COMBINED FAN XI */}
-              <div className="w-full max-w-3xl relative flex flex-col items-center bg-[#080808]/80 backdrop-blur-xl border border-white/5 rounded-[40px] py-12 md:py-16 px-2 md:px-8 shadow-2xl mt-12 md:mt-16">
+              <div className="w-full max-w-3xl relative flex flex-col items-center bg-[#080808]/80 backdrop-blur-xl border border-border rounded-[40px] py-12 md:py-16 px-2 md:px-8 shadow-2xl mt-12 md:mt-16">
                  
                  {/* Header Line */}
-                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#020202] px-4 md:px-6 border border-white/10 rounded-full whitespace-nowrap">
-                   <span className="text-[10px] md:text-xs text-gray-400 font-black tracking-[0.3em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-gray-400 to-white">Combined Fan XI</span>
+                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#020202] px-4 md:px-6 border border-border rounded-full whitespace-nowrap">
+                   <span className="text-[10px] md:text-xs text-muted-foreground font-black tracking-[0.3em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-gray-400 to-white">Combined Fan XI</span>
                  </div>
 
                  {/* Subtle Pitch Lines */}
-                 <div className="absolute inset-4 md:inset-8 border-2 border-white/5 rounded-3xl pointer-events-none" />
-                 <div className="absolute top-4 md:top-8 bottom-4 md:bottom-8 left-1/2 w-0.5 bg-white/5 -translate-x-1/2 pointer-events-none" />
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 border-2 border-white/5 rounded-full pointer-events-none" />
+                 <div className="absolute inset-4 md:inset-8 border-2 border-border rounded-3xl pointer-events-none" />
+                 <div className="absolute top-4 md:top-8 bottom-4 md:bottom-8 left-1/2 w-0.5 bg-muted -translate-x-1/2 pointer-events-none" />
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 border-2 border-border rounded-full pointer-events-none" />
 
                  <div className="w-full relative flex flex-col gap-12 md:gap-20 items-center z-10 mt-6 md:mt-8">
                     {/* GK */}
                     <div className="flex justify-center w-full">
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
-                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
-                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
-                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-muted/80 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-muted/80 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
                         </div>
-                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Alisson</span>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors">Alisson</span>
                       </div>
                     </div>
 
@@ -672,11 +672,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="flex justify-between w-[90%] md:w-[85%]">
                       {['Gvardiol', 'Van Dijk', 'Trent'].map(player => (
                         <div key={player} className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
-                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
-                            <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
-                            <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                            <div className="w-4 h-4 md:w-6 md:h-6 bg-muted/80 rounded-full absolute top-2 md:top-4" />
+                            <div className="w-8 h-6 md:w-12 md:h-10 bg-muted/80 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
                           </div>
-                          <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">{player}</span>
+                          <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors">{player}</span>
                         </div>
                       ))}
                     </div>
@@ -685,11 +685,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="flex justify-between w-full px-2 md:px-4">
                       {['Mac Allister', 'De Bruyne', 'Foden', 'Doku'].map(player => (
                         <div key={player} className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
-                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
-                            <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
-                            <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                            <div className="w-4 h-4 md:w-6 md:h-6 bg-muted/80 rounded-full absolute top-2 md:top-4" />
+                            <div className="w-8 h-6 md:w-12 md:h-10 bg-muted/80 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
                           </div>
-                          <span className="text-[8px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors whitespace-nowrap">{player}</span>
+                          <span className="text-[8px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors whitespace-nowrap">{player}</span>
                         </div>
                       ))}
                     </div>
@@ -697,11 +697,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     {/* FWDs (3) */}
                     <div className="flex justify-between w-[90%] md:w-[85%] relative">
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
-                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
-                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
-                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-muted/80 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-muted/80 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
                         </div>
-                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Diaz</span>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors">Diaz</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform relative">
                         <div className="absolute -inset-2 bg-teal/20 rounded-full blur-md" />
@@ -711,19 +711,19 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <span className="text-[9px] md:text-xs font-black text-teal uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
-                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
-                          <div className="w-4 h-4 md:w-6 md:h-6 bg-white/10 rounded-full absolute top-2 md:top-4" />
-                          <div className="w-8 h-6 md:w-12 md:h-10 bg-white/10 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
+                          <div className="w-4 h-4 md:w-6 md:h-6 bg-muted/80 rounded-full absolute top-2 md:top-4" />
+                          <div className="w-8 h-6 md:w-12 md:h-10 bg-muted/80 rounded-t-[20px] absolute -bottom-1 md:-bottom-2" />
                         </div>
-                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors">Haaland</span>
+                        <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors">Haaland</span>
                       </div>
                     </div>
                  </div>
               </div>
               
               {/* Floating Action Button */}
-              <button className="hidden md:flex absolute top-12 right-12 w-14 h-14 bg-[#111] hover:bg-[#222] rounded-full items-center justify-center shadow-2xl transition-all border border-white/10 group cursor-pointer z-50">
-                 <Share className="w-5 h-5 text-gray-400 group-hover:text-white" />
+              <button className="hidden md:flex absolute top-12 right-12 w-14 h-14 bg-muted hover:bg-[#222] rounded-full items-center justify-center shadow-2xl transition-all border border-border group cursor-pointer z-50">
+                 <Share className="w-5 h-5 text-muted-foreground group-hover:text-foreground" />
               </button>
             </div>
           </section>
@@ -731,20 +731,20 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           {/* AGENDA SETTLEMENT ENGINE & FINAL DAMAGE REPORT */}
           <section className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
              {/* Final Damage Report / Narrative Curve */}
-             <div className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+             <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div>
                    <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
                      <Activity className="w-3.5 h-3.5" /> Match Narrative Curve
                    </h3>
-                   <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-8">
+                   <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-8">
                      Final Damage Report
                    </h2>
                 </div>
                 
                 {/* Static Narrative Curve Mockup */}
-                <div className="w-full h-32 md:h-48 relative border-b border-l border-white/10 flex items-end justify-between px-2 pb-1 mb-6 ml-6 md:ml-8 mt-6">
+                <div className="w-full h-32 md:h-48 relative border-b border-l border-border flex items-end justify-between px-2 pb-1 mb-6 ml-6 md:ml-8 mt-6">
                    <span className="absolute -left-6 md:-left-8 top-0 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Euphoria</span>
                    <span className="absolute -left-6 md:-left-8 bottom-4 text-[8px] text-gray-500 font-bold uppercase tracking-widest -rotate-90 origin-left">Despair</span>
                    
@@ -770,10 +770,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 </div>
 
                 {/* Sustained Sentiment Crash */}
-                <div className="bg-[#121212] border border-[#D32F2F]/20 rounded-2xl p-4 flex items-center justify-between shadow-inner">
+                <div className="bg-muted text-muted-foreground border border-[#D32F2F]/20 rounded-2xl p-4 flex items-center justify-between shadow-inner">
                    <div className="flex flex-col">
                       <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Sustained Sentiment Crash</span>
-                      <span className="text-sm font-black text-white">Man City Post-Match Velocity</span>
+                      <span className="text-sm font-black text-foreground">Man City Post-Match Velocity</span>
                    </div>
                    <div className="bg-[#D32F2F]/20 text-[#FF3B00] px-3 py-1.5 rounded-lg text-sm font-black animate-pulse flex items-center gap-1">
                       <Flame className="w-3.5 h-3.5" /> -18% Spiking
@@ -782,11 +782,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              </div>
 
              {/* Agenda Settlement Checklist */}
-             <div className="bg-[#0A0A0A] border border-white/5 rounded-[32px] p-6 lg:p-10 shadow-2xl relative">
+             <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative">
                 <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
                    <Target className="w-3.5 h-3.5" /> Autopsy
                 </h3>
-                <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight mb-8">
+                <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-8">
                    Agenda Settlements
                 </h2>
 
@@ -806,8 +806,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                             <span className="text-[10px] font-black tracking-widest uppercase mb-1">
                                {agenda.state === 'proven' ? <span className="text-teal">AGENDA PROVEN</span> : <span className="text-coral">AGENDA DEBUNKED</span>}
                             </span>
-                            <span className="text-sm font-bold text-white mb-1">{agenda.text}</span>
-                            <span className="text-[10px] text-gray-400 font-medium leading-relaxed">{agenda.sub}</span>
+                            <span className="text-sm font-bold text-foreground mb-1">{agenda.text}</span>
+                            <span className="text-[10px] text-muted-foreground font-medium leading-relaxed">{agenda.sub}</span>
                          </div>
                       </div>
                    ))}
@@ -818,16 +818,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           {/* Hot Takes */}
           <section className="mb-16">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-sm font-black tracking-widest text-white uppercase flex items-center gap-3">
+              <h2 className="text-sm font-black tracking-widest text-foreground uppercase flex items-center gap-3">
                 <Flame className="w-5 h-5 text-[#FF3B00]" /> HOT TAKES
               </h2>
-              <button className="text-[10px] text-gray-400 font-bold hover:text-white transition-colors uppercase tracking-widest">See all</button>
+              <button className="text-[10px] text-muted-foreground font-bold hover:text-foreground transition-colors uppercase tracking-widest">See all</button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {takes.map((take) => (
-                <div key={take.id} className="bg-[#0A0A0A] border border-white/5 rounded-[24px] p-6 flex flex-col hover:border-white/20 transition-all">
-                  <h3 className="text-sm font-black text-white mb-6 leading-relaxed">{take.question}</h3>
+                <div key={take.id} className="bg-card text-card-foreground border border-border rounded-[24px] p-6 flex flex-col hover:border-border-strong transition-all">
+                  <h3 className="text-sm font-black text-foreground mb-6 leading-relaxed">{take.question}</h3>
                   <div className="space-y-4 mb-6 flex-1">
                     {take.options.map((opt, i) => (
                       <div 
@@ -836,16 +836,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         className={`group ${votedTakes[take.id] ? 'cursor-default' : 'cursor-pointer'}`}
                       >
                         <div className="flex justify-between text-xs font-bold mb-2">
-                          <span className={`${votedTakes[take.id] ? '' : 'group-hover:text-white transition-colors'} ${opt.percent > 50 ? 'text-white' : 'text-gray-400'}`}>{opt.text}</span>
-                          <span className={opt.percent > 50 ? 'text-white' : 'text-gray-500'}>{opt.percent}%</span>
+                          <span className={`${votedTakes[take.id] ? '' : 'group-hover:text-foreground transition-colors'} ${opt.percent > 50 ? 'text-foreground' : 'text-muted-foreground'}`}>{opt.text}</span>
+                          <span className={opt.percent > 50 ? 'text-foreground' : 'text-gray-500'}>{opt.percent}%</span>
                         </div>
-                        <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
                           <div className={`h-full rounded-full transition-all duration-500 ${opt.color}`} style={{ width: `${opt.percent}%` }} />
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div className="pt-4 border-t border-white/5 flex items-center gap-2">
+                  <div className="pt-4 border-t border-border flex items-center gap-2">
                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{take.votes} LIVE</span>
                   </div>
@@ -871,7 +871,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <section className="mt-4">
             <div className="w-full max-w-5xl mx-auto flex flex-col">
               {/* MOBILE / TABLET PITCH (Vertical) */}
-              <div className="xl:hidden w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden min-h-[600px] md:min-h-[800px] border border-white/5 border-b-0">
+              <div className="xl:hidden w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden min-h-[600px] md:min-h-[800px] border border-border border-b-0">
                 {/* Field Lines (Vertical) */}
                 <div className="absolute inset-4 border border-[#1A3A24] pointer-events-none" />
                 <div className="absolute top-1/2 left-4 right-4 h-px bg-[#1A3A24] pointer-events-none" />
@@ -908,7 +908,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         isHighRating ? 'border-[#FF7F50] shadow-[0_0_15px_rgba(255,127,80,0.6)]' : 'border-gray-500'
                       }`}>
                          <img src={player.img} className="w-full h-full object-cover rounded-full" />
-                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-white ${isHighRating ? 'border-[#FF7F50]' : 'border-white/20'}`}>
+                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-foreground ${isHighRating ? 'border-[#FF7F50]' : 'border-border-strong'}`}>
                            {player.rating}
                          </div>
                       </div>
@@ -921,7 +921,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               </div>
 
               {/* DESKTOP PITCH (Horizontal) */}
-              <div className="hidden xl:block w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden h-[500px] border border-white/5 border-b-0">
+              <div className="hidden xl:block w-full relative bg-[#09150E] rounded-t-[24px] overflow-hidden h-[500px] border border-border border-b-0">
                 {/* Field Lines (Horizontal) */}
                 <div className="absolute inset-4 border border-[#1A3A24] pointer-events-none" />
                 <div className="absolute top-4 bottom-4 left-1/2 w-px bg-[#1A3A24] pointer-events-none" />
@@ -958,7 +958,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         isHighRating ? 'border-[#FF7F50] shadow-[0_0_15px_rgba(255,127,80,0.6)]' : 'border-gray-500'
                       }`}>
                          <img src={player.img} className="w-full h-full object-cover rounded-full" />
-                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-white ${isHighRating ? 'border-[#FF7F50]' : 'border-white/20'}`}>
+                         <div className={`absolute -bottom-2 -right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border bg-black text-foreground ${isHighRating ? 'border-[#FF7F50]' : 'border-border-strong'}`}>
                            {player.rating}
                          </div>
                       </div>
@@ -971,30 +971,30 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               </div>
 
               {/* Subs (Horizontal Strip) */}
-              <div className="flex flex-col md:flex-row justify-between items-center bg-[#0A0A0A] border-t border-white/5 p-4 rounded-b-[24px] gap-4 w-full mt-4 md:mt-0 relative z-20">
+              <div className="flex flex-col md:flex-row justify-between items-center bg-card text-card-foreground border-t border-border p-4 rounded-b-[24px] gap-4 w-full mt-4 md:mt-0 relative z-20">
                 {/* Left side (MCI) */}
                 <div className="flex items-center gap-2 w-full">
                   <div className="w-1 h-4 bg-[#4FC3F7]" />
                   <div className="flex gap-1.5">
                     {subsMCI.map(sub => (
-                      <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10 shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
+                      <div className="w-6 h-6 rounded-full overflow-hidden border border-border shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
                         <img src={sub.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                       </div>
                     ))}
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
                   </div>
                 </div>
 
                 {/* Right side (LIV) */}
                 <div className="flex items-center justify-end gap-2 w-full">
                   <div className="flex gap-1.5">
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
-                    <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
+                    <div className="w-6 h-6 rounded-full border border-border bg-black/20 shrink-0" />
                     {subsLIV.map(sub => (
-                      <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10 shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
+                      <div className="w-6 h-6 rounded-full overflow-hidden border border-border shrink-0 group cursor-pointer" key={sub.name} title={sub.name}>
                         <img src={sub.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                       </div>
                     ))}
@@ -1017,8 +1017,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           transition={{ duration: 0.3 }}
           className="w-full max-w-3xl mx-auto space-y-12"
         >
-          <div className="relative border-l-2 border-white/10 ml-6 md:ml-1/2 md:border-none">
-            <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-white/10 -translate-x-1/2"></div>
+          <div className="relative border-l-2 border-border ml-6 md:ml-1/2 md:border-none">
+            <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-muted/80 -translate-x-1/2"></div>
             
             {timelineEvents.map((event: any, index: number) => {
               const isTeam1 = event.team === matchInfo?.team1 || event.team === 'LIV';
@@ -1029,7 +1029,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   
                   {/* Content Box */}
                   <div className={`md:w-1/2 ${isTeam1 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} w-full`}>
-                    <div className="bg-[#0A0A0A] border border-white/5 p-4 rounded-2xl hover:bg-[#111] transition-colors relative group">
+                    <div className="bg-card text-card-foreground border border-border p-4 rounded-2xl hover:bg-muted transition-colors relative group">
                       {/* Event Icon */}
                       <div className={`absolute top-4 ${isTeam1 ? 'right-4 md:left-4 md:right-auto' : 'right-4'} text-xl opacity-50 group-hover:opacity-100 transition-opacity`}>
                         {event.type === 'goal' && '⚽'}
@@ -1038,10 +1038,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                       </div>
                       
                       <div className="text-teal font-black text-xs tracking-widest mb-1">{event.time}</div>
-                      <div className="text-lg font-black text-white mb-1">
+                      <div className="text-lg font-black text-foreground mb-1">
                         {event.type === 'sub' ? `${event.playerIn} In / ${event.playerOut} Out` : event.player}
                       </div>
-                      <div className="text-xs text-gray-400 font-medium leading-relaxed">{event.detail}</div>
+                      <div className="text-xs text-muted-foreground font-medium leading-relaxed">{event.detail}</div>
                     </div>
                   </div>
                 </div>
@@ -1064,12 +1064,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           {/* Subtle background glow */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#00E5FF]/10 transition-colors duration-1000"></div>
           
-          <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+          <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-border rounded-[32px] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
             
             {/* Top decorative gradient line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF7F50] via-white/20 to-[#4FC3F7]"></div>
 
-            <div className="flex justify-between items-center mb-12 pb-8 border-b border-white/5">
+            <div className="flex justify-between items-center mb-12 pb-8 border-b border-border">
                <div className="flex items-center gap-4 md:gap-6">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[#FF7F50] blur-xl opacity-30 rounded-full"></div>
@@ -1079,7 +1079,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                </div>
                <div className="flex flex-col items-center">
                  <span className="text-[10px] md:text-xs font-black tracking-[0.3em] text-gray-500 uppercase">Match Stats</span>
-                 <div className="w-8 h-1 bg-white/10 rounded-full mt-2"></div>
+                 <div className="w-8 h-1 bg-muted/80 rounded-full mt-2"></div>
                </div>
                <div className="flex items-center gap-4 md:gap-6">
                   <span className="text-2xl md:text-4xl font-black uppercase text-transparent bg-clip-text bg-gradient-to-br from-gray-400 to-white">MCI</span>
@@ -1099,15 +1099,15 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 return (
                   <div key={idx} className="flex flex-col group/stat">
                     <div className="flex justify-between items-end mb-3">
-                      <span className="text-xl md:text-2xl font-black text-white drop-shadow-md">
-                        {stat.liv}{stat.type === 'percent' ? <span className="text-sm text-gray-400">%</span> : ''}
+                      <span className="text-xl md:text-2xl font-black text-foreground drop-shadow-md">
+                        {stat.liv}{stat.type === 'percent' ? <span className="text-sm text-muted-foreground">%</span> : ''}
                       </span>
-                      <span className="text-gray-400 uppercase tracking-widest text-[10px] md:text-xs font-bold group-hover/stat:text-white transition-colors">{stat.label}</span>
-                      <span className="text-xl md:text-2xl font-black text-white drop-shadow-md">
-                        {stat.mci}{stat.type === 'percent' ? <span className="text-sm text-gray-400">%</span> : ''}
+                      <span className="text-muted-foreground uppercase tracking-widest text-[10px] md:text-xs font-bold group-hover/stat:text-foreground transition-colors">{stat.label}</span>
+                      <span className="text-xl md:text-2xl font-black text-foreground drop-shadow-md">
+                        {stat.mci}{stat.type === 'percent' ? <span className="text-sm text-muted-foreground">%</span> : ''}
                       </span>
                     </div>
-                    <div className="flex w-full h-3 md:h-4 rounded-full overflow-hidden bg-black/50 border border-white/5 gap-1.5 shadow-inner">
+                    <div className="flex w-full h-3 md:h-4 rounded-full overflow-hidden bg-black/50 border border-border gap-1.5 shadow-inner">
                       <div className="h-full bg-gradient-to-l from-[#FF7F50] to-[#E64A19] shadow-[0_0_15px_rgba(255,127,80,0.5)] relative overflow-hidden" style={{ width: `${livPercent}%` }}>
                          <div className="absolute inset-0 bg-white/20 w-1/2 -skew-x-12 translate-x-[-150%] group-hover/stat:translate-x-[300%] transition-transform duration-1000"></div>
                       </div>
@@ -1179,13 +1179,13 @@ function LineupTab() {
       {/* Pitch & Bench Container */}
       <div className="w-full max-w-[420px] mx-auto">
          {/* Pitch Area */}
-         <div className="relative w-full h-[700px] bg-[#070e0a] rounded-t-2xl border border-white/5 border-b-0 overflow-hidden pt-2">
+         <div className="relative w-full h-[700px] bg-[#070e0a] rounded-t-2xl border border-border border-b-0 overflow-hidden pt-2">
             {/* Team Logos */}
-            <div className="absolute top-4 left-4 font-black text-white/20 text-xl tracking-tighter flex items-center gap-2">
+            <div className="absolute top-4 left-4 font-black text-foreground/20 text-xl tracking-tighter flex items-center gap-2">
               <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-6 h-6 opacity-40 grayscale brightness-200" alt="" />
               MCI
             </div>
-            <div className="absolute bottom-4 right-4 font-black text-white/20 text-xl tracking-tighter flex items-center gap-2">
+            <div className="absolute bottom-4 right-4 font-black text-foreground/20 text-xl tracking-tighter flex items-center gap-2">
               <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-5 h-6 opacity-40 grayscale brightness-200" alt="" />
               LIV
             </div>
@@ -1202,7 +1202,7 @@ function LineupTab() {
             {/* MCI Players */}
             {mciPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-teal shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-teal shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
                  <span className="text-[9px] font-black tracking-wider text-teal drop-shadow-md">{p.name}</span>
@@ -1212,7 +1212,7 @@ function LineupTab() {
             {/* LIV Players */}
             {livPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-white/20'} overflow-hidden mb-1 relative bg-[#0A0A0A]`}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
                  <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
@@ -1221,24 +1221,24 @@ function LineupTab() {
          </div>
 
          {/* Bench */}
-         <div className="w-full bg-[#1A1A1A] rounded-b-2xl p-4 border border-white/5 border-t-0 mb-8">
+         <div className="w-full bg-[#1A1A1A] rounded-b-2xl p-4 border border-border border-t-0 mb-8">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-1 h-4 bg-teal" />
               <div className="flex gap-1.5">
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=1" className="w-full h-full object-cover"/></div>
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=2" className="w-full h-full object-cover"/></div>
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=1" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=2" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
               </div>
             </div>
             <div className="flex items-center justify-end gap-2">
               <div className="flex gap-1.5">
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
-                <div className="w-6 h-6 rounded-full border border-white/5 bg-black/20" />
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=3" className="w-full h-full object-cover"/></div>
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-white/10"><img src="https://i.pravatar.cc/100?img=4" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
+                <div className="w-6 h-6 rounded-full border border-border bg-black/20" />
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=3" className="w-full h-full object-cover"/></div>
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=4" className="w-full h-full object-cover"/></div>
               </div>
               <div className="w-1 h-4 bg-[#FF7F50]" />
             </div>
@@ -1253,7 +1253,7 @@ function LineupTab() {
            <div className="flex justify-between items-end mb-3">
              <div className="flex items-center gap-2">
                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className="w-5 h-5" alt=""/>
-               <span className="text-[10px] font-black uppercase">YOUR VIBE <span className="text-gray-400">(MCI FANS)</span></span>
+               <span className="text-[10px] font-black uppercase">YOUR VIBE <span className="text-muted-foreground">(MCI FANS)</span></span>
              </div>
              {hasVotedAs === 'neutral' ? (
                <div className="flex items-center gap-1.5">
@@ -1275,7 +1275,7 @@ function LineupTab() {
                if (!hasVotedAs) setHasVotedAs('fan');
              }}
              disabled={hasVotedAs === 'neutral'}
-             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 
@@ -1283,14 +1283,14 @@ function LineupTab() {
            <div className="flex justify-between items-end mb-3">
              <div className="flex items-center gap-2">
                <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className="w-4 h-5" alt=""/>
-               <span className="text-[10px] font-black uppercase text-gray-400">LIVERPOOL FANS</span>
+               <span className="text-[10px] font-black uppercase text-muted-foreground">LIVERPOOL FANS</span>
              </div>
              <div className="flex items-center gap-1.5">
                <span className="text-[10px] font-black text-[#D32F2F] tracking-widest">42% WORRIED</span>
                <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
              </div>
            </div>
-           <div className="w-full h-1 bg-white/10 rounded-full">
+           <div className="w-full h-1 bg-muted/80 rounded-full">
              <div className="h-full bg-[#D32F2F] rounded-full" style={{ width: '42%' }} />
            </div>
          </div>
@@ -1318,7 +1318,7 @@ function LineupTab() {
                if (!hasVotedAs) setHasVotedAs('neutral');
              }}
              disabled={hasVotedAs === 'fan'}
-             className={`w-full h-1 bg-white/10 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
       </div>
@@ -1329,8 +1329,8 @@ function LineupTab() {
 function H2HTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
-        <h3 className="text-[10px] font-black text-center text-gray-400 tracking-widest mb-6">LAST 5 MEETINGS</h3>
+      <div className="bg-card text-card-foreground rounded-2xl p-6 border border-border">
+        <h3 className="text-[10px] font-black text-center text-muted-foreground tracking-widest mb-6">LAST 5 MEETINGS</h3>
         
         <div className="flex items-center justify-between mb-8">
             <div className="flex flex-col items-center">
@@ -1339,7 +1339,7 @@ function H2HTab() {
             </div>
             <div className="flex gap-6 text-center">
                <div><div className="text-2xl font-black text-teal">3</div><div className="text-[8px] text-teal tracking-widest">WINS</div></div>
-               <div><div className="text-2xl font-black text-white">1</div><div className="text-[8px] text-gray-400 tracking-widest">DRAW</div></div>
+               <div><div className="text-2xl font-black text-foreground">1</div><div className="text-[8px] text-muted-foreground tracking-widest">DRAW</div></div>
                <div><div className="text-2xl font-black text-[#D32F2F]">1</div><div className="text-[8px] text-[#D32F2F] tracking-widest">WIN</div></div>
             </div>
             <div className="flex flex-col items-center">
@@ -1356,7 +1356,7 @@ function H2HTab() {
              { d: "Oct '22", h: "Liverpool", s: "1 - 0", a: "Man City" },
              { d: "Apr '22", h: "Man City", s: "2 - 1", a: "Liverpool" },
            ].map((m, i) => (
-             <div key={i} className="flex items-center justify-between text-xs border-b border-white/5 pb-2 last:border-0">
+             <div key={i} className="flex items-center justify-between text-xs border-b border-border pb-2 last:border-0">
                <span className="text-gray-500 w-12">{m.d}</span>
                <span className="flex-1 text-right text-gray-300">{m.h}</span>
                <span className="font-black px-4">{m.s}</span>
@@ -1372,11 +1372,11 @@ function H2HTab() {
 function StandingsTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="bg-[#0A0A0A] rounded-2xl p-4 border border-white/5 overflow-x-auto hide-scrollbar">
+      <div className="bg-card text-card-foreground rounded-2xl p-4 border border-border overflow-x-auto hide-scrollbar">
          <div className="text-[9px] font-black text-gray-500 tracking-widest uppercase mb-4 px-2">Premier League</div>
          <table className="w-full text-xs text-left">
            <thead>
-             <tr className="text-[9px] text-gray-500 border-b border-white/5">
+             <tr className="text-[9px] text-gray-500 border-b border-border">
                <th className="pb-2 font-normal w-6 text-center">#</th>
                <th className="pb-2 font-normal">TEAM</th>
                <th className="pb-2 font-normal text-right">P</th>
@@ -1392,15 +1392,15 @@ function StandingsTab() {
                { p: 4, t: "Aston Villa", icon: "bg-purple-900", ply: 35, gd: "+20", pts: 66, hl: false },
                { p: 5, t: "Tottenham", icon: "bg-white", ply: 35, gd: "+13", pts: 60, hl: false },
              ].map((r, i) => (
-               <tr key={i} className={`border-b border-white/5 last:border-0 ${r.hl ? 'bg-teal/5' : ''}`}>
-                 <td className={`py-3 text-center ${r.hl ? 'text-teal font-bold' : 'text-gray-400'}`}>{r.p}</td>
+               <tr key={i} className={`border-b border-border last:border-0 ${r.hl ? 'bg-teal/5' : ''}`}>
+                 <td className={`py-3 text-center ${r.hl ? 'text-teal font-bold' : 'text-muted-foreground'}`}>{r.p}</td>
                  <td className="py-3 flex items-center gap-2">
                    <div className={`w-4 h-4 rounded-full ${r.icon}`} />
                    <span className={r.hl ? 'text-teal font-bold' : 'text-gray-200'}>{r.t}</span>
                  </td>
-                 <td className="py-3 text-right text-gray-400">{r.ply}</td>
-                 <td className="py-3 text-right text-gray-400">{r.gd}</td>
-                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-teal' : 'text-white'}`}>{r.pts}</td>
+                 <td className="py-3 text-right text-muted-foreground">{r.ply}</td>
+                 <td className="py-3 text-right text-muted-foreground">{r.gd}</td>
+                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-teal' : 'text-foreground'}`}>{r.pts}</td>
                </tr>
              ))}
            </tbody>
@@ -1413,19 +1413,19 @@ function StandingsTab() {
 function FormTab() {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="bg-[#0A0A0A] rounded-2xl p-6 border border-white/5">
+      <div className="bg-card text-card-foreground rounded-2xl p-6 border border-border">
          <div className="flex justify-between items-center mb-8">
             <div className="flex flex-col">
-              <span className="text-[10px] font-black uppercase text-gray-400 mb-3">MAN CITY</span>
+              <span className="text-[10px] font-black uppercase text-muted-foreground mb-3">MAN CITY</span>
               <div className="flex gap-2">
                  {['W','W','W','D','W'].map((r,i) => (
-                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-coral/20 text-coral'}`}>{r}</div>
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-muted-foreground' : 'bg-coral/20 text-coral'}`}>{r}</div>
                  ))}
               </div>
               <div className="flex gap-4 mt-4 text-[10px] text-gray-500">
                 <span>Last 5</span>
-                <span>GF <strong className="text-white">14</strong></span>
-                <span>GA <strong className="text-white">4</strong></span>
+                <span>GF <strong className="text-foreground">14</strong></span>
+                <span>GA <strong className="text-foreground">4</strong></span>
               </div>
             </div>
 
@@ -1433,13 +1433,13 @@ function FormTab() {
               <span className="text-[10px] font-black uppercase text-[#D32F2F] mb-3">LIVERPOOL</span>
               <div className="flex gap-2">
                  {['W','W','L','W','D'].map((r,i) => (
-                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-gray-400' : 'bg-coral/20 text-coral'}`}>{r}</div>
+                   <div key={i} className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black ${r==='W' ? 'bg-green-500/20 text-green-500' : r==='D' ? 'bg-gray-500/20 text-muted-foreground' : 'bg-coral/20 text-coral'}`}>{r}</div>
                  ))}
               </div>
               <div className="flex gap-4 mt-4 text-[10px] text-gray-500">
                 <span>Last 5</span>
-                <span>GF <strong className="text-white">9</strong></span>
-                <span>GA <strong className="text-white">5</strong></span>
+                <span>GF <strong className="text-foreground">9</strong></span>
+                <span>GA <strong className="text-foreground">5</strong></span>
               </div>
             </div>
          </div>
@@ -1452,7 +1452,7 @@ function KeyBattlesTab() {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="space-y-4">
-         <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+         <div className="bg-card text-card-foreground border border-border rounded-2xl p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
                <div className="w-10 h-10 rounded-full overflow-hidden">
                  <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
@@ -1462,7 +1462,7 @@ function KeyBattlesTab() {
                  <span className="text-[10px] text-gray-500">Man City</span>
                </div>
             </div>
-            <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
+            <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
             <div className="flex items-center gap-3 text-right flex-row-reverse">
                <div className="w-10 h-10 rounded-full overflow-hidden">
                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
@@ -1474,7 +1474,7 @@ function KeyBattlesTab() {
             </div>
          </div>
 
-         <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+         <div className="bg-card text-card-foreground border border-border rounded-2xl p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
                <div className="w-10 h-10 rounded-full overflow-hidden">
                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
@@ -1484,7 +1484,7 @@ function KeyBattlesTab() {
                  <span className="text-[10px] text-gray-500">Man City</span>
                </div>
             </div>
-            <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
+            <div className="w-6 h-6 rounded-full border border-border flex items-center justify-center text-[8px] font-black text-gray-500">VS</div>
             <div className="flex items-center gap-3 text-right flex-row-reverse">
                <div className="w-10 h-10 rounded-full overflow-hidden">
                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" className="w-full h-full object-cover" />
