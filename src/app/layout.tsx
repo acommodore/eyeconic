@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   description: "Eyeconic analyzes live fan sentiment, emotional momentum, and match events to show you the games that matter most right now.",
 };
 
+export const viewport = {
+  themeColor: "#000000",
+  viewportFit: "cover",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

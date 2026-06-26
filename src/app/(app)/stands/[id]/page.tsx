@@ -384,7 +384,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         </div>
 
         {/* Chat Feed on mobile */}
-        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
+        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col-reverse relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
           <div className="space-y-4 space-y-reverse px-3 pb-4 mt-auto pt-16 flex flex-col-reverse">
             {[...chatMessages].reverse().map((msg) => (
             <div key={msg.id} className="flex gap-2 group">
@@ -508,7 +508,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         {/* Right Pane: Live Chat & Polls */}
         <div className="w-[400px] xl:w-[480px] bg-card text-card-foreground flex flex-col border-l border-border shrink-0 relative z-20 overflow-hidden h-full">
           {renderPoll()}
-          <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
+          <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col-reverse relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
             <div className="space-y-6 space-y-reverse px-6 pb-6 mt-auto pt-16 flex flex-col-reverse">
               {[...chatMessages].reverse().map((msg) => (
               <div key={msg.id} className="flex gap-3 group">
