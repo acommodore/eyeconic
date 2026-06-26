@@ -76,7 +76,7 @@ export default function AppLayout({
   return (
     <div 
       className={`${isStandRoom ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'} bg-[#050505] text-white flex flex-col md:flex-row`}
-      style={{ '--nav-height': showNav ? '80px' : '0px' } as React.CSSProperties}
+      style={{ '--mobile-nav-height': showNav ? '80px' : '0px' } as React.CSSProperties}
     >
       {/* Mobile Top Bar */}
       <header className="md:hidden h-16 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">

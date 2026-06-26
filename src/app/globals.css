@@ -138,3 +138,14 @@ body {
 .animate-ticker:active {
   animation-play-state: paused;
 }
+
+
+:root {
+  --nav-height: var(--mobile-nav-height, 0px);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-height: 0px !important;
+  }
+}
