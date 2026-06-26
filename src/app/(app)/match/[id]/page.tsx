@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
+import StartStandButton from "@/components/stands/StartStandButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 import LivePulseView from "@/components/match/LivePulseView";
 
@@ -135,13 +137,61 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-export default function MatchDetailsPage() {
+export default function MatchDetailsPage({ params }: { params: { id: string } }) {
+  const supabase = createClient();
+  const [matchData, setMatchData] = useState<any>(null);
+  const [pulseEvents, setPulseEvents] = useState<any[]>([]);
   const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('live');
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState(initialHotTakes);
   const [votedTakes, setVotedTakes] = useState<Record<number, boolean>>({});
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch live match
+      const { data: match } = await supabase.from('matches').select('*').eq('status', 'live').single();
+      if (match) {
+        setMatchData(match);
+        
+        // Fetch hot takes
+        const { data: hotTakes } = await supabase.from('hot_takes').select('*').eq('match_id', match.id);
+        if (hotTakes && hotTakes.length > 0) {
+          setTakes(hotTakes.map(ht => ({
+            id: ht.id,
+            question: ht.question,
+            options: ht.options,
+            votes: "Real-time"
+          })));
+        }
+
+        // Fetch events
+        const { data: events } = await supabase.from('match_events').select('*').eq('match_id', match.id);
+        if (events) {
+          setPulseEvents(events);
+        }
+      }
+    };
+    fetchData();
+
+    // Subscribe to hot takes
+    const channel = supabase.channel('match_updates')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'hot_takes' }, (payload) => {
+        fetchData(); // Refresh all for simplicity
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'match_events' }, (payload) => {
+        fetchData();
+      })
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'matches' }, (payload) => {
+        setMatchData(payload.new);
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase]);
 
   const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
   const [hasVotedVibe, setHasVotedVibe] = useState(false);
@@ -286,27 +336,22 @@ export default function MatchDetailsPage() {
             </div>
           </div>
 
-          {/* Join Stands Action (Hidden during live match) */}
-          {matchState !== 'live' && (
-            <div className="mt-8 w-full max-w-md mx-auto">
-               <Link href="/stands/2" className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
-                 <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
-                    <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-                          <Mic className="w-5 h-5 text-black" fill="currentColor" />
-                       </div>
-                       <div className="flex flex-col justify-center text-left">
-                          <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN THE DISCUSSION</h2>
-                          <p className="text-[10px] text-teal font-medium tracking-wide">12.4K active in the stands</p>
-                       </div>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-1">
-                       <ChevronRight className="w-4 h-4 text-teal" />
-                    </div>
-                 </div>
-               </Link>
-            </div>
-          )}
+          {/* Stands Actions */}
+          <div className="mt-8 w-full max-w-lg mx-auto flex flex-col md:flex-row gap-4 justify-center items-center">
+             <StartStandButton matchId={params.id} />
+             <Link href="/stands/2" className="block w-full md:w-auto cursor-pointer hover:-translate-y-0.5 transition-transform">
+               <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
+                  <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+                        <Mic className="w-5 h-5 text-black" fill="currentColor" />
+                     </div>
+                     <div className="flex flex-col justify-center text-left mr-4">
+                        <h2 className="text-sm font-black tracking-widest uppercase text-white leading-tight mb-0.5">JOIN EXISTING STAND</h2>
+                     </div>
+                  </div>
+               </div>
+             </Link>
+          </div>
 
         </div>
       </div>

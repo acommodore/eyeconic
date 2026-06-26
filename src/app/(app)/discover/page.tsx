@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'lucide-react';
 
@@ -256,6 +257,71 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
 };
 
 export default function DiscoverPage() {
+  const supabase = createClient();
+  const [liveMatches, setLiveMatches] = useState(allLiveMatches);
+  const [upcomingMatches, setUpcomingMatches] = useState(upcomingTableData);
+
+  useEffect(() => {
+    const fetchMatches = async () => {
+      const { data, error } = await supabase.from('matches').select('*');
+      if (!error && data) {
+        const live = data.filter(m => m.status === 'live');
+        const upcoming = data.filter(m => m.status === 'upcoming');
+        if (live.length > 0) {
+          // Map to match frontend schema
+          const mappedLive = live.map(m => ({
+            id: m.id,
+            team1: m.team1,
+            team2: m.team2,
+            score: `${m.score1} - ${m.score2}`,
+            time: m.current_minute || "0'",
+            logo1: m.logo1,
+            logo2: m.logo2,
+            league: m.league,
+            pulseStatus: m.volatility > 90 ? "Volatile" : "Heating Up",
+            pulseEmoji: m.mood?.includes('⚡') ? "⚡" : "🔥",
+            pulseColor: "text-coral",
+            insight: "Real-time insights arriving...",
+            emotionalMvp: "Loading...",
+            polarizingPlayer: "Loading...",
+            fanMood: m.mood?.replace(/[^ws]/gi, '').trim() || "Tense",
+            fanMoodEmoji: m.mood?.match(/[�-�][�-�]/)?.[0] || "😬",
+            metrics: { chaos: m.volatility, tactical: 80, rivalry: 90, surprise: 40 },
+            bookmarked: true,
+            agenda: "Live updates active",
+            volatility: m.volatility,
+            triggers: m.triggers || []
+          }));
+          setLiveMatches(mappedLive);
+        }
+        if (upcoming.length > 0) {
+          setUpcomingMatches(upcoming);
+        }
+      }
+    };
+    
+    fetchMatches();
+
+    const channel = supabase.channel('realtime:matches')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'matches' }, (payload) => {
+        setLiveMatches(prev => prev.map(m => {
+          if (m.id === payload.new.id) {
+            return {
+              ...m,
+              score: `${payload.new.score1} - ${payload.new.score2}`,
+              time: payload.new.current_minute || m.time,
+              volatility: payload.new.volatility || m.volatility
+            };
+          }
+          return m;
+        }));
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase]);
   const [activeFilter, setActiveFilter] = useState("Chaos"); // Chaos, Tactical, Rivalries, Surprise Me, Bookmarks
   const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
@@ -268,7 +334,7 @@ export default function DiscoverPage() {
   };
 
   // Sorting logic for Live Matches based on Active Filter
-  const sortedLiveMatches = [...allLiveMatches].sort((a, b) => {
+  const sortedLiveMatches = [...liveMatches].sort((a, b) => {
     if (activeFilter === "Bookmarks") return (b.bookmarked ? 1 : 0) - (a.bookmarked ? 1 : 0);
     if (activeFilter === "Chaos") return b.metrics.chaos - a.metrics.chaos;
     if (activeFilter === "Tactical") return b.metrics.tactical - a.metrics.tactical;
@@ -304,7 +370,7 @@ export default function DiscoverPage() {
   // Tag matches with status
   const allCurrentMatches = [
     ...remainingLiveMatches.map(m => ({ ...m, status: 'live' })),
-    ...upcomingTableData.map(m => ({ ...m, status: 'upcoming' })),
+    ...upcomingMatches.map(m => ({ ...m, status: 'upcoming' })),
     ...finishedTableData.map(m => ({ ...m, status: 'finished' }))
   ];
 

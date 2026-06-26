@@ -1,6 +1,18 @@
-import { Settings, Shield, Bell, User, ChevronRight } from "lucide-react";
+"use client";
+
+import { Settings, Shield, Bell, User, ChevronRight, LogOut } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
+  const supabase = createClient();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
   return (
     <div className="w-full max-w-4xl mx-auto p-4 md:p-8 min-h-screen space-y-8 animate-in fade-in duration-500">
       
@@ -33,6 +45,24 @@ export default function SettingsPage() {
             <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
           </div>
         ))}
+
+        {/* LOGOUT BUTTON */}
+        <div 
+          onClick={handleLogout}
+          className="flex items-center justify-between p-6 bg-red-500/10 border border-red-500/20 rounded-2xl cursor-pointer hover:border-red-500/50 hover:bg-red-500/20 transition-colors group mt-8"
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-red-500/20 rounded-xl text-red-500 group-hover:text-red-400 transition-colors">
+              <LogOut className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold tracking-widest uppercase text-red-500 group-hover:text-red-400">Sign Out</h3>
+              <p className="text-xs text-red-500/70 mt-1">Disconnect your current session.</p>
+            </div>
+          </div>
+          <ChevronRight className="w-5 h-5 text-red-500/50 group-hover:text-red-400 group-hover:translate-x-1 transition-all" />
+        </div>
+
       </div>
       
     </div>

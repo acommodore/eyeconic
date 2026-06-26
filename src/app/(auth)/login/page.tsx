@@ -4,16 +4,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useState } from "react";
+import { login } from "@/app/(auth)/actions";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const message = searchParams.get("message");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    router.push("/dashboard");
-  };
+  
 
   return (
     <motion.div 
@@ -51,13 +52,14 @@ export default function LoginPage() {
         <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/10" />
       </div>
 
-      <form className="w-full space-y-5" onSubmit={handleLogin}>
+      {message && (<div className="w-full p-4 mb-4 bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-bold text-center rounded-xl">{message}</div>)}
+      <form className="w-full space-y-5" action={login}>
         <div className="group relative">
           <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#00E5FF] transition-colors">EMAIL</label>
           <div className="relative flex items-center">
             <Mail className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#00E5FF] transition-colors" />
             <input 
-              type="email" 
+              type="email" name="email" 
               placeholder="Enter your email"
               required
               className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-[#00E5FF] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
@@ -70,7 +72,7 @@ export default function LoginPage() {
           <div className="relative flex items-center">
             <Lock className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#00E5FF] transition-colors" />
             <input 
-              type={showPassword ? "text" : "password"} 
+              type={showPassword ? "text" : "password"} name="password" 
               placeholder="Enter your password"
               required
               className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white focus:outline-none focus:border-[#00E5FF] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(0,229,255,0.1)]"

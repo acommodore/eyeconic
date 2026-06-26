@@ -2,10 +2,44 @@
 
 import { Settings, Shield, Edit2, Medal, Activity, Flame, Trophy, ChevronRight, Zap, Target, Eye } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("track-record");
+  const [profile, setProfile] = useState<any>(null);
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editUsername, setEditUsername] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const supabase = createClient();
+
+  
+  const handleSaveProfile = async () => {
+    if (!editUsername.trim() || !profile) return;
+    setIsSaving(true);
+    const { error } = await supabase.from('profiles').update({ username: editUsername.trim() }).eq('id', profile.id);
+    if (!error) {
+      setProfile({ ...profile, username: editUsername.trim() });
+      setIsEditModalOpen(false);
+    }
+    setIsSaving(false);
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserEmail(user.email || "");
+        const { data: prof } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+        if (prof) {
+          setProfile(prof);
+        }
+      }
+    };
+    fetchUser();
+  }, [supabase]);
+
 
   return (
     <div className="w-full max-w-[1600px] mx-auto p-4 md:p-8 min-h-screen space-y-12 animate-in fade-in duration-500 pb-24">
@@ -37,10 +71,10 @@ export default function ProfilePage() {
               <div className="relative">
                 <div className="w-32 h-32 rounded-full border-2 border-teal p-1 relative z-10">
                   <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="Avatar" className="w-full h-full object-cover" />
+                    <img src={profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + userEmail} alt="Avatar" className="w-full h-full object-cover" />
                   </div>
                 </div>
-                <button className="absolute bottom-0 right-0 p-2 bg-foreground text-background rounded-full hover:scale-110 transition-transform z-20">
+                <button onClick={() => { setEditUsername(profile?.username || ""); setIsEditModalOpen(true); }} className="absolute bottom-0 right-0 p-2 bg-foreground text-background rounded-full hover:scale-110 transition-transform z-20">
                   <Edit2 className="w-4 h-4" />
                 </button>
                 {/* Glow behind avatar */}
@@ -48,8 +82,8 @@ export default function ProfilePage() {
               </div>
               
               <div>
-                <h2 className="text-2xl font-black tracking-widest uppercase">Maximus Prime</h2>
-                <p className="text-muted-foreground text-sm font-mono mt-1">@maxprime_99</p>
+                <h2 className="text-2xl font-black tracking-widest uppercase">{profile?.username || "Operative"}</h2>
+                <p className="text-muted-foreground text-sm font-mono mt-1">{userEmail ? `@${userEmail.split('@')[0]}` : '@operative_99'}</p>
               </div>
 
               <div className="flex gap-2 w-full pt-4 border-t border-border mt-4">
@@ -187,6 +221,42 @@ export default function ProfilePage() {
 
         </div>
       </div>
+
+      {/* Edit Profile Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-[#0A0A0A] border border-border rounded-3xl p-6 w-full max-w-sm space-y-6 shadow-2xl">
+            <h3 className="text-xl font-black uppercase tracking-widest text-foreground">Edit Profile</h3>
+            
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase">Username</label>
+              <input 
+                type="text" 
+                value={editUsername}
+                onChange={(e) => setEditUsername(e.target.value)}
+                placeholder="Enter new username"
+                className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-sm text-foreground focus:outline-none focus:border-teal transition-colors"
+              />
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <button 
+                onClick={() => setIsEditModalOpen(false)}
+                className="flex-1 py-3 rounded-xl border border-border text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleSaveProfile}
+                disabled={isSaving}
+                className="flex-1 py-3 rounded-xl bg-teal text-black text-xs font-black uppercase tracking-widest hover:bg-teal/90 transition-colors flex justify-center items-center"
+              >
+                {isSaving ? "Saving..." : "Save"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

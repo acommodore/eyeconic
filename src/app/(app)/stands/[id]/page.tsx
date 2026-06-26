@@ -1,11 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParticipants, useLocalParticipant } from "@livekit/components-react";
+import { createClient } from "@/lib/supabase/client";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
+import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
 
-export default function ActiveStandPage() {
+function StandRoomLayout({ matchId }: { matchId: string }) {
+  const supabase = createClient();
+  const participants = useParticipants();
+  const { localParticipant } = useLocalParticipant();
+
+  useEffect(() => {
+    const fetchMsgs = async () => {
+      const { data } = await supabase.from('stand_messages').select('*, profiles(*)').eq('stand_id', matchId).order('created_at', { ascending: true });
+      if (data) {
+        setChatMessages(data.map((m: any) => ({
+          id: m.id,
+          name: m.profiles.username,
+          color: "text-[teal]",
+          avatar: m.profiles.avatar_url,
+          time: new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          text: m.message,
+          isSpeaker: false
+        })));
+      }
+    };
+    fetchMsgs();
+
+    const channel = supabase.channel('stand_chat')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'stand_messages', filter: `stand_id=eq.${matchId}` }, async (payload) => {
+        const { data: prof } = await supabase.from('profiles').select('*').eq('id', payload.new.profile_id).single();
+        if (prof) {
+          setChatMessages(prev => [...prev, {
+            id: payload.new.id,
+            name: prof.username,
+            color: "text-[teal]",
+            avatar: prof.avatar_url,
+            time: new Date(payload.new.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            text: payload.new.message,
+            isSpeaker: false
+          }]);
+        }
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [matchId, supabase]);
+
   const [mutedUsers, setMutedUsers] = useState<Record<string, boolean>>({});
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
   const [inputText, setInputText] = useState("");
@@ -468,5 +513,17 @@ export default function ActiveStandPage() {
 
       </div>
     </div>
+  );
+}
+
+
+export default function ActiveStandPage() {
+  const params = useParams();
+  const id = Array.isArray(params?.id) ? params.id[0] : params?.id || "default";
+
+  return (
+    <LiveAudioRoom roomName={id} username={`User_${Math.floor(Math.random() * 1000)}`}>
+      <StandRoomLayout matchId={id} />
+    </LiveAudioRoom>
   );
 }
