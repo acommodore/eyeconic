@@ -19,10 +19,9 @@ export default function AppLayout({
   const isNavVisible = useRef(true);
 
   useEffect(() => {
-    const handleScroll = (e: Event) => {
+    const handleScroll = () => {
       if (typeof window !== 'undefined') {
-        const target = e.target as HTMLElement | Document;
-        const currentScrollY = target === document ? window.scrollY : (target as HTMLElement).scrollTop;
+        const currentScrollY = window.scrollY;
         
         // Ignore iOS rubber-band bounce
         if (currentScrollY < 0) return;
@@ -43,8 +42,28 @@ export default function AppLayout({
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true, capture: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleHideNav = () => {
+      if (isNavVisible.current) {
+        setShowNav(false);
+        isNavVisible.current = false;
+      }
+    };
+    
+    const handleShowNav = () => {
+      if (!isNavVisible.current) {
+        setShowNav(true);
+        isNavVisible.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('hide-nav', handleHideNav);
+    window.addEventListener('show-nav', handleShowNav);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hide-nav', handleHideNav);
+      window.removeEventListener('show-nav', handleShowNav);
+    };
   }, []);
 
   const navItems = [

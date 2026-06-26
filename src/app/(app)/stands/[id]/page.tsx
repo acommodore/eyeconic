@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParticipants, useLocalParticipant } from "@livekit/components-react";
 import { createClient } from "@/lib/supabase/client";
 import { useParams } from "next/navigation";
@@ -55,6 +55,18 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
   const [inputText, setInputText] = useState("");
   const [isMicPending, setIsMicPending] = useState(false);
+  
+  const lastChatScrollY = useRef(0);
+  const handleChatScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const currentScrollY = e.currentTarget.scrollTop;
+    if (currentScrollY > lastChatScrollY.current && currentScrollY > 20) {
+      window.dispatchEvent(new CustomEvent('hide-nav'));
+    } else if (currentScrollY < lastChatScrollY.current) {
+      window.dispatchEvent(new CustomEvent('show-nav'));
+    }
+    lastChatScrollY.current = currentScrollY;
+  };
+
   const [chatMessages, setChatMessages] = useState([
     {
       id: 1,
@@ -429,7 +441,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         </div>
 
         {/* Live Chat Feed */}
-        <div className="flex-1 overflow-y-auto space-y-4 md:space-y-6 px-4 md:px-6 pb-4 md:pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
+        <div className="flex-1 overflow-y-auto space-y-4 md:space-y-6 px-4 md:px-6 pb-4 md:pb-6 relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
           {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-2 md:gap-3 group">
               <div className={`w-6 h-6 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-white/20'} p-0.5 md:p-1 mt-0.5 transition-transform duration-300 group-hover:scale-110`}>
