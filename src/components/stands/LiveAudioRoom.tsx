@@ -49,7 +49,7 @@ export default function LiveAudioRoom({
       connect={true}
       audio={false}
       video={false}
-      className="w-full h-full"
+      className="w-full h-full flex flex-col flex-1 min-h-0"
     >
       <RoomAudioRenderer />
       {children}
