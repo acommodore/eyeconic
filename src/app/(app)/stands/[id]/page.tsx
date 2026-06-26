@@ -68,44 +68,27 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   };
 
   const [chatMessages, setChatMessages] = useState([
-    {
-      id: 1,
-      name: "Gooner4Life",
-      color: "text-[teal]",
-      avatar: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
-      time: "1m ago",
-      text: "Absolute shocker from the VAR there. Clear penalty! We are being robbed in broad daylight.",
-      isSpeaker: false
-    },
-    {
-      id: 2,
-      name: "BlueMason",
-      color: "text-[coral]",
-      avatar: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
-      time: "Just now",
-      text: "Never a pen. He dove before the contact even happened. 🤡 Have some shame!",
-      isSpeaker: false
-    },
-    {
-      id: 3,
-      name: "Spursy_10",
-      color: "text-gray-300",
-      avatar: "https://upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg",
-      time: "Just now",
-      text: "Host is completely biased as usual. Get him off the mic and let someone objective speak.",
-      isSpeaker: false
-    },
-    {
-      id: 4,
-      name: "GunnerVic (Speaker)",
-      color: "text-[#00C853]",
-      avatar: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
-      time: "Just now",
-      text: "Are you blind?! He clearly clipped his heel! Everyone in the stadium saw it.",
-      isSpeaker: true
-    }
+    ...Array(15).fill(0).flatMap((_, i) => [
+      {
+        id: i * 2 + 1,
+        name: "Gooner4Life",
+        color: "text-[teal]",
+        avatar: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+        time: "1m ago",
+        text: "Absolute shocker from the VAR there. Clear penalty! We are being robbed in broad daylight.",
+        isSpeaker: false
+      },
+      {
+        id: i * 2 + 2,
+        name: "BlueMason",
+        color: "text-[coral]",
+        avatar: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+        time: "Just now",
+        text: "Never a pen. He dove before the contact even happened. 🤡 Have some shame!",
+        isSpeaker: false
+      }
+    ])
   ]);
-
   const [pollVotes, setPollVotes] = useState({ yes: 780, no: 220 });
   const [hasVoted, setHasVoted] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
