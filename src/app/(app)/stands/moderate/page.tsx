@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Mic, MicOff, UserPlus, X, BarChart2, Music, Settings, Send, Play, Pause, SkipForward, Volume2, Plus, Video } from "lucide-react";
+import { Search, Mic, MicOff, UserPlus, X, BarChart2, Music, Settings, Send, Play, Pause, SkipForward, Volume2, Plus, MonitorUp } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -65,7 +65,7 @@ export default function ModerateStandPage() {
               </div>
               
               {showMedia && (
-                <div className="mb-8 w-full aspect-video rounded-[2rem] overflow-hidden relative border border-blue-500/30 shadow-[0_0_50px_rgba(59,130,246,0.15)] animate-in fade-in zoom-in duration-500">
+                <div className="mb-8 w-full aspect-video rounded-[2rem] overflow-hidden relative border-2 border-teal/30 shadow-[0_0_50px_rgba(0,229,255,0.15)] animate-in fade-in zoom-in duration-500 group">
                   <video 
                     src="https://www.w3schools.com/html/mov_bbb.mp4" 
                     autoPlay 
@@ -73,9 +73,31 @@ export default function ModerateStandPage() {
                     muted 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-                  <div className="absolute top-6 left-6 px-3 py-1 bg-red-500 text-white text-[10px] font-black tracking-widest uppercase rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)] flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-white" /> LIVE MEDIA
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+                  
+                  {/* Top Bar */}
+                  <div className="absolute top-6 left-6 right-6 flex items-start justify-between z-10 pointer-events-none">
+                    <div className="flex items-center gap-3">
+                      <div className="px-3 py-1.5 bg-red-500 text-white text-xs font-black tracking-widest uppercase rounded-lg animate-pulse flex items-center gap-2 shadow-lg">
+                        <div className="w-2 h-2 rounded-full bg-white" /> LIVE
+                      </div>
+                      <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-black tracking-widest rounded-lg flex items-center gap-2 border border-white/10">
+                        <Eye className="w-4 h-4 text-teal" /> 12.4K
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Bar Twitch Style */}
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-10 pointer-events-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-xl border-2 border-teal overflow-hidden shadow-lg bg-black">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=JukeMaster" alt="JukeMaster" className="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 className="text-white font-black text-lg shadow-black drop-shadow-md">Tactical Analysis: City vs Arsenal</h3>
+                        <p className="text-teal font-bold text-xs tracking-wider uppercase drop-shadow-md">@JukeMaster is sharing screen</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -202,10 +224,10 @@ export default function ModerateStandPage() {
           
           <button 
             onClick={() => setShowMedia(!showMedia)}
-            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${showMedia ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
+            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${showMedia ? 'bg-teal/20 text-teal border border-teal/50 shadow-[0_0_20px_rgba(0,229,255,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
           >
-            <Video className="w-6 h-6" />
-            <span className="text-[9px] font-black tracking-widest uppercase">MEDIA</span>
+            <MonitorUp className="w-6 h-6" />
+            <span className="text-[9px] font-black tracking-widest uppercase">SHARE</span>
           </button>
           
           <button 
