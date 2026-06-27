@@ -6,7 +6,7 @@ import { useState, useEffect, use } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
-import StartStandButton from "@/components/stands/StartStandButton";
+
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 import LivePulseView from "@/components/match/LivePulseView";
 import { useAuth } from "@/components/Providers";
@@ -419,19 +419,15 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Away"}</h2>
-            </div>
-          </div>
-
-          {/* Stands Actions */}
-          <div className="mt-8 w-full max-w-lg mx-auto flex flex-col md:flex-row gap-4 justify-center items-center">
-             <StartStandButton matchId={matchId} />
-             <Link href={`/stands/${matchId}`} className="block w-full md:w-auto cursor-pointer hover:-translate-y-0.5 transition-transform">
-               <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
-                  <div className="flex items-center gap-4">
-                     <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+              {/* Stands Actions */}
+              <div className="flex flex-col md:flex-row gap-3 pt-6 border-t border-border">
+                <Link href={`/stands/${matchId}`} className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
+                  <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
                         <Mic className="w-5 h-5 text-black" fill="currentColor" />
-                     </div>
-                     <div className="flex flex-col justify-center text-left mr-4">
+                      </div>
+                      <div className="flex flex-col justify-center text-left mr-4">
                         <h2 className="text-sm font-black tracking-widest uppercase text-foreground leading-tight mb-0.5">JOIN EXISTING STAND</h2>
                      </div>
                   </div>

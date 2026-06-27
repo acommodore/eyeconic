@@ -1,6 +1,6 @@
 "use client";
 
-import { Settings, Shield, Edit2, Medal, Activity, Flame, Trophy, ChevronRight, Zap, Target, Eye } from "lucide-react";
+import { Settings, Shield, Edit2, Medal, Activity, Flame, Trophy, ChevronRight, Zap, Target, Eye, Mic } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -135,6 +135,11 @@ export default function ProfilePage() {
               ))}
             </div>
           </div>
+          
+          <Link href="/stands/create" className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black uppercase tracking-widest hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,69,0,0.3)] mt-6">
+            <Mic className="w-5 h-5" /> Push An Agenda
+          </Link>
+
         </div>
 
         {/* Right Column - Stats & History */}
