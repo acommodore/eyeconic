@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { Activity, Home, User, Menu, ChevronLeft, Building2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingModal } from "@/components/ui/OnboardingModal";
+import { useAuth } from "@/components/Providers";
+import { createClient } from "@/lib/supabase/client";
 
 export default function AppLayout({
   children,
@@ -15,8 +17,11 @@ export default function AppLayout({
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showNav, setShowNav] = useState(true);
+  const [profile, setProfile] = useState<{username: string, avatar_url: string} | null>(null);
   const lastScrollY = useRef(0);
   const isNavVisible = useRef(true);
+  const { user } = useAuth();
+  const supabase = createClient();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,12 +64,33 @@ export default function AppLayout({
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('hide-nav', handleHideNav);
     window.addEventListener('show-nav', handleShowNav);
+
+    const fetchProfile = async () => {
+      if (user) {
+        const { data } = await supabase.from('profiles').select('username, avatar_url').eq('id', user.id).single();
+        if (data) {
+          setProfile(data);
+        }
+      }
+    };
+    
+    fetchProfile();
+
+    const handleProfileUpdated = () => {
+      fetchProfile();
+    };
+    window.addEventListener('profile-updated', handleProfileUpdated);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('hide-nav', handleHideNav);
       window.removeEventListener('show-nav', handleShowNav);
+      window.removeEventListener('profile-updated', handleProfileUpdated);
     };
-  }, []);
+  }, [user, supabase]);
+
+  const displayName = profile?.username || "Operative";
+  const avatarUrl = profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=Operative";
 
   const navItems = [
     { icon: <Home className="w-6 h-6" />, label: "Home", href: "/home" },
@@ -94,7 +120,7 @@ export default function AppLayout({
           <ThemeToggle />
           <Link href="/profile" className="w-8 h-8 rounded-full border border-border overflow-hidden bg-muted">
              {/* Avatar placeholder */}
-             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
+             <img src={avatarUrl} alt="User" />
           </Link>
         </div>
       </header>
@@ -150,13 +176,13 @@ export default function AppLayout({
           <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
           <div className="w-10 h-10 shrink-0 rounded-full border border-[#00E5FF] overflow-hidden p-0.5 group-hover:border-foreground transition-colors">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
+              <img src={avatarUrl} alt="User" />
               <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-black" />
             </div>
           </div>
           {!isCollapsed && (
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-bold truncate group-hover:text-[#00E5FF] transition-colors">Maximus Prime</p>
+              <p className="text-sm font-bold truncate group-hover:text-[#00E5FF] transition-colors">{displayName}</p>
               <p className="text-xs text-gray-500">View Profile</p>
             </div>
           )}

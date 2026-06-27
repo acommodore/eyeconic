@@ -34,6 +34,7 @@ export default function ProfilePage() {
     if (!error) {
       setProfile({ ...(profile || {}), id: user.id, username: editUsername.trim() });
       setIsEditModalOpen(false);
+      window.dispatchEvent(new Event('profile-updated'));
     } else {
       console.error("Error saving profile:", error);
     }
