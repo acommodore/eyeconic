@@ -1,8 +1,9 @@
 "use client";
 
-import { Settings, Shield, Bell, User, ChevronRight, LogOut } from "lucide-react";
+import { Settings, Shield, Bell, User, ChevronRight, LogOut, ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function SettingsPage() {
   const supabase = createClient();
@@ -18,6 +19,12 @@ export default function SettingsPage() {
       
       {/* Header */}
       <div className="flex flex-col">
+        <button onClick={() => router.back()} className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors w-fit group">
+          <div className="p-2 bg-black/5 dark:bg-white/5 rounded-full group-hover:bg-black/10 dark:group-hover:bg-white/10 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+          </div>
+          <span className="text-xs font-bold uppercase tracking-widest">Back to Profile</span>
+        </button>
         <h1 className="text-3xl font-black tracking-[0.2em] uppercase drop-shadow-md">SETTINGS</h1>
         <div className="flex items-center gap-2 mt-1">
           <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
@@ -27,12 +34,16 @@ export default function SettingsPage() {
 
       <div className="grid gap-4">
         {[
-          { icon: <User className="w-5 h-5" />, title: "Account Details", desc: "Manage your email, password, and active sessions." },
-          { icon: <Bell className="w-5 h-5" />, title: "Notifications", desc: "Configure push and email alerts for your clubs." },
-          { icon: <Shield className="w-5 h-5" />, title: "Privacy & Security", desc: "Control who sees your Emotional Track Record." },
-          { icon: <Settings className="w-5 h-5" />, title: "App Preferences", desc: "Language, haptics, and data usage." }
+          { icon: <User className="w-5 h-5" />, title: "Account Details", desc: "Manage your email, password, and active sessions.", href: "/settings/account" },
+          { icon: <Bell className="w-5 h-5" />, title: "Notifications", desc: "Configure push and email alerts for your clubs.", href: "/settings/notifications" },
+          { icon: <Shield className="w-5 h-5" />, title: "Privacy & Security", desc: "Control who sees your Emotional Track Record.", href: "/settings/privacy" },
+          { icon: <Settings className="w-5 h-5" />, title: "App Preferences", desc: "Language, haptics, and data usage.", href: "/settings/preferences" }
         ].map((item, i) => (
-          <div key={i} className="flex items-center justify-between p-6 bg-card border border-border rounded-2xl cursor-pointer hover:border-foreground transition-colors group">
+          <div 
+            key={i} 
+            onClick={() => router.push(item.href)}
+            className="flex items-center justify-between p-6 bg-card border border-border rounded-2xl cursor-pointer hover:border-foreground transition-colors group"
+          >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-black/5 dark:bg-white/5 rounded-xl text-muted-foreground group-hover:text-foreground transition-colors">
                 {item.icon}

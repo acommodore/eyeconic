@@ -16,12 +16,26 @@ export default function ProfilePage() {
 
   
   const handleSaveProfile = async () => {
-    if (!editUsername.trim() || !profile) return;
+    if (!editUsername.trim()) return;
     setIsSaving(true);
-    const { error } = await supabase.from('profiles').update({ username: editUsername.trim() }).eq('id', profile.id);
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      setIsSaving(false);
+      return;
+    }
+
+    const { error } = await supabase.from('profiles').upsert({ 
+      id: user.id, 
+      username: editUsername.trim(),
+      avatar_url: profile?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.id}`
+    });
+
     if (!error) {
-      setProfile({ ...profile, username: editUsername.trim() });
+      setProfile({ ...(profile || {}), id: user.id, username: editUsername.trim() });
       setIsEditModalOpen(false);
+    } else {
+      console.error("Error saving profile:", error);
     }
     setIsSaving(false);
   };
