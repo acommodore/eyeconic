@@ -142,13 +142,17 @@ import { allMatches } from '@/lib/mockData';
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
-  const matchInfo = allMatches.find(m => m.id.toString() === matchId);
-  const timelineEvents = (matchInfo as any)?.timelineEvents || defaultTimelineEvents;
+  const mockMatchInfo = allMatches.find(m => m.id.toString() === matchId);
   
   const supabase = createClient();
-  const [matchData, setMatchData] = useState<any>(null);
+  const [dbMatchData, setDbMatchData] = useState<any>(null);
+  
+  const matchInfo = dbMatchData || mockMatchInfo;
+  
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
   const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>(matchInfo?.status === 'upcoming' ? 'prematch' : matchInfo?.status === 'finished' ? 'postmatch' : 'live');
+  const timelineEvents = (matchInfo as any)?.timelineEvents || defaultTimelineEvents;
+  
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState(initialHotTakes);
@@ -157,13 +161,22 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch live match
-      const { data: match } = await supabase.from('matches').select('*').eq('status', 'live').single();
-      if (match) {
-        setMatchData(match);
+      // Fetch match by ID to support dynamic Supabase UUIDs
+      let targetMatch = null;
+      if (matchId.includes('-')) {
+         const { data } = await supabase.from('matches').select('*').eq('id', matchId).single();
+         targetMatch = data;
+      } else {
+         const { data } = await supabase.from('matches').select('*').eq('id', matchId).single();
+         targetMatch = data || mockMatchInfo;
+      }
+
+      if (targetMatch && targetMatch.id) {
+        setDbMatchData(targetMatch);
+        setMatchState(targetMatch.status === 'upcoming' ? 'prematch' : targetMatch.status === 'finished' ? 'postmatch' : 'live');
         
         // Fetch hot takes
-        const { data: hotTakes } = await supabase.from('hot_takes').select('*').eq('match_id', match.id);
+        const { data: hotTakes } = await supabase.from('hot_takes').select('*').eq('match_id', targetMatch.id);
         if (hotTakes && hotTakes.length > 0) {
           setTakes(hotTakes.map(ht => ({
             id: ht.id,
@@ -174,7 +187,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         }
 
         // Fetch events
-        const { data: events } = await supabase.from('match_events').select('*').eq('match_id', match.id);
+        const { data: events } = await supabase.from('match_events').select('*').eq('match_id', targetMatch.id);
         if (events) {
           setPulseEvents(events);
         }
@@ -191,7 +204,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         fetchData();
       })
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'matches' }, (payload) => {
-        setMatchData(payload.new);
+        setDbMatchData(payload.new);
       })
       .subscribe();
 

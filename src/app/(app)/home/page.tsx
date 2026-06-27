@@ -28,6 +28,29 @@ const getVolatilityColor = (volatility: number) => {
   return 'text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]';
 };
 
+const getShortName = (name: string) => {
+  const map: Record<string, string> = {
+    'Chelsea': 'CHE',
+    'Man City': 'MCI',
+    'Man United': 'MUN',
+    'Arsenal': 'ARS',
+    'Liverpool': 'LIV',
+    'Tottenham': 'TOT',
+    'Barcelona': 'FCB',
+    'Real Madrid': 'RMA',
+    'Everton': 'EVE',
+    'Newcastle': 'NEW',
+    'Inter Milan': 'INT',
+    'Inter': 'INT',
+    'Milan': 'MIL',
+    'Dortmund': 'BVB',
+    'PSG': 'PSG',
+    'Bayern': 'FCB',
+    'Juventus': 'JUV',
+  };
+  return map[name] || name.substring(0, 3).toUpperCase();
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished = false }: { match: any, isExpanded: boolean, onToggle: (id: number) => void, isLive?: boolean, isFinished?: boolean }) => {
   return (
@@ -57,7 +80,8 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
 
               <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0 flex-1">
                  <div className="flex items-center gap-2 justify-end min-w-0">
-                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate">{match.team1}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate hidden md:block">{match.team1}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate md:hidden">{getShortName(match.team1)}</span>
                     {match.logo1 && (
                        /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={match.logo1} alt={match.team1} className={`w-5 h-5 object-contain shrink-0 ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
@@ -77,7 +101,8 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                        /* eslint-disable-next-line @next/next/no-img-element */
                        <img src={match.logo2} alt={match.team2} className={`w-5 h-5 object-contain shrink-0 ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
                     )}
-                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate">{match.team2}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate hidden md:block">{match.team2}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate md:hidden">{getShortName(match.team2)}</span>
                  </div>
               </div>
               
@@ -395,7 +420,8 @@ export default function DiscoverPage() {
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team1}</h2>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate hidden md:block">{heroMatch.team1}</h2>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate md:hidden">{getShortName(heroMatch.team1)}</h2>
                         <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[0] : ''}
                         </span>
@@ -403,7 +429,8 @@ export default function DiscoverPage() {
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team2}</h2>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate hidden md:block">{heroMatch.team2}</h2>
+                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate md:hidden">{getShortName(heroMatch.team2)}</h2>
                         <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[1] : ''}
                         </span>
