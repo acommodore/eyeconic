@@ -7,20 +7,11 @@ import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'luc
 
 // --- MOCK DATA ---
 
-import { allLiveMatches } from '@/lib/mockData';
+import { allLiveMatches, upcomingTableData, finishedTableData } from '@/lib/mockData';
 
-const upcomingTableData = [
-  { id: 4, team1: "Arsenal", team2: "Everton", time: "14:00", logo1: "https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/7/7c/Everton_FC_logo.svg", league: "Premier League", mood: "Tactical Battle 🧠", hyped: true, volatility: 82, triggers: ["[MUST WIN]"] },
-  { id: 5, team1: "Barcelona", team2: "Real Madrid", time: "16:30", logo1: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg", league: "La Liga", mood: "High Tension ⚡", hyped: true, volatility: 91, triggers: ["[TITLE DECIDER]"] },
-  { id: 6, team1: "Man United", team2: "Liverpool", time: "19:00", logo1: "https://upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg", league: "Premier League", mood: "Chaos ⚡", hyped: true, volatility: 98, triggers: ["[DERBY]"] },
-  { id: 8, team1: "Chelsea", team2: "Newcastle", time: "20:00", logo1: "https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg", league: "Premier League", mood: "Desperation 😰", hyped: false, volatility: 65, triggers: [] },
-  { id: 9, team1: "Inter Milan", team2: "Milan", time: "21:00", logo1: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg", logo2: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg", league: "Serie A", mood: "Strategic ♟️", hyped: false, volatility: 55, triggers: [] },
-];
 
-const finishedTableData = [
-  { id: 10, team1: "Dortmund", team2: "PSG", score: "1 - 1", logo1: "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg", league: "Champions League", mood: "Relief 😮‍💨", hyped: true, volatility: 88, triggers: ["[LATE EQUALIZER]"] },
-  { id: 11, team1: "Inter", team2: "Roma", score: "2 - 0", logo1: "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg", logo2: "https://upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo_%282017%29.svg", league: "Serie A", mood: "Clinical 🎯", hyped: false, volatility: 45, triggers: [] },
-];
+
+
 
 const tickerItems = [
   "📈 ARS Fans: +15% Optimism (Saka sub)",

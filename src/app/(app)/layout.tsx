@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Activity, Home, User, Menu, ChevronLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingModal } from "@/components/ui/OnboardingModal";
-import { StadiumIcon } from "@/components/StadiumIcon";
 
 export default function AppLayout({
   children,
@@ -69,10 +68,10 @@ export default function AppLayout({
 
   const navItems = [
     { icon: <Home className="w-6 h-6" />, label: "Home", href: "/home" },
-    { icon: <StadiumIcon className="w-6 h-6" />, label: "The Stand", href: "/stands" },
+    { icon: <Activity className="w-6 h-6" />, label: "The Stand", href: "/stands" },
   ];
 
-  const isStandRoom = /^\/stands\/[^/]+$/.test(pathname) || /^\/match\/[^/]+$/.test(pathname);
+  const isStandRoom = /^\/stands\/[^/]+$/.test(pathname);
 
   return (
     <div 

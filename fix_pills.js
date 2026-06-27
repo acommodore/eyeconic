@@ -1,0 +1,1 @@
+const fs = require('fs'); let content = fs.readFileSync('src/app/(app)/match/[id]/page.tsx', 'utf8'); content = content.replace(/hidden sm:inline/g, ''); fs.writeFileSync('src/app/(app)/match/[id]/page.tsx', content);

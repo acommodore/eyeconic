@@ -70,6 +70,12 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     lastChatScrollY.current = currentScrollY;
   };
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
   const [chatMessages, setChatMessages] = useState([
     ...Array(15).fill(0).flatMap((_, i) => [
       {
@@ -321,9 +327,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
       {/* DESKTOP LAYOUT: Stage (Left) -> Poll+Chat+Action Bar (Right) */}
       
       <div className="flex-1 flex flex-col md:hidden overflow-hidden w-full h-full">
-        {/* Poll at very top on mobile */}
-        {renderPoll()}
-        
+
         {/* Stage on mobile */}
         <div className="shrink-0 flex flex-col bg-background px-3 pb-3 border-b border-border z-10">
           <div className="px-3 py-2 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-xl flex flex-col gap-2 shrink-0 backdrop-blur-md mb-3">
@@ -383,10 +387,13 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           )}
         </div>
 
+        {/* Poll below stage on mobile */}
+        {renderPoll()}
+
         {/* Chat Feed on mobile */}
-        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col-reverse relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
-          <div className="space-y-4 space-y-reverse px-3 pb-4 mt-auto pt-16 flex flex-col-reverse">
-            {[...chatMessages].reverse().map((msg) => (
+        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
+          <div className="space-y-4 px-3 pb-4 pt-4 flex flex-col">
+            {chatMessages.map((msg) => (
             <div key={msg.id} className="flex gap-2 group">
               <div className={`w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-border-strong'} p-0.5 mt-0.5`}>
                 <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
@@ -402,7 +409,8 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               </div>
             </div>
           ))}
-            </div>
+          <div ref={messagesEndRef} />
+          </div>
         </div>
         {/* Action Bar on mobile */}
         <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + 8px)` }}>
@@ -508,9 +516,10 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         {/* Right Pane: Live Chat & Polls */}
         <div className="w-[400px] xl:w-[480px] bg-card text-card-foreground flex flex-col border-l border-border shrink-0 relative z-20 overflow-hidden h-full">
           {renderPoll()}
-          <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col-reverse relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]">
-            <div className="space-y-6 space-y-reverse px-6 pb-6 mt-auto pt-16 flex flex-col-reverse">
-              {[...chatMessages].reverse().map((msg) => (
+          {/* Desktop Chat Box Container */}
+          <div className="flex-1 min-h-0 bg-black/40 backdrop-blur-sm border-x border-b border-border-strong flex flex-col relative" onScroll={handleChatScroll}>
+            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {chatMessages.map((msg) => (
               <div key={msg.id} className="flex gap-3 group">
                 <div className={`w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-border-strong'} p-1 transition-transform group-hover:scale-110`}>
                   <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />

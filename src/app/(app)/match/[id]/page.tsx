@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target } from "lucide-react";
+import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target, Lock } from "lucide-react";
 import { useState, useEffect, use } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
@@ -137,18 +137,18 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-import { allLiveMatches } from "@/lib/mockData";
+import { allMatches } from '@/lib/mockData';
 
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
-  const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
+  const matchInfo = allMatches.find(m => m.id.toString() === matchId);
   const timelineEvents = matchInfo?.timelineEvents || defaultTimelineEvents;
   
   const supabase = createClient();
   const [matchData, setMatchData] = useState<any>(null);
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
-  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('live');
+  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>(matchInfo?.status === 'upcoming' ? 'prematch' : matchInfo?.status === 'finished' ? 'postmatch' : 'live');
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState(initialHotTakes);
@@ -377,14 +377,65 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         ))}
       </div>
 
-      {matchState === 'live' && (matchInfo?.time?.includes("'") || matchInfo?.time === 'HT' || matchInfo?.time === 'LIVE') ? (
-        <LivePulseView isMatchFinished={false} />
-      ) : matchState === 'live' && (
-        <div className="flex flex-col items-center justify-center py-20 text-muted-foreground/50">
-           <span className="text-4xl mb-2 opacity-50 grayscale">🏁</span>
-           <p className="text-xs font-black uppercase tracking-widest opacity-50">Match is not live</p>
+{/* SEASON CONTEXT */}
+        {(matchState === 'prematch' || matchState === 'live') && (
+          <div className="w-full max-w-4xl mx-auto mb-8 bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-2xl p-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl backdrop-blur-sm">
+            <div className="flex flex-col items-center md:items-start">
+              <span className="text-[10px] font-black uppercase tracking-widest text-teal mb-1">Season Context</span>
+              <div className="text-sm font-bold flex items-center gap-2">
+                <span className="text-foreground">4th</span>
+                <span className="text-muted-foreground text-[10px]">vs</span>
+                <span className="text-foreground">7th</span>
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Recent Form</span>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold">
+                <span className="text-green-500">W</span>-
+                <span className="text-yellow-500">D</span>-
+                <span className="text-green-500">W</span>-
+                <span className="text-red-500">L</span>-
+                <span className="text-green-500">W</span>
+                <span className="text-muted-foreground mx-1 text-[10px]">vs</span>
+                <span className="text-red-500">L</span>-
+                <span className="text-green-500">W</span>-
+                <span className="text-red-500">L</span>-
+                <span className="text-yellow-500">D</span>-
+                <span className="text-green-500">W</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Gap</span>
+                <span className="text-sm font-bold">5 pts</span>
+              </div>
+              <div className="w-px h-8 bg-border hidden md:block"></div>
+              <div className="flex flex-col items-center md:items-end">
+                <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Last Meeting</span>
+                <span className="text-sm font-bold text-teal">{matchInfo?.team1 || 'Team A'} won (2-1)</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+              {matchState === 'live' && matchInfo?.status === 'upcoming' ? (
+        <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-3xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-5 mix-blend-luminosity bg-cover z-0 pointer-events-none" />
+           <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+             <Clock className="w-8 h-8 text-teal opacity-80" />
+           </div>
+           <h3 className="relative z-10 text-3xl font-black tracking-tighter uppercase mb-4 text-foreground">Awaiting Kick Off</h3>
+           <p className="relative z-10 text-sm text-muted-foreground max-w-xs font-medium">
+             The stage is set. Eyeconic will begin tracking momentum, sentiment, and key moments once the match gets underway.
+           </p>
         </div>
-      )}
+      ) : matchState === 'live' && matchInfo?.status === 'finished' ? (
+        <LivePulseView isMatchFinished={true} />
+      ) : matchState === 'live' ? (
+        <LivePulseView isMatchFinished={false} />
+      ) : null}
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (
         <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
@@ -401,7 +452,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Flame className="w-4 h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Chaos</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Chaos</span>
                     </div>
                     <span className="text-sm font-black relative z-10 text-foreground">{votes.chaos}%</span>
                  </div>
@@ -409,7 +460,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="absolute left-0 top-0 h-full bg-teal/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Shield className="w-4 h-4 text-teal group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Tactical</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Tactical</span>
                     </div>
                     <span className="text-sm font-black relative z-10 text-foreground">{votes.tactical}%</span>
                  </div>
@@ -417,7 +468,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
                     <div className="flex items-center gap-2 relative z-10">
                        <Zap className="w-4 h-4 text-purple-500 group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase hidden sm:inline">Tension</span>
+                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Tension</span>
                     </div>
                     <span className="text-sm font-black relative z-10 text-foreground">{votes.tension}%</span>
                  </div>
@@ -427,42 +478,44 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       )}
 
       {/* Tab Navigation - Modern Pills */}
-      {matchState !== 'live' && (
+      {matchState === 'prematch' && (
         <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-border">
-          {matchState === 'prematch' ? (
-            ['LINEUP', 'H2H', 'STANDINGS', 'FORM', 'KEY BATTLES'].map((tab) => (
-              <button 
-                key={tab}
-                onClick={() => setPrematchTab(tab)}
-                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-                  prematchTab === tab 
-                    ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-                }`}
-              >
-                {tab}
-              </button>
-            ))
-          ) : (
-            ['OVERVIEW', 'ROSTER', 'STATS', 'STANDS'].map((tab) => (
-              <button 
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-                  activeTab === tab 
-                    ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-                }`}
-              >
-                {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
-                {tab === 'ROSTER' && <Users className="w-4 h-4" />}
-                {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
-                {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
-                {tab === 'STANDS' && <Mic className="w-4 h-4" />}
-                {tab}
-              </button>
-            ))
-          )}
+          {['LINEUP', 'H2H', 'KEY BATTLES'].map((tab) => (
+            <button 
+              key={tab}
+              onClick={() => setPrematchTab(tab)}
+              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                prematchTab === tab 
+                  ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                  : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {matchState === 'postmatch' && matchInfo?.status === 'finished' && (
+        <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-border">
+          {['OVERVIEW', 'ROSTER', 'STATS', 'STANDS'].map((tab) => (
+            <button 
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                activeTab === tab 
+                  ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                  : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+              }`}
+            >
+              {tab === 'OVERVIEW' && <Activity className={`w-4 h-4 ${activeTab === tab ? 'animate-pulse' : ''}`} />}
+              {tab === 'ROSTER' && <Users className="w-4 h-4" />}
+              {tab === 'TIMELINE' && <Clock className="w-4 h-4" />}
+              {tab === 'STATS' && <BarChart3 className="w-4 h-4" />}
+              {tab === 'STANDS' && <Mic className="w-4 h-4" />}
+              {tab}
+            </button>
+          ))}
         </div>
       )}
 
@@ -480,8 +533,6 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
                 {prematchTab === 'H2H' && <H2HTab matchInfo={matchInfo} />}
-                {prematchTab === 'STANDINGS' && <StandingsTab matchInfo={matchInfo} />}
-                {prematchTab === 'FORM' && <FormTab matchInfo={matchInfo} />}
                 {prematchTab === 'KEY BATTLES' && <KeyBattlesTab matchInfo={matchInfo} />}
              </div>
 
@@ -539,8 +590,64 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           </motion.div>
         )}
 
+        {/* POST-MATCH CONTENT - LOCKED STATE */}
+      {matchState === 'postmatch' && matchInfo?.status !== 'finished' && (
+        <div className="w-full max-w-4xl mx-auto space-y-6">
+          <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-3xl relative overflow-hidden shadow-2xl backdrop-blur-sm">
+             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-[0.03] mix-blend-luminosity bg-cover z-0 pointer-events-none" />
+             <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-teal to-transparent opacity-30" />
+             
+             {matchInfo?.status === 'live' && (
+               <div className="relative z-10 flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full mb-6">
+                  <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">Live</span>
+               </div>
+             )}
+
+             {matchInfo?.status === 'upcoming' && (
+               <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+                 <Clock className="w-8 h-8 text-teal opacity-80" />
+               </div>
+             )}
+
+             {matchInfo?.status === 'live' && (
+               <div className="relative z-10 w-full h-24 mb-6 opacity-30">
+                 {/* Fake pitch/chart animation placeholder */}
+                 <div className="absolute inset-0 border border-border rounded-xl bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/82/Soccer_field_-_empty.svg')] bg-center bg-cover mix-blend-screen overflow-hidden">
+                    <div className="w-3 h-3 bg-teal rounded-full absolute top-1/2 left-1/4 shadow-[0_0_10px_rgba(0,229,255,1)] animate-pulse" />
+                    <div className="w-3 h-3 bg-[#FF7F50] rounded-full absolute top-1/3 left-2/3 shadow-[0_0_10px_rgba(255,127,80,1)] animate-pulse" />
+                 </div>
+               </div>
+             )}
+
+             <h3 className="relative z-10 text-2xl font-black tracking-tighter uppercase mb-3 text-foreground">
+               {matchInfo?.status === 'upcoming' ? 'Awaiting the full story' : 'The match is still unfolding'}
+             </h3>
+             <p className="relative z-10 text-sm text-muted-foreground max-w-md font-medium">
+               {matchInfo?.status === 'upcoming' 
+                 ? 'The match is yet to be played. Return after full time for ratings, tactical breakdowns, and key takeaways.'
+                 : 'We\'re collecting every moment to build the complete story. Full match intelligence becomes available after full time.'}
+             </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {['Player Ratings', 'Momentum Swings', 'Tactical Analysis', 'Fan Pulse'].map((label) => (
+              <div key={label} className="bg-card text-card-foreground/5 border border-border rounded-2xl p-6 flex flex-col items-center justify-center gap-3 relative overflow-hidden group select-none">
+                <div className="absolute inset-0 bg-muted/30 backdrop-blur-[2px] z-10 flex items-center justify-center">
+                   <div className="w-10 h-10 rounded-full bg-black/60 border border-border flex items-center justify-center shadow-xl">
+                      <Lock className="w-4 h-4 text-muted-foreground" />
+                   </div>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-muted border border-border opacity-20" />
+                <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/30 blur-[1px]">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
         {/* STANDS TAB */}
-        {matchState === 'postmatch' && activeTab === 'STANDS' && (
+        {matchState === 'postmatch' && matchInfo?.status === 'finished' && activeTab === 'STANDS' && (
           <motion.div
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
@@ -582,7 +689,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         )}
 
         {/* Overview Content (Post Match) */}
-        {matchState === 'postmatch' && activeTab === 'OVERVIEW' && (
+        {matchState === 'postmatch' && matchInfo?.status === 'finished' && activeTab === 'OVERVIEW' && (
           <motion.div 
             key="overview"
             initial={{ opacity: 0, y: 15 }}
@@ -592,6 +699,62 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             className="space-y-12"
           >
           
+            {/* SEASON IMPACT */}
+            <section className="mt-4 mb-8 border border-border bg-card rounded-2xl p-4 md:p-6 shadow-xl overflow-hidden relative">
+              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-teal to-transparent opacity-30" />
+              <h2 className="text-lg md:text-xl font-black tracking-tighter uppercase mb-4 text-center text-foreground">Season Impact</h2>
+              
+              <div className="flex flex-col md:flex-row gap-4">
+                {/* Team 1 */}
+                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-xl p-4 relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent pointer-events-none" />
+                  <div className="flex items-center gap-2 mb-3 w-full justify-center md:justify-start">
+                    <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-6 h-6 object-contain" />
+                    <span className="font-black text-base uppercase tracking-wider">{matchInfo?.team1 || 'Team A'}</span>
+                  </div>
+                  <div className="flex items-end gap-2 mb-3">
+                    <span className="text-2xl font-black tabular-nums">2nd</span>
+                    <span className="text-xs text-muted-foreground font-bold mb-1">(↑1)</span>
+                    <span className="text-xs font-black text-teal bg-teal/10 px-2 py-0.5 rounded border border-teal/20 mb-1">+3 pts</span>
+                  </div>
+                  <div className="w-full space-y-2">
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Form</span>
+                      <span className="text-xs font-mono font-bold tracking-widest">W-W-W-D-W-W</span>
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Insight</span>
+                      <span className="text-xs font-medium text-gray-300">Strengthens title push</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Team 2 */}
+                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-xl p-4 relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF7F50]/5 to-transparent pointer-events-none" />
+                  <div className="flex items-center gap-2 mb-3 w-full justify-center md:justify-start">
+                    <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-6 h-6 object-contain" />
+                    <span className="font-black text-base uppercase tracking-wider">{matchInfo?.team2 || 'Team B'}</span>
+                  </div>
+                  <div className="flex items-end gap-2 mb-3">
+                    <span className="text-2xl font-black tabular-nums">8th</span>
+                    <span className="text-xs text-muted-foreground font-bold mb-1">(↓1)</span>
+                    <span className="text-xs font-black text-[#FF7F50] bg-[#FF7F50]/10 px-2 py-0.5 rounded border border-[#FF7F50]/20 mb-1">+0 pts</span>
+                  </div>
+                  <div className="w-full space-y-2">
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Form</span>
+                      <span className="text-xs font-mono font-bold tracking-widest text-muted-foreground">L-D-L-W-L-L</span>
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-widest font-black">Insight</span>
+                      <span className="text-xs font-medium text-gray-300">Drifting from top 4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
           {/* FANS HAVE SPOKEN - MVP & FAN XI */}
           <section className="relative w-full rounded-[32px] overflow-hidden border border-border shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
             {/* Dark Cinematic Background */}
