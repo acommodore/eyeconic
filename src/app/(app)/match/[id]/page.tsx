@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target, Lock } from "lucide-react";
+import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target, Lock, Building2 } from "lucide-react";
 import { useState, useEffect, use } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
@@ -278,8 +278,37 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     setVotedTakes(prev => ({ ...prev, [takeId]: true }));
   };
 
+  const tickerItems = [
+    "📈 ARS Fans: +15% Optimism (Saka sub)",
+    "📉 MUN Fans: -30% Patience (Ten Hag)",
+    "⚠️ RMA Fans: Tension Spiking (0-0 80')",
+    "🔥 LIV Fans: Roaring (+45% Momentum)",
+    "🧊 CHE Fans: Complete silence at Stamford Bridge",
+    "📈 JUV Fans: Tactical approval rising (+12%)",
+  ];
+
   return (
-    <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 bg-[#020202] min-h-screen text-foreground pb-24">
+    <div className="bg-[#020202] min-h-screen">
+      {/* 0. TERMINAL TICKER TAPE */}
+      <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
+         <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                   {item}
+                 </button>
+               ))}
+            </div>
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                   {item}
+                 </button>
+               ))}
+            </div>
+         </div>
+      </div>
+      <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 text-foreground pb-24">
       
 
       {/* Top Header Navigation */}
@@ -448,30 +477,30 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                    <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" /> Live
                  </div>
               </div>
-              <div className="flex gap-2 h-12">
-                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
+              <div className="flex gap-1 sm:gap-2 h-12">
+                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
-                    <div className="flex items-center gap-2 relative z-10">
-                       <Flame className="w-4 h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Chaos</span>
+                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
+                       <Flame className="w-3 h-3 sm:w-4 sm:h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
+                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Chaos</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-foreground">{votes.chaos}%</span>
+                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.chaos}%</span>
                  </div>
-                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-teal/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
+                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-teal/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-teal/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
-                    <div className="flex items-center gap-2 relative z-10">
-                       <Shield className="w-4 h-4 text-teal group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Tactical</span>
+                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
+                       <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-teal group-active:scale-110 transition-transform" />
+                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Tactical</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-foreground">{votes.tactical}%</span>
+                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.tactical}%</span>
                  </div>
-                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-purple-500/20 flex items-center justify-between px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
+                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-purple-500/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
                     <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
-                    <div className="flex items-center gap-2 relative z-10">
-                       <Zap className="w-4 h-4 text-purple-500 group-active:scale-110 transition-transform" />
-                       <span className="text-[10px] font-black text-muted-foreground uppercase ">Tension</span>
+                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
+                       <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 group-active:scale-110 transition-transform" />
+                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Tension</span>
                     </div>
-                    <span className="text-sm font-black relative z-10 text-foreground">{votes.tension}%</span>
+                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.tension}%</span>
                  </div>
               </div>
            </section>
@@ -631,19 +660,21 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {['Player Ratings', 'Momentum Swings', 'Tactical Analysis', 'Fan Pulse'].map((label) => (
-              <div key={label} className="bg-card text-card-foreground/5 border border-border rounded-2xl p-6 flex flex-col items-center justify-center gap-3 relative overflow-hidden group select-none">
-                <div className="absolute inset-0 bg-muted/30 backdrop-blur-[2px] z-10 flex items-center justify-center">
-                   <div className="w-10 h-10 rounded-full bg-black/60 border border-border flex items-center justify-center shadow-xl">
-                      <Lock className="w-4 h-4 text-muted-foreground" />
+          {matchInfo?.status !== 'upcoming' && (
+             <div className="grid grid-cols-2 gap-4">
+               {['Player Ratings', 'Momentum Swings', 'Tactical Analysis', 'Fan Pulse'].map((label) => (
+                 <div key={label} className="bg-card text-card-foreground/5 border border-border rounded-2xl p-6 flex flex-col items-center justify-center gap-3 relative overflow-hidden group select-none">
+                   <div className="absolute inset-0 bg-muted/30 backdrop-blur-[2px] z-10 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-black/60 border border-border flex items-center justify-center shadow-xl">
+                         <Lock className="w-4 h-4 text-muted-foreground" />
+                      </div>
                    </div>
-                </div>
-                <div className="w-12 h-12 rounded-xl bg-muted border border-border opacity-20" />
-                <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/30 blur-[1px]">{label}</span>
-              </div>
-            ))}
-          </div>
+                   <div className="w-12 h-12 rounded-xl bg-muted border border-border opacity-20" />
+                   <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/30 blur-[1px]">{label}</span>
+                 </div>
+               ))}
+             </div>
+          )}
         </div>
       )}
 
@@ -656,7 +687,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              className="space-y-8"
           >
             <div className="flex items-center gap-2 mb-4">
-               <Mic className="w-5 h-5 text-teal" />
+               <Building2 className="w-5 h-5 text-teal" />
                <h3 className="text-sm font-black tracking-widest text-teal uppercase">Highlights from the Stands</h3>
             </div>
             <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-[32px] p-6 shadow-2xl space-y-4">
@@ -1302,6 +1333,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           onPrev={handlePrevPlayer}
         />
       )}
+      </div>
     </div>
   );
 }

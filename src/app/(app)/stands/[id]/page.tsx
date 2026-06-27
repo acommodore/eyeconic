@@ -389,9 +389,9 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         {renderPoll()}
 
         {/* Chat Feed on mobile */}
-        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A]" onScroll={handleChatScroll}>
-          <div className="space-y-4 px-3 pb-4 pt-4 flex flex-col">
-            {chatMessages.map((msg) => (
+        <div className="flex-1 min-h-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex flex-col-reverse relative bg-gradient-to-b from-transparent via-[#050505] to-[#0A0A0A] px-3 pb-4 pt-4 gap-4" onScroll={handleChatScroll}>
+          <div ref={messagesEndRef} />
+          {[...chatMessages].reverse().map((msg) => (
             <div key={msg.id} className="flex gap-2 group">
               <div className={`w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0 border ${msg.isSpeaker ? 'border-[#00C853] shadow-[0_0_15px_rgba(0,200,83,0.4)]' : 'border-border-strong'} p-0.5 mt-0.5`}>
                 <img src={msg.avatar} className="w-full h-full object-contain" alt="avatar" />
@@ -407,8 +407,6 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               </div>
             </div>
           ))}
-          <div ref={messagesEndRef} />
-          </div>
         </div>
         {/* Action Bar on mobile */}
         <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + 8px)` }}>
