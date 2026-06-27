@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Upload, CheckCircle2, ChevronDown, Plus } from "lucide-react";
+import { ArrowLeft, Upload, CheckCircle2, ChevronDown, Plus, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -120,12 +120,17 @@ export default function StartStandPage() {
       </main>
 
       {/* Bottom Action */}
-      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent max-w-4xl mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent z-50 max-w-4xl mx-auto">
         <button 
           onClick={handlePushAgenda}
-          className="w-full py-5 bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black text-sm tracking-widest uppercase rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(255,69,0,0.4)]"
+          className="relative w-full py-5 rounded-2xl font-black text-sm tracking-[0.3em] uppercase text-black overflow-hidden group hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_40px_rgba(0,229,255,0.4)]"
         >
-          PUSH YOUR AGENDA
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF] to-[#00E5FF]/80 group-hover:opacity-90 transition-opacity" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_1.5s_infinite]" />
+          <span className="relative z-10 flex items-center justify-center gap-2">
+            PUSH YOUR AGENDA <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </span>
         </button>
       </div>
     </div>
