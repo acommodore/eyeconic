@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Compass, User, Menu, ChevronLeft } from "lucide-react";
+import { Activity, Home, User, Menu, ChevronLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingModal } from "@/components/ui/OnboardingModal";
+import { StadiumIcon } from "@/components/StadiumIcon";
 
 export default function AppLayout({
   children,
@@ -67,8 +68,8 @@ export default function AppLayout({
   }, []);
 
   const navItems = [
-    { icon: <Compass className="w-6 h-6" />, label: "Home", href: "/home" },
-    { icon: <User className="w-6 h-6" />, label: "The Stand", href: "/stands" },
+    { icon: <Home className="w-6 h-6" />, label: "Home", href: "/home" },
+    { icon: <StadiumIcon className="w-6 h-6" />, label: "The Stand", href: "/stands" },
   ];
 
   const isStandRoom = /^\/stands\/[^/]+$/.test(pathname) || /^\/match\/[^/]+$/.test(pathname);
@@ -185,7 +186,6 @@ export default function AppLayout({
               <div className={`p-1.5 rounded-full ${isActive ? "bg-[#00E5FF]/10" : ""}`}>
                 {item.icon}
               </div>
-              <span className="text-[10px] font-medium">{item.label}</span>
             </Link>
           );
         })}

@@ -377,8 +377,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         ))}
       </div>
 
-      {matchState === 'live' && (
+      {matchState === 'live' && (matchInfo?.time?.includes("'") || matchInfo?.time === 'HT' || matchInfo?.time === 'LIVE') ? (
         <LivePulseView isMatchFinished={false} />
+      ) : matchState === 'live' && (
+        <div className="flex flex-col items-center justify-center py-20 text-muted-foreground/50">
+           <span className="text-4xl mb-2 opacity-50 grayscale">🏁</span>
+           <p className="text-xs font-black uppercase tracking-widest opacity-50">Match is not live</p>
+        </div>
       )}
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (
