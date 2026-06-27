@@ -420,8 +420,7 @@ export default function DiscoverPage() {
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate hidden md:block">{heroMatch.team1}</h2>
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate md:hidden">{getShortName(heroMatch.team1)}</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team1}</h2>
                         <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[0] : ''}
                         </span>
@@ -429,8 +428,7 @@ export default function DiscoverPage() {
                      <div className="flex items-center gap-4">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate hidden md:block">{heroMatch.team2}</h2>
-                        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate md:hidden">{getShortName(heroMatch.team2)}</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team2}</h2>
                         <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
                            {heroMatch.score ? heroMatch.score.split(' - ')[1] : ''}
                         </span>
