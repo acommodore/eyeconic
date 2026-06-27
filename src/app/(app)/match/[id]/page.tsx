@@ -960,7 +960,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 </h2>
 
                 <div className="flex flex-col gap-4">
-                   {(matchInfo?.hotTakes || [
+                   {((matchInfo as any)?.hotTakes || [
                      { state: 'debunked', text: 'Man City Midfield Capitulation', sub: 'Rodri completed 92% of passes under pressure.' },
                      { state: 'proven', text: 'Tactical Shift', sub: 'Diaz\'s entry forced Walker deeper, breaking City\'s high press structure.' },
                      { state: 'proven', text: 'The Midfield Battle', sub: 'Mac Allister won 82% of ground duels, sparking sub-4-second transitions.' },

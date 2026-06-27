@@ -72,9 +72,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chatMessages]);
+
 
   const [chatMessages, setChatMessages] = useState([
     ...Array(15).fill(0).flatMap((_, i) => [

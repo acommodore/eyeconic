@@ -47,8 +47,15 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               )}
            </div>
 
-           <div className="flex-1 min-w-0 w-full md:w-auto">
-              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0">
+           <div className="flex-1 min-w-0 w-full md:w-auto flex flex-col md:flex-row md:items-center md:justify-between">
+              
+              <div className="flex items-center justify-start gap-2 flex-wrap mb-2 md:mb-0 md:w-[150px] lg:w-[200px] shrink-0">
+                 {match.triggers?.map((t: string, i: number) => (
+                    <span key={i} className="text-[9px] font-mono uppercase text-coral bg-coral/5 border border-coral/30 px-1.5 py-0.5 rounded tracking-widest">[{t.replace(/[\[\]]/g, '')}]</span>
+                 ))}
+              </div>
+
+              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0 flex-1">
                  <div className="flex items-center gap-2 justify-end min-w-0">
                     <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate">{match.team1}</span>
                     {match.logo1 && (
@@ -74,11 +81,8 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  </div>
               </div>
               
-              <div className="flex items-center justify-center gap-2 flex-wrap mt-2">
-                 {match.triggers?.map((t: string, i: number) => (
-                    <span key={i} className="text-[9px] font-mono uppercase text-coral bg-coral/5 border border-coral/30 px-1.5 py-0.5 rounded tracking-widest">[{t}]</span>
-                 ))}
-              </div>
+              {/* Dummy spacing block to keep teams centered horizontally */}
+              <div className="hidden md:block md:w-[150px] lg:w-[200px] shrink-0"></div>
            </div>
 
            <div className="flex items-center gap-4 md:gap-6 shrink-0">
