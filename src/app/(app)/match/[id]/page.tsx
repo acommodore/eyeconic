@@ -325,8 +325,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
-                <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-2xl">
-                  {matchInfo?.score || "0 - 0"}
+                <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative">
+                  {(matchInfo as any)?.score || "0 - 0"}
                 </div>
               )}
             </div>

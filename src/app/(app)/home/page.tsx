@@ -74,9 +74,9 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  </div>
               </div>
               
-              <div className="flex items-center gap-2 flex-wrap mt-2 md:mt-0 md:ml-4">
+              <div className="flex items-center justify-center gap-2 flex-wrap mt-2">
                  {match.triggers?.map((t: string, i: number) => (
-                    <span key={i} className="text-[9px] font-mono uppercase text-coral bg-coral/5 border border-coral/30 px-1.5 py-0.5 rounded tracking-widest">{t}</span>
+                    <span key={i} className="text-[9px] font-mono uppercase text-coral bg-coral/5 border border-coral/30 px-1.5 py-0.5 rounded tracking-widest">[{t}]</span>
                  ))}
               </div>
            </div>
