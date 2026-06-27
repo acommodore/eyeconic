@@ -9,6 +9,8 @@ import { BackButton } from "@/components/ui/BackButton";
 import StartStandButton from "@/components/stands/StartStandButton";
 import PlayerSummaryModal from "@/components/match/PlayerSummaryModal";
 import LivePulseView from "@/components/match/LivePulseView";
+import { useAuth } from "@/components/Providers";
+import { toast } from "sonner";
 
 const getTeamPlayers = () => {
   return [...pitchLIV.map(p => ({...p, team: 'Liverpool'})), ...pitchMCI.map(p => ({...p, team: 'Man City'}))];
@@ -139,6 +141,19 @@ const matchStats = [
 
 import { allMatches } from '@/lib/mockData';
 
+interface HotTakeOption {
+  text: string;
+  percent: number;
+  color: string;
+}
+
+interface HotTake {
+  id: string | number;
+  question: string;
+  options: HotTakeOption[];
+  votes: string;
+}
+
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
@@ -155,9 +170,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
-  const [takes, setTakes] = useState(initialHotTakes);
-  const [votedTakes, setVotedTakes] = useState<Record<number, boolean>>({});
+  const [takes, setTakes] = useState<HotTake[]>(initialHotTakes);
+  const [votedTakes, setVotedTakes] = useState<Record<string | number, boolean>>({});
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -260,9 +276,17 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     }
   };
 
-  const handleVote = (takeId: number, optionIndex: number) => {
+  const handleVote = async (takeId: string | number, optionIndex: number) => {
+    if (!user) {
+      toast.error('Login Required', {
+        description: 'You must be logged in to vote on hot takes.',
+      });
+      return;
+    }
+    
     if (votedTakes[takeId]) return;
 
+    // Optimistic UI update
     setTakes(currentTakes => currentTakes.map(take => {
       if (take.id !== takeId) return take;
 
@@ -289,6 +313,22 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     }));
 
     setVotedTakes(prev => ({ ...prev, [takeId]: true }));
+    
+    // Write to Supabase if it's a real take (uuid)
+    if (typeof takeId === 'string' && takeId.includes('-')) {
+      const { error } = await supabase.from('hot_take_votes').insert({
+        take_id: takeId,
+        profile_id: user.id,
+        option_index: optionIndex
+      });
+      if (error) {
+        console.error('Error recording vote:', error);
+      } else {
+        // Also increment the options count in hot_takes table to trigger realtime
+        // Note: For a robust app, you'd use a postgres function or trigger to update the percents
+        toast.success('Vote recorded!', { description: 'Your voice has been heard in the stands.' });
+      }
+    }
   };
 
   const tickerItems = [
@@ -475,9 +515,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
            </p>
         </div>
       ) : matchState === 'live' && matchInfo?.status === 'finished' ? (
-        <LivePulseView isMatchFinished={true} />
+        <LivePulseView isMatchFinished={true} matchId={matchInfo?.id} />
       ) : matchState === 'live' ? (
-        <LivePulseView isMatchFinished={false} />
+        <LivePulseView isMatchFinished={false} matchId={matchInfo?.id} />
       ) : null}
       {/* PRE-MATCH WIDGETS */}
       {matchState === 'prematch' && (

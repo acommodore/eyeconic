@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight, Activity } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 // --- Data Models ---
 const matchEvents = [
@@ -178,7 +179,7 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, ha
 );
 
 
-export default function LivePulseView({ isMatchFinished = false }: { isMatchFinished?: boolean }) {
+export default function LivePulseView({ isMatchFinished = false, matchId }: { isMatchFinished?: boolean, matchId?: string }) {
   const [activeMobileView, setActiveMobileView] = useState<'feed' | 'pulse'>('feed');
   const [activeMinute, setActiveMinute] = useState(78);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -197,6 +198,47 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
   const [recordingTime, setRecordingTime] = useState(10);
   const [echoedNotes, setEchoedNotes] = useState<Set<number>>(new Set());
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [flashState, setFlashState] = useState(false);
+  const [momentumData, setMomentumData] = useState<any[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    if (!matchId) return;
+
+    const fetchInitialData = async () => {
+      const { data } = await supabase
+        .from('match_momentum')
+        .select('*')
+        .eq('match_id', matchId)
+        .order('minute', { ascending: true });
+      if (data) setMomentumData(data);
+    };
+    fetchInitialData();
+
+    const eventsChannel = supabase.channel(`pulse_events_${matchId}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'match_events', filter: `match_id=eq.${matchId}` }, (payload) => {
+        const eventType = payload.new.event_type;
+        if (eventType === 'goal') {
+          if (typeof navigator !== 'undefined' && navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]);
+          }
+          setFlashState(true);
+          setTimeout(() => setFlashState(false), 1000);
+        }
+      })
+      .subscribe();
+
+    const momentumChannel = supabase.channel(`momentum_${matchId}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'match_momentum', filter: `match_id=eq.${matchId}` }, (payload) => {
+        setMomentumData(prev => [...prev, payload.new]);
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(eventsChannel);
+      supabase.removeChannel(momentumChannel);
+    };
+  }, [matchId, supabase]);
 
   const handleEcho = (noteId: number) => {
     setEchoedNotes(prev => {
@@ -395,7 +437,10 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
   }, [prevEvent, nextEvent]);
 
   return (
-    <div className="w-full space-y-10">
+    <div className="w-full space-y-10 relative">
+      {flashState && (
+        <div className="fixed inset-0 z-[100] bg-white animate-flash pointer-events-none mix-blend-screen" />
+      )}
 
       {/* 3. SPLIT LAYOUT */}
       <div className={`grid grid-cols-1 xl:grid-cols-12 gap-8 overflow-hidden pb-24 xl:pb-0`}>
@@ -437,6 +482,23 @@ export default function LivePulseView({ isMatchFinished = false }: { isMatchFini
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* Momentum Activity Bars */}
+            <div className="relative w-full px-4 mb-4 h-16 shrink-0 flex items-end gap-1">
+              {momentumData.map((dataPoint) => (
+                <div 
+                  key={dataPoint.id} 
+                  className="flex-1 bg-teal/40 hover:bg-teal transition-colors rounded-t-sm" 
+                  style={{ height: `${dataPoint.value}%` }} 
+                  title={`Minute ${dataPoint.minute}: ${dataPoint.value}%`}
+                />
+              ))}
+              {momentumData.length === 0 && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs text-muted-foreground font-bold uppercase tracking-widest animate-pulse">Waiting for live data...</span>
+                </div>
+              )}
             </div>
 
             {/* Interactive Timeline */}

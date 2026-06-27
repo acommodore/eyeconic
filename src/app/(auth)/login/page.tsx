@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { useState } from "react";
 import { login } from "@/app/(auth)/actions";
+import { createClient } from "@/lib/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { motion } from "framer-motion";
@@ -14,6 +15,16 @@ function LoginForm() {
   const message = searchParams.get("message");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const supabase = createClient();
+
+  const handleGoogleLogin = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+  };
 
   
 
@@ -35,7 +46,7 @@ function LoginForm() {
 
       {/* Social Login Buttons */}
       <div className="flex gap-4 mb-8">
-        <button className="flex-1 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center gap-3 hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md group relative overflow-hidden">
+        <button onClick={handleGoogleLogin} type="button" className="flex-1 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center gap-3 hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md group relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
           <svg className="w-5 h-5 relative z-10" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>

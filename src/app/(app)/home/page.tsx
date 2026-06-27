@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'lucide-react';
@@ -52,7 +52,7 @@ const getShortName = (name: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished = false }: { match: any, isExpanded: boolean, onToggle: (id: number) => void, isLive?: boolean, isFinished?: boolean }) => {
+const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, isFinished = false, isBookmarked = false, onToggleBookmark }: { match: any, isExpanded: boolean, onToggle: (id: number) => void, isLive?: boolean, isFinished?: boolean, isBookmarked?: boolean, onToggleBookmark?: (id: number) => void }) => {
   return (
     <div className={`border-b border-border bg-card/40 backdrop-blur-sm hover:bg-white/[0.04] transition-colors overflow-hidden ${isExpanded ? 'bg-white/[0.04]' : ''}`}>
       <div 
@@ -118,6 +118,9 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  <span className="text-[9px] uppercase tracking-widest text-muted-foreground hidden sm:block">VOL</span>
               </div>
               
+              <button onClick={(e) => { e.stopPropagation(); onToggleBookmark?.(match.id); }} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-muted hover:bg-black/10 dark:bg-muted/80 transition-colors border border-border">
+                  <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-teal text-teal' : 'text-muted-foreground group-hover:text-teal'}`} />
+              </button>
               <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-muted hover:bg-black/10 dark:bg-muted/80 transition-colors border border-border">
                  <ArrowRight className="w-4 h-4 text-teal group-hover:translate-x-0.5 transition-transform" />
               </Link>
@@ -181,7 +184,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
       )}
     </div>
   );
-};
+});
 
 export default function DiscoverPage() {
   const supabase = createClient();
@@ -253,6 +256,26 @@ export default function DiscoverPage() {
   const [activeFilter, setActiveFilter] = useState("Chaos"); // Chaos, Tactical, Rivalries, Surprise Me, Bookmarks
   const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
+  const [bookmarkedMatches, setBookmarkedMatches] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('eyeconic_bookmarks');
+      if (saved) {
+        setBookmarkedMatches(new Set(JSON.parse(saved)));
+      }
+    } catch (e) {}
+  }, []);
+
+  const toggleBookmark = (id: number) => {
+    setBookmarkedMatches(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      localStorage.setItem('eyeconic_bookmarks', JSON.stringify(Array.from(next)));
+      return next;
+    });
+  };
 
   const toggleMatch = (id: number) => {
     const next = new Set(expandedMatches);
@@ -262,13 +285,15 @@ export default function DiscoverPage() {
   };
 
   // Sorting logic for Live Matches based on Active Filter
-  const sortedLiveMatches = [...liveMatches].sort((a, b) => {
-    if (activeFilter === "Bookmarks") return (b.bookmarked ? 1 : 0) - (a.bookmarked ? 1 : 0);
-    if (activeFilter === "Chaos") return b.metrics.chaos - a.metrics.chaos;
-    if (activeFilter === "Tactical") return b.metrics.tactical - a.metrics.tactical;
-    if (activeFilter === "Rivalries") return b.metrics.rivalry - a.metrics.rivalry;
-    if (activeFilter === "Surprise Me") return b.metrics.surprise - a.metrics.surprise;
-    return 0;
+  const sortedLiveMatches = [...liveMatches]
+    .filter(m => activeFilter === "Bookmarks" ? bookmarkedMatches.has(m.id) : true)
+    .sort((a, b) => {
+      if (activeFilter === "Bookmarks") return b.volatility - a.volatility;
+      if (activeFilter === "Chaos") return b.metrics.chaos - a.metrics.chaos;
+      if (activeFilter === "Tactical") return b.metrics.tactical - a.metrics.tactical;
+      if (activeFilter === "Rivalries") return b.metrics.rivalry - a.metrics.rivalry;
+      if (activeFilter === "Surprise Me") return b.metrics.surprise - a.metrics.surprise;
+      return 0;
   });
 
   const heroMatch = sortedLiveMatches[0];
@@ -302,9 +327,15 @@ export default function DiscoverPage() {
     ...finishedTableData.map(m => ({ ...m, status: 'finished' }))
   ];
 
+  // If active filter is Bookmarks, filter the entire feed
+  let finalMatches = allCurrentMatches;
+  if (activeFilter === "Bookmarks") {
+     finalMatches = allCurrentMatches.filter(m => bookmarkedMatches.has(m.id));
+  }
+  
   // Group by League
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const groupedMatches: Record<string, any[]> = allCurrentMatches.reduce((acc, match) => {
+  const groupedMatches: Record<string, any[]> = finalMatches.reduce((acc, match) => {
     const league = match.league || "Other Competitions";
     if (!acc[league]) acc[league] = [];
     acc[league].push(match);
@@ -315,22 +346,20 @@ export default function DiscoverPage() {
   const watchabilityMatches = [
     {
       groupName: "Live Matches",
-      matches: allCurrentMatches.filter(m => m.status === 'live').sort((a, b) => b.volatility - a.volatility)
+      matches: finalMatches.filter(m => m.status === 'live').sort((a, b) => b.volatility - a.volatility)
     },
     {
       groupName: "Upcoming Matches",
-      matches: allCurrentMatches.filter(m => m.status === 'upcoming').sort((a, b) => b.volatility - a.volatility)
+      matches: finalMatches.filter(m => m.status === 'upcoming').sort((a, b) => b.volatility - a.volatility)
     },
     {
       groupName: "Finished Matches",
-      matches: allCurrentMatches.filter(m => m.status === 'finished').sort((a, b) => b.volatility - a.volatility)
+      matches: finalMatches.filter(m => m.status === 'finished').sort((a, b) => b.volatility - a.volatility)
     }
   ].filter(group => group.matches.length > 0);
 
   return (
     <main className="min-h-screen bg-background text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
-      
-      {/* Dynamic Ambient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-teal/20 blur-[120px]"></div>
          <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-900/20 blur-[100px]"></div>
@@ -503,6 +532,7 @@ export default function DiscoverPage() {
 
         {/* 3. TERMINAL FEED LIST */}
         <section className="space-y-12">
+          
           {sortMode === 'league' ? (
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
@@ -520,12 +550,14 @@ export default function DiscoverPage() {
                       {matches.map((match: any, index: number) => (
                         <div key={match.id} className={index !== matches.length - 1 ? "border-b border-border" : ""}>
                            <TerminalRow 
-                             match={match} 
-                             isExpanded={expandedMatches.has(match.id)} 
-                             onToggle={toggleMatch} 
-                             isLive={match.status === 'live'}
-                             isFinished={match.status === 'finished'} 
-                           />
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
                         </div>
                       ))}
                     </div>
@@ -549,12 +581,14 @@ export default function DiscoverPage() {
                       {group.matches.map((match: any, index: number) => (
                         <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-border" : ""}>
                            <TerminalRow 
-                             match={match} 
-                             isExpanded={expandedMatches.has(match.id)} 
-                             onToggle={toggleMatch} 
-                             isLive={match.status === 'live'}
-                             isFinished={match.status === 'finished'} 
-                           />
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
                         </div>
                       ))}
                     </div>

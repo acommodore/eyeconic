@@ -172,7 +172,7 @@ export default function OnboardingPage() {
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full flex flex-col h-full"
               >
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 ${step === 3 ? 'mb-4' : 'mb-16'}`}>
                   <div className="max-w-2xl">
                     <motion.h1 
                       initial={{ opacity: 0, x: -20 }}
@@ -219,65 +219,50 @@ export default function OnboardingPage() {
                   )}
                 </div>
 
-                {/* Step 3: Dramatic Showdown */}
+                {/* Step 3: Preference Confirmation */}
                 {step === 3 && favoriteTeam && rivalTeam && (
-                  <div className="flex-1 flex flex-col items-center justify-center py-10 relative">
-                     <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24 w-full justify-center max-w-4xl relative z-10">
-                       
-                       {/* Left Side (Your Club) */}
-                       <motion.div 
-                         initial={{ opacity: 0, x: -50, scale: 0.9 }}
-                         animate={{ opacity: 1, x: 0, scale: 1 }}
-                         transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-                         className="flex flex-col items-center gap-6 relative"
-                       >
-                         <div 
-                           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 blur-[60px] rounded-full pointer-events-none"
-                           style={{ backgroundColor: favoriteTeam.color }}
-                         />
-                         <span className="inline-block px-4 py-1.5 rounded-full bg-muted/80 border border-border-strong text-xs text-foreground font-bold tracking-widest uppercase backdrop-blur-md">
-                           My Club
-                         </span>
-                         <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
-                           <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] ${favoriteTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
-                         </div>
-                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-foreground drop-shadow-md">{favoriteTeam.name}</span>
-                       </motion.div>
+                  <div className="flex-1 flex flex-col items-center justify-start pt-4 relative w-full max-w-lg mx-auto">
+                     <motion.div 
+                       initial={{ opacity: 0, y: 20 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       className="w-full bg-card/40 backdrop-blur-md border border-border rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
+                     >
+                       {/* Subtle Background Elements */}
+                       <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-[80px] pointer-events-none" />
+                       <div className="absolute bottom-0 left-0 w-64 h-64 bg-red-500/5 rounded-full blur-[80px] pointer-events-none" />
 
-                       {/* Epic VS Divider */}
-                       <motion.div 
-                         initial={{ opacity: 0, scale: 0 }}
-                         animate={{ opacity: 1, scale: 1 }}
-                         transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-                         className="flex flex-col items-center justify-center z-20 shrink-0 relative"
-                       >
-                         <div className="absolute w-[1px] h-32 md:h-64 bg-gradient-to-b from-transparent via-white/30 to-transparent -rotate-12" />
-                         <div className="bg-background text-foreground p-4 rounded-full border border-border shadow-[0_0_30px_rgba(0,0,0,0.8)] z-10">
-                            <span className="text-2xl font-black italic tracking-tighter text-gray-500">VS</span>
-                         </div>
-                       </motion.div>
+                       {/* Header */}
+                       <div className="text-center mb-8 border-b border-border/50 pb-6 relative z-10">
+                         <h3 className="text-xl md:text-2xl font-black uppercase tracking-widest text-foreground">Profile Summary</h3>
+                         <p className="text-muted-foreground font-mono text-[10px] md:text-xs mt-2 uppercase tracking-widest">Confirm your allegiances</p>
+                       </div>
 
-                       {/* Right Side (Arch Rival) */}
-                       <motion.div 
-                         initial={{ opacity: 0, x: 50, scale: 0.9 }}
-                         animate={{ opacity: 1, x: 0, scale: 1 }}
-                         transition={{ duration: 0.6, delay: 0.2, type: "spring", bounce: 0.4 }}
-                         className="flex flex-col items-center gap-6 relative"
-                       >
-                         <div 
-                           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 blur-[60px] rounded-full pointer-events-none"
-                           style={{ backgroundColor: rivalTeam.color }}
-                         />
-                         <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-xs text-red-400 font-bold tracking-widest uppercase backdrop-blur-md">
-                           Arch Rival
-                         </span>
-                         <div className="w-40 h-40 md:w-56 md:h-56 relative z-10">
-                           <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.2)] ${rivalTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
+                       <div className="flex flex-col gap-4 relative z-10">
+                         {/* Ledger Row: Favorite Team */}
+                         <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors">
+                           <div className="absolute left-0 top-0 bottom-0 w-1.5" style={{ backgroundColor: favoriteTeam.color || '#00e5ff' }} />
+                           <div className="pl-4">
+                             <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest block mb-1">Primary Club</span>
+                             <span className="text-lg md:text-xl font-bold text-foreground drop-shadow-md">{favoriteTeam.name}</span>
+                           </div>
+                           <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                             <img src={favoriteTeam.logo} alt={favoriteTeam.short} className={`w-full h-full object-contain ${favoriteTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
+                           </div>
                          </div>
-                         <span className="text-3xl md:text-4xl font-black tracking-tighter text-foreground drop-shadow-md">{rivalTeam.name}</span>
-                       </motion.div>
 
-                     </div>
+                         {/* Ledger Row: Arch Rival */}
+                         <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-red-500/10 relative overflow-hidden group hover:border-red-500/20 transition-colors">
+                           <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-red-500/80" />
+                           <div className="pl-4">
+                             <span className="text-[9px] font-mono text-red-400 uppercase tracking-widest block mb-1">Arch Rival</span>
+                             <span className="text-lg md:text-xl font-bold text-foreground drop-shadow-md">{rivalTeam.name}</span>
+                           </div>
+                           <div className="w-12 h-12 md:w-16 md:h-16 relative">
+                             <img src={rivalTeam.logo} alt={rivalTeam.short} className={`w-full h-full object-contain ${rivalTeam.invert ? 'filter dark:invert-0 invert' : ''}`} />
+                           </div>
+                         </div>
+                       </div>
+                     </motion.div>
                   </div>
                 )}
 
