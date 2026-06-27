@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Mic, MicOff, UserPlus, X, BarChart2, Music, Settings, Send, Play, Pause, SkipForward, Volume2, Plus } from "lucide-react";
+import { Search, Mic, MicOff, UserPlus, X, BarChart2, Music, Settings, Send, Play, Pause, SkipForward, Volume2, Plus, Video } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,7 @@ export default function ModerateStandPage() {
   const [activeModal, setActiveModal] = useState<'none' | 'poll' | 'music'>('none');
   const [pollDuration, setPollDuration] = useState('5m');
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [showMedia, setShowMedia] = useState(false);
   const [pollOptions, setPollOptions] = useState(["", ""]);
 
   const handleAddOption = () => {
@@ -62,6 +63,22 @@ export default function ModerateStandPage() {
               <div className="flex items-center justify-between mb-6 px-1 border-b border-border/50 pb-2">
                 <h2 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase">HOST STAGE</h2>
               </div>
+              
+              {showMedia && (
+                <div className="mb-8 w-full aspect-video rounded-[2rem] overflow-hidden relative border border-blue-500/30 shadow-[0_0_50px_rgba(59,130,246,0.15)] animate-in fade-in zoom-in duration-500">
+                  <video 
+                    src="https://www.w3schools.com/html/mov_bbb.mp4" 
+                    autoPlay 
+                    loop 
+                    muted 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                  <div className="absolute top-6 left-6 px-3 py-1 bg-red-500 text-white text-[10px] font-black tracking-widest uppercase rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)] flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-white" /> LIVE MEDIA
+                  </div>
+                </div>
+              )}
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {/* Host Card */}
@@ -181,6 +198,14 @@ export default function ModerateStandPage() {
           <button className="flex-1 py-4 px-6 border border-[#FF4500]/50 text-[#FF4500] hover:bg-[#FF4500]/10 hover:border-[#FF4500] rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(255,69,0,0.1)]">
             <MicOff className="w-5 h-5" />
             <span className="text-xs font-black tracking-widest uppercase">MUTE ALL</span>
+          </button>
+          
+          <button 
+            onClick={() => setShowMedia(!showMedia)}
+            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${showMedia ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
+          >
+            <Video className="w-6 h-6" />
+            <span className="text-[9px] font-black tracking-widest uppercase">MEDIA</span>
           </button>
           
           <button 
