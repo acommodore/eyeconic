@@ -62,7 +62,7 @@ function HeroSection() {
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center pt-24 pb-20 px-6 lg:px-20 overflow-hidden bg-gray-50 dark:bg-background text-foreground transition-colors duration-500 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
       {/* Heavy Dark Overlay */}
-      <div className="absolute inset-0 bg-white/60 dark:bg-background text-foreground/90 z-0" />
+      <div className="absolute inset-0 bg-white/60 dark:bg-black/70 z-0 transition-colors duration-500" />
 
       <div className="relative z-30 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 mt-10">
         <div className="flex-1 text-left w-full">

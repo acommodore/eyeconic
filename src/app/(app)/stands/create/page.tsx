@@ -19,10 +19,10 @@ export default function StartStandPage() {
     <div className="min-h-screen bg-[#0A0A0A] text-foreground pb-24">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-border">
-        <div className="flex items-center justify-between p-4 max-w-md mx-auto relative">
-          <button onClick={() => router.back()} className="text-muted-foreground hover:text-foreground transition-colors p-2 -ml-2 relative z-20">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
+        <div className="flex items-center justify-between p-4 max-w-4xl mx-auto relative">
+           <button onClick={() => router.back()} className="text-muted-foreground hover:text-foreground transition-colors p-2 -ml-2 relative z-20">
+             <ArrowLeft className="w-5 h-5" />
+           </button>
           
           <h1 className="text-xs font-black tracking-[0.2em] uppercase text-center absolute left-0 right-0 z-10">
             START A<br/>STAND
@@ -34,9 +34,9 @@ export default function StartStandPage() {
         </div>
       </header>
 
-      <main className="p-4 max-w-md mx-auto space-y-8 mt-4">
+      <main className="p-4 max-w-4xl mx-auto space-y-10 mt-6">
         {/* Cover Section */}
-        <section className="space-y-3">
+        <section className="space-y-4">
           <div className="flex items-center justify-between px-1">
             <h2 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">COVER</h2>
             <span className="text-[10px] font-black text-teal tracking-widest uppercase">Required</span>
@@ -123,10 +123,10 @@ export default function StartStandPage() {
       </main>
 
       {/* Bottom Action */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent max-w-md mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent max-w-4xl mx-auto">
         <button 
           onClick={handlePushAgenda}
-          className="w-full py-4 bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black text-xs tracking-widest uppercase rounded-xl hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,69,0,0.3)]"
+          className="w-full py-5 bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black text-sm tracking-widest uppercase rounded-2xl hover:scale-[1.02] transition-transform shadow-[0_0_30px_rgba(255,69,0,0.4)]"
         >
           PUSH YOUR AGENDA
         </button>
