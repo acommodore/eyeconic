@@ -27,7 +27,7 @@ export default function ModerateStandPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-foreground pb-32">
+    <div className="min-h-screen bg-[#0A0A0A] text-foreground flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-border">
         <div className="flex items-center justify-between p-4 max-w-6xl mx-auto relative">
@@ -79,9 +79,6 @@ export default function ModerateStandPage() {
                     <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-white/10 transition-colors">
                       <MicOff className="w-4 h-4 text-muted-foreground" />
                     </button>
-                    <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-white/10 transition-colors">
-                      <UserPlus className="w-4 h-4 text-muted-foreground" />
-                    </button>
                   </div>
                 </div>
 
@@ -98,7 +95,7 @@ export default function ModerateStandPage() {
                   
                   <div className="flex items-center gap-2 mt-5 w-full justify-center">
                     <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-white/10 transition-colors">
-                      <Settings className="w-4 h-4 text-muted-foreground" />
+                      <MicOff className="w-4 h-4 text-muted-foreground" />
                     </button>
                   </div>
                 </div>
@@ -179,7 +176,7 @@ export default function ModerateStandPage() {
       </main>
 
       {/* Bottom Tool Bar */}
-      <div className="fixed bottom-6 left-0 right-0 p-4 max-w-2xl mx-auto z-40">
+      <div className="sticky bottom-6 left-0 right-0 p-4 max-w-2xl mx-auto z-40 mt-auto">
         <div className="bg-card/90 border border-white/10 rounded-3xl p-2 flex items-center justify-between gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl">
           <button className="flex-1 py-4 px-6 border border-[#FF4500]/50 text-[#FF4500] hover:bg-[#FF4500]/10 hover:border-[#FF4500] rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(255,69,0,0.1)]">
             <MicOff className="w-5 h-5" />

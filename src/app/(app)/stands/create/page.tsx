@@ -16,7 +16,7 @@ export default function StartStandPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-foreground pb-24">
+    <div className="min-h-screen bg-[#0A0A0A] text-foreground flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-border">
         <div className="flex items-center justify-between p-4 max-w-4xl mx-auto relative">
@@ -120,7 +120,7 @@ export default function StartStandPage() {
       </main>
 
       {/* Bottom Action */}
-      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent z-50 max-w-4xl mx-auto">
+      <div className="sticky bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A] to-transparent z-50 max-w-4xl mx-auto mt-auto">
         <button 
           onClick={handlePushAgenda}
           className="relative w-full py-5 rounded-2xl font-black text-sm tracking-[0.3em] uppercase text-black overflow-hidden group hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_40px_rgba(0,229,255,0.4)]"
