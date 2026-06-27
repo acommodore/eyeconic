@@ -34,90 +34,87 @@ export default function StartStandPage() {
         </div>
       </header>
 
-      <main className="p-4 max-w-4xl mx-auto space-y-10 mt-6">
+      <main className="p-4 max-w-4xl mx-auto space-y-12 mt-8 pb-32">
         {/* Cover Section */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-between px-1">
-            <h2 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">COVER</h2>
-            <span className="text-[10px] font-black text-teal tracking-widest uppercase">Required</span>
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase">COVER</h2>
+            <div className="px-3 py-1 rounded-full bg-teal/10 border border-teal/20 text-[10px] font-black text-teal tracking-widest uppercase">Required</div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 h-48">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-auto md:h-56">
             <button 
               onClick={() => setCover('upload')}
-              className={`rounded-2xl border border-dashed flex flex-col items-center justify-center gap-3 transition-all ${cover === 'upload' ? 'border-teal bg-teal/5' : 'border-border bg-card/30 hover:bg-card/50 text-muted-foreground'}`}
+              className={`rounded-3xl border border-dashed flex flex-col items-center justify-center gap-4 transition-all group p-8 ${cover === 'upload' ? 'border-teal bg-teal/5 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'border-border/50 bg-card/20 hover:bg-card/40 hover:border-border text-muted-foreground'}`}
             >
-              <Upload className="w-5 h-5" />
-              <span className="text-[10px] font-medium">Upload Image</span>
+              <div className={`p-4 rounded-full transition-colors ${cover === 'upload' ? 'bg-teal/20' : 'bg-muted group-hover:bg-muted/80'}`}>
+                <Upload className={`w-6 h-6 ${cover === 'upload' ? 'text-teal' : ''}`} />
+              </div>
+              <span className="text-xs font-bold tracking-wider uppercase">Upload Image</span>
             </button>
             
             <button 
               onClick={() => setCover('classic')}
-              className={`rounded-2xl border relative overflow-hidden transition-all group ${cover === 'classic' ? 'border-teal' : 'border-border bg-card/30'}`}
+              className={`rounded-3xl border relative overflow-hidden transition-all group h-48 md:h-auto ${cover === 'classic' ? 'border-teal shadow-[0_0_30px_rgba(0,229,255,0.15)]' : 'border-border/50 bg-card/20 hover:border-border'}`}
             >
-              {/* Mock bg for classic arena */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0A0A0A]" />
-              <div className="absolute bottom-4 left-4 text-xs font-black tracking-widest text-white z-10">
-                Classic Arena
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+              
+              <div className="absolute bottom-6 left-6 text-sm font-black tracking-[0.2em] text-white z-10 drop-shadow-lg">
+                CLASSIC ARENA
               </div>
               {cover === 'classic' && (
-                <div className="absolute top-3 right-3 text-teal z-10 bg-black/50 rounded-full">
-                  <CheckCircle2 className="w-5 h-5 fill-teal text-black" />
+                <div className="absolute top-4 right-4 z-10 bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10">
+                  <CheckCircle2 className="w-6 h-6 fill-teal text-black" />
                 </div>
               )}
-              {/* Glow */}
-              {cover === 'classic' && <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,229,255,0.15)] pointer-events-none" />}
             </button>
           </div>
         </section>
 
         {/* Stand Name Section */}
-        <section className="space-y-3">
-          <h2 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase px-1">STAND NAME</h2>
-          <div className="relative">
+        <section className="space-y-6">
+          <h2 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase">STAND NAME</h2>
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5FF]/20 to-[#FF7F50]/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
             <input 
               type="text" 
-              placeholder="Name your stand" 
+              placeholder="e.g. The Blue Moon Tactics Board" 
               maxLength={32}
               value={standName}
               onChange={(e) => setStandName(e.target.value)}
-              className="w-full bg-card border border-border rounded-xl px-4 py-3.5 text-sm font-medium focus:outline-none focus:border-teal/50 transition-colors placeholder:text-muted-foreground/50"
+              className="relative w-full bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl px-6 py-5 text-lg font-bold focus:outline-none focus:border-teal/50 focus:bg-card transition-all placeholder:text-muted-foreground/30 shadow-xl"
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground/50 font-mono">
+            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-xs text-muted-foreground/50 font-mono font-bold">
               {standName.length}/32
             </span>
           </div>
         </section>
 
         {/* Match Section */}
-        <section className="space-y-3">
-          <h2 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase px-1">MATCH</h2>
-          <button className="w-full bg-card border border-border rounded-xl p-3 flex items-center justify-between hover:bg-white/5 transition-colors text-left group">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-1.5">
-                <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-[8px] font-mono border border-border">img</div>
-                <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-[8px] font-mono border border-border z-10">img</div>
+        <section className="space-y-6">
+          <h2 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase">MATCH LINK</h2>
+          <button className="w-full bg-gradient-to-br from-card/80 to-muted/30 backdrop-blur-md border border-border/50 rounded-2xl p-5 flex items-center justify-between hover:border-teal/30 hover:shadow-[0_0_30px_rgba(0,229,255,0.05)] transition-all group shadow-xl">
+            <div className="flex items-center gap-5">
+              <div className="flex -space-x-3 shadow-lg">
+                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center border-2 border-background z-0 p-2 shadow-sm transform group-hover:-translate-x-1 transition-transform">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain" />
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center border-2 border-background z-10 p-2 shadow-sm transform group-hover:translate-x-1 transition-transform">
+                  <img src="https://upload.wikimedia.org/wikipedia/en/5/3/33/Arsenal_FC.svg" alt="ARS" className="w-full h-full object-contain" />
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-black tracking-wider text-foreground">MCI vs ARS</h3>
-                <p className="text-[9px] text-muted-foreground mt-0.5">Etihad Stadium • 20:00</p>
+              <div className="text-left">
+                <h3 className="text-base font-black tracking-widest text-foreground uppercase mb-1">MCI <span className="text-muted-foreground mx-1">VS</span> ARS</h3>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
+                  <p className="text-[10px] font-bold text-muted-foreground tracking-widest uppercase">Etihad Stadium • LIVE</p>
+                </div>
               </div>
             </div>
-            <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-          </button>
-
-          {/* Empty details blocks to match screenshot */}
-          <div className="grid grid-cols-2 gap-3 mt-4">
-            <div className="h-14 rounded-xl border border-teal/40 shadow-[inset_0_0_15px_rgba(0,229,255,0.05)] bg-card" />
-            <div className="h-14 rounded-xl border border-border bg-card" />
-            <div className="h-14 rounded-xl border border-border bg-card" />
-            <div className="h-14 rounded-xl border border-border bg-card" />
-            <div className="col-span-2 h-14 rounded-xl border border-border bg-card" />
-          </div>
-
-          <button className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-border bg-card hover:bg-white/5 transition-colors mt-3">
-            <span className="text-[10px] font-black tracking-widest text-muted-foreground uppercase text-left leading-tight">ADD<br/>DETAILS</span>
-            <Plus className="w-4 h-4 text-teal" />
+            <div className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center group-hover:bg-teal/10 transition-colors border border-transparent group-hover:border-teal/20">
+              <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-teal transition-colors" />
+            </div>
           </button>
         </section>
       </main>
