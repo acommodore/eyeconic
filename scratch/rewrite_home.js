@@ -1,4 +1,9 @@
-"use client";
+const fs = require('fs');
+const path = require('path');
+
+const targetPath = path.join(__dirname, 'src', 'app', '(app)', 'home', 'page.tsx');
+
+const content = `"use client";
 
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
@@ -55,25 +60,24 @@ const MetricBar = ({ label, value, colorClass }: { label: string, value: number,
       <span className="font-bold text-foreground">{value}</span>
     </div>
     <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden border border-white/5">
-      <div className={`h-full rounded-full ${colorClass}`} style={{ width: `${value}%` }} />
+      <div className={\`h-full rounded-full \${colorClass}\`} style={{ width: \`\${value}%\` }} />
     </div>
   </div>
 );
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CuratedMatchCard = ({ match, isLive = false, isFinished = false }: { match: any, isLive?: boolean, isFinished?: boolean }) => {
   const curation = getMatchCurations(match.id, match.team1);
 
   return (
     <div className="bg-card/40 backdrop-blur-md border border-border/50 rounded-[2rem] p-6 lg:p-8 relative overflow-hidden group hover:border-white/10 hover:bg-card/60 transition-all shadow-xl flex flex-col h-full">
       {/* Background glow based on label */}
-      <div className={`absolute -inset-40 bg-gradient-to-br ${curation.color} opacity-10 blur-[80px] pointer-events-none group-hover:opacity-20 transition-opacity`} />
+      <div className={\`absolute -inset-40 bg-gradient-to-br \${curation.color} opacity-10 blur-[80px] pointer-events-none group-hover:opacity-20 transition-opacity\`} />
       
       {/* Label Badge */}
       <div className="flex justify-between items-start mb-8 relative z-10">
-        <div className={`inline-flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full shadow-lg`}>
+        <div className={\`inline-flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full shadow-lg\`}>
           {curation.icon}
-          <span className={`text-xs font-black tracking-widest uppercase ${curation.textColor}`}>{curation.label}</span>
+          <span className={\`text-xs font-black tracking-widest uppercase \${curation.textColor}\`}>{curation.label}</span>
         </div>
         
         {isLive && (
@@ -88,8 +92,7 @@ const CuratedMatchCard = ({ match, isLive = false, isFinished = false }: { match
       <div className="flex items-center justify-between mb-8 relative z-10">
          <div className="flex flex-col items-center gap-3 w-[40%]">
             {match.logo1 && (
-               /* eslint-disable-next-line @next/next/no-img-element */
-               <img src={match.logo1} alt={match.team1} className={`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
+               <img src={match.logo1} alt={match.team1} className={\`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl \${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}\`} />
             )}
             <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-center line-clamp-1">{match.team1}</h3>
          </div>
@@ -106,8 +109,7 @@ const CuratedMatchCard = ({ match, isLive = false, isFinished = false }: { match
 
          <div className="flex flex-col items-center gap-3 w-[40%]">
             {match.logo2 && (
-               /* eslint-disable-next-line @next/next/no-img-element */
-               <img src={match.logo2} alt={match.team2} className={`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
+               <img src={match.logo2} alt={match.team2} className={\`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl \${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}\`} />
             )}
             <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-center line-clamp-1">{match.team2}</h3>
          </div>
@@ -130,7 +132,7 @@ const CuratedMatchCard = ({ match, isLive = false, isFinished = false }: { match
       </div>
 
       {/* CTA */}
-      <Link href={`/match/${match.id}`} className="relative z-10 w-full block text-center py-4 rounded-xl bg-white text-black font-black uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+      <Link href={\`/match/\${match.id}\`} className="relative z-10 w-full block text-center py-4 rounded-xl bg-white text-black font-black uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
          {isLive ? 'Open Match' : 'Match Preview'}
       </Link>
     </div>
@@ -149,7 +151,17 @@ export default function DiscoverPage() {
         const live = data.filter(m => m.status === 'live');
         const upcoming = data.filter(m => m.status === 'upcoming');
         if (live.length > 0) {
-           // We are continuing to use mock data for simplicity
+          const mappedLive = live.map(m => ({
+            id: m.id,
+            team1: m.team1,
+            team2: m.team2,
+            score: \`\${m.score1} - \${m.score2}\`,
+            time: m.current_minute || "0'",
+            logo1: m.logo1,
+            logo2: m.logo2,
+            league: m.league,
+            volatility: m.volatility
+          }));
         }
         if (upcoming.length > 0) {
           setUpcomingMatches(upcoming);
@@ -207,9 +219,9 @@ export default function DiscoverPage() {
         </header>
 
         {/* PERSONALIZATION FILTERS */}
-        <div className="mb-12 border-b border-white/10 pb-6 overflow-x-auto hide-scrollbar">
-           <h3 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase mb-4 whitespace-nowrap">I usually watch matches for:</h3>
-           <div className="flex flex-nowrap md:flex-wrap items-center gap-3">
+        <div className="mb-12 border-b border-white/10 pb-6">
+           <h3 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase mb-4">I usually watch matches for:</h3>
+           <div className="flex flex-wrap items-center gap-3">
               {filters.map(f => {
                 const Icon = f.icon;
                 const isActive = activeFilter === f.name;
@@ -217,7 +229,7 @@ export default function DiscoverPage() {
                   <button 
                     key={f.name}
                     onClick={() => setActiveFilter(f.name)}
-                    className={`shrink-0 flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${isActive ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-card/50 border border-white/10 text-muted-foreground hover:border-white/30 hover:text-white backdrop-blur-md'}`}
+                    className={\`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all \${isActive ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-card/50 border border-white/10 text-muted-foreground hover:border-white/30 hover:text-white backdrop-blur-md'}\`}
                   >
                     <Icon className="w-4 h-4" /> {f.name}
                   </button>
@@ -248,3 +260,7 @@ export default function DiscoverPage() {
     </main>
   );
 }
+`;
+
+fs.writeFileSync(targetPath, content);
+console.log('Successfully updated home/page.tsx with the Match Ranking Pipeline UI!');
