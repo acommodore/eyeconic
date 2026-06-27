@@ -519,46 +519,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       ) : matchState === 'live' ? (
         <LivePulseView isMatchFinished={false} matchId={matchInfo?.id} />
       ) : null}
-      {/* PRE-MATCH WIDGETS */}
-      {matchState === 'prematch' && (
-        <div className="flex flex-col gap-3 mb-10 max-w-4xl mx-auto">
-           {/* Crowdcast - Horizontal Segmented */}
-           <section className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-3xl p-4 shadow-xl">
-              <div className="flex justify-between items-center mb-3 px-1">
-                 <h2 className="text-[10px] font-black tracking-widest uppercase text-muted-foreground">CROWDCAST VIBE</h2>
-                 <div className="flex items-center gap-1.5 text-[9px] font-bold text-teal uppercase">
-                   <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" /> Live
-                 </div>
-              </div>
-              <div className="flex gap-1 sm:gap-2 h-12">
-                 <div onClick={() => handlePrematchVote('chaos')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-[#FF7F50]/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
-                    <div className="absolute left-0 top-0 h-full bg-[#FF7F50]/10 transition-all duration-300" style={{ width: `${votes.chaos}%` }} />
-                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
-                       <Flame className="w-3 h-3 sm:w-4 sm:h-4 text-[#FF7F50] group-active:scale-110 transition-transform" />
-                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Chaos</span>
-                    </div>
-                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.chaos}%</span>
-                 </div>
-                 <div onClick={() => handlePrematchVote('tactical')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-teal/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
-                    <div className="absolute left-0 top-0 h-full bg-teal/10 transition-all duration-300" style={{ width: `${votes.tactical}%` }} />
-                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
-                       <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-teal group-active:scale-110 transition-transform" />
-                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Tactical</span>
-                    </div>
-                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.tactical}%</span>
-                 </div>
-                 <div onClick={() => handlePrematchVote('tension')} className="flex-1 bg-card text-card-foreground rounded-2xl border border-purple-500/20 flex items-center justify-between px-1.5 sm:px-4 relative overflow-hidden cursor-pointer hover:bg-muted/50 transition-colors group">
-                    <div className="absolute left-0 top-0 h-full bg-purple-500/10 transition-all duration-300" style={{ width: `${votes.tension}%` }} />
-                    <div className="flex items-center gap-1 sm:gap-2 relative z-10">
-                       <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 group-active:scale-110 transition-transform" />
-                       <span className="text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase ">Tension</span>
-                    </div>
-                    <span className="text-xs sm:text-sm font-black relative z-10 text-foreground">{votes.tension}%</span>
-                 </div>
-              </div>
-           </section>
-        </div>
-      )}
+      {/* PRE-MATCH WIDGETS (Removed) */}
 
       {/* Tab Navigation - Modern Pills */}
       {matchState === 'prematch' && (
