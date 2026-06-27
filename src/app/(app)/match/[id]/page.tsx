@@ -143,7 +143,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
   const matchInfo = allMatches.find(m => m.id.toString() === matchId);
-  const timelineEvents = matchInfo?.timelineEvents || defaultTimelineEvents;
+  const timelineEvents = (matchInfo as any)?.timelineEvents || defaultTimelineEvents;
   
   const supabase = createClient();
   const [matchData, setMatchData] = useState<any>(null);
@@ -427,11 +427,6 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              <Clock className="w-8 h-8 text-teal opacity-80" />
            </div>
            
-           <div className="relative z-10 flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full mb-6">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">Live</span>
-           </div>
-
            <h3 className="relative z-10 text-3xl font-black tracking-tighter uppercase mb-4 text-foreground">Awaiting Kick Off</h3>
            <p className="relative z-10 text-sm text-muted-foreground max-w-xs font-medium">
              The stage is set. Eyeconic will begin tracking momentum, sentiment, and key moments once the match gets underway.
