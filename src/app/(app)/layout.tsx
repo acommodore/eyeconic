@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Home, User, Menu, ChevronLeft } from "lucide-react";
+import { Activity, Home, User, Menu, ChevronLeft, Building2 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingModal } from "@/components/ui/OnboardingModal";
 
@@ -68,7 +68,7 @@ export default function AppLayout({
 
   const navItems = [
     { icon: <Home className="w-6 h-6" />, label: "Home", href: "/home" },
-    { icon: <Activity className="w-6 h-6" />, label: "The Stand", href: "/stands" },
+    { icon: <Building2 className="w-6 h-6" />, label: "Stands", href: "/stands" },
   ];
 
   const isStandRoom = /^\/stands\/[^/]+$/.test(pathname);

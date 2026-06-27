@@ -452,8 +452,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {matchState === 'live' && matchInfo?.status === 'upcoming' ? (
         <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-3xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-5 mix-blend-luminosity bg-cover z-0 pointer-events-none" />
-           <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
-             <span className="text-3xl">⏳</span>
+           <div className="relative z-10 flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full mb-6">
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">Live</span>
            </div>
            
            <h3 className="relative z-10 text-3xl font-black tracking-tighter uppercase mb-4 text-foreground">Awaiting Kick Off</h3>
@@ -687,7 +688,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              className="space-y-8"
           >
             <div className="flex items-center gap-2 mb-4">
-               <Building2 className="w-5 h-5 text-teal" />
+               <Mic className="w-5 h-5 text-teal" />
                <h3 className="text-sm font-black tracking-widest text-teal uppercase">Highlights from the Stands</h3>
             </div>
             <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-[32px] p-6 shadow-2xl space-y-4">
