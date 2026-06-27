@@ -424,7 +424,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-3xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-5 mix-blend-luminosity bg-cover z-0 pointer-events-none" />
            <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
-             <Clock className="w-8 h-8 text-teal opacity-80" />
+             <span className="text-3xl">⏳</span>
            </div>
            
            <h3 className="relative z-10 text-3xl font-black tracking-tighter uppercase mb-4 text-foreground">Awaiting Kick Off</h3>
@@ -607,7 +607,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
              {matchInfo?.status === 'upcoming' && (
                <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
-                 <Clock className="w-8 h-8 text-teal opacity-80" />
+                 <span className="text-3xl">⏳</span>
                </div>
              )}
 
