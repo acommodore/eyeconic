@@ -109,9 +109,13 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
    const contextText = (isLive || isFinished) && match.insight ? match.insight : curation.whyWatch;
 
    return (
-    <div className={`group flex flex-col transition-all duration-300 ${isExpanded ? 'bg-white/5 border-l-2 border-l-teal' : 'hover:bg-white/5 border-l-2 border-l-transparent'}`}>
+    <div className={`group flex flex-col transition-all duration-500 mb-2 rounded-2xl relative overflow-hidden ${isExpanded ? 'bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'bg-black/20 border border-transparent hover:border-white/5 hover:bg-white/[0.03]'}`}>
+      {/* Ambient Glows */}
+      <div className="absolute top-1/2 left-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      <div className="absolute top-1/2 right-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      
       <div 
-        className="flex items-center p-4 cursor-pointer gap-4 md:gap-6"
+        className="relative z-10 flex items-center p-5 md:p-6 cursor-pointer gap-4 md:gap-6"
         onClick={() => onToggle(match.id)}
       >
         {/* TIME / STATUS */}
@@ -173,8 +177,8 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
       </div>
 
       {/* EXPANDED VIEW */}
-      {isExpanded && (
-        <div className="px-4 pb-5 pt-3 border-t border-white/5 bg-gradient-to-b from-black/20 to-black/40 shadow-inner">
+      <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-5 pb-6 pt-4 border-t border-white/5 bg-black/40 shadow-inner relative z-10">
            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               
               {/* AI METRICS PANEL */}
@@ -267,7 +271,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
            </div>
         </div>
-      )}
+      </div>
     </div>
   );
 });
@@ -284,18 +288,18 @@ const tickerItems = [
 ];
 
 const NewsTicker = () => (
-    <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
+    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-3 shadow-2xl">
        <div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+               <button key={`ticker-1-${idx}`} className="text-xs font-mono tracking-widest uppercase text-teal/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
                  {item}
                </button>
              ))}
           </div>
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+               <button key={`ticker-2-${idx}`} className="text-xs font-mono tracking-widest uppercase text-teal/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
                  {item}
                </button>
              ))}
@@ -396,11 +400,77 @@ export default function DiscoverPage() {
   }, {} as Record<string, typeof allCurrentMatches>);
 
   return (
-    <main className="min-h-screen bg-[#020202] text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden">
+    <main className="min-h-screen bg-[#000] text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden">
       {/* Background pattern */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       
-      <div className="relative z-10 w-full mb-8">
+      {/* ABSOLUTE TOP HERO SECTION */}
+      {heroMatch && heroCuration && (
+      <section className="relative w-full min-h-[60vh] md:min-h-[70vh] flex flex-col justify-center border-b border-white/10 overflow-hidden bg-black pt-20 pb-16">
+         {/* Cinematic Backgrounds */}
+         <div className="absolute inset-0 bg-gradient-to-b from-teal/20 via-transparent to-black/90 mix-blend-screen pointer-events-none" />
+         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-teal/20 rounded-full blur-[120px] pointer-events-none opacity-50 mix-blend-screen animate-pulse" />
+         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none opacity-30 mix-blend-screen" />
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none mix-blend-overlay" />
+
+         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12 lg:gap-24 items-center justify-between">
+            {/* Left Column (Teams, Score, Action) */}
+            <div className="flex-1 flex flex-col w-full">
+               <div className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-teal mb-8 md:mb-12 flex items-center gap-3 bg-teal/10 w-max px-5 py-2.5 rounded-full border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]"></span>
+                  MATCH OF THE MOMENT
+               </div>
+
+               <div className="flex flex-col gap-8 md:gap-10 mb-12">
+                  <div className="flex items-center gap-6 md:gap-8 group">
+                     <div className="w-16 h-16 md:w-24 md:h-24 rounded-[2rem] bg-black/40 border border-white/20 flex items-center justify-center p-3 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[2rem] blur-xl" />
+                        <img src={heroMatch.logo1} alt={heroMatch.team1} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
+                     </div>
+                     <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team1}</h2>
+                     <span className="text-6xl sm:text-7xl md:text-[9rem] leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                        {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[0] : ''}
+                     </span>
+                  </div>
+                  <div className="flex items-center gap-6 md:gap-8 group">
+                     <div className="w-16 h-16 md:w-24 md:h-24 rounded-[2rem] bg-black/40 border border-white/20 flex items-center justify-center p-3 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[2rem] blur-xl" />
+                        <img src={heroMatch.logo2} alt={heroMatch.team2} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
+                     </div>
+                     <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team2}</h2>
+                     <span className="text-6xl sm:text-7xl md:text-[9rem] leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                        {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[1] : ''}
+                     </span>
+                  </div>
+               </div>
+
+               <div className="flex items-center gap-6">
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-sm md:text-base font-mono font-black uppercase tracking-widest text-black bg-teal px-10 py-5 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,229,255,0.4)] w-max">
+                     ENTER MATCH CENTRE <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                  </Link>
+               </div>
+            </div>
+
+            {/* Right Column (Watchability Ring) */}
+            <div className="w-full lg:w-[500px] shrink-0 flex flex-col items-center justify-center">
+               <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+                  <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_30px_rgba(0,229,255,0.5)]">
+                     <circle cx="50%" cy="50%" r="45%" stroke="rgba(255,255,255,0.05)" strokeWidth="8" fill="none" />
+                     <circle cx="50%" cy="50%" r="45%" stroke="#00e5ff" strokeWidth="8" fill="none" strokeDasharray="283%" strokeDashoffset={`${283 - (283 * heroMatch.volatility) / 100}%`} strokeLinecap="round" className="transition-all duration-1000 ease-out" />
+                  </svg>
+                  <div className="flex flex-col items-center justify-center relative z-10">
+                     <span className="text-6xl md:text-8xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
+                     <span className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-teal mt-2 flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full border border-teal/20">
+                        <Brain className="w-3 h-3" /> Watchability
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      )}
+
+      <div className="relative z-10 w-full mb-12 md:mb-16">
         <NewsTicker />
       </div>
 
@@ -431,93 +501,6 @@ export default function DiscoverPage() {
            })}
         </div>
 
-        {/* HERO SECTION */}
-        {heroMatch && heroCuration && (
-        <section className="mb-16">
-          <div className="relative rounded-[40px] border border-white/10 bg-black/60 backdrop-blur-xl overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-purple-500/10 pointer-events-none mix-blend-screen" />
-            <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-teal/50 to-transparent opacity-50" />
-            
-            <div className="relative z-10 p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-               
-               {/* Left Column (Teams, Score, Momentum) */}
-               <div className="flex-1 flex flex-col justify-center w-full">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-8 flex items-center gap-2 bg-teal/10 w-max px-4 py-2 rounded-full border border-teal/20 shadow-[0_0_15px_rgba(0,229,255,0.15)]">
-                     <span className="w-2 h-2 rounded-full bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,1)]"></span>
-                     MATCH OF THE MOMENT
-                  </div>
-
-                  <div className="flex flex-col gap-6 mb-10">
-                     <div className="flex items-center gap-6">
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-2.5 shadow-lg">
-                           <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-full h-full object-contain drop-shadow-xl ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
-                        </div>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-wider truncate drop-shadow-md">{heroMatch.team1}</h2>
-                        <span className="text-5xl md:text-7xl font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                           {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[0] : ''}
-                        </span>
-                     </div>
-                     <div className="flex items-center gap-6">
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-2.5 shadow-lg">
-                           <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-full h-full object-contain drop-shadow-xl ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
-                        </div>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-wider truncate drop-shadow-md">{heroMatch.team2}</h2>
-                        <span className="text-5xl md:text-7xl font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                           {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[1] : ''}
-                        </span>
-                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-6 mt-auto pt-4 border-t border-white/5">
-                     <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-xs font-mono font-bold uppercase tracking-widest text-black bg-teal px-8 py-4.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,229,255,0.4)] w-max">
-                        ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                     </Link>
-                  </div>
-               </div>
-
-               {/* Right Column (AI Panel & Graph) */}
-               <div className="w-full lg:w-[450px] shrink-0 flex flex-col gap-6 bg-black/40 p-8 rounded-[32px] border border-white/5 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-[80px] pointer-events-none" />
-                  
-                  {/* Top Stats */}
-                  <div className="flex items-center justify-between pb-6 border-b border-white/10 relative z-10">
-                     <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                        <Brain className="w-4 h-4 text-teal" /> Watchability Index
-                     </span>
-                     <span className="text-5xl font-mono font-black tabular-nums text-foreground drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">{heroMatch.volatility}%</span>
-                  </div>
-
-                  {/* Momentum Graph for Live matches */}
-                  {heroMatch.status === 'live' && (
-                     <div className="relative z-10 w-full pb-4 border-b border-white/10 mb-2">
-                        <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" />
-                     </div>
-                  )}
-
-                  {/* The AI Metrics */}
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4 relative z-10">
-                     {heroMatch.status === 'live' || heroMatch.status === 'finished' ? (
-                        <>
-                           <MetricBar label="Stakes" value={heroCuration.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                           <MetricBar label="Intensity" value={heroCuration.metrics.intensity} colorClass="bg-gradient-to-r from-red-500 to-rose-400" />
-                           <MetricBar label="Quality" value={heroCuration.metrics.quality} colorClass="bg-gradient-to-r from-purple-500 to-blue-500" />
-                           <MetricBar label="Tempo" value={heroCuration.metrics.tempo} colorClass="bg-gradient-to-r from-yellow-500 to-orange-500" />
-                        </>
-                     ) : (
-                        <>
-                           <MetricBar label="Stakes" value={heroCuration.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                           <MetricBar label="Fan Temp" value={heroCuration.metrics.fanTemp} colorClass="bg-gradient-to-r from-yellow-400 to-orange-500" />
-                           <MetricBar label="Volatility" value={heroCuration.metrics.volatility} colorClass="bg-gradient-to-r from-teal to-blue-400" />
-                           <MetricBar label="Star Power" value={heroCuration.metrics.starPower} colorClass="bg-gradient-to-r from-purple-500 to-indigo-500" />
-                        </>
-                     )}
-                  </div>
-                  
-               </div>
-            </div>
-          </div>
-        </section>
-        )}
 
         {/* TERMINAL FEED SORTING CONTROLS */}
         <div className="flex items-center justify-between mb-8">
