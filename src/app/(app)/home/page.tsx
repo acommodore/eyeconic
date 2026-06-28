@@ -476,14 +476,6 @@ export default function DiscoverPage() {
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
         
-        {/* HEADER */}
-        <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-           <div>
-              <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-2 drop-shadow-lg">Terminal Feed</h1>
-              <p className="text-sm text-muted-foreground font-mono">Real-time match data & AI Watchability Index.</p>
-           </div>
-        </header>
-
         {/* EMOTIONAL FILTERS */}
         <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mb-10 pb-2">
            {filters.map(f => {
