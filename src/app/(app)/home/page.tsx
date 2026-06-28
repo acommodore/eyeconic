@@ -45,17 +45,33 @@ const getMatchCurations = (matchId: number, team1: string, status: string) => {
   }
 };
 
-const MetricBar = ({ label, value, colorClass }: { label: string, value: number, colorClass: string }) => (
-  <div className="flex flex-col gap-1 w-full mb-3">
-    <div className="flex justify-between items-center text-[9px] font-mono tracking-widest uppercase">
-      <span className="text-muted-foreground">{label}</span>
-      <span className="font-bold text-foreground drop-shadow-md">{value}</span>
+const MetricDial = ({ label, value, colorHex }: { label: string, value: number, colorHex: string }) => {
+  const radius = 36;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+
+  return (
+    <div className="flex flex-col items-center justify-center p-2 bg-black/20 rounded-xl border border-white/5 shadow-inner">
+      <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-md">
+          <circle cx="50" cy="50" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="8" fill="none" />
+          <circle 
+            cx="50" cy="50" r={radius} 
+            stroke={colorHex} 
+            strokeWidth="8" 
+            fill="none" 
+            strokeDasharray={circumference} 
+            strokeDashoffset={offset} 
+            strokeLinecap="round" 
+            className="transition-all duration-1000 ease-out" 
+          />
+        </svg>
+        <span className="text-sm md:text-base font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
+      </div>
+      <span className="text-[8px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-3 text-center truncate w-full">{label}</span>
     </div>
-    <div className="h-1.5 w-full bg-black/50 rounded-full overflow-hidden border border-white/5 shadow-inner">
-      <div className={`h-full rounded-full ${colorClass} shadow-[0_0_10px_currentColor] opacity-80`} style={{ width: `${value}%` }} />
-    </div>
-  </div>
-);
+  );
+};
 
 const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white' }: { data?: number[], homeColor?: string, awayColor?: string }) => {
   const graphData = data.length > 0 ? data : [
@@ -189,21 +205,21 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     <Brain className="w-3.5 h-3.5 text-teal" /> AI Ranking Pipeline
                  </h4>
                  
-                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 mb-4">
+                 <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                     {/* Live/Finished vs Upcoming logic */}
                     {isLive || isFinished ? (
                        <>
-                          <MetricBar label="Stakes" value={curation.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                          <MetricBar label="Intensity" value={curation.metrics.intensity} colorClass="bg-gradient-to-r from-red-500 to-rose-400" />
-                          <MetricBar label="Quality" value={curation.metrics.quality} colorClass="bg-gradient-to-r from-purple-500 to-blue-500" />
-                          <MetricBar label="Tempo" value={curation.metrics.tempo} colorClass="bg-gradient-to-r from-yellow-500 to-orange-500" />
+                          <MetricDial label="Stakes" value={curation.metrics.stakes} colorHex="#f97316" />
+                          <MetricDial label="Intensity" value={curation.metrics.intensity} colorHex="#ef4444" />
+                          <MetricDial label="Quality" value={curation.metrics.quality} colorHex="#a855f7" />
+                          <MetricDial label="Tempo" value={curation.metrics.tempo} colorHex="#eab308" />
                        </>
                     ) : (
                        <>
-                          <MetricBar label="Stakes" value={curation.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                          <MetricBar label="Fan Temp" value={curation.metrics.fanTemp} colorClass="bg-gradient-to-r from-yellow-400 to-orange-500" />
-                          <MetricBar label="Volatility" value={curation.metrics.volatility} colorClass="bg-gradient-to-r from-teal to-blue-400" />
-                          <MetricBar label="Star Power" value={curation.metrics.starPower} colorClass="bg-gradient-to-r from-purple-500 to-indigo-500" />
+                          <MetricDial label="Stakes" value={curation.metrics.stakes} colorHex="#f97316" />
+                          <MetricDial label="Fan Temp" value={curation.metrics.fanTemp} colorHex="#facc15" />
+                          <MetricDial label="Volatility" value={curation.metrics.volatility} colorHex="#00e5ff" />
+                          <MetricDial label="Star Power" value={curation.metrics.starPower} colorHex="#a855f7" />
                        </>
                     )}
                  </div>
@@ -406,84 +422,72 @@ export default function DiscoverPage() {
       
       {/* ABSOLUTE TOP HERO SECTION */}
       {heroMatch && heroCuration && (
-      <section className="relative w-full min-h-0 py-10 md:py-12 md:min-h-[40vh] flex flex-col justify-center border-b border-white/10 overflow-hidden bg-black pt-16 md:pt-16">
+      <section className="relative w-full min-h-0 py-6 md:py-8 flex flex-col justify-center border-b border-white/10 overflow-hidden bg-black pt-16 md:pt-20">
          {/* Cinematic Backgrounds */}
          <div className="absolute inset-0 bg-gradient-to-b from-teal/20 via-transparent to-black/90 mix-blend-screen pointer-events-none" />
          <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-teal/20 rounded-full blur-[100px] pointer-events-none opacity-50 mix-blend-screen animate-pulse" />
          <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-500/20 rounded-full blur-[80px] pointer-events-none opacity-30 mix-blend-screen" />
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none mix-blend-overlay" />
 
-         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center justify-between">
+         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-8 flex flex-col lg:flex-row gap-6 lg:gap-12 items-center justify-between">
             {/* Left Column (Teams, Score, Action) */}
             <div className="flex-1 flex flex-col w-full">
-               <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-6 md:mb-8 flex items-center gap-3 bg-teal/10 w-max px-4 py-2 rounded-full border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-                  <span className="w-2 h-2 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]"></span>
+               <div className="text-[9px] font-mono uppercase tracking-widest text-teal mb-4 md:mb-6 flex items-center gap-2 bg-teal/10 w-max px-3 py-1.5 rounded-full border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]"></span>
                   MATCH OF THE MOMENT
                </div>
 
-               <div className="flex flex-col gap-5 md:gap-6 mb-8">
-                  <div className="flex items-center gap-4 md:gap-6 group">
-                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1.5rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-2.5 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] blur-xl" />
+               <div className="flex flex-col gap-3 md:gap-4 mb-6">
+                  <div className="flex items-center gap-3 md:gap-4 group">
+                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-[1rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl" />
                         <img src={heroMatch.logo1} alt={heroMatch.team1} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team1}</h2>
-                     <span className="text-5xl sm:text-5xl md:text-6xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team1}</h2>
+                     <span className="text-3xl sm:text-4xl md:text-5xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
                         {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[0] : ''}
                      </span>
                   </div>
-                  <div className="flex items-center gap-4 md:gap-6 group">
-                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1.5rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-2.5 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] blur-xl" />
+                  <div className="flex items-center gap-3 md:gap-4 group">
+                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-[1rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl" />
                         <img src={heroMatch.logo2} alt={heroMatch.team2} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team2}</h2>
-                     <span className="text-5xl sm:text-5xl md:text-6xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team2}</h2>
+                     <span className="text-3xl sm:text-4xl md:text-5xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
                         {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[1] : ''}
                      </span>
                   </div>
                </div>
 
-               <div className="flex items-center gap-6">
-                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-mono font-black uppercase tracking-widest text-black bg-teal px-6 py-4 md:px-8 md:py-4 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,229,255,0.4)] w-max">
-                     ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+               <div className="flex items-center gap-4">
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 text-[10px] md:text-xs font-mono font-black uppercase tracking-widest text-black bg-teal px-5 py-3 md:px-6 md:py-3 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(0,229,255,0.4)] w-max">
+                     ENTER MATCH CENTRE <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </Link>
                </div>
             </div>
 
             {/* Right Column (Watchability Ring & AI Metrics) */}
-            <div className="w-full lg:w-[400px] shrink-0 flex flex-col items-center justify-center mt-8 lg:mt-0 gap-8">
-               <div className="relative w-40 h-40 md:w-48 md:h-48 flex items-center justify-center">
-                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_30px_rgba(0,229,255,0.5)]">
+            <div className="w-full lg:w-[400px] shrink-0 flex flex-col items-center justify-center mt-6 lg:mt-0 gap-6">
+               <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center">
+                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_20px_rgba(0,229,255,0.5)]">
                      <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="none" />
                      <circle cx="50" cy="50" r="45" stroke="#00e5ff" strokeWidth="6" className="transition-all duration-1000 ease-out" fill="none" strokeDasharray="282.7" strokeDashoffset={282.7 - (282.7 * heroMatch.volatility) / 100} strokeLinecap="round" />
                   </svg>
                   <div className="flex flex-col items-center justify-center relative z-10">
-                     <span className="text-4xl md:text-6xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
-                     <span className="text-[8px] md:text-[10px] font-mono uppercase tracking-widest text-teal mt-1 md:mt-2 flex items-center gap-1 md:gap-2 bg-black/40 px-2 md:px-3 py-1 rounded-full border border-teal/20">
-                        <Brain className="w-2.5 h-2.5 md:w-3 md:h-3" /> Watchability
+                     <span className="text-3xl md:text-4xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
+                     <span className="text-[7px] md:text-[8px] font-mono uppercase tracking-widest text-teal mt-1 flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded-full border border-teal/20">
+                        <Brain className="w-2 h-2 md:w-2.5 md:h-2.5" /> Watchability
                      </span>
                   </div>
                </div>
 
-               <div className="w-full flex flex-col gap-4">
+               <div className="w-full flex flex-col gap-3">
                   <div className="grid grid-cols-4 gap-2">
-                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
-                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Stakes</span>
-                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.stakes}</span>
-                     </div>
-                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
-                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Intensity</span>
-                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.intensity}</span>
-                     </div>
-                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
-                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Quality</span>
-                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.quality}</span>
-                     </div>
-                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
-                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Tempo</span>
-                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.tempo}</span>
-                     </div>
+                     <MetricDial label="Stakes" value={heroCuration.metrics.stakes} colorHex="#f97316" />
+                     <MetricDial label="Intensity" value={heroCuration.metrics.intensity} colorHex="#ef4444" />
+                     <MetricDial label="Quality" value={heroCuration.metrics.quality} colorHex="#a855f7" />
+                     <MetricDial label="Tempo" value={heroCuration.metrics.tempo} colorHex="#eab308" />
                   </div>
 
                   {((heroMatch as any).emotionalMvp || (heroMatch as any).polarizingPlayer) && (
