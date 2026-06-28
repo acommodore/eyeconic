@@ -406,11 +406,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
          </div>
       </div>
-      <div className="w-full max-w-[1200px] mx-auto p-4 md:p-8 text-foreground pb-24">
+      <div className="w-full max-w-[1200px] mx-auto p-4 md:px-8 md:py-4 text-foreground pb-24">
       
-
       {/* Top Header Navigation */}
-      <div className="flex items-center justify-between mb-8 mt-2 md:mt-12">
+      <div className="flex items-center justify-between mb-6 mt-2 md:mt-4">
         <BackButton containerClassName="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground" iconClassName="w-5 h-5 text-foreground" />
         <h1 className="text-sm font-black tracking-widest text-muted-foreground uppercase">Match Center</h1>
         <button className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground">
@@ -419,24 +418,24 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Cinematic Scoreboard */}
-      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-12 border border-border shadow-2xl">
+      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-10 border border-border shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/20 via-[#020202] to-[#4FC3F7]/20 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
-        <div className="relative z-20 p-8 md:p-16 flex flex-col items-center justify-center">
+        <div className="relative z-20 px-6 py-8 md:px-12 md:py-8 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-4 group-hover:scale-105 transition-transform">
+              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-3 md:mb-4 group-hover:scale-105 transition-transform">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-4">{matchInfo?.team1 || "Home"}</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-2 md:mb-4">{matchInfo?.team1 || "Home"}</h2>
               
               {/* Goal Scorers - Only show in postmatch */}
               {matchState === 'postmatch' && (
-                <div className="flex flex-col items-center gap-1 mt-2 text-[10px] md:text-xs font-bold text-muted-foreground">
+                <div className="flex flex-col items-center gap-1 mt-1 md:mt-2 text-[10px] md:text-xs font-bold text-muted-foreground">
                   <div className="flex items-center justify-center gap-1.5">
                     <span className="text-teal">⚽</span> 2'
                   </div>
@@ -445,14 +444,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
 
             {/* SCORE / TIME */}
-            <div className="flex flex-col items-center justify-start pt-6 md:pt-10 shrink-0">
+            <div className="flex flex-col items-center justify-start pt-4 md:pt-8 shrink-0">
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
-                  <span className="text-[10px] md:text-[12px] font-bold text-teal tracking-[0.2em] uppercase mb-1">Kickoff In</span>
+                  <span className="text-[9px] md:text-[11px] font-bold text-teal tracking-[0.2em] uppercase mb-1">Kickoff In</span>
                   <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
-                <div className="text-4xl md:text-7xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative">
+                <div className="text-4xl md:text-6xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative">
                   {(matchInfo as any)?.score || "0 - 0"}
                 </div>
               )}
@@ -460,18 +459,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
             {/* TEAM 2 */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-muted border border-border flex items-center justify-center p-4 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-4">
+              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-3 md:mb-4">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Away"}</h2>
             </div>
           </div>
-
-          {/* Stands Actions */}
-          <div className="mt-8 w-full max-w-lg mx-auto flex justify-center items-center">
-             
-          </div>
-
         </div>
       </div>
 
@@ -492,44 +485,46 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         ))}
       </div>
 
-{/* SEASON CONTEXT */}
+        {/* SEASON CONTEXT */}
         {(matchState === 'prematch' || matchState === 'live') && (
-          <div className="w-full max-w-4xl mx-auto mb-8 bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-2xl p-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl backdrop-blur-sm">
-            <div className="flex flex-col items-center md:items-start">
-              <span className="text-[10px] font-black uppercase tracking-widest text-teal mb-1">Season Context</span>
-              <div className="text-sm font-bold flex items-center gap-2">
-                <span className="text-foreground">4th</span>
-                <span className="text-muted-foreground text-[10px]">vs</span>
-                <span className="text-foreground">7th</span>
+          <div className="w-full max-w-4xl mx-auto mb-8 bg-black/40 border border-white/5 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl backdrop-blur-md">
+            <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
+              <div className="flex flex-col items-center md:items-start">
+                <span className="text-[9px] font-mono uppercase tracking-widest text-teal mb-1">Season Context</span>
+                <div className="text-sm font-black flex items-center gap-2 text-foreground">
+                  <span>4th</span>
+                  <span className="text-muted-foreground text-[10px]">vs</span>
+                  <span>7th</span>
+                </div>
+              </div>
+              <div className="w-px h-8 bg-white/10 hidden md:block"></div>
+              <div className="flex flex-col items-center md:items-start text-right md:text-left">
+                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
+                <span className="text-sm font-black text-foreground">5 pts</span>
               </div>
             </div>
             
-            <div className="flex flex-col items-center">
-              <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Recent Form</span>
-              <div className="flex items-center gap-2 text-xs font-mono font-bold">
-                <span className="text-green-500">W</span>-
-                <span className="text-yellow-500">D</span>-
-                <span className="text-green-500">W</span>-
-                <span className="text-red-500">L</span>-
-                <span className="text-green-500">W</span>
-                <span className="text-muted-foreground mx-1 text-[10px]">vs</span>
-                <span className="text-red-500">L</span>-
-                <span className="text-green-500">W</span>-
-                <span className="text-red-500">L</span>-
-                <span className="text-yellow-500">D</span>-
-                <span className="text-green-500">W</span>
+            <div className="flex flex-col items-center w-full md:w-auto py-4 md:py-0 border-y border-white/5 md:border-y-0">
+              <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Recent Form</span>
+              <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase">
+                <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
+                <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+                <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>
+                <span className="text-muted-foreground mx-2 text-[9px] font-mono">vs</span>
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+                <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-6">
-              <div className="flex flex-col items-center">
-                <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Gap</span>
-                <span className="text-sm font-bold">5 pts</span>
-              </div>
-              <div className="w-px h-8 bg-border hidden md:block"></div>
+            <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
               <div className="flex flex-col items-center md:items-end">
-                <span className="text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-1">Last Meeting</span>
-                <span className="text-sm font-bold text-teal">{matchInfo?.team1 || 'Team A'} won (2-1)</span>
+                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
+                <span className="text-xs font-black text-foreground">{matchInfo?.team1 || 'Team A'} won <span className="text-teal">(2-1)</span></span>
               </div>
             </div>
           </div>

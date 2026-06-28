@@ -51,8 +51,8 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center p-1 md:p-2 bg-black/20 rounded-xl border border-white/5 shadow-inner">
-      <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center p-1 md:p-1.5 bg-black/20 rounded-xl border border-white/5 shadow-inner">
+      <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 flex items-center justify-center">
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-md">
           <circle cx="50" cy="50" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="8" fill="none" />
           <circle 
@@ -66,14 +66,14 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
             className="transition-all duration-1000 ease-out" 
           />
         </svg>
-        <span className="text-[10px] sm:text-sm md:text-base font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
+        <span className="text-[9px] sm:text-[10px] md:text-xs font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
       </div>
-      <span className="text-[6px] sm:text-[7px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-1 md:mt-3 text-center truncate w-full px-1">{label}</span>
+      <span className="text-[5px] sm:text-[6px] md:text-[8px] uppercase font-mono tracking-widest text-muted-foreground mt-1 md:mt-2 text-center truncate w-full px-1">{label}</span>
     </div>
   );
 };
 
-const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white' }: { data?: number[], homeColor?: string, awayColor?: string }) => {
+const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white', heightClass = 'h-16' }: { data?: number[], homeColor?: string, awayColor?: string, heightClass?: string }) => {
   const graphData = data.length > 0 ? data : [
      2, 5, -2, -5, -8, 10, 15, -2, -10, -25, 
      -15, -5, 5, 20, 45, 85, 90, 60, 40, 25, 
@@ -82,19 +82,19 @@ const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor =
   ];
 
   return (
-    <div className="w-full flex flex-col gap-1 py-2">
-      <div className="flex justify-between items-center text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-3">
-        <span className="flex items-center gap-1.5"><div className={`w-2 h-2 rounded-sm ${homeColor}`}></div> Home</span>
+    <div className="w-full flex flex-col gap-1 py-1">
+      <div className="flex justify-between items-center text-[7px] md:text-[8px] font-mono text-muted-foreground uppercase tracking-widest mb-1">
+        <span className="flex items-center gap-1"><div className={`w-1.5 h-1.5 rounded-sm ${homeColor}`}></div> Home</span>
         <span className="font-bold text-foreground tracking-widest drop-shadow-md">Momentum</span>
-        <span className="flex items-center gap-1.5">Away <div className={`w-2 h-2 rounded-sm ${awayColor}`}></div></span>
+        <span className="flex items-center gap-1">Away <div className={`w-1.5 h-1.5 rounded-sm ${awayColor}`}></div></span>
       </div>
       
-      <div className="relative w-full h-24 flex items-center border-x border-white/10 px-0.5 mb-2">
+      <div className={`relative w-full ${heightClass} flex items-center border-x border-white/10 px-0.5 mb-1`}>
         <div className="absolute left-0 right-0 top-1/2 h-px bg-white/20 z-0"></div>
-        <div className="absolute -bottom-4 left-0 text-[8px] font-mono text-muted-foreground">KO</div>
-        <div className="absolute -bottom-4 right-0 text-[8px] font-mono text-muted-foreground">HT</div>
+        <div className="absolute -bottom-3 left-0 text-[6px] md:text-[7px] font-mono text-muted-foreground">KO</div>
+        <div className="absolute -bottom-3 right-0 text-[6px] md:text-[7px] font-mono text-muted-foreground">HT</div>
 
-        <div className="w-full h-full flex items-center justify-between gap-[2px] z-10">
+        <div className="w-full h-full flex items-center justify-between gap-[1px] z-10">
            {graphData.map((val, idx) => {
               const isHome = val > 0;
               const heightPct = Math.min(100, Math.abs(val));
@@ -198,18 +198,18 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
       {/* EXPANDED VIEW */}
       <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="px-5 pb-6 pt-4 border-t border-white/5 bg-black/40 shadow-inner relative z-10">
-           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="px-4 pb-4 pt-3 border-t border-white/5 bg-black/40 shadow-inner relative z-10">
+           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
               
               {/* AI METRICS PANEL */}
-              <div className="col-span-1 md:col-span-2 bg-black/40 p-5 rounded-2xl border border-white/5 backdrop-blur-md shadow-2xl relative overflow-hidden">
+              <div className="col-span-1 md:col-span-2 bg-black/40 p-3 md:p-4 rounded-2xl border border-white/5 backdrop-blur-md shadow-2xl relative overflow-hidden">
                  <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-purple-500/5 pointer-events-none" />
                  
-                 <h4 className="relative z-10 text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-5 flex items-center gap-2">
+                 <h4 className="relative z-10 text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-3 flex items-center gap-2">
                     <Brain className="w-3.5 h-3.5 text-teal" /> AI Ranking Pipeline
                  </h4>
                  
-                 <div className="relative z-10 grid grid-cols-4 gap-2 md:gap-4 mb-4">
+                 <div className="relative z-10 grid grid-cols-4 gap-2 mb-3">
                     {/* Live/Finished vs Upcoming logic */}
                     {isLive || isFinished ? (
                        <>
@@ -229,8 +229,8 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  </div>
 
                  {(isLive || isFinished) && (
-                    <div className="relative z-10 pt-2 md:pt-4 border-t border-white/5 mt-2 md:mt-4">
-                       <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" />
+                    <div className="relative z-10 pt-2 border-t border-white/5 mt-2">
+                       <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" heightClass="h-10" />
                     </div>
                  )}
               </div>
@@ -238,34 +238,34 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
               {/* NARRATIVE & ACTION PANEL */}
               <div className="col-span-1 md:col-span-2 flex flex-col justify-between">
                  <div>
-                    <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">{contextLabel}</h4>
-                    <p className="text-xs text-gray-200 leading-relaxed font-mono italic bg-black/40 p-4 rounded-xl border border-white/5 mb-5 shadow-inner">
+                    <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">{contextLabel}</h4>
+                    <p className="text-[10px] md:text-xs text-gray-200 leading-relaxed font-mono italic bg-black/40 p-3 md:p-4 rounded-xl border border-white/5 mb-3 shadow-inner">
                        "{contextText}"
                     </p>
                     
                     {/* Hero and Villain from mockData */}
                     {match.emotionalMvp && (
-                       <div className={`grid ${isFinished ? 'grid-cols-1' : 'grid-cols-2'} gap-4 mb-5`}>
-                          <div className="bg-gradient-to-br from-black/40 to-black/20 p-4 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+                       <div className={`grid ${isFinished ? 'grid-cols-1' : 'grid-cols-2'} gap-3 mb-3`}>
+                          <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
                              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal/30 to-transparent" />
-                             <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">
+                             <span className="text-[8px] md:text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">
                                 {isFinished ? "Match MVP 🏆" : "MVP Watch 🌟"}
                              </span>
-                             <span className="text-xs font-black uppercase text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.4)]">{match.emotionalMvp}</span>
+                             <span className="text-[10px] md:text-xs font-black uppercase text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.4)]">{match.emotionalMvp}</span>
                           </div>
                           
                           {!isFinished && match.polarizingPlayer && (
-                             <div className="bg-gradient-to-br from-black/40 to-black/20 p-4 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+                             <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-coral/30 to-transparent" />
-                                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">Fraud Watch 🚨</span>
-                                <span className="text-xs font-black uppercase text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.4)]">{match.polarizingPlayer}</span>
+                                <span className="text-[8px] md:text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Fraud Watch 🚨</span>
+                                <span className="text-[10px] md:text-xs font-black uppercase text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.4)]">{match.polarizingPlayer}</span>
                              </div>
                           )}
                        </div>
                     )}
                  </div>
 
-                 <div className="mt-3 md:mt-5 flex flex-wrap gap-3">
+                 <div className="mt-2 md:mt-3 flex flex-wrap gap-2 md:gap-3">
                     <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-teal text-black px-6 py-3.5 rounded-xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(0,229,255,0.3)]">
                        MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
@@ -444,7 +444,7 @@ export default function DiscoverPage() {
                   </div>
                   <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-full border border-teal/20 shadow-inner">
                      <Brain className="w-3 h-3 text-teal" />
-                     <span className="text-[10px] md:text-xs font-mono font-black text-teal tracking-widest">{heroMatch.volatility} INDEX</span>
+                     <span className="text-[10px] md:text-xs font-mono font-black text-teal tracking-widest">{heroMatch.volatility}%</span>
                   </div>
                </div>
 
@@ -482,29 +482,41 @@ export default function DiscoverPage() {
                      MATCH CENTRE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
 
-                  <div className="w-full lg:w-auto flex flex-col md:flex-row items-center gap-4 lg:gap-6 justify-end flex-1">
-                     <div className="grid grid-cols-4 gap-2 w-full md:w-auto">
+                  <div className="w-full lg:w-auto flex flex-row items-center gap-3 lg:gap-4 justify-start lg:justify-end flex-1 overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
+                     {/* 1. Momentum Graph */}
+                     <div className="w-24 md:w-32 shrink-0">
+                        <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" heightClass="h-8" />
+                     </div>
+                     
+                     <div className="w-px h-8 bg-white/10 shrink-0 mx-1" />
+
+                     {/* 2. 4 Radial Dials */}
+                     <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                         <MetricDial label="Stakes" value={heroCuration.metrics.stakes} colorHex="#f97316" />
+                        <MetricDial label="Tempo" value={heroCuration.metrics.tempo} colorHex="#eab308" />
                         <MetricDial label="Intensity" value={heroCuration.metrics.intensity} colorHex="#ef4444" />
                         <MetricDial label="Quality" value={heroCuration.metrics.quality} colorHex="#a855f7" />
-                        <MetricDial label="Tempo" value={heroCuration.metrics.tempo} colorHex="#eab308" />
                      </div>
 
                      {((heroMatch as any).emotionalMvp || (heroMatch as any).polarizingPlayer) && (
-                        <div className="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2 w-full md:w-auto shrink-0">
-                           {(heroMatch as any).emotionalMvp && (
-                              <div className="flex flex-col items-center justify-center bg-teal/10 rounded-xl p-2.5 border border-teal/20 h-full">
-                                 <span className="text-[7px] md:text-[8px] text-teal/70 uppercase tracking-widest mb-1">MVP Watch</span>
-                                 <span className="text-xs font-black text-teal truncate text-center max-w-[80px]">{(heroMatch as any).emotionalMvp}</span>
-                              </div>
-                           )}
-                           {(heroMatch as any).polarizingPlayer && (
-                              <div className="flex flex-col items-center justify-center bg-coral/10 rounded-xl p-2.5 border border-coral/20 h-full">
-                                 <span className="text-[7px] md:text-[8px] text-coral/70 uppercase tracking-widest mb-1">Fraud Watch</span>
-                                 <span className="text-xs font-black text-coral truncate text-center max-w-[80px]">{(heroMatch as any).polarizingPlayer}</span>
-                              </div>
-                           )}
-                        </div>
+                        <>
+                           <div className="w-px h-8 bg-white/10 shrink-0 mx-1" />
+                           {/* 3. MVP and Fraud Watch */}
+                           <div className="flex items-center gap-2 shrink-0 h-full">
+                              {(heroMatch as any).emotionalMvp && (
+                                 <div className="flex flex-col items-center justify-center bg-teal/10 rounded-xl px-3 py-1.5 border border-teal/20 h-full min-h-[48px]">
+                                    <span className="text-[7px] md:text-[8px] text-teal/70 uppercase tracking-widest mb-0.5">MVP Watch</span>
+                                    <span className="text-[9px] md:text-xs font-black text-teal truncate max-w-[80px]">{(heroMatch as any).emotionalMvp}</span>
+                                 </div>
+                              )}
+                              {(heroMatch as any).polarizingPlayer && (
+                                 <div className="flex flex-col items-center justify-center bg-coral/10 rounded-xl px-3 py-1.5 border border-coral/20 h-full min-h-[48px]">
+                                    <span className="text-[7px] md:text-[8px] text-coral/70 uppercase tracking-widest mb-0.5">Fraud Watch</span>
+                                    <span className="text-[9px] md:text-xs font-black text-coral truncate max-w-[80px]">{(heroMatch as any).polarizingPlayer}</span>
+                                 </div>
+                              )}
+                           </div>
+                        </>
                      )}
                   </div>
                </div>

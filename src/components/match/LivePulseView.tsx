@@ -211,7 +211,14 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
         .select('*')
         .eq('match_id', matchId)
         .order('minute', { ascending: true });
-      if (data) setMomentumData(data);
+      if (data && data.length > 0) {
+        setMomentumData(data);
+      } else {
+        const mockData = Array.from({length: 90}, (_, i) => ({
+           id: i, minute: i+1, value: Math.max(10, Math.min(100, 50 + Math.sin(i * 0.1) * 30 + (Math.random() * 20 - 10)))
+        }));
+        setMomentumData(mockData);
+      }
     };
     fetchInitialData();
 
