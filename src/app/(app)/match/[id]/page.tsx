@@ -12,6 +12,51 @@ import LivePulseView from "@/components/match/LivePulseView";
 import { useAuth } from "@/components/Providers";
 import { toast } from "sonner";
 
+const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white' }: { data?: number[], homeColor?: string, awayColor?: string }) => {
+  const graphData = data.length > 0 ? data : [
+     2, 5, -2, -5, -8, 10, 15, -2, -10, -25, 
+     -15, -5, 5, 20, 45, 85, 90, 60, 40, 25, 
+     10, -5, -15, -20, -35, -25, -10, -15, -30, -50,
+     -40, -10, 10, 20, 15, 30, 40, 75, 20, 10
+  ];
+
+  return (
+    <div className="w-full flex flex-col gap-1 py-2 mt-2">
+      <div className="flex justify-between items-center text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-3">
+        <span className="flex items-center gap-1.5"><div className={`w-2 h-2 rounded-sm ${homeColor}`}></div> Home</span>
+        <span className="font-bold text-foreground tracking-widest drop-shadow-md">Match Momentum</span>
+        <span className="flex items-center gap-1.5">Away <div className={`w-2 h-2 rounded-sm ${awayColor}`}></div></span>
+      </div>
+      
+      <div className="relative w-full h-24 flex items-center border-x border-white/10 px-0.5 mb-2">
+        <div className="absolute left-0 right-0 top-1/2 h-px bg-white/20 z-0"></div>
+        <div className="absolute -bottom-4 left-0 text-[8px] font-mono text-muted-foreground">KO</div>
+        <div className="absolute -bottom-4 right-0 text-[8px] font-mono text-muted-foreground">HT</div>
+
+        <div className="w-full h-full flex items-center justify-between gap-[2px] z-10">
+           {graphData.map((val, idx) => {
+              const isHome = val > 0;
+              const heightPct = Math.min(100, Math.abs(val));
+              return (
+                 <div key={idx} className="flex-1 h-full flex flex-col justify-center group cursor-crosshair">
+                    <div className="flex-1 flex flex-col justify-end relative">
+                       {isHome && <div className={`w-full ${homeColor} rounded-t-[1px] opacity-90 group-hover:opacity-100 transition-all group-hover:shadow-[0_0_8px_currentColor]`} style={{ height: `${heightPct}%` }} />}
+                    </div>
+                    <div className="h-[1px] w-full shrink-0" />
+                    <div className="flex-1 flex flex-col justify-start relative">
+                       {!isHome && <div className={`w-full ${awayColor} rounded-b-[1px] opacity-90 group-hover:opacity-100 transition-all group-hover:shadow-[0_0_8px_currentColor]`} style={{ height: `${heightPct}%` }} />}
+                    </div>
+                 </div>
+              )
+           })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 const getTeamPlayers = () => {
   return [...pitchLIV.map(p => ({...p, team: 'Liverpool'})), ...pitchMCI.map(p => ({...p, team: 'Man City'}))];
 };
