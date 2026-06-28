@@ -103,7 +103,7 @@ const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor =
 
 const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, isFinished = false, isBookmarked = false, onToggleBookmark }: any) => {
    const curation = getMatchCurations(match.id, match.team1, match.status);
-   const hasActiveStand = true;
+   const hasActiveStand = !isLive;
 
    const contextLabel = isLive ? "Live Context" : isFinished ? "Post-Match Insight" : "Pre-Match Context";
    const contextText = (isLive || isFinished) && match.insight ? match.insight : curation.whyWatch;
@@ -451,12 +451,12 @@ export default function DiscoverPage() {
                </div>
             </div>
 
-            {/* Right Column (Watchability Ring) */}
-            <div className="w-full lg:w-[400px] shrink-0 flex flex-col items-center justify-center mt-8 lg:mt-0">
-               <div className="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
-                  <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_30px_rgba(0,229,255,0.5)]">
-                     <circle cx="50%" cy="50%" r="45%" stroke="rgba(255,255,255,0.05)" strokeWidth="6" className="md:stroke-[8px]" fill="none" />
-                     <circle cx="50%" cy="50%" r="45%" stroke="#00e5ff" strokeWidth="6" className="md:stroke-[8px] transition-all duration-1000 ease-out" fill="none" strokeDasharray="283%" strokeDashoffset={`${283 - (283 * heroMatch.volatility) / 100}%`} strokeLinecap="round" />
+            {/* Right Column (Watchability Ring & AI Metrics) */}
+            <div className="w-full lg:w-[400px] shrink-0 flex flex-col items-center justify-center mt-8 lg:mt-0 gap-8">
+               <div className="relative w-40 h-40 md:w-48 md:h-48 flex items-center justify-center">
+                  <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_30px_rgba(0,229,255,0.5)]">
+                     <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.05)" strokeWidth="6" fill="none" />
+                     <circle cx="50" cy="50" r="45" stroke="#00e5ff" strokeWidth="6" className="transition-all duration-1000 ease-out" fill="none" strokeDasharray="282.7" strokeDashoffset={282.7 - (282.7 * heroMatch.volatility) / 100} strokeLinecap="round" />
                   </svg>
                   <div className="flex flex-col items-center justify-center relative z-10">
                      <span className="text-4xl md:text-6xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
@@ -464,6 +464,44 @@ export default function DiscoverPage() {
                         <Brain className="w-2.5 h-2.5 md:w-3 md:h-3" /> Watchability
                      </span>
                   </div>
+               </div>
+
+               <div className="w-full flex flex-col gap-4">
+                  <div className="grid grid-cols-4 gap-2">
+                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
+                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Stakes</span>
+                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.stakes}</span>
+                     </div>
+                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
+                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Intensity</span>
+                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.intensity}</span>
+                     </div>
+                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
+                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Quality</span>
+                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.quality}</span>
+                     </div>
+                     <div className="flex flex-col items-center bg-white/5 rounded-lg p-2 border border-white/10">
+                        <span className="text-[8px] text-muted-foreground uppercase tracking-widest mb-1">Tempo</span>
+                        <span className="text-xs md:text-sm font-black text-white">{heroCuration.metrics.tempo}</span>
+                     </div>
+                  </div>
+
+                  {((heroMatch as any).emotionalMvp || (heroMatch as any).polarizingPlayer) && (
+                     <div className="grid grid-cols-2 gap-2">
+                        {(heroMatch as any).emotionalMvp && (
+                           <div className="flex flex-col items-center bg-teal/10 rounded-lg p-2 border border-teal/20">
+                              <span className="text-[8px] text-teal/70 uppercase tracking-widest mb-1">MVP Watch</span>
+                              <span className="text-xs md:text-sm font-black text-teal truncate w-full text-center">{(heroMatch as any).emotionalMvp}</span>
+                           </div>
+                        )}
+                        {(heroMatch as any).polarizingPlayer && (
+                           <div className="flex flex-col items-center bg-coral/10 rounded-lg p-2 border border-coral/20">
+                              <span className="text-[8px] text-coral/70 uppercase tracking-widest mb-1">Fraud Watch</span>
+                              <span className="text-xs md:text-sm font-black text-coral truncate w-full text-center">{(heroMatch as any).polarizingPlayer}</span>
+                           </div>
+                        )}
+                     </div>
+                  )}
                </div>
             </div>
          </div>
@@ -476,39 +514,41 @@ export default function DiscoverPage() {
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
         
-        {/* EMOTIONAL FILTERS */}
-        <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mb-10 pb-2">
-           {filters.map(f => {
-             const Icon = f.icon;
-             const isActive = activeFilter === f.name;
-             return (
-               <button 
-                 key={f.name}
-                 onClick={() => setActiveFilter(f.name)}
-                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
-               >
-                 <Icon className="w-3.5 h-3.5" /> {f.name}
-               </button>
-             )
-           })}
-        </div>
+        {/* FILTERS AND SORTING ROW */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+           {/* EMOTIONAL FILTERS */}
+           <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2">
+              {filters.map(f => {
+                const Icon = f.icon;
+                const isActive = activeFilter === f.name;
+                return (
+                  <button 
+                    key={f.name}
+                    onClick={() => setActiveFilter(f.name)}
+                    className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
+                  >
+                    <Icon className="w-3.5 h-3.5" /> {f.name}
+                  </button>
+                )
+              })}
+           </div>
 
-
-        {/* TERMINAL FEED SORTING CONTROLS */}
-        <div className="flex items-center justify-between mb-8">
-           <div className="flex bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 w-full md:w-auto ml-auto shadow-lg">
-             <button 
-               onClick={() => setSortMode('watchability')}
-               className={`flex-1 md:flex-none px-8 py-2.5 flex items-center justify-center gap-2.5 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                <Activity className="w-3.5 h-3.5" />
-                WATCHABILITY
-             </button>
-             <button 
-               onClick={() => setSortMode('league')}
-               className={`flex-1 md:flex-none px-8 py-2.5 flex items-center justify-center gap-2.5 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                <Swords className="w-3.5 h-3.5" />
-                LEAGUE
-             </button>
+           {/* TERMINAL FEED SORTING CONTROLS */}
+           <div className="flex items-center shrink-0 pb-2">
+              <div className="flex bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 shadow-lg">
+                <button 
+                  onClick={() => setSortMode('watchability')}
+                  className={`px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                   <Activity className="w-3.5 h-3.5" />
+                   WATCHABILITY
+                </button>
+                <button 
+                  onClick={() => setSortMode('league')}
+                  className={`px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                   <Swords className="w-3.5 h-3.5" />
+                   LEAGUE
+                </button>
+              </div>
            </div>
         </div>
 
