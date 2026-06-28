@@ -115,7 +115,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
         onClick={() => onToggle(match.id)}
       >
         {/* TIME / STATUS */}
-        <div className="w-[60px] md:w-[80px] flex flex-col items-center justify-center shrink-0">
+        <div className="w-[65px] md:w-[80px] flex flex-col items-center justify-center shrink-0">
            {isLive ? (
               <span className="text-xs md:text-sm font-bold font-mono text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]">{match.time}</span>
            ) : isFinished ? (
@@ -160,15 +160,15 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
         </div>
 
         {/* RIGHT CONTROLS */}
-        <div className="w-[60px] md:w-[80px] flex items-center justify-end gap-2 shrink-0">
+        <div className="w-[65px] md:w-[80px] flex items-center justify-end gap-2 shrink-0">
            <span className="text-xs md:text-base font-mono font-black tabular-nums text-foreground drop-shadow-md">{match.volatility}%</span>
            <button 
              onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
              className={`hidden md:flex p-1.5 rounded-full transition-all duration-300 ${isBookmarked ? 'bg-teal/20 text-teal shadow-[0_0_10px_rgba(0,229,255,0.2)]' : 'hover:bg-white/10 text-muted-foreground'}`}
            >
-             <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
+             <Bookmark className="w-3.5 h-3.5 shrink-0" fill={isBookmarked ? "currentColor" : "none"} />
            </button>
-           <ChevronDown className={`w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+           <ChevronDown className={`shrink-0 w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
       </div>
 
