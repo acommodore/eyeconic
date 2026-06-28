@@ -3,139 +3,188 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
-import { Zap, Brain, ArrowRight, Bookmark, Swords, Flame, Sparkles } from 'lucide-react';
+import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity } from 'lucide-react';
+
+// --- MOCK DATA ---
+
 import { allLiveMatches, upcomingTableData, finishedTableData } from '@/lib/mockData';
 
-// --- MOCK RANKING DATA ---
-const getMatchCurations = (matchId: number, team1: string) => {
-  // Mock logic to return curated tags based on teams
-  if (team1 === 'Arsenal' || team1 === 'Man City' || team1 === 'Liverpool') {
-    return {
-      label: 'Unmissable',
-      icon: <Flame className="w-4 h-4 text-orange-500" />,
-      color: 'from-orange-500/20 to-red-500/20',
-      textColor: 'text-orange-500',
-      whyWatch: "Huge stakes, intense rivalry, and massive title implications. Both teams are built for attacking football.",
-      metrics: { drama: 95, fanTemp: 98, volatility: 92, tactical: 85 }
-    }
-  } else if (team1 === 'Chelsea' || team1 === 'Man United' || team1 === 'Tottenham') {
-    return {
-      label: 'Chaos Guaranteed',
-      icon: <Zap className="w-4 h-4 text-yellow-500" />,
-      color: 'from-yellow-500/20 to-orange-500/20',
-      textColor: 'text-yellow-500',
-      whyWatch: "Two highly unpredictable teams known for high-scoring, chaotic games and defensive vulnerabilities.",
-      metrics: { drama: 90, fanTemp: 88, volatility: 95, tactical: 60 }
-    }
-  } else if (team1 === 'Juventus' || team1 === 'Inter Milan' || team1 === 'Inter') {
-    return {
-      label: 'Tactical Chess Match',
-      icon: <Brain className="w-4 h-4 text-purple-500" />,
-      color: 'from-purple-500/20 to-blue-500/20',
-      textColor: 'text-purple-400',
-      whyWatch: "A battle of elite defensive systems. Expect a tight, highly disciplined match decided by fine margins.",
-      metrics: { drama: 72, fanTemp: 80, volatility: 40, tactical: 96 }
-    }
-  } else {
-    return {
-      label: 'Sleeper Pick',
-      icon: <Sparkles className="w-4 h-4 text-teal" />,
-      color: 'from-teal/20 to-blue-500/20',
-      textColor: 'text-teal',
-      whyWatch: "Under-the-radar fixture featuring young talents and expansive attacking styles.",
-      metrics: { drama: 65, fanTemp: 50, volatility: 85, tactical: 70 }
-    }
-  }
+
+
+
+
+const tickerItems = [
+  "📈 ARS Fans: +15% Optimism (Saka sub)",
+  "📉 MUN Fans: -30% Patience (Ten Hag)",
+  "⚠️ RMA Fans: Tension Spiking (0-0 80')",
+  "🔥 LIV Fans: Roaring (+45% Momentum)",
+  "🧊 CHE Fans: Complete silence at Stamford Bridge",
+  "📈 JUV Fans: Tactical approval rising (+12%)",
+];
+
+const getVolatilityColor = (volatility: number) => {
+  if (volatility >= 90) return 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]';
+  if (volatility >= 70) return 'text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]';
+  return 'text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]';
 };
 
-const MetricBar = ({ label, value, colorClass }: { label: string, value: number, colorClass: string }) => (
-  <div className="flex flex-col gap-1.5 w-full">
-    <div className="flex justify-between items-center text-[10px] font-mono tracking-widest uppercase">
-      <span className="text-muted-foreground">{label}</span>
-      <span className="font-bold text-foreground">{value}</span>
-    </div>
-    <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden border border-white/5">
-      <div className={`h-full rounded-full ${colorClass}`} style={{ width: `${value}%` }} />
-    </div>
-  </div>
-);
+const getShortName = (name: string) => {
+  const map: Record<string, string> = {
+    'Chelsea': 'CHE',
+    'Man City': 'MCI',
+    'Man United': 'MUN',
+    'Arsenal': 'ARS',
+    'Liverpool': 'LIV',
+    'Tottenham': 'TOT',
+    'Barcelona': 'FCB',
+    'Real Madrid': 'RMA',
+    'Everton': 'EVE',
+    'Newcastle': 'NEW',
+    'Inter Milan': 'INT',
+    'Inter': 'INT',
+    'Milan': 'MIL',
+    'Dortmund': 'BVB',
+    'PSG': 'PSG',
+    'Bayern': 'FCB',
+    'Juventus': 'JUV',
+  };
+  return map[name] || name.substring(0, 3).toUpperCase();
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CuratedMatchCard = ({ match, isLive = false, isFinished = false }: { match: any, isLive?: boolean, isFinished?: boolean }) => {
-  const curation = getMatchCurations(match.id, match.team1);
-
+const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, isFinished = false, isBookmarked = false, onToggleBookmark }: { match: any, isExpanded: boolean, onToggle: (id: number) => void, isLive?: boolean, isFinished?: boolean, isBookmarked?: boolean, onToggleBookmark?: (id: number) => void }) => {
   return (
-    <div className="bg-card/40 backdrop-blur-md border border-border/50 rounded-[2rem] p-6 lg:p-8 relative overflow-hidden group hover:border-white/10 hover:bg-card/60 transition-all shadow-xl flex flex-col h-full">
-      {/* Background glow based on label */}
-      <div className={`absolute -inset-40 bg-gradient-to-br ${curation.color} opacity-10 blur-[80px] pointer-events-none group-hover:opacity-20 transition-opacity`} />
-      
-      {/* Label Badge */}
-      <div className="flex justify-between items-start mb-8 relative z-10">
-        <div className={`inline-flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full shadow-lg`}>
-          {curation.icon}
-          <span className={`text-xs font-black tracking-widest uppercase ${curation.textColor}`}>{curation.label}</span>
+    <div className={`border-b border-border bg-card/40 backdrop-blur-sm hover:bg-white/[0.04] transition-colors overflow-hidden ${isExpanded ? 'bg-white/[0.04]' : ''}`}>
+      <div 
+        className="flex flex-col md:flex-row md:items-center justify-between p-4 cursor-pointer gap-4 md:gap-6"
+        onClick={() => onToggle(match.id)}
+      >
+        <div className="flex items-center gap-4 md:gap-6 w-full">
+           <div className="w-12 shrink-0 flex flex-col items-center justify-center">
+              {isLive ? (
+                 <span className="text-[10px] font-mono text-coral animate-pulse font-bold">{match.time}</span>
+              ) : isFinished ? (
+                 <span className="text-[10px] font-mono text-muted-foreground font-bold">FT</span>
+              ) : (
+                 <span className="text-[10px] font-mono text-muted-foreground font-bold">{match.time}</span>
+              )}
+           </div>
+
+           <div className="flex-1 min-w-0 w-full md:w-auto flex flex-col md:flex-row md:items-center md:justify-between">
+              
+              <div className="flex items-center justify-start gap-2 flex-wrap mb-2 md:mb-0 md:w-[150px] lg:w-[200px] shrink-0">
+                 {match.triggers?.map((t: string, i: number) => (
+                    <span key={i} className="text-[9px] font-mono uppercase text-coral bg-coral/5 border border-coral/30 px-1.5 py-0.5 rounded tracking-widest">[{t.replace(/[\[\]]/g, '')}]</span>
+                 ))}
+              </div>
+
+              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 min-w-0 flex-1">
+                 <div className="flex items-center gap-2 justify-end min-w-0">
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate hidden md:block">{match.team1}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-right truncate md:hidden">{getShortName(match.team1)}</span>
+                    {match.logo1 && (
+                       /* eslint-disable-next-line @next/next/no-img-element */
+                       <img src={match.logo1} alt={match.team1} className={`w-5 h-5 object-contain shrink-0 ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
+                    )}
+                 </div>
+
+                 <div className="flex items-center justify-center min-w-[48px] px-2 shrink-0">
+                    {isLive || isFinished ? (
+                       <span className="text-lg font-mono font-black text-foreground tabular-nums whitespace-nowrap">{match.score || "0 - 0"}</span>
+                    ) : (
+                       <span className="text-sm font-mono text-gray-600 font-bold">VS</span>
+                    )}
+                 </div>
+
+                 <div className="flex items-center gap-2 justify-start min-w-0">
+                    {match.logo2 && (
+                       /* eslint-disable-next-line @next/next/no-img-element */
+                       <img src={match.logo2} alt={match.team2} className={`w-5 h-5 object-contain shrink-0 ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
+                    )}
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate hidden md:block">{match.team2}</span>
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider text-left truncate md:hidden">{getShortName(match.team2)}</span>
+                 </div>
+              </div>
+              
+              {/* Dummy spacing block to keep teams centered horizontally */}
+              <div className="hidden md:block md:w-[150px] lg:w-[200px] shrink-0"></div>
+           </div>
+
+           <div className="flex items-center gap-4 md:gap-6 shrink-0">
+              <div className="flex items-center gap-2">
+                 <span className={`font-mono text-lg font-black tabular-nums ${getVolatilityColor(match.volatility)}`}>
+                    {match.volatility}%
+                 </span>
+                 <span className="text-[9px] uppercase tracking-widest text-muted-foreground hidden sm:block">VOL</span>
+              </div>
+              
+              <button onClick={(e) => { e.stopPropagation(); onToggleBookmark?.(match.id); }} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-muted hover:bg-black/10 dark:bg-muted/80 transition-colors border border-border">
+                  <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-teal text-teal' : 'text-muted-foreground group-hover:text-teal'}`} />
+              </button>
+              <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-muted hover:bg-black/10 dark:bg-muted/80 transition-colors border border-border">
+                 <ArrowRight className="w-4 h-4 text-teal group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+           </div>
         </div>
-        
-        {isLive && (
-          <div className="flex items-center gap-2 px-3 py-1 bg-coral/10 border border-coral/20 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-coral animate-pulse" />
-            <span className="text-[10px] font-black text-coral tracking-widest uppercase">{match.time}</span>
-          </div>
-        )}
       </div>
 
-      {/* Header: Teams & Score */}
-      <div className="flex items-center justify-between mb-8 relative z-10">
-         <div className="flex flex-col items-center gap-3 w-[40%]">
-            {match.logo1 && (
-               /* eslint-disable-next-line @next/next/no-img-element */
-               <img src={match.logo1} alt={match.team1} className={`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
-            )}
-            <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-center line-clamp-1">{match.team1}</h3>
-         </div>
+      {isExpanded && (
+        <div className="px-4 pb-5 pt-3 border-t border-border bg-black/5 dark:bg-black/40 shadow-inner">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="col-span-1">
+                 <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Live Context</h4>
+                 <p className="text-xs text-muted-foreground leading-relaxed font-mono">
+                    {match.insight || (isFinished ? "Post-match fallout and analysis ongoing." : isLive ? "Awaiting significant narrative developments..." : "Pre-match buildup is intensifying...")}
+                 </p>
+                 <Link href={`/match/${match.id}`} className="mt-4 md:hidden inline-flex items-center gap-2 text-[10px] font-mono text-teal uppercase tracking-widest">
+                    Enter Match Centre <ArrowRight className="w-3 h-3" />
+                 </Link>
+              </div>
 
-         <div className="flex flex-col items-center justify-center shrink-0 w-[20%]">
-            {(isLive || isFinished) && match.score ? (
-               <div className="text-3xl md:text-4xl font-black font-mono tracking-tighter tabular-nums drop-shadow-md">
-                 {match.score}
-               </div>
-            ) : (
-               <span className="text-lg font-black text-muted-foreground uppercase font-mono">VS</span>
-            )}
-         </div>
+              {(match.emotionalMvp || match.polarizingPlayer) && (
+                 <div className="col-span-1">
+                    <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Key Actors</h4>
+                    <div className="flex flex-col gap-2">
+                       {match.emotionalMvp && (
+                          <div className="flex items-center justify-between pb-1 border-b border-border">
+                             <span className="text-[10px] font-mono uppercase tracking-widest text-teal">Hero</span>
+                             <span className="text-xs font-bold text-foreground uppercase">{match.emotionalMvp}</span>
+                          </div>
+                       )}
+                       {match.polarizingPlayer && (
+                          <div className="flex items-center justify-between pb-1 border-b border-border">
+                             <span className="text-[10px] font-mono uppercase tracking-widest text-coral">Villain</span>
+                             <span className="text-xs font-bold text-foreground uppercase">{match.polarizingPlayer}</span>
+                          </div>
+                       )}
+                    </div>
+                 </div>
+              )}
 
-         <div className="flex flex-col items-center gap-3 w-[40%]">
-            {match.logo2 && (
-               /* eslint-disable-next-line @next/next/no-img-element */
-               <img src={match.logo2} alt={match.team2} className={`w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
-            )}
-            <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-center line-clamp-1">{match.team2}</h3>
-         </div>
-      </div>
-
-      {/* Metrics Row */}
-      <div className="grid grid-cols-2 gap-4 mb-8 relative z-10 mt-auto">
-         <MetricBar label="Drama" value={curation.metrics.drama} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-         <MetricBar label="Tactical" value={curation.metrics.tactical} colorClass="bg-gradient-to-r from-purple-500 to-blue-500" />
-         <MetricBar label="Volatility" value={curation.metrics.volatility} colorClass="bg-gradient-to-r from-teal to-blue-400" />
-         <MetricBar label="Fan Temp" value={curation.metrics.fanTemp} colorClass="bg-gradient-to-r from-yellow-400 to-orange-500" />
-      </div>
-
-      {/* Why Watch */}
-      <div className="bg-black/30 rounded-2xl p-5 mb-8 relative z-10 border border-white/5 backdrop-blur-sm">
-         <p className="text-xs text-gray-300 leading-relaxed font-medium">
-            <span className="text-white font-black uppercase tracking-widest block mb-2 text-[10px]">Why watch?</span> 
-            {curation.whyWatch}
-         </p>
-      </div>
-
-      {/* CTA */}
-      <Link href={`/match/${match.id}`} className="relative z-10 w-full block text-center py-4 rounded-xl bg-white text-black font-black uppercase tracking-[0.2em] text-xs hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-         {isLive ? 'Open Match' : 'Match Preview'}
-      </Link>
+              <div className="col-span-1">
+                 <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Audience State</h4>
+                 <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between pb-1 border-b border-border">
+                       <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Dominant Emotion</span>
+                       <div className="flex items-center gap-1.5 text-xs font-bold text-foreground uppercase">
+                          <span>{match.fanMoodEmoji || "🔥"}</span>
+                          <span>{match.fanMood || match.mood || "Electric"}</span>
+                       </div>
+                    </div>
+                    {match.agenda && (
+                       <div className="flex items-center justify-between pb-1 border-b border-border">
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Active Agenda</span>
+                          <span className="text-[10px] font-mono uppercase tracking-widest font-bold text-foreground truncate max-w-[120px]">{match.agenda}</span>
+                       </div>
+                    )}
+                 </div>
+              </div>
+           </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+});
 
 export default function DiscoverPage() {
   const supabase = createClient();
@@ -149,8 +198,33 @@ export default function DiscoverPage() {
         const live = data.filter(m => m.status === 'live');
         const upcoming = data.filter(m => m.status === 'upcoming');
         if (live.length > 0) {
-           // We are continuing to use mock data for simplicity
-        }
+          // Map to match frontend schema
+          const mappedLive = live.map(m => ({
+            id: m.id,
+            team1: m.team1,
+            team2: m.team2,
+            score: `${m.score1} - ${m.score2}`,
+            time: m.current_minute || "0'",
+            logo1: m.logo1,
+            logo2: m.logo2,
+            league: m.league,
+            pulseStatus: m.volatility > 90 ? "Volatile" : "Heating Up",
+            pulseEmoji: m.mood?.includes('⚡') ? "⚡" : "🔥",
+            pulseColor: "text-coral",
+            insight: "Real-time insights arriving...",
+            emotionalMvp: "Loading...",
+            polarizingPlayer: "Loading...",
+            fanMood: m.mood?.replace(/[^ws]/gi, '').trim() || "Tense",
+            fanMoodEmoji: m.mood?.match(/[�-�][�-�]/)?.[0] || "😬",
+            metrics: { chaos: m.volatility, tactical: 80, rivalry: 90, surprise: 40 },
+            bookmarked: true,
+            agenda: "Live updates active",
+            volatility: m.volatility,
+            triggers: m.triggers || []
+          }));
+            // setLiveMatches(mappedLive); // commented out to show mock data
+            // We can still use the upcoming matches from backend if needed
+          }
         if (upcoming.length > 0) {
           setUpcomingMatches(upcoming);
         }
@@ -158,32 +232,131 @@ export default function DiscoverPage() {
     };
     
     fetchMatches();
-  }, [supabase]);
 
-  const [activeFilter, setActiveFilter] = useState("All"); 
+    const channel = supabase.channel('realtime:matches')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'matches' }, (payload) => {
+        setLiveMatches(prev => prev.map(m => {
+          if (m.id === payload.new.id) {
+            return {
+              ...m,
+              score: `${payload.new.score1} - ${payload.new.score2}`,
+              time: payload.new.current_minute || m.time,
+              volatility: payload.new.volatility || m.volatility
+            };
+          }
+          return m;
+        }));
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase]);
+  const [activeFilter, setActiveFilter] = useState("Chaos"); // Chaos, Tactical, Rivalries, Surprise Me, Bookmarks
+  const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
+  const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
+  const [bookmarkedMatches, setBookmarkedMatches] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('eyeconic_bookmarks');
+      if (saved) {
+        setBookmarkedMatches(new Set(JSON.parse(saved)));
+      }
+    } catch (e) {}
+  }, []);
+
+  const toggleBookmark = (id: number) => {
+    setBookmarkedMatches(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      localStorage.setItem('eyeconic_bookmarks', JSON.stringify(Array.from(next)));
+      return next;
+    });
+  };
+
+  const toggleMatch = (id: number) => {
+    const next = new Set(expandedMatches);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setExpandedMatches(next);
+  };
+
+  // Sorting logic for Live Matches based on Active Filter
+  const sortedLiveMatches = [...liveMatches]
+    .filter(m => activeFilter === "Bookmarks" ? bookmarkedMatches.has(m.id) : true)
+    .sort((a, b) => {
+      if (activeFilter === "Bookmarks") return b.volatility - a.volatility;
+      if (activeFilter === "Chaos") return b.metrics.chaos - a.metrics.chaos;
+      if (activeFilter === "Tactical") return b.metrics.tactical - a.metrics.tactical;
+      if (activeFilter === "Rivalries") return b.metrics.rivalry - a.metrics.rivalry;
+      if (activeFilter === "Surprise Me") return b.metrics.surprise - a.metrics.surprise;
+      return 0;
+  });
+
+  const heroMatch = sortedLiveMatches[0];
+  const remainingLiveMatches = sortedLiveMatches.slice(1);
+
+  const [activeDate, setActiveDate] = useState("14");
+
+  // Calendar Days
+  const days = [
+    { label: "Mon", date: "12" },
+    { label: "Tue", date: "13" },
+    { label: "Wed", date: "14" },
+    { label: "Thu", date: "15" },
+    { label: "Fri", date: "16" },
+    { label: "Sat", date: "17" },
+    { label: "Sun", date: "18" },
+  ];
 
   const filters = [
-    { name: "All", icon: Sparkles },
-    { name: "Chaos & Goals", icon: Zap },
-    { name: "Tactical Battles", icon: Brain },
+    { name: "Chaos", icon: Zap },
+    { name: "Tactical", icon: Brain },
     { name: "Rivalries", icon: Swords },
-    { name: "High Stakes", icon: Flame },
+    { name: "Surprise Me", icon: Shuffle },
+    { name: "Bookmarks", icon: Bookmark },
   ];
 
+  // Tag matches with status
   const allCurrentMatches = [
-    ...liveMatches.map(m => ({ ...m, status: 'live' })),
-    ...upcomingMatches.map(m => ({ ...m, status: 'upcoming' }))
+    ...remainingLiveMatches.map(m => ({ ...m, status: 'live' })),
+    ...upcomingMatches.map(m => ({ ...m, status: 'upcoming' })),
+    ...finishedTableData.map(m => ({ ...m, status: 'finished' }))
   ];
 
-  // Mock filtering based on preferences
-  let filteredMatches = allCurrentMatches;
-  if (activeFilter === "Chaos & Goals") {
-     filteredMatches = allCurrentMatches.filter(m => getMatchCurations(m.id, m.team1).label === 'Chaos Guaranteed');
-  } else if (activeFilter === "Tactical Battles") {
-     filteredMatches = allCurrentMatches.filter(m => getMatchCurations(m.id, m.team1).label === 'Tactical Chess Match');
-  } else if (activeFilter === "High Stakes" || activeFilter === "Rivalries") {
-     filteredMatches = allCurrentMatches.filter(m => getMatchCurations(m.id, m.team1).label === 'Unmissable');
+  // If active filter is Bookmarks, filter the entire feed
+  let finalMatches = allCurrentMatches;
+  if (activeFilter === "Bookmarks") {
+     finalMatches = allCurrentMatches.filter(m => bookmarkedMatches.has(m.id));
   }
+  
+  // Group by League
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const groupedMatches: Record<string, any[]> = finalMatches.reduce((acc, match) => {
+    const league = match.league || "Other Competitions";
+    if (!acc[league]) acc[league] = [];
+    acc[league].push(match);
+    return acc;
+  }, {} as Record<string, any[]>);
+
+  // Group by Watchability (Status > Volatility)
+  const watchabilityMatches = [
+    {
+      groupName: "Live Matches",
+      matches: finalMatches.filter(m => m.status === 'live').sort((a, b) => b.volatility - a.volatility)
+    },
+    {
+      groupName: "Upcoming Matches",
+      matches: finalMatches.filter(m => m.status === 'upcoming').sort((a, b) => b.volatility - a.volatility)
+    },
+    {
+      groupName: "Finished Matches",
+      matches: finalMatches.filter(m => m.status === 'finished').sort((a, b) => b.volatility - a.volatility)
+    }
+  ].filter(group => group.matches.length > 0);
 
   return (
     <main className="min-h-screen bg-background text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
@@ -193,55 +366,242 @@ export default function DiscoverPage() {
          <div className="absolute top-[40%] right-[-20%] w-[60%] h-[60%] rounded-full bg-purple-900/10 blur-[150px]"></div>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 pt-12 md:pt-20">
+      {/* 0. TERMINAL TICKER TAPE */}
+      <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
+         <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                   {item}
+                 </button>
+               ))}
+            </div>
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {tickerItems.map((item, idx) => (
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                   {item}
+                 </button>
+               ))}
+            </div>
+         </div>
+      </div>
+
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 pt-8">
         
-        {/* HEADER */}
-        <header className="mb-16 max-w-2xl">
-           <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 leading-tight">
-              Don't just watch football.<br/>
-              <span className="text-teal">Watch the right football.</span>
-           </h1>
-           <p className="text-base md:text-lg text-gray-400 font-medium tracking-wide">
-              Eyeconic curates the best live and upcoming matches using our AI Ranking Pipeline. Find the match that fits your vibe right now.
-           </p>
+        {/* CALENDAR & THEME HEADER */}
+        <header className="mb-8 flex flex-row items-center justify-between gap-4">
+           <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-2 md:pb-0 flex-1">
+              {days.map(day => {
+                const isActive = day.date === activeDate;
+                return (
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-muted border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
+                    <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
+                    <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-black dark:text-foreground drop-shadow-md' : ''}`}>{day.date}</span>
+                  </button>
+                );
+              })}
+           </div>
         </header>
 
-        {/* PERSONALIZATION FILTERS */}
-        <div className="mb-12 border-b border-white/10 pb-6 overflow-x-auto hide-scrollbar">
-           <h3 className="text-[10px] font-black tracking-widest text-muted-foreground uppercase mb-4 whitespace-nowrap">I usually watch matches for:</h3>
-           <div className="flex flex-nowrap md:flex-wrap items-center gap-3">
-              {filters.map(f => {
-                const Icon = f.icon;
-                const isActive = activeFilter === f.name;
-                return (
-                  <button 
-                    key={f.name}
-                    onClick={() => setActiveFilter(f.name)}
-                    className={`shrink-0 flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all ${isActive ? 'bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-card/50 border border-white/10 text-muted-foreground hover:border-white/30 hover:text-white backdrop-blur-md'}`}
-                  >
-                    <Icon className="w-4 h-4" /> {f.name}
-                  </button>
-                )
-              })}
+        {/* EMOTIONAL FILTERS */}
+        <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar mb-10 pb-2">
+           {filters.map(f => {
+             const Icon = f.icon;
+             const isActive = activeFilter === f.name;
+             return (
+               <button 
+                 key={f.name}
+                 onClick={() => setActiveFilter(f.name)}
+                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-muted'}`}
+               >
+                 <Icon className="w-3.5 h-3.5" /> {f.name}
+               </button>
+             )
+           })}
+        </div>
+
+        {/* 1. HERO SECTION (Ranked #1 by Filter) */}
+        {heroMatch && (
+        <section className="mb-16">
+          <div className="relative rounded-[40px] border border-border bg-card/60 backdrop-blur-md overflow-hidden group shadow-2xl">
+            {/* Subtle Image background for Hero */}
+            <div 
+               className="absolute inset-0 bg-cover bg-center opacity-[0.03] mix-blend-screen group-hover:opacity-[0.06] transition-opacity duration-1000" 
+               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-teal/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen group-hover:bg-teal/20 transition-colors duration-1000"></div>
+            
+            <div className="absolute top-8 right-8 z-20 hidden md:block">
+              <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" alt="Premier League" className="h-10 md:h-12 w-auto drop-shadow-md filter brightness-0 invert opacity-50" />
+            </div>
+
+            <div className="relative z-10 p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+               <div className="flex-1 flex flex-col justify-center w-full">
+                  {/* Match of the Day indicator */}
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-6 flex items-center gap-2 bg-teal/10 w-max px-3 py-1.5 rounded-full border border-teal/20">
+                     <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,1)]"></span>
+                     MATCH OF THE MOMENT
+                  </div>
+
+                  {/* Scoreline */}
+                  <div className="flex flex-col gap-4 mb-8">
+                     <div className="flex items-center gap-4">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team1}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                           {heroMatch.score ? heroMatch.score.split(' - ')[0] : ''}
+                        </span>
+                     </div>
+                     <div className="flex items-center gap-4">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-lg shrink-0 ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-wider text-foreground drop-shadow-md truncate">{heroMatch.team2}</h2>
+                        <span className="text-5xl md:text-6xl font-mono font-black text-foreground tabular-nums drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] ml-auto shrink-0">
+                           {heroMatch.score ? heroMatch.score.split(' - ')[1] : ''}
+                        </span>
+                     </div>
+                  </div>
+
+                  {/* Pulse & Time inline */}
+                  <div className="flex items-center gap-6 mb-10">
+                     <span className="text-lg font-mono text-coral animate-pulse font-bold tabular-nums drop-shadow-[0_0_8px_rgba(255,107,107,0.6)]">{heroMatch.time}</span>
+                     <div className="w-px h-6 bg-white/20"></div>
+                     <div className={`flex items-center gap-3 text-sm font-mono uppercase tracking-widest ${getVolatilityColor(heroMatch.volatility)} bg-black/5 dark:bg-muted px-4 py-2 rounded-full border border-border`}>
+                        <span className="text-xl">{heroMatch.pulseEmoji}</span>
+                        <span>{heroMatch.pulseStatus}</span>
+                     </div>
+                  </div>
+
+                  {/* Action link inline */}
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-xs font-mono font-bold uppercase tracking-widest text-black bg-teal px-8 py-4 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_20px_rgba(0,229,255,0.4)] w-max">
+                     ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+               </div>
+
+               <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-3xl border border-border backdrop-blur-xl">
+                  {/* Narrative (Unboxed, separated by fine lines) */}
+                  <div className="pb-5 border-b border-border">
+                     <h3 className="text-[9px] font-mono uppercase tracking-widest text-teal mb-3 flex items-center gap-2">
+                        <Activity className="w-3 h-3" /> Live Context
+                     </h3>
+                     <p className="text-sm text-gray-200 font-mono leading-relaxed">&quot;{heroMatch.insight}&quot;</p>
+                  </div>
+                  
+                  {/* Key Data */}
+                  <div className="flex items-start justify-between">
+                     <div className="flex flex-col gap-2">
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">Volatility Index</span>
+                        <span className={`text-5xl font-mono font-black tabular-nums ${getVolatilityColor(heroMatch.volatility)}`}>{heroMatch.volatility}%</span>
+                     </div>
+                     <div className="flex flex-col items-end gap-2">
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground">Active Triggers</span>
+                        <div className="flex flex-col gap-1.5 items-end">
+                           {heroMatch.triggers?.map((t, i) => (
+                              <span key={i} className="text-[10px] font-mono text-coral bg-coral/10 border border-coral/30 px-2.5 py-1 rounded-md uppercase tracking-widest">{t}</span>
+                           ))}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+        </section>
+        )}
+
+        {/* 2. TERMINAL FEED SORTING CONTROLS */}
+        <div className="flex items-center justify-between mb-8">
+           <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-md hidden md:block">Terminal Feed</h2>
+           
+           <div className="flex bg-card rounded-full p-1 border border-border w-full md:w-auto">
+             <button 
+               onClick={() => setSortMode('watchability')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                <Activity className="w-3.5 h-3.5" />
+                WATCHABILITY
+             </button>
+             <button 
+               onClick={() => setSortMode('league')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                <Swords className="w-3.5 h-3.5" />
+                LEAGUE
+             </button>
            </div>
         </div>
 
-        {/* MATCH GRID */}
-        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-           {filteredMatches.map((match) => (
-              <CuratedMatchCard 
-                key={match.id} 
-                match={match} 
-                isLive={match.status === 'live'} 
-                isFinished={match.status === 'finished'} 
-              />
-           ))}
+        {/* 3. TERMINAL FEED LIST */}
+        <section className="space-y-12">
+          
+          {sortMode === 'league' ? (
+             Object.entries(groupedMatches).map(([league, matches]) => (
+               <div key={league} className="flex flex-col">
+                  {/* League Header */}
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{league}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
 
-           {filteredMatches.length === 0 && (
-             <div className="col-span-full p-20 text-center bg-card/40 rounded-[2rem] border border-white/5 backdrop-blur-md">
-               <span className="text-muted-foreground text-sm font-mono tracking-widest uppercase">No matches currently fit this vibe.</span>
-             </div>
-           )}
+                  {/* League Container */}
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-border" : ""}>
+                           <TerminalRow 
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+             ))
+          ) : (
+             watchabilityMatches.map((group) => (
+               <div key={group.groupName} className="flex flex-col">
+                  {/* Group Header */}
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{group.groupName}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
+
+                  {/* Group Container */}
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {group.matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-border" : ""}>
+                           <TerminalRow 
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+             ))
+          )}
+
+          {allCurrentMatches.length === 0 && (
+            <div className="p-16 text-center bg-card/50 rounded-2xl border border-border backdrop-blur-md">
+              <span className="text-muted-foreground text-sm font-mono tracking-widest uppercase">No matches found matching this criteria.</span>
+            </div>
+          )}
         </section>
 
       </div>
