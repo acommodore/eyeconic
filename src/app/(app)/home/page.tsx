@@ -51,8 +51,8 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center p-2 bg-black/20 rounded-xl border border-white/5 shadow-inner">
-      <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center p-1.5 md:p-2 bg-black/20 rounded-xl border border-white/5 shadow-inner">
+      <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center">
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-md">
           <circle cx="50" cy="50" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="8" fill="none" />
           <circle 
@@ -66,9 +66,9 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
             className="transition-all duration-1000 ease-out" 
           />
         </svg>
-        <span className="text-sm md:text-base font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
+        <span className="text-xs sm:text-sm md:text-base font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
       </div>
-      <span className="text-[8px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-3 text-center truncate w-full">{label}</span>
+      <span className="text-[7px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-2 md:mt-3 text-center truncate w-full">{label}</span>
     </div>
   );
 };
@@ -205,7 +205,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     <Brain className="w-3.5 h-3.5 text-teal" /> AI Ranking Pipeline
                  </h4>
                  
-                 <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                 <div className="relative z-10 grid grid-cols-4 gap-2 md:gap-4 mb-4">
                     {/* Live/Finished vs Upcoming logic */}
                     {isLive || isFinished ? (
                        <>
@@ -422,7 +422,7 @@ export default function DiscoverPage() {
       
       {/* ABSOLUTE TOP HERO SECTION */}
       {heroMatch && heroCuration && (
-      <section className="relative w-full pt-16 pb-8 md:pt-20 md:pb-12 border-b border-white/10 bg-black overflow-hidden">
+      <section className="relative w-full pt-4 pb-4 md:pt-8 md:pb-8 border-b border-white/10 bg-black overflow-hidden">
          {/* Cinematic Backgrounds */}
          <div className="absolute inset-0 bg-gradient-to-b from-teal/10 via-transparent to-black/90 mix-blend-screen pointer-events-none" />
          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-teal/20 rounded-full blur-[120px] pointer-events-none opacity-40 mix-blend-screen animate-pulse" />
@@ -431,7 +431,7 @@ export default function DiscoverPage() {
          <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-8">
             
             {/* The Compact Glassmorphic Hero Card */}
-            <div className="w-full bg-gradient-to-br from-white/[0.03] to-black/60 border border-white/10 rounded-3xl p-5 md:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col gap-6 lg:gap-8">
+            <div className="w-full bg-gradient-to-br from-white/[0.03] to-black/60 border border-white/10 rounded-3xl p-4 md:p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col gap-5 lg:gap-6">
                {/* Internal glowing elements */}
                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-teal/50 to-transparent" />
                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
