@@ -70,10 +70,9 @@ const MomentumBar = ({ momentum }: { momentum: number }) => (
   </div>
 );
 
-
 const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, isFinished = false, isBookmarked = false, onToggleBookmark }: any) => {
    const curation = getMatchCurations(match.id, match.team1, match.status);
-   const hasActiveStand = match.team1 === 'Chelsea' || match.team1 === 'Arsenal';
+   const hasActiveStand = true;
 
    return (
     <div className={`group flex flex-col transition-all duration-300 ${isExpanded ? 'bg-white/5 border-l-2 border-l-teal' : 'hover:bg-white/5 border-l-2 border-l-transparent'}`}>
@@ -96,23 +95,17 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
         </div>
 
         {/* TEAMS & SCORE */}
-        <div className="flex-1 flex items-center justify-between min-w-0 pr-4">
-           <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-6 flex-1 min-w-0">
-              <div className="flex items-center gap-3 w-full md:w-[45%]">
-                 <h3 className="text-sm md:text-base font-black uppercase tracking-wider truncate">{match.team1}</h3>
-              </div>
-              <div className="flex items-center gap-2 md:gap-4 shrink-0">
-                 {isLive || isFinished ? (
-                    <span className="text-lg md:text-2xl font-black font-mono tracking-tighter tabular-nums bg-black/40 px-3 py-1 rounded-md border border-white/5">
-                       {match.score}
-                    </span>
-                 ) : (
-                    <span className="text-xs font-black text-muted-foreground px-3 py-1 bg-black/20 rounded-md border border-white/5 font-mono">VS</span>
-                 )}
-              </div>
-              <div className="flex items-center gap-3 w-full md:w-[45%] justify-end md:justify-start">
-                 <h3 className="text-sm md:text-base font-black uppercase tracking-wider truncate text-right md:text-left">{match.team2}</h3>
-              </div>
+        <div className="flex-1 flex items-center min-w-0 pr-4">
+           <div className="flex items-center gap-4 w-full">
+              <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-right w-1/2 truncate">{match.team1}</h3>
+              {isLive || isFinished ? (
+                 <span className="text-lg md:text-2xl font-black font-mono tracking-tighter tabular-nums bg-black/40 px-3 py-1 rounded-md border border-white/5 shrink-0">
+                    {match.score}
+                 </span>
+              ) : (
+                 <span className="text-xs font-black text-muted-foreground px-3 py-1 bg-black/20 rounded-md border border-white/5 font-mono shrink-0">VS</span>
+              )}
+              <h3 className="text-sm md:text-base font-black uppercase tracking-wider text-left w-1/2 truncate">{match.team2}</h3>
            </div>
         </div>
 
@@ -163,7 +156,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     )}
                  </div>
 
-                 {isLive && (
+                 {(isLive || isFinished) && (
                     <div className="pt-3 border-t border-white/5">
                        <MomentumBar momentum={curation.metrics.momentum} />
                     </div>
@@ -173,8 +166,13 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
               {/* NARRATIVE & ACTION PANEL */}
               <div className="col-span-1 md:col-span-2 flex flex-col justify-between">
                  <div>
+                    <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Pre-Match Context</h4>
+                    <p className="text-xs text-gray-300 leading-relaxed font-mono italic bg-black/20 p-3 rounded-lg border border-white/5 mb-4">
+                       "{curation.whyWatch}"
+                    </p>
+                    
                     {/* Hero and Villain from mockData */}
-                    {match.emotionalMvp && match.polarizingPlayer ? (
+                    {match.emotionalMvp && match.polarizingPlayer && (
                        <div className="grid grid-cols-2 gap-4 mb-4">
                           <div className="bg-black/20 p-3 rounded-lg border border-white/5 flex flex-col items-center text-center">
                              <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">The Hero 🦸</span>
@@ -184,13 +182,6 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                              <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">The Villain 🦹</span>
                              <span className="text-xs font-black uppercase text-coral">{match.polarizingPlayer}</span>
                           </div>
-                       </div>
-                    ) : (
-                       <div>
-                          <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Pre-Match Context</h4>
-                          <p className="text-xs text-gray-300 leading-relaxed font-mono italic bg-black/20 p-3 rounded-lg border border-white/5">
-                             "{curation.whyWatch}"
-                          </p>
                        </div>
                     )}
                  </div>
@@ -217,22 +208,34 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 TerminalRow.displayName = 'TerminalRow';
 
 
+const tickerItems = [
+    "📈 ARS Fans: +15% Optimism (Saka sub)",
+    "📉 MUN Fans: -30% Patience (Ten Hag)",
+    "⚠️ RMA Fans: Tension Spiking (0-0 80')",
+    "🔥 LIV Fans: Roaring (+45% Momentum)",
+    "🧊 CHE Fans: Complete silence at Stamford Bridge",
+    "📈 JUV Fans: Tactical approval rising (+12%)",
+];
+
 const NewsTicker = () => (
-  <div className="w-full bg-teal text-black py-2 overflow-hidden flex items-center mb-8 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-    <div className="whitespace-nowrap animate-[marquee_20s_linear_infinite] flex items-center gap-8 font-mono text-[10px] uppercase font-black tracking-widest">
-      <span>🔥 LIVERPOOL V CITY HEATING UP</span>
-      <span>•</span>
-      <span>⚡ VINICIUS JR DRIVING CHAOS IN MADRID</span>
-      <span>•</span>
-      <span>🛡️ BAYERN PARKING THE BUS?</span>
-      <span>•</span>
-      <span>🚀 VILLA PARK ROCKING AFTER 3-0 START</span>
-      <span>•</span>
-      <span>🔥 LIVERPOOL V CITY HEATING UP</span>
-      <span>•</span>
-      <span>⚡ VINICIUS JR DRIVING CHAOS IN MADRID</span>
+    <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
+       <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+          <div className="flex justify-around min-w-[50%] shrink-0">
+             {tickerItems.map((item, idx) => (
+               <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                 {item}
+               </button>
+             ))}
+          </div>
+          <div className="flex justify-around min-w-[50%] shrink-0">
+             {tickerItems.map((item, idx) => (
+               <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                 {item}
+               </button>
+             ))}
+          </div>
+       </div>
     </div>
-  </div>
 );
 
 export default function DiscoverPage() {
@@ -243,8 +246,9 @@ export default function DiscoverPage() {
 
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
   const [bookmarkedMatches, setBookmarkedMatches] = useState<Set<number>>(new Set());
+  
+  const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
   const [activeFilter, setActiveFilter] = useState("All"); 
-  const [leagueFilter, setLeagueFilter] = useState("All Leagues");
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -294,9 +298,6 @@ export default function DiscoverPage() {
     ...finishedMatches.map(m => ({ ...m, status: 'finished' }))
   ];
 
-  // Unique leagues for dropdown
-  const uniqueLeagues = ["All Leagues", ...Array.from(new Set(allCurrentMatches.map(m => m.league)))];
-
   let finalMatches = allCurrentMatches;
 
   // Apply emotional filter
@@ -310,11 +311,6 @@ export default function DiscoverPage() {
      finalMatches = finalMatches.filter(m => getMatchCurations(m.id, m.team1, m.status).metrics.stakes > 90);
   }
 
-  // Apply league filter
-  if (leagueFilter !== "All Leagues") {
-     finalMatches = finalMatches.filter(m => m.league === leagueFilter);
-  }
-
   const heroMatch = finalMatches.find(m => m.status === 'live') || finalMatches[0];
   let heroCuration = null;
   if (heroMatch) {
@@ -326,6 +322,12 @@ export default function DiscoverPage() {
     { groupName: 'Upcoming Matches', matches: finalMatches.filter(m => m.status === 'upcoming').sort((a,b) => b.volatility - a.volatility) },
     { groupName: 'Finished Matches', matches: finalMatches.filter(m => m.status === 'finished').sort((a,b) => b.volatility - a.volatility) }
   ];
+
+  const groupedMatches = finalMatches.reduce((acc, match) => {
+     if (!acc[match.league]) acc[match.league] = [];
+     acc[match.league].push(match);
+     return acc;
+  }, {} as Record<string, typeof allCurrentMatches>);
 
   return (
     <main className="min-h-screen bg-[#020202] text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden">
@@ -445,54 +447,89 @@ export default function DiscoverPage() {
         </section>
         )}
 
-        {/* METRICS & LEAGUE FILTERS */}
-        <div className="flex items-center justify-end mb-6">
-           <div className="flex items-center gap-3">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <select 
-                 value={leagueFilter}
-                 onChange={(e) => setLeagueFilter(e.target.value)}
-                 className="bg-card text-xs font-mono uppercase tracking-widest text-muted-foreground border border-border rounded-lg px-4 py-2 outline-none focus:border-teal"
-              >
-                 {uniqueLeagues.map(l => (
-                    <option key={l} value={l}>{l}</option>
-                 ))}
-              </select>
+        {/* 2. TERMINAL FEED SORTING CONTROLS */}
+        <div className="flex items-center justify-between mb-8">
+           <div className="flex bg-card rounded-full p-1 border border-border w-full md:w-auto ml-auto">
+             <button 
+               onClick={() => setSortMode('watchability')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                <Activity className="w-3.5 h-3.5" />
+                WATCHABILITY
+             </button>
+             <button 
+               onClick={() => setSortMode('league')}
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                <Swords className="w-3.5 h-3.5" />
+                LEAGUE
+             </button>
            </div>
         </div>
 
         {/* TERMINAL FEED LIST */}
         <section className="space-y-12">
-          {watchabilityMatches.map((group) => {
-            if (group.matches.length === 0) return null;
-            return (
-            <div key={group.groupName} className="flex flex-col">
-               <div className="flex items-center gap-4 mb-4 pl-2">
-                 <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-600' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
-                 <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{group.groupName}</h2>
-                 <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
-               </div>
+          {sortMode === 'league' ? (
+             Object.entries(groupedMatches).map(([league, matches]) => (
+               <div key={league} className="flex flex-col">
+                  {/* League Header */}
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{league}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
 
-               <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
-                 <div className="flex flex-col">
-                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                   {group.matches.map((match: any, index: number) => (
-                     <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-border" : ""}>
-                        <TerminalRow 
-                         match={match} 
-                         isExpanded={expandedMatches.has(match.id)} 
-                         onToggle={toggleMatch} 
-                         isLive={match.status === 'live'} 
-                         isFinished={match.status === 'finished'} 
-                         isBookmarked={bookmarkedMatches.has(match.id)}
-                         onToggleBookmark={toggleBookmark}
-                       />
-                     </div>
-                   ))}
-                 </div>
+                  {/* League Container */}
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-border" : ""}>
+                           <TerminalRow 
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                </div>
-            </div>
-          )})}
+             ))
+          ) : (
+             watchabilityMatches.map((group) => {
+               if (group.matches.length === 0) return null;
+               return (
+               <div key={group.groupName} className="flex flex-col">
+                  <div className="flex items-center gap-4 mb-4 pl-2">
+                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-600' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
+                    <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{group.groupName}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
+                  </div>
+
+                  <div className="bg-card/50 backdrop-blur-md rounded-2xl border border-border overflow-hidden shadow-2xl">
+                    <div className="flex flex-col">
+                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                      {group.matches.map((match: any, index: number) => (
+                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-border" : ""}>
+                           <TerminalRow 
+                            match={match} 
+                            isExpanded={expandedMatches.has(match.id)} 
+                            onToggle={toggleMatch} 
+                            isLive={match.status === 'live'} 
+                            isFinished={match.status === 'finished'} 
+                            isBookmarked={bookmarkedMatches.has(match.id)}
+                            onToggleBookmark={toggleBookmark}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+             )})
+          )}
         </section>
 
       </div>
