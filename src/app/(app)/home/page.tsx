@@ -288,14 +288,14 @@ const NewsTicker = () => (
        <div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+               <button key={`ticker-1-${idx}`} className="text-xs font-mono tracking-widest uppercase text-teal/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
                  {item}
                </button>
              ))}
           </div>
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+               <button key={`ticker-2-${idx}`} className="text-xs font-mono tracking-widest uppercase text-teal/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
                  {item}
                </button>
              ))}
@@ -431,180 +431,7 @@ export default function DiscoverPage() {
            })}
         </div>
 
-        {/* HERO SECTION */}
-        {heroMatch && heroCuration && (
-        <section className="mb-16">
-          <div className="relative rounded-[40px] border border-white/10 bg-black/60 backdrop-blur-xl overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-purple-500/10 pointer-events-none mix-blend-screen" />
-            <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-teal/50 to-transparent opacity-50" />
-            
-            <div className="relative z-10 p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-               
-               {/* Left Column (Teams, Score, Momentum) */}
-               <div className="flex-1 flex flex-col justify-center w-full">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-8 flex items-center gap-2 bg-teal/10 w-max px-4 py-2 rounded-full border border-teal/20 shadow-[0_0_15px_rgba(0,229,255,0.15)]">
-                     <span className="w-2 h-2 rounded-full bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,1)]"></span>
-                     MATCH OF THE MOMENT
-                  </div>
-
-                  <div className="flex flex-col gap-6 mb-10">
-                     <div className="flex items-center gap-6">
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-2.5 shadow-lg">
-                           <img src={heroMatch.logo1} alt={heroMatch.team1} className={`w-full h-full object-contain drop-shadow-xl ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
-                        </div>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-wider truncate drop-shadow-md">{heroMatch.team1}</h2>
-                        <span className="text-5xl md:text-7xl font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                           {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[0] : ''}
-                        </span>
-                     </div>
-                     <div className="flex items-center gap-6">
-                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-2.5 shadow-lg">
-                           <img src={heroMatch.logo2} alt={heroMatch.team2} className={`w-full h-full object-contain drop-shadow-xl ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
-                        </div>
-                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-wider truncate drop-shadow-md">{heroMatch.team2}</h2>
-                        <span className="text-5xl md:text-7xl font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                           {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[1] : ''}
-                        </span>
-                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-6 mt-auto pt-4 border-t border-white/5">
-                     <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-xs font-mono font-bold uppercase tracking-widest text-black bg-teal px-8 py-4.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,229,255,0.4)] w-max">
-                        ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                     </Link>
-                  </div>
-               </div>
-
-               {/* Right Column (AI Panel & Graph) */}
-               <div className="w-full lg:w-[450px] shrink-0 flex flex-col gap-6 bg-black/40 p-8 rounded-[32px] border border-white/5 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-[80px] pointer-events-none" />
-                  
-                  {/* Top Stats */}
-                  <div className="flex items-center justify-between pb-6 border-b border-white/10 relative z-10">
-                     <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                        <Brain className="w-4 h-4 text-teal" /> Watchability Index
-                     </span>
-                     <span className="text-5xl font-mono font-black tabular-nums text-foreground drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">{heroMatch.volatility}%</span>
-                  </div>
-
-                  {/* Momentum Graph for Live matches */}
-                  {heroMatch.status === 'live' && (
-                     <div className="relative z-10 w-full pb-4 border-b border-white/10 mb-2">
-                        <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" />
-                     </div>
-                  )}
-
-                  {/* The AI Metrics */}
-                  <div className="grid grid-cols-2 gap-x-8 gap-y-4 relative z-10">
-                     {heroMatch.status === 'live' || heroMatch.status === 'finished' ? (
-                        <>
-                           <MetricBar label="Stakes" value={heroCuration.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                           <MetricBar label="Intensity" value={heroCuration.metrics.intensity} colorClass="bg-gradient-to-r from-red-500 to-rose-400" />
-                           <MetricBar label="Quality" value={heroCuration.metrics.quality} colorClass="bg-gradient-to-r from-purple-500 to-blue-500" />
-                           <MetricBar label="Tempo" value={heroCuration.metrics.tempo} colorClass="bg-gradient-to-r from-yellow-500 to-orange-500" />
-                        </>
-                     ) : (
-                        <>
-                           <MetricBar label="Stakes" value={heroCuration.metrics.stakes} colorClass="bg-gradient-to-r from-orange-500 to-red-500" />
-                           <MetricBar label="Fan Temp" value={heroCuration.metrics.fanTemp} colorClass="bg-gradient-to-r from-yellow-400 to-orange-500" />
-                           <MetricBar label="Volatility" value={heroCuration.metrics.volatility} colorClass="bg-gradient-to-r from-teal to-blue-400" />
-                           <MetricBar label="Star Power" value={heroCuration.metrics.starPower} colorClass="bg-gradient-to-r from-purple-500 to-indigo-500" />
-                        </>
-                     )}
-                  </div>
-                  
-               </div>
-            </div>
-          </div>
-        </section>
-        )}
-
-        {/* TERMINAL FEED SORTING CONTROLS */}
-        <div className="flex items-center justify-between mb-8">
-           <div className="flex bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 w-full md:w-auto ml-auto shadow-lg">
-             <button 
-               onClick={() => setSortMode('watchability')}
-               className={`flex-1 md:flex-none px-8 py-2.5 flex items-center justify-center gap-2.5 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                <Activity className="w-3.5 h-3.5" />
-                WATCHABILITY
-             </button>
-             <button 
-               onClick={() => setSortMode('league')}
-               className={`flex-1 md:flex-none px-8 py-2.5 flex items-center justify-center gap-2.5 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                <Swords className="w-3.5 h-3.5" />
-                LEAGUE
-             </button>
-           </div>
         </div>
-
-        {/* TERMINAL FEED LIST */}
-        <section className="space-y-12">
-          {sortMode === 'league' ? (
-             Object.entries(groupedMatches).map(([league, matches]) => (
-               <div key={league} className="flex flex-col">
-                  {/* League Header */}
-                  <div className="flex items-center gap-4 mb-5 pl-2">
-                    <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_12px_rgba(0,229,255,0.8)]"></div>
-                    <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg">{league}</h2>
-                    <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </div>
-
-                  {/* League Container */}
-                  <div className="bg-black/30 backdrop-blur-xl rounded-[32px] border border-white/5 overflow-hidden shadow-2xl">
-                    <div className="flex flex-col">
-                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                      {matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
-                           <TerminalRow 
-                            match={match} 
-                            isExpanded={expandedMatches.has(match.id)} 
-                            onToggle={toggleMatch} 
-                            isLive={match.status === 'live'} 
-                            isFinished={match.status === 'finished'} 
-                            isBookmarked={bookmarkedMatches.has(match.id)}
-                            onToggleBookmark={toggleBookmark}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-               </div>
-             ))
-          ) : (
-             watchabilityMatches.map((group) => {
-               if (group.matches.length === 0) return null;
-               return (
-               <div key={group.groupName} className="flex flex-col">
-                  <div className="flex items-center gap-4 mb-5 pl-2">
-                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-teal shadow-[0_0_12px_rgba(0,229,255,0.8)]'}`}></div>
-                    <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg">{group.groupName}</h2>
-                    <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </div>
-
-                  <div className="bg-black/30 backdrop-blur-xl rounded-[32px] border border-white/5 overflow-hidden shadow-2xl">
-                    <div className="flex flex-col">
-                      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                      {group.matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-white/5" : ""}>
-                           <TerminalRow 
-                            match={match} 
-                            isExpanded={expandedMatches.has(match.id)} 
-                            onToggle={toggleMatch} 
-                            isLive={match.status === 'live'} 
-                            isFinished={match.status === 'finished'} 
-                            isBookmarked={bookmarkedMatches.has(match.id)}
-                            onToggleBookmark={toggleBookmark}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-               </div>
-             )})
-          )}
-        </section>
-
-      </div>
     </main>
   );
 }
