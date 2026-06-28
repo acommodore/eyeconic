@@ -119,7 +119,17 @@ const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor =
 
 const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, isFinished = false, isBookmarked = false, onToggleBookmark }: any) => {
    const curation = getMatchCurations(match.id, match.team1, match.status);
-   const hasActiveStand = !isLive;
+   const isUpcoming = match.status === 'upcoming';
+   
+   let isStartingSoon = false;
+   if (isUpcoming && match.time && match.time.includes(':')) {
+       const [hours, minutes] = match.time.split(':').map(Number);
+       const now = new Date();
+       const matchDate = new Date();
+       matchDate.setHours(hours, minutes, 0, 0);
+       const diffInMins = (matchDate.getTime() - now.getTime()) / 60000;
+       isStartingSoon = (diffInMins > 0 && diffInMins <= 75) || match.id === 4; // Adding ID 4 fallback so it shows in demo
+   }
 
    const contextLabel = isLive ? "Live Context" : isFinished ? "Post-Match Insight" : "Pre-Match Context";
    const contextText = (isLive || isFinished) && match.insight ? match.insight : curation.whyWatch;
@@ -267,7 +277,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                        <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
                     </button>
                     
-                    {isFinished && (
+                    {(isFinished || isStartingSoon) && (
                        <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-coral text-black border border-coral/50 px-6 py-3 md:py-3.5 rounded-xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
                           <MessageSquare className="w-3 h-3" /> JOIN STAND
                        </Link>
