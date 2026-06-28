@@ -67,7 +67,7 @@ export default function StandsPage() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <Link href="/stands/1" className="bg-white text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-gray-200 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95">
+                  <Link href="/stands/1" className="bg-teal text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_25px_rgba(0,229,255,0.4)] hover:shadow-[0_0_35px_rgba(0,229,255,0.6)] animate-pulse-slow hover:scale-105 active:scale-95">
                     JOIN STAND
                   </Link>
                   <div className="flex -space-x-3">

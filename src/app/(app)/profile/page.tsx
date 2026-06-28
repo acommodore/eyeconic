@@ -233,7 +233,7 @@ export default function ProfilePage() {
               <p className="text-muted-foreground text-sm max-w-sm">
                 Head over to The Stand during a live match to leave your first voice note and start building your echo history.
               </p>
-              <Link href="/stands" className="mt-6 px-6 py-2 bg-foreground text-background font-bold text-xs uppercase tracking-widest rounded-full hover:scale-105 transition-transform">
+              <Link href="/stands" className="mt-6 px-8 py-3 bg-teal text-black font-black text-xs uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,229,255,0.3)]">
                 Go to The Stand
               </Link>
             </div>

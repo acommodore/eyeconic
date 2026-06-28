@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
-import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity, Flame, Sparkles, ChevronDown, Filter } from 'lucide-react';
+import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity, Flame, Sparkles, ChevronDown, Filter, MessageSquare } from 'lucide-react';
 import { allLiveMatches, upcomingTableData, finishedTableData } from '@/lib/mockData';
 
 // --- MOCK RANKING DATA ---
@@ -225,7 +225,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  </div>
 
                  {(isLive || isFinished) && (
-                    <div className="relative z-10 pt-4 border-t border-white/5 mt-4">
+                    <div className="relative z-10 pt-2 md:pt-4 border-t border-white/5 mt-2 md:mt-4">
                        <MatchMomentumGraph homeColor="bg-teal" awayColor="bg-coral" />
                     </div>
                  )}
@@ -261,25 +261,21 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     )}
                  </div>
 
-                 <div className="mt-4 flex flex-wrap gap-3">
-                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-white text-black px-6 py-3.5 rounded-xl uppercase tracking-widest hover:bg-gray-200 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-                       Match Centre <ArrowRight className="w-3 h-3" />
+                 <div className="mt-3 md:mt-5 flex flex-wrap gap-3">
+                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-teal text-black px-6 py-3.5 rounded-xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+                       MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
 
                     <button 
                        onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
-                       className={`md:hidden flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black px-6 py-3.5 rounded-xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-teal/20 text-teal border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
+                       className={`flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black px-6 py-3.5 rounded-xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-teal/20 text-teal border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
                     >
                        <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
                     </button>
                     
-                    {hasActiveStand && (
-                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-6 py-3.5 rounded-xl uppercase tracking-widest hover:bg-emerald-500/30 hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(16,185,129,0.15)]">
-                          <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                          </span>
-                          JOIN STAND
+                    {isLive && (
+                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-coral text-black border border-coral/50 px-6 py-3 md:py-3.5 rounded-xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
+                          <MessageSquare className="w-3 h-3" /> LIVE STANDS
                        </Link>
                     )}
                  </div>
@@ -478,8 +474,8 @@ export default function DiscoverPage() {
 
                {/* Bottom row: Action & Metrics */}
                <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pt-4 border-t border-white/5">
-                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 text-[10px] md:text-xs font-mono font-black uppercase tracking-widest text-black bg-teal px-6 py-3.5 rounded-full hover:bg-white transition-all duration-300 w-full lg:w-max shadow-[0_0_20px_rgba(0,229,255,0.3)] shrink-0">
-                     ENTER MATCH CENTRE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 text-[10px] md:text-xs font-mono font-black uppercase tracking-widest text-black bg-teal px-8 py-4 rounded-full hover:bg-white transition-all duration-300 w-full lg:w-max shadow-[0_0_25px_rgba(0,229,255,0.4)] hover:shadow-[0_0_35px_rgba(0,229,255,0.6)] hover:scale-105 shrink-0">
+                     MATCH CENTRE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
 
                   <div className="w-full lg:w-auto flex flex-col md:flex-row items-center gap-4 lg:gap-6 justify-end flex-1">
