@@ -469,18 +469,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
           {/* Stands Actions */}
           <div className="mt-8 w-full max-w-lg mx-auto flex justify-center items-center">
-             <Link href={`/stands/${matchId}`} className="block w-full cursor-pointer hover:-translate-y-0.5 transition-transform">
-               <div className="bg-gradient-to-r from-[#00E5FF]/10 to-[#121212]/90 backdrop-blur-xl border border-teal/20 rounded-full p-3 pl-4 flex items-center justify-between group shadow-xl">
-                  <div className="flex items-center gap-4">
-                     <div className="w-10 h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-                        <Mic className="w-5 h-5 text-black" fill="currentColor" />
-                     </div>
-                     <div className="flex flex-col justify-center text-left mr-4">
-                        <h2 className="text-sm font-black tracking-widest uppercase text-foreground leading-tight mb-0.5">JOIN EXISTING STAND</h2>
-                     </div>
-                  </div>
-               </div>
-             </Link>
+             
           </div>
 
         </div>
