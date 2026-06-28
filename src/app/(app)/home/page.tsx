@@ -406,61 +406,61 @@ export default function DiscoverPage() {
       
       {/* ABSOLUTE TOP HERO SECTION */}
       {heroMatch && heroCuration && (
-      <section className="relative w-full min-h-0 py-10 md:py-16 md:min-h-[70vh] flex flex-col justify-center border-b border-white/10 overflow-hidden bg-black pt-16 md:pt-20">
+      <section className="relative w-full min-h-0 py-10 md:py-12 md:min-h-[40vh] flex flex-col justify-center border-b border-white/10 overflow-hidden bg-black pt-16 md:pt-16">
          {/* Cinematic Backgrounds */}
          <div className="absolute inset-0 bg-gradient-to-b from-teal/20 via-transparent to-black/90 mix-blend-screen pointer-events-none" />
-         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-teal/20 rounded-full blur-[120px] pointer-events-none opacity-50 mix-blend-screen animate-pulse" />
-         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none opacity-30 mix-blend-screen" />
+         <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-teal/20 rounded-full blur-[100px] pointer-events-none opacity-50 mix-blend-screen animate-pulse" />
+         <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-500/20 rounded-full blur-[80px] pointer-events-none opacity-30 mix-blend-screen" />
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none mix-blend-overlay" />
 
-         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-10 lg:gap-24 items-center justify-between">
+         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center justify-between">
             {/* Left Column (Teams, Score, Action) */}
             <div className="flex-1 flex flex-col w-full">
-               <div className="text-[10px] md:text-xs font-mono uppercase tracking-widest text-teal mb-6 md:mb-12 flex items-center gap-3 bg-teal/10 w-max px-4 py-2 md:px-5 md:py-2.5 rounded-full border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
-                  <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]"></span>
+               <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-6 md:mb-8 flex items-center gap-3 bg-teal/10 w-max px-4 py-2 rounded-full border border-teal/30 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                  <span className="w-2 h-2 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,1)]"></span>
                   MATCH OF THE MOMENT
                </div>
 
-               <div className="flex flex-col gap-5 md:gap-10 mb-8 md:mb-12">
-                  <div className="flex items-center gap-4 md:gap-8 group">
-                     <div className="w-12 h-12 md:w-24 md:h-24 rounded-[1.5rem] md:rounded-[2rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-3 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] md:rounded-[2rem] blur-xl" />
+               <div className="flex flex-col gap-5 md:gap-6 mb-8">
+                  <div className="flex items-center gap-4 md:gap-6 group">
+                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1.5rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-2.5 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] blur-xl" />
                         <img src={heroMatch.logo1} alt={heroMatch.team1} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-3xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team1}</h2>
-                     <span className="text-5xl sm:text-6xl md:text-[9rem] leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team1}</h2>
+                     <span className="text-5xl sm:text-5xl md:text-6xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
                         {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[0] : ''}
                      </span>
                   </div>
-                  <div className="flex items-center gap-4 md:gap-8 group">
-                     <div className="w-12 h-12 md:w-24 md:h-24 rounded-[1.5rem] md:rounded-[2rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-3 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] md:rounded-[2rem] blur-xl" />
+                  <div className="flex items-center gap-4 md:gap-6 group">
+                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1.5rem] bg-black/40 border border-white/20 flex items-center justify-center p-2 md:p-2.5 shadow-2xl backdrop-blur-md relative group-hover:scale-110 transition-transform duration-500">
+                        <div className="absolute inset-0 bg-white/5 rounded-[1.5rem] blur-xl" />
                         <img src={heroMatch.logo2} alt={heroMatch.team2} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-3xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team2}</h2>
-                     <span className="text-5xl sm:text-6xl md:text-[9rem] leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
+                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter truncate drop-shadow-2xl">{heroMatch.team2}</h2>
+                     <span className="text-5xl sm:text-5xl md:text-6xl leading-none font-mono font-black tabular-nums ml-auto shrink-0 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] opacity-90">
                         {(heroMatch as any).score ? (heroMatch as any).score.split(' - ')[1] : ''}
                      </span>
                   </div>
                </div>
 
                <div className="flex items-center gap-6">
-                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 md:gap-3 text-xs md:text-base font-mono font-black uppercase tracking-widest text-black bg-teal px-6 py-4 md:px-10 md:py-5 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,229,255,0.4)] w-max">
-                     ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform" />
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 md:gap-3 text-xs md:text-sm font-mono font-black uppercase tracking-widest text-black bg-teal px-6 py-4 md:px-8 md:py-4 rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(0,229,255,0.4)] w-max">
+                     ENTER MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                   </Link>
                </div>
             </div>
 
             {/* Right Column (Watchability Ring) */}
-            <div className="w-full lg:w-[500px] shrink-0 flex flex-col items-center justify-center mt-8 lg:mt-0">
-               <div className="relative w-40 h-40 md:w-80 md:h-80 flex items-center justify-center">
+            <div className="w-full lg:w-[400px] shrink-0 flex flex-col items-center justify-center mt-8 lg:mt-0">
+               <div className="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
                   <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_30px_rgba(0,229,255,0.5)]">
                      <circle cx="50%" cy="50%" r="45%" stroke="rgba(255,255,255,0.05)" strokeWidth="6" className="md:stroke-[8px]" fill="none" />
                      <circle cx="50%" cy="50%" r="45%" stroke="#00e5ff" strokeWidth="6" className="md:stroke-[8px] transition-all duration-1000 ease-out" fill="none" strokeDasharray="283%" strokeDashoffset={`${283 - (283 * heroMatch.volatility) / 100}%`} strokeLinecap="round" />
                   </svg>
                   <div className="flex flex-col items-center justify-center relative z-10">
-                     <span className="text-4xl md:text-8xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
-                     <span className="text-[8px] md:text-xs font-mono uppercase tracking-widest text-teal mt-1 md:mt-2 flex items-center gap-1 md:gap-2 bg-black/40 px-2 md:px-3 py-1 rounded-full border border-teal/20">
+                     <span className="text-4xl md:text-6xl font-mono font-black tabular-nums tracking-tighter drop-shadow-lg">{heroMatch.volatility}</span>
+                     <span className="text-[8px] md:text-[10px] font-mono uppercase tracking-widest text-teal mt-1 md:mt-2 flex items-center gap-1 md:gap-2 bg-black/40 px-2 md:px-3 py-1 rounded-full border border-teal/20">
                         <Brain className="w-2.5 h-2.5 md:w-3 md:h-3" /> Watchability
                      </span>
                   </div>
