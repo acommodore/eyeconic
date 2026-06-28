@@ -208,18 +208,23 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     </p>
                     
                     {/* Hero and Villain from mockData */}
-                    {match.emotionalMvp && match.polarizingPlayer && (
-                       <div className="grid grid-cols-2 gap-4 mb-5">
+                    {match.emotionalMvp && (
+                       <div className={`grid ${isFinished ? 'grid-cols-1' : 'grid-cols-2'} gap-4 mb-5`}>
                           <div className="bg-gradient-to-br from-black/40 to-black/20 p-4 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
                              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal/30 to-transparent" />
-                             <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">The Hero 🦸</span>
+                             <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">
+                                {isFinished ? "Match MVP 🏆" : "MVP Watch 🌟"}
+                             </span>
                              <span className="text-xs font-black uppercase text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.4)]">{match.emotionalMvp}</span>
                           </div>
-                          <div className="bg-gradient-to-br from-black/40 to-black/20 p-4 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
-                             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-coral/30 to-transparent" />
-                             <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">The Villain 🦹</span>
-                             <span className="text-xs font-black uppercase text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.4)]">{match.polarizingPlayer}</span>
-                          </div>
+                          
+                          {!isFinished && match.polarizingPlayer && (
+                             <div className="bg-gradient-to-br from-black/40 to-black/20 p-4 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-coral/30 to-transparent" />
+                                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">Fraud Watch 🚨</span>
+                                <span className="text-xs font-black uppercase text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.4)]">{match.polarizingPlayer}</span>
+                             </div>
+                          )}
                        </div>
                     )}
                  </div>
