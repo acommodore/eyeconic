@@ -541,14 +541,14 @@ export default function DiscoverPage() {
       </section>
       )}
 
-      <div className="relative z-10 w-full mb-6 md:mb-8">
+      <div className="relative z-10 w-full mb-4 md:mb-6">
         <NewsTicker />
       </div>
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
         
         {/* FILTERS AND SORTING ROW */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
            {/* EMOTIONAL FILTERS */}
            <div className="relative w-full lg:w-auto">
              <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
