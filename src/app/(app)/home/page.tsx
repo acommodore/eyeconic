@@ -602,12 +602,12 @@ export default function DiscoverPage() {
         </div>
 
         {/* TERMINAL FEED LIST */}
-        <section className="space-y-2">
+        <section className="space-y-1">
           {sortMode === 'league' ? (
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
                   {/* League Header */}
-                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-2 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-1 pl-2 w-full text-left group">
                     <div className="w-1.5 h-6 bg-[#75fbd9] rounded-full shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
                     <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-[#75fbd9] transition-colors">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
@@ -620,7 +620,7 @@ export default function DiscoverPage() {
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {matches.map((match: any, index: number) => (
-                        <div key={match.id} className="mb-2">
+                        <div key={match.id} className="mb-1">
                            <TerminalRow 
                             match={match} 
                             isExpanded={expandedMatches.has(match.id)} 
@@ -642,7 +642,7 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-2 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-1 pl-2 w-full text-left group">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]'}`}></div>
                     <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-[#75fbd9]'}`}>{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
@@ -654,7 +654,7 @@ export default function DiscoverPage() {
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {group.matches.map((match: any, index: number) => (
-                        <div key={match.id} className="mb-2">
+                        <div key={match.id} className="mb-1">
                            <TerminalRow 
                             match={match} 
                             isExpanded={expandedMatches.has(match.id)} 

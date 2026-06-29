@@ -614,7 +614,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-2 px-4"
+            className="space-y-1 px-4"
           >
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'SEASON CONTEXT' && <SeasonContextTab matchInfo={matchInfo} />}
@@ -682,7 +682,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
         {/* POST-MATCH CONTENT - LOCKED STATE */}
       {matchState === 'postmatch' && matchInfo?.status !== 'finished' && (
-        <div className="w-full max-w-4xl mx-auto space-y-2 px-4">
+        <div className="w-full max-w-4xl mx-auto space-y-1 px-4">
           <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-sm">
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-[0.03] mix-blend-luminosity bg-cover z-0 pointer-events-none" />
              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-teal to-transparent opacity-30" />
@@ -744,7 +744,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
              exit={{ opacity: 0, y: -15 }}
-             className="space-y-2 px-4"
+             className="space-y-1 px-4"
           >
             <div className="flex items-center gap-2 mb-4">
                <Mic className="w-5 h-5 text-[#75fbd9]" />
@@ -788,7 +788,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-2 px-4"
+            className="space-y-1 px-4"
           >
           
             {/* SEASON IMPACT */}
@@ -1125,7 +1125,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="space-y-2 px-4"
+          className="space-y-1 px-4"
         >
           {/* Pitch View Roster */}
           <section className="mt-4">
