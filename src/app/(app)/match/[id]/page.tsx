@@ -383,7 +383,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
          </div>
       </div>
-      <div className="w-full max-w-[1200px] mx-auto p-0 md:px-8 md:py-4 text-foreground pb-24">
+      <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8 pt-4 md:pt-4 text-foreground pb-24">
       <style>{`
         @keyframes scorerScroll {
           0% { transform: translateY(0); }
@@ -394,7 +394,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         }
       `}</style>
       {/* Cinematic Scoreboard */}
-      <div className="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0 rounded-b-[32px] md:rounded-2xl overflow-hidden mb-4 md:mb-6 border-b border-border md:border shadow-2xl -mt-4 md:mt-0">
+      <div className="relative w-full rounded-2xl overflow-hidden mb-4 border border-border shadow-2xl">
         {/* Navigation Buttons Overlay */}
         <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 md:px-0 pt-2 md:pt-0">
           <div className="pointer-events-auto">
@@ -457,7 +457,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>72'</span>
                       ) : "FT"}
                     </span>
-                    <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none">
+                    <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none whitespace-nowrap">
                       {(matchInfo as any)?.score || "0 - 0"}
                     </div>
                   </>
