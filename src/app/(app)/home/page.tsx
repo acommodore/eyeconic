@@ -559,7 +559,7 @@ export default function DiscoverPage() {
                     <button 
                       key={f.name}
                       onClick={() => setActiveFilter(f.name)}
-                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
+                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-xl border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
                     >
                       <Icon className="w-3.5 h-3.5" /> {f.name}
                     </button>
@@ -572,16 +572,16 @@ export default function DiscoverPage() {
 
            {/* TERMINAL FEED SORTING CONTROLS */}
            <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto mt-4 lg:mt-0">
-              <div className="flex w-full bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 shadow-lg">
+              <div className="flex w-full bg-black/40 backdrop-blur-md rounded-2xl p-1 border border-white/10 shadow-lg">
                 <button 
                   onClick={() => setSortMode('watchability')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Activity className="w-3.5 h-3.5" />
                    WATCHABILITY
                 </button>
                 <button 
                   onClick={() => setSortMode('league')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Swords className="w-3.5 h-3.5" />
                    LEAGUE
                 </button>
