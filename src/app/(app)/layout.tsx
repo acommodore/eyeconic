@@ -111,7 +111,7 @@ export default function AppLayout({
           <div className="w-8 h-8 flex items-center justify-center">
             <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="font-black tracking-widest uppercase">STIMMUNG</span>
+          <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-4 w-auto object-contain brightness-0 dark:invert" />
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
@@ -131,7 +131,7 @@ export default function AppLayout({
               <div className="w-10 h-10 flex items-center justify-center">
                 <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
               </div>
-              <span className="text-xl font-black tracking-widest uppercase">STIMMUNG</span>
+              <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-5 w-auto object-contain brightness-0 dark:invert" />
             </Link>
           )}
           <button 

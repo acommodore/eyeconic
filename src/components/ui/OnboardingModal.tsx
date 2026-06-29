@@ -86,9 +86,9 @@ export function OnboardingModal() {
         <div className="p-6 pt-0 flex flex-col gap-4">
           <button 
             onClick={handleNext}
-            className="w-full bg-foreground text-background font-black uppercase tracking-widest py-4 rounded-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full bg-foreground text-background font-black tracking-widest py-4 rounded-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 cursor-pointer"
           >
-             {step === 2 ? 'ENTER STIMMUNG' : 'NEXT'} {step === 2 ? <Play className="w-4 h-4 fill-background" /> : <ArrowRight className="w-4 h-4" />}
+             {step === 2 ? 'ENTER Stimmung' : 'NEXT'} {step === 2 ? <Play className="w-4 h-4 fill-background" /> : <ArrowRight className="w-4 h-4" />}
           </button>
           <button 
             onClick={handleClose}

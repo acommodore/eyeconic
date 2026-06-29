@@ -38,7 +38,7 @@ function Navbar() {
           <div className="w-10 h-10 flex items-center justify-center">
             <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
           </div>
-          <span className="text-xl font-black tracking-widest uppercase text-gray-900 dark:text-foreground transition-colors">STIMMUNG</span>
+          <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-5 w-auto object-contain brightness-0 dark:invert transition-all" />
         </Link>
         <div className="flex items-center gap-4">
           <ThemeToggle />
@@ -115,8 +115,8 @@ function HeroSection() {
               
               {/* Terminal Header */}
               <div className="px-6 py-4 border-b border-gray-300 dark:border-border flex items-center justify-between bg-black/5 dark:bg-muted transition-colors">
-                <div className="flex items-center gap-3 text-gray-500 dark:text-muted-foreground text-xs tracking-widest uppercase">
-                  <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> STIMMUNG_OS v2.0
+                <div className="flex items-center gap-3 text-gray-500 dark:text-muted-foreground text-xs tracking-widest">
+                  <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> Stimmung_OS v2.0
                 </div>
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-white/20" />
