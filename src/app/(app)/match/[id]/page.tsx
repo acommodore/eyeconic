@@ -408,7 +408,15 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
          </div>
       </div>
       <div className="w-full max-w-[1200px] mx-auto p-0 md:px-8 md:py-4 text-foreground pb-24">
-      
+      <style>{`
+        @keyframes scorerScroll {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        .animate-scorer-scroll {
+          animation: scorerScroll 4s linear infinite;
+        }
+      `}</style>
       {/* Cinematic Scoreboard */}
       <div className="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0 rounded-b-[32px] md:rounded-[32px] overflow-hidden mb-4 md:mb-6 border-b border-border md:border shadow-2xl -mt-4 md:mt-0">
         {/* Navigation Buttons Overlay */}
@@ -439,26 +447,34 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="flex flex-col items-center gap-0.5 md:gap-1 mt-1 text-[9px] md:text-[10px] font-bold text-muted-foreground">
-                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
-                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
-                  </div>
-                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
-                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Nunez 54'
+                <div className="h-6 md:h-8 overflow-hidden relative w-full mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                  <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Nunez 54'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Nunez 54'
+                    </div>
                   </div>
                 </div>
               )}
             </div>
 
             {/* SCORE / TIME */}
-            <div className="flex flex-col items-center justify-start pt-2 md:pt-6 shrink-0 relative z-10">
+            <div className="flex flex-col items-center justify-start -mt-2 md:-mt-6 shrink-0 relative z-10">
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
                   <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
                   <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono leading-none" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                   <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
                     <Mic className="w-2.5 h-2.5 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Live Stand</span>
+                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
                   </Link>
                 </div>
               ) : (
@@ -473,7 +489,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   </div>
                   <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
                     <Mic className="w-2.5 h-2.5 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Live Stand</span>
+                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
                   </Link>
                 </div>
               )}
@@ -488,9 +504,20 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="flex flex-col items-center gap-0.5 md:gap-1 mt-1 text-[9px] md:text-[10px] font-bold text-muted-foreground">
-                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
-                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
+                <div className="h-6 md:h-8 overflow-hidden relative w-full mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                  <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Foden 89'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
+                    </div>
+                    <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
+                      <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Foden 89'
+                    </div>
                   </div>
                 </div>
               )}
