@@ -26,9 +26,7 @@ export default function AuthLayout({
 
         {/* Floating Brand Badge */}
         <Link href="/" className="absolute top-10 left-10 flex items-center gap-3 z-20 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 flex items-center justify-center">
-            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
-          </div>
+          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-8 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
           <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-5 w-auto object-contain brightness-0 invert drop-shadow-md" />
         </Link>
       </div>
@@ -37,9 +35,7 @@ export default function AuthLayout({
       <div className="w-full md:w-[600px] shrink-0 flex flex-col justify-center items-center p-6 md:p-12 relative z-10 bg-[#050505] md:bg-transparent shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
         {/* Mobile Brand Badge */}
         <Link href="/" className="md:hidden flex items-center gap-3 mb-12 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 flex items-center justify-center">
-            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain" />
-          </div>
+          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-6 w-auto object-contain" />
           <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-4 w-auto object-contain brightness-0 dark:invert" />
         </Link>
 

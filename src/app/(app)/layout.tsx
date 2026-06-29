@@ -108,9 +108,7 @@ export default function AppLayout({
       {!isStandRoom && (
       <header className="md:hidden h-16 border-b border-border flex items-center justify-between px-4 bg-card text-card-foreground">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 flex items-center justify-center">
-            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain" />
-          </div>
+          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-6 w-auto object-contain" />
           <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-4 w-auto object-contain brightness-0 dark:invert" />
         </Link>
         <div className="flex items-center gap-3">
@@ -128,9 +126,7 @@ export default function AppLayout({
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 flex items-center justify-center">
-                <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
-              </div>
+              <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-8 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
               <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-5 w-auto object-contain brightness-0 dark:invert" />
             </Link>
           )}

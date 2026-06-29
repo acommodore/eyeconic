@@ -35,9 +35,7 @@ function Navbar() {
       <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 flex items-center justify-center">
-            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
-          </div>
+          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-8 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
           <img src="/stimmung_text_logo_nobg.png" alt="Stimmung" className="h-5 w-auto object-contain brightness-0 dark:invert transition-all" />
         </Link>
         <div className="flex items-center gap-4">
