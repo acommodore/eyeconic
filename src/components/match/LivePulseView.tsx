@@ -456,63 +456,6 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
         {/* LEFT PANE: Match Pulse Timeline */}
         <div className={`flex flex-col gap-4 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
 
-          {/* Season Context Accordion */}
-          <section className="bg-card rounded-[2rem] border border-border shadow-xl flex flex-col relative overflow-hidden">
-            <div 
-              className="flex items-center justify-between cursor-pointer p-4 md:px-6 md:py-4"
-              onClick={() => setIsSeasonContextOpen(!isSeasonContextOpen)}
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-1 h-6 bg-[#75fbd9]" />
-                <h2 className="text-sm font-black tracking-widest text-foreground uppercase">SEASON CONTEXT</h2>
-              </div>
-              <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${isSeasonContextOpen ? 'rotate-180' : ''}`} />
-            </div>
-            
-            {isSeasonContextOpen && (
-              <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-4 px-4 md:px-6 border-t border-border animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
-                  <div className="flex flex-col items-center md:items-start">
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-1">League Pos</span>
-                    <div className="text-sm font-black flex items-center gap-2 text-foreground">
-                      <span className="font-mono tabular-nums">4th</span>
-                      <span className="text-muted-foreground text-[10px]">vs</span>
-                      <span className="font-mono tabular-nums">7th</span>
-                    </div>
-                  </div>
-                  <div className="w-px h-8 bg-border hidden md:block"></div>
-                  <div className="flex flex-col items-center md:items-start text-right md:text-left">
-                    <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
-                    <span className="text-sm font-black text-foreground font-mono tabular-nums">5 pts</span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col items-center w-full md:w-auto py-3 md:py-0 border-y border-border md:border-y-0">
-                  <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Form</span>
-                  <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase font-mono">
-                    <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-                    <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-                    <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
-                    <span className="text-muted-foreground mx-2 text-[9px]">vs</span>
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-                    <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
-                  </div>
-                </div>
-
-                <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
-                  <div className="flex flex-col items-center md:items-end">
-                    <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
-                    <span className="text-xs font-black text-foreground">LIVERPOOL won <span className="text-[#75fbd9] font-mono tabular-nums">(2-1)</span></span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </section>
 
           {/* Action Feed */}
           <section className="bg-card rounded-[2rem] border border-border px-4 py-4 md:p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
