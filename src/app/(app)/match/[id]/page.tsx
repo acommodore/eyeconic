@@ -412,14 +412,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
             <div className="flex flex-col items-center flex-1 relative">
-              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
+              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mt-2 md:mt-3 mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team1 || "Home"}</h2>
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="absolute top-[100%] left-0 right-0 h-6 md:h-8 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                <div className="absolute top-[100%] left-0 right-0 h-10 md:h-12 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
                       <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
@@ -467,14 +467,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
             {/* TEAM 2 */}
             <div className="flex flex-col items-center flex-1 relative">
-              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
+              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mt-2 md:mt-3 mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team2 || "Away"}</h2>
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="absolute top-[100%] left-0 right-0 h-6 md:h-8 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                <div className="absolute top-[100%] left-0 right-0 h-10 md:h-12 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
                       <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
@@ -1907,6 +1907,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 
