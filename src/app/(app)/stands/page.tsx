@@ -19,7 +19,7 @@ export default function StandsPage() {
       {/* Top Navigation Tabs - Floating & Glassy */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border px-4 md:px-8 py-4">
         <div className="flex gap-3 overflow-x-auto pb-2 hover-scrollbar hide-scrollbar-mobile">
-          <button onClick={() => scrollToSection('live-now')} className="px-6 py-2.5 rounded-full bg-[teal]/10 border border-[teal]/30 text-[teal] font-black tracking-widest text-xs whitespace-nowrap flex items-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-[teal]/20 transition-all cursor-pointer">
+          <button onClick={() => scrollToSection('live-now')} className="px-6 py-2.5 rounded-full bg-[teal]/10 border border-[teal]/30 text-[teal] font-black tracking-widest text-xs whitespace-nowrap flex items-center gap-2 shadow-[0_0_20px_rgba(117, 251, 217,0.15)] hover:bg-[teal]/20 transition-all cursor-pointer">
             <Radio className="w-4 h-4 animate-pulse" />
             LIVE NOW
           </button>
@@ -67,7 +67,7 @@ export default function StandsPage() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <Link href="/stands/1" className="bg-teal text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_25px_rgba(0,229,255,0.4)] hover:shadow-[0_0_35px_rgba(0,229,255,0.6)] animate-pulse-slow hover:scale-105 active:scale-95">
+                  <Link href="/stands/1" className="bg-[#75fbd9] text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] animate-pulse-slow hover:scale-105 active:scale-95">
                     JOIN STAND
                   </Link>
                   <div className="flex -space-x-3">
@@ -115,7 +115,7 @@ export default function StandsPage() {
               
               {/* Card 1 */}
               <Link href="/stands/1" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -154,7 +154,7 @@ export default function StandsPage() {
 
                {/* Card 2 */}
                <Link href="/stands/2" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -193,7 +193,7 @@ export default function StandsPage() {
 
                {/* Card 3 */}
                <Link href="/stands/3" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -231,7 +231,7 @@ export default function StandsPage() {
               
               {/* Card 4 - Hidden on smaller screens to balance grid */}
                <Link href="/stands/4" className="hidden xl:block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   

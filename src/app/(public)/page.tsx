@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-background text-foreground text-gray-900 dark:text-foreground selection:bg-[#00E5FF]/30 font-sans transition-colors duration-500">
+    <div className="min-h-screen bg-gray-50 dark:bg-background text-foreground text-gray-900 dark:text-foreground selection:bg-[#75fbd9]/30 font-sans transition-colors duration-500">
       {/* Global Background Grid & Noise */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05] dark:opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(currentColor 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
       <div className="fixed inset-0 z-0 pointer-events-none opacity-10 dark:opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -35,7 +35,7 @@ function Navbar() {
       <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
+          <img src="/stimmung_logo_nobg.png?v=1782737833051" alt="Stimmung Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
         </Link>
         <div className="flex items-center gap-4">
           <ThemeToggle />
@@ -65,7 +65,7 @@ function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-300 dark:border-border bg-muted0 dark:bg-muted backdrop-blur-md mb-8 transition-colors">
-              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-[#00E5FF] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-[#75fbd9] animate-pulse" />
               <span className="text-[10px] font-mono tracking-widest text-black dark:text-gray-300 uppercase font-black">Live Intelligence Engine</span>
             </div>
             
@@ -80,7 +80,7 @@ function HeroSection() {
                 <span className="text-foreground">WORTH</span> <span className="text-muted-foreground">WATCHING.</span>
               </span>
             </h1>
-            <h2 className="text-[#00E5FF] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(0,229,255,0.3)] font-bold">
+            <h2 className="text-[#75fbd9] font-mono tracking-widest uppercase text-sm md:text-sm mb-8 drop-shadow-[0_0_10px_rgba(117, 251, 217,0.3)] font-bold">
               STATS ARE DECEPTIVE
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-muted-foreground font-medium mb-12 tracking-wide max-w-xl leading-relaxed transition-colors">
@@ -105,7 +105,7 @@ function HeroSection() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[480px] transform-style-3d group"
           >
             {/* Glow Behind */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-[#00E5FF]/30 to-[#FF7F50]/20 blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity duration-1000" />
+            <div className="absolute -inset-1 bg-gradient-to-br from-[#75fbd9]/30 to-[#FF7F50]/20 blur-2xl opacity-30 dark:opacity-50 group-hover:opacity-60 dark:group-hover:opacity-80 transition-opacity duration-1000" />
             
             <div className="relative backdrop-blur-2xl bg-white/60 dark:bg-black/60 border border-gray-300 dark:border-border rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden font-mono transition-colors duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent pointer-events-none" />
@@ -113,7 +113,7 @@ function HeroSection() {
               {/* Terminal Header */}
               <div className="px-6 py-4 border-b border-gray-300 dark:border-border flex items-center justify-between bg-black/5 dark:bg-muted transition-colors">
                 <div className="flex items-center gap-3 text-gray-500 dark:text-muted-foreground text-xs tracking-widest">
-                  <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> Stimmung_OS v2.0
+                  <TerminalIcon className="w-4 h-4 text-[#75fbd9]" /> Stimmung_OS v2.0
                 </div>
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-white/20" />
@@ -125,8 +125,8 @@ function HeroSection() {
               {/* Terminal Content */}
               <div className="p-6">
                 <div className="flex justify-between items-center mb-8">
-                  <div className="flex items-center gap-2 text-[#00E5FF]">
-                    <span className="w-2 h-2 bg-[#00E5FF] shadow-[0_0_10px_#00E5FF] animate-pulse" />
+                  <div className="flex items-center gap-2 text-[#75fbd9]">
+                    <span className="w-2 h-2 bg-[#75fbd9] shadow-[0_0_10px_#75fbd9] animate-pulse" />
                     <span className="text-[10px] font-bold tracking-widest uppercase">Global Signal Active</span>
                   </div>
                 </div>
@@ -148,14 +148,14 @@ function HeroSection() {
                   </div>
 
                   <div className="relative p-4 border border-gray-300 dark:border-border rounded-lg group/item hover:bg-black/5 dark:hover:bg-muted/50 transition-colors">
-                     <div className="absolute left-0 top-0 w-1 h-full bg-[#00E5FF]" />
+                     <div className="absolute left-0 top-0 w-1 h-full bg-[#75fbd9]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
                          <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" className="w-5 h-5 object-contain" alt="ARS" />
                          <span className="text-gray-500 dark:text-muted-foreground text-[10px] font-black tracking-widest">VS</span>
                          <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg" className="w-5 h-5 object-contain" alt="PSG" />
                        </div>
-                       <span className="text-[#00E5FF] font-bold">85 EMTN</span>
+                       <span className="text-[#75fbd9] font-bold">85 EMTN</span>
                      </div>
                   </div>
 
@@ -187,7 +187,7 @@ function ProblemAndShiftSection() {
       
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#00E5FF]/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-[#75fbd9]/20 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#FF7F50]/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen" />
       </div>
       
@@ -200,7 +200,7 @@ function ProblemAndShiftSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-gray-900 dark:text-foreground tracking-tighter transition-colors"
           >
             Traditional apps show you what happened.<br/> 
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-blue-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#75fbd9] to-blue-500">
               Stimmung shows you what is worth watching.
             </span>
           </motion.h2>
@@ -213,7 +213,7 @@ function ProblemAndShiftSection() {
           >
             Instead of checking 5 different apps to figure out which game is getting exciting, 
             <span className="text-gray-900 dark:text-foreground font-bold transition-colors"> Stimmung </span> 
-            does the heavy lifting. Powered by our proprietary <span className="text-[#00E5FF] font-bold">Attention Layer</span>, we analyze real-time crowd noise, tactical shifts, and momentum spikes to tell you exactly when a boring 0-0 draw turns into an absolute thriller.
+            does the heavy lifting. Powered by our proprietary <span className="text-[#75fbd9] font-bold">Attention Layer</span>, we analyze real-time crowd noise, tactical shifts, and momentum spikes to tell you exactly when a boring 0-0 draw turns into an absolute thriller.
           </motion.p>
         </div>
         
@@ -241,13 +241,13 @@ function ProblemAndShiftSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-6 md:p-8 rounded-2xl bg-gradient-to-b from-[#00E5FF]/10 dark:from-[#00E5FF]/[0.05] to-transparent border border-[#00E5FF]/20 relative overflow-hidden group transition-colors"
+            className="p-6 md:p-8 rounded-2xl bg-gradient-to-b from-[#75fbd9]/10 dark:from-[#75fbd9]/[0.05] to-transparent border border-[#75fbd9]/20 relative overflow-hidden group transition-colors"
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00E5FF] to-blue-500 shadow-[0_0_20px_#00E5FF]" />
-            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#00E5FF]/10 blur-[80px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors duration-700" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#75fbd9] to-blue-500 shadow-[0_0_20px_#75fbd9]" />
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#75fbd9]/10 blur-[80px] rounded-full group-hover:bg-[#75fbd9]/20 transition-colors duration-700" />
             
             <h3 className="text-sm font-mono font-bold mb-6 text-gray-900 dark:text-foreground uppercase tracking-[0.2em] flex items-center gap-3 relative z-10 transition-colors">
-              <Activity className="w-4 h-4 text-[#00E5FF]" /> Stimmung
+              <Activity className="w-4 h-4 text-[#75fbd9]" /> Stimmung
             </h3>
             <ul className="space-y-4 relative z-10">
               {['Instant match intelligence', 'Know what\'s worth watching', 'Live momentum insights', 'Timely game alerts', 'Watch with confidence'].map((item, i) => (
@@ -259,7 +259,7 @@ function ProblemAndShiftSection() {
                   transition={{ delay: 0.2 + (i * 0.1) }}
                   className="flex items-center gap-4 text-gray-900 dark:text-foreground text-base font-medium tracking-wide transition-colors"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#00E5FF] shrink-0 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" /> {item}
+                  <CheckCircle2 className="w-4 h-4 text-[#75fbd9] shrink-0 drop-shadow-[0_0_8px_rgba(117, 251, 217,0.8)]" /> {item}
                 </motion.li>
               ))}
             </ul>
@@ -276,9 +276,9 @@ function FeaturesSection() {
       title: "The EMTN Score",
       desc: "Our live algorithm quantifies match excitement using real-time crowd noise, momentum shifts, and tactical data.",
       colSpan: "md:col-span-2",
-      icon: <Activity className="w-5 h-5 text-[#00E5FF]" />,
-      glowColor: "rgba(0, 229, 255, 0.4)",
-      borderColor: "border-[#00E5FF]/30",
+      icon: <Activity className="w-5 h-5 text-[#75fbd9]" />,
+      glowColor: "rgba(117, 251, 217, 0.4)",
+      borderColor: "border-[#75fbd9]/30",
     },
     {
       title: "Smart Match Routing",
@@ -317,7 +317,7 @@ function FeaturesSection() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-12 text-center">
           <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-foreground tracking-tighter drop-shadow-xl transition-colors">The Engine</h3>
-          <p className="text-[#00E5FF] font-mono tracking-widest mt-4 text-sm md:text-base uppercase">POWERED BY THE ATTENTION LAYER</p>
+          <p className="text-[#75fbd9] font-mono tracking-widest mt-4 text-sm md:text-base uppercase">POWERED BY THE ATTENTION LAYER</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-4 md:gap-6 perspective-[1000px]">
@@ -436,8 +436,8 @@ function TerminalSection() {
 
   const alerts = {
     idle: {
-      color: "text-[#00E5FF]", bg: "bg-[#00E5FF]/5", border: "border-[#00E5FF]/20", shadow: "shadow-[inset_0_0_30px_rgba(0,229,255,0.05)] dark:shadow-[inset_0_0_30px_rgba(0,229,255,0.1)]", gradient: "via-[#00E5FF]",
-      icon: <Activity className="w-4 h-4 animate-pulse" />, title: "SYSTEM NORMAL - MONITORING", desc: "All systems nominal. Analyzing baseline fan sentiment across global leagues.", pill: "STABLE", dot: "bg-[#00E5FF] animate-pulse"
+      color: "text-[#75fbd9]", bg: "bg-[#75fbd9]/5", border: "border-[#75fbd9]/20", shadow: "shadow-[inset_0_0_30px_rgba(117, 251, 217,0.05)] dark:shadow-[inset_0_0_30px_rgba(117, 251, 217,0.1)]", gradient: "via-[#75fbd9]",
+      icon: <Activity className="w-4 h-4 animate-pulse" />, title: "SYSTEM NORMAL - MONITORING", desc: "All systems nominal. Analyzing baseline fan sentiment across global leagues.", pill: "STABLE", dot: "bg-[#75fbd9] animate-pulse"
     },
     tension: {
       color: "text-[#FFBD2E]", bg: "bg-[#FFBD2E]/5", border: "border-[#FFBD2E]/20", shadow: "shadow-[inset_0_0_30px_rgba(255,189,46,0.05)] dark:shadow-[inset_0_0_30px_rgba(255,189,46,0.1)]", gradient: "via-[#FFBD2E]",
@@ -460,7 +460,7 @@ function TerminalSection() {
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-foreground tracking-tighter transition-colors">The Attention Layer</h2>
           <p className="text-sm text-gray-500 font-mono tracking-widest uppercase flex items-center justify-center gap-3">
-             <span className="w-2 h-2 bg-[#00E5FF] rounded-full animate-ping" />
+             <span className="w-2 h-2 bg-[#75fbd9] rounded-full animate-ping" />
              Interactive Terminal Demonstrator
           </p>
         </div>
@@ -469,7 +469,7 @@ function TerminalSection() {
         <div className="max-w-5xl mx-auto mb-8 flex flex-wrap justify-center gap-4">
           <button 
             onClick={() => setSimulationMode('idle')}
-            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'idle' ? 'bg-[#00E5FF]/10 border-[#00E5FF]/50 text-[#00E5FF]' : 'bg-gray-100 dark:bg-muted border-gray-300 dark:border-border text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground'}`}
+            className={`px-4 py-2 text-xs font-mono font-bold tracking-widest uppercase rounded border transition-colors ${simulationMode === 'idle' ? 'bg-[#75fbd9]/10 border-[#75fbd9]/50 text-[#75fbd9]' : 'bg-gray-100 dark:bg-muted border-gray-300 dark:border-border text-gray-600 dark:text-muted-foreground hover:text-gray-900 dark:hover:text-foreground'}`}
           >
             Reset
           </button>
@@ -550,14 +550,14 @@ function TerminalSection() {
                     pillText = "CRITICAL";
                     pillBg = "bg-[#FF7F50]/10 border-[#FF7F50]/20 text-[#FF7F50] font-bold";
                   } else if (match.emtn >= 50) {
-                    scoreColor = "text-[#00E5FF] font-bold";
+                    scoreColor = "text-[#75fbd9] font-bold";
                     pillText = "RISING";
-                    pillBg = "bg-[#00E5FF]/5 border-[#00E5FF]/20 text-[#00E5FF] font-bold";
+                    pillBg = "bg-[#75fbd9]/5 border-[#75fbd9]/20 text-[#75fbd9] font-bold";
                   }
 
                   // Force the left bar for the main match even in idle mode
                   if (isMain && simulationMode === 'idle') {
-                    leftBarStyle = "bg-[#00E5FF] shadow-[0_0_15px_#00E5FF]";
+                    leftBarStyle = "bg-[#75fbd9] shadow-[0_0_15px_#75fbd9]";
                     wrapperStyle = "bg-black/[0.03] dark:bg-white/[0.03] border-gray-400 dark:border-border cursor-pointer";
                   }
 
@@ -625,7 +625,7 @@ function TerminalSection() {
 
 function SocialProofSection() {
   const stats = [
-    { label: "Fan Reactions Parsed", value: "10M+", trend: "Live", icon: <Activity className="w-5 h-5 text-[#00E5FF]" /> },
+    { label: "Fan Reactions Parsed", value: "10M+", trend: "Live", icon: <Activity className="w-5 h-5 text-[#75fbd9]" /> },
     { label: "Matches Analyzed", value: "500+", trend: "Global", icon: <Globe className="w-5 h-5 text-[#FF7F50]" /> },
     { label: "Communities Engaged", value: "100+", trend: "Active", icon: <Users className="w-5 h-5 text-[#A855F7]" /> }
   ];
@@ -645,13 +645,13 @@ function SocialProofSection() {
               transition={{ delay: i * 0.1 }}
               className="p-8 rounded-2xl bg-white dark:bg-[#080808] border border-gray-300 dark:border-border relative group overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,1)] transition-colors duration-500"
             >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00E5FF]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#75fbd9]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="flex justify-between items-start mb-10">
                 <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-muted flex items-center justify-center border border-gray-300 dark:border-border group-hover:bg-black/10 dark:group-hover:bg-muted/80 transition-colors duration-500">
                   {stat.icon}
                 </div>
-                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-black/5 dark:bg-muted rounded border border-gray-300 dark:border-border group-hover:border-[#00E5FF]/20 group-hover:text-[#00E5FF] transition-colors duration-500">
+                <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-black/5 dark:bg-muted rounded border border-gray-300 dark:border-border group-hover:border-[#75fbd9]/20 group-hover:text-[#75fbd9] transition-colors duration-500">
                   {stat.trend}
                 </div>
               </div>
@@ -675,7 +675,7 @@ function WaitlistSection() {
     <section className="w-full py-24 px-6 relative overflow-hidden bg-gray-100 dark:bg-background text-foreground transition-colors duration-500">
       {/* Abstract Data Core */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] pointer-events-none z-0">
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#00E5FF_0%,_transparent_50%)] opacity-20 dark:opacity-10 blur-[50px]" />
+         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#75fbd9_0%,_transparent_50%)] opacity-20 dark:opacity-10 blur-[50px]" />
          <motion.div 
            animate={{ rotate: 360 }}
            transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
@@ -684,7 +684,7 @@ function WaitlistSection() {
          <motion.div 
            animate={{ rotate: -360 }}
            transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
-           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#00E5FF]/30 dark:border-[#00E5FF]/10 rounded-full transition-colors duration-500"
+           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#75fbd9]/30 dark:border-[#75fbd9]/10 rounded-full transition-colors duration-500"
          />
       </div>
       
@@ -692,8 +692,8 @@ function WaitlistSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           <div className="text-center lg:text-left">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-gray-900 dark:text-foreground tracking-tighter drop-shadow-md dark:drop-shadow-2xl transition-colors leading-[1.1]">Join the Future of Football Discovery</h2>
-            <p className="text-[#00E5FF] font-mono text-xs tracking-[0.4em] uppercase mb-12 lg:mb-0 flex justify-center lg:justify-start items-center gap-4">
-               <span className="w-8 h-[1px] bg-[#00E5FF]" /> Enter the Waitlist <span className="w-8 h-[1px] bg-[#00E5FF]" />
+            <p className="text-[#75fbd9] font-mono text-xs tracking-[0.4em] uppercase mb-12 lg:mb-0 flex justify-center lg:justify-start items-center gap-4">
+               <span className="w-8 h-[1px] bg-[#75fbd9]" /> Enter the Waitlist <span className="w-8 h-[1px] bg-[#75fbd9]" />
             </p>
           </div>
           
@@ -701,23 +701,23 @@ function WaitlistSection() {
             <form className="space-y-6 text-left p-10 backdrop-blur-2xl bg-white/60 dark:bg-white/[0.02] border border-gray-300 dark:border-border rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.5)] transition-colors duration-500" onSubmit={(e) => e.preventDefault()}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="relative group">
-              <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Name" id="name" />
-              <label htmlFor="name" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Name</label>
-              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
+              <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#75fbd9] transition-colors peer placeholder-transparent" placeholder="Name" id="name" />
+              <label htmlFor="name" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#75fbd9] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Name</label>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#75fbd9] transition-all duration-300 peer-focus:w-full" />
             </div>
             <div className="relative group">
-              <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Club" id="club" />
-              <label htmlFor="club" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Favourite Club</label>
-              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
+              <input type="text" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#75fbd9] transition-colors peer placeholder-transparent" placeholder="Club" id="club" />
+              <label htmlFor="club" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#75fbd9] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Favourite Club</label>
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#75fbd9] transition-all duration-300 peer-focus:w-full" />
             </div>
           </div>
           <div className="relative group mt-8">
-            <input type="email" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#00E5FF] transition-colors peer placeholder-transparent" placeholder="Email" id="email" />
-            <label htmlFor="email" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#00E5FF] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Email Address</label>
-            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#00E5FF] transition-all duration-300 peer-focus:w-full" />
+            <input type="email" className="w-full bg-transparent border-b border-gray-300 dark:border-border-strong px-0 py-4 text-gray-900 dark:text-foreground font-mono text-sm focus:outline-none focus:border-[#75fbd9] transition-colors peer placeholder-transparent" placeholder="Email" id="email" />
+            <label htmlFor="email" className="absolute left-0 top-4 text-gray-500 font-mono text-sm transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-[#75fbd9] peer-valid:-top-4 peer-valid:text-[10px] peer-valid:text-gray-500 dark:peer-valid:text-muted-foreground uppercase tracking-widest">Email Address</label>
+            <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#75fbd9] transition-all duration-300 peer-focus:w-full" />
           </div>
           
-          <button className="relative w-full mt-12 bg-[#00E5FF] text-black font-black tracking-[0.3em] text-sm py-6 rounded-none hover:bg-gray-900 hover:text-foreground dark:hover:bg-white dark:hover:text-black transition-all uppercase overflow-hidden group">
+          <button className="relative w-full mt-12 bg-[#75fbd9] text-black font-black tracking-[0.3em] text-sm py-6 rounded-none hover:bg-gray-900 hover:text-foreground dark:hover:bg-white dark:hover:text-black transition-all uppercase overflow-hidden group">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 dark:opacity-20 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 dark:via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             SECURE ACCESS

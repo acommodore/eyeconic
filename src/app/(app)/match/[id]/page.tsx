@@ -66,9 +66,9 @@ const initialHotTakes = [
     id: 1,
     question: "Was Salah the right MVP?",
     options: [
-      { text: "Yes, 100% deserved", percent: 72, color: "bg-teal" },
-      { text: "No, Van Dijk deserved it", percent: 18, color: "bg-teal/30" },
-      { text: "Someone else", percent: 10, color: "bg-teal/30" }
+      { text: "Yes, 100% deserved", percent: 72, color: "bg-[#75fbd9]" },
+      { text: "No, Van Dijk deserved it", percent: 18, color: "bg-[#75fbd9]/30" },
+      { text: "Someone else", percent: 10, color: "bg-[#75fbd9]/30" }
     ],
     votes: "8.7K votes"
   },
@@ -78,7 +78,7 @@ const initialHotTakes = [
     options: [
       { text: "Correct decision", percent: 32, color: "bg-gray-500" },
       { text: "Robbery!", percent: 58, color: "bg-coral" },
-      { text: "Too close to call", percent: 10, color: "bg-teal/30" }
+      { text: "Too close to call", percent: 10, color: "bg-[#75fbd9]/30" }
     ],
     votes: "7.9K votes"
   },
@@ -86,9 +86,9 @@ const initialHotTakes = [
     id: 3,
     question: "What won Liverpool the game?",
     options: [
-      { text: "Midfield control", percent: 41, color: "bg-teal" },
-      { text: "Salah's brilliance", percent: 37, color: "bg-teal/80" },
-      { text: "City's poor finishing", percent: 22, color: "bg-teal/50" }
+      { text: "Midfield control", percent: 41, color: "bg-[#75fbd9]" },
+      { text: "Salah's brilliance", percent: 37, color: "bg-[#75fbd9]/80" },
+      { text: "City's poor finishing", percent: 22, color: "bg-[#75fbd9]/50" }
     ],
     votes: "6.3K votes"
   }
@@ -393,14 +393,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
             </div>
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
@@ -438,7 +438,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {matchState === 'postmatch' && (
                 <div className="flex flex-col items-center gap-1 mt-1 md:mt-2 text-[10px] md:text-xs font-bold text-muted-foreground">
                   <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-teal">⚽</span> 2'
+                    <span className="text-[#75fbd9]">⚽</span> 2'
                   </div>
                 </div>
               )}
@@ -448,11 +448,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             <div className="flex flex-col items-center justify-start pt-4 md:pt-8 shrink-0">
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
-                  <span className="text-[9px] md:text-[11px] font-bold text-teal tracking-[0.2em] uppercase mb-1">Kickoff In</span>
-                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+                  <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
+                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
-                <div className="text-4xl md:text-6xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative">
+                <div className="text-4xl md:text-6xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono">
                   {(matchInfo as any)?.score || "0 - 0"}
                 </div>
               )}
@@ -477,7 +477,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
             className={`flex-1 py-3 px-4 rounded-xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
               matchState === state 
-                ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.3)]' 
+                ? 'bg-[#75fbd9] text-black shadow-[0_0_20px_rgba(117, 251, 217,0.3)]' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
           >
@@ -486,69 +486,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         ))}
       </div>
 
-        {/* SEASON CONTEXT */}
-        {(matchState === 'prematch' || matchState === 'live') && (
-          <div className="w-full max-w-4xl mx-auto mb-8 flex flex-col">
-            <button 
-              onClick={() => setIsSeasonContextOpen(!isSeasonContextOpen)}
-              className="flex items-center gap-4 mb-2 pl-2 w-full group cursor-pointer"
-            >
-              <div className="w-1 h-6 rounded-full bg-teal shadow-[0_0_12px_rgba(0,229,255,0.8)]"></div>
-              <h2 className="text-sm font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-teal transition-colors">Season Context</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-              <ChevronDown className={`w-5 h-5 text-white/50 transition-transform duration-300 ${isSeasonContextOpen ? 'rotate-180' : ''}`} />
-            </button>
-            
-            <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isSeasonContextOpen ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
-              <div className="bg-black/40 border border-white/5 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl backdrop-blur-md">
-                <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
-                  <div className="flex flex-col items-center md:items-start">
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-teal mb-1">League Position</span>
-                    <div className="text-sm font-black flex items-center gap-2 text-foreground">
-                      <span>4th</span>
-                      <span className="text-muted-foreground text-[10px]">vs</span>
-                      <span>7th</span>
-                    </div>
-                  </div>
-                  <div className="w-px h-8 bg-white/10 hidden md:block"></div>
-                  <div className="flex flex-col items-center md:items-start text-right md:text-left">
-                    <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
-                    <span className="text-sm font-black text-foreground">5 pts</span>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col items-center w-full md:w-auto py-4 md:py-0 border-y border-white/5 md:border-y-0">
-                  <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Recent Form</span>
-                  <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase">
-                    <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
-                    <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-                    <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>
-                    <span className="text-muted-foreground mx-2 text-[9px] font-mono">vs</span>
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>-
-                    <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-                    <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-                    <span className="text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">W</span>
-                  </div>
-                </div>
-                
-                <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
-                  <div className="flex flex-col items-center md:items-end">
-                    <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
-                    <span className="text-xs font-black text-foreground">{matchInfo?.team1 || 'Team A'} won <span className="text-teal">(2-1)</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+
 
               {matchState === 'live' && matchInfo?.status === 'upcoming' ? (
         <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-3xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-5 mix-blend-luminosity bg-cover z-0 pointer-events-none" />
-           <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+           <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-[#75fbd9]/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]">
              <span className="text-3xl">⏳</span>
            </div>
            
@@ -566,20 +509,27 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* Tab Navigation - Modern Pills */}
       {matchState === 'prematch' && (
-        <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile mb-4 border-b border-border">
-          {['LINEUP', 'H2H', 'KEY BATTLES'].map((tab) => (
-            <button 
-              key={tab}
-              onClick={() => setPrematchTab(tab)}
-              className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
-                prematchTab === tab 
-                  ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
-                  : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
+        <div className="mb-4 border-b border-border">
+          <div className="flex items-center gap-4 mb-4 pl-2 w-full">
+            <div className="w-1 h-6 rounded-full bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
+            <h2 className="text-sm font-black uppercase tracking-widest text-foreground drop-shadow-lg">MATCH INTEL</h2>
+            <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile">
+            {['LINEUP', 'H2H', 'SEASON CONTEXT', 'KEY BATTLES'].map((tab) => (
+              <button 
+                key={tab}
+                onClick={() => setPrematchTab(tab)}
+                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                  prematchTab === tab 
+                    ? 'bg-[#75fbd9]/10 border border-[#75fbd9]/30 text-[#75fbd9] shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' 
+                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
@@ -591,7 +541,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
                 activeTab === tab 
-                  ? 'bg-teal/10 border border-teal/30 text-teal shadow-[0_0_20px_rgba(0,229,255,0.15)]' 
+                  ? 'bg-[#75fbd9]/10 border border-[#75fbd9]/30 text-[#75fbd9] shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' 
                   : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
               }`}
             >
@@ -620,13 +570,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
                 {prematchTab === 'H2H' && <H2HTab matchInfo={matchInfo} />}
+                {prematchTab === 'SEASON CONTEXT' && <SeasonContextTab matchInfo={matchInfo} />}
                 {prematchTab === 'KEY BATTLES' && <KeyBattlesTab matchInfo={matchInfo} />}
              </div>
 
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
              {prematchTab === 'LINEUP' && (
                <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-teal/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#75fbd9]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                         <img src={getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -634,18 +585,18 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <div className="absolute inset-0 bg-gradient-to-l from-[#121212] to-transparent" />
                      </div>
                      <div className="relative z-10 w-full h-full flex flex-col justify-center">
-                        <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2">MVP WATCH</h3>
+                        <h3 className="text-[10px] font-black tracking-widest text-[#75fbd9] uppercase mb-2">MVP WATCH</h3>
                         <select 
                           value={mvpWatchPlayer}
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
                           disabled={matchState === 'postmatch'}
-                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-border disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#75fbd9] transition-colors pb-1 border-b border-border disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
                         </select>
                         <p className="text-[10px] text-muted-foreground mb-2">{getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.team}</p>
                         <div className="flex items-end gap-1 mt-auto">
-                          <span className="text-xl font-black text-teal leading-none">8.7</span>
+                          <span className="text-xl font-black text-[#75fbd9] leading-none">8.7</span>
                           <span className="text-[9px] text-gray-500 uppercase pb-0.5">Season rating</span>
                         </div>
                      </div>
@@ -694,7 +645,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              )}
 
              {matchInfo?.status === 'upcoming' && (
-               <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-teal/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.15)]">
+               <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-[#75fbd9]/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]">
                  <span className="text-3xl">⏳</span>
                </div>
              )}
@@ -703,7 +654,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                <div className="relative z-10 w-full h-24 mb-6 opacity-30">
                  {/* Fake pitch/chart animation placeholder */}
                  <div className="absolute inset-0 border border-border rounded-xl bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/82/Soccer_field_-_empty.svg')] bg-center bg-cover mix-blend-screen overflow-hidden">
-                    <div className="w-3 h-3 bg-teal rounded-full absolute top-1/2 left-1/4 shadow-[0_0_10px_rgba(0,229,255,1)] animate-pulse" />
+                    <div className="w-3 h-3 bg-[#75fbd9] rounded-full absolute top-1/2 left-1/4 shadow-[0_0_10px_rgba(117, 251, 217,1)] animate-pulse" />
                     <div className="w-3 h-3 bg-[#FF7F50] rounded-full absolute top-1/3 left-2/3 shadow-[0_0_10px_rgba(255,127,80,1)] animate-pulse" />
                  </div>
                </div>
@@ -746,12 +697,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              className="space-y-8"
           >
             <div className="flex items-center gap-2 mb-4">
-               <Mic className="w-5 h-5 text-teal" />
-               <h3 className="text-sm font-black tracking-widest text-teal uppercase">Highlights from the Stands</h3>
+               <Mic className="w-5 h-5 text-[#75fbd9]" />
+               <h3 className="text-sm font-black tracking-widest text-[#75fbd9] uppercase">Highlights from the Stands</h3>
             </div>
             <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-[32px] p-6 shadow-2xl space-y-4">
                {[
-                 { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#00E5FF] to-blue-500" },
+                 { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#75fbd9] to-blue-500" },
                  { id: 2, name: "AnfieldRed", time: "68'", text: "That decision is shocking. Absolute madness from the ref there.", color: "from-[#C8102E] to-red-500" },
                  { id: 3, name: "NeutralFan", time: "FT", text: "Incredible match. A masterclass in tactical adaptability in the second half.", color: "from-gray-400 to-gray-600" }
                ].map(note => (
@@ -765,11 +716,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <p className="text-sm text-muted-foreground italic">"{note.text}"</p>
                         
                         <div className="flex items-center gap-3 md:gap-4 mt-4 bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
-                          <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                          <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#75fbd9] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <Play className="w-3 h-3 md:w-4 md:h-4 text-black fill-black ml-0.5" />
                           </button>
                           <div className="flex-1 flex items-center gap-0.5 md:gap-1 h-4 md:h-6 opacity-50 overflow-hidden">
-                            {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-teal rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
+                            {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-[#75fbd9] rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
                           </div>
                         </div>
                      </div>
@@ -798,7 +749,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Team 1 */}
                 <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-xl p-4 relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#75fbd9]/5 to-transparent pointer-events-none" />
                   <div className="flex items-center gap-2 mb-3 w-full justify-center md:justify-start">
                     <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-6 h-6 object-contain" />
                     <span className="font-black text-base uppercase tracking-wider">{matchInfo?.team1 || 'Team A'}</span>
@@ -806,7 +757,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   <div className="flex items-end gap-2 mb-3">
                     <span className="text-2xl font-black tabular-nums">2nd</span>
                     <span className="text-xs text-muted-foreground font-bold mb-1">(↑1)</span>
-                    <span className="text-xs font-black text-teal bg-teal/10 px-2 py-0.5 rounded border border-teal/20 mb-1">+3 pts</span>
+                    <span className="text-xs font-black text-[#75fbd9] bg-[#75fbd9]/10 px-2 py-0.5 rounded border border-[#75fbd9]/20 mb-1">+3 pts</span>
                   </div>
                   <div className="w-full space-y-2">
                     <div className="flex flex-col gap-0.5">
@@ -851,17 +802,17 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             {/* Dark Cinematic Background */}
             <div className="absolute inset-0 bg-[#020202] z-0" />
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay z-0" />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/30 to-transparent opacity-50" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00E5FF]/30 to-transparent opacity-50" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#75fbd9]/30 to-transparent opacity-50" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#75fbd9]/30 to-transparent opacity-50" />
 
             <div className="relative z-10 p-6 md:p-16 flex flex-col items-center">
               
               {/* Premium Header */}
               <div className="flex flex-col items-center mb-12 md:mb-16 relative w-full mt-4 md:mt-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-24 md:h-32 bg-teal/20 blur-[80px] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-64 h-24 md:h-32 bg-[#75fbd9]/20 blur-[80px] pointer-events-none" />
                 <h2 className="text-3xl md:text-6xl font-black text-center tracking-tighter uppercase leading-[0.9] drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
                   The Fans Have <br/>
-                  <span className="text-teal drop-shadow-[0_0_20px_rgba(0,229,255,0.6)]">Spoken.</span>
+                  <span className="text-[#75fbd9] drop-shadow-[0_0_20px_rgba(117, 251, 217,0.6)]">Spoken.</span>
                 </h2>
               </div>
 
@@ -876,22 +827,22 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {/* MVP SHOWCASE */}
               <div className="w-full max-w-lg mx-auto flex flex-col items-center relative mb-12">
                 {/* Massive Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-teal/20 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 bg-[#75fbd9]/20 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div className="relative">
                   {/* Rotating Rings */}
-                  <div className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-teal/30 rounded-full animate-[spin_12s_linear_infinite]" />
-                  <div className="absolute -inset-8 md:-inset-10 border border-teal/10 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+                  <div className="absolute -inset-4 md:-inset-6 border-2 border-dashed border-[#75fbd9]/30 rounded-full animate-[spin_12s_linear_infinite]" />
+                  <div className="absolute -inset-8 md:-inset-10 border border-[#75fbd9]/10 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
                   
-                  <div className="w-40 h-40 md:w-56 md:h-56 rounded-full p-1 md:p-1.5 bg-gradient-to-br from-[#00E5FF] via-[#00E5FF]/20 to-transparent shadow-[0_0_50px_rgba(0,229,255,0.3)] relative z-10">
+                  <div className="w-40 h-40 md:w-56 md:h-56 rounded-full p-1 md:p-1.5 bg-gradient-to-br from-[#75fbd9] via-[#75fbd9]/20 to-transparent shadow-[0_0_50px_rgba(117, 251, 217,0.3)] relative z-10">
                      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500&fit=crop" className="w-full h-full rounded-full object-cover border-4 border-[#020202]" />
                   </div>
                   
-                  <div className="absolute -top-3 -right-4 md:-top-4 md:-right-6 bg-gradient-to-r from-[#00E5FF] to-[#00B4D8] text-[#020202] text-[10px] md:text-xs font-black px-3 py-1 md:px-4 md:py-1.5 rounded-full uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(0,229,255,0.4)] z-20 border border-[#020202] transform rotate-6">
+                  <div className="absolute -top-3 -right-4 md:-top-4 md:-right-6 bg-gradient-to-r from-[#75fbd9] to-[#00B4D8] text-[#020202] text-[10px] md:text-xs font-black px-3 py-1 md:px-4 md:py-1.5 rounded-full uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(117, 251, 217,0.4)] z-20 border border-[#020202] transform rotate-6">
                     MVP
                   </div>
                   
-                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-teal text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-teal/50 shadow-[0_10px_30px_rgba(0,229,255,0.3)] z-20 font-mono transform -rotate-3">
+                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-[#75fbd9] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#75fbd9]/50 shadow-[0_10px_30px_rgba(117, 251, 217,0.3)] z-20 font-mono transform -rotate-3">
                     9.2
                   </div>
                   
@@ -963,11 +914,11 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <span className="text-[9px] md:text-xs font-bold text-gray-500 uppercase tracking-widest group-hover:text-foreground transition-colors">Diaz</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform relative">
-                        <div className="absolute -inset-2 bg-teal/20 rounded-full blur-md" />
-                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-teal shadow-[0_0_20px_rgba(0,229,255,0.4)] p-0.5 md:p-1 bg-[#020202] relative z-10">
+                        <div className="absolute -inset-2 bg-[#75fbd9]/20 rounded-full blur-md" />
+                        <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-[#75fbd9] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] p-0.5 md:p-1 bg-[#020202] relative z-10">
                           <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop" className="w-full h-full rounded-full object-cover" />
                         </div>
-                        <span className="text-[9px] md:text-xs font-black text-teal uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
+                        <span className="text-[9px] md:text-xs font-black text-[#75fbd9] uppercase tracking-widest drop-shadow-md mt-0.5 md:mt-1">Salah</span>
                       </div>
                       <div className="flex flex-col items-center gap-2 md:gap-3 group cursor-pointer hover:scale-110 transition-transform">
                         <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-border bg-gradient-to-b from-white/5 to-transparent backdrop-blur-md flex flex-col items-center justify-end overflow-hidden shadow-inner relative">
@@ -991,10 +942,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <section className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
              {/* Final Damage Report / Narrative Curve */}
              <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#75fbd9]/5 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div>
-                   <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
+                   <h3 className="text-[10px] font-black tracking-widest text-[#75fbd9] uppercase mb-2 flex items-center gap-2">
                      <Activity className="w-3.5 h-3.5" /> Match Narrative Curve
                    </h3>
                    <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-8">
@@ -1009,12 +960,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                    
                    {/* Data Points (Bars) */}
                    {[
-                     { h: '40%', c: 'bg-teal/20', t: '15\'' },
-                     { h: '60%', c: 'bg-teal/40', t: '30\'' },
+                     { h: '40%', c: 'bg-[#75fbd9]/20', t: '15\'' },
+                     { h: '60%', c: 'bg-[#75fbd9]/40', t: '30\'' },
                      { h: '30%', c: 'bg-coral/40', t: 'HT' },
                      { h: '20%', c: 'bg-coral/80', t: '60\'' },
                      { h: '15%', c: 'bg-[#D32F2F]', t: '75\'' },
-                     { h: '85%', c: 'bg-teal/80', t: 'FT' },
+                     { h: '85%', c: 'bg-[#75fbd9]/80', t: 'FT' },
                    ].map((bar, i) => (
                      <div key={i} className="flex flex-col items-center gap-2 w-8 md:w-12 group">
                         <div className={`w-full ${bar.c} rounded-t-sm transition-all group-hover:brightness-150`} style={{ height: bar.h }} />
@@ -1024,7 +975,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
                    {/* Connecting Line Mock */}
                    <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                     <polyline points="5,60 22,40 40,70 58,80 75,85 92,15" fill="none" stroke="rgba(0, 229, 255, 0.4)" strokeWidth="1" strokeDasharray="4 2" />
+                     <polyline points="5,60 22,40 40,70 58,80 75,85 92,15" fill="none" stroke="rgba(117, 251, 217, 0.4)" strokeWidth="1" strokeDasharray="4 2" />
                    </svg>
                 </div>
 
@@ -1042,7 +993,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
              {/* Agenda Settlement Checklist */}
              <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative">
-                <h3 className="text-[10px] font-black tracking-widest text-teal uppercase mb-2 flex items-center gap-2">
+                <h3 className="text-[10px] font-black tracking-widest text-[#75fbd9] uppercase mb-2 flex items-center gap-2">
                    <Target className="w-3.5 h-3.5" /> Autopsy
                 </h3>
                 <h2 className="text-2xl md:text-3xl font-black text-foreground uppercase tracking-tight mb-8">
@@ -1057,13 +1008,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                      { state: 'proven', text: 'Haaland Nullified', sub: 'Van Dijk restricted Haaland to a season-low 14 touches.' },
                      { state: 'debunked', text: 'xG Overperformance', sub: 'Liverpool converted 1.2 xG into 2 goals against the run of play.' }
                    ]).map((agenda: any, i: number) => (
-                      <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-teal/5 border-teal/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
-                         <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-teal/20 text-teal' : 'bg-coral/20 text-coral'}`}>
+                      <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-[#75fbd9]/5 border-[#75fbd9]/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
+                         <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-[#75fbd9]/20 text-[#75fbd9]' : 'bg-coral/20 text-coral'}`}>
                             {agenda.state === 'proven' ? '✓' : '✗'}
                          </div>
                          <div className="flex flex-col">
                             <span className="text-[10px] font-black tracking-widest uppercase mb-1">
-                               {agenda.state === 'proven' ? <span className="text-teal">AGENDA PROVEN</span> : <span className="text-coral">AGENDA DEBUNKED</span>}
+                               {agenda.state === 'proven' ? <span className="text-[#75fbd9]">AGENDA PROVEN</span> : <span className="text-coral">AGENDA DEBUNKED</span>}
                             </span>
                             <span className="text-sm font-bold text-foreground mb-1">{agenda.text}</span>
                             <span className="text-[10px] text-muted-foreground font-medium leading-relaxed">{agenda.sub}</span>
@@ -1296,7 +1247,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         {event.type === 'sub' && '🔄'}
                       </div>
                       
-                      <div className="text-teal font-black text-xs tracking-widest mb-1">{event.time}</div>
+                      <div className="text-[#75fbd9] font-black text-xs tracking-widest mb-1">{event.time}</div>
                       <div className="text-lg font-black text-foreground mb-1">
                         {event.type === 'sub' ? `${event.playerIn} In / ${event.playerOut} Out` : event.player}
                       </div>
@@ -1321,7 +1272,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           className="w-full max-w-4xl mx-auto relative group"
         >
           {/* Subtle background glow */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#00E5FF]/10 transition-colors duration-1000"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#75fbd9]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#75fbd9]/10 transition-colors duration-1000"></div>
           
           <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-border rounded-[32px] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
             
@@ -1462,10 +1413,10 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
             {/* MCI Players */}
             {mciPlayers.map((p, i) => (
               <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-teal shadow-[0_0_15px_rgba(0,229,255,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
                     <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-teal drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] font-black tracking-wider text-[#75fbd9] drop-shadow-md">{p.name}</span>
               </div>
             ))}
 
@@ -1483,7 +1434,7 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
          {/* Bench */}
          <div className="w-full bg-[#1A1A1A] rounded-b-2xl p-4 border border-border border-t-0 mb-8">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-1 h-4 bg-teal" />
+              <div className="w-1 h-4 bg-[#75fbd9]" />
               <div className="flex gap-1.5">
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=1" className="w-full h-full object-cover"/></div>
                 <div className="w-6 h-6 rounded-full overflow-hidden border border-border"><img src="https://i.pravatar.cc/100?img=2" className="w-full h-full object-cover"/></div>
@@ -1521,7 +1472,7 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                  <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
                </div>
              ) : (
-               <span className="text-[10px] font-black text-teal tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
+               <span className="text-[10px] font-black text-[#75fbd9] tracking-widest">{vibe >= 50 ? 'FEELING GOOD' : 'WORRIED'}</span>
              )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
@@ -1534,8 +1485,8 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                setVibe(parseInt(e.target.value));
                if (!hasVotedAs) setHasVotedAs('fan');
              }}
-             disabled={hasVotedAs === 'neutral' || matchState === 'postmatch'}
-             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' || matchState === 'postmatch' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             disabled={hasVotedAs === 'neutral' || matchInfo?.status === 'finished'}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#75fbd9] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' || matchInfo?.status === 'finished' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 
@@ -1564,7 +1515,7 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                  <div className="w-3 h-3 border border-gray-600 rounded-sm flex flex-col items-center justify-center text-[6px] text-gray-500">🔒</div>
                </div>
              ) : (
-               <span className="text-[10px] font-black text-teal tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
+               <span className="text-[10px] font-black text-[#75fbd9] tracking-widest">{tactical >= 50 ? 'LIV EDGE' : 'MCI EDGE'}</span>
              )}
            </div>
            <div className="flex justify-between text-[8px] text-gray-500 font-bold mb-1">
@@ -1578,9 +1529,57 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                if (!hasVotedAs) setHasVotedAs('neutral');
              }}
              disabled={hasVotedAs === 'fan'}
-             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#75fbd9] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'fan' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
+      </div>
+    </div>
+  );
+}
+
+function SeasonContextTab({ matchInfo }: { matchInfo: any }) {
+  return (
+    <div className="w-full h-full flex flex-col">
+      <div className="bg-card border border-border rounded-2xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl">
+        <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
+          <div className="flex flex-col items-center md:items-start">
+            <span className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-1">League Position</span>
+            <div className="text-sm font-black flex items-center gap-2 text-foreground">
+              <span className="font-mono tabular-nums">4th</span>
+              <span className="text-muted-foreground text-[10px]">vs</span>
+              <span className="font-mono tabular-nums">7th</span>
+            </div>
+          </div>
+          <div className="w-px h-8 bg-border hidden md:block"></div>
+          <div className="flex flex-col items-center md:items-start text-right md:text-left">
+            <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
+            <span className="text-sm font-black text-foreground font-mono tabular-nums">5 pts</span>
+          </div>
+        </div>
+        
+        <div className="flex flex-col items-center w-full md:w-auto py-4 md:py-0 border-y border-border md:border-y-0">
+          <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Recent Form</span>
+          <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase font-mono">
+            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+            <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
+            <span className="text-muted-foreground mx-2 text-[9px]">vs</span>
+            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+            <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
+          </div>
+        </div>
+        
+        <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
+          <div className="flex flex-col items-center md:items-end">
+            <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
+            <span className="text-xs font-black text-foreground">{matchInfo?.team1 || 'Team A'} won <span className="text-[#75fbd9] font-mono tabular-nums">(2-1)</span></span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -1598,7 +1597,7 @@ function H2HTab({ matchInfo }: { matchInfo: any }) {
                <span className="text-[10px] font-bold">{matchInfo?.team2?.toUpperCase() || "MAN CITY"}</span>
             </div>
             <div className="flex gap-6 text-center">
-               <div><div className="text-2xl font-black text-teal">3</div><div className="text-[8px] text-teal tracking-widest">WINS</div></div>
+               <div><div className="text-2xl font-black text-[#75fbd9]">3</div><div className="text-[8px] text-[#75fbd9] tracking-widest">WINS</div></div>
                <div><div className="text-2xl font-black text-foreground">1</div><div className="text-[8px] text-muted-foreground tracking-widest">DRAW</div></div>
                <div><div className="text-2xl font-black text-[#D32F2F]">1</div><div className="text-[8px] text-[#D32F2F] tracking-widest">WIN</div></div>
             </div>
@@ -1652,15 +1651,15 @@ function StandingsTab({ matchInfo }: { matchInfo: any }) {
                { p: 4, t: "Aston Villa", icon: "bg-purple-900", ply: 35, gd: "+20", pts: 66, hl: false },
                { p: 5, t: "Tottenham", icon: "bg-white", ply: 35, gd: "+13", pts: 60, hl: false },
              ].map((r, i) => (
-               <tr key={i} className={`border-b border-border last:border-0 ${r.hl ? 'bg-teal/5' : ''}`}>
-                 <td className={`py-3 text-center ${r.hl ? 'text-teal font-bold' : 'text-muted-foreground'}`}>{r.p}</td>
+               <tr key={i} className={`border-b border-border last:border-0 ${r.hl ? 'bg-[#75fbd9]/5' : ''}`}>
+                 <td className={`py-3 text-center ${r.hl ? 'text-[#75fbd9] font-bold' : 'text-muted-foreground'}`}>{r.p}</td>
                  <td className="py-3 flex items-center gap-2">
                    <div className={`w-4 h-4 rounded-full ${r.icon}`} />
-                   <span className={r.hl ? 'text-teal font-bold' : 'text-gray-200'}>{r.t}</span>
+                   <span className={r.hl ? 'text-[#75fbd9] font-bold' : 'text-gray-200'}>{r.t}</span>
                  </td>
                  <td className="py-3 text-right text-muted-foreground">{r.ply}</td>
                  <td className="py-3 text-right text-muted-foreground">{r.gd}</td>
-                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-teal' : 'text-foreground'}`}>{r.pts}</td>
+                 <td className={`py-3 text-right pr-2 font-bold ${r.hl ? 'text-[#75fbd9]' : 'text-foreground'}`}>{r.pts}</td>
                </tr>
              ))}
            </tbody>

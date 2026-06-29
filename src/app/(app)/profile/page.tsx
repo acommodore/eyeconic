@@ -64,8 +64,8 @@ export default function ProfilePage() {
         <div className="flex flex-col">
           <h1 className="text-3xl font-black tracking-[0.2em] uppercase drop-shadow-md">OPERATIVE PROFILE</h1>
           <div className="flex items-center gap-2 mt-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
-            <span className="text-[10px] text-teal font-mono tracking-widest uppercase">ID: 8492-AX</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#75fbd9] animate-pulse" />
+            <span className="text-[10px] text-[#75fbd9] font-mono tracking-widest uppercase">ID: 8492-AX</span>
           </div>
         </div>
         <Link href="/settings" className="text-muted-foreground hover:text-foreground transition-all duration-300 p-3 bg-black/5 dark:bg-white/5 rounded-full border border-border hover:bg-black/10 dark:hover:bg-white/10 hover:rotate-90 inline-block">
@@ -84,7 +84,7 @@ export default function ProfilePage() {
             
             <div className="relative z-10 flex flex-col items-center text-center space-y-4">
               <div className="relative">
-                <div className="w-32 h-32 rounded-full border-2 border-teal p-1 relative z-10">
+                <div className="w-32 h-32 rounded-full border-2 border-[#75fbd9] p-1 relative z-10">
                   <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
                     <img src={profile?.avatar_url || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + userEmail} alt="Avatar" className="w-full h-full object-cover" />
                   </div>
@@ -93,7 +93,7 @@ export default function ProfilePage() {
                   <Edit2 className="w-4 h-4" />
                 </button>
                 {/* Glow behind avatar */}
-                <div className="absolute inset-0 bg-teal/20 blur-2xl rounded-full z-0" />
+                <div className="absolute inset-0 bg-[#75fbd9]/20 blur-2xl rounded-full z-0" />
               </div>
               
               <div>
@@ -104,7 +104,7 @@ export default function ProfilePage() {
               <div className="flex gap-2 w-full pt-4 border-t border-border mt-4">
                 <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl p-3 flex flex-col items-center">
                   <span className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Rank</span>
-                  <span className="font-black text-teal flex items-center gap-1"><Trophy className="w-3 h-3" /> Gold II</span>
+                  <span className="font-black text-[#75fbd9] flex items-center gap-1"><Trophy className="w-3 h-3" /> Gold II</span>
                 </div>
                 <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl p-3 flex flex-col items-center">
                   <span className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Eye Accuracy</span>
@@ -124,7 +124,7 @@ export default function ProfilePage() {
             <div className="grid grid-cols-4 gap-3">
               {[
                 { icon: <Flame className="w-6 h-6 text-coral" />, name: "Hot Streak", active: true },
-                { icon: <Eye className="w-6 h-6 text-teal" />, name: "Visionary", active: true },
+                { icon: <Eye className="w-6 h-6 text-[#75fbd9]" />, name: "Visionary", active: true },
                 { icon: <Activity className="w-6 h-6 text-purple-400" />, name: "Instigator", active: true },
                 { icon: <Medal className="w-6 h-6 text-yellow-500" />, name: "Champion", active: false },
               ].map((badge, i) => (
@@ -152,14 +152,14 @@ export default function ProfilePage() {
               className={`pb-4 text-sm font-bold tracking-widest uppercase transition-colors relative ${activeTab === 'track-record' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/80'}`}
             >
               Emotional Track Record
-              {activeTab === 'track-record' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal rounded-t-full shadow-[0_-2px_10px_rgba(0,229,255,0.5)]" />}
+              {activeTab === 'track-record' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#75fbd9] rounded-t-full shadow-[0_-2px_10px_rgba(117, 251, 217,0.5)]" />}
             </button>
             <button 
               onClick={() => setActiveTab("history")}
               className={`pb-4 text-sm font-bold tracking-widest uppercase transition-colors relative ${activeTab === 'history' ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/80'}`}
             >
               Echo History
-              {activeTab === 'history' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal rounded-t-full shadow-[0_-2px_10px_rgba(0,229,255,0.5)]" />}
+              {activeTab === 'history' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#75fbd9] rounded-t-full shadow-[0_-2px_10px_rgba(117, 251, 217,0.5)]" />}
             </button>
           </div>
 
@@ -191,11 +191,11 @@ export default function ProfilePage() {
                 <div className="bg-card border border-border p-5 rounded-2xl flex flex-col justify-between">
                   <h4 className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase mb-2">Current Vibe</h4>
                   <div className="w-full bg-black/5 dark:bg-white/5 h-2 rounded-full overflow-hidden flex">
-                    <div className="h-full bg-teal w-[60%]" />
+                    <div className="h-full bg-[#75fbd9] w-[60%]" />
                     <div className="h-full bg-coral w-[40%]" />
                   </div>
                   <div className="flex justify-between text-[10px] font-mono mt-2">
-                    <span className="text-teal">Euphoric</span>
+                    <span className="text-[#75fbd9]">Euphoric</span>
                     <span className="text-coral">Anxious</span>
                   </div>
                 </div>
@@ -203,7 +203,7 @@ export default function ProfilePage() {
 
               <div className="bg-card border border-border rounded-3xl p-6">
                 <h3 className="text-sm font-bold tracking-widest text-foreground uppercase mb-6 flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-teal" />
+                  <Activity className="w-4 h-4 text-[#75fbd9]" />
                   Recent Activity
                 </h3>
                 <div className="space-y-4">
@@ -233,7 +233,7 @@ export default function ProfilePage() {
               <p className="text-muted-foreground text-sm max-w-sm">
                 Head over to The Stand during a live match to leave your first voice note and start building your echo history.
               </p>
-              <Link href="/stands" className="mt-6 px-8 py-3 bg-teal text-black font-black text-xs uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(0,229,255,0.3)]">
+              <Link href="/stands" className="mt-6 px-8 py-3 bg-[#75fbd9] text-black font-black text-xs uppercase tracking-widest rounded-full hover:scale-105 transition-transform shadow-[0_0_20px_rgba(117, 251, 217,0.3)]">
                 Go to The Stand
               </Link>
             </div>
@@ -255,7 +255,7 @@ export default function ProfilePage() {
                 value={editUsername}
                 onChange={(e) => setEditUsername(e.target.value)}
                 placeholder="Enter new username"
-                className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-sm text-foreground focus:outline-none focus:border-teal transition-colors"
+                className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-sm text-foreground focus:outline-none focus:border-[#75fbd9] transition-colors"
               />
             </div>
 
@@ -269,7 +269,7 @@ export default function ProfilePage() {
               <button 
                 onClick={handleSaveProfile}
                 disabled={isSaving}
-                className="flex-1 py-3 rounded-xl bg-teal text-black text-xs font-black uppercase tracking-widest hover:bg-teal/90 transition-colors flex justify-center items-center"
+                className="flex-1 py-3 rounded-xl bg-[#75fbd9] text-black text-xs font-black uppercase tracking-widest hover:bg-[#75fbd9]/90 transition-colors flex justify-center items-center"
               >
                 {isSaving ? "Saving..." : "Save"}
               </button>

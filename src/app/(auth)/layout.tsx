@@ -11,7 +11,7 @@ export default function AuthLayout({
       {/* Left Side: Dramatic Atmosphere (Hidden on mobile) */}
       <div className="hidden md:flex flex-1 relative items-center justify-center overflow-hidden border-r border-white/5">
         {/* Deep ambient glows */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,229,255,0.08)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(117, 251, 217,0.08)_0%,transparent_60%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,127,80,0.05)_0%,transparent_50%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-overlay pointer-events-none" />
         
@@ -26,7 +26,7 @@ export default function AuthLayout({
 
         {/* Floating Brand Badge */}
         <Link href="/" className="absolute top-10 left-10 flex items-center gap-3 z-20 hover:opacity-80 transition-opacity">
-          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
+          <img src="/stimmung_logo_nobg.png?v=1782737833042" alt="Stimmung Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
         </Link>
       </div>
 
@@ -34,7 +34,7 @@ export default function AuthLayout({
       <div className="w-full md:w-[600px] shrink-0 flex flex-col justify-center items-center p-6 md:p-12 relative z-10 bg-[#050505] md:bg-transparent shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
         {/* Mobile Brand Badge */}
         <Link href="/" className="md:hidden flex items-center gap-3 mb-12 hover:opacity-80 transition-opacity">
-          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-12 w-auto object-contain" />
+          <img src="/stimmung_logo_nobg.png?v=1782737833042" alt="Stimmung Logo" className="h-8 w-auto object-contain" />
         </Link>
 
         <div className="w-full max-w-sm">

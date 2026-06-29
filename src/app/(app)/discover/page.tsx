@@ -127,7 +127,7 @@ const tickerItems = [
 const getVolatilityColor = (volatility: number) => {
   if (volatility >= 90) return 'text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]';
   if (volatility >= 70) return 'text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]';
-  return 'text-teal drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]';
+  return 'text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.8)]';
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -192,7 +192,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
               </div>
               
               <Link href={`/match/${match.id}`} onClick={(e) => e.stopPropagation()} className="group hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:bg-white/10 transition-colors border border-border">
-                 <ArrowRight className="w-4 h-4 text-teal group-hover:translate-x-0.5 transition-transform" />
+                 <ArrowRight className="w-4 h-4 text-[#75fbd9] group-hover:translate-x-0.5 transition-transform" />
               </Link>
            </div>
         </div>
@@ -206,7 +206,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                  <p className="text-xs text-muted-foreground leading-relaxed font-mono">
                     {match.insight || (isFinished ? "Post-match fallout and analysis ongoing." : isLive ? "Awaiting significant narrative developments..." : "Pre-match buildup is intensifying...")}
                  </p>
-                 <Link href={`/match/${match.id}`} className="mt-4 md:hidden inline-flex items-center gap-2 text-[10px] font-mono text-teal uppercase tracking-widest">
+                 <Link href={`/match/${match.id}`} className="mt-4 md:hidden inline-flex items-center gap-2 text-[10px] font-mono text-[#75fbd9] uppercase tracking-widest">
                     Enter Match Centre <ArrowRight className="w-3 h-3" />
                  </Link>
               </div>
@@ -217,7 +217,7 @@ const TerminalRow = ({ match, isExpanded, onToggle, isLive = false, isFinished =
                     <div className="flex flex-col gap-2">
                        {match.emotionalMvp && (
                           <div className="flex items-center justify-between pb-1 border-b border-border">
-                             <span className="text-[10px] font-mono uppercase tracking-widest text-teal">Hero</span>
+                             <span className="text-[10px] font-mono uppercase tracking-widest text-[#75fbd9]">Hero</span>
                              <span className="text-xs font-bold text-foreground uppercase">{match.emotionalMvp}</span>
                           </div>
                        )}
@@ -400,11 +400,11 @@ export default function DiscoverPage() {
   ].filter(group => group.matches.length > 0);
 
   return (
-    <main className="min-h-screen bg-background text-foreground font-sans selection:bg-teal selection:text-black pb-32 overflow-x-hidden relative">
+    <main className="min-h-screen bg-background text-foreground font-sans selection:bg-[#75fbd9] selection:text-black pb-32 overflow-x-hidden relative">
       
       {/* Dynamic Ambient Background */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
-         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-teal/20 blur-[120px]"></div>
+         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#75fbd9]/20 blur-[120px]"></div>
          <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-900/20 blur-[100px]"></div>
          <div className="absolute top-[40%] right-[-20%] w-[60%] h-[60%] rounded-full bg-purple-900/10 blur-[150px]"></div>
       </div>
@@ -414,14 +414,14 @@ export default function DiscoverPage() {
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
             </div>
             <div className="flex justify-around min-w-[50%] shrink-0">
                {tickerItems.map((item, idx) => (
-                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-teal px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
+                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-white/5 transition-colors rounded py-0.5 cursor-pointer">
                    {item}
                  </button>
                ))}
@@ -437,7 +437,7 @@ export default function DiscoverPage() {
               {days.map(day => {
                 const isActive = day.date === activeDate;
                 return (
-                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-teal text-teal shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-[#75fbd9] text-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
                     <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
                     <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-black dark:text-foreground drop-shadow-md' : ''}`}>{day.date}</span>
                   </button>
@@ -455,7 +455,7 @@ export default function DiscoverPage() {
                <button 
                  key={f.name}
                  onClick={() => setActiveFilter(f.name)}
-                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-white/5'}`}
+                 className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/5 dark:bg-white/5'}`}
                >
                  <Icon className="w-3.5 h-3.5" /> {f.name}
                </button>
@@ -473,13 +473,13 @@ export default function DiscoverPage() {
                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-teal/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen group-hover:bg-teal/20 transition-colors duration-1000"></div>
+            <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#75fbd9]/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen group-hover:bg-[#75fbd9]/20 transition-colors duration-1000"></div>
             
             <div className="relative z-10 p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
                <div className="flex-1 flex flex-col justify-center w-full">
                   {/* Match of the Day indicator */}
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-teal mb-6 flex items-center gap-2 bg-teal/10 w-max px-3 py-1.5 rounded-full border border-teal/20">
-                     <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,1)]"></span>
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-[#75fbd9] mb-6 flex items-center gap-2 bg-[#75fbd9]/10 w-max px-3 py-1.5 rounded-full border border-[#75fbd9]/20">
+                     <span className="w-1.5 h-1.5 rounded-full bg-[#75fbd9] animate-pulse shadow-[0_0_8px_rgba(117, 251, 217,1)]"></span>
                      HERO SPOTLIGHT // {heroMatch.league}
                   </div>
 
@@ -514,7 +514,7 @@ export default function DiscoverPage() {
                   </div>
 
                   {/* Action link inline */}
-                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-xs font-mono font-black uppercase tracking-widest text-black bg-teal px-8 py-4 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_25px_rgba(0,229,255,0.4)] hover:shadow-[0_0_35px_rgba(0,229,255,0.6)] animate-pulse-slow w-max">
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-3 text-xs font-mono font-black uppercase tracking-widest text-black bg-[#75fbd9] px-8 py-4 rounded-full hover:bg-white hover:scale-105 transition-all shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] animate-pulse-slow w-max">
                      MATCH CENTRE <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                </div>
@@ -522,7 +522,7 @@ export default function DiscoverPage() {
                <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-3xl border border-border backdrop-blur-xl">
                   {/* Narrative (Unboxed, separated by fine lines) */}
                   <div className="pb-5 border-b border-border">
-                     <h3 className="text-[9px] font-mono uppercase tracking-widest text-teal mb-3 flex items-center gap-2">
+                     <h3 className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-3 flex items-center gap-2">
                         <Activity className="w-3 h-3" /> Live Context
                      </h3>
                      <p className="text-sm text-gray-200 font-mono leading-relaxed">&quot;{heroMatch.insight}&quot;</p>
@@ -556,13 +556,13 @@ export default function DiscoverPage() {
            <div className="flex bg-card rounded-full p-1 border border-border w-full md:w-auto">
              <button 
                onClick={() => setSortMode('watchability')}
-               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                 <Activity className="w-3.5 h-3.5" />
                 WATCHABILITY
              </button>
              <button 
                onClick={() => setSortMode('league')}
-               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+               className={`flex-1 md:flex-none px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] md:text-xs font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                 <Swords className="w-3.5 h-3.5" />
                 LEAGUE
              </button>
@@ -576,7 +576,7 @@ export default function DiscoverPage() {
                <div key={league} className="flex flex-col">
                   {/* League Header */}
                   <div className="flex items-center gap-4 mb-4 pl-2">
-                    <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_8px_rgba(0,229,255,0.6)]"></div>
+                    <div className="w-1.5 h-6 bg-[#75fbd9] rounded-full shadow-[0_0_8px_rgba(117, 251, 217,0.6)]"></div>
                     <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
                   </div>
@@ -605,7 +605,7 @@ export default function DiscoverPage() {
                <div key={group.groupName} className="flex flex-col">
                   {/* Group Header */}
                   <div className="flex items-center gap-4 mb-4 pl-2">
-                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : 'bg-teal shadow-[0_0_8px_rgba(0,229,255,0.6)]'}`}></div>
+                    <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_8px_rgba(255,107,107,0.6)]' : 'bg-[#75fbd9] shadow-[0_0_8px_rgba(117, 251, 217,0.6)]'}`}></div>
                     <h2 className="text-lg font-black uppercase tracking-widest text-foreground drop-shadow-md">{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
                   </div>

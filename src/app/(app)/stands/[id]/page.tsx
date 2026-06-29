@@ -548,12 +548,12 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                 <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
               </button>
             </div>
-            <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center focus-within:border-[teal] focus-within:shadow-[0_0_20px_rgba(0,229,255,0.15)] transition-all">
+            <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center focus-within:border-[teal] focus-within:shadow-[0_0_20px_rgba(117, 251, 217,0.15)] transition-all">
               <div className="w-8 h-8 rounded-full bg-gray-800 ml-1 overflow-hidden shrink-0">
                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
               </div>
               <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Join the conversation..." className="bg-transparent border-none outline-none text-sm w-full px-4 text-foreground placeholder:text-gray-600 font-medium" />
-              <button type="submit" disabled={!inputText.trim()} className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(0,229,255,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
+              <button type="submit" disabled={!inputText.trim()} className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
                 <Send className="w-4 h-4" />
               </button>
             </form>

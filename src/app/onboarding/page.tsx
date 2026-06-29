@@ -228,7 +228,7 @@ export default function OnboardingPage() {
                        className="w-full bg-card/40 backdrop-blur-md border border-border rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
                      >
                        {/* Subtle Background Elements */}
-                       <div className="absolute top-0 right-0 w-64 h-64 bg-teal/5 rounded-full blur-[80px] pointer-events-none" />
+                       <div className="absolute top-0 right-0 w-64 h-64 bg-[#75fbd9]/5 rounded-full blur-[80px] pointer-events-none" />
                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-red-500/5 rounded-full blur-[80px] pointer-events-none" />
 
                        {/* Header */}
@@ -240,7 +240,7 @@ export default function OnboardingPage() {
                        <div className="flex flex-col gap-4 relative z-10">
                          {/* Ledger Row: Favorite Team */}
                          <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors">
-                           <div className="absolute left-0 top-0 bottom-0 w-1.5" style={{ backgroundColor: favoriteTeam.color || '#00e5ff' }} />
+                           <div className="absolute left-0 top-0 bottom-0 w-1.5" style={{ backgroundColor: favoriteTeam.color || '#75fbd9' }} />
                            <div className="pl-4">
                              <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest block mb-1">Primary Club</span>
                              <span className="text-lg md:text-xl font-bold text-foreground drop-shadow-md">{favoriteTeam.name}</span>

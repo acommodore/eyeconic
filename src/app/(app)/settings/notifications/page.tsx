@@ -32,7 +32,7 @@ export default function NotificationsPage() {
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><BellRing className="w-4 h-4 text-teal"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><BellRing className="w-4 h-4 text-[#75fbd9]"/></div>
               <div>
                 <p className="text-sm font-bold">Push Notifications</p>
                 <p className="text-xs text-muted-foreground">Receive instant alerts on your device.</p>
@@ -40,7 +40,7 @@ export default function NotificationsPage() {
             </div>
             <button 
               onClick={() => setPushEnabled(!pushEnabled)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${pushEnabled ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${pushEnabled ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${pushEnabled ? 'left-7' : 'left-1'}`} />
             </button>
@@ -56,7 +56,7 @@ export default function NotificationsPage() {
             </div>
             <button 
               onClick={() => setEmailEnabled(!emailEnabled)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${emailEnabled ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${emailEnabled ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${emailEnabled ? 'left-7' : 'left-1'}`} />
             </button>
@@ -77,7 +77,7 @@ export default function NotificationsPage() {
             </div>
             <button 
               onClick={() => setMatchAlerts(!matchAlerts)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${matchAlerts ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${matchAlerts ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${matchAlerts ? 'left-7' : 'left-1'}`} />
             </button>

@@ -35,7 +35,7 @@ export default function LiveAudioRoom({
     return (
       <div className="w-full h-screen flex items-center justify-center bg-background text-foreground">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 rounded-full border-4 border-teal border-t-transparent animate-spin" />
+          <div className="w-8 h-8 rounded-full border-4 border-[#75fbd9] border-t-transparent animate-spin" />
           <p className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Connecting to Stand...</p>
         </div>
       </div>

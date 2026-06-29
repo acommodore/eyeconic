@@ -30,7 +30,7 @@ export default function PreferencesPage() {
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Vibrate className="w-4 h-4 text-teal"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Vibrate className="w-4 h-4 text-[#75fbd9]"/></div>
               <div>
                 <p className="text-sm font-bold">Haptic Feedback</p>
                 <p className="text-xs text-muted-foreground">Feel the tension of live matches.</p>
@@ -38,7 +38,7 @@ export default function PreferencesPage() {
             </div>
             <button 
               onClick={() => setHapticsEnabled(!hapticsEnabled)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${hapticsEnabled ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${hapticsEnabled ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${hapticsEnabled ? 'left-7' : 'left-1'}`} />
             </button>
@@ -54,7 +54,7 @@ export default function PreferencesPage() {
             </div>
             <button 
               onClick={() => setDataSaver(!dataSaver)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${dataSaver ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${dataSaver ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${dataSaver ? 'left-7' : 'left-1'}`} />
             </button>
@@ -68,7 +68,7 @@ export default function PreferencesPage() {
                 <p className="text-xs text-muted-foreground">System Default (English)</p>
               </div>
             </div>
-            <button className="text-[10px] font-bold text-teal hover:text-teal/80 uppercase tracking-widest px-3 py-1.5 border border-border rounded-xl">Change</button>
+            <button className="text-[10px] font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest px-3 py-1.5 border border-border rounded-xl">Change</button>
           </div>
         </div>
 

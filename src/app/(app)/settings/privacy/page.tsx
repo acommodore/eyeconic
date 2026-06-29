@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             </div>
             <button 
               onClick={() => setPrivateProfile(!privateProfile)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${privateProfile ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${privateProfile ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${privateProfile ? 'left-7' : 'left-1'}`} />
             </button>
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
             </div>
             <button 
               onClick={() => setHideTrackRecord(!hideTrackRecord)}
-              className={`w-12 h-6 rounded-full relative transition-colors ${hideTrackRecord ? 'bg-teal' : 'bg-muted'}`}
+              className={`w-12 h-6 rounded-full relative transition-colors ${hideTrackRecord ? 'bg-[#75fbd9]' : 'bg-muted'}`}
             >
               <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${hideTrackRecord ? 'left-7' : 'left-1'}`} />
             </button>

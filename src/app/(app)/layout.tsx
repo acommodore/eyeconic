@@ -108,7 +108,7 @@ export default function AppLayout({
       {!isStandRoom && (
       <header className="md:hidden h-16 border-b border-border flex items-center justify-between px-4 bg-card text-card-foreground">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-12 w-auto object-contain" />
+          <img src="/stimmung_logo_nobg.png?v=1782737833013" alt="Stimmung Logo" className="h-8 w-auto object-contain" />
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
@@ -125,7 +125,7 @@ export default function AppLayout({
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+              <img src="/stimmung_logo_nobg.png?v=1782737833013" alt="Stimmung Logo" className="h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
             </Link>
           )}
           <button 
@@ -146,7 +146,7 @@ export default function AppLayout({
                 title={isCollapsed ? item.label : ""}
                 className={`flex items-center rounded-xl transition-all ${
                   isActive 
-                    ? "bg-[#00E5FF]/10 text-[#00E5FF] font-semibold" 
+                    ? "bg-[#75fbd9]/10 text-[#75fbd9] font-semibold" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 } ${isCollapsed ? 'justify-center w-12 h-12 p-0' : 'gap-4 px-4 py-3 w-full'}`}
               >
@@ -162,7 +162,7 @@ export default function AppLayout({
             <ThemeToggle />
           </div>
           <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
-          <div className="w-10 h-10 shrink-0 rounded-full border border-[#00E5FF] overflow-hidden p-0.5 group-hover:border-foreground transition-colors">
+          <div className="w-10 h-10 shrink-0 rounded-full border border-[#75fbd9] overflow-hidden p-0.5 group-hover:border-foreground transition-colors">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
               <img src={avatarUrl} alt="User" />
               <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-black" />
@@ -170,7 +170,7 @@ export default function AppLayout({
           </div>
           {!isCollapsed && (
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-bold truncate group-hover:text-[#00E5FF] transition-colors">{displayName}</p>
+              <p className="text-sm font-bold truncate group-hover:text-[#75fbd9] transition-colors">{displayName}</p>
               <p className="text-xs text-gray-500">View Profile</p>
             </div>
           )}
@@ -193,10 +193,10 @@ export default function AppLayout({
               key={item.href} 
               href={item.href}
               className={`flex flex-col items-center justify-center w-16 h-full gap-1 transition-colors ${
-                isActive ? "text-[#00E5FF]" : "text-gray-500 hover:text-gray-300"
+                isActive ? "text-[#75fbd9]" : "text-gray-500 hover:text-gray-300"
               }`}
             >
-              <div className={`p-1.5 rounded-full ${isActive ? "bg-[#00E5FF]/10" : ""}`}>
+              <div className={`p-1.5 rounded-full ${isActive ? "bg-[#75fbd9]/10" : ""}`}>
                 {item.icon}
               </div>
             </Link>

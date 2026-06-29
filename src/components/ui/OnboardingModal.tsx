@@ -38,9 +38,9 @@ export function OnboardingModal() {
         
         {/* Step Indicators */}
         <div className="absolute top-6 left-0 right-0 flex justify-center gap-2 z-10">
-           <div className={`h-1 rounded-full transition-all duration-300 ${step === 0 ? 'w-8 bg-teal shadow-[0_0_8px_rgba(0,229,255,0.8)]' : 'w-4 bg-white/20'}`} />
-           <div className={`h-1 rounded-full transition-all duration-300 ${step === 1 ? 'w-8 bg-teal shadow-[0_0_8px_rgba(0,229,255,0.8)]' : 'w-4 bg-white/20'}`} />
-           <div className={`h-1 rounded-full transition-all duration-300 ${step === 2 ? 'w-8 bg-teal shadow-[0_0_8px_rgba(0,229,255,0.8)]' : 'w-4 bg-white/20'}`} />
+           <div className={`h-1 rounded-full transition-all duration-300 ${step === 0 ? 'w-8 bg-[#75fbd9] shadow-[0_0_8px_rgba(117, 251, 217,0.8)]' : 'w-4 bg-white/20'}`} />
+           <div className={`h-1 rounded-full transition-all duration-300 ${step === 1 ? 'w-8 bg-[#75fbd9] shadow-[0_0_8px_rgba(117, 251, 217,0.8)]' : 'w-4 bg-white/20'}`} />
+           <div className={`h-1 rounded-full transition-all duration-300 ${step === 2 ? 'w-8 bg-[#75fbd9] shadow-[0_0_8px_rgba(117, 251, 217,0.8)]' : 'w-4 bg-white/20'}`} />
         </div>
 
         {/* Content Slider */}
@@ -48,9 +48,9 @@ export function OnboardingModal() {
           
           {/* STEP 0: Watchability */}
           <div className="w-1/3 p-10 pt-16 flex flex-col items-center text-center">
-             <div className="w-24 h-24 bg-teal/10 rounded-full flex items-center justify-center mb-6 border border-teal/30 relative">
-                <Zap className="w-10 h-10 text-teal" />
-                <div className="absolute inset-0 bg-teal/20 rounded-full animate-ping opacity-20" />
+             <div className="w-24 h-24 bg-[#75fbd9]/10 rounded-full flex items-center justify-center mb-6 border border-[#75fbd9]/30 relative">
+                <Zap className="w-10 h-10 text-[#75fbd9]" />
+                <div className="absolute inset-0 bg-[#75fbd9]/20 rounded-full animate-ping opacity-20" />
              </div>
              <h2 className="text-2xl font-black uppercase tracking-widest text-foreground mb-4">The Watchability Score</h2>
              <p className="text-muted-foreground text-sm leading-relaxed">

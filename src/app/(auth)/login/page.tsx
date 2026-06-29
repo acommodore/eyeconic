@@ -67,27 +67,27 @@ function LoginForm() {
       {message && (<div className="w-full p-4 mb-4 bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-bold text-center rounded-xl">{message}</div>)}
       <form className="w-full space-y-5" action={login}>
         <div className="group relative">
-          <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#00E5FF] transition-colors">EMAIL</label>
+          <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#75fbd9] transition-colors">EMAIL</label>
           <div className="relative flex items-center">
-            <Mail className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#00E5FF] transition-colors" />
+            <Mail className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#75fbd9] transition-colors" />
             <input 
               type="email" name="email" 
               placeholder="Enter your email"
               required
-              className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-[#00E5FF] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
+              className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-[#75fbd9] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(117, 251, 217,0.1)]"
             />
           </div>
         </div>
         
         <div className="group relative">
-          <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#00E5FF] transition-colors">PASSWORD</label>
+          <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#75fbd9] transition-colors">PASSWORD</label>
           <div className="relative flex items-center">
-            <Lock className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#00E5FF] transition-colors" />
+            <Lock className="absolute left-4 w-5 h-5 text-gray-500 group-focus-within:text-[#75fbd9] transition-colors" />
             <input 
               type={showPassword ? "text" : "password"} name="password" 
               placeholder="Enter your password"
               required
-              className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white focus:outline-none focus:border-[#00E5FF] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
+              className="w-full bg-[#0A0A0A] border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white focus:outline-none focus:border-[#75fbd9] focus:bg-white/5 transition-all duration-300 text-sm font-medium tracking-wide placeholder-gray-600 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-focus-within:shadow-[0_0_20px_rgba(117, 251, 217,0.1)]"
             />
             <button 
               type="button"
@@ -100,19 +100,19 @@ function LoginForm() {
         </div>
         
         <div className="flex justify-end pt-2">
-          <Link href="/forgot-password" className="text-xs font-bold tracking-wide text-gray-400 hover:text-[#00E5FF] transition-colors">
+          <Link href="/forgot-password" className="text-xs font-bold tracking-wide text-gray-400 hover:text-[#75fbd9] transition-colors">
             Forgot Password?
           </Link>
         </div>
 
-        <button type="submit" className="group relative w-full mt-6 bg-[#00E5FF] text-[#020202] font-black text-sm tracking-[0.2em] uppercase py-5 rounded-2xl hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_40px_rgba(0,229,255,0.5)] overflow-hidden">
+        <button type="submit" className="group relative w-full mt-6 bg-[#75fbd9] text-[#020202] font-black text-sm tracking-[0.2em] uppercase py-5 rounded-2xl hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(117, 251, 217,0.3)] hover:shadow-[0_0_40px_rgba(117, 251, 217,0.5)] overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
           <span className="relative z-10">SIGN IN</span>
         </button>
       </form>
 
       <p className="mt-10 text-center text-sm font-medium text-gray-500 tracking-wide">
-        Don&apos;t have an account? <Link href="/signup" className="text-white hover:text-[#00E5FF] transition-colors font-bold underline decoration-white/20 underline-offset-4">Sign up</Link>
+        Don&apos;t have an account? <Link href="/signup" className="text-white hover:text-[#75fbd9] transition-colors font-bold underline decoration-white/20 underline-offset-4">Sign up</Link>
       </p>
     </motion.div>
   );

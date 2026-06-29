@@ -19,7 +19,7 @@ const matchEvents = [
 
 const mockVoiceNotes = [
   { id: 1, user: '@jdoe_88', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop', mood: 'ANGRY', moodColor: 'text-[#FF7F50] bg-[#FF7F50]/10', dotColor: 'bg-[#FF7F50]', comment: '"Unbelievable! How did he even see that through the crowd?! The defense was nowhere to be found."', echoes: 12 },
-  { id: 2, user: '@tactics_guy', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop', mood: 'HYPE', moodColor: 'text-teal bg-teal/10', dotColor: 'bg-teal', comment: '"Notice how he shifts his weight right before the moment... absolute class."', echoes: 8 },
+  { id: 2, user: '@tactics_guy', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop', mood: 'HYPE', moodColor: 'text-[#75fbd9] bg-[#75fbd9]/10', dotColor: 'bg-[#75fbd9]', comment: '"Notice how he shifts his weight right before the moment... absolute class."', echoes: 8 },
   { id: 3, user: '@cityfan_99', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=100&auto=format&fit=crop', mood: 'SHOCKED', moodColor: 'text-yellow-500 bg-yellow-500/10', dotColor: 'bg-yellow-500', comment: '"I thought that was in for sure... you have to be kidding me."', echoes: 45 },
   { id: 4, user: '@sarah_k', avatar: 'https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=100&auto=format&fit=crop', mood: 'SAD', moodColor: 'text-muted-foreground bg-gray-400/10', dotColor: 'bg-gray-400', comment: '"We need to finish those chances if we want to take anything from this game."', echoes: 2 },
 ];
@@ -94,9 +94,9 @@ const getDotColor = (type: string) => {
 
 // --- Sub-components ---
 const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, handleEcho }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void, echoedNotes: Set<number>, handleEcho: (id: number) => void }) => (
-  <div className={`w-full bg-card rounded-[2rem] border ${isActive ? 'border-teal/50 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'border-border'} p-6 md:p-8 relative transition-all duration-500 flex flex-col overflow-hidden`}>
+  <div className={`w-full bg-card rounded-[2rem] border ${isActive ? 'border-[#75fbd9]/50 shadow-[0_0_30px_rgba(117, 251, 217,0.1)]' : 'border-border'} p-6 md:p-8 relative transition-all duration-500 flex flex-col overflow-hidden`}>
     <div className="flex items-center justify-between mb-4">
-      <span className="text-teal font-mono font-bold text-xl">{event.minute}&apos;</span>
+      <span className="text-[#75fbd9] font-mono font-bold text-xl">{event.minute}&apos;</span>
       
       <div className="flex items-center gap-4">
         <div className="inline-flex items-center gap-1.5 bg-black/5 dark:bg-white/5 px-4 py-2 rounded-full text-xs font-bold text-muted-foreground">
@@ -160,13 +160,13 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, ha
             </div>
             
             <div className="flex items-center gap-3 md:gap-4 bg-black/5 dark:bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
-              <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal flex items-center justify-center hover:scale-105 transition-transform shrink-0">
+              <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#75fbd9] flex items-center justify-center hover:scale-105 transition-transform shrink-0">
                 <Play className="w-3 h-3 md:w-4 md:h-4 text-black fill-black ml-0.5" />
               </button>
               <div className="flex-1 flex items-center gap-0.5 md:gap-1 h-4 md:h-6 opacity-50 min-w-0 pr-2 overflow-hidden">
-                {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-teal rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
+                {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-[#75fbd9] rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
               </div>
-              <button onClick={() => handleEcho(note.id)} className={`flex items-center gap-1.5 ${echoedNotes.has(note.id) ? 'bg-teal text-black hover:bg-teal/90' : 'bg-teal/10 text-teal hover:bg-teal/20'} px-3 py-1.5 rounded-lg border border-teal/30 text-[10px] font-bold transition-colors shrink-0`}>
+              <button onClick={() => handleEcho(note.id)} className={`flex items-center gap-1.5 ${echoedNotes.has(note.id) ? 'bg-[#75fbd9] text-black hover:bg-[#75fbd9]/90' : 'bg-[#75fbd9]/10 text-[#75fbd9] hover:bg-[#75fbd9]/20'} px-3 py-1.5 rounded-lg border border-[#75fbd9]/30 text-[10px] font-bold transition-colors shrink-0`}>
                 <Mic className="w-3 h-3" /> ECHO • {note.echoes + (echoedNotes.has(note.id) ? 1 : 0)}
               </button>
             </div>
@@ -305,7 +305,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
   const handlePostReaction = () => {
     let colorClass = 'text-[#FF7F50] bg-[#FF7F50]/10';
     let dotColor = 'bg-[#FF7F50]';
-    if (selectedReaction === 'HYPE') { colorClass = 'text-teal bg-teal/10'; dotColor = 'bg-teal'; }
+    if (selectedReaction === 'HYPE') { colorClass = 'text-[#75fbd9] bg-[#75fbd9]/10'; dotColor = 'bg-[#75fbd9]'; }
     if (selectedReaction === 'BORING') { colorClass = 'text-muted-foreground bg-gray-400/10'; dotColor = 'bg-gray-400'; }
 
     const newNote = {
@@ -358,7 +358,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
 
     let ratingColorClass = "text-muted-foreground";
     if (parseFloat(p.rating) >= 8.0) {
-      ratingColorClass = "text-teal"; // Seafoam Green
+      ratingColorClass = "text-[#75fbd9]"; // Seafoam Green
     } else if (parseFloat(p.rating) < 7.0 && p.rating !== '-') {
       ratingColorClass = "text-[#FF7F50]"; // Chaos Orange
     } else if (p.rating !== '-') {
@@ -459,7 +459,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
           <section className="bg-card rounded-[2rem] border border-border p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
             <div className="flex items-center justify-between mb-8 relative shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-1 h-6 bg-teal" />
+                <div className="w-1 h-6 bg-[#75fbd9]" />
                 <h2 className="text-sm font-black tracking-widest text-foreground uppercase">ACTION FEED</h2>
               </div>
               
@@ -481,7 +481,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                           setActiveFilter(option);
                           setIsFilterOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black/5 dark:bg-white/5 transition-colors ${activeFilter === option ? 'text-teal' : 'text-muted-foreground'}`}
+                        className={`w-full text-left px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black/5 dark:bg-white/5 transition-colors ${activeFilter === option ? 'text-[#75fbd9]' : 'text-muted-foreground'}`}
                       >
                         {option}
                       </button>
@@ -523,7 +523,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               {/* The base line */}
               <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-black/10 dark:bg-white/10 -translate-y-1/2" />
               {/* The progress line up to the current minute (assuming 90 max) */}
-              <div className="absolute top-1/2 left-4 h-0.5 bg-gradient-to-r from-yellow-500 via-[#00E5FF] to-transparent -translate-y-1/2 transition-all duration-500" style={{width: `${Math.min((88 / 90) * 100, 100)}%`}} />
+              <div className="absolute top-1/2 left-4 h-0.5 bg-gradient-to-r from-yellow-500 via-[#75fbd9] to-transparent -translate-y-1/2 transition-all duration-500" style={{width: `${Math.min((88 / 90) * 100, 100)}%`}} />
               
               {/* The Event Dots (Filtered) */}
               {filteredEvents.map((event) => {
@@ -541,17 +541,17 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                     <div 
                       className={`w-3 h-3 rounded-full ring-4 transition-all duration-300 ${dotColorClass} ${
                         isActive 
-                          ? 'ring-[#050505] shadow-[0_0_15px_rgba(0,229,255,1)] scale-125' 
+                          ? 'ring-[#050505] shadow-[0_0_15px_rgba(117, 251, 217,1)] scale-125' 
                           : 'ring-[#050505] opacity-60 group-hover:opacity-100 group-hover:scale-110'
                       }`} 
                     />
                     
-                    <div className={`absolute -top-7 text-xs font-bold transition-colors ${isActive ? 'text-teal' : 'text-muted-foreground'}`}>
+                    <div className={`absolute -top-7 text-xs font-bold transition-colors ${isActive ? 'text-[#75fbd9]' : 'text-muted-foreground'}`}>
                       {event.minute}&apos;
                     </div>
                     
                     {isActive && (
-                      <div className="absolute -bottom-6 text-teal animate-pulse">
+                      <div className="absolute -bottom-6 text-[#75fbd9] animate-pulse">
                         |||
                       </div>
                     )}
@@ -635,7 +635,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
            >
               <div className="w-12 h-1.5 bg-white/20 rounded-full mb-3" />
               {activeMobileView === 'feed' ? (
-                <div className="flex items-center gap-2 text-teal text-sm font-black uppercase tracking-widest drop-shadow-[0_0_15px_rgba(0,229,255,0.8)] animate-pulse">
+                <div className="flex items-center gap-2 text-[#75fbd9] text-sm font-black uppercase tracking-widest drop-shadow-[0_0_15px_rgba(117, 251, 217,0.8)] animate-pulse">
                    <ChevronUp className="w-5 h-5" /> Player Impact Live
                 </div>
               ) : (
@@ -648,7 +648,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
            {/* Player Impact - TACTICAL VIEW */}
            <section className="bg-card rounded-[2rem] border border-border p-6 shadow-xl relative overflow-visible">
               <div className="flex items-center gap-3 mb-2 relative z-10">
-                <div className="w-1 h-6 bg-teal" />
+                <div className="w-1 h-6 bg-[#75fbd9]" />
                 <h2 className="text-sm font-black tracking-widest text-foreground uppercase">PLAYER IMPACT LIVE</h2>
               </div>
               <p className="text-[10px] text-muted-foreground mb-8 uppercase tracking-widest relative z-10">Tap player to rate action</p>
@@ -657,13 +657,13 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                 <div className="flex bg-muted rounded-full p-1 border border-border">
                   <button 
                     onClick={() => setActiveTeam('LIV')}
-                    className={`px-6 py-2 flex items-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${activeTeam === 'LIV' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                    className={`px-6 py-2 flex items-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${activeTeam === 'LIV' ? 'bg-[#75fbd9] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                      <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg" className={`w-4 h-4 object-contain ${activeTeam === 'LIV' ? '' : 'opacity-50'}`} alt="LIV" />
                      LIVERPOOL
                   </button>
                   <button 
                     onClick={() => setActiveTeam('MCI')}
-                    className={`px-6 py-2 flex items-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${activeTeam === 'MCI' ? 'bg-teal text-black shadow-[0_0_15px_rgba(0,229,255,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
+                    className={`px-6 py-2 flex items-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${activeTeam === 'MCI' ? 'bg-[#75fbd9] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)]' : 'text-muted-foreground hover:text-foreground'}`}>
                      <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" className={`w-4 h-4 object-contain ${activeTeam === 'MCI' ? '' : 'opacity-50'}`} alt="MCI" />
                      MAN CITY
                   </button>
@@ -736,7 +736,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                    <span className="text-[8px] font-black text-coral uppercase tracking-widest">RECORD</span>
                  </button>
                ) : (
-                 <div className="w-[72px] h-[72px] rounded-full border-4 border-teal shadow-[0_0_20px_rgba(0,229,255,0.4)] flex items-center justify-center shrink-0">
+                 <div className="w-[72px] h-[72px] rounded-full border-4 border-[#75fbd9] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] flex items-center justify-center shrink-0">
                    <span className="text-foreground font-black tracking-widest text-lg">{recordingTime.toFixed(1)}s</span>
                  </div>
                )}
@@ -744,7 +744,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                <div className="flex items-center gap-1.5 flex-1 justify-center">
                  {/* Soundwave bars (animated) */}
                  {[...Array(6)].map((_, i) => (
-                   <div key={i} className={`w-1.5 ${isRecording ? 'bg-teal animate-pulse shadow-[0_0_8px_rgba(0,229,255,0.6)]' : 'bg-black/10 dark:bg-white/10'} rounded-full transition-colors`} style={{ height: isRecording ? `${Math.max(12, ((i * 17) % 45))}px` : '12px', animationDelay: isRecording ? `${i * 0.15}s` : '0s' }} />
+                   <div key={i} className={`w-1.5 ${isRecording ? 'bg-[#75fbd9] animate-pulse shadow-[0_0_8px_rgba(117, 251, 217,0.6)]' : 'bg-black/10 dark:bg-white/10'} rounded-full transition-colors`} style={{ height: isRecording ? `${Math.max(12, ((i * 17) % 45))}px` : '12px', animationDelay: isRecording ? `${i * 0.15}s` : '0s' }} />
                  ))}
                </div>
                <div className="flex flex-col gap-1.5 justify-end h-12 shrink-0">
@@ -764,7 +764,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                 <button 
                   key={rxn.label}
                   onClick={() => setSelectedReaction(rxn.label)}
-                  className={`flex flex-col items-center gap-3 p-4 rounded-2xl border ${selectedReaction === rxn.label ? 'bg-black/10 dark:bg-white/10 border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-muted border-transparent hover:bg-black/5 dark:bg-white/5'} transition-all shrink-0 min-w-[65px]`}
+                  className={`flex flex-col items-center gap-3 p-4 rounded-2xl border ${selectedReaction === rxn.label ? 'bg-black/10 dark:bg-white/10 border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-muted border-transparent hover:bg-black/5 dark:bg-white/5'} transition-all shrink-0 min-w-[65px]`}
                 >
                   <span className="text-3xl drop-shadow-lg">{rxn.emoji}</span>
                   <span className="text-[8px] font-black tracking-widest uppercase text-muted-foreground">{rxn.label}</span>

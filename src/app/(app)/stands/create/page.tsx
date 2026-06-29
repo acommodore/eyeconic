@@ -29,19 +29,19 @@ export default function PushAgendaPage() {
   };
 
   const getHeatColor = () => {
-     if (heatLevel < 30) return 'from-teal to-blue-500';
+     if (heatLevel < 30) return 'from-[#75fbd9] to-blue-500';
      if (heatLevel < 70) return 'from-yellow-400 to-orange-500';
      return 'from-coral to-red-600';
   };
 
   const getHeatShadow = () => {
-     if (heatLevel < 30) return 'shadow-[0_0_30px_rgba(0,229,255,0.3)]';
+     if (heatLevel < 30) return 'shadow-[0_0_30px_rgba(117, 251, 217,0.3)]';
      if (heatLevel < 70) return 'shadow-[0_0_30px_rgba(250,204,21,0.3)]';
      return 'shadow-[0_0_40px_rgba(255,107,107,0.5)]';
   };
 
   return (
-    <div className="min-h-screen bg-black text-foreground flex flex-col font-sans selection:bg-teal selection:text-black overflow-x-hidden relative w-full">
+    <div className="min-h-screen bg-black text-foreground flex flex-col font-sans selection:bg-[#75fbd9] selection:text-black overflow-x-hidden relative w-full">
       {/* Dynamic Backgrounds */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       <div className="fixed inset-0 bg-gradient-to-b from-black via-zinc-950 to-black z-0 pointer-events-none" />
@@ -57,7 +57,7 @@ export default function PushAgendaPage() {
           
            <div className="flex flex-col items-center justify-center absolute left-1/2 -translate-x-1/2 pointer-events-none">
               <div className="flex items-center gap-2">
-                 <Zap className="w-3.5 h-3.5 text-teal animate-pulse" />
+                 <Zap className="w-3.5 h-3.5 text-[#75fbd9] animate-pulse" />
                  <h1 className="text-xs md:text-sm font-black tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/50 drop-shadow-lg">
                    Push Agenda
                  </h1>
@@ -78,7 +78,7 @@ export default function PushAgendaPage() {
             onClick={() => setIsMatchSelectOpen(!isMatchSelectOpen)}
             className="w-full bg-gradient-to-br from-white/[0.05] to-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 flex items-center justify-between hover:border-white/20 transition-all cursor-pointer group shadow-2xl relative overflow-hidden"
           >
-          <div className="absolute inset-0 bg-gradient-to-r from-teal/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#75fbd9]/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-6 relative z-10">
             <div className="flex -space-x-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-0 group-hover:-translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
@@ -89,8 +89,8 @@ export default function PushAgendaPage() {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-[9px] font-black tracking-[0.2em] text-teal uppercase mb-1 flex items-center gap-1.5 opacity-80">
-                 <div className="w-1 h-1 rounded-full bg-teal animate-pulse" /> TARGET MATCH
+              <span className="text-[9px] font-black tracking-[0.2em] text-[#75fbd9] uppercase mb-1 flex items-center gap-1.5 opacity-80">
+                 <div className="w-1 h-1 rounded-full bg-[#75fbd9] animate-pulse" /> TARGET MATCH
               </span>
               <span className="text-base md:text-xl font-black uppercase tracking-widest text-white drop-shadow-lg">
                  {targetMatch.team1} <span className="text-white/30 mx-1">VS</span> {targetMatch.team2}
@@ -158,14 +158,14 @@ export default function PushAgendaPage() {
           </label>
           <button 
             onClick={() => setHasCover(!hasCover)}
-            className={`w-full aspect-[21/9] rounded-2xl border flex flex-col items-center justify-center gap-4 transition-all duration-500 overflow-hidden relative group ${hasCover ? 'border-teal/50 bg-teal/5' : 'border-white/10 border-dashed bg-white/[0.02] hover:border-white/30 hover:bg-white/5'}`}
+            className={`w-full aspect-[21/9] rounded-2xl border flex flex-col items-center justify-center gap-4 transition-all duration-500 overflow-hidden relative group ${hasCover ? 'border-[#75fbd9]/50 bg-[#75fbd9]/5' : 'border-white/10 border-dashed bg-white/[0.02] hover:border-white/30 hover:bg-white/5'}`}
           >
-            {hasCover && <div className="absolute inset-0 bg-gradient-to-tr from-teal/20 to-transparent opacity-50" />}
+            {hasCover && <div className="absolute inset-0 bg-gradient-to-tr from-[#75fbd9]/20 to-transparent opacity-50" />}
             
-            <div className={`p-4 rounded-full transition-transform duration-500 relative z-10 ${hasCover ? 'bg-teal/20 text-teal scale-110 shadow-[0_0_30px_rgba(0,229,255,0.3)]' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:scale-110'}`}>
+            <div className={`p-4 rounded-full transition-transform duration-500 relative z-10 ${hasCover ? 'bg-[#75fbd9]/20 text-[#75fbd9] scale-110 shadow-[0_0_30px_rgba(117, 251, 217,0.3)]' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:scale-110'}`}>
                <Camera className="w-6 h-6 md:w-8 md:h-8" />
             </div>
-            <span className={`text-[10px] md:text-xs font-black tracking-[0.2em] uppercase relative z-10 ${hasCover ? 'text-teal drop-shadow-md' : 'text-white/40'}`}>
+            <span className={`text-[10px] md:text-xs font-black tracking-[0.2em] uppercase relative z-10 ${hasCover ? 'text-[#75fbd9] drop-shadow-md' : 'text-white/40'}`}>
               {hasCover ? "EVIDENCE ATTACHED" : "DROP MEDIA HERE"}
             </span>
           </button>
@@ -179,7 +179,7 @@ export default function PushAgendaPage() {
           
           <div className="flex items-center justify-between relative z-10">
             <label className="text-[10px] md:text-xs font-black tracking-widest text-white/60 uppercase flex items-center gap-2">
-              <Flame className={`w-4 h-4 transition-colors duration-500 ${heatLevel > 75 ? 'text-coral animate-pulse' : heatLevel > 30 ? 'text-yellow-400' : 'text-teal'}`} /> 
+              <Flame className={`w-4 h-4 transition-colors duration-500 ${heatLevel > 75 ? 'text-coral animate-pulse' : heatLevel > 30 ? 'text-yellow-400' : 'text-[#75fbd9]'}`} /> 
               AGENDA TEMPERATURE
             </label>
             <div className={`px-4 py-1.5 rounded-full border border-white/10 bg-black/50 backdrop-blur-md ${getHeatShadow()} transition-all duration-500`}>
@@ -196,14 +196,14 @@ export default function PushAgendaPage() {
                onChange={(e) => setHeatLevel(parseInt(e.target.value))}
                className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer outline-none relative z-10"
                style={{ 
-                  background: `linear-gradient(to right, ${heatLevel > 75 ? '#FF6B6B' : heatLevel > 30 ? '#FACC15' : '#00E5FF'} ${heatLevel}%, rgba(255,255,255,0.1) ${heatLevel}%)` 
+                  background: `linear-gradient(to right, ${heatLevel > 75 ? '#FF6B6B' : heatLevel > 30 ? '#FACC15' : '#75fbd9'} ${heatLevel}%, rgba(255,255,255,0.1) ${heatLevel}%)` 
                }}
              />
              {/* Custom Thumb Styling using CSS in global or just rely on native for now with background trick above */}
           </div>
           
           <div className="flex justify-between text-[8px] md:text-[9px] font-black uppercase tracking-[0.2em] text-white/40 relative z-10">
-            <span className={heatLevel < 30 ? 'text-teal' : ''}>CIVIL DEBATE</span>
+            <span className={heatLevel < 30 ? 'text-[#75fbd9]' : ''}>CIVIL DEBATE</span>
             <span className={heatLevel >= 30 && heatLevel <= 75 ? 'text-yellow-400' : ''}>HEATED</span>
             <span className={heatLevel > 75 ? 'text-coral' : ''}>ABSOLUTE CHAOS</span>
           </div>
@@ -219,7 +219,7 @@ export default function PushAgendaPage() {
         <div className="max-w-5xl w-full pointer-events-auto relative z-10">
           <button 
             onClick={handlePushAgenda}
-            className={`w-full max-w-sm mx-auto bg-teal text-slate-900 py-4 md:py-5 rounded-full font-black text-sm md:text-base tracking-[0.2em] uppercase hover:bg-teal/90 transition-all shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center justify-center gap-3 border border-teal group relative overflow-hidden`}
+            className={`w-full max-w-sm mx-auto bg-[#75fbd9] text-slate-900 py-4 md:py-5 rounded-full font-black text-sm md:text-base tracking-[0.2em] uppercase hover:bg-[#75fbd9]/90 transition-all shadow-[0_0_30px_rgba(117, 251, 217,0.4)] hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center justify-center gap-3 border border-[#75fbd9] group relative overflow-hidden`}
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <AlertTriangle className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-500" />

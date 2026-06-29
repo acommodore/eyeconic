@@ -47,7 +47,7 @@ export default function ModerateStandPage() {
             <button className="text-muted-foreground hover:text-foreground transition-colors">
               <Search className="w-5 h-5" />
             </button>
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-teal/30 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#75fbd9]/30 shadow-[0_0_10px_rgba(117, 251, 217,0.2)]">
               <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aye" alt="Avatar" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function ModerateStandPage() {
               </div>
               
               {showMedia && (
-                <div className="mb-8 w-full aspect-video rounded-[2rem] overflow-hidden relative border-2 border-teal/30 shadow-[0_0_50px_rgba(0,229,255,0.15)] animate-in fade-in zoom-in duration-500 group">
+                <div className="mb-8 w-full aspect-video rounded-[2rem] overflow-hidden relative border-2 border-[#75fbd9]/30 shadow-[0_0_50px_rgba(117, 251, 217,0.15)] animate-in fade-in zoom-in duration-500 group">
                   <video 
                     src="https://www.w3schools.com/html/mov_bbb.mp4" 
                     autoPlay 
@@ -82,7 +82,7 @@ export default function ModerateStandPage() {
                         <div className="w-2 h-2 rounded-full bg-white" /> LIVE
                       </div>
                       <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-black tracking-widest rounded-lg flex items-center gap-2 border border-white/10">
-                        <Eye className="w-4 h-4 text-teal" /> 12.4K
+                        <Eye className="w-4 h-4 text-[#75fbd9]" /> 12.4K
                       </div>
                     </div>
                   </div>
@@ -90,12 +90,12 @@ export default function ModerateStandPage() {
                   {/* Bottom Bar Twitch Style */}
                   <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-10 pointer-events-none">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl border-2 border-teal overflow-hidden shadow-lg bg-black">
+                      <div className="w-14 h-14 rounded-xl border-2 border-[#75fbd9] overflow-hidden shadow-lg bg-black">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=JukeMaster" alt="JukeMaster" className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h3 className="text-white font-black text-lg shadow-black drop-shadow-md">Tactical Analysis: City vs Arsenal</h3>
-                        <p className="text-teal font-bold text-xs tracking-wider uppercase drop-shadow-md">@JukeMaster is sharing screen</p>
+                        <p className="text-[#75fbd9] font-bold text-xs tracking-wider uppercase drop-shadow-md">@JukeMaster is sharing screen</p>
                       </div>
                     </div>
                   </div>
@@ -104,15 +104,15 @@ export default function ModerateStandPage() {
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {/* Host Card */}
-                <div className="bg-card border border-teal/30 rounded-3xl p-6 flex flex-col items-center shadow-[0_0_30px_rgba(0,229,255,0.05)] relative group hover:border-teal/50 transition-colors">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden mb-4 border-2 border-teal relative shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+                <div className="bg-card border border-[#75fbd9]/30 rounded-3xl p-6 flex flex-col items-center shadow-[0_0_30px_rgba(117, 251, 217,0.05)] relative group hover:border-[#75fbd9]/50 transition-colors">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden mb-4 border-2 border-[#75fbd9] relative shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=JukeMaster" alt="JukeMaster" className="w-full h-full object-cover" />
                     <div className="absolute -bottom-2 -right-2 bg-card rounded-full p-1 border border-border">
-                      <Mic className="w-4 h-4 text-teal" />
+                      <Mic className="w-4 h-4 text-[#75fbd9]" />
                     </div>
                   </div>
                   <h3 className="font-bold text-sm text-foreground">@JukeMaster</h3>
-                  <p className="text-[10px] text-teal mt-1 tracking-wider uppercase font-black">Speaking...</p>
+                  <p className="text-[10px] text-[#75fbd9] mt-1 tracking-wider uppercase font-black">Speaking...</p>
                   
                   <div className="flex items-center gap-2 mt-5 w-full justify-center">
                     <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-white/10 transition-colors">
@@ -149,7 +149,7 @@ export default function ModerateStandPage() {
               </div>
               
               <div className="space-y-3">
-                <div className="bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl p-4 flex items-center justify-between group hover:border-teal/30 transition-colors shadow-lg">
+                <div className="bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl p-4 flex items-center justify-between group hover:border-[#75fbd9]/30 transition-colors shadow-lg">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl overflow-hidden bg-muted border border-border">
                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=GoalHunter99" alt="GoalHunter99" className="w-full h-full object-cover" />
@@ -157,7 +157,7 @@ export default function ModerateStandPage() {
                     <div>
                       <h3 className="font-bold text-sm text-foreground">@GoalHunter99</h3>
                       <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase mt-1 flex items-center gap-1.5">
-                        <Eye className="w-3 h-3 text-teal" /> High EAS
+                        <Eye className="w-3 h-3 text-[#75fbd9]" /> High EAS
                       </p>
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default function ModerateStandPage() {
                     <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/30 transition-colors">
                       <X className="w-4 h-4" />
                     </button>
-                    <button className="px-5 py-2.5 bg-white text-black font-black text-xs tracking-widest uppercase rounded-xl hover:bg-teal hover:text-black transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+                    <button className="px-5 py-2.5 bg-white text-black font-black text-xs tracking-widest uppercase rounded-xl hover:bg-[#75fbd9] hover:text-black transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_20px_rgba(117, 251, 217,0.4)]">
                       INVITE
                     </button>
                   </div>
@@ -224,7 +224,7 @@ export default function ModerateStandPage() {
           
           <button 
             onClick={() => setShowMedia(!showMedia)}
-            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${showMedia ? 'bg-teal/20 text-teal border border-teal/50 shadow-[0_0_20px_rgba(0,229,255,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
+            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${showMedia ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/50 shadow-[0_0_20px_rgba(117, 251, 217,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
           >
             <MonitorUp className="w-6 h-6" />
             <span className="text-[9px] font-black tracking-widest uppercase">SHARE</span>
@@ -232,7 +232,7 @@ export default function ModerateStandPage() {
           
           <button 
             onClick={() => setActiveModal('poll')}
-            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${activeModal === 'poll' ? 'bg-teal/20 text-teal border border-teal/50 shadow-[0_0_20px_rgba(0,229,255,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
+            className={`w-16 h-16 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-colors ${activeModal === 'poll' ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/50 shadow-[0_0_20px_rgba(117, 251, 217,0.2)]' : 'bg-black/40 text-muted-foreground hover:bg-white/10 border border-white/10 hover:text-white'}`}
           >
             <BarChart2 className="w-6 h-6" />
             <span className="text-[9px] font-black tracking-widest uppercase">POLLS</span>
@@ -256,9 +256,9 @@ export default function ModerateStandPage() {
           <div className="bg-card border border-border rounded-[2rem] p-8 w-full max-w-md space-y-8 shadow-2xl relative z-10">
             <div className="flex justify-between items-center">
               <h3 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase flex items-center gap-2">
-                <BarChart2 className="w-5 h-5 text-teal" /> CREATE LIVE POLL
+                <BarChart2 className="w-5 h-5 text-[#75fbd9]" /> CREATE LIVE POLL
               </h3>
-              <div className="w-2 h-2 rounded-full bg-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
+              <div className="w-2 h-2 rounded-full bg-[#75fbd9] animate-pulse shadow-[0_0_10px_rgba(117, 251, 217,0.8)]" />
             </div>
             
             <textarea 
@@ -269,7 +269,7 @@ export default function ModerateStandPage() {
             
             <div className="space-y-4">
               {pollOptions.map((opt, i) => (
-                <div key={i} className="flex items-center gap-4 bg-muted/30 border border-border/50 rounded-2xl px-5 py-4 focus-within:border-teal/50 focus-within:bg-card transition-colors shadow-inner">
+                <div key={i} className="flex items-center gap-4 bg-muted/30 border border-border/50 rounded-2xl px-5 py-4 focus-within:border-[#75fbd9]/50 focus-within:bg-card transition-colors shadow-inner">
                   <span className="text-sm font-black text-muted-foreground/50">{String.fromCharCode(65 + i)}</span>
                   <input 
                     type="text" 
@@ -289,7 +289,7 @@ export default function ModerateStandPage() {
                   <button 
                     key={dur}
                     onClick={() => setPollDuration(dur)}
-                    className={`flex-1 py-3 rounded-xl text-sm font-black transition-all border ${pollDuration === dur ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.15)]' : 'bg-card text-muted-foreground border-border hover:bg-muted'}`}
+                    className={`flex-1 py-3 rounded-xl text-sm font-black transition-all border ${pollDuration === dur ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.15)]' : 'bg-card text-muted-foreground border-border hover:bg-muted'}`}
                   >
                     {dur}
                   </button>
@@ -301,7 +301,7 @@ export default function ModerateStandPage() {
               <button 
                 onClick={handleAddOption}
                 disabled={pollOptions.length >= 5}
-                className="flex items-center gap-2 text-teal font-black text-xs tracking-[0.2em] uppercase hover:text-teal/80 transition-colors disabled:opacity-50 disabled:hover:text-teal"
+                className="flex items-center gap-2 text-[#75fbd9] font-black text-xs tracking-[0.2em] uppercase hover:text-[#75fbd9]/80 transition-colors disabled:opacity-50 disabled:hover:text-[#75fbd9]"
               >
                 <Plus className="w-5 h-5" /> Add Option
               </button>

@@ -92,7 +92,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
     <>
       <button 
         onClick={handleAction}
-        className="flex items-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black px-4 py-2 md:px-6 md:py-3 rounded-full font-black tracking-tight transition-all shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] hover:scale-105 active:scale-95"
+        className="flex items-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black px-4 py-2 md:px-6 md:py-3 rounded-full font-black tracking-tight transition-all shadow-[0_0_20px_rgba(117, 251, 217,0.3)] hover:shadow-[0_0_30px_rgba(117, 251, 217,0.5)] hover:scale-105 active:scale-95"
       >
         <Mic className="w-4 h-4 md:w-5 md:h-5" />
         <span className="text-sm md:text-base">Start a Stand</span>
@@ -132,7 +132,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
             ) : (
               <form onSubmit={handleCreateRoom} className="space-y-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-[teal]/20 border border-[teal]/50 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                  <div className="w-16 h-16 bg-[teal]/20 border border-[teal]/50 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(117, 251, 217,0.2)]">
                     <Mic className="w-8 h-8 text-[teal]" />
                   </div>
                   <h2 className="text-2xl font-black italic text-foreground">HOST A STAND</h2>
@@ -155,7 +155,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
                 <button 
                   type="submit"
                   disabled={creating || !roomTitle.trim()}
-                  className="w-full flex items-center justify-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black py-3 rounded-xl font-black transition-all shadow-[0_0_20px_rgba(0,229,255,0.3)] disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black py-3 rounded-xl font-black transition-all shadow-[0_0_20px_rgba(117, 251, 217,0.3)] disabled:opacity-50"
                 >
                   {creating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5 fill-black" />}
                   {creating ? "Going Live..." : "Go Live Now"}

@@ -27,8 +27,8 @@ export default function SettingsPage() {
         </button>
         <h1 className="text-3xl font-black tracking-[0.2em] uppercase drop-shadow-md">SETTINGS</h1>
         <div className="flex items-center gap-2 mt-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
-          <span className="text-[10px] text-teal font-mono tracking-widest uppercase">CONFIGURATION PROTOCOLS</span>
+          <div className="w-1.5 h-1.5 rounded-full bg-[#75fbd9] animate-pulse" />
+          <span className="text-[10px] text-[#75fbd9] font-mono tracking-widest uppercase">CONFIGURATION PROTOCOLS</span>
         </div>
       </div>
 

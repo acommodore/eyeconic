@@ -27,7 +27,7 @@ export default function AccountDetailsPage() {
             <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase flex items-center gap-2"><Mail className="w-3 h-3"/> Email Address</label>
             <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-xl p-4">
               <span className="text-sm font-medium">operative@stimmung.com</span>
-              <button className="text-xs font-bold text-teal hover:text-teal/80 uppercase tracking-widest">Edit</button>
+              <button className="text-xs font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest">Edit</button>
             </div>
           </div>
 
@@ -35,7 +35,7 @@ export default function AccountDetailsPage() {
             <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase flex items-center gap-2"><Key className="w-3 h-3"/> Password</label>
             <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-xl p-4">
               <span className="text-sm font-medium">••••••••••••</span>
-              <button className="text-xs font-bold text-teal hover:text-teal/80 uppercase tracking-widest">Change</button>
+              <button className="text-xs font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest">Change</button>
             </div>
           </div>
 
@@ -47,7 +47,7 @@ export default function AccountDetailsPage() {
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div>
                 <p className="text-sm font-bold">Windows PC - Chrome</p>
-                <p className="text-xs text-teal font-mono mt-1">Current Session</p>
+                <p className="text-xs text-[#75fbd9] font-mono mt-1">Current Session</p>
               </div>
             </div>
             <div className="flex items-center justify-between">
