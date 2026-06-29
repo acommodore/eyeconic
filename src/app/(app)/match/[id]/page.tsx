@@ -353,36 +353,18 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     }
   };
 
-  const tickerItems = [
-    "📈 ARS Fans: +15% Optimism (Saka sub)",
-    "📉 MUN Fans: -30% Patience (Ten Hag)",
-    "⚠️ RMA Fans: Tension Spiking (0-0 80')",
-    "🔥 LIV Fans: Roaring (+45% Momentum)",
-    "🧊 CHE Fans: Complete silence at Stamford Bridge",
-    "📈 JUV Fans: Tactical approval rising (+12%)",
+  const seasonContextItems = [
+    `🔥 ${matchInfo?.team1 || 'Home'} are unbeaten in their last 5 matches`,
+    `📉 ${matchInfo?.team2 || 'Away'} have conceded 4 goals in 5 games`,
+    `⚔️ Key Battle: Van Dijk vs Haaland`,
+    `📈 ${matchInfo?.team1 || 'Home'} sit 1st with 80 pts`,
+    `📊 Expected Goals (xG): ${matchInfo?.team1 || 'Home'} 2.1 - ${matchInfo?.team2 || 'Away'} 1.8`,
+    `🏟️ Anfield is a fortress: 15 wins in 17 home games`,
   ];
 
   return (
     <div className="bg-[#020202] min-h-screen">
-      {/* 0. TERMINAL TICKER TAPE */}
-      <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-xl border-b border-border flex items-center overflow-hidden py-1.5 shadow-2xl">
-         <div className="flex whitespace-nowrap animate-ticker w-[200%]">
-            <div className="flex justify-around min-w-[50%] shrink-0">
-               {tickerItems.map((item, idx) => (
-                 <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
-                   {item}
-                 </button>
-               ))}
-            </div>
-            <div className="flex justify-around min-w-[50%] shrink-0">
-               {tickerItems.map((item, idx) => (
-                 <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 hover:text-foreground hover:bg-black/5 dark:bg-muted transition-colors rounded py-0.5 cursor-pointer">
-                   {item}
-                 </button>
-               ))}
-            </div>
-         </div>
-      </div>
+      {/* Top ticker removed to place under Hero Card */}
       <div className="w-full max-w-[1200px] mx-auto px-0 md:px-8 pt-0 md:pt-4 text-foreground pb-24">
       <style>{`
         @keyframes scorerScroll {
@@ -390,13 +372,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           100% { transform: translateY(-50%); }
         }
         .animate-scorer-scroll {
-          animation: scorerScroll 4s linear infinite;
+          animation: scorerScroll 4s linear 3 forwards;
         }
       `}</style>
       {/* Cinematic Scoreboard */}
       <div className="relative w-full rounded-none md:rounded-2xl overflow-hidden mb-4 border-b md:border border-border shadow-2xl">
         {/* Navigation Buttons Overlay */}
-        <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 pt-2 md:pt-0">
+        <div className="absolute top-2 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 pt-2 md:pt-0">
           <div className="pointer-events-auto">
             <BackButton containerClassName="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg" iconClassName="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
@@ -411,7 +393,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
-        <div className="relative z-20 px-6 py-10 pt-20 md:px-12 md:py-12 md:pt-16 flex flex-col items-center justify-center">
+        <div className="relative z-20 px-6 py-6 pt-10 md:px-12 md:py-6 md:pt-10 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
@@ -498,6 +480,26 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
           </div>
         </div>
+      </div>
+
+      {/* 0. SEASON CONTEXT TICKER TAPE */}
+      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-3 mb-6 bg-muted/10 backdrop-blur-md">
+         <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {seasonContextItems.map((item, idx) => (
+                 <span key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground px-8 border-r border-border/30 last:border-none">
+                   {item}
+                 </span>
+               ))}
+            </div>
+            <div className="flex justify-around min-w-[50%] shrink-0">
+               {seasonContextItems.map((item, idx) => (
+                 <span key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground px-8 border-r border-border/30 last:border-none">
+                   {item}
+                 </span>
+               ))}
+            </div>
+         </div>
       </div>
 
       {/* Main 3-Tab Navigation */}
@@ -1891,6 +1893,8 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
+
 
 
 
