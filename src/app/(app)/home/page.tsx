@@ -314,7 +314,7 @@ const tickerItems = [
 ];
 
 const NewsTicker = () => (
-    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-3 shadow-2xl">
+    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-2 shadow-2xl">
        <div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
@@ -556,7 +556,7 @@ export default function DiscoverPage() {
       </section>
       )}
 
-      <div className="relative z-10 w-full mb-4 md:mb-6">
+      <div className="relative z-10 w-full mb-2 md:mb-4">
         <NewsTicker />
       </div>
 
@@ -681,4 +681,5 @@ export default function DiscoverPage() {
     </main>
   );
 }
+
 
