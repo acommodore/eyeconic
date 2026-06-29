@@ -548,7 +548,7 @@ export default function DiscoverPage() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
         
         {/* FILTERS AND SORTING ROW */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
            {/* EMOTIONAL FILTERS */}
            <div className="relative w-full lg:w-auto">
              <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
@@ -571,7 +571,7 @@ export default function DiscoverPage() {
            </div>
 
            {/* TERMINAL FEED SORTING CONTROLS */}
-           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto mt-4 lg:mt-0">
+           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
               <div className="flex w-full bg-black/40 backdrop-blur-md rounded-2xl p-1 border border-white/10 shadow-lg">
                 <button 
                   onClick={() => setSortMode('watchability')}
