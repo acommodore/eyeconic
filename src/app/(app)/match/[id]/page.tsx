@@ -638,7 +638,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={mvpWatchPlayer}
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-border"
+                          disabled={matchState === 'postmatch'}
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-teal transition-colors pb-1 border-b border-border disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
                         </select>
@@ -662,7 +663,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={fraudWatchPlayer}
                           onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-border"
+                          disabled={matchState === 'postmatch'}
+                          className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-[#D32F2F]/30 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
                         </select>
@@ -1532,8 +1534,8 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                setVibe(parseInt(e.target.value));
                if (!hasVotedAs) setHasVotedAs('fan');
              }}
-             disabled={hasVotedAs === 'neutral'}
-             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             disabled={hasVotedAs === 'neutral' || matchState === 'postmatch'}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-teal [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' || matchState === 'postmatch' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 

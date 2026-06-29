@@ -492,15 +492,25 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Momentum Activity Bars */}
-            <div className="relative w-full px-4 mb-4 h-16 shrink-0 flex items-end gap-1">
-              {momentumData.map((dataPoint) => (
-                <div 
-                  key={dataPoint.id} 
-                  className="flex-1 bg-teal/40 hover:bg-teal transition-colors rounded-t-sm" 
-                  style={{ height: `${dataPoint.value}%` }} 
-                  title={`Minute ${dataPoint.minute}: ${dataPoint.value}%`}
-                />
-              ))}
+            <div className="relative w-full px-4 mb-4 h-16 shrink-0 flex items-center gap-[2px]">
+              <div className="absolute left-4 right-4 top-1/2 h-px bg-white/20 z-0"></div>
+              {momentumData.map((dataPoint) => {
+                const normalizedValue = dataPoint.value - 50;
+                const isHome = normalizedValue > 0;
+                const heightPct = Math.min(100, Math.abs(normalizedValue) * 2); // Scale up to 100% since max deviation is 50
+                
+                return (
+                  <div key={dataPoint.id} className="flex-1 h-full flex flex-col justify-center group cursor-crosshair z-10" title={`Minute ${dataPoint.minute}: ${dataPoint.value}%`}>
+                     <div className="flex-1 flex flex-col justify-end relative">
+                        {isHome && <div className="w-full bg-[#FFD700] rounded-t-[1px] opacity-90 group-hover:opacity-100 transition-all group-hover:shadow-[0_0_8px_#FFD700]" style={{ height: `${heightPct}%` }} />}
+                     </div>
+                     <div className="h-[1px] w-full shrink-0" />
+                     <div className="flex-1 flex flex-col justify-start relative">
+                        {!isHome && <div className="w-full bg-white rounded-b-[1px] opacity-90 group-hover:opacity-100 transition-all group-hover:shadow-[0_0_8px_#ffffff]" style={{ height: `${heightPct}%` }} />}
+                     </div>
+                  </div>
+                );
+              })}
               {momentumData.length === 0 && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-xs text-muted-foreground font-bold uppercase tracking-widest animate-pulse">Waiting for live data...</span>
