@@ -378,7 +378,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       {/* Cinematic Scoreboard */}
       <div className="relative w-full rounded-none md:rounded-2xl overflow-hidden mb-4 border-b md:border border-border shadow-2xl">
         {/* Navigation Buttons Overlay */}
-        <div className="absolute top-2 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 pt-2 md:pt-0">
+        <div className="absolute top-1 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 pt-0">
           <div className="pointer-events-auto">
             <BackButton containerClassName="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg" iconClassName="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
@@ -404,7 +404,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
-        <div className="relative z-20 px-6 py-8 pt-16 md:px-12 md:py-8 md:pt-16 flex flex-col items-center justify-center">
+        <div className="relative z-20 px-6 pb-20 pt-10 md:px-12 md:pb-20 md:pt-10 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
@@ -494,7 +494,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
-      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-3 mb-6 bg-muted/10 backdrop-blur-md">
+      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-3 mb-2 bg-muted/10 backdrop-blur-md">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
@@ -1904,6 +1904,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 
