@@ -578,45 +578,38 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Interactive Timeline */}
-            <div className="relative w-full px-2 mb-8 h-10 shrink-0">
+            <div className="relative w-full px-4 mb-8 h-10 shrink-0">
               {/* The base line */}
               <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-black/10 dark:bg-white/10 -translate-y-1/2" />
               {/* The progress line up to the current minute (assuming 90 max) */}
-              <div className="absolute top-1/2 left-4 h-0.5 bg-gradient-to-r from-yellow-500 via-[#75fbd9] to-transparent -translate-y-1/2 transition-all duration-500" style={{width: `${Math.min((88 / 90) * 100, 100)}%`}} />
+              <div className="absolute top-1/2 left-4 right-4 h-0.5 -translate-y-1/2">
+                <div className="h-full bg-gradient-to-r from-yellow-500 via-[#75fbd9] to-transparent transition-all duration-500" style={{width: `${Math.min((88 / 90) * 100, 100)}%`}} />
+              </div>
               
               {/* The Event Dots (Filtered) */}
-              {filteredEvents.map((event) => {
-                const isActive = activeMinute === event.minute;
-                const leftPos = `${(event.minute / 90) * 100}%`;
-                const dotColorClass = getDotColor(event.type);
-                
-                return (
-                  <div 
-                    key={event.id}
-                    onClick={() => setActiveMinute(event.minute)}
-                    className="absolute top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 cursor-pointer group transition-all"
-                    style={{ left: `calc(${leftPos} + 1rem)` }} // adjusting for px-4
-                  >
+              <div className="absolute top-1/2 left-4 right-4 h-0 -translate-y-1/2">
+                {filteredEvents.map((event) => {
+                  const isActive = activeMinute === event.minute;
+                  const leftPos = `${(event.minute / 90) * 100}%`;
+                  const dotColorClass = getDotColor(event.type);
+                  
+                  return (
                     <div 
-                      className={`w-3 h-3 rounded-full ring-4 transition-all duration-300 ${dotColorClass} ${
-                        isActive 
-                          ? 'ring-[#050505] shadow-[0_0_15px_rgba(117, 251, 217,1)] scale-125' 
-                          : 'ring-[#050505] opacity-60 group-hover:opacity-100 group-hover:scale-110'
-                      }`} 
-                    />
-                    
-                    <div className={`absolute -top-7 text-xs font-bold transition-colors ${isActive ? 'text-[#75fbd9]' : 'text-muted-foreground'}`}>
-                      {event.minute}&apos;
+                      key={event.id}
+                      onClick={() => setActiveMinute(event.minute)}
+                      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer group transition-all"
+                      style={{ left: leftPos }}
+                    >
+                      <div 
+                        className={`w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-card z-10 transition-transform ${dotColorClass} ${isActive ? 'scale-150 shadow-[0_0_15px_rgba(255,255,255,0.5)]' : 'group-hover:scale-125 hover:shadow-[0_0_10px_currentColor]'}`}
+                      />
+                      <span className={`absolute top-5 text-[8px] md:text-[9px] font-black font-mono transition-opacity ${isActive ? 'opacity-100 text-[#75fbd9] drop-shadow-md' : 'opacity-0 group-hover:opacity-100 text-muted-foreground'}`}>
+                        {event.minute}'
+                      </span>
                     </div>
-                    
-                    {isActive && (
-                      <div className="absolute -bottom-6 text-[#75fbd9] animate-pulse">
-                        |||
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
 
             {/* Carousel of Cards */}
