@@ -150,9 +150,16 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     const channel = supabase.channel(`stand_emojis_${matchId}`, {
       config: { broadcast: { self: false } },
     });
-    channel.on('broadcast', { event: 'emoji' }, ({ payload }) => {
-      if (payload?.emoji) spawnEmojiLocally(payload.emoji);
-    }).subscribe();
+    channel
+      .on('broadcast', { event: 'emoji' }, ({ payload }) => {
+        if (payload?.emoji) spawnEmojiLocally(payload.emoji);
+      })
+      .on('broadcast', { event: 'chat' }, ({ payload }) => {
+        if (payload?.id) {
+          setChatMessages(prev => [...prev, payload]);
+        }
+      })
+      .subscribe();
     emojiBroadcastRef.current = channel;
     return () => { supabase.removeChannel(channel); };
   }, [matchId]);
@@ -242,40 +249,38 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     setHasVoted(true);
   };
 
-  const toggleMute = (username: string) => {
-    setMutedUsers(prev => ({ ...prev, [username]: !prev[username] }));
-  };
-
-  const spawnEmoji = (emoji: string) => {
-    const id = Date.now() + Math.random();
-    setFloatingEmojis(prev => [...prev, { id, emoji, left: Math.random() * 80 + 10 }]);
-    setTimeout(() => {
-      setFloatingEmojis(prev => prev.filter(e => e.id !== id));
-    }, 2500);
-  };
 
   const handleSendMessage = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!inputText.trim()) return;
 
-    if (!currentUser) {
-      alert("You must be logged in to chat.");
-      return;
-    }
-
     const text = inputText.trim();
     setInputText("");
 
-    const { error } = await supabase.from('stand_messages').insert([{
-      stand_id: matchId,
-      profile_id: currentUser.id,
-      message: text
-    }]);
+    // Add locally immediately
+    const localMsg = {
+      id: Date.now(),
+      name: localParticipant?.identity || "You",
+      color: "text-[teal]",
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${localParticipant?.identity || 'me'}`,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      text,
+      isSpeaker: false,
+    };
+    setChatMessages(prev => [...prev, localMsg]);
 
-    if (error) {
-      console.error("Error sending message:", error);
+    // Broadcast to other users
+    try {
+      await emojiBroadcastRef.current?.send({
+        type: 'broadcast',
+        event: 'chat',
+        payload: localMsg,
+      });
+    } catch (e) {
+      console.error('Failed to broadcast message', e);
     }
   };
+
 
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
