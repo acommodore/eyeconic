@@ -359,6 +359,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     `📈 FORM: ${matchInfo?.team1 || 'Home'} (W-W-D-W-L) | ${matchInfo?.team2 || 'Away'} (W-L-D-D-W)`,
     `⚔️ LAST MEETING: ${matchInfo?.team1 || 'Home'} 2 - 1 ${matchInfo?.team2 || 'Away'}`,
     `🔥 ${matchInfo?.team1 || 'Home'} are unbeaten in their last 5 matches`,
+    `🛡️ DEFENSE: ${matchInfo?.team1 || 'Home'} has 12 clean sheets this season`,
+    `⚽ DANGER MAN: Salah (18 G) vs Haaland (20 G)`,
+    `👟 DOMINANCE: ${matchInfo?.team2 || 'Away'} averages 64% possession`,
     `📉 ${matchInfo?.team2 || 'Away'} have conceded 4 goals in 5 games`,
   ];
 
@@ -1904,6 +1907,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 
