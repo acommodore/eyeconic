@@ -3,37 +3,56 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useParticipants, useLocalParticipant, useIsSpeaking } from "@livekit/components-react";
-import type { Participant } from "livekit-client";
+import type { Participant, RemoteParticipant } from "livekit-client";
 import { createClient } from "@/lib/supabase/client";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp, Activity } from "lucide-react";
+import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp, Activity, VolumeX } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
 import { matchService } from '@/services/matchService';
 import { Match } from '@/types/match';
 
-function SpeakerTile({ participant, speakerClass }: { participant: Participant, speakerClass: string }) {
+function SpeakerTile({ participant, speakerClass, isLocallyMuted, onToggleMute }: { participant: Participant, speakerClass: string, isLocallyMuted: boolean, onToggleMute: (identity: string) => void }) {
   const isSpeaking = useIsSpeaking(participant);
   const isMuted = !participant.isMicrophoneEnabled;
   const username = participant.identity;
 
   return (
-    <div className={`${speakerClass} overflow-hidden border-2 ${isMuted ? 'border-border' : isSpeaking ? 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`}>
-      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isMuted ? 'grayscale opacity-50' : 'opacity-100'}`} />
+    <div
+      className={`${speakerClass} overflow-hidden border-2 ${
+        isLocallyMuted ? 'border-gray-700 opacity-60' :
+        isMuted ? 'border-border' :
+        isSpeaking ? 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]' :
+        'border-border-strong hover:border-white/40'
+      } group cursor-pointer transition-all duration-500 hover:scale-[1.02] relative`}
+      onClick={() => onToggleMute(username)}
+      title={isLocallyMuted ? `Unmute ${username}` : `Mute ${username} locally`}
+    >
+      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isMuted || isLocallyMuted ? 'grayscale opacity-50' : 'opacity-100'}`} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
       <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-      {isSpeaking && !isMuted && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-2xl animate-pulse pointer-events-none" />}
+      {isSpeaking && !isMuted && !isLocallyMuted && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-2xl animate-pulse pointer-events-none" />}
+
+      {/* Locally muted overlay */}
+      {isLocallyMuted && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-10">
+          <div className="flex flex-col items-center gap-1">
+            <VolumeX className="w-5 h-5 md:w-7 md:h-7 text-white" />
+            <span className="text-[8px] md:text-[10px] font-black text-white/80 tracking-widest uppercase">Muted</span>
+          </div>
+        </div>
+      )}
       
       <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-        <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${isMuted ? 'bg-red-500/80 backdrop-blur' : isSpeaking ? 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
-          {isMuted ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className={`w-3 h-3 ${isSpeaking ? 'text-black' : 'text-muted-foreground'}`} />}
+        <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${isLocallyMuted ? 'bg-gray-700/90 backdrop-blur' : isMuted ? 'bg-red-500/80 backdrop-blur' : isSpeaking ? 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
+          {isLocallyMuted ? <VolumeX className="w-3 h-3 text-white" /> : isMuted ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className={`w-3 h-3 ${isSpeaking ? 'text-black' : 'text-muted-foreground'}`} />}
         </div>
       </div>
       
       <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-         <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${isMuted ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg`} />
-         <span className={`text-[9px] md:text-sm font-black ${isMuted ? 'text-gray-300' : 'text-foreground'} drop-shadow-md truncate`}>{username}</span>
+         <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${isLocallyMuted ? 'bg-gray-500' : isMuted ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg`} />
+         <span className={`text-[9px] md:text-sm font-black ${isMuted || isLocallyMuted ? 'text-gray-400' : 'text-foreground'} drop-shadow-md truncate`}>{username}</span>
       </div>
     </div>
   );
@@ -100,6 +119,20 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   }, [matchId, supabase]);
 
   const [mutedUsers, setMutedUsers] = useState<Record<string, boolean>>({});
+
+  const toggleLocalMute = (identity: string) => {
+    const remoteParticipant = participants.find(
+      (p) => p.identity === identity && p !== localParticipant
+    ) as RemoteParticipant | undefined;
+    if (!remoteParticipant) return; // don't mute yourself
+    const nowMuted = !mutedUsers[identity];
+    setMutedUsers((prev) => ({ ...prev, [identity]: nowMuted }));
+    try {
+      remoteParticipant.setVolume(nowMuted ? 0 : 1);
+    } catch (e) {
+      console.error('Failed to set volume', e);
+    }
+  };
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
   const [inputText, setInputText] = useState("");
   const [isMicPending, setIsMicPending] = useState(false);
@@ -217,7 +250,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     
     for (let i = 0; i < 6; i++) {
       if (i < paddedParticipants.length) {
-        slots.push(<SpeakerTile key={paddedParticipants[i].identity} participant={paddedParticipants[i]} speakerClass={speakerClass} />);
+        slots.push(<SpeakerTile key={paddedParticipants[i].identity} participant={paddedParticipants[i]} speakerClass={speakerClass} isLocallyMuted={!!mutedUsers[paddedParticipants[i].identity]} onToggleMute={toggleLocalMute} />);
       } else {
         slots.push(
           <div key={`empty-${i}`} className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
