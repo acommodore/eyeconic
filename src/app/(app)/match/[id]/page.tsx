@@ -381,7 +381,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       {/* Cinematic Scoreboard */}
       <div className="relative w-full rounded-none md:rounded-2xl overflow-hidden mb-4 border-b md:border border-border shadow-2xl">
         {/* Navigation Buttons Overlay */}
-        <div className="absolute top-1 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 pt-0">
+        <div className="absolute top-1 left-4 right-4 z-50 flex justify-between items-center pointer-events-none pt-0">
           <div className="pointer-events-auto">
             <BackButton containerClassName="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg" iconClassName="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
@@ -1690,47 +1690,29 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
 }
 
 function SeasonContextTab({ matchInfo }: { matchInfo: any }) {
+  const items = [
+    <>League Position: <span className="font-mono text-white">4th vs 7th</span></>,
+    <>Gap: <span className="font-mono text-white">5 pts</span></>,
+    <>Recent Form: <span className="font-mono text-white">W-D-W-L-W vs L-W-L-D-W</span></>,
+    <>Last Meeting: <span className="font-mono text-white">{matchInfo?.team1 || 'Team A'} won (2-1)</span></>
+  ];
+
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="bg-card border border-border rounded-2xl p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl">
-        <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
-          <div className="flex flex-col items-center md:items-start">
-            <span className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-1">League Position</span>
-            <div className="text-sm font-black flex items-center gap-2 text-foreground">
-              <span className="font-mono tabular-nums">4th</span>
-              <span className="text-muted-foreground text-[10px]">vs</span>
-              <span className="font-mono tabular-nums">7th</span>
-            </div>
-          </div>
-          <div className="w-px h-8 bg-border hidden md:block"></div>
-          <div className="flex flex-col items-center md:items-start text-right md:text-left">
-            <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
-            <span className="text-sm font-black text-foreground font-mono tabular-nums">5 pts</span>
-          </div>
+    <div className="w-full flex items-center overflow-hidden py-4 border border-border/50 rounded-2xl bg-muted/10 backdrop-blur-md">
+      <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+        <div className="flex justify-around min-w-[50%] shrink-0 gap-8 px-4">
+          {items.map((item, idx) => (
+            <span key={`ticker-1-${idx}`} className="text-[12px] md:text-[14px] font-black tracking-widest uppercase text-[#75fbd9]">
+              {item}
+            </span>
+          ))}
         </div>
-        
-        <div className="flex flex-col items-center w-full md:w-auto py-4 md:py-0 border-y border-border md:border-y-0">
-          <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Recent Form</span>
-          <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase font-mono">
-            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-            <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
-            <span className="text-muted-foreground mx-2 text-[9px]">vs</span>
-            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
-            <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
-            <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
-            <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
-          </div>
-        </div>
-        
-        <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
-          <div className="flex flex-col items-center md:items-end">
-            <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
-            <span className="text-xs font-black text-foreground">{matchInfo?.team1 || 'Team A'} won <span className="text-[#75fbd9] font-mono tabular-nums">(2-1)</span></span>
-          </div>
+        <div className="flex justify-around min-w-[50%] shrink-0 gap-8 px-4">
+          {items.map((item, idx) => (
+            <span key={`ticker-2-${idx}`} className="text-[12px] md:text-[14px] font-black tracking-widest uppercase text-[#75fbd9]">
+              {item}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -1910,6 +1892,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { LiveKitRoom, RoomAudioRenderer } from '@livekit/components-react';
+import { Activity } from 'lucide-react';
 
 export default function LiveAudioRoom({ 
   roomName, 
@@ -35,8 +36,7 @@ export default function LiveAudioRoom({
     return (
       <div className="w-full h-screen flex items-center justify-center bg-background text-foreground">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 rounded-full border-4 border-[#75fbd9] border-t-transparent animate-spin" />
-          <p className="text-sm font-bold tracking-widest text-muted-foreground uppercase">Connecting to Stand...</p>
+          <div className="animate-pulse flex flex-col items-center"><Activity className="w-8 h-8 text-[coral] mb-4 animate-bounce" /><p className="text-white font-mono uppercase tracking-widest text-xs">Loading Stand...</p></div>
         </div>
       </div>
     );
@@ -56,3 +56,4 @@ export default function LiveAudioRoom({
     </LiveKitRoom>
   );
 }
+
