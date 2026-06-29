@@ -407,24 +407,27 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
          </div>
       </div>
-      <div className="w-full max-w-[1200px] mx-auto p-4 md:px-8 md:py-4 text-foreground pb-24">
+      <div className="w-full max-w-[1200px] mx-auto p-0 md:px-8 md:py-4 text-foreground pb-24">
       
-      {/* Top Header Navigation */}
-      <div className="flex items-center justify-between mb-6 mt-2 md:mt-4">
-        <BackButton containerClassName="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground" iconClassName="w-5 h-5 text-foreground" />
-        <h1 className="text-sm font-black tracking-widest text-muted-foreground uppercase">Match Center</h1>
-        <button className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-muted/80 transition-colors backdrop-blur-md bg-card text-card-foreground">
-          <Share className="w-5 h-5 text-foreground" />
-        </button>
-      </div>
-
       {/* Cinematic Scoreboard */}
-      <div className="relative w-full rounded-[32px] overflow-hidden mb-8 md:mb-10 border border-border shadow-2xl">
+      <div className="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0 rounded-b-[32px] md:rounded-[32px] overflow-hidden mb-4 md:mb-6 border-b border-border md:border shadow-2xl -mt-4 md:mt-0">
+        {/* Navigation Buttons Overlay */}
+        <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 md:px-0 pt-2 md:pt-0">
+          <div className="pointer-events-auto">
+            <BackButton containerClassName="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg" iconClassName="w-4 h-4 md:w-5 md:h-5 text-white" />
+          </div>
+          <div className="pointer-events-auto">
+            <button className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg">
+              <Share className="w-4 h-4 md:w-5 md:h-5 text-white" />
+            </button>
+          </div>
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/20 via-[#020202] to-[#4FC3F7]/20 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
-        <div className="relative z-20 px-6 py-8 md:px-12 md:py-8 flex flex-col items-center justify-center">
+        <div className="relative z-20 px-6 py-10 pt-20 md:px-12 md:py-12 md:pt-16 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
@@ -470,7 +473,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Main 3-Tab Navigation */}
-      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-8 max-w-lg mx-auto shadow-2xl">
+      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-4 max-w-lg mx-4 md:mx-auto shadow-2xl">
         {['prematch', 'live', 'postmatch'].map((state) => (
           <button
             key={state}
