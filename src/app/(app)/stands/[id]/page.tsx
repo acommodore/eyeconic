@@ -23,7 +23,7 @@ function SpeakerTile({ participant, speakerClass }: { participant: Participant, 
       <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isMuted ? 'grayscale opacity-50' : 'opacity-100'}`} />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
       <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-      {isSpeaking && !isMuted && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-xl animate-pulse pointer-events-none" />}
+      {isSpeaking && !isMuted && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-2xl animate-pulse pointer-events-none" />}
       
       <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
         <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${isMuted ? 'bg-red-500/80 backdrop-blur' : isSpeaking ? 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
@@ -209,8 +209,8 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
   const renderSpeakers = (isMediaMode: boolean) => {
     const speakerClass = isMediaMode 
-      ? "relative w-14 h-14 md:w-24 md:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
-      : "relative aspect-square h-full md:w-full md:h-full md:aspect-auto shrink-0 min-h-0 rounded-xl";
+      ? "relative w-14 h-14 md:w-24 md:h-24 md:w-32 md:h-32 shrink-0 rounded-2xl xl:rounded-2xl" 
+      : "relative aspect-square h-full md:w-full md:h-full md:aspect-auto shrink-0 min-h-0 rounded-2xl";
 
     const paddedParticipants = [...participants];
     const slots = [];
@@ -232,7 +232,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
   const renderPoll = () => (
     <div className="p-3 md:p-4 bg-gradient-to-b from-[#050505] to-transparent shrink-0">
-      <div className="bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-xl p-3 md:p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-border-strong transition-all duration-300">
+      <div className="bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-2xl p-3 md:p-4 backdrop-blur-md relative overflow-hidden shadow-lg group hover:border-border-strong transition-all duration-300">
         <div className="absolute top-0 right-0 w-24 h-24 bg-[teal]/10 rounded-full blur-[30px] pointer-events-none group-hover:bg-[teal]/20 transition-all duration-500" />
         
         <div 
@@ -260,7 +260,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           <div className="space-y-3">
             <div 
               onClick={() => handleVote('yes')}
-              className={`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[teal]/50'}`}
+              className={`relative h-8 rounded-2xl bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[teal]/50'}`}
             >
               <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[teal]/40 to-[teal]/20 transition-all duration-1000" style={{ width: `${yesPercentage}%` }} />
               <div className="absolute inset-0 flex items-center justify-between px-3">
@@ -270,7 +270,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
             </div>
             <div 
               onClick={() => handleVote('no')}
-              className={`relative h-8 rounded-lg bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[coral]/50'}`}
+              className={`relative h-8 rounded-2xl bg-card text-card-foreground/40 border overflow-hidden transition-colors ${hasVoted ? 'cursor-default border-border' : 'cursor-pointer border-border hover:border-[coral]/50'}`}
             >
               <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[coral]/40 to-[coral]/20 transition-all duration-1000" style={{ width: `${noPercentage}%` }} />
               <div className="absolute inset-0 flex items-center justify-between px-3">
@@ -333,7 +333,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 
         {/* Stage on mobile */}
         <div className="shrink-0 flex flex-col bg-background px-3 pb-3 border-b border-border z-10">
-          <div className="px-3 py-2 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-xl flex flex-col gap-2 shrink-0 backdrop-blur-md mb-3">
+          <div className="px-3 py-2 relative overflow-hidden bg-card text-card-foreground/5 dark:bg-muted border border-border rounded-2xl flex flex-col gap-2 shrink-0 backdrop-blur-md mb-3">
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-2 shrink-0">
                 <BackButton containerClassName="p-2 hover:bg-card text-card-foreground/10 rounded-full transition-colors group bg-card text-card-foreground/40 border border-border backdrop-blur" iconClassName="w-4 h-4 text-foreground" />
@@ -361,7 +361,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           
           {isVideoPlaying ? (
             <div className="w-full flex flex-row gap-2">
-              <div className="flex-1 aspect-video bg-card relative overflow-hidden rounded-xl shadow-lg border border-border group">
+              <div className="flex-1 aspect-video bg-card relative overflow-hidden rounded-2xl shadow-lg border border-border group">
                 <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover opacity-80" />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="w-8 h-8 rounded-full bg-card/50 backdrop-blur border border-border-strong flex items-center justify-center">
@@ -378,7 +378,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               </div>
             </div>
           ) : (
-            <div className="w-full h-20 relative bg-card overflow-hidden flex rounded-xl shadow-lg border border-border shrink-0">
+            <div className="w-full h-20 relative bg-card overflow-hidden flex rounded-2xl shadow-lg border border-border shrink-0">
               <div className="absolute inset-0 z-0">
                 <img src="https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover opacity-40 mix-blend-luminosity" />
                 <div className="absolute inset-0 bg-gradient-to-br from-[#FF0000]/20 via-[#020202]/80 to-[#001C58]/20" />
@@ -416,15 +416,15 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         {/* Action Bar on mobile */}
         <div className="shrink-0 p-2 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-2 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-30" style={{ paddingBottom: `calc(env(safe-area-inset-bottom) + 8px)` }}>
           <div className="flex gap-2">
-            <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-lg py-1 transition-all">
+            <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-2xl py-1 transition-all">
               <span className="text-xl">🤡</span>
               <span className="text-[8px] font-black text-muted-foreground tracking-widest uppercase">Waffling</span>
             </button>
-            <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-lg py-1 transition-all">
+            <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-card text-card-foreground/5 border border-border rounded-2xl py-1 transition-all">
               <span className="text-xl">🍳</span>
               <span className="text-[8px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
             </button>
-            <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-lg py-1 font-black transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}`}>
+            <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-2xl py-1 font-black transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}`}>
               {isMicPending ? <Loader2 className="w-4 h-4 animate-spin" /> : (localParticipant?.isMicrophoneEnabled ? <MicOff className="w-4 h-4 fill-current" /> : <Mic className="w-4 h-4 fill-black" />)}
               <span className="text-[9px] tracking-widest uppercase">{isMicPending ? 'Pending' : (localParticipant?.isMicrophoneEnabled ? 'Mute Mic' : 'Request Mic')}</span>
             </button>
@@ -434,7 +434,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
             </div>
             <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Join the conversation..." className="bg-transparent border-none outline-none text-[15px] w-full px-3 text-foreground placeholder:text-gray-600 font-medium" />
-            <button type="submit" disabled={!inputText.trim()} className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] border-[teal] text-black' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
+            <button type="submit" disabled={!inputText.trim()} className={`w-8 h-8 flex items-center justify-center rounded-2xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] border-[teal] text-black' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
@@ -540,15 +540,15 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           </div>
           <div className="p-4 border-t border-border bg-card text-card-foreground/80 backdrop-blur-xl space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] relative z-30">
             <div className="flex gap-3">
-              <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
+              <button onClick={() => spawnEmoji('🤡')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-2xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
                 <span className="text-2xl">🤡</span>
                 <span className="text-[9px] font-black text-muted-foreground tracking-widest uppercase">Waffling</span>
               </button>
-              <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
+              <button onClick={() => spawnEmoji('🍳')} className="flex-1 flex flex-col items-center justify-center gap-1 bg-card text-card-foreground/5 border border-border rounded-2xl py-3 hover:bg-card text-card-foreground/10 hover:border-border-strong hover:-translate-y-1 transition-all shadow-lg">
                 <span className="text-2xl">🍳</span>
                 <span className="text-[9px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
               </button>
-              <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-3 hover:scale-[1.02] font-black cursor-pointer transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}`}>
+              <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-2xl py-3 hover:scale-[1.02] font-black cursor-pointer transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}`}>
                 {isMicPending ? <Loader2 className="w-5 h-5 animate-spin" /> : (localParticipant?.isMicrophoneEnabled ? <MicOff className="w-5 h-5 fill-current" /> : <Mic className="w-5 h-5 fill-black" />)}
                 <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : (localParticipant?.isMicrophoneEnabled ? 'Mute Mic' : 'Request Mic')}</span>
               </button>
@@ -558,7 +558,7 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus" alt="User" />
               </div>
               <input type="text" value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Join the conversation..." className="bg-transparent border-none outline-none text-sm w-full px-4 text-foreground placeholder:text-gray-600 font-medium" />
-              <button type="submit" disabled={!inputText.trim()} className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
+              <button type="submit" disabled={!inputText.trim()} className={`w-10 h-10 flex items-center justify-center rounded-2xl transition-all mr-0.5 border ${inputText.trim() ? 'bg-[teal] hover:bg-[teal]/90 border-[teal] text-black shadow-[0_0_15px_rgba(117, 251, 217,0.4)] hover:scale-105' : 'bg-card text-card-foreground/5 border-border text-muted-foreground/80'}`}>
                 <Send className="w-4 h-4" />
               </button>
             </form>
@@ -582,3 +582,4 @@ export default function ActiveStandPage() {
     </LiveAudioRoom>
   );
 }
+

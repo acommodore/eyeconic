@@ -45,7 +45,7 @@ export default function SettingsPage() {
             className="flex items-center justify-between p-6 bg-card border border-border rounded-2xl cursor-pointer hover:border-foreground transition-colors group"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-black/5 dark:bg-white/5 rounded-xl text-muted-foreground group-hover:text-foreground transition-colors">
+              <div className="p-3 bg-black/5 dark:bg-white/5 rounded-2xl text-muted-foreground group-hover:text-foreground transition-colors">
                 {item.icon}
               </div>
               <div>
@@ -63,7 +63,7 @@ export default function SettingsPage() {
           className="flex items-center justify-between p-6 bg-red-500/10 border border-red-500/20 rounded-2xl cursor-pointer hover:border-red-500/50 hover:bg-red-500/20 transition-colors group mt-8"
         >
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-red-500/20 rounded-xl text-red-500 group-hover:text-red-400 transition-colors">
+            <div className="p-3 bg-red-500/20 rounded-2xl text-red-500 group-hover:text-red-400 transition-colors">
               <LogOut className="w-5 h-5" />
             </div>
             <div>
@@ -79,3 +79,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

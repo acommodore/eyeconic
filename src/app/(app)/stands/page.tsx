@@ -41,7 +41,7 @@ export default function StandsPage() {
       <div className="p-4 md:p-8 space-y-16">
           
           {/* HERO SECTION: Featured Live Stand */}
-          <section className="relative w-full rounded-[32px] overflow-hidden group cursor-pointer border border-border shadow-2xl">
+          <section className="relative w-full rounded-2xl overflow-hidden group cursor-pointer border border-border shadow-2xl">
             {/* Animated Ambient Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#6200EA]/20 via-[#020202] to-[coral]/20 z-0" />
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614632537423-1e6c2e7e0aab?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000 z-0 mix-blend-overlay" />
@@ -67,7 +67,7 @@ export default function StandsPage() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <Link href="/stands/1" className="bg-[#75fbd9] text-black font-black tracking-widest text-sm px-8 py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] animate-pulse-slow hover:scale-105 active:scale-95">
+                  <Link href="/stands/1" className="bg-[#75fbd9] text-black font-black tracking-widest text-sm px-8 py-4 rounded-2xl hover:bg-white transition-all shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] animate-pulse-slow hover:scale-105 active:scale-95">
                     JOIN STAND
                   </Link>
                   <div className="flex -space-x-3">
@@ -115,7 +115,7 @@ export default function StandsPage() {
               
               {/* Card 1 */}
               <Link href="/stands/1" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-2xl overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -143,7 +143,7 @@ export default function StandsPage() {
                           </div>
                           <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest hidden sm:block">Hosted by LFCFanTV</span>
                         </div>
-                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-2xl transition-colors backdrop-blur">
                           Join
                         </button>
                       </div>
@@ -154,7 +154,7 @@ export default function StandsPage() {
 
                {/* Card 2 */}
                <Link href="/stands/2" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-2xl overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1552318965-6e6be7484ada?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -182,7 +182,7 @@ export default function StandsPage() {
                           </div>
                           <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest hidden sm:block">Hosted by TheRef</span>
                         </div>
-                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-2xl transition-colors backdrop-blur">
                           Join
                         </button>
                       </div>
@@ -193,7 +193,7 @@ export default function StandsPage() {
 
                {/* Card 3 */}
                <Link href="/stands/3" className="block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-2xl overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -220,7 +220,7 @@ export default function StandsPage() {
                           </div>
                           <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest hidden sm:block">Hosted by MadridistaHQ</span>
                         </div>
-                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-2xl transition-colors backdrop-blur">
                           Join
                         </button>
                       </div>
@@ -231,7 +231,7 @@ export default function StandsPage() {
               
               {/* Card 4 - Hidden on smaller screens to balance grid */}
                <Link href="/stands/4" className="hidden xl:block">
-                <div className="aspect-[4/3] md:aspect-[3/2] rounded-[24px] overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
+                <div className="aspect-[4/3] md:aspect-[3/2] rounded-2xl overflow-hidden relative group border border-border hover:border-[teal]/30 transition-all hover:shadow-[0_0_30px_rgba(117, 251, 217,0.15)] flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-105 transition-transform duration-700" />
                   
@@ -258,7 +258,7 @@ export default function StandsPage() {
                           </div>
                           <span className="text-[9px] text-muted-foreground font-bold uppercase tracking-widest hidden sm:block">Hosted by CalcioTalk</span>
                         </div>
-                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-lg transition-colors backdrop-blur">
+                        <button className="px-4 py-1.5 bg-card text-card-foreground/10 dark:bg-white/10 hover:bg-[teal] text-foreground hover:text-black font-black text-[10px] tracking-widest uppercase rounded-2xl transition-colors backdrop-blur">
                           Join
                         </button>
                       </div>
@@ -283,7 +283,7 @@ export default function StandsPage() {
               
               {/* Scheduled Item 1 */}
               <div className="flex items-center gap-4 bg-[#0A0A0A] border border-border p-4 rounded-2xl hover:bg-card text-card-foreground/5 dark:bg-white/5 transition-colors group cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[teal]/50 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[teal]/50 transition-colors">
                   <span className="text-xs font-black text-muted-foreground">7:00</span>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -297,7 +297,7 @@ export default function StandsPage() {
 
               {/* Scheduled Item 2 */}
               <div className="flex items-center gap-4 bg-[#0A0A0A] border border-border p-4 rounded-2xl hover:bg-card text-card-foreground/5 dark:bg-white/5 transition-colors group cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[coral]/50 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[coral]/50 transition-colors">
                   <span className="text-xs font-black text-muted-foreground">8:30</span>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -311,7 +311,7 @@ export default function StandsPage() {
 
                {/* Scheduled Item 3 */}
                <div className="flex items-center gap-4 bg-[#0A0A0A] border border-border p-4 rounded-2xl hover:bg-card text-card-foreground/5 dark:bg-white/5 transition-colors group cursor-pointer">
-                <div className="w-12 h-12 rounded-xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] flex flex-col items-center justify-center border border-border shadow-inner shrink-0 group-hover:border-[#6200EA]/50 transition-colors">
                   <span className="text-xs font-black text-muted-foreground">10:00</span>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -443,7 +443,7 @@ export default function StandsPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Highlight 1 */}
-              <div className="bg-[#0A0A0A] border border-border rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+              <div className="bg-[#0A0A0A] border border-border rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
@@ -465,7 +465,7 @@ export default function StandsPage() {
               </div>
 
               {/* Highlight 2 */}
-              <div className="bg-[#0A0A0A] border border-border rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+              <div className="bg-[#0A0A0A] border border-border rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
@@ -487,7 +487,7 @@ export default function StandsPage() {
               </div>
 
                {/* Highlight 3 */}
-               <div className="bg-[#0A0A0A] border border-border rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+               <div className="bg-[#0A0A0A] border border-border rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1628891435222-06592ce29663?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
@@ -509,7 +509,7 @@ export default function StandsPage() {
               </div>
 
               {/* Highlight 4 */}
-              <div className="bg-[#0A0A0A] border border-border rounded-[24px] overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hidden lg:block">
+              <div className="bg-[#0A0A0A] border border-border rounded-2xl overflow-hidden group cursor-pointer hover:border-white/20 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] hidden lg:block">
                 <div className="aspect-video relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent z-10" />
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-50 group-hover:scale-110 transition-transform duration-700" />
@@ -537,3 +537,4 @@ export default function StandsPage() {
     </div>
   );
 }
+

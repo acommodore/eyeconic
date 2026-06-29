@@ -21,11 +21,11 @@ export default function AccountDetailsPage() {
       </div>
 
       <div className="space-y-6">
-        <div className="bg-card border border-border rounded-3xl p-6 space-y-6">
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           
           <div className="space-y-2">
             <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase flex items-center gap-2"><Mail className="w-3 h-3"/> Email Address</label>
-            <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-xl p-4">
+            <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-2xl p-4">
               <span className="text-sm font-medium">operative@stimmung.com</span>
               <button className="text-xs font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest">Edit</button>
             </div>
@@ -33,7 +33,7 @@ export default function AccountDetailsPage() {
 
           <div className="space-y-2">
             <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase flex items-center gap-2"><Key className="w-3 h-3"/> Password</label>
-            <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-xl p-4">
+            <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-2xl p-4">
               <span className="text-sm font-medium">••••••••••••</span>
               <button className="text-xs font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest">Change</button>
             </div>
@@ -41,7 +41,7 @@ export default function AccountDetailsPage() {
 
         </div>
 
-        <div className="bg-card border border-border rounded-3xl p-6">
+        <div className="bg-card border border-border rounded-2xl p-6">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-4 flex items-center gap-2"><Smartphone className="w-4 h-4 text-muted-foreground"/> Active Sessions</h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-border pb-4">
@@ -64,3 +64,4 @@ export default function AccountDetailsPage() {
     </div>
   );
 }
+

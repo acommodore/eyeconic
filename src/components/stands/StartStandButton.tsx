@@ -122,7 +122,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
                   <button 
                     onClick={handleApplyPressPass}
                     disabled={applying}
-                    className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-bold hover:bg-gray-200 transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-2xl font-bold hover:bg-gray-200 transition-colors disabled:opacity-50"
                   >
                     {applying ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle2 className="w-5 h-5" />}
                     {applying ? "Reviewing Application..." : "Apply for Press Pass"}
@@ -147,7 +147,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
                     value={roomTitle}
                     onChange={e => setRoomTitle(e.target.value)}
                     placeholder="e.g. Tactical Breakdown: Arteta's Masterclass"
-                    className="w-full px-4 py-3 bg-card text-card-foreground/5 dark:bg-white/5 border border-border rounded-xl focus:outline-none focus:border-[teal] focus:ring-1 focus:ring-[teal] text-foreground font-medium"
+                    className="w-full px-4 py-3 bg-card text-card-foreground/5 dark:bg-white/5 border border-border rounded-2xl focus:outline-none focus:border-[teal] focus:ring-1 focus:ring-[teal] text-foreground font-medium"
                     maxLength={60}
                   />
                 </div>
@@ -155,7 +155,7 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
                 <button 
                   type="submit"
                   disabled={creating || !roomTitle.trim()}
-                  className="w-full flex items-center justify-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black py-3 rounded-xl font-black transition-all shadow-[0_0_20px_rgba(117, 251, 217,0.3)] disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 bg-[teal] hover:bg-[teal]/90 text-black py-3 rounded-2xl font-black transition-all shadow-[0_0_20px_rgba(117, 251, 217,0.3)] disabled:opacity-50"
                 >
                   {creating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5 fill-black" />}
                   {creating ? "Going Live..." : "Go Live Now"}
@@ -168,3 +168,4 @@ export default function StartStandButton({ matchId }: { matchId: string }) {
     </>
   );
 }
+

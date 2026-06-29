@@ -27,12 +27,12 @@ export default function NotificationsPage() {
       <div className="space-y-6">
         
         {/* Global Settings */}
-        <div className="bg-card border border-border rounded-3xl p-6 space-y-6">
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-4 text-foreground border-b border-border pb-4">Global Alerts</h3>
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><BellRing className="w-4 h-4 text-[#75fbd9]"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><BellRing className="w-4 h-4 text-[#75fbd9]"/></div>
               <div>
                 <p className="text-sm font-bold">Push Notifications</p>
                 <p className="text-xs text-muted-foreground">Receive instant alerts on your device.</p>
@@ -48,7 +48,7 @@ export default function NotificationsPage() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><MessageSquare className="w-4 h-4 text-muted-foreground"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><MessageSquare className="w-4 h-4 text-muted-foreground"/></div>
               <div>
                 <p className="text-sm font-bold">Email Digest</p>
                 <p className="text-xs text-muted-foreground">Weekly wrap-up of rivalries and chaos.</p>
@@ -64,12 +64,12 @@ export default function NotificationsPage() {
         </div>
 
         {/* Live Match Settings */}
-        <div className="bg-card border border-border rounded-3xl p-6 space-y-6">
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-4 text-foreground border-b border-border pb-4">Match Events</h3>
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Bell className="w-4 h-4 text-coral"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><Bell className="w-4 h-4 text-coral"/></div>
               <div>
                 <p className="text-sm font-bold">Chaos & Momentum Spikes</p>
                 <p className="text-xs text-muted-foreground">Alert when a match gets extremely volatile.</p>
@@ -88,3 +88,4 @@ export default function NotificationsPage() {
     </div>
   );
 }
+

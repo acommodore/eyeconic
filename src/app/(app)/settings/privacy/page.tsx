@@ -25,12 +25,12 @@ export default function PrivacyPage() {
 
       <div className="space-y-6">
         
-        <div className="bg-card border border-border rounded-3xl p-6 space-y-6">
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-4 text-foreground border-b border-border pb-4">Visibility Settings</h3>
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Lock className="w-4 h-4 text-muted-foreground"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><Lock className="w-4 h-4 text-muted-foreground"/></div>
               <div>
                 <p className="text-sm font-bold">Private Profile</p>
                 <p className="text-xs text-muted-foreground">Only approved contacts can see your profile.</p>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><EyeOff className="w-4 h-4 text-muted-foreground"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><EyeOff className="w-4 h-4 text-muted-foreground"/></div>
               <div>
                 <p className="text-sm font-bold">Hide Emotional Track Record</p>
                 <p className="text-xs text-muted-foreground">Hide your reaction statistics from others.</p>
@@ -65,3 +65,4 @@ export default function PrivacyPage() {
     </div>
   );
 }
+

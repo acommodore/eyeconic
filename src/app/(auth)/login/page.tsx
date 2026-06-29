@@ -64,7 +64,7 @@ function LoginForm() {
         <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/10" />
       </div>
 
-      {message && (<div className="w-full p-4 mb-4 bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-bold text-center rounded-xl">{message}</div>)}
+      {message && (<div className="w-full p-4 mb-4 bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-bold text-center rounded-2xl">{message}</div>)}
       <form className="w-full space-y-5" action={login}>
         <div className="group relative">
           <label className="block text-[10px] font-bold tracking-widest text-gray-500 mb-2 uppercase group-focus-within:text-[#75fbd9] transition-colors">EMAIL</label>
@@ -119,3 +119,4 @@ function LoginForm() {
 }
 
 export default function LoginPage() { return <Suspense fallback={<div>Loading...</div>}><LoginForm /></Suspense>; }
+

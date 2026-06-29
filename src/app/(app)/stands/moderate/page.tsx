@@ -78,10 +78,10 @@ export default function ModerateStandPage() {
                   {/* Top Bar */}
                   <div className="absolute top-6 left-6 right-6 flex items-start justify-between z-10 pointer-events-none">
                     <div className="flex items-center gap-3">
-                      <div className="px-3 py-1.5 bg-red-500 text-white text-xs font-black tracking-widest uppercase rounded-lg animate-pulse flex items-center gap-2 shadow-lg">
+                      <div className="px-3 py-1.5 bg-red-500 text-white text-xs font-black tracking-widest uppercase rounded-2xl animate-pulse flex items-center gap-2 shadow-lg">
                         <div className="w-2 h-2 rounded-full bg-white" /> LIVE
                       </div>
-                      <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-black tracking-widest rounded-lg flex items-center gap-2 border border-white/10">
+                      <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md text-white text-xs font-black tracking-widest rounded-2xl flex items-center gap-2 border border-white/10">
                         <Eye className="w-4 h-4 text-[#75fbd9]" /> 12.4K
                       </div>
                     </div>
@@ -90,7 +90,7 @@ export default function ModerateStandPage() {
                   {/* Bottom Bar Twitch Style */}
                   <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-10 pointer-events-none">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl border-2 border-[#75fbd9] overflow-hidden shadow-lg bg-black">
+                      <div className="w-14 h-14 rounded-2xl border-2 border-[#75fbd9] overflow-hidden shadow-lg bg-black">
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=JukeMaster" alt="JukeMaster" className="w-full h-full object-cover" />
                       </div>
                       <div>
@@ -104,7 +104,7 @@ export default function ModerateStandPage() {
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {/* Host Card */}
-                <div className="bg-card border border-[#75fbd9]/30 rounded-3xl p-6 flex flex-col items-center shadow-[0_0_30px_rgba(117, 251, 217,0.05)] relative group hover:border-[#75fbd9]/50 transition-colors">
+                <div className="bg-card border border-[#75fbd9]/30 rounded-2xl p-6 flex flex-col items-center shadow-[0_0_30px_rgba(117, 251, 217,0.05)] relative group hover:border-[#75fbd9]/50 transition-colors">
                   <div className="w-20 h-20 rounded-2xl overflow-hidden mb-4 border-2 border-[#75fbd9] relative shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=JukeMaster" alt="JukeMaster" className="w-full h-full object-cover" />
                     <div className="absolute -bottom-2 -right-2 bg-card rounded-full p-1 border border-border">
@@ -122,7 +122,7 @@ export default function ModerateStandPage() {
                 </div>
 
                 {/* Co-Host Card */}
-                <div className="bg-card/50 border border-border/50 rounded-3xl p-6 flex flex-col items-center relative group hover:border-border transition-colors">
+                <div className="bg-card/50 border border-border/50 rounded-2xl p-6 flex flex-col items-center relative group hover:border-border transition-colors">
                   <div className="w-20 h-20 rounded-2xl overflow-hidden mb-4 relative opacity-80 group-hover:opacity-100 transition-opacity">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=RefWatch" alt="RefWatch" className="w-full h-full object-cover grayscale" />
                     <div className="absolute -bottom-2 -right-2 bg-card rounded-full p-1 border border-border">
@@ -151,7 +151,7 @@ export default function ModerateStandPage() {
               <div className="space-y-3">
                 <div className="bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl p-4 flex items-center justify-between group hover:border-[#75fbd9]/30 transition-colors shadow-lg">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl overflow-hidden bg-muted border border-border">
+                    <div className="w-12 h-12 rounded-2xl overflow-hidden bg-muted border border-border">
                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=GoalHunter99" alt="GoalHunter99" className="w-full h-full object-cover" />
                     </div>
                     <div>
@@ -165,7 +165,7 @@ export default function ModerateStandPage() {
                     <button className="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center border border-white/5 hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/30 transition-colors">
                       <X className="w-4 h-4" />
                     </button>
-                    <button className="px-5 py-2.5 bg-white text-black font-black text-xs tracking-widest uppercase rounded-xl hover:bg-[#75fbd9] hover:text-black transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_20px_rgba(117, 251, 217,0.4)]">
+                    <button className="px-5 py-2.5 bg-white text-black font-black text-xs tracking-widest uppercase rounded-2xl hover:bg-[#75fbd9] hover:text-black transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_20px_rgba(117, 251, 217,0.4)]">
                       INVITE
                     </button>
                   </div>
@@ -176,7 +176,7 @@ export default function ModerateStandPage() {
 
           {/* Right Column: Super Chat Stream */}
           <div className="lg:col-span-1">
-            <section className="relative h-full min-h-[400px] bg-card/30 rounded-3xl border border-border/50 p-6 flex flex-col">
+            <section className="relative h-full min-h-[400px] bg-card/30 rounded-2xl border border-border/50 p-6 flex flex-col">
               <div className="flex items-center justify-between mb-6 border-b border-border/50 pb-2 shrink-0">
                 <h2 className="text-xs font-black tracking-[0.2em] text-muted-foreground uppercase">SUPER CHAT</h2>
                 <div className="px-2 py-0.5 bg-red-500/10 border border-red-500/20 text-red-500 text-[9px] font-black tracking-widest uppercase rounded">LIVE</div>
@@ -198,7 +198,7 @@ export default function ModerateStandPage() {
                           <span className="text-[9px] text-muted-foreground font-mono">2m ago</span>
                         </div>
                       </div>
-                      <span className="px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 font-black text-xs rounded-lg">$50.00</span>
+                      <span className="px-2 py-1 bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 font-black text-xs rounded-2xl">$50.00</span>
                     </div>
                     <p className="text-sm text-foreground/90 leading-relaxed font-medium">
                       That tackle was absolutely clean! Ref needs glasses 🤦‍♂️
@@ -216,7 +216,7 @@ export default function ModerateStandPage() {
 
       {/* Bottom Tool Bar */}
       <div className="sticky bottom-6 left-0 right-0 p-4 max-w-2xl mx-auto z-40 mt-auto">
-        <div className="bg-card/90 border border-white/10 rounded-3xl p-2 flex items-center justify-between gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        <div className="bg-card/90 border border-white/10 rounded-2xl p-2 flex items-center justify-between gap-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl">
           <button className="flex-1 py-4 px-6 border border-[#FF4500]/50 text-[#FF4500] hover:bg-[#FF4500]/10 hover:border-[#FF4500] rounded-2xl flex items-center justify-center gap-3 transition-colors shadow-[0_0_20px_rgba(255,69,0,0.1)]">
             <MicOff className="w-5 h-5" />
             <span className="text-xs font-black tracking-widest uppercase">MUTE ALL</span>
@@ -289,7 +289,7 @@ export default function ModerateStandPage() {
                   <button 
                     key={dur}
                     onClick={() => setPollDuration(dur)}
-                    className={`flex-1 py-3 rounded-xl text-sm font-black transition-all border ${pollDuration === dur ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.15)]' : 'bg-card text-muted-foreground border-border hover:bg-muted'}`}
+                    className={`flex-1 py-3 rounded-2xl text-sm font-black transition-all border ${pollDuration === dur ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.15)]' : 'bg-card text-muted-foreground border-border hover:bg-muted'}`}
                   >
                     {dur}
                   </button>
@@ -386,3 +386,4 @@ function Eye(props: any) {
     </svg>
   )
 }
+

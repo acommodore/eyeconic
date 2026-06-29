@@ -77,7 +77,7 @@ export default function ProfilePage() {
         
         {/* Left Column - ID Card */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-card border border-border rounded-3xl p-6 relative overflow-hidden group">
+          <div className="bg-card border border-border rounded-2xl p-6 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
               <Shield className="w-32 h-32 text-foreground" />
             </div>
@@ -102,11 +102,11 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex gap-2 w-full pt-4 border-t border-border mt-4">
-                <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl p-3 flex flex-col items-center">
+                <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-2xl p-3 flex flex-col items-center">
                   <span className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Rank</span>
                   <span className="font-black text-[#75fbd9] flex items-center gap-1"><Trophy className="w-3 h-3" /> Gold II</span>
                 </div>
-                <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-xl p-3 flex flex-col items-center">
+                <div className="flex-1 bg-black/5 dark:bg-white/5 rounded-2xl p-3 flex flex-col items-center">
                   <span className="text-[10px] text-muted-foreground uppercase tracking-widest mb-1">Eye Accuracy</span>
                   <span className="font-black text-foreground flex items-center gap-1"><Target className="w-3 h-3" /> 84%</span>
                 </div>
@@ -119,7 +119,7 @@ export default function ProfilePage() {
           </Link>
 
           {/* Badges */}
-          <div className="bg-card border border-border rounded-3xl p-6">
+          <div className="bg-card border border-border rounded-2xl p-6">
             <h3 className="text-xs font-mono tracking-widest text-muted-foreground uppercase mb-4">Acquired Badges</h3>
             <div className="grid grid-cols-4 gap-3">
               {[
@@ -128,7 +128,7 @@ export default function ProfilePage() {
                 { icon: <Activity className="w-6 h-6 text-purple-400" />, name: "Instigator", active: true },
                 { icon: <Medal className="w-6 h-6 text-yellow-500" />, name: "Champion", active: false },
               ].map((badge, i) => (
-                <div key={i} className={`aspect-square rounded-xl flex items-center justify-center border ${badge.active ? 'bg-black/5 dark:bg-white/5 border-border hover:border-foreground transition-colors cursor-pointer' : 'opacity-20 border-border grayscale'} relative group`}>
+                <div key={i} className={`aspect-square rounded-2xl flex items-center justify-center border ${badge.active ? 'bg-black/5 dark:bg-white/5 border-border hover:border-foreground transition-colors cursor-pointer' : 'opacity-20 border-border grayscale'} relative group`}>
                   {badge.icon}
                   {badge.active && (
                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-foreground text-background text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
@@ -201,7 +201,7 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              <div className="bg-card border border-border rounded-3xl p-6">
+              <div className="bg-card border border-border rounded-2xl p-6">
                 <h3 className="text-sm font-bold tracking-widest text-foreground uppercase mb-6 flex items-center gap-2">
                   <Activity className="w-4 h-4 text-[#75fbd9]" />
                   Recent Activity
@@ -212,7 +212,7 @@ export default function ProfilePage() {
                     { text: "Echoed a Voice Note in The Stand", time: "5 hours ago", match: "ARS vs TOT" },
                     { text: "Joined the Arsenal Tribal Room", time: "1 day ago", match: "Global" },
                   ].map((act, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-black/2 dark:bg-white/2 border border-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+                    <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-black/2 dark:bg-white/2 border border-border hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer group">
                       <div>
                         <p className="text-sm font-medium">{act.text}</p>
                         <p className="text-[10px] font-mono text-muted-foreground uppercase mt-1">{act.match}</p>
@@ -227,7 +227,7 @@ export default function ProfilePage() {
               </div>
             </div>
           ) : (
-            <div className="bg-card border border-border rounded-3xl p-12 text-center flex flex-col items-center justify-center animate-in slide-in-from-left-4 duration-300 h-64">
+            <div className="bg-card border border-border rounded-2xl p-12 text-center flex flex-col items-center justify-center animate-in slide-in-from-left-4 duration-300 h-64">
               <Zap className="w-12 h-12 text-muted-foreground mb-4 opacity-50" />
               <h3 className="text-xl font-black uppercase tracking-widest mb-2">No Echoes Yet</h3>
               <p className="text-muted-foreground text-sm max-w-sm">
@@ -245,7 +245,7 @@ export default function ProfilePage() {
       {/* Edit Profile Modal */}
       {isEditModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-[#0A0A0A] border border-border rounded-3xl p-6 w-full max-w-sm space-y-6 shadow-2xl">
+          <div className="bg-[#0A0A0A] border border-border rounded-2xl p-6 w-full max-w-sm space-y-6 shadow-2xl">
             <h3 className="text-xl font-black uppercase tracking-widest text-foreground">Edit Profile</h3>
             
             <div className="space-y-2">
@@ -255,21 +255,21 @@ export default function ProfilePage() {
                 value={editUsername}
                 onChange={(e) => setEditUsername(e.target.value)}
                 placeholder="Enter new username"
-                className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-sm text-foreground focus:outline-none focus:border-[#75fbd9] transition-colors"
+                className="w-full bg-black/50 border border-white/10 rounded-2xl p-3 text-sm text-foreground focus:outline-none focus:border-[#75fbd9] transition-colors"
               />
             </div>
 
             <div className="flex gap-3 pt-4">
               <button 
                 onClick={() => setIsEditModalOpen(false)}
-                className="flex-1 py-3 rounded-xl border border-border text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors"
+                className="flex-1 py-3 rounded-2xl border border-border text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors"
               >
                 Cancel
               </button>
               <button 
                 onClick={handleSaveProfile}
                 disabled={isSaving}
-                className="flex-1 py-3 rounded-xl bg-[#75fbd9] text-black text-xs font-black uppercase tracking-widest hover:bg-[#75fbd9]/90 transition-colors flex justify-center items-center"
+                className="flex-1 py-3 rounded-2xl bg-[#75fbd9] text-black text-xs font-black uppercase tracking-widest hover:bg-[#75fbd9]/90 transition-colors flex justify-center items-center"
               >
                 {isSaving ? "Saving..." : "Save"}
               </button>

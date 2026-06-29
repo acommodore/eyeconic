@@ -29,7 +29,7 @@ const fetchPlayerStats = async (playerId: string) => {
 // --- Sub-components ---
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, handleEcho }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void, echoedNotes: Set<number>, handleEcho: (id: number) => void }) => (
-  <div className={`bg-[#050505] border border-white/5 rounded-lg p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors ${isActive ? 'ring-1 ring-[#75fbd9]/50' : ''}`}>
+  <div className={`bg-[#050505] border border-white/5 rounded-2xl p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors ${isActive ? 'ring-1 ring-[#75fbd9]/50' : ''}`}>
     <div className="flex items-center gap-1.5 shrink-0 mt-0.5 w-8">
       <span className={`w-1.5 h-1.5 rounded-full ${event.type === 'pos' ? 'bg-[#75fbd9]' : 'bg-coral'}`}></span>
       <span className="text-[8px] font-bold text-white tracking-widest">{event.time}</span>
@@ -82,7 +82,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
     >
       {/* Container: Smaller width (max-w-4xl) to make it more compact */}
       <div 
-        className="w-full max-w-4xl max-h-[90vh] md:max-h-[80vh] bg-[#0A0A0A] rounded-[24px] border border-white/10 text-white relative flex flex-col shadow-2xl animate-in zoom-in-95 duration-200 overflow-hidden"
+        className="w-full max-w-4xl max-h-[90vh] md:max-h-[80vh] bg-[#0A0A0A] rounded-2xl border border-white/10 text-white relative flex flex-col shadow-2xl animate-in zoom-in-95 duration-200 overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         
@@ -144,27 +144,27 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
 
             {/* Compact Stats Grid */}
             <div className="grid grid-cols-2 gap-2 w-full mt-auto">
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-white">{player.stats.goals}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Goals</span>
                </div>
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-white">{player.stats.assists}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Assists</span>
                </div>
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-white">{player.stats.passAccuracy}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Pass Acc</span>
                </div>
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-[#75fbd9]">{player.stats.touches}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Touches</span>
                </div>
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-white">{player.stats.duelsWon}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">Duels</span>
                </div>
-               <div className="bg-[#0A0A0A] border border-white/5 rounded-lg p-2.5 flex flex-col items-center">
+               <div className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-2.5 flex flex-col items-center">
                   <span className="text-base font-black text-white">{player.stats.shotsOnTarget}</span>
                   <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest">S.O.T</span>
                </div>
@@ -184,7 +184,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
                 </div>
               </div>
               
-              <div className="bg-[#050505] border border-white/5 rounded-xl p-3 relative overflow-hidden h-28 flex flex-col justify-end">
+              <div className="bg-[#050505] border border-white/5 rounded-2xl p-3 relative overflow-hidden h-28 flex flex-col justify-end">
                 <div className="absolute inset-x-3 top-1/2 h-px bg-white/5 z-0" />
                 <div className="absolute inset-0 z-10 w-full h-full px-3 py-4">
                   <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -225,7 +225,7 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
               </div>
               <div className="space-y-1.5 overflow-y-auto hide-scrollbar pb-2">
                 {player.keyMoments.map((moment: { id: string; minute: number; type: string; desc: string; }) => (
-                  <div key={moment.id} className="bg-[#050505] border border-white/5 rounded-lg p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors">
+                  <div key={moment.id} className="bg-[#050505] border border-white/5 rounded-2xl p-2.5 flex items-start gap-2.5 hover:bg-[#111] transition-colors">
                     <div className="flex items-center gap-1.5 shrink-0 mt-0.5 w-8">
                       <span className={`w-1.5 h-1.5 rounded-full ${moment.type === 'pos' ? 'bg-[#75fbd9]' : 'bg-coral'}`}></span>
                       <span className="text-[8px] font-bold text-white tracking-widest">{moment.minute}'</span>
@@ -242,3 +242,4 @@ export default function PlayerSummaryModal({ playerId, onClose, onNext, onPrev }
     </div>
   );
 }
+

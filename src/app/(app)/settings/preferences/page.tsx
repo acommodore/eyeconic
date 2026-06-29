@@ -25,12 +25,12 @@ export default function PreferencesPage() {
 
       <div className="space-y-6">
         
-        <div className="bg-card border border-border rounded-3xl p-6 space-y-6">
+        <div className="bg-card border border-border rounded-2xl p-6 space-y-6">
           <h3 className="text-sm font-bold tracking-widest uppercase mb-4 text-foreground border-b border-border pb-4">Device Settings</h3>
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Vibrate className="w-4 h-4 text-[#75fbd9]"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><Vibrate className="w-4 h-4 text-[#75fbd9]"/></div>
               <div>
                 <p className="text-sm font-bold">Haptic Feedback</p>
                 <p className="text-xs text-muted-foreground">Feel the tension of live matches.</p>
@@ -46,7 +46,7 @@ export default function PreferencesPage() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Settings2 className="w-4 h-4 text-muted-foreground"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><Settings2 className="w-4 h-4 text-muted-foreground"/></div>
               <div>
                 <p className="text-sm font-bold">Data Saver Mode</p>
                 <p className="text-xs text-muted-foreground">Reduce data usage in The Stand.</p>
@@ -62,13 +62,13 @@ export default function PreferencesPage() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-lg"><Languages className="w-4 h-4 text-muted-foreground"/></div>
+              <div className="p-2 bg-black/5 dark:bg-white/5 rounded-2xl"><Languages className="w-4 h-4 text-muted-foreground"/></div>
               <div>
                 <p className="text-sm font-bold">Language</p>
                 <p className="text-xs text-muted-foreground">System Default (English)</p>
               </div>
             </div>
-            <button className="text-[10px] font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest px-3 py-1.5 border border-border rounded-xl">Change</button>
+            <button className="text-[10px] font-bold text-[#75fbd9] hover:text-[#75fbd9]/80 uppercase tracking-widest px-3 py-1.5 border border-border rounded-2xl">Change</button>
           </div>
         </div>
 
@@ -76,3 +76,4 @@ export default function PreferencesPage() {
     </div>
   );
 }
+

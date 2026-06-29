@@ -394,7 +394,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         }
       `}</style>
       {/* Cinematic Scoreboard */}
-      <div className="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0 rounded-b-[32px] md:rounded-[32px] overflow-hidden mb-4 md:mb-6 border-b border-border md:border shadow-2xl -mt-4 md:mt-0">
+      <div className="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0 rounded-b-[32px] md:rounded-2xl overflow-hidden mb-4 md:mb-6 border-b border-border md:border shadow-2xl -mt-4 md:mt-0">
         {/* Navigation Buttons Overlay */}
         <div className="absolute top-4 left-4 right-4 z-50 flex justify-between items-center pointer-events-none px-4 md:px-0 pt-2 md:pt-0">
           <div className="pointer-events-auto">
@@ -463,7 +463,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   </>
                 )}
               </div>
-              <Link href={`/stands/1`} className="mt-2 md:mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1.5 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
+              <Link href={`/stands/1`} className="mt-2 md:mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1.5 rounded-2xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
                 <Mic className="w-2.5 h-2.5 md:w-3 md:h-3 animate-pulse" />
                 <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
               </Link>
@@ -506,7 +506,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <button
             key={state}
             onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
-            className={`flex-1 py-3 px-4 rounded-xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
+            className={`flex-1 py-3 px-4 rounded-2xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
               matchState === state 
                 ? 'bg-[#75fbd9] text-black shadow-[0_0_20px_rgba(117, 251, 217,0.3)]' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
@@ -520,7 +520,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
 
               {matchState === 'live' && matchInfo?.status === 'upcoming' ? (
-        <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-3xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center py-24 text-center max-w-lg mx-auto border border-border rounded-2xl bg-card text-card-foreground/5 shadow-2xl backdrop-blur-sm relative overflow-hidden">
            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-5 mix-blend-luminosity bg-cover z-0 pointer-events-none" />
            <div className="relative z-10 w-16 h-16 rounded-full bg-black/50 border border-[#75fbd9]/20 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]">
              <span className="text-3xl">⏳</span>
@@ -608,7 +608,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              {/* Secondary Info Cards (MVP & Fraud Watch) */}
              {prematchTab === 'LINEUP' && (
                <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
-                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#75fbd9]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#75fbd9]/30 rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                         <img src={getTeamPlayers().find(p => p.name === mvpWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -633,7 +633,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                      </div>
                   </div>
 
-                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
+                  <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-[#D32F2F]/30 rounded-2xl p-5 flex items-center gap-4 relative overflow-hidden group shadow-2xl">
                      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-transparent z-0 pointer-events-none" />
                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none">
                         <img src={getTeamPlayers().find(p => p.name === fraudWatchPlayer)?.img} className="w-full h-full object-cover object-top mix-blend-luminosity" />
@@ -664,7 +664,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         {/* POST-MATCH CONTENT - LOCKED STATE */}
       {matchState === 'postmatch' && matchInfo?.status !== 'finished' && (
         <div className="w-full max-w-4xl mx-auto space-y-6 px-4 md:px-0">
-          <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-3xl relative overflow-hidden shadow-2xl backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-2xl relative overflow-hidden shadow-2xl backdrop-blur-sm">
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-[0.03] mix-blend-luminosity bg-cover z-0 pointer-events-none" />
              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-teal to-transparent opacity-30" />
              
@@ -684,7 +684,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              {matchInfo?.status === 'live' && (
                <div className="relative z-10 w-full h-24 mb-6 opacity-30">
                  {/* Fake pitch/chart animation placeholder */}
-                 <div className="absolute inset-0 border border-border rounded-xl bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/82/Soccer_field_-_empty.svg')] bg-center bg-cover mix-blend-screen overflow-hidden">
+                 <div className="absolute inset-0 border border-border rounded-2xl bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/82/Soccer_field_-_empty.svg')] bg-center bg-cover mix-blend-screen overflow-hidden">
                     <div className="w-3 h-3 bg-[#75fbd9] rounded-full absolute top-1/2 left-1/4 shadow-[0_0_10px_rgba(117, 251, 217,1)] animate-pulse" />
                     <div className="w-3 h-3 bg-[#FF7F50] rounded-full absolute top-1/3 left-2/3 shadow-[0_0_10px_rgba(255,127,80,1)] animate-pulse" />
                  </div>
@@ -710,7 +710,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                          <Lock className="w-4 h-4 text-muted-foreground" />
                       </div>
                    </div>
-                   <div className="w-12 h-12 rounded-xl bg-muted border border-border opacity-20" />
+                   <div className="w-12 h-12 rounded-2xl bg-muted border border-border opacity-20" />
                    <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/30 blur-[1px]">{label}</span>
                  </div>
                ))}
@@ -731,7 +731,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                <Mic className="w-5 h-5 text-[#75fbd9]" />
                <h3 className="text-sm font-black tracking-widest text-[#75fbd9] uppercase">Highlights from the Stands</h3>
             </div>
-            <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-[32px] p-6 shadow-2xl space-y-4">
+            <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-2xl p-6 shadow-2xl space-y-4">
                {[
                  { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#75fbd9] to-blue-500" },
                  { id: 2, name: "AnfieldRed", time: "68'", text: "That decision is shocking. Absolute madness from the ref there.", color: "from-[#C8102E] to-red-500" },
@@ -746,7 +746,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         </div>
                         <p className="text-sm text-muted-foreground italic">"{note.text}"</p>
                         
-                        <div className="flex items-center gap-3 md:gap-4 mt-4 bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
+                        <div className="flex items-center gap-3 md:gap-4 mt-4 bg-black/60 rounded-2xl p-2 md:p-3 overflow-hidden">
                           <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#75fbd9] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <Play className="w-3 h-3 md:w-4 md:h-4 text-black fill-black ml-0.5" />
                           </button>
@@ -779,7 +779,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Team 1 */}
-                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-xl p-4 relative overflow-hidden group">
+                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-2xl p-4 relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#75fbd9]/5 to-transparent pointer-events-none" />
                   <div className="flex items-center gap-2 mb-3 w-full justify-center md:justify-start">
                     <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} className="w-6 h-6 object-contain" />
@@ -803,7 +803,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 </div>
 
                 {/* Team 2 */}
-                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-xl p-4 relative overflow-hidden group">
+                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left bg-muted/30 border border-border rounded-2xl p-4 relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#FF7F50]/5 to-transparent pointer-events-none" />
                   <div className="flex items-center gap-2 mb-3 w-full justify-center md:justify-start">
                     <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} className="w-6 h-6 object-contain" />
@@ -829,7 +829,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </section>
 
           {/* FANS HAVE SPOKEN - MVP & FAN XI */}
-          <section className="relative w-full rounded-[32px] overflow-hidden border border-border shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
+          <section className="relative w-full rounded-2xl overflow-hidden border border-border shadow-[0_30px_60px_rgba(0,0,0,0.8)] mt-12 mb-16 group">
             {/* Dark Cinematic Background */}
             <div className="absolute inset-0 bg-[#020202] z-0" />
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay z-0" />
@@ -873,7 +873,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     MVP
                   </div>
                   
-                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-[#75fbd9] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-xl border border-[#75fbd9]/50 shadow-[0_10px_30px_rgba(117, 251, 217,0.3)] z-20 font-mono transform -rotate-3">
+                  <div className="absolute -top-3 -left-3 md:-top-4 md:-left-4 bg-[#020202] text-[#75fbd9] text-lg md:text-xl font-black px-4 py-1.5 md:px-5 md:py-2 rounded-2xl border border-[#75fbd9]/50 shadow-[0_10px_30px_rgba(117, 251, 217,0.3)] z-20 font-mono transform -rotate-3">
                     9.2
                   </div>
                   
@@ -885,7 +885,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               </div>
 
               {/* COMBINED FAN XI */}
-              <div className="w-full max-w-3xl relative flex flex-col items-center bg-[#080808]/80 backdrop-blur-xl border border-border rounded-[40px] py-12 md:py-16 px-2 md:px-8 shadow-2xl mt-12 md:mt-16">
+              <div className="w-full max-w-3xl relative flex flex-col items-center bg-[#080808]/80 backdrop-blur-xl border border-border rounded-2xl py-12 md:py-16 px-2 md:px-8 shadow-2xl mt-12 md:mt-16">
                  
                  {/* Header Line */}
                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#020202] px-4 md:px-6 border border-border rounded-full whitespace-nowrap">
@@ -893,7 +893,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                  </div>
 
                  {/* Subtle Pitch Lines */}
-                 <div className="absolute inset-4 md:inset-8 border-2 border-border rounded-3xl pointer-events-none" />
+                 <div className="absolute inset-4 md:inset-8 border-2 border-border rounded-2xl pointer-events-none" />
                  <div className="absolute top-4 md:top-8 bottom-4 md:bottom-8 left-1/2 w-0.5 bg-muted -translate-x-1/2 pointer-events-none" />
                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 border-2 border-border rounded-full pointer-events-none" />
 
@@ -972,7 +972,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           {/* AGENDA SETTLEMENT ENGINE & FINAL DAMAGE REPORT */}
           <section className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
              {/* Final Damage Report / Narrative Curve */}
-             <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+             <div className="bg-card text-card-foreground border border-border rounded-2xl p-6 lg:p-10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#75fbd9]/5 blur-[80px] rounded-full pointer-events-none" />
                 
                 <div>
@@ -1016,14 +1016,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                       <span className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Sustained Sentiment Crash</span>
                       <span className="text-sm font-black text-foreground">Man City Post-Match Velocity</span>
                    </div>
-                   <div className="bg-[#D32F2F]/20 text-[#FF3B00] px-3 py-1.5 rounded-lg text-sm font-black animate-pulse flex items-center gap-1">
+                   <div className="bg-[#D32F2F]/20 text-[#FF3B00] px-3 py-1.5 rounded-2xl text-sm font-black animate-pulse flex items-center gap-1">
                       <Flame className="w-3.5 h-3.5" /> -18% Spiking
                    </div>
                 </div>
              </div>
 
              {/* Agenda Settlement Checklist */}
-             <div className="bg-card text-card-foreground border border-border rounded-[32px] p-6 lg:p-10 shadow-2xl relative">
+             <div className="bg-card text-card-foreground border border-border rounded-2xl p-6 lg:p-10 shadow-2xl relative">
                 <h3 className="text-[10px] font-black tracking-widest text-[#75fbd9] uppercase mb-2 flex items-center gap-2">
                    <Target className="w-3.5 h-3.5" /> Autopsy
                 </h3>
@@ -1039,7 +1039,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                      { state: 'proven', text: 'Haaland Nullified', sub: 'Van Dijk restricted Haaland to a season-low 14 touches.' },
                      { state: 'debunked', text: 'xG Overperformance', sub: 'Liverpool converted 1.2 xG into 2 goals against the run of play.' }
                    ]).map((agenda: any, i: number) => (
-                      <div key={i} className={`p-4 rounded-xl border ${agenda.state === 'proven' ? 'bg-[#75fbd9]/5 border-[#75fbd9]/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
+                      <div key={i} className={`p-4 rounded-2xl border ${agenda.state === 'proven' ? 'bg-[#75fbd9]/5 border-[#75fbd9]/20' : 'bg-coral/5 border-coral/20'} flex gap-4 items-start`}>
                          <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${agenda.state === 'proven' ? 'bg-[#75fbd9]/20 text-[#75fbd9]' : 'bg-coral/20 text-coral'}`}>
                             {agenda.state === 'proven' ? '✓' : '✗'}
                          </div>
@@ -1067,7 +1067,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {takes.map((take) => (
-                <div key={take.id} className="bg-card text-card-foreground border border-border rounded-[24px] p-6 flex flex-col hover:border-border-strong transition-all">
+                <div key={take.id} className="bg-card text-card-foreground border border-border rounded-2xl p-6 flex flex-col hover:border-border-strong transition-all">
                   <h3 className="text-sm font-black text-foreground mb-6 leading-relaxed">{take.question}</h3>
                   <div className="space-y-4 mb-6 flex-1">
                     {take.options.map((opt, i) => (
@@ -1303,9 +1303,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           className="w-full max-w-4xl mx-auto relative group px-4 md:px-0"
         >
           {/* Subtle background glow */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#75fbd9]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#75fbd9]/10 transition-colors duration-1000"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#75fbd9]/5 to-transparent rounded-2xl blur-3xl -z-10 group-hover:from-[#75fbd9]/10 transition-colors duration-1000"></div>
           
-          <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-border rounded-[32px] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+          <div className="bg-gradient-to-b from-[#111111]/90 to-[#050505]/95 backdrop-blur-2xl border border-border rounded-2xl p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
             
             {/* Top decorative gradient line */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF7F50] via-white/20 to-[#4FC3F7]"></div>
@@ -1393,7 +1393,7 @@ function PlayerStatsModal({ player, onClose }: { player: any, onClose: () => voi
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="relative z-10 w-full max-w-sm bg-[#111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+        className="relative z-10 w-full max-w-sm bg-[#111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
       >
          {/* Cover / Header */}
          <div className={`h-32 relative flex items-end p-5 ${player.team === 'LIV' ? 'bg-gradient-to-tr from-[#C8102E]/40 to-transparent' : 'bg-gradient-to-tr from-[#6CABDD]/40 to-transparent'}`}>
@@ -1403,7 +1403,7 @@ function PlayerStatsModal({ player, onClose }: { player: any, onClose: () => voi
             </button>
             
             <div className="relative z-10 flex items-center gap-4">
-               <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-white/20 shadow-xl bg-black">
+               <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl bg-black">
                  <img src={player.img} alt={player.name} className="w-full h-full object-cover" />
                </div>
                <div>
@@ -1519,7 +1519,7 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
             </div>
 
             {/* Pitch Markings */}
-            <div className="absolute inset-4 border border-green-900/30 rounded-lg" />
+            <div className="absolute inset-4 border border-green-900/30 rounded-2xl" />
             <div className="absolute left-1/2 -translate-x-1/2 top-4 w-40 h-20 border border-t-0 border-green-900/30 rounded-b-lg" />
             <div className="absolute left-1/2 -translate-x-1/2 top-4 w-20 h-8 border border-t-0 border-green-900/30 rounded-b-lg" />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-4 w-40 h-20 border border-b-0 border-green-900/30 rounded-t-lg" />
@@ -1891,4 +1891,5 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 

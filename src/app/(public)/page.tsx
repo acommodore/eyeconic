@@ -132,7 +132,7 @@ function HeroSection() {
                 </div>
                 
                 <div className="space-y-6 text-sm">
-                  <div className="relative p-4 bg-black/5 dark:bg-muted border border-gray-300 dark:border-border rounded-lg overflow-hidden group/item hover:bg-black/10 dark:hover:bg-muted/80 transition-colors">
+                  <div className="relative p-4 bg-black/5 dark:bg-muted border border-gray-300 dark:border-border rounded-2xl overflow-hidden group/item hover:bg-black/10 dark:hover:bg-muted/80 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#FF7F50] shadow-[0_0_15px_#FF7F50]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -147,7 +147,7 @@ function HeroSection() {
                      </div>
                   </div>
 
-                  <div className="relative p-4 border border-gray-300 dark:border-border rounded-lg group/item hover:bg-black/5 dark:hover:bg-muted/50 transition-colors">
+                  <div className="relative p-4 border border-gray-300 dark:border-border rounded-2xl group/item hover:bg-black/5 dark:hover:bg-muted/50 transition-colors">
                      <div className="absolute left-0 top-0 w-1 h-full bg-[#75fbd9]" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -159,7 +159,7 @@ function HeroSection() {
                      </div>
                   </div>
 
-                  <div className="relative p-4 border border-gray-300 dark:border-border rounded-lg group/item hover:bg-black/5 dark:hover:bg-muted/50 transition-colors opacity-60">
+                  <div className="relative p-4 border border-gray-300 dark:border-border rounded-2xl group/item hover:bg-black/5 dark:hover:bg-muted/50 transition-colors opacity-60">
                      <div className="absolute left-0 top-0 w-1 h-full bg-gray-400 dark:bg-gray-600" />
                      <div className="flex justify-between items-center">
                        <div className="flex items-center gap-2">
@@ -497,7 +497,7 @@ function TerminalSection() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="w-full max-w-5xl mx-auto rounded-xl border border-gray-300 dark:border-border overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,1)] bg-gray-50 dark:bg-[#030303] font-mono relative backdrop-blur-xl transition-colors duration-500"
+          className="w-full max-w-5xl mx-auto rounded-2xl border border-gray-300 dark:border-border overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_100px_rgba(0,0,0,1)] bg-gray-50 dark:bg-[#030303] font-mono relative backdrop-blur-xl transition-colors duration-500"
         >
           <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent ${currentAlert.gradient} to-transparent opacity-50 transition-colors duration-500`} />
           
@@ -571,7 +571,7 @@ function TerminalSection() {
                         setDataPoints(prev => [...prev.slice(1), match.emtn]); // Prevent jarring chart jump
                       }}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      className={`flex flex-col md:flex-row md:items-center justify-between text-gray-900 dark:text-foreground p-5 rounded-lg transition-colors relative overflow-hidden border ${wrapperStyle}`}
+                      className={`flex flex-col md:flex-row md:items-center justify-between text-gray-900 dark:text-foreground p-5 rounded-2xl transition-colors relative overflow-hidden border ${wrapperStyle}`}
                     >
                        <div className={`absolute left-0 top-0 w-1 h-full transition-colors ${leftBarStyle}`} />
                        <span className="text-gray-600 dark:text-gray-300 text-base transition-colors font-mono flex items-center">
@@ -606,7 +606,7 @@ function TerminalSection() {
                 })}
              </div>
 
-             <div className={`relative overflow-hidden ${currentAlert.bg} border ${currentAlert.border} p-6 rounded-lg ${currentAlert.color} backdrop-blur-sm z-10 ${currentAlert.shadow} transition-all duration-500`}>
+             <div className={`relative overflow-hidden ${currentAlert.bg} border ${currentAlert.border} p-6 rounded-2xl ${currentAlert.color} backdrop-blur-sm z-10 ${currentAlert.shadow} transition-all duration-500`}>
                 <div className={`absolute -inset-x-full top-0 h-[1px] bg-gradient-to-r from-transparent ${currentAlert.gradient} to-transparent animate-[scan_3s_linear_infinite] opacity-50`} />
                 <div className="flex items-center gap-3 mb-3 font-bold uppercase tracking-[0.2em] text-xs transition-colors">
                    {currentAlert.icon} {currentAlert.title}
@@ -648,7 +648,7 @@ function SocialProofSection() {
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#75fbd9]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="flex justify-between items-start mb-10">
-                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-muted flex items-center justify-center border border-gray-300 dark:border-border group-hover:bg-black/10 dark:group-hover:bg-muted/80 transition-colors duration-500">
+                <div className="w-12 h-12 rounded-2xl bg-black/5 dark:bg-muted flex items-center justify-center border border-gray-300 dark:border-border group-hover:bg-black/10 dark:group-hover:bg-muted/80 transition-colors duration-500">
                   {stat.icon}
                 </div>
                 <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 py-1 bg-black/5 dark:bg-muted rounded border border-gray-300 dark:border-border group-hover:border-[#75fbd9]/20 group-hover:text-[#75fbd9] transition-colors duration-500">
@@ -748,3 +748,4 @@ function Footer() {
     </footer>
   );
 }
+

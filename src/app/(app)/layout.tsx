@@ -144,7 +144,7 @@ export default function AppLayout({
                 key={item.href} 
                 href={item.href}
                 title={isCollapsed ? item.label : ""}
-                className={`flex items-center rounded-xl transition-all ${
+                className={`flex items-center rounded-2xl transition-all ${
                   isActive 
                     ? "bg-[#75fbd9]/10 text-[#75fbd9] font-semibold" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
@@ -161,7 +161,7 @@ export default function AppLayout({
           <div className={`flex ${isCollapsed ? 'justify-center' : 'justify-start px-2'}`}>
             <ThemeToggle />
           </div>
-          <Link href="/profile" className={`flex items-center gap-3 rounded-xl bg-muted border border-border hover:bg-muted/80 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
+          <Link href="/profile" className={`flex items-center gap-3 rounded-2xl bg-muted border border-border hover:bg-muted/80 transition-colors cursor-pointer group ${isCollapsed ? 'justify-center p-2 w-14 h-14' : 'p-3 w-full'}`}>
           <div className="w-10 h-10 shrink-0 rounded-full border border-[#75fbd9] overflow-hidden p-0.5 group-hover:border-foreground transition-colors">
             <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden relative">
               <img src={avatarUrl} alt="User" />
@@ -209,3 +209,4 @@ export default function AppLayout({
     </div>
   );
 }
+

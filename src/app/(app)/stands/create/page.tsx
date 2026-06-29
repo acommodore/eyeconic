@@ -109,7 +109,7 @@ export default function PushAgendaPage() {
                 <div 
                   key={idx}
                   onClick={() => { setTargetMatch(m); setIsMatchSelectOpen(false); }}
-                  className="w-full p-4 flex items-center gap-4 rounded-xl hover:bg-white/10 cursor-pointer transition-colors"
+                  className="w-full p-4 flex items-center gap-4 rounded-2xl hover:bg-white/10 cursor-pointer transition-colors"
                 >
                   <div className="flex -space-x-2">
                     <img src={m.logo1} className="w-8 h-8 rounded-full bg-white/10 p-1 border border-white/20" />
@@ -230,3 +230,4 @@ export default function PushAgendaPage() {
     </div>
   );
 }
+

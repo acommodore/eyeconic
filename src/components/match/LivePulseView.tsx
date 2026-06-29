@@ -159,14 +159,14 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, ha
               </div>
             </div>
             
-            <div className="flex items-center gap-3 md:gap-4 bg-black/5 dark:bg-black/60 rounded-xl p-2 md:p-3 overflow-hidden">
+            <div className="flex items-center gap-3 md:gap-4 bg-black/5 dark:bg-black/60 rounded-2xl p-2 md:p-3 overflow-hidden">
               <button className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#75fbd9] flex items-center justify-center hover:scale-105 transition-transform shrink-0">
                 <Play className="w-3 h-3 md:w-4 md:h-4 text-black fill-black ml-0.5" />
               </button>
               <div className="flex-1 flex items-center gap-0.5 md:gap-1 h-4 md:h-6 opacity-50 min-w-0 pr-2 overflow-hidden">
                 {[...Array(16)].map((_, i) => <div key={i} className="flex-1 min-w-[3px] bg-[#75fbd9] rounded-full" style={{height: `${Math.max(15, ((i * 37) % 80) + 20)}%`}} />)}
               </div>
-              <button onClick={() => handleEcho(note.id)} className={`flex items-center gap-1.5 ${echoedNotes.has(note.id) ? 'bg-[#75fbd9] text-black hover:bg-[#75fbd9]/90' : 'bg-[#75fbd9]/10 text-[#75fbd9] hover:bg-[#75fbd9]/20'} px-3 py-1.5 rounded-lg border border-[#75fbd9]/30 text-[10px] font-bold transition-colors shrink-0`}>
+              <button onClick={() => handleEcho(note.id)} className={`flex items-center gap-1.5 ${echoedNotes.has(note.id) ? 'bg-[#75fbd9] text-black hover:bg-[#75fbd9]/90' : 'bg-[#75fbd9]/10 text-[#75fbd9] hover:bg-[#75fbd9]/20'} px-3 py-1.5 rounded-2xl border border-[#75fbd9]/30 text-[10px] font-bold transition-colors shrink-0`}>
                 <Mic className="w-3 h-3" /> ECHO • {note.echoes + (echoedNotes.has(note.id) ? 1 : 0)}
               </button>
             </div>
@@ -387,7 +387,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
              <button onClick={(e) => { e.stopPropagation(); handleEmojiClick(p.id, 'negative'); }} className="hover:scale-125 transition-transform text-lg">❌</button>
           </div>
         )}
-        <div className={`flex flex-col items-center bg-[#0a0a0a] border ${borderColor} rounded-lg overflow-hidden w-12 md:w-16 shadow-xl transition-all duration-300 relative z-20`}>
+        <div className={`flex flex-col items-center bg-[#0a0a0a] border ${borderColor} rounded-2xl overflow-hidden w-12 md:w-16 shadow-xl transition-all duration-300 relative z-20`}>
           <div className="w-full aspect-square relative bg-[#1A1A1A]">
             <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${p.name}`} className={`w-full h-full object-cover filter ${ratingStatus ? 'opacity-100' : 'opacity-80'}`} />
             {p.rating !== '-' && (
@@ -526,13 +526,13 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               <div className="relative">
                 <button 
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className="flex items-center gap-2 px-4 py-1.5 rounded-xl border border-border text-[10px] text-muted-foreground font-bold hover:text-foreground transition-colors uppercase tracking-widest"
+                  className="flex items-center gap-2 px-4 py-1.5 rounded-2xl border border-border text-[10px] text-muted-foreground font-bold hover:text-foreground transition-colors uppercase tracking-widest"
                 >
                   <Settings2 className="w-3 h-3" /> {activeFilter === 'All' ? 'Filter' : activeFilter}
                 </button>
                 
                 {isFilterOpen && (
-                  <div className="absolute right-0 mt-2 w-32 bg-muted border border-border rounded-xl shadow-xl z-50 py-2">
+                  <div className="absolute right-0 mt-2 w-32 bg-muted border border-border rounded-2xl shadow-xl z-50 py-2">
                     {filterOptions.map(option => (
                       <button
                         key={option}
@@ -728,7 +728,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               <div className="relative z-10 flex flex-col items-center gap-8 md:gap-10 w-full max-w-lg mx-auto p-2 py-6 md:p-6 md:py-10 overflow-visible mt-4">
                  
                  {/* Stylized Pitch Outline */}
-                 <div className="absolute inset-0 pointer-events-none opacity-20 border border-border-strong rounded-3xl m-1 md:m-4" />
+                 <div className="absolute inset-0 pointer-events-none opacity-20 border border-border-strong rounded-2xl m-1 md:m-4" />
                  <div className="absolute top-4 md:top-5 left-1/2 -translate-x-1/2 w-40 md:w-48 h-20 md:h-24 border-2 border-border-strong rounded-b-[4rem] pointer-events-none" />
                  <div className="absolute top-4 md:top-5 left-1/2 -translate-x-1/2 w-20 md:w-24 h-10 md:h-12 border-2 border-border-strong pointer-events-none" />
                  <div className="absolute bottom-4 md:bottom-5 left-1/2 -translate-x-1/2 w-40 md:w-48 h-20 md:h-24 border-2 border-border-strong rounded-t-[4rem] pointer-events-none" />
@@ -782,7 +782,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
           <div className="bg-card border border-border rounded-[2.5rem] w-full max-w-sm p-8 flex flex-col items-center shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-in fade-in zoom-in-95 duration-200">
             {/* Recording Visualizer Box */}
-            <div className="bg-muted border border-border rounded-3xl w-full p-8 flex items-center justify-between mb-10 shadow-inner">
+            <div className="bg-muted border border-border rounded-2xl w-full p-8 flex items-center justify-between mb-10 shadow-inner">
                
                {!isRecording && recordingTime === 10 ? (
                  <button onClick={startRecording} className="w-[72px] h-[72px] rounded-full border-4 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)] flex flex-col items-center justify-center shrink-0 hover:scale-105 transition-transform bg-coral/10 hover:bg-coral/20">
@@ -852,3 +852,4 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
     </div>
   );
 }
+

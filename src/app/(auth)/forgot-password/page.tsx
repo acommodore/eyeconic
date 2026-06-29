@@ -69,7 +69,7 @@ export default function ForgotPasswordPage() {
           <p className="text-gray-400 text-sm mb-6 leading-relaxed">
             We&apos;ve sent a password reset link to your email. It will expire in 30 minutes.
           </p>
-          <Link href="/login" className="block w-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm tracking-widest uppercase py-4 rounded-xl transition-colors">
+          <Link href="/login" className="block w-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm tracking-widest uppercase py-4 rounded-2xl transition-colors">
             RETURN TO LOGIN
           </Link>
         </motion.div>
@@ -77,3 +77,4 @@ export default function ForgotPasswordPage() {
     </motion.div>
   );
 }
+

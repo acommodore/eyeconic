@@ -437,7 +437,7 @@ export default function DiscoverPage() {
               {days.map(day => {
                 const isActive = day.date === activeDate;
                 return (
-                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-[#75fbd9] text-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
+                  <button key={day.date} onClick={() => setActiveDate(day.date)} className={`flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-2xl border shrink-0 ${isActive ? 'bg-black/5 dark:bg-black/5 dark:bg-white/5 border-[#75fbd9] text-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-transparent border-black/10 dark:border-border text-muted-foreground dark:text-muted-foreground hover:border-black/20 dark:hover:border-border-strong'} cursor-pointer transition-all`}>
                     <span className="text-[10px] font-mono uppercase tracking-widest">{day.label}</span>
                     <span className={`text-lg font-mono font-black tabular-nums ${isActive ? 'text-black dark:text-foreground drop-shadow-md' : ''}`}>{day.date}</span>
                   </button>
@@ -466,7 +466,7 @@ export default function DiscoverPage() {
         {/* 1. HERO SECTION (Ranked #1 by Filter) */}
         {heroMatch && (
         <section className="mb-16">
-          <div className="relative rounded-[40px] border border-border bg-card/60 backdrop-blur-md overflow-hidden group shadow-2xl">
+          <div className="relative rounded-2xl border border-border bg-card/60 backdrop-blur-md overflow-hidden group shadow-2xl">
             {/* Subtle Image background for Hero */}
             <div 
                className="absolute inset-0 bg-cover bg-center opacity-[0.03] mix-blend-screen group-hover:opacity-[0.06] transition-opacity duration-1000" 
@@ -519,7 +519,7 @@ export default function DiscoverPage() {
                   </Link>
                </div>
 
-               <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-3xl border border-border backdrop-blur-xl">
+               <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-6 bg-[#000000]/40 p-6 rounded-2xl border border-border backdrop-blur-xl">
                   {/* Narrative (Unboxed, separated by fine lines) */}
                   <div className="pb-5 border-b border-border">
                      <h3 className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-3 flex items-center gap-2">
@@ -642,3 +642,4 @@ export default function DiscoverPage() {
     </main>
   );
 }
+

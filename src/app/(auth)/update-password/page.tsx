@@ -88,7 +88,7 @@ export default function UpdatePasswordPage() {
           <p className="text-gray-400 text-sm mb-6 leading-relaxed">
             Your password has been successfully reset. You can now log in with your new password.
           </p>
-          <Link href="/login" className="block w-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm tracking-widest uppercase py-4 rounded-xl transition-colors">
+          <Link href="/login" className="block w-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm tracking-widest uppercase py-4 rounded-2xl transition-colors">
             GO TO LOGIN
           </Link>
         </motion.div>
@@ -96,3 +96,4 @@ export default function UpdatePasswordPage() {
     </motion.div>
   );
 }
+

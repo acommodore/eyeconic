@@ -52,7 +52,7 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex flex-col items-center justify-center p-1 md:p-1.5 bg-black/20 rounded-xl border border-white/5 shadow-inner">
+    <div className="flex flex-col items-center justify-center p-1 md:p-1.5 bg-black/20 rounded-2xl border border-white/5 shadow-inner">
       <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 flex items-center justify-center">
         <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-md">
           <circle cx="50" cy="50" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="8" fill="none" />
@@ -249,14 +249,14 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
               <div className="col-span-1 md:col-span-2 flex flex-col justify-between">
                  <div>
                     <h4 className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1.5">{contextLabel}</h4>
-                    <p className="text-[10px] md:text-xs text-gray-200 leading-relaxed font-mono italic bg-black/40 p-3 md:p-4 rounded-xl border border-white/5 mb-3 shadow-inner">
+                    <p className="text-[10px] md:text-xs text-gray-200 leading-relaxed font-mono italic bg-black/40 p-3 md:p-4 rounded-2xl border border-white/5 mb-3 shadow-inner">
                        "{contextText}"
                     </p>
                     
                     {/* Hero and Villain from mockData */}
                     {match.emotionalMvp && (
                        <div className={`grid ${isFinished ? 'grid-cols-1' : 'grid-cols-2'} gap-3 mb-3`}>
-                          <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+                          <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-2xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
                              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal/30 to-transparent" />
                              <span className="text-[8px] md:text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">
                                 {isFinished ? "Match MVP 🏆" : "MVP Watch 🌟"}
@@ -265,7 +265,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                           </div>
                           
                           {!isFinished && match.polarizingPlayer && (
-                             <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+                             <div className="bg-gradient-to-br from-black/40 to-black/20 p-2 md:p-3 rounded-2xl border border-white/5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-coral/30 to-transparent" />
                                 <span className="text-[8px] md:text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Fraud Watch 🚨</span>
                                 <span className="text-[10px] md:text-xs font-black uppercase text-coral drop-shadow-[0_0_8px_rgba(255,107,107,0.4)]">{match.polarizingPlayer}</span>
@@ -276,19 +276,19 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  </div>
 
                  <div className="mt-2 md:mt-3 flex flex-wrap gap-2 md:gap-3">
-                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-[#75fbd9] text-black px-6 py-3.5 rounded-xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
+                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-[#75fbd9] text-black px-6 py-3.5 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
                        MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
 
                     <button 
                        onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
-                       className={`flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black px-6 py-3.5 rounded-xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
+                       className={`flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black px-6 py-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
                     >
                        <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
                     </button>
                     
                     {(isFinished || isStartingSoon) && (
-                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-coral text-black border border-coral/50 px-6 py-3 md:py-3.5 rounded-xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
+                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-coral text-black border border-coral/50 px-6 py-3 md:py-3.5 rounded-2xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
                           <MessageSquare className="w-3 h-3" /> JOIN STAND
                        </Link>
                     )}
@@ -461,18 +461,18 @@ export default function DiscoverPage() {
          <div className="relative z-10 w-full max-w-[1200px] mx-auto px-2 md:px-8">
             
             {/* The Compact Glassmorphic Hero Card */}
-            <div className="w-full bg-gradient-to-br from-white/[0.03] to-black/60 border border-white/10 rounded-2xl md:rounded-3xl p-3 md:p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col gap-4 lg:gap-6">
+            <div className="w-full bg-gradient-to-br from-white/[0.03] to-black/60 border border-white/10 rounded-2xl md:rounded-2xl p-3 md:p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden flex flex-col gap-4 lg:gap-6">
                {/* Internal glowing elements */}
                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-teal/50 to-transparent" />
                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
                
                {/* Top row: Tag & Watchability */}
                <div className="flex items-center justify-between">
-                  <div className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] flex items-center gap-2 bg-[#75fbd9]/10 px-3 py-1.5 rounded-xl border border-[#75fbd9]/30 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
+                  <div className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] flex items-center gap-2 bg-[#75fbd9]/10 px-3 py-1.5 rounded-2xl border border-[#75fbd9]/30 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
                      <span className="w-1.5 h-1.5 rounded-full bg-[#75fbd9] animate-pulse shadow-[0_0_10px_rgba(117, 251, 217,1)]"></span>
                      MATCH OF THE MOMENT
                   </div>
-                  <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-xl border border-[#75fbd9]/20 shadow-inner">
+                  <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-2xl border border-[#75fbd9]/20 shadow-inner">
                      <Brain className="w-3 h-3 text-[#75fbd9]" />
                      <span className="text-[10px] md:text-xs font-mono font-black text-[#75fbd9] tracking-widest">{heroMatch.volatility}%</span>
                   </div>
@@ -482,8 +482,8 @@ export default function DiscoverPage() {
                <div className="flex items-center justify-center gap-4 md:gap-12 w-full my-2">
                   {/* Team 1 */}
                   <div className="flex flex-col items-center gap-2 md:gap-3">
-                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-[1rem] bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
+                        <div className="absolute inset-0 bg-white/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                         <img src={heroMatch.logo1} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
                      <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team1}</h2>
@@ -498,8 +498,8 @@ export default function DiscoverPage() {
 
                   {/* Team 2 */}
                   <div className="flex flex-col items-center gap-2 md:gap-3">
-                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-[1rem] bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
-                        <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
+                        <div className="absolute inset-0 bg-white/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                         <img src={heroMatch.logo2} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
                      <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team2}</h2>
@@ -534,13 +534,13 @@ export default function DiscoverPage() {
                            {/* 3. MVP and Fraud Watch */}
                            <div className="flex items-center gap-2 shrink-0 h-full">
                               {(heroMatch as any).emotionalMvp && (
-                                 <div className="flex flex-col items-center justify-center bg-[#75fbd9]/10 rounded-xl px-3 py-1.5 border border-[#75fbd9]/20 h-full min-h-[48px]">
+                                 <div className="flex flex-col items-center justify-center bg-[#75fbd9]/10 rounded-2xl px-3 py-1.5 border border-[#75fbd9]/20 h-full min-h-[48px]">
                                     <span className="text-[7px] md:text-[8px] text-[#75fbd9]/70 uppercase tracking-widest mb-0.5">MVP Watch</span>
                                     <span className="text-[9px] md:text-xs font-black text-[#75fbd9] truncate max-w-[80px]">{(heroMatch as any).emotionalMvp}</span>
                                  </div>
                               )}
                               {(heroMatch as any).polarizingPlayer && (
-                                 <div className="flex flex-col items-center justify-center bg-coral/10 rounded-xl px-3 py-1.5 border border-coral/20 h-full min-h-[48px]">
+                                 <div className="flex flex-col items-center justify-center bg-coral/10 rounded-2xl px-3 py-1.5 border border-coral/20 h-full min-h-[48px]">
                                     <span className="text-[7px] md:text-[8px] text-coral/70 uppercase tracking-widest mb-0.5">Fraud Watch</span>
                                     <span className="text-[9px] md:text-xs font-black text-coral truncate max-w-[80px]">{(heroMatch as any).polarizingPlayer}</span>
                                  </div>
@@ -574,7 +574,7 @@ export default function DiscoverPage() {
                     <button 
                       key={f.name}
                       onClick={() => setActiveFilter(f.name)}
-                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-xl border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
+                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-2xl border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
                     >
                       <Icon className="w-3.5 h-3.5" /> {f.name}
                     </button>
@@ -590,13 +590,13 @@ export default function DiscoverPage() {
               <div className="flex w-full bg-black/40 backdrop-blur-md rounded-2xl p-1 border border-white/10 shadow-lg">
                 <button 
                   onClick={() => setSortMode('watchability')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-2xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Activity className="w-3.5 h-3.5" />
                    WATCHABILITY
                 </button>
                 <button 
                   onClick={() => setSortMode('league')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-2xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Swords className="w-3.5 h-3.5" />
                    LEAGUE
                 </button>
@@ -619,7 +619,7 @@ export default function DiscoverPage() {
 
                   {/* League Container */}
                   <div className={`transition-all duration-500 overflow-hidden ${collapsedGroups.has(league) ? 'max-h-0 opacity-0' : 'max-h-[5000px] opacity-100'}`}>
-                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-[32px] border border-border overflow-hidden shadow-2xl">
+                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-2xl border border-border overflow-hidden shadow-2xl">
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {matches.map((match: any, index: number) => (
@@ -653,7 +653,7 @@ export default function DiscoverPage() {
                   </button>
 
                   <div className={`transition-all duration-500 overflow-hidden ${collapsedGroups.has(group.groupName) ? 'max-h-0 opacity-0' : 'max-h-[5000px] opacity-100'}`}>
-                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-[32px] border border-border overflow-hidden shadow-2xl">
+                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-2xl border border-border overflow-hidden shadow-2xl">
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {group.matches.map((match: any, index: number) => (
@@ -681,3 +681,4 @@ export default function DiscoverPage() {
     </main>
   );
 }
+

@@ -225,7 +225,7 @@ export default function OnboardingPage() {
                      <motion.div 
                        initial={{ opacity: 0, y: 20 }}
                        animate={{ opacity: 1, y: 0 }}
-                       className="w-full bg-card/40 backdrop-blur-md border border-border rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
+                       className="w-full bg-card/40 backdrop-blur-md border border-border rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden"
                      >
                        {/* Subtle Background Elements */}
                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#75fbd9]/5 rounded-full blur-[80px] pointer-events-none" />
@@ -420,3 +420,4 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
