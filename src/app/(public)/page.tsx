@@ -35,14 +35,10 @@ function Navbar() {
       <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-md transition-colors" />
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 rounded-lg bg-white dark:bg-black border border-gray-300 dark:border-border flex items-center justify-center relative overflow-hidden group transition-colors">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] opacity-10 dark:opacity-20 group-hover:opacity-100 transition-opacity duration-500" />
-            <svg className="w-4 h-4 text-gray-900 dark:text-foreground relative z-10 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
+          <div className="w-10 h-10 flex items-center justify-center">
+            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
           </div>
-          <span className="text-xl font-black tracking-widest uppercase text-gray-900 dark:text-foreground transition-colors">EYECONIC</span>
+          <span className="text-xl font-black tracking-widest uppercase text-gray-900 dark:text-foreground transition-colors">STIMMUNG</span>
         </Link>
         <div className="flex items-center gap-4">
           <ThemeToggle />
@@ -91,7 +87,7 @@ function HeroSection() {
               STATS ARE DECEPTIVE
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-muted-foreground font-medium mb-12 tracking-wide max-w-xl leading-relaxed transition-colors">
-              Eyeconic parses live crowd sentiment, momentum swings, and tension to broadcast exactly where the drama is happening, right now.
+              Stimmung parses live crowd sentiment, momentum swings, and tension to broadcast exactly where the drama is happening, right now.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 font-mono">
@@ -120,7 +116,7 @@ function HeroSection() {
               {/* Terminal Header */}
               <div className="px-6 py-4 border-b border-gray-300 dark:border-border flex items-center justify-between bg-black/5 dark:bg-muted transition-colors">
                 <div className="flex items-center gap-3 text-gray-500 dark:text-muted-foreground text-xs tracking-widest uppercase">
-                  <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> EYECONIC_OS v2.0
+                  <TerminalIcon className="w-4 h-4 text-[#00E5FF]" /> STIMMUNG_OS v2.0
                 </div>
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-white/20" />
@@ -208,7 +204,7 @@ function ProblemAndShiftSection() {
           >
             Traditional apps show you what happened.<br/> 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] to-blue-500">
-              Eyeconic shows you what is worth watching.
+              Stimmung shows you what is worth watching.
             </span>
           </motion.h2>
           <motion.p
@@ -219,7 +215,7 @@ function ProblemAndShiftSection() {
             className="text-lg md:text-xl text-gray-600 dark:text-muted-foreground max-w-3xl mx-auto tracking-wide leading-relaxed font-medium transition-colors"
           >
             Instead of checking 5 different apps to figure out which game is getting exciting, 
-            <span className="text-gray-900 dark:text-foreground font-bold transition-colors"> Eyeconic </span> 
+            <span className="text-gray-900 dark:text-foreground font-bold transition-colors"> Stimmung </span> 
             does the heavy lifting. Powered by our proprietary <span className="text-[#00E5FF] font-bold">Attention Layer</span>, we analyze real-time crowd noise, tactical shifts, and momentum spikes to tell you exactly when a boring 0-0 draw turns into an absolute thriller.
           </motion.p>
         </div>
@@ -254,7 +250,7 @@ function ProblemAndShiftSection() {
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#00E5FF]/10 blur-[80px] rounded-full group-hover:bg-[#00E5FF]/20 transition-colors duration-700" />
             
             <h3 className="text-sm font-mono font-bold mb-6 text-gray-900 dark:text-foreground uppercase tracking-[0.2em] flex items-center gap-3 relative z-10 transition-colors">
-              <Activity className="w-4 h-4 text-[#00E5FF]" /> Eyeconic
+              <Activity className="w-4 h-4 text-[#00E5FF]" /> Stimmung
             </h3>
             <ul className="space-y-4 relative z-10">
               {['Instant match intelligence', 'Know what\'s worth watching', 'Live momentum insights', 'Timely game alerts', 'Watch with confidence'].map((item, i) => (
@@ -743,7 +739,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-3">
           <Activity className="w-5 h-5 text-gray-500" />
-          <span className="text-lg font-bold tracking-tighter text-gray-500">Eyeconic</span>
+          <span className="text-lg font-bold tracking-tighter text-gray-500">Stimmung</span>
         </div>
         
         <div className="flex gap-10 text-[10px] text-gray-500 dark:text-gray-600 font-mono tracking-[0.2em] uppercase transition-colors">

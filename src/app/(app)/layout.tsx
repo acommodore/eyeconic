@@ -108,13 +108,10 @@ export default function AppLayout({
       {!isStandRoom && (
       <header className="md:hidden h-16 border-b border-border flex items-center justify-between px-4 bg-card text-card-foreground">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-6 h-6 rounded bg-[#00E5FF] flex items-center justify-center">
-            <svg className="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
+          <div className="w-8 h-8 flex items-center justify-center">
+            <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="font-black tracking-widest uppercase">EYECONIC</span>
+          <span className="font-black tracking-widest uppercase">STIMMUNG</span>
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
@@ -131,13 +128,10 @@ export default function AppLayout({
         <div className={`flex items-center mb-12 ${isCollapsed ? 'justify-center w-full' : 'justify-between w-full'}`}>
           {!isCollapsed && (
             <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00E5FF] to-[#FF7F50] flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-                <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
+              <div className="w-10 h-10 flex items-center justify-center">
+                <img src="/stimmung_logo_nobg.png" alt="Stimmung Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
               </div>
-              <span className="text-xl font-black tracking-widest uppercase">EYECONIC</span>
+              <span className="text-xl font-black tracking-widest uppercase">STIMMUNG</span>
             </Link>
           )}
           <button 

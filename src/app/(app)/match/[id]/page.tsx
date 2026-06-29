@@ -554,7 +554,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
            
            <h3 className="relative z-10 text-3xl font-black tracking-tighter uppercase mb-4 text-foreground">Awaiting Kick Off</h3>
            <p className="relative z-10 text-sm text-muted-foreground max-w-xs font-medium">
-             The stage is set. Eyeconic will begin tracking momentum, sentiment, and key moments once the match gets underway.
+             The stage is set. Stimmung will begin tracking momentum, sentiment, and key moments once the match gets underway.
            </p>
         </div>
       ) : matchState === 'live' && matchInfo?.status === 'finished' ? (

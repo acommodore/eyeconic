@@ -10,14 +10,14 @@ export function OnboardingModal() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    const hasSeen = localStorage.getItem("eyeconic_has_seen_onboarding");
+    const hasSeen = localStorage.getItem("stimmung_has_seen_onboarding");
     if (!hasSeen) {
       setIsOpen(true);
     }
   }, []);
 
   const handleClose = () => {
-    localStorage.setItem("eyeconic_has_seen_onboarding", "true");
+    localStorage.setItem("stimmung_has_seen_onboarding", "true");
     setIsOpen(false);
     router.push('/home');
   };
@@ -88,7 +88,7 @@ export function OnboardingModal() {
             onClick={handleNext}
             className="w-full bg-foreground text-background font-black uppercase tracking-widest py-4 rounded-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 cursor-pointer"
           >
-             {step === 2 ? 'ENTER EYECONIC' : 'NEXT'} {step === 2 ? <Play className="w-4 h-4 fill-background" /> : <ArrowRight className="w-4 h-4" />}
+             {step === 2 ? 'ENTER STIMMUNG' : 'NEXT'} {step === 2 ? <Play className="w-4 h-4 fill-background" /> : <ArrowRight className="w-4 h-4" />}
           </button>
           <button 
             onClick={handleClose}

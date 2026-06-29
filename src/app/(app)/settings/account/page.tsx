@@ -26,7 +26,7 @@ export default function AccountDetailsPage() {
           <div className="space-y-2">
             <label className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase flex items-center gap-2"><Mail className="w-3 h-3"/> Email Address</label>
             <div className="flex items-center justify-between bg-black/5 dark:bg-white/5 border border-border rounded-xl p-4">
-              <span className="text-sm font-medium">operative@eyeconic.com</span>
+              <span className="text-sm font-medium">operative@stimmung.com</span>
               <button className="text-xs font-bold text-teal hover:text-teal/80 uppercase tracking-widest">Edit</button>
             </div>
           </div>

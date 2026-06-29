@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Eyeconic | Football Emotion Engine",
-  description: "Eyeconic analyzes live fan sentiment, emotional momentum, and match events to show you the games that matter most right now.",
+  title: "Stimmung | Football Emotion Engine",
+  description: "Stimmung analyzes live fan sentiment, emotional momentum, and match events to show you the games that matter most right now.",
 };
 
 export const viewport = {

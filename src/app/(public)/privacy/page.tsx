@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <div className="space-y-12 text-gray-600 dark:text-muted-foreground leading-relaxed">
           <section>
             <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-4">1. Data Collection</h2>
-            <p>We collect minimal data required to provide the Eyeconic service, including email addresses for waitlist and standard usage analytics.</p>
+            <p>We collect minimal data required to provide the Stimmung service, including email addresses for waitlist and standard usage analytics.</p>
           </section>
           <section>
             <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-4">2. Use of Information</h2>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
           </section>
           <section>
             <h2 className="text-xl font-bold text-gray-900 dark:text-foreground mb-4">4. Contact Us</h2>
-            <p>If you have any questions about our privacy policy, please contact us at privacy@eyeconic.app.</p>
+            <p>If you have any questions about our privacy policy, please contact us at privacy@stimmung.app.</p>
           </section>
         </div>
       </main>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <Activity className="w-5 h-5 text-gray-500" />
-            <span className="text-lg font-bold tracking-tighter text-gray-500">Eyeconic</span>
+            <span className="text-lg font-bold tracking-tighter text-gray-500">Stimmung</span>
           </div>
           <div className="flex gap-10 text-[10px] text-gray-500 dark:text-gray-600 font-mono tracking-[0.2em] uppercase transition-colors">
             <Link href="/#hero" className="hover:text-gray-900 dark:hover:text-foreground transition-colors">About</Link>
