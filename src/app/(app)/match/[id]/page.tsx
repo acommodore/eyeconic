@@ -596,7 +596,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-12"
+            className="space-y-12 px-4 md:px-0"
           >
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
@@ -663,7 +663,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
         {/* POST-MATCH CONTENT - LOCKED STATE */}
       {matchState === 'postmatch' && matchInfo?.status !== 'finished' && (
-        <div className="w-full max-w-4xl mx-auto space-y-6">
+        <div className="w-full max-w-4xl mx-auto space-y-6 px-4 md:px-0">
           <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-3xl relative overflow-hidden shadow-2xl backdrop-blur-sm">
              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=1000&auto=format&fit=crop')] opacity-[0.03] mix-blend-luminosity bg-cover z-0 pointer-events-none" />
              <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-teal to-transparent opacity-30" />
@@ -725,7 +725,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
              exit={{ opacity: 0, y: -15 }}
-             className="space-y-8"
+             className="space-y-8 px-4 md:px-0"
           >
             <div className="flex items-center gap-2 mb-4">
                <Mic className="w-5 h-5 text-[#75fbd9]" />
@@ -769,7 +769,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-12"
+            className="space-y-12 px-4 md:px-0"
           >
           
             {/* SEASON IMPACT */}
@@ -1106,7 +1106,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="space-y-12"
+          className="space-y-12 px-4 md:px-0"
         >
           {/* Pitch View Roster */}
           <section className="mt-4">
@@ -1256,7 +1256,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-3xl mx-auto space-y-12"
+          className="w-full max-w-3xl mx-auto space-y-12 px-4 md:px-0"
         >
           <div className="relative border-l-2 border-border ml-6 md:ml-1/2 md:border-none">
             <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-muted/80 -translate-x-1/2"></div>
@@ -1300,7 +1300,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-4xl mx-auto relative group"
+          className="w-full max-w-4xl mx-auto relative group px-4 md:px-0"
         >
           {/* Subtle background glow */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#75fbd9]/5 to-transparent rounded-[32px] blur-3xl -z-10 group-hover:from-[#75fbd9]/10 transition-colors duration-1000"></div>
@@ -1891,3 +1891,4 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+

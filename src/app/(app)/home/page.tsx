@@ -74,7 +74,7 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
   );
 };
 
-const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white', heightClass = 'h-16' }: { data?: number[], homeColor?: string, awayColor?: string, heightClass?: string }) => {
+const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor = 'bg-white', heightClass = 'h-16', team1Logo, team2Logo }: { data?: number[], homeColor?: string, awayColor?: string, heightClass?: string, team1Logo?: string, team2Logo?: string }) => {
   const graphData = data.length > 0 ? data : [
      2, 5, -2, -5, -8, 10, 15, -2, -10, -25, 
      -15, -5, 5, 20, 45, 85, 90, 60, 40, 25, 
@@ -84,10 +84,14 @@ const MatchMomentumGraph = ({ data = [], homeColor = 'bg-[#FFD700]', awayColor =
 
   return (
     <div className="w-full flex flex-col gap-1 py-1">
-      <div className="flex justify-between items-center text-[7px] md:text-[8px] font-mono text-muted-foreground uppercase tracking-widest mb-1">
-        <span className="flex items-center gap-1"><div className={`w-1.5 h-1.5 rounded-sm ${homeColor}`}></div> Home</span>
+      <div className="flex justify-between items-center text-[7px] md:text-[8px] font-mono text-muted-foreground uppercase tracking-widest mb-1 px-1">
+        <span className="flex items-center gap-1">
+          {team1Logo ? <img src={team1Logo} className="w-3.5 h-3.5 md:w-4 md:h-4 object-contain invert" /> : <div className={`w-1.5 h-1.5 rounded-sm ${homeColor}`}></div>}
+        </span>
         <span className="font-bold text-foreground tracking-widest drop-shadow-md">Momentum</span>
-        <span className="flex items-center gap-1">Away <div className={`w-1.5 h-1.5 rounded-sm ${awayColor}`}></div></span>
+        <span className="flex items-center gap-1">
+          {team2Logo ? <img src={team2Logo} className="w-3.5 h-3.5 md:w-4 md:h-4 object-contain invert" /> : <div className={`w-1.5 h-1.5 rounded-sm ${awayColor}`}></div>}
+        </span>
       </div>
       
       <div className={`relative w-full ${heightClass} flex items-center border-x border-white/10 px-0.5 mb-1`}>
@@ -236,7 +240,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
                  {(isLive || isFinished) && (
                     <div className="relative z-10 pt-2 border-t border-white/5 mt-2">
-                       <MatchMomentumGraph homeColor="bg-[#75fbd9]" awayColor="bg-coral" heightClass="h-10" />
+                       <MatchMomentumGraph homeColor="bg-[#75fbd9]" awayColor="bg-coral" heightClass="h-10" team1Logo={match.logo1} team2Logo={match.logo2} />
                     </div>
                  )}
               </div>
@@ -510,8 +514,8 @@ export default function DiscoverPage() {
 
                   <div className="w-full lg:w-auto flex flex-row items-center gap-3 lg:gap-4 justify-start lg:justify-end flex-1 overflow-x-auto pb-2 lg:pb-0 hide-scrollbar">
                      {/* 1. Momentum Graph */}
-                     <div className="w-24 md:w-32 shrink-0">
-                        <MatchMomentumGraph homeColor="bg-[#75fbd9]" awayColor="bg-coral" heightClass="h-8" />
+                     <div className="w-32 md:w-48 shrink-0">
+                        <MatchMomentumGraph homeColor="bg-[#75fbd9]" awayColor="bg-coral" heightClass="h-8" team1Logo={heroMatch.logo1} team2Logo={heroMatch.logo2} />
                      </div>
                      
                      <div className="w-px h-8 bg-white/10 shrink-0 mx-1" />
@@ -556,7 +560,7 @@ export default function DiscoverPage() {
         <NewsTicker />
       </div>
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-2 md:px-8">
         
         {/* FILTERS AND SORTING ROW */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
