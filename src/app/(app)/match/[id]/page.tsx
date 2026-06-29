@@ -589,7 +589,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={mvpWatchPlayer}
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                          disabled={matchState === 'postmatch'}
+                          disabled={matchInfo?.status === 'finished'}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#75fbd9] transition-colors pb-1 border-b border-border disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
@@ -614,7 +614,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={fraudWatchPlayer}
                           onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                          disabled={matchState === 'postmatch'}
+                          disabled={matchInfo?.status === 'finished'}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-[#D32F2F]/30 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
