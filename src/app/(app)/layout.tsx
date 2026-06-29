@@ -179,13 +179,13 @@ export default function AppLayout({
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 flex flex-col relative min-h-0 ${isStandRoom ? 'pb-0' : 'pb-20 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
+      <main className={`flex-1 flex flex-col relative min-h-0 ${isStandRoom ? 'pb-0' : 'pb-16 md:pb-0'} overflow-x-hidden transition-all duration-300`}>
         {children}
       </main>
 
       {/* Mobile Bottom Navigation */}
       {!isStandRoom && (
-      <nav className={`md:hidden fixed bottom-0 w-full h-[calc(5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-card text-card-foreground border-t border-border flex items-center justify-around px-2 z-50  transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
+      <nav className={`md:hidden fixed bottom-0 w-full h-[calc(4rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-card text-card-foreground border-t border-border flex items-center justify-around px-2 z-50  transition-transform duration-300 ${showNav ? 'translate-y-0' : 'translate-y-full'}`}>
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
