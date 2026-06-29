@@ -494,13 +494,13 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Timeline Axis Labels */}
-            <div className="w-full px-4 flex items-center justify-between text-[8px] md:text-[9px] font-mono text-muted-foreground font-black mb-1">
+            <div className="w-full px-4 flex items-center justify-between text-[8px] md:text-[9px] font-mono text-muted-foreground font-black mb-0">
               <span>0'</span>
               <span>90'</span>
             </div>
 
             {/* Momentum Activity Bars */}
-            <div className="relative w-full px-4 mb-4 h-16 shrink-0 flex items-center gap-[2px]">
+            <div className="relative w-full px-4 mb-1 h-16 shrink-0 flex items-center gap-[2px]">
               <div className="absolute left-4 right-4 top-1/2 h-px bg-white/20 z-0"></div>
               {momentumData.map((dataPoint) => {
                 const normalizedValue = dataPoint.value - 50;
