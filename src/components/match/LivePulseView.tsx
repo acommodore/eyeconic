@@ -500,7 +500,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Momentum Activity Bars */}
-            <div className="relative w-full px-4 mb-5 h-16 shrink-0 flex items-center gap-[2px]">
+            <div className="relative w-full px-4 mb-4 h-16 shrink-0 flex items-center gap-[2px]">
               <div className="absolute left-4 right-4 top-1/2 h-px bg-white/20 z-0"></div>
               {momentumData.map((dataPoint) => {
                 const normalizedValue = dataPoint.value - 50;
@@ -527,7 +527,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Interactive Timeline */}
-            <div className="relative w-full px-4 mb-5 h-10 shrink-0">
+            <div className="relative w-full px-4 mb-4 h-10 shrink-0">
               {/* The base line */}
               <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-black/10 dark:bg-white/10 -translate-y-1/2" />
               {/* The progress line up to the current minute (assuming 90 max) */}
@@ -795,4 +795,5 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
     </div>
   );
 }
+
 
