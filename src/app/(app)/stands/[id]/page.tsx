@@ -134,6 +134,43 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     }
   };
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
+
+  // Helper that locally spawns the floating emoji animation
+  const spawnEmojiLocally = (emoji: string) => {
+    const id = Date.now() + Math.random();
+    setFloatingEmojis(prev => [...prev, { id, emoji, left: Math.random() * 80 + 10 }]);
+    setTimeout(() => {
+      setFloatingEmojis(prev => prev.filter(e => e.id !== id));
+    }, 2500);
+  };
+
+  // Subscribe to emoji broadcasts from other participants
+  const emojiBroadcastRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
+  useEffect(() => {
+    const channel = supabase.channel(`stand_emojis_${matchId}`, {
+      config: { broadcast: { self: false } },
+    });
+    channel.on('broadcast', { event: 'emoji' }, ({ payload }) => {
+      if (payload?.emoji) spawnEmojiLocally(payload.emoji);
+    }).subscribe();
+    emojiBroadcastRef.current = channel;
+    return () => { supabase.removeChannel(channel); };
+  }, [matchId]);
+
+  // Broadcast emoji to all other users AND show locally
+  const spawnEmoji = async (emoji: string) => {
+    spawnEmojiLocally(emoji);
+    try {
+      await emojiBroadcastRef.current?.send({
+        type: 'broadcast',
+        event: 'emoji',
+        payload: { emoji },
+      });
+    } catch (e) {
+      console.error('Failed to broadcast emoji', e);
+    }
+  };
+
   const [inputText, setInputText] = useState("");
   const [isMicPending, setIsMicPending] = useState(false);
 
