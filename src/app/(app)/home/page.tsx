@@ -471,7 +471,7 @@ export default function DiscoverPage() {
                         <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                         <img src={heroMatch.logo1} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter truncate max-w-[100px] md:max-w-none text-center">{heroMatch.team1.substring(0,3)}</h2>
+                     <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team1}</h2>
                   </div>
                   
                   {/* Score */}
@@ -487,8 +487,7 @@ export default function DiscoverPage() {
                         <div className="absolute inset-0 bg-white/5 rounded-[1rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                         <img src={heroMatch.logo2} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
-                     <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter truncate max-w-[100px] md:max-w-none text-center">{heroMatch.team2.substring(0,3)}</h2>
-                     <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight text-white/90">{heroMatch.team2.substring(0,3).toUpperCase()}</h2>
+                     <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team2}</h2>
                   </div>
                </div>
 
