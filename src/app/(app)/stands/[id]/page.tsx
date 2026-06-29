@@ -7,10 +7,11 @@ import type { Participant } from "livekit-client";
 import { createClient } from "@/lib/supabase/client";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flame, Zap, Loader2, MonitorPlay, ChevronDown, ChevronUp, Activity } from "lucide-react";
 import { BackButton } from "@/components/ui/BackButton";
 import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
-import { allLiveMatches } from "@/lib/mockData";
+import { matchService } from '@/services/matchService';
+import { Match } from '@/types/match';
 
 function SpeakerTile({ participant, speakerClass }: { participant: Participant, speakerClass: string }) {
   const isSpeaking = useIsSpeaking(participant);
@@ -39,8 +40,18 @@ function SpeakerTile({ participant, speakerClass }: { participant: Participant, 
 }
 
 function StandRoomLayout({ matchId }: { matchId: string }) {
-  const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
+  const [matchInfo, setMatchInfo] = useState<Match | null>(null);
+
+  useEffect(() => {
+    const fetchMatch = async () => {
+      const match = await matchService.getMatchById(Number(matchId));
+      if (match) setMatchInfo(match);
+    };
+    fetchMatch();
+  }, [matchId]);
+
   const supabase = createClient();
+
   const participants = useParticipants();
   const { localParticipant } = useLocalParticipant();
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -308,10 +319,17 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
         ))}
       </div>
 
-      {/* MOBILE LAYOUT: Poll -> Stage -> Chat -> Action Bar */}
-      {/* DESKTOP LAYOUT: Stage (Left) -> Poll+Chat+Action Bar (Right) */}
-      
-      <div className="flex-1 flex flex-col md:hidden overflow-hidden w-full h-full">
+      {!matchInfo ? (
+        <div className="flex-1 w-full min-h-screen bg-black flex items-center justify-center">
+          <div className="animate-pulse flex flex-col items-center">
+             <Activity className="w-8 h-8 text-[coral] mb-4 animate-bounce" />
+             <p className="text-white font-mono uppercase tracking-widest text-xs">Loading Stand...</p>
+          </div>
+        </div>
+      ) : (
+      <>
+        {/* MOBILE LAYOUT */}
+        <div className="flex-1 min-h-0 md:hidden flex flex-col overflow-hidden bg-black/90 relative z-10 border-b border-border shadow-2xl w-full">
 
         {/* Stage on mobile */}
         <div className="shrink-0 flex flex-col bg-background px-3 pb-3 border-b border-border z-10">
@@ -547,7 +565,8 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
           </div>
         </div>
       </div>
-      
+      </>
+      )}
     </div>
   );
 }
@@ -555,9 +574,10 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
 export default function ActiveStandPage() {
   const params = useParams();
   const id = Array.isArray(params?.id) ? params.id[0] : params?.id || "default";
+  const [username] = useState(() => `User_${Math.floor(Math.random() * 1000)}`);
 
   return (
-    <LiveAudioRoom roomName={id} username={`User_${Math.floor(Math.random() * 1000)}`}>
+    <LiveAudioRoom roomName={id} username={username}>
       <StandRoomLayout matchId={id} />
     </LiveAudioRoom>
   );

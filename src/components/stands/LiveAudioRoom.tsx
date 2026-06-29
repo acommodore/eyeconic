@@ -17,7 +17,7 @@ export default function LiveAudioRoom({
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const resp = await fetch(`/api/livekit?room=\${roomName}&username=\${username}`);
+        const resp = await fetch(`/api/livekit?room=${roomName}&username=${username}`);
         if (!resp.ok) {
           throw new Error('Failed to fetch token');
         }

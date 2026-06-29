@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity, Flame, Sparkles, ChevronDown, Filter, MessageSquare } from 'lucide-react';
-import { allLiveMatches, upcomingTableData, finishedTableData } from '@/lib/mockData';
+import { matchService } from '@/services/matchService';
+import { Match } from '@/types/match';
 
 // --- MOCK RANKING DATA ---
 const getMatchCurations = (matchId: number, team1: string, status: string) => {
@@ -331,9 +332,10 @@ const NewsTicker = () => (
 
 export default function DiscoverPage() {
   const supabase = createClient();
-  const [liveMatches, setLiveMatches] = useState(allLiveMatches);
-  const [upcomingMatches, setUpcomingMatches] = useState(upcomingTableData);
-  const [finishedMatches, setFinishedMatches] = useState(finishedTableData);
+  const [liveMatches, setLiveMatches] = useState<Match[]>([]);
+  const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
+  const [finishedMatches, setFinishedMatches] = useState<Match[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
   const [bookmarkedMatches, setBookmarkedMatches] = useState<Set<number>>(new Set());
@@ -353,13 +355,22 @@ export default function DiscoverPage() {
 
   useEffect(() => {
     const fetchMatches = async () => {
-      const { data, error } = await supabase.from('matches').select('*');
-      if (!error && data) {
-        // mock data is used directly for now since supabase matches might be stale or differently formatted
+      setIsLoading(true);
+      try {
+        const live = await matchService.getLiveMatches();
+        const upcoming = await matchService.getUpcomingMatches();
+        const finished = await matchService.getFinishedMatches();
+        setLiveMatches(live);
+        setUpcomingMatches(upcoming);
+        setFinishedMatches(finished);
+      } catch (err) {
+        console.error("Error fetching matches:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchMatches();
-  }, [supabase]);
+  }, []);
 
   const toggleMatch = (id: number) => {
     setExpandedMatches(prev => {
@@ -419,9 +430,9 @@ export default function DiscoverPage() {
   }
 
   const watchabilityMatches = [
-    { groupName: 'Live Matches', matches: finalMatches.filter(m => m.status === 'live').sort((a,b) => b.volatility - a.volatility) },
-    { groupName: 'Upcoming Matches', matches: finalMatches.filter(m => m.status === 'upcoming').sort((a,b) => b.volatility - a.volatility) },
-    { groupName: 'Finished Matches', matches: finalMatches.filter(m => m.status === 'finished').sort((a,b) => b.volatility - a.volatility) }
+    { groupName: 'Live Matches', matches: finalMatches.filter(m => m.status === 'live').sort((a,b) => (b.volatility || 0) - (a.volatility || 0)) },
+    { groupName: 'Upcoming Matches', matches: finalMatches.filter(m => m.status === 'upcoming').sort((a,b) => (b.volatility || 0) - (a.volatility || 0)) },
+    { groupName: 'Finished Matches', matches: finalMatches.filter(m => m.status === 'finished').sort((a,b) => (b.volatility || 0) - (a.volatility || 0)) }
   ];
 
   const groupedMatches = finalMatches.reduce((acc, match) => {

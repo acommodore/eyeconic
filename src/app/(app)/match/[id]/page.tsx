@@ -184,8 +184,8 @@ const matchStats = [
   { label: "Corners", liv: 7, mci: 4, type: "number" },
 ];
 
-import { allMatches } from '@/lib/mockData';
-
+import { matchService } from '@/services/matchService';
+import { Match } from '@/types/match';
 interface HotTakeOption {
   text: string;
   percent: number;
@@ -202,12 +202,31 @@ interface HotTake {
 export default function MatchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const unwrappedParams = use(params);
   const matchId = unwrappedParams.id;
-  const mockMatchInfo = allMatches.find(m => m.id.toString() === matchId);
   
-  const supabase = createClient();
-  const [dbMatchData, setDbMatchData] = useState<any>(null);
+  const [matchInfo, setMatchInfo] = useState<Match | null>(null);
   
-  const matchInfo = dbMatchData || mockMatchInfo;
+  useEffect(() => {
+    const fetchMatch = async () => {
+      try {
+        const match = await matchService.getMatchById(Number(matchId));
+        if (match) setMatchInfo(match);
+      } catch (err) {
+        console.error("Error fetching match details:", err);
+      }
+    };
+    fetchMatch();
+  }, [matchId]);
+
+  if (!matchInfo) {
+    return (
+      <div className="flex-1 w-full min-h-screen bg-black flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center">
+           <Activity className="w-8 h-8 text-[coral] mb-4 animate-bounce" />
+           <p className="text-white font-mono uppercase tracking-widest text-xs">Loading Match Data...</p>
+        </div>
+      </div>
+    );
+  }
   
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
   const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
@@ -220,60 +239,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   const [votedTakes, setVotedTakes] = useState<Record<string | number, boolean>>({});
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const { user } = useAuth();
-
+  const supabase = createClient();
   useEffect(() => {
-    const fetchData = async () => {
-      // Fetch match by ID to support dynamic Supabase UUIDs
-      let targetMatch = null;
-      if (matchId.includes('-')) {
-         const { data } = await supabase.from('matches').select('*').eq('id', matchId).single();
-         targetMatch = data;
-      } else {
-         const { data } = await supabase.from('matches').select('*').eq('id', matchId).single();
-         targetMatch = data || mockMatchInfo;
-      }
-
-      if (targetMatch && targetMatch.id) {
-        setDbMatchData(targetMatch);
-        setMatchState(targetMatch.status === 'upcoming' ? 'prematch' : targetMatch.status === 'finished' ? 'postmatch' : 'live');
-        
-        // Fetch hot takes
-        const { data: hotTakes } = await supabase.from('hot_takes').select('*').eq('match_id', targetMatch.id);
-        if (hotTakes && hotTakes.length > 0) {
-          setTakes(hotTakes.map(ht => ({
-            id: ht.id,
-            question: ht.question,
-            options: ht.options,
-            votes: "Real-time"
-          })));
-        }
-
-        // Fetch events
-        const { data: events } = await supabase.from('match_events').select('*').eq('match_id', targetMatch.id);
-        if (events) {
-          setPulseEvents(events);
-        }
-      }
-    };
-    fetchData();
-
-    // Subscribe to hot takes
-    const channel = supabase.channel('match_updates')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'hot_takes' }, (payload) => {
-        fetchData(); // Refresh all for simplicity
-      })
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'match_events' }, (payload) => {
-        fetchData();
-      })
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'matches' }, (payload) => {
-        setDbMatchData(payload.new);
-      })
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [supabase]);
+    if (matchInfo) {
+      setMatchState(matchInfo.status === 'upcoming' ? 'prematch' : matchInfo.status === 'finished' ? 'postmatch' : 'live');
+      if (matchInfo.hotTakes) setTakes(matchInfo.hotTakes as any);
+      if (matchInfo.timelineEvents) setPulseEvents(matchInfo.timelineEvents);
+    }
+  }, [matchInfo]);
 
   const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
   const [hasVotedVibe, setHasVotedVibe] = useState(false);
@@ -439,7 +412,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
-            <div className="flex flex-col items-center flex-1">
+            <div className="flex flex-col items-center flex-1 relative">
               <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-3 md:mb-4 group-hover:scale-105 transition-transform">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
@@ -447,7 +420,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="h-6 md:h-8 overflow-hidden relative w-full mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                <div className="absolute top-[100%] left-0 right-0 h-6 md:h-8 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
                       <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
@@ -467,36 +440,34 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
 
             {/* SCORE / TIME */}
-            <div className="flex flex-col items-center justify-start -mt-2 md:-mt-6 shrink-0 relative z-10">
-              {matchState === 'prematch' ? (
-                <div className="flex flex-col items-center">
-                  <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
-                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono leading-none" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
-                  <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
-                    <Mic className="w-2.5 h-2.5 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <span className={`text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1 md:mb-2 ${matchState === 'live' ? 'text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]' : 'text-muted-foreground'}`}>
-                    {matchState === 'live' ? (
-                      <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>72'</span>
-                    ) : "FT"}
-                  </span>
-                  <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none">
-                    {(matchInfo as any)?.score || "0 - 0"}
-                  </div>
-                  <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
-                    <Mic className="w-2.5 h-2.5 animate-pulse" />
-                    <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
-                  </Link>
-                </div>
-              )}
+            <div className="flex flex-col items-center justify-start shrink-0 relative z-10 w-24 md:w-32">
+              <div className="h-16 md:h-24 flex flex-col items-center justify-center w-full">
+                {matchState === 'prematch' ? (
+                  <>
+                    <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
+                    <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono leading-none" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+                  </>
+                ) : (
+                  <>
+                    <span className={`text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1 ${matchState === 'live' ? 'text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]' : 'text-muted-foreground'}`}>
+                      {matchState === 'live' ? (
+                        <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>72'</span>
+                      ) : "FT"}
+                    </span>
+                    <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none">
+                      {(matchInfo as any)?.score || "0 - 0"}
+                    </div>
+                  </>
+                )}
+              </div>
+              <Link href={`/stands/1`} className="mt-2 md:mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1.5 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
+                <Mic className="w-2.5 h-2.5 md:w-3 md:h-3 animate-pulse" />
+                <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest whitespace-nowrap">Join Stand</span>
+              </Link>
             </div>
 
             {/* TEAM 2 */}
-            <div className="flex flex-col items-center flex-1">
+            <div className="flex flex-col items-center flex-1 relative">
               <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-3 md:mb-4">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
@@ -504,7 +475,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               
               {/* Goal Scorers */}
               {matchState !== 'prematch' && (
-                <div className="h-6 md:h-8 overflow-hidden relative w-full mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
+                <div className="absolute top-[100%] left-0 right-0 h-6 md:h-8 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
                       <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
@@ -558,9 +529,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
            </p>
         </div>
       ) : matchState === 'live' && matchInfo?.status === 'finished' ? (
-        <LivePulseView isMatchFinished={true} matchId={matchInfo?.id} />
+        <LivePulseView isMatchFinished={true} matchId={matchId} />
       ) : matchState === 'live' ? (
-        <LivePulseView isMatchFinished={false} matchId={matchInfo?.id} />
+        <LivePulseView isMatchFinished={false} matchId={matchId} />
       ) : null}
       {/* PRE-MATCH WIDGETS (Removed) */}
 
@@ -1409,10 +1380,96 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 // Pre-Match Tab Components
 // ---------------------------------------------------------
 
+function PlayerStatsModal({ player, onClose }: { player: any, onClose: () => void }) {
+  if (!player) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        className="relative z-10 w-full max-w-sm bg-[#111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+      >
+         {/* Cover / Header */}
+         <div className={`h-32 relative flex items-end p-5 ${player.team === 'LIV' ? 'bg-gradient-to-tr from-[#C8102E]/40 to-transparent' : 'bg-gradient-to-tr from-[#6CABDD]/40 to-transparent'}`}>
+            <div className="absolute inset-0 bg-black/20" />
+            <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center border border-white/10 backdrop-blur-md transition-colors z-20">
+               <span className="text-white text-xs font-bold">✕</span>
+            </button>
+            
+            <div className="relative z-10 flex items-center gap-4">
+               <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-white/20 shadow-xl bg-black">
+                 <img src={player.img} alt={player.name} className="w-full h-full object-cover" />
+               </div>
+               <div>
+                 <h2 className="text-xl font-black text-white tracking-widest">{player.name}</h2>
+                 <p className="text-[10px] text-white/60 font-bold uppercase tracking-wider">{player.team} • {player.pos || 'Player'}</p>
+               </div>
+            </div>
+         </div>
+
+         {/* Stats Grid */}
+         <div className="p-5 bg-[#0a0a0a]">
+            <h3 className="text-[10px] font-black text-white/40 tracking-widest uppercase mb-4">Season Performance</h3>
+            
+            <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="bg-white/5 rounded-2xl p-3 flex flex-col items-center justify-center border border-white/5">
+                 <span className="text-2xl font-black text-white mb-0.5">{player.goals || Math.floor(Math.random() * 15)}</span>
+                 <span className="text-[8px] text-white/50 uppercase tracking-widest">Goals</span>
+              </div>
+              <div className="bg-white/5 rounded-2xl p-3 flex flex-col items-center justify-center border border-white/5">
+                 <span className="text-2xl font-black text-white mb-0.5">{player.assists || Math.floor(Math.random() * 10)}</span>
+                 <span className="text-[8px] text-white/50 uppercase tracking-widest">Assists</span>
+              </div>
+              <div className="bg-white/5 rounded-2xl p-3 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden">
+                 <div className="absolute inset-0 bg-[coral]/10" />
+                 <span className="text-2xl font-black text-[coral] mb-0.5 relative z-10">{player.rating || (7 + Math.random() * 2).toFixed(1)}</span>
+                 <span className="text-[8px] text-[coral]/70 uppercase tracking-widest relative z-10">Rating</span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between text-[10px] font-bold text-white/60 mb-1.5 uppercase tracking-wider">
+                  <span>Pass Accuracy</span>
+                  <span className="text-[#75fbd9]">{player.passAcc || Math.floor(80 + Math.random() * 15)}%</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-[#75fbd9] rounded-full shadow-[0_0_10px_rgba(117,251,217,0.5)]" style={{ width: `${player.passAcc || Math.floor(80 + Math.random() * 15)}%` }} />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-[10px] font-bold text-white/60 mb-1.5 uppercase tracking-wider">
+                  <span>Shot Conversion</span>
+                  <span className="text-white">{player.shotConv || Math.floor(10 + Math.random() * 20)}%</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-white/40 rounded-full" style={{ width: `${player.shotConv || Math.floor(10 + Math.random() * 20)}%` }} />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-[10px] font-bold text-white/60 mb-1.5 uppercase tracking-wider">
+                  <span>Duel Success</span>
+                  <span className="text-white">{player.duelSucc || Math.floor(50 + Math.random() * 30)}%</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full bg-white/40 rounded-full" style={{ width: `${player.duelSucc || Math.floor(50 + Math.random() * 30)}%` }} />
+                </div>
+              </div>
+            </div>
+         </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function LineupTab({ matchInfo }: { matchInfo: any }) {
   const [vibe, setVibe] = useState(80);
   const [tactical, setTactical] = useState(45);
   const [hasVotedAs, setHasVotedAs] = useState<'fan' | 'neutral' | null>(null);
+  const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
 
   const mciPlayers = [
     { name: "EDERSON", x: 50, y: 6 },
@@ -1469,21 +1526,31 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
 
             {/* MCI Players */}
             {mciPlayers.map((p, i) => (
-              <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
+              <div 
+                key={i} 
+                className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-transform hover:scale-110 z-10 group" 
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                onClick={() => setSelectedPlayer({...p, team: 'MCI', img: `https://i.pravatar.cc/100?img=${i+10}`, pos: p.y < 20 ? 'Defender' : p.y > 30 ? 'Forward' : 'Midfielder'})}
+              >
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#75fbd9] shadow-[0_0_15px_rgba(117, 251, 217,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground group-hover:border-white transition-colors`}>
+                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt={p.name} className="w-full h-full object-cover opacity-90 group-hover:opacity-100" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#75fbd9] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] font-black tracking-wider text-[#75fbd9] drop-shadow-md bg-black/60 px-1 rounded-sm">{p.name}</span>
               </div>
             ))}
 
             {/* LIV Players */}
             {livPlayers.map((p, i) => (
-              <div key={i} className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground`}>
-                    <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90" />
+              <div 
+                key={i} 
+                className="absolute flex flex-col items-center -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-transform hover:scale-110 z-10 group" 
+                style={{ left: `${p.x}%`, top: `${p.y}%` }}
+                onClick={() => setSelectedPlayer({...p, team: 'LIV', img: `https://i.pravatar.cc/100?img=${i+30}`, pos: p.y > 80 ? 'Defender' : p.y < 70 ? 'Forward' : 'Midfielder'})}
+              >
+                 <div className={`w-10 h-10 rounded-2xl ${p.glow ? 'border-2 border-[#FF7F50] shadow-[0_0_15px_rgba(255,79,0,0.6)]' : 'border border-border-strong'} overflow-hidden mb-1 relative bg-card text-card-foreground group-hover:border-white transition-colors`}>
+                    <img src={`https://i.pravatar.cc/100?img=${i+30}`} alt={p.name} className="w-full h-full object-cover opacity-90 group-hover:opacity-100" />
                  </div>
-                 <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md">{p.name}</span>
+                 <span className="text-[9px] font-black tracking-wider text-[#FF7F50] drop-shadow-md bg-black/60 px-1 rounded-sm">{p.name}</span>
               </div>
             ))}
          </div>
@@ -1512,6 +1579,12 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
             </div>
          </div>
       </div>
+
+      <AnimatePresence>
+        {selectedPlayer && (
+          <PlayerStatsModal player={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
+        )}
+      </AnimatePresence>
 
       {/* Lineup Confidence */}
       <div>
