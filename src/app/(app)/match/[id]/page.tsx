@@ -498,7 +498,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
       {matchState === 'live' && (
-      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-3 mb-4 bg-muted/10 backdrop-blur-md">
+      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-4 bg-muted/10 backdrop-blur-md">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
@@ -1698,7 +1698,7 @@ function SeasonContextTab({ matchInfo }: { matchInfo: any }) {
   ];
 
   return (
-    <div className="w-full flex items-center overflow-hidden py-4 border border-border/50 rounded-2xl bg-muted/10 backdrop-blur-md">
+    <div className="w-full flex items-center overflow-hidden py-2.5 border border-border/50 rounded-2xl bg-muted/10 backdrop-blur-md">
       <div className="flex whitespace-nowrap animate-ticker w-[200%]">
         <div className="flex justify-around min-w-[50%] shrink-0 gap-8 px-4">
           {items.map((item, idx) => (
@@ -1892,6 +1892,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 

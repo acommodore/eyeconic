@@ -314,8 +314,7 @@ const tickerItems = [
 ];
 
 const NewsTicker = () => (
-    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-2 shadow-2xl">
-       <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-1.5 shadow-2xl">`n        <div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
                <button key={`ticker-1-${idx}`} className="text-xs font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
@@ -679,5 +678,6 @@ export default function DiscoverPage() {
     </main>
   );
 }
+
 
 
