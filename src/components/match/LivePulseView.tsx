@@ -515,7 +515,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
           </section>
 
           {/* Action Feed */}
-          <section className="bg-card rounded-[2rem] border border-border px-3 py-4 md:p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
+          <section className="bg-card rounded-[2rem] border border-border px-4 py-4 md:p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
             <div className="flex items-center justify-between mb-4 relative shrink-0">
               <div className="flex items-center gap-2 md:gap-3 shrink-0">
                 <div className="w-1 h-6 bg-[#75fbd9]" />

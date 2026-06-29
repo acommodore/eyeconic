@@ -142,7 +142,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
       
       <button 
         type="button"
-        className="relative w-full text-left z-10 flex items-center p-5 md:p-6 cursor-pointer gap-4 md:gap-6"
+        className="relative w-full text-left z-10 flex items-center py-3 px-4 md:py-4 md:px-6 cursor-pointer gap-4 md:gap-6"
         onClick={() => onToggle(match.id)}
       >
         {/* TIME / STATUS */}
@@ -541,14 +541,14 @@ export default function DiscoverPage() {
       </section>
       )}
 
-      <div className="relative z-10 w-full mb-12 md:mb-16">
+      <div className="relative z-10 w-full mb-6 md:mb-8">
         <NewsTicker />
       </div>
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
         
         {/* FILTERS AND SORTING ROW */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
            {/* EMOTIONAL FILTERS */}
            <div className="relative w-full lg:w-auto">
              <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
