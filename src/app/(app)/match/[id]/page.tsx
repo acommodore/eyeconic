@@ -497,6 +497,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
+      {matchState === 'live' && (
       <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-3 mb-4 bg-muted/10 backdrop-blur-md">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
@@ -515,6 +516,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
          </div>
       </div>
+      )}
 
       {/* Main 3-Tab Navigation */}
       <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-4 max-w-lg mx-4 md:mx-auto shadow-2xl">
@@ -563,7 +565,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile">
-            {['LINEUP', 'H2H', 'KEY BATTLES'].map((tab) => (
+            {['SEASON CONTEXT', 'LINEUP', 'H2H', 'KEY BATTLES'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setPrematchTab(tab)}
@@ -612,9 +614,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-12 px-4"
+            className="space-y-4 px-4"
           >
              <div className="max-w-4xl mx-auto min-h-[450px]">
+                {prematchTab === 'SEASON CONTEXT' && <SeasonContextTab matchInfo={matchInfo} />}
                 {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
                 {prematchTab === 'H2H' && <H2HTab matchInfo={matchInfo} />}
                 
@@ -741,7 +744,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
              exit={{ opacity: 0, y: -15 }}
-             className="space-y-8 px-4"
+             className="space-y-4 px-4"
           >
             <div className="flex items-center gap-2 mb-4">
                <Mic className="w-5 h-5 text-[#75fbd9]" />
@@ -785,7 +788,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-12 px-4"
+            className="space-y-4 px-4"
           >
           
             {/* SEASON IMPACT */}
@@ -1122,7 +1125,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="space-y-12 px-4"
+          className="space-y-4 px-4"
         >
           {/* Pitch View Roster */}
           <section className="mt-4">
@@ -1272,7 +1275,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-3xl mx-auto space-y-12 px-4"
+          className="w-full max-w-3xl mx-auto space-y-4 px-4"
         >
           <div className="relative border-l-2 border-border ml-6 md:ml-1/2 md:border-none">
             <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-muted/80 -translate-x-1/2"></div>
@@ -1907,6 +1910,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 

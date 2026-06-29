@@ -15,7 +15,8 @@ export const matchService = {
 
   getMatchById: async (id: number): Promise<Match | undefined> => {
     await new Promise(resolve => setTimeout(resolve, 300));
-    const match = allLiveMatches.find(m => m.id === id);
+    const allMatches = [...allLiveMatches, ...upcomingTableData, ...finishedTableData];
+    const match = allMatches.find(m => m.id === id);
     return match as Match | undefined;
   },
 
@@ -29,3 +30,4 @@ export const matchService = {
     return finishedTableData as Match[];
   }
 };
+
