@@ -140,7 +140,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
    const contextText = (isLive || isFinished) && match.insight ? match.insight : curation.whyWatch;
 
    return (
-    <div className={`group flex flex-col transition-all duration-500 mb-2 rounded-2xl relative overflow-hidden ${isExpanded ? 'bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(117, 251, 217,0.1)]' : 'bg-black/10 dark:bg-black/20 border border-transparent hover:border-black/5 dark:hover:border-white/5 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:scale-[0.99]'}`}>
+    <div className={`group flex flex-col transition-all duration-500 rounded-2xl relative overflow-hidden ${isExpanded ? 'bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(117, 251, 217,0.1)]' : 'bg-black/10 dark:bg-black/20 border border-transparent hover:border-black/5 dark:hover:border-white/5 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:scale-[0.99]'}`}>
       {/* Ambient Glows */}
       <div className="absolute top-1/2 left-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       <div className="absolute top-1/2 right-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -314,7 +314,7 @@ const tickerItems = [
 ];
 
 const NewsTicker = () => (
-    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-1.5 shadow-2xl">`n        <div className="flex whitespace-nowrap animate-ticker w-[200%]">
+    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-1.5 shadow-2xl"><div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
                <button key={`ticker-1-${idx}`} className="text-xs font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
@@ -602,12 +602,12 @@ export default function DiscoverPage() {
         </div>
 
         {/* TERMINAL FEED LIST */}
-        <section className="space-y-12">
+        <section className="space-y-2">
           {sortMode === 'league' ? (
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
                   {/* League Header */}
-                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-5 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-2 pl-2 w-full text-left group">
                     <div className="w-1.5 h-6 bg-[#75fbd9] rounded-full shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
                     <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-[#75fbd9] transition-colors">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
@@ -620,7 +620,7 @@ export default function DiscoverPage() {
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
+                        <div key={match.id} className="mb-2">
                            <TerminalRow 
                             match={match} 
                             isExpanded={expandedMatches.has(match.id)} 
@@ -642,7 +642,7 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-5 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-2 pl-2 w-full text-left group">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]'}`}></div>
                     <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-[#75fbd9]'}`}>{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
@@ -654,7 +654,7 @@ export default function DiscoverPage() {
                       <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {group.matches.map((match: any, index: number) => (
-                        <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-white/5" : ""}>
+                        <div key={match.id} className="mb-2">
                            <TerminalRow 
                             match={match} 
                             isExpanded={expandedMatches.has(match.id)} 
