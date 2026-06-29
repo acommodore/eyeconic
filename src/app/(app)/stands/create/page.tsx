@@ -28,17 +28,17 @@ export default function PushAgendaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-foreground flex flex-col font-sans selection:bg-teal selection:text-black overflow-x-hidden relative">
+    <div className="min-h-screen bg-black text-foreground flex flex-col font-sans selection:bg-teal selection:text-black overflow-x-hidden relative w-full">
       {/* Dynamic Backgrounds */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       <div className="fixed inset-0 bg-gradient-to-b from-black via-zinc-950 to-black z-0 pointer-events-none" />
-      <div className={`fixed top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-br ${getHeatColor()} rounded-full blur-[150px] opacity-10 pointer-events-none transition-colors duration-1000 z-0`} />
+      <div className={`fixed top-[-10%] left-1/2 -translate-x-1/2 w-[150vw] md:w-[800px] h-[50vw] md:h-[500px] bg-gradient-to-br ${getHeatColor()} rounded-full blur-[100px] md:blur-[150px] opacity-10 pointer-events-none transition-colors duration-1000 z-0`} />
 
       {/* Premium Header */}
-      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 py-4 md:px-8 shadow-2xl relative overflow-hidden">
+      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 pt-12 pb-4 md:pt-6 md:px-8 shadow-2xl relative overflow-hidden w-full">
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-        <div className="flex items-center justify-between max-w-3xl mx-auto w-full relative z-10">
-           <button onClick={() => router.back()} className="group w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md">
+        <div className="flex items-center justify-between max-w-5xl mx-auto w-full relative z-10">
+           <button onClick={() => router.back()} className="group w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md shrink-0">
              <ArrowLeft className="w-5 h-5 text-white/70 group-hover:text-white group-hover:-translate-x-0.5 transition-all" />
            </button>
           
@@ -51,24 +51,24 @@ export default function PushAgendaPage() {
               </div>
            </div>
           
-          <div className="w-10 h-10 rounded-full border border-white/10 relative z-10 flex-shrink-0 bg-black overflow-hidden hover:scale-105 hover:border-white/30 transition-all shadow-xl cursor-pointer">
+          <div className="w-10 h-10 rounded-full border border-white/10 relative z-10 shrink-0 bg-black overflow-hidden hover:scale-105 hover:border-white/30 transition-all shadow-xl cursor-pointer">
             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aye" alt="Avatar" className="w-full h-full object-cover" />
           </div>
         </div>
       </header>
 
-      <main className="p-4 md:p-8 max-w-3xl mx-auto w-full flex flex-col gap-6 md:gap-8 mt-2 md:mt-4 pb-40 flex-1 relative z-10">
+      <main className="p-4 md:p-8 max-w-5xl mx-auto w-full flex flex-col gap-6 md:gap-8 mt-2 md:mt-4 pb-40 flex-1 relative z-10">
         
         {/* Match Selection (Cinematic Glassmorphism) */}
-        <div className="w-full bg-gradient-to-br from-white/[0.05] to-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 flex items-center justify-between hover:border-white/20 transition-all cursor-pointer group shadow-2xl relative overflow-hidden">
+        <div className="w-full bg-gradient-to-br from-white/[0.05] to-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 flex items-center justify-between hover:border-white/20 transition-all cursor-pointer group shadow-2xl relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-teal/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-6 relative z-10">
             <div className="flex -space-x-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-0 group-hover:-translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
-                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg" alt="MCI" className="w-full h-full object-contain drop-shadow-md" />
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-0 group-hover:-translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
+                <img src="https://crests.football-data.org/65.svg" alt="MCI" className="w-full h-full object-contain drop-shadow-md" />
               </div>
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-10 group-hover:translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
-                <img src="https://upload.wikimedia.org/wikipedia/en/5/3/33/Arsenal_FC.svg" alt="ARS" className="w-full h-full object-contain drop-shadow-md" />
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-10 group-hover:translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
+                <img src="https://crests.football-data.org/57.svg" alt="ARS" className="w-full h-full object-contain drop-shadow-md" />
               </div>
             </div>
             <div className="flex flex-col">
@@ -85,8 +85,10 @@ export default function PushAgendaPage() {
           </div>
         </div>
 
-        {/* Agenda Title */}
-        <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl overflow-hidden group focus-within:border-white/30 transition-colors">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+            {/* Agenda Title */}
+        <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl overflow-hidden group focus-within:border-white/30 transition-colors">
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent group-focus-within:via-teal/50 transition-colors duration-500" />
           
           <div className="flex items-center justify-between relative z-10">
@@ -103,12 +105,12 @@ export default function PushAgendaPage() {
             rows={2}
             value={agendaTitle}
             onChange={(e) => setAgendaTitle(e.target.value)}
-            className="w-full bg-transparent border-none px-0 py-4 text-3xl md:text-5xl font-black uppercase tracking-tighter focus:outline-none focus:ring-0 transition-all placeholder:text-white/10 resize-none leading-[1.1] text-white drop-shadow-2xl relative z-10"
+            className="w-full bg-transparent border-none px-0 py-2 text-2xl md:text-4xl font-black uppercase tracking-tighter focus:outline-none focus:ring-0 transition-all placeholder:text-white/10 resize-none leading-[1.1] text-white drop-shadow-2xl relative z-10"
           />
         </div>
 
         {/* Visuals / Cover */}
-        <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 shadow-2xl">
+        <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl">
           <label className="text-[10px] md:text-xs font-black tracking-widest text-white/60 uppercase flex items-center justify-between">
             <span className="flex items-center gap-2"><Camera className="w-3.5 h-3.5 text-white/40" /> VISUAL EVIDENCE</span>
             <span className="text-[9px] text-white/40 tracking-[0.2em] font-mono">OPTIONAL</span>
@@ -128,8 +130,11 @@ export default function PushAgendaPage() {
           </button>
         </div>
 
-        {/* Heat Level Slider */}
-        <div className="flex flex-col gap-8 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 md:p-8 shadow-2xl overflow-hidden">
+          </div>
+          
+          <div className="lg:col-span-5 flex flex-col gap-6 md:gap-8 lg:sticky lg:top-32">
+            {/* Heat Level Slider */}
+        <div className="flex flex-col gap-6 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl overflow-hidden">
           <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${getHeatColor()} blur-[100px] opacity-10 pointer-events-none transition-colors duration-1000`} />
           
           <div className="flex items-center justify-between relative z-10">
@@ -164,19 +169,21 @@ export default function PushAgendaPage() {
           </div>
         </div>
 
+          </div>
+        </div>
       </main>
 
       {/* Floating Bottom CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 md:p-8 z-50 pointer-events-none flex justify-center">
          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent z-0" />
-        <div className="max-w-3xl w-full pointer-events-auto relative z-10">
+        <div className="max-w-5xl w-full pointer-events-auto relative z-10">
           <button 
             onClick={handlePushAgenda}
-            className={`group w-full bg-gradient-to-r ${getHeatColor()} text-white py-5 md:py-6 rounded-[2rem] font-black text-sm md:text-lg tracking-[0.3em] uppercase hover:brightness-110 transition-all duration-300 ${getHeatShadow()} hover:shadow-[0_20px_60px_rgba(255,107,107,0.4)] hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] flex items-center justify-center gap-3 border border-white/20 relative overflow-hidden`}
+            className={`w-full max-w-sm mx-auto bg-teal text-slate-900 py-4 md:py-5 rounded-full font-black text-sm md:text-base tracking-[0.2em] uppercase hover:bg-teal/90 transition-all shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:-translate-y-1 active:translate-y-0 active:scale-95 flex items-center justify-center gap-3 border border-teal group relative overflow-hidden`}
           >
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            <AlertTriangle className="w-5 h-5 md:w-6 md:h-6 relative z-10 group-hover:scale-110 transition-transform duration-500" />
-            <span className="relative z-10">DEPLOY AGENDA</span>
+            <AlertTriangle className="w-5 h-5 relative z-10 group-hover:scale-110 transition-transform duration-500" />
+            <span className="relative z-10">GO LIVE</span>
           </button>
         </div>
       </div>

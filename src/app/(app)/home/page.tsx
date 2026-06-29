@@ -140,18 +140,22 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
       <div className="absolute top-1/2 left-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       <div className="absolute top-1/2 right-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       
-      <div 
-        className="relative z-10 flex items-center p-5 md:p-6 cursor-pointer gap-4 md:gap-6"
+      <button 
+        type="button"
+        className="relative w-full text-left z-10 flex items-center p-5 md:p-6 cursor-pointer gap-4 md:gap-6"
         onClick={() => onToggle(match.id)}
       >
         {/* TIME / STATUS */}
         <div className="w-[65px] md:w-[80px] flex flex-col items-center justify-center shrink-0">
            {isLive ? (
-              <span className="text-xs md:text-sm font-bold font-mono text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]">{match.time}</span>
+              <span className="text-xs md:text-sm font-bold font-mono text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]">
+                 <span className="inline-block w-1.5 h-1.5 bg-coral rounded-full mr-1.5 relative top-[-1px] shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>
+                 {match.time}
+              </span>
            ) : isFinished ? (
-              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">FT</span>
+              <span className="text-[10px] font-mono text-white/70 font-bold uppercase tracking-widest">FT</span>
            ) : (
-              <span className="text-[10px] md:text-xs font-mono text-muted-foreground">{match.time}</span>
+              <span className="text-[10px] md:text-xs font-mono font-bold text-white/70">{match.time}</span>
            )}
         </div>
 
@@ -160,8 +164,8 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
            <div className="flex items-center justify-between gap-2 w-full">
               {/* Home Team */}
               <div className="flex items-center justify-end w-[40%] gap-2 md:gap-3">
-                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-right truncate drop-shadow-sm">{match.team1}</h3>
-                 <h3 className="md:hidden text-xs font-black uppercase tracking-wider text-right">{match.team1.substring(0,3)}</h3>
+                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-right truncate text-white drop-shadow-md">{match.team1}</h3>
+                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-right text-white drop-shadow-md">{match.team1.substring(0,3)}</h3>
                  <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-white/5 rounded-full p-0.5 border border-white/10">
                     <img src={match.logo1} alt={match.team1} className={`w-full h-full object-contain ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
                  </div>
@@ -183,18 +187,19 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-white/5 rounded-full p-0.5 border border-white/10">
                     <img src={match.logo2} alt={match.team2} className={`w-full h-full object-contain ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
                  </div>
-                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-left truncate drop-shadow-sm">{match.team2}</h3>
-                 <h3 className="md:hidden text-xs font-black uppercase tracking-wider text-left">{match.team2.substring(0,3)}</h3>
+                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-left truncate text-white drop-shadow-md">{match.team2}</h3>
+                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-left text-white drop-shadow-md">{match.team2.substring(0,3)}</h3>
               </div>
            </div>
         </div>
 
         {/* RIGHT CONTROLS */}
-        <div className="w-[65px] md:w-[80px] flex items-center justify-end gap-2 shrink-0">
+        <div className="w-[65px] md:w-[80px] flex items-center justify-end gap-1.5 shrink-0">
+           <Flame className="w-3 h-3 md:w-3.5 md:h-3.5 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
            <span className="text-xs md:text-base font-mono font-black tabular-nums text-foreground drop-shadow-md">{match.volatility}%</span>
            <ChevronDown className={`shrink-0 w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
-      </div>
+      </button>
 
       {/* EXPANDED VIEW */}
       <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
@@ -473,6 +478,7 @@ export default function DiscoverPage() {
                         <img src={heroMatch.logo2} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
                      <h2 className="text-xl md:text-3xl font-black uppercase tracking-tighter truncate max-w-[100px] md:max-w-none text-center">{heroMatch.team2.substring(0,3)}</h2>
+                     <h2 className="text-lg md:text-xl font-bold uppercase tracking-tight text-white/90">{heroMatch.team2.substring(0,3).toUpperCase()}</h2>
                   </div>
                </div>
 
@@ -535,34 +541,38 @@ export default function DiscoverPage() {
         {/* FILTERS AND SORTING ROW */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
            {/* EMOTIONAL FILTERS */}
-           <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2">
-              {filters.map(f => {
-                const Icon = f.icon;
-                const isActive = activeFilter === f.name;
-                return (
-                  <button 
-                    key={f.name}
-                    onClick={() => setActiveFilter(f.name)}
-                    className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
-                  >
-                    <Icon className="w-3.5 h-3.5" /> {f.name}
-                  </button>
-                )
-              })}
+           <div className="relative w-full lg:w-auto">
+             <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
+                {filters.map(f => {
+                  const Icon = f.icon;
+                  const isActive = activeFilter === f.name;
+                  return (
+                    <button 
+                      key={f.name}
+                      onClick={() => setActiveFilter(f.name)}
+                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-teal/10 text-teal border-teal/50 shadow-[0_0_15px_rgba(0,229,255,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
+                    >
+                      <Icon className="w-3.5 h-3.5" /> {f.name}
+                    </button>
+                  )
+                })}
+             </div>
+             {/* Fade overlay */}
+             <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
            </div>
 
            {/* TERMINAL FEED SORTING CONTROLS */}
-           <div className="flex items-center shrink-0 pb-2">
-              <div className="flex bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 shadow-lg">
+           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto mt-4 lg:mt-0">
+              <div className="flex w-full bg-black/40 backdrop-blur-md rounded-full p-1 border border-white/10 shadow-lg">
                 <button 
                   onClick={() => setSortMode('watchability')}
-                  className={`px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-teal text-[#0a192f] shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Activity className="w-3.5 h-3.5" />
                    WATCHABILITY
                 </button>
                 <button 
                   onClick={() => setSortMode('league')}
-                  className={`px-6 py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
+                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-full text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-teal text-[#0a192f] shadow-[0_0_20px_rgba(0,229,255,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
                    <Swords className="w-3.5 h-3.5" />
                    LEAGUE
                 </button>

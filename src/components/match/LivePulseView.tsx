@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ArrowRightLeft, ChevronRight, Activity } from "lucide-react";
+import { ChevronLeft, Share2, Bell, Play, Flame, Target, Users, Settings2, BarChart2, Mic, ChevronDown, ChevronUp, ArrowRightLeft, ChevronRight, Activity } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 // --- Data Models ---
@@ -604,7 +604,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               xl:col-span-5 xl:space-y-8
               xl:relative xl:translate-y-0 xl:h-auto xl:bg-transparent xl:border-none xl:shadow-none xl:p-0 xl:overflow-visible
               fixed inset-x-0 bottom-0 z-[100] transition-transform duration-200 ease-out bg-card rounded-t-[2rem] border-t border-x border-border shadow-[0_-20px_50px_rgba(0,0,0,0.9)] px-4 pb-8 pt-4 h-[85vh] overflow-y-auto
-              ${activeMobileView === 'pulse' ? 'translate-y-0' : 'translate-y-[calc(100%-100px)] cursor-pointer hover:bg-muted'}
+              ${activeMobileView === 'pulse' ? 'translate-y-0' : 'translate-y-[calc(100%-120px)] cursor-pointer hover:bg-muted'}
             `}
           onClick={(e) => {
             if (window.innerWidth < 1280 && activeMobileView === 'feed') {
@@ -615,7 +615,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
           onTouchEnd={handleDrawerTouchEnd}
         >
            {/* Mobile Drawer Handle */}
-           <div className="xl:hidden w-full flex flex-col items-center justify-center mb-8 relative pb-4" 
+           <div className={`xl:hidden w-full flex flex-col items-center justify-center pt-2 pb-6 relative ${activeMobileView === 'feed' ? 'animate-bounce' : ''}`} 
              onClick={(e) => {
                if (activeMobileView === 'pulse') {
                  e.stopPropagation();
@@ -623,14 +623,14 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                }
              }}
            >
-              <div className="w-12 h-1.5 bg-white/20 rounded-full mb-2" />
+              <div className="w-12 h-1.5 bg-white/20 rounded-full mb-3" />
               {activeMobileView === 'feed' ? (
-                <div className="flex items-center gap-2 text-teal text-[10px] font-black uppercase tracking-widest animate-pulse">
-                   <Activity className="w-3.5 h-3.5" /> Pull up for Player Pulse
+                <div className="flex items-center gap-2 bg-teal/20 border border-teal text-teal px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-[0_0_30px_rgba(0,229,255,0.4)]">
+                   <ChevronUp className="w-4 h-4" /> Player Impact Live
                 </div>
               ) : (
                 <div className="flex items-center gap-2 text-muted-foreground text-[10px] font-black uppercase tracking-widest cursor-pointer hover:text-foreground">
-                   <ChevronDown className="w-4 h-4" /> Tap to Close
+                   <ChevronDown className="w-4 h-4" /> Close Player Impact
                 </div>
               )}
            </div>
