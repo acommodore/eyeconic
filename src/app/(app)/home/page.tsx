@@ -135,7 +135,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
    const contextText = (isLive || isFinished) && match.insight ? match.insight : curation.whyWatch;
 
    return (
-    <div className={`group flex flex-col transition-all duration-500 mb-2 rounded-2xl relative overflow-hidden ${isExpanded ? 'bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'bg-black/20 border border-transparent hover:border-white/5 hover:bg-white/[0.03]'}`}>
+    <div className={`group flex flex-col transition-all duration-500 mb-2 rounded-2xl relative overflow-hidden ${isExpanded ? 'bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(0,229,255,0.1)]' : 'bg-black/10 dark:bg-black/20 border border-transparent hover:border-black/5 dark:hover:border-white/5 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:scale-[0.99]'}`}>
       {/* Ambient Glows */}
       <div className="absolute top-1/2 left-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
       <div className="absolute top-1/2 right-[20%] -translate-y-1/2 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -153,9 +153,9 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  {match.time}
               </span>
            ) : isFinished ? (
-              <span className="text-[10px] font-mono text-white/70 font-bold uppercase tracking-widest">FT</span>
+              <span className="text-[10px] font-mono text-foreground/70 font-bold uppercase tracking-widest">FT</span>
            ) : (
-              <span className="text-[10px] md:text-xs font-mono font-bold text-white/70">{match.time}</span>
+              <span className="text-[10px] md:text-xs font-mono font-bold text-foreground/70">{match.time}</span>
            )}
         </div>
 
@@ -164,31 +164,31 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
            <div className="flex items-center justify-between gap-2 w-full">
               {/* Home Team */}
               <div className="flex items-center justify-end w-[40%] gap-2 md:gap-3">
-                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-right truncate text-white drop-shadow-md">{match.team1}</h3>
-                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-right text-white drop-shadow-md">{match.team1.substring(0,3)}</h3>
-                 <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-white/5 rounded-full p-0.5 border border-white/10">
-                    <img src={match.logo1} alt={match.team1} className={`w-full h-full object-contain ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'invert' : ''}`} />
+                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-right truncate text-foreground drop-shadow-md">{match.team1}</h3>
+                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-right text-foreground drop-shadow-md">{match.team1.substring(0,3)}</h3>
+                 <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-black/5 dark:bg-white/5 rounded-full p-0.5 border border-border">
+                    <img src={match.logo1} alt={match.team1} className={`w-full h-full object-contain ${match.logo1.includes('black') || match.team1 === 'Juventus' ? 'dark:invert' : ''}`} />
                  </div>
               </div>
 
               {/* Score */}
               <div className="shrink-0 flex justify-center w-[20%]">
                  {isLive || isFinished ? (
-                    <span className="text-sm md:text-2xl font-black font-mono tracking-tighter tabular-nums bg-black/60 px-2 md:px-3 py-1 rounded-md border border-white/10 shadow-[inset_0_0_15px_rgba(255,255,255,0.05)] text-white whitespace-nowrap">
+                    <span className="text-sm md:text-2xl font-black font-mono tracking-tighter tabular-nums bg-black/10 dark:bg-black/60 px-2 md:px-3 py-1 rounded-md border border-border text-foreground whitespace-nowrap">
                        {match.score}
                     </span>
                  ) : (
-                    <span className="text-[10px] md:text-xs font-black text-muted-foreground px-2 md:px-3 py-1 bg-black/40 rounded-md border border-white/5 font-mono">VS</span>
+                    <span className="text-[10px] md:text-xs font-black text-muted-foreground px-2 md:px-3 py-1 bg-black/5 dark:bg-black/40 rounded-md border border-border font-mono">VS</span>
                  )}
               </div>
 
               {/* Away Team */}
               <div className="flex items-center justify-start w-[40%] gap-2 md:gap-3">
-                 <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-white/5 rounded-full p-0.5 border border-white/10">
-                    <img src={match.logo2} alt={match.team2} className={`w-full h-full object-contain ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'invert' : ''}`} />
+                 <div className="w-5 h-5 md:w-6 md:h-6 shrink-0 flex items-center justify-center bg-black/5 dark:bg-white/5 rounded-full p-0.5 border border-border">
+                    <img src={match.logo2} alt={match.team2} className={`w-full h-full object-contain ${match.logo2.includes('black') || match.team2 === 'Juventus' ? 'dark:invert' : ''}`} />
                  </div>
-                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-left truncate text-white drop-shadow-md">{match.team2}</h3>
-                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-left text-white drop-shadow-md">{match.team2.substring(0,3)}</h3>
+                 <h3 className="hidden md:block text-sm md:text-base font-black uppercase tracking-wider text-left truncate text-foreground drop-shadow-md">{match.team2}</h3>
+                 <h3 className="md:hidden text-[13px] font-black uppercase tracking-wider text-left text-foreground drop-shadow-md">{match.team2.substring(0,3)}</h3>
               </div>
            </div>
         </div>
@@ -337,9 +337,19 @@ export default function DiscoverPage() {
 
   const [expandedMatches, setExpandedMatches] = useState<Set<number>>(new Set());
   const [bookmarkedMatches, setBookmarkedMatches] = useState<Set<number>>(new Set());
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
   
   const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
   const [activeFilter, setActiveFilter] = useState("All"); 
+
+  const toggleGroup = (groupName: string) => {
+    setCollapsedGroups(prev => {
+      const next = new Set(prev);
+      if (next.has(groupName)) next.delete(groupName);
+      else next.add(groupName);
+      return next;
+    });
+  };
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -586,15 +596,17 @@ export default function DiscoverPage() {
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
                   {/* League Header */}
-                  <div className="flex items-center gap-4 mb-5 pl-2">
+                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-5 pl-2 w-full text-left group">
                     <div className="w-1.5 h-6 bg-teal rounded-full shadow-[0_0_12px_rgba(0,229,255,0.8)]"></div>
-                    <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg">{league}</h2>
-                    <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </div>
+                    <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-teal transition-colors">{league}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
+                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${collapsedGroups.has(league) ? 'rotate-180' : ''}`} />
+                  </button>
 
                   {/* League Container */}
-                  <div className="bg-black/30 backdrop-blur-xl rounded-[32px] border border-white/5 overflow-hidden shadow-2xl">
-                    <div className="flex flex-col">
+                  <div className={`transition-all duration-500 overflow-hidden ${collapsedGroups.has(league) ? 'max-h-0 opacity-0' : 'max-h-[5000px] opacity-100'}`}>
+                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-[32px] border border-border overflow-hidden shadow-2xl">
+                      <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {matches.map((match: any, index: number) => (
                         <div key={match.id} className={index !== matches.length - 1 ? "border-b border-white/5" : ""}>
@@ -618,14 +630,16 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <div className="flex items-center gap-4 mb-5 pl-2">
+                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-5 pl-2 w-full text-left group">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-teal shadow-[0_0_12px_rgba(0,229,255,0.8)]'}`}></div>
-                    <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg">{group.groupName}</h2>
-                    <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </div>
+                    <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-teal'}`}>{group.groupName}</h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
+                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${collapsedGroups.has(group.groupName) ? 'rotate-180' : ''}`} />
+                  </button>
 
-                  <div className="bg-black/30 backdrop-blur-xl rounded-[32px] border border-white/5 overflow-hidden shadow-2xl">
-                    <div className="flex flex-col">
+                  <div className={`transition-all duration-500 overflow-hidden ${collapsedGroups.has(group.groupName) ? 'max-h-0 opacity-0' : 'max-h-[5000px] opacity-100'}`}>
+                    <div className="bg-black/5 dark:bg-black/30 backdrop-blur-xl rounded-[32px] border border-border overflow-hidden shadow-2xl">
+                      <div className="flex flex-col">
                       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                       {group.matches.map((match: any, index: number) => (
                         <div key={match.id} className={index !== group.matches.length - 1 ? "border-b border-white/5" : ""}>

@@ -625,12 +625,12 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
            >
               <div className="w-12 h-1.5 bg-white/20 rounded-full mb-3" />
               {activeMobileView === 'feed' ? (
-                <div className="flex items-center gap-2 bg-teal/20 border border-teal text-teal px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-[0_0_30px_rgba(0,229,255,0.4)]">
-                   <ChevronUp className="w-4 h-4" /> Player Impact Live
+                <div className="flex items-center gap-2 text-teal text-sm font-black uppercase tracking-widest drop-shadow-[0_0_15px_rgba(0,229,255,0.8)] animate-pulse">
+                   <ChevronUp className="w-5 h-5" /> Player Impact Live
                 </div>
               ) : (
                 <div className="flex items-center gap-2 text-muted-foreground text-[10px] font-black uppercase tracking-widest cursor-pointer hover:text-foreground">
-                   <ChevronDown className="w-4 h-4" /> Close Player Impact
+                   <ChevronDown className="w-4 h-4" /> Tap to Close
                 </div>
               )}
            </div>

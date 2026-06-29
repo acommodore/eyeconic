@@ -114,6 +114,10 @@ export default function ProfilePage() {
             </div>
           </div>
 
+          <Link href="/stands/create" className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black uppercase tracking-widest hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,69,0,0.3)] my-6">
+            <Mic className="w-5 h-5" /> Push An Agenda
+          </Link>
+
           {/* Badges */}
           <div className="bg-card border border-border rounded-3xl p-6">
             <h3 className="text-xs font-mono tracking-widest text-muted-foreground uppercase mb-4">Acquired Badges</h3>
@@ -135,10 +139,6 @@ export default function ProfilePage() {
               ))}
             </div>
           </div>
-          
-          <Link href="/stands/create" className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-gradient-to-r from-[#FF4500] to-[#FF7F50] text-white font-black uppercase tracking-widest hover:scale-[1.02] transition-transform shadow-[0_0_20px_rgba(255,69,0,0.3)] mt-6">
-            <Mic className="w-5 h-5" /> Push An Agenda
-          </Link>
 
         </div>
 

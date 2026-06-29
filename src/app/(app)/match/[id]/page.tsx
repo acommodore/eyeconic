@@ -493,8 +493,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               onClick={() => setIsSeasonContextOpen(!isSeasonContextOpen)}
               className="flex items-center gap-4 mb-2 pl-2 w-full group cursor-pointer"
             >
-              <div className="w-1 h-3 rounded-full bg-teal shadow-[0_0_12px_rgba(0,229,255,0.8)]"></div>
-              <h2 className="text-[10px] font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-teal transition-colors">Season Context</h2>
+              <div className="w-1 h-6 rounded-full bg-teal shadow-[0_0_12px_rgba(0,229,255,0.8)]"></div>
+              <h2 className="text-sm font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-teal transition-colors">Season Context</h2>
               <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
               <ChevronDown className={`w-5 h-5 text-white/50 transition-transform duration-300 ${isSeasonContextOpen ? 'rotate-180' : ''}`} />
             </button>

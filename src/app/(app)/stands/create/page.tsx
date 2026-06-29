@@ -10,6 +10,19 @@ export default function PushAgendaPage() {
   const [agendaTitle, setAgendaTitle] = useState("");
   const [heatLevel, setHeatLevel] = useState(50);
   const [hasCover, setHasCover] = useState(false);
+  const [isMatchSelectOpen, setIsMatchSelectOpen] = useState(false);
+  const [targetMatch, setTargetMatch] = useState({
+    team1: "MCI",
+    team2: "ARS",
+    logo1: "https://crests.football-data.org/65.svg",
+    logo2: "https://crests.football-data.org/57.svg"
+  });
+
+  const availableMatches = [
+    { team1: "MCI", team2: "ARS", logo1: "https://crests.football-data.org/65.svg", logo2: "https://crests.football-data.org/57.svg" },
+    { team1: "LIV", team2: "CHE", logo1: "https://crests.football-data.org/64.svg", logo2: "https://crests.football-data.org/61.svg" },
+    { team1: "MUN", team2: "TOT", logo1: "https://crests.football-data.org/66.svg", logo2: "https://crests.football-data.org/73.svg" }
+  ];
 
   const handlePushAgenda = () => {
     router.push("/stands/moderate");
@@ -35,7 +48,7 @@ export default function PushAgendaPage() {
       <div className={`fixed top-[-10%] left-1/2 -translate-x-1/2 w-[150vw] md:w-[800px] h-[50vw] md:h-[500px] bg-gradient-to-br ${getHeatColor()} rounded-full blur-[100px] md:blur-[150px] opacity-10 pointer-events-none transition-colors duration-1000 z-0`} />
 
       {/* Premium Header */}
-      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 pt-12 pb-4 md:pt-6 md:px-8 shadow-2xl relative overflow-hidden w-full">
+      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 pt-20 pb-4 md:pt-6 md:px-8 shadow-2xl relative overflow-hidden w-full">
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="flex items-center justify-between max-w-5xl mx-auto w-full relative z-10">
            <button onClick={() => router.back()} className="group w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md shrink-0">
@@ -60,15 +73,19 @@ export default function PushAgendaPage() {
       <main className="p-4 md:p-8 max-w-5xl mx-auto w-full flex flex-col gap-6 md:gap-8 mt-2 md:mt-4 pb-40 flex-1 relative z-10">
         
         {/* Match Selection (Cinematic Glassmorphism) */}
-        <div className="w-full bg-gradient-to-br from-white/[0.05] to-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 flex items-center justify-between hover:border-white/20 transition-all cursor-pointer group shadow-2xl relative overflow-hidden">
+        <div className="relative z-20">
+          <div 
+            onClick={() => setIsMatchSelectOpen(!isMatchSelectOpen)}
+            className="w-full bg-gradient-to-br from-white/[0.05] to-black/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-4 flex items-center justify-between hover:border-white/20 transition-all cursor-pointer group shadow-2xl relative overflow-hidden"
+          >
           <div className="absolute inset-0 bg-gradient-to-r from-teal/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="flex items-center gap-6 relative z-10">
             <div className="flex -space-x-4">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-0 group-hover:-translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
-                <img src="https://crests.football-data.org/65.svg" alt="MCI" className="w-full h-full object-contain drop-shadow-md" />
+                <img src={targetMatch.logo1} alt={targetMatch.team1} className="w-full h-full object-contain drop-shadow-md" />
               </div>
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-black/60 flex items-center justify-center p-2.5 border border-white/20 z-10 group-hover:translate-x-2 transition-transform duration-500 shadow-2xl backdrop-blur-md">
-                <img src="https://crests.football-data.org/57.svg" alt="ARS" className="w-full h-full object-contain drop-shadow-md" />
+                <img src={targetMatch.logo2} alt={targetMatch.team2} className="w-full h-full object-contain drop-shadow-md" />
               </div>
             </div>
             <div className="flex flex-col">
@@ -76,17 +93,39 @@ export default function PushAgendaPage() {
                  <div className="w-1 h-1 rounded-full bg-teal animate-pulse" /> TARGET MATCH
               </span>
               <span className="text-base md:text-xl font-black uppercase tracking-widest text-white drop-shadow-lg">
-                 MCI <span className="text-white/30 mx-1">VS</span> ARS
+                 {targetMatch.team1} <span className="text-white/30 mx-1">VS</span> {targetMatch.team2}
               </span>
             </div>
           </div>
           <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 group-hover:scale-110 transition-all relative z-10">
-            <ChevronDown className="w-5 h-5 text-white/70" />
+            <ChevronDown className={`w-5 h-5 text-white/70 transition-transform duration-300 ${isMatchSelectOpen ? 'rotate-180' : ''}`} />
           </div>
+          </div>
+
+          {/* Match Dropdown */}
+          {isMatchSelectOpen && (
+            <div className="absolute top-full mt-4 left-0 w-full bg-black/90 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 animate-in fade-in slide-in-from-top-4">
+              {availableMatches.map((m, idx) => (
+                <div 
+                  key={idx}
+                  onClick={() => { setTargetMatch(m); setIsMatchSelectOpen(false); }}
+                  className="w-full p-4 flex items-center gap-4 rounded-xl hover:bg-white/10 cursor-pointer transition-colors"
+                >
+                  <div className="flex -space-x-2">
+                    <img src={m.logo1} className="w-8 h-8 rounded-full bg-white/10 p-1 border border-white/20" />
+                    <img src={m.logo2} className="w-8 h-8 rounded-full bg-white/10 p-1 border border-white/20 z-10" />
+                  </div>
+                  <span className="font-black uppercase tracking-widest text-white text-sm">
+                    {m.team1} <span className="text-white/30">VS</span> {m.team2}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
-          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 items-start relative z-10">
+          <div className="flex flex-col gap-6 md:gap-8 lg:col-span-1">
             {/* Agenda Title */}
         <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl overflow-hidden group focus-within:border-white/30 transition-colors">
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent group-focus-within:via-teal/50 transition-colors duration-500" />
@@ -108,7 +147,9 @@ export default function PushAgendaPage() {
             className="w-full bg-transparent border-none px-0 py-2 text-2xl md:text-4xl font-black uppercase tracking-tighter focus:outline-none focus:ring-0 transition-all placeholder:text-white/10 resize-none leading-[1.1] text-white drop-shadow-2xl relative z-10"
           />
         </div>
+        </div>
 
+          <div className="flex flex-col gap-6 md:gap-8 lg:col-span-1">
         {/* Visuals / Cover */}
         <div className="flex flex-col gap-4 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl">
           <label className="text-[10px] md:text-xs font-black tracking-widest text-white/60 uppercase flex items-center justify-between">
@@ -129,10 +170,9 @@ export default function PushAgendaPage() {
             </span>
           </button>
         </div>
-
           </div>
           
-          <div className="lg:col-span-5 flex flex-col gap-6 md:gap-8 lg:sticky lg:top-32">
+          <div className="flex flex-col gap-6 md:gap-8 lg:col-span-1">
             {/* Heat Level Slider */}
         <div className="flex flex-col gap-6 relative bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-xl border border-white/10 rounded-[2rem] p-5 md:p-6 shadow-2xl overflow-hidden">
           <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${getHeatColor()} blur-[100px] opacity-10 pointer-events-none transition-colors duration-1000`} />
