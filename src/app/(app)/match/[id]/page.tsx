@@ -379,7 +379,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         }
       `}</style>
       {/* Cinematic Scoreboard */}
-      <div className="relative w-full rounded-none md:rounded-2xl overflow-hidden mb-4 border-b md:border border-border shadow-2xl">
+      <div className="relative w-full rounded-none md:rounded-2xl overflow-hidden mb-1 border-b md:border border-border shadow-2xl">
         {/* Navigation Buttons Overlay */}
         <div className="absolute top-1 left-4 right-4 z-50 flex justify-between items-center pointer-events-none pt-0">
           <div className="pointer-events-auto">
@@ -498,7 +498,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
       {matchState === 'live' && (
-      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-4 bg-muted/10 backdrop-blur-md">
+      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-1 bg-muted/10 backdrop-blur-md">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
@@ -519,12 +519,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       )}
 
       {/* Main 3-Tab Navigation */}
-      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-4 max-w-lg mx-4 md:mx-auto shadow-2xl">
+      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-2 max-w-lg mx-4 md:mx-auto shadow-2xl">
         {['prematch', 'live', 'postmatch'].map((state) => (
           <button
             key={state}
             onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
-            className={`flex-1 py-3 px-4 rounded-2xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
+            className={`flex-1 py-2 px-4 rounded-2xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
               matchState === state 
                 ? 'bg-[#75fbd9] text-black shadow-[0_0_20px_rgba(117, 251, 217,0.3)]' 
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
