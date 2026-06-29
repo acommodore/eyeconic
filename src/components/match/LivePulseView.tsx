@@ -526,7 +526,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               <div className="relative">
                 <button 
                   onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-border text-[10px] text-muted-foreground font-bold hover:text-foreground transition-colors uppercase tracking-widest"
+                  className="flex items-center gap-2 px-4 py-1.5 rounded-xl border border-border text-[10px] text-muted-foreground font-bold hover:text-foreground transition-colors uppercase tracking-widest"
                 >
                   <Settings2 className="w-3 h-3" /> {activeFilter === 'All' ? 'Filter' : activeFilter}
                 </button>

@@ -453,11 +453,11 @@ export default function DiscoverPage() {
                
                {/* Top row: Tag & Watchability */}
                <div className="flex items-center justify-between">
-                  <div className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] flex items-center gap-2 bg-[#75fbd9]/10 px-3 py-1.5 rounded-full border border-[#75fbd9]/30 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
+                  <div className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] flex items-center gap-2 bg-[#75fbd9]/10 px-3 py-1.5 rounded-xl border border-[#75fbd9]/30 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]">
                      <span className="w-1.5 h-1.5 rounded-full bg-[#75fbd9] animate-pulse shadow-[0_0_10px_rgba(117, 251, 217,1)]"></span>
                      MATCH OF THE MOMENT
                   </div>
-                  <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-full border border-[#75fbd9]/20 shadow-inner">
+                  <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-xl border border-[#75fbd9]/20 shadow-inner">
                      <Brain className="w-3 h-3 text-[#75fbd9]" />
                      <span className="text-[10px] md:text-xs font-mono font-black text-[#75fbd9] tracking-widest">{heroMatch.volatility}%</span>
                   </div>
@@ -493,7 +493,7 @@ export default function DiscoverPage() {
 
                {/* Bottom row: Action & Metrics */}
                <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pt-4 border-t border-white/5">
-                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 text-[10px] md:text-xs font-mono font-black uppercase tracking-widest text-black bg-[#75fbd9] px-8 py-4 rounded-full hover:bg-white transition-all duration-300 w-full lg:w-max shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] hover:scale-105 shrink-0">
+                  <Link href={`/match/${heroMatch.id}`} className="group inline-flex items-center justify-center gap-2 text-[10px] md:text-xs font-mono font-black uppercase tracking-widest text-black bg-[#75fbd9] px-8 py-4 rounded-2xl hover:bg-white transition-all duration-300 w-full lg:w-max shadow-[0_0_25px_rgba(117, 251, 217,0.4)] hover:shadow-[0_0_35px_rgba(117, 251, 217,0.6)] hover:scale-105 shrink-0">
                      MATCH CENTRE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
 

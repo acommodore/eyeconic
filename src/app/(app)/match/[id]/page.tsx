@@ -468,7 +468,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                     {(matchInfo as any)?.score || "0 - 0"}
                   </div>
                   {matchState === 'live' && (
-                    <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-full border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
+                    <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-xl border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
                       <Mic className="w-2.5 h-2.5 animate-pulse" />
                       <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Live Stand</span>
                     </Link>
