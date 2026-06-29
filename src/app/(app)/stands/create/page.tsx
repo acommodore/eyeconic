@@ -48,7 +48,7 @@ export default function PushAgendaPage() {
       <div className={`fixed top-[-10%] left-1/2 -translate-x-1/2 w-[150vw] md:w-[800px] h-[50vw] md:h-[500px] bg-gradient-to-br ${getHeatColor()} rounded-full blur-[100px] md:blur-[150px] opacity-10 pointer-events-none transition-colors duration-1000 z-0`} />
 
       {/* Premium Header */}
-      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 pt-20 pb-4 md:pt-6 md:px-8 shadow-2xl relative overflow-hidden w-full">
+      <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/5 px-4 pt-6 pb-4 md:pt-6 md:px-8 shadow-2xl relative overflow-hidden w-full">
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         <div className="flex items-center justify-between max-w-5xl mx-auto w-full relative z-10">
            <button onClick={() => router.back()} className="group w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md shrink-0">

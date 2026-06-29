@@ -454,12 +454,12 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
       <div className={`grid grid-cols-1 xl:grid-cols-12 gap-8 overflow-hidden pb-24 xl:pb-0`}>
         
         {/* LEFT PANE: Match Pulse Timeline */}
-        <div className={`flex flex-col gap-8 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
+        <div className={`flex flex-col gap-4 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
 
           {/* Season Context Accordion */}
-          <section className="bg-card rounded-[2rem] border border-border p-6 shadow-xl flex flex-col relative overflow-hidden">
+          <section className="bg-card rounded-[2rem] border border-border shadow-xl flex flex-col relative overflow-hidden">
             <div 
-              className="flex items-center justify-between cursor-pointer"
+              className="flex items-center justify-between cursor-pointer p-4 md:px-6 md:py-4"
               onClick={() => setIsSeasonContextOpen(!isSeasonContextOpen)}
             >
               <div className="flex items-center gap-3">
@@ -470,7 +470,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
             
             {isSeasonContextOpen && (
-              <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-border animate-in fade-in slide-in-from-top-4 duration-300">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-4 px-4 md:px-6 border-t border-border animate-in fade-in slide-in-from-top-4 duration-300">
                 <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
                   <div className="flex flex-col items-center md:items-start">
                     <span className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-1">League Pos</span>
@@ -501,6 +501,13 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                     <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
                     <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
                     <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
+                  </div>
+                </div>
+
+                <div className="flex w-full md:w-auto items-center justify-center md:justify-end">
+                  <div className="flex flex-col items-center md:items-end">
+                    <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Last Meeting</span>
+                    <span className="text-xs font-black text-foreground">LIVERPOOL won <span className="text-[#75fbd9] font-mono tabular-nums">(2-1)</span></span>
                   </div>
                 </div>
               </div>
@@ -719,10 +726,10 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               </div>
 
               {/* TACTICAL FORMATION GRID */}
-              <div className="relative z-10 flex flex-col items-center gap-8 md:gap-10 w-full max-w-lg mx-auto bg-[#0a0a0a] border-2 border-border rounded-3xl p-6 py-10 overflow-visible shadow-2xl mt-4">
+              <div className="relative z-10 flex flex-col items-center gap-8 md:gap-10 w-full max-w-lg mx-auto p-2 py-6 md:p-6 md:py-10 overflow-visible mt-4">
                  
                  {/* Stylized Pitch Outline */}
-                 <div className="absolute inset-0 pointer-events-none opacity-20 border-2 border-border-strong rounded-3xl m-3 md:m-4" />
+                 <div className="absolute inset-0 pointer-events-none opacity-20 border border-border-strong rounded-3xl m-1 md:m-4" />
                  <div className="absolute top-4 md:top-5 left-1/2 -translate-x-1/2 w-40 md:w-48 h-20 md:h-24 border-2 border-border-strong rounded-b-[4rem] pointer-events-none" />
                  <div className="absolute top-4 md:top-5 left-1/2 -translate-x-1/2 w-20 md:w-24 h-10 md:h-12 border-2 border-border-strong pointer-events-none" />
                  <div className="absolute bottom-4 md:bottom-5 left-1/2 -translate-x-1/2 w-40 md:w-48 h-20 md:h-24 border-2 border-border-strong rounded-t-[4rem] pointer-events-none" />
@@ -753,8 +760,8 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
               </div>
 
               {/* Substitutions */}
-              <div className="relative z-10 mt-12 pt-6 border-t border-border w-full flex flex-col items-center overflow-visible">
-                 <span className="text-[8px] text-muted-foreground font-bold uppercase tracking-[0.3em] mb-6">BENCH</span>
+              <div className="relative z-10 mt-6 pt-4 border-t border-border w-full flex flex-col items-center overflow-visible">
+                 <span className="text-[8px] text-muted-foreground font-bold uppercase tracking-[0.3em] mb-4">BENCH</span>
                  <div className="flex items-center gap-4 w-full justify-start md:justify-center overflow-x-auto pb-6 px-4 no-scrollbar">
                     {currentSquad.filter(p => p.position === 'COACH').map(renderPlayer)}
                     <div className="w-px h-10 bg-black/10 dark:bg-white/10 mx-2 shrink-0" /> {/* Divider between coach and players */}
