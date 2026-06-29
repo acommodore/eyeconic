@@ -482,9 +482,8 @@ export default function DiscoverPage() {
                <div className="flex items-center justify-center gap-4 md:gap-12 w-full my-2">
                   {/* Team 1 */}
                   <div className="flex flex-col items-center gap-2 md:gap-3">
-                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
-                        <div className="absolute inset-0 bg-white/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <img src={heroMatch.logo1} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
+                     <div className="w-14 h-14 md:w-20 md:h-20 flex items-center justify-center relative group">
+                        <img src={heroMatch.logo1} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${heroMatch.logo1.includes('black') || heroMatch.team1 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
                      <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team1}</h2>
                   </div>
@@ -498,9 +497,8 @@ export default function DiscoverPage() {
 
                   {/* Team 2 */}
                   <div className="flex flex-col items-center gap-2 md:gap-3">
-                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center p-2.5 shadow-xl relative group">
-                        <div className="absolute inset-0 bg-white/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <img src={heroMatch.logo2} className={`relative z-10 w-full h-full object-contain drop-shadow-lg ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
+                     <div className="w-14 h-14 md:w-20 md:h-20 flex items-center justify-center relative group">
+                        <img src={heroMatch.logo2} className={`relative z-10 w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${heroMatch.logo2.includes('black') || heroMatch.team2 === 'Juventus' ? 'invert' : ''}`} />
                      </div>
                      <h2 className="text-sm md:text-xl font-black uppercase tracking-tighter text-center max-w-[100px] md:max-w-[160px] leading-tight">{heroMatch.team2}</h2>
                   </div>
