@@ -614,7 +614,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-3 px-4"
+            className="space-y-2 px-4"
           >
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'SEASON CONTEXT' && <SeasonContextTab matchInfo={matchInfo} />}
@@ -744,13 +744,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              initial={{ opacity: 0, y: 15 }}
              animate={{ opacity: 1, y: 0 }}
              exit={{ opacity: 0, y: -15 }}
-             className="space-y-3 px-4"
+             className="space-y-2 px-4"
           >
             <div className="flex items-center gap-2 mb-4">
                <Mic className="w-5 h-5 text-[#75fbd9]" />
                <h3 className="text-sm font-black tracking-widest text-[#75fbd9] uppercase">Highlights from the Stands</h3>
             </div>
-            <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-2xl p-6 shadow-2xl space-y-3">
+            <div className="bg-muted text-muted-foreground/80 backdrop-blur-xl border border-border rounded-2xl p-6 shadow-2xl space-y-2">
                {[
                  { id: 1, name: "CityZen99", time: "24'", text: "What a ridiculous goal! Nobody saw that coming. That changes the entire trajectory of the game!", color: "from-[#75fbd9] to-blue-500" },
                  { id: 2, name: "AnfieldRed", time: "68'", text: "That decision is shocking. Absolute madness from the ref there.", color: "from-[#C8102E] to-red-500" },
@@ -788,7 +788,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="space-y-3 px-4"
+            className="space-y-2 px-4"
           >
           
             {/* SEASON IMPACT */}
@@ -1088,7 +1088,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               {takes.map((take) => (
                 <div key={take.id} className="bg-card text-card-foreground border border-border rounded-2xl p-6 flex flex-col hover:border-border-strong transition-all">
                   <h3 className="text-sm font-black text-foreground mb-6 leading-relaxed">{take.question}</h3>
-                  <div className="space-y-3 mb-6 flex-1">
+                  <div className="space-y-2 mb-6 flex-1">
                     {take.options.map((opt, i) => (
                       <div 
                         key={i}
@@ -1125,7 +1125,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="space-y-3 px-4"
+          className="space-y-2 px-4"
         >
           {/* Pitch View Roster */}
           <section className="mt-4">
@@ -1275,7 +1275,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-3xl mx-auto space-y-3 px-4"
+          className="w-full max-w-3xl mx-auto space-y-2 px-4"
         >
           <div className="relative border-l-2 border-border ml-6 md:ml-1/2 md:border-none">
             <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-0.5 bg-muted/80 -translate-x-1/2"></div>
@@ -1452,7 +1452,7 @@ function PlayerStatsModal({ player, onClose }: { player: any, onClose: () => voi
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               <div>
                 <div className="flex justify-between text-[10px] font-bold text-white/60 mb-1.5 uppercase tracking-wider">
                   <span>Pass Accuracy</span>
@@ -1759,7 +1759,7 @@ function H2HTab({ matchInfo }: { matchInfo: any }) {
             </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
            {[
              { d: "Dec '23", h: "Man City", s: "1 - 1", a: "Liverpool" },
              { d: "Nov '23", h: "Liverpool", s: "1 - 1", a: "Man City" },
@@ -1862,7 +1862,7 @@ function FormTab({ matchInfo }: { matchInfo: any }) {
 function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="space-y-3">
+      <div className="space-y-2">
          <div className="bg-card text-card-foreground border border-border rounded-2xl p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
                <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -1910,6 +1910,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 

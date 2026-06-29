@@ -276,7 +276,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  </div>
 
                  <div className="mt-2 md:mt-3 flex flex-wrap gap-2 md:gap-3">
-                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-[#75fbd9] text-black px-6 py-3.5 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
+                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-[#75fbd9] text-black px-3 py-3 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
                        MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
 
@@ -288,7 +288,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     </button>
                     
                     {(isFinished || isStartingSoon) && (
-                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black bg-coral text-black border border-coral/50 px-6 py-3 md:py-3.5 rounded-2xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
+                       <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-coral text-black border border-coral/50 px-3 py-3 rounded-2xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
                           <MessageSquare className="w-3 h-3" /> JOIN STAND
                        </Link>
                     )}
