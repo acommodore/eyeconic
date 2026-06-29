@@ -435,13 +435,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-3 md:mb-4 group-hover:scale-105 transition-transform">
                 <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-2 md:mb-4">{matchInfo?.team1 || "Home"}</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team1 || "Home"}</h2>
               
-              {/* Goal Scorers - Only show in postmatch */}
-              {matchState === 'postmatch' && (
-                <div className="flex flex-col items-center gap-1 mt-1 md:mt-2 text-[10px] md:text-xs font-bold text-muted-foreground">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span className="text-[#75fbd9]">⚽</span> 2'
+              {/* Goal Scorers */}
+              {matchState !== 'prematch' && (
+                <div className="flex flex-col items-center gap-0.5 md:gap-1 mt-1 text-[9px] md:text-[10px] font-bold text-muted-foreground">
+                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
+                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Salah 12'
+                  </div>
+                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
+                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Nunez 54'
                   </div>
                 </div>
               )}
@@ -479,7 +482,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-3 md:mb-4">
                 <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
-              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center">{matchInfo?.team2 || "Away"}</h2>
+              <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team2 || "Away"}</h2>
+              
+              {/* Goal Scorers */}
+              {matchState !== 'prematch' && (
+                <div className="flex flex-col items-center gap-0.5 md:gap-1 mt-1 text-[9px] md:text-[10px] font-bold text-muted-foreground">
+                  <div className="flex items-center justify-center gap-1 md:gap-1.5">
+                    <span className="text-[#75fbd9] text-[8px] md:text-[10px]">⚽</span> Haaland 33'
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
