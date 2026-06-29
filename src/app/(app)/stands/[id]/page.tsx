@@ -43,6 +43,13 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   const supabase = createClient();
   const participants = useParticipants();
   const { localParticipant } = useLocalParticipant();
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user) setCurrentUser(data.user);
+    });
+  }, [supabase]);
 
   useEffect(() => {
     const fetchMsgs = async () => {
@@ -166,22 +173,27 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
     }, 2500);
   };
 
-  const handleSendMessage = (e?: React.FormEvent) => {
+  const handleSendMessage = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!inputText.trim()) return;
 
-    const newMessage = {
-      id: Date.now(),
-      name: "Maximus (You)",
-      color: "text-[coral]",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maximus",
-      time: "Just now",
-      text: inputText.trim(),
-      isSpeaker: false
-    };
+    if (!currentUser) {
+      alert("You must be logged in to chat.");
+      return;
+    }
 
-    setChatMessages(prev => [...prev, newMessage]);
+    const text = inputText.trim();
     setInputText("");
+
+    const { error } = await supabase.from('stand_messages').insert([{
+      stand_id: matchId,
+      profile_id: currentUser.id,
+      message: text
+    }]);
+
+    if (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   const renderSpeakers = (isMediaMode: boolean) => {
