@@ -621,6 +621,7 @@ export default function DiscoverPage() {
                           />
                         </div>
                       ))}
+                      </div>
                     </div>
                   </div>
                </div>
@@ -654,6 +655,7 @@ export default function DiscoverPage() {
                           />
                         </div>
                       ))}
+                      </div>
                     </div>
                   </div>
                </div>
