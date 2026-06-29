@@ -282,7 +282,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
                     <button 
                        onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
-                       className={`flex-none inline-flex items-center justify-center gap-2 text-[10px] font-black px-6 py-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
+                       className={`flex-none inline-flex items-center justify-center text-[10px] font-black p-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
                     >
                        <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
                     </button>
