@@ -205,6 +205,18 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   
   const [matchInfo, setMatchInfo] = useState<Match | null>(null);
   
+  const [pulseEvents, setPulseEvents] = useState<any[]>([]);
+  const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
+  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('prematch');
+  const [activeTab, setActiveTab] = useState('OVERVIEW');
+  const [prematchTab, setPrematchTab] = useState('LINEUP');
+  const [takes, setTakes] = useState<HotTake[]>(initialHotTakes);
+  const [votedTakes, setVotedTakes] = useState<Record<string | number, boolean>>({});
+  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  
+  const { user } = useAuth();
+  const supabase = createClient();
+  
   useEffect(() => {
     const fetchMatch = async () => {
       try {
@@ -217,6 +229,21 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
     fetchMatch();
   }, [matchId]);
 
+  useEffect(() => {
+    if (matchInfo) {
+      setMatchState(matchInfo.status === 'upcoming' ? 'prematch' : matchInfo.status === 'finished' ? 'postmatch' : 'live');
+      if (matchInfo.hotTakes) setTakes(matchInfo.hotTakes as any);
+      if (matchInfo.timelineEvents) setPulseEvents(matchInfo.timelineEvents);
+    }
+  }, [matchInfo]);
+
+  const timelineEvents = (matchInfo as any)?.timelineEvents || defaultTimelineEvents;
+
+  const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
+  const [hasVotedVibe, setHasVotedVibe] = useState(false);
+  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('De Bruyne');
+  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('Darwin Núñez');
+
   if (!matchInfo) {
     return (
       <div className="flex-1 w-full min-h-screen bg-black flex items-center justify-center">
@@ -227,31 +254,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
     );
   }
-  
-  const [pulseEvents, setPulseEvents] = useState<any[]>([]);
-  const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
-  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>(matchInfo?.status === 'upcoming' ? 'prematch' : matchInfo?.status === 'finished' ? 'postmatch' : 'live');
-  const timelineEvents = (matchInfo as any)?.timelineEvents || defaultTimelineEvents;
-  
-  const [activeTab, setActiveTab] = useState('OVERVIEW');
-  const [prematchTab, setPrematchTab] = useState('LINEUP');
-  const [takes, setTakes] = useState<HotTake[]>(initialHotTakes);
-  const [votedTakes, setVotedTakes] = useState<Record<string | number, boolean>>({});
-  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
-  const { user } = useAuth();
-  const supabase = createClient();
-  useEffect(() => {
-    if (matchInfo) {
-      setMatchState(matchInfo.status === 'upcoming' ? 'prematch' : matchInfo.status === 'finished' ? 'postmatch' : 'live');
-      if (matchInfo.hotTakes) setTakes(matchInfo.hotTakes as any);
-      if (matchInfo.timelineEvents) setPulseEvents(matchInfo.timelineEvents);
-    }
-  }, [matchInfo]);
 
-  const [votes, setVotes] = useState({ chaos: 64, tactical: 22, tension: 14 });
-  const [hasVotedVibe, setHasVotedVibe] = useState(false);
-  const [mvpWatchPlayer, setMvpWatchPlayer] = useState('De Bruyne');
-  const [fraudWatchPlayer, setFraudWatchPlayer] = useState('Darwin Núñez');
 
   const handlePrematchVote = (type: 'chaos' | 'tactical' | 'tension') => {
     if (hasVotedVibe) return;
