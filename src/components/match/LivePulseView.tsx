@@ -455,6 +455,42 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
         {/* LEFT PANE: Match Pulse Timeline */}
         <div className={`flex flex-col gap-8 ${isMatchFinished ? 'xl:col-span-12 w-full max-w-5xl mx-auto' : 'xl:col-span-7'}`}>
 
+          {/* Season Context Inline */}
+          <div className="bg-card border border-border rounded-[2rem] p-4 md:p-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl">
+            <div className="flex w-full md:w-auto items-center justify-between md:justify-start gap-4 md:gap-6">
+              <div className="flex flex-col items-center md:items-start">
+                <span className="text-[9px] font-mono uppercase tracking-widest text-[#75fbd9] mb-1">League Pos</span>
+                <div className="text-sm font-black flex items-center gap-2 text-foreground">
+                  <span className="font-mono tabular-nums">4th</span>
+                  <span className="text-muted-foreground text-[10px]">vs</span>
+                  <span className="font-mono tabular-nums">7th</span>
+                </div>
+              </div>
+              <div className="w-px h-8 bg-border hidden md:block"></div>
+              <div className="flex flex-col items-center md:items-start text-right md:text-left">
+                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-1">Gap</span>
+                <span className="text-sm font-black text-foreground font-mono tabular-nums">5 pts</span>
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center w-full md:w-auto py-3 md:py-0 border-y border-border md:border-y-0">
+              <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-2">Form</span>
+              <div className="flex items-center justify-center gap-1 md:gap-2 text-[10px] font-black uppercase font-mono">
+                <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+                <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+                <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
+                <span className="text-muted-foreground mx-2 text-[9px]">vs</span>
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>-
+                <span className="text-coral drop-shadow-[0_0_8px_rgba(255,127,80,0.5)]">L</span>-
+                <span className="text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">D</span>-
+                <span className="text-[#75fbd9] drop-shadow-[0_0_8px_rgba(117, 251, 217,0.5)]">W</span>
+              </div>
+            </div>
+          </div>
+
           {/* Action Feed */}
           <section className="bg-card rounded-[2rem] border border-border p-6 shadow-xl flex-1 flex flex-col relative overflow-hidden">
             <div className="flex items-center justify-between mb-8 relative shrink-0">
@@ -625,7 +661,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
           onTouchEnd={handleDrawerTouchEnd}
         >
            {/* Mobile Drawer Handle */}
-           <div className={`xl:hidden w-full flex flex-col items-center justify-center pt-2 pb-6 relative ${activeMobileView === 'feed' ? 'animate-bounce' : ''}`} 
+           <div className={`xl:hidden w-full flex flex-col items-center justify-center pt-2 pb-2 relative`} 
              onClick={(e) => {
                if (activeMobileView === 'pulse') {
                  e.stopPropagation();
@@ -633,13 +669,9 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
                }
              }}
            >
-              <div className="w-12 h-1.5 bg-white/20 rounded-full mb-3" />
-              {activeMobileView === 'feed' ? (
-                <div className="flex items-center gap-2 text-[#75fbd9] text-sm font-black uppercase tracking-widest drop-shadow-[0_0_15px_rgba(117, 251, 217,0.8)] animate-pulse">
-                   <ChevronUp className="w-5 h-5" /> Player Impact Live
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 text-muted-foreground text-[10px] font-black uppercase tracking-widest cursor-pointer hover:text-foreground">
+              <div className="w-12 h-1.5 bg-white/20 rounded-full mb-1" />
+              {activeMobileView === 'pulse' && (
+                <div className="flex items-center gap-2 text-muted-foreground text-[10px] font-black uppercase tracking-widest cursor-pointer hover:text-foreground mt-2">
                    <ChevronDown className="w-4 h-4" /> Tap to Close
                 </div>
               )}
@@ -647,7 +679,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
            
            {/* Player Impact - TACTICAL VIEW */}
            <section className="bg-card rounded-[2rem] border border-border p-6 shadow-xl relative overflow-visible">
-              <div className="flex items-center gap-3 mb-2 relative z-10">
+              <div className={`flex items-center gap-3 mb-2 relative z-10 ${activeMobileView === 'feed' ? 'animate-bounce xl:animate-none' : ''}`}>
                 <div className="w-1 h-6 bg-[#75fbd9]" />
                 <h2 className="text-sm font-black tracking-widest text-foreground uppercase">PLAYER IMPACT LIVE</h2>
               </div>
