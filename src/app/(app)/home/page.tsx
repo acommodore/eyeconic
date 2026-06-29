@@ -69,7 +69,7 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
         </svg>
         <span className="text-[9px] sm:text-[10px] md:text-xs font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
       </div>
-      <span className="text-[5px] sm:text-[6px] md:text-[8px] uppercase font-mono tracking-widest text-muted-foreground mt-1 md:mt-2 text-center truncate w-full px-1">{label}</span>
+      <span className="text-[6px] sm:text-[7px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-1 md:mt-2 text-center truncate w-full px-1">{label}</span>
     </div>
   );
 };
@@ -520,9 +520,9 @@ export default function DiscoverPage() {
                      {/* 2. 4 Radial Dials */}
                      <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
                         <MetricDial label="Stakes" value={heroCuration.metrics.stakes} colorHex="#f97316" />
-                        <MetricDial label="Tempo" value={heroCuration.metrics.tempo} colorHex="#eab308" />
-                        <MetricDial label="Intensity" value={heroCuration.metrics.intensity} colorHex="#ef4444" />
                         <MetricDial label="Quality" value={heroCuration.metrics.quality} colorHex="#a855f7" />
+                        <MetricDial label="Intensity" value={heroCuration.metrics.intensity} colorHex="#ef4444" />
+                        <MetricDial label="Tempo" value={heroCuration.metrics.tempo} colorHex="#eab308" />
                      </div>
 
                      {((heroMatch as any).emotionalMvp || (heroMatch as any).polarizingPlayer) && (
@@ -571,9 +571,9 @@ export default function DiscoverPage() {
                     <button 
                       key={f.name}
                       onClick={() => setActiveFilter(f.name)}
-                      className={`shrink-0 whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-2xl border text-[10px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/50 shadow-[0_0_15px_rgba(117, 251, 217,0.2)]' : 'bg-card border-border text-muted-foreground hover:border-white/30 hover:bg-black/20 dark:bg-muted'}`}
+                      className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 px-3 py-1 rounded-xl text-[9px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border border-[#75fbd9]/40' : 'text-muted-foreground/60 hover:text-muted-foreground'}`}
                     >
-                      <Icon className="w-3.5 h-3.5" /> {f.name}
+                      <Icon className="w-3 h-3" /> {f.name}
                     </button>
                   )
                 })}
@@ -582,19 +582,18 @@ export default function DiscoverPage() {
              <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
            </div>
 
-           {/* TERMINAL FEED SORTING CONTROLS */}
            <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
-              <div className="flex w-full bg-black/40 backdrop-blur-md rounded-2xl p-1 border border-white/10 shadow-lg">
+              <div className="flex w-full border-b border-white/10">
                 <button 
                   onClick={() => setSortMode('watchability')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-2xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'watchability' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                   <Activity className="w-3.5 h-3.5" />
+                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'watchability' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                   <Activity className="w-3 h-3" />
                    WATCHABILITY
                 </button>
                 <button 
                   onClick={() => setSortMode('league')}
-                  className={`flex-1 px-4 lg:px-6 py-2.5 lg:py-2 flex items-center justify-center gap-2 rounded-2xl text-[10px] font-black tracking-widest transition-all ${sortMode === 'league' ? 'bg-[#75fbd9] text-[#0a192f] shadow-[0_0_20px_rgba(117, 251, 217,0.4)] scale-[1.02] lg:scale-105' : 'text-muted-foreground hover:text-foreground hover:bg-white/5'}`}>
-                   <Swords className="w-3.5 h-3.5" />
+                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'league' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                   <Swords className="w-3 h-3" />
                    LEAGUE
                 </button>
               </div>
@@ -642,7 +641,7 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-1 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(group.groupName)} className={`flex items-center gap-4 mb-1 pl-2 w-full text-left group ${group.groupName === 'Live Matches' ? 'pt-4' : 'pt-1'}`}>
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]'}`}></div>
                     <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-[#75fbd9]'}`}>{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
