@@ -448,15 +448,28 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             </div>
 
             {/* SCORE / TIME */}
-            <div className="flex flex-col items-center justify-start pt-4 md:pt-8 shrink-0">
+            <div className="flex flex-col items-center justify-start pt-2 md:pt-6 shrink-0 relative z-10">
               {matchState === 'prematch' ? (
                 <div className="flex flex-col items-center">
                   <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
-                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
+                  <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono leading-none" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
                 </div>
               ) : (
-                <div className="text-4xl md:text-6xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono">
-                  {(matchInfo as any)?.score || "0 - 0"}
+                <div className="flex flex-col items-center">
+                  <span className={`text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1 md:mb-2 ${matchState === 'live' ? 'text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]' : 'text-muted-foreground'}`}>
+                    {matchState === 'live' ? (
+                      <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>72'</span>
+                    ) : "FT"}
+                  </span>
+                  <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none">
+                    {(matchInfo as any)?.score || "0 - 0"}
+                  </div>
+                  {matchState === 'live' && (
+                    <Link href={`/stands/1`} className="mt-3 flex items-center justify-center gap-1.5 bg-[#75fbd9]/10 hover:bg-[#75fbd9]/20 text-[#75fbd9] px-3 py-1 rounded-full border border-[#75fbd9]/30 transition-all shadow-[0_0_15px_rgba(117,251,217,0.2)] hover:shadow-[0_0_20px_rgba(117,251,217,0.4)] hover:scale-105 group backdrop-blur-md">
+                      <Mic className="w-2.5 h-2.5 animate-pulse" />
+                      <span className="text-[8px] font-black uppercase tracking-widest whitespace-nowrap">Join Live Stand</span>
+                    </Link>
+                  )}
                 </div>
               )}
             </div>
