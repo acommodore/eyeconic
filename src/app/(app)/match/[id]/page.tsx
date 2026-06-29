@@ -354,12 +354,12 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   };
 
   const seasonContextItems = [
+    `🏆 LEAGUE POS: 4th vs 7th`,
+    `📊 POINTS GAP: 5 pts`,
+    `📈 FORM: ${matchInfo?.team1 || 'Home'} (W-W-D-W-L) | ${matchInfo?.team2 || 'Away'} (W-L-D-D-W)`,
+    `⚔️ LAST MEETING: ${matchInfo?.team1 || 'Home'} 2 - 1 ${matchInfo?.team2 || 'Away'}`,
     `🔥 ${matchInfo?.team1 || 'Home'} are unbeaten in their last 5 matches`,
     `📉 ${matchInfo?.team2 || 'Away'} have conceded 4 goals in 5 games`,
-    `⚔️ Key Battle: Van Dijk vs Haaland`,
-    `📈 ${matchInfo?.team1 || 'Home'} sit 1st with 80 pts`,
-    `📊 Expected Goals (xG): ${matchInfo?.team1 || 'Home'} 2.1 - ${matchInfo?.team2 || 'Away'} 1.8`,
-    `🏟️ Anfield is a fortress: 15 wins in 17 home games`,
   ];
 
   return (
@@ -383,7 +383,18 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             <BackButton containerClassName="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg" iconClassName="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
           <div className="pointer-events-auto">
-            <button className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg">
+            <button 
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: `${matchInfo?.team1 || 'Home'} vs ${matchInfo?.team2 || 'Away'}`,
+                    text: 'Check out this match on Eyeconic!',
+                    url: window.location.href,
+                  }).catch(console.error);
+                }
+              }}
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg"
+            >
               <Share className="w-4 h-4 md:w-5 md:h-5 text-white" />
             </button>
           </div>
@@ -393,13 +404,13 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518605368461-1ee12523b1c4?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-overlay z-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-transparent to-transparent z-10" />
         
-        <div className="relative z-20 px-6 py-6 pt-10 md:px-12 md:py-6 md:pt-10 flex flex-col items-center justify-center">
+        <div className="relative z-20 px-6 py-8 pt-16 md:px-12 md:py-8 md:pt-16 flex flex-col items-center justify-center">
 
           <div className="flex items-start justify-center gap-6 md:gap-16 w-full max-w-2xl">
             {/* TEAM 1 */}
             <div className="flex flex-col items-center flex-1 relative">
-              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(255,107,107,0.3)] mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-                <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
+              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
+                <img src={matchInfo?.logo1 || "https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg"} alt="Team 1" className={`w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${matchInfo?.logo1?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team1 || "Home"}</h2>
               
@@ -453,8 +464,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
             {/* TEAM 2 */}
             <div className="flex flex-col items-center flex-1 relative">
-              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-muted border border-border flex items-center justify-center p-3 shadow-[0_0_40px_rgba(79,195,247,0.3)] mb-3 md:mb-4">
-                <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
+              <div className="w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mb-3 md:mb-4 group-hover:scale-105 transition-transform drop-shadow-2xl">
+                <img src={matchInfo?.logo2 || "https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg"} alt="Team 2" className={`w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] ${matchInfo?.logo2?.includes('black') ? 'invert' : ''}`} />
               </div>
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team2 || "Away"}</h2>
               
@@ -487,14 +498,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
-                 <span key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground px-8 border-r border-border/30 last:border-none">
+                 <span key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 border-r border-border/30 last:border-none">
                    {item}
                  </span>
                ))}
             </div>
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
-                 <span key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground px-8 border-r border-border/30 last:border-none">
+                 <span key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9] px-8 border-r border-border/30 last:border-none">
                    {item}
                  </span>
                ))}
@@ -549,7 +560,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile">
-            {['LINEUP', 'H2H', 'SEASON CONTEXT', 'KEY BATTLES'].map((tab) => (
+            {['LINEUP', 'H2H', 'KEY BATTLES'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setPrematchTab(tab)}
@@ -603,7 +614,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
              <div className="max-w-4xl mx-auto min-h-[450px]">
                 {prematchTab === 'LINEUP' && <LineupTab matchInfo={matchInfo} />}
                 {prematchTab === 'H2H' && <H2HTab matchInfo={matchInfo} />}
-                {prematchTab === 'SEASON CONTEXT' && <SeasonContextTab matchInfo={matchInfo} />}
+                
                 {prematchTab === 'KEY BATTLES' && <KeyBattlesTab matchInfo={matchInfo} />}
              </div>
 
@@ -1893,6 +1904,7 @@ function KeyBattlesTab({ matchInfo }: { matchInfo: any }) {
     </div>
   );
 }
+
 
 
 
