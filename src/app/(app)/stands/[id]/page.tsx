@@ -2,7 +2,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useParticipants, useLocalParticipant } from "@livekit/components-react";
+import { useParticipants, useLocalParticipant, useIsSpeaking } from "@livekit/components-react";
+import type { Participant } from "livekit-client";
 import { createClient } from "@/lib/supabase/client";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -10,6 +11,32 @@ import { ArrowLeft, Share2, Mic, MicOff, Hand, Send, MoreHorizontal, Users, Flam
 import { BackButton } from "@/components/ui/BackButton";
 import LiveAudioRoom from "@/components/stands/LiveAudioRoom";
 import { allLiveMatches } from "@/lib/mockData";
+
+function SpeakerTile({ participant, speakerClass }: { participant: Participant, speakerClass: string }) {
+  const isSpeaking = useIsSpeaking(participant);
+  const isMuted = !participant.isMicrophoneEnabled;
+  const username = participant.identity;
+
+  return (
+    <div className={`${speakerClass} overflow-hidden border-2 ${isMuted ? 'border-border' : isSpeaking ? 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`}>
+      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`} className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isMuted ? 'grayscale opacity-50' : 'opacity-100'}`} />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
+      {isSpeaking && !isMuted && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-xl animate-pulse pointer-events-none" />}
+      
+      <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
+        <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${isMuted ? 'bg-red-500/80 backdrop-blur' : isSpeaking ? 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
+          {isMuted ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className={`w-3 h-3 ${isSpeaking ? 'text-black' : 'text-muted-foreground'}`} />}
+        </div>
+      </div>
+      
+      <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
+         <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${isMuted ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg`} />
+         <span className={`text-[9px] md:text-sm font-black ${isMuted ? 'text-gray-300' : 'text-foreground'} drop-shadow-md truncate`}>{username}</span>
+      </div>
+    </div>
+  );
+}
 
 function StandRoomLayout({ matchId }: { matchId: string }) {
   const matchInfo = allLiveMatches.find(m => m.id.toString() === matchId);
@@ -58,6 +85,19 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
   const [floatingEmojis, setFloatingEmojis] = useState<{id: number, emoji: string, left: number}[]>([]);
   const [inputText, setInputText] = useState("");
   const [isMicPending, setIsMicPending] = useState(false);
+
+  const toggleMic = async () => {
+    if (!localParticipant) return;
+    try {
+      setIsMicPending(true);
+      const isEnabled = localParticipant.isMicrophoneEnabled;
+      await localParticipant.setMicrophoneEnabled(!isEnabled);
+    } catch (e) {
+      console.error("Failed to toggle mic", e);
+    } finally {
+      setIsMicPending(false);
+    }
+  };
   
   const lastChatScrollY = useRef(0);
   const handleChatScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -149,87 +189,22 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
       ? "relative w-14 h-14 md:w-24 md:h-24 md:w-32 md:h-32 shrink-0 rounded-lg xl:rounded-2xl" 
       : "relative aspect-square h-full md:w-full md:h-full md:aspect-auto shrink-0 min-h-0 rounded-xl";
 
-    return (
-      <>
-        {/* Speaker 1: Active Talking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GOONER4LIFE'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.4)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GOONER4LIFE')}>
-          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GOONER4LIFE'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-          {!mutedUsers['GOONER4LIFE'] && <div className="absolute inset-0 border-2 border-[coral]/40 rounded-xl animate-pulse pointer-events-none" />}
-          
-          <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.5)]'} flex items-center justify-center`}>
-              {mutedUsers['GOONER4LIFE'] ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className="w-3 h-3 text-black" />}
-            </div>
+    const paddedParticipants = [...participants];
+    const slots = [];
+    
+    for (let i = 0; i < 6; i++) {
+      if (i < paddedParticipants.length) {
+        slots.push(<SpeakerTile key={paddedParticipants[i].identity} participant={paddedParticipants[i]} speakerClass={speakerClass} />);
+      } else {
+        slots.push(
+          <div key={`empty-${i}`} className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
+            <MoreHorizontal className="w-6 h-6 text-foreground/20" />
           </div>
-          
-          <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${mutedUsers['GOONER4LIFE'] ? 'bg-red-500' : 'bg-[coral] animate-pulse'} shadow-lg`} />
-             <span className={`text-[9px] md:text-sm font-black ${mutedUsers['GOONER4LIFE'] ? 'text-gray-300' : 'text-foreground'} drop-shadow-md truncate`}>GOONER4LIFE</span>
-          </div>
-        </div>
+        );
+      }
+    }
 
-        {/* Speaker 2: Muted */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['BLUEMASON'] ? 'border-border' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('BLUEMASON')}>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['BLUEMASON'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none" />
-          
-          <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['BLUEMASON'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
-              <MicOff className={`w-3 h-3 ${mutedUsers['BLUEMASON'] ? 'text-foreground' : 'text-muted-foreground'}`} />
-            </div>
-          </div>
-          
-          <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['BLUEMASON'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>BLUEMASON</span>
-          </div>
-        </div>
-
-        {/* Speaker 3: Muted */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['SPURSY_10'] ? 'border-border' : 'border-border-strong hover:border-white/40'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('SPURSY_10')}>
-          <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['SPURSY_10'] ? 'grayscale opacity-50' : 'opacity-80 group-hover:opacity-100'}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-          
-          <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['SPURSY_10'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[#222]/80 backdrop-blur border border-border'} flex items-center justify-center`}>
-              <MicOff className={`w-3 h-3 ${mutedUsers['SPURSY_10'] ? 'text-foreground' : 'text-muted-foreground'}`} />
-            </div>
-          </div>
-          
-          <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['SPURSY_10'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>SPURSY_10</span>
-          </div>
-        </div>
-
-        {/* Speaker 4: Empty Slot */}
-        <div className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
-          <MoreHorizontal className="w-6 h-6 text-foreground/20" />
-        </div>
-
-        {/* Speaker 5: Active Mic, Non-Speaking */}
-        <div className={`${speakerClass} overflow-hidden border-2 ${mutedUsers['GUNNERVIC'] ? 'border-border' : 'border-[coral] shadow-[0_0_20px_rgba(255,59,0,0.2)]'} group cursor-pointer transition-all duration-500 hover:scale-[1.02]`} onClick={() => toggleMute('GUNNERVIC')}>
-          <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=400&auto=format&fit=crop" className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${mutedUsers['GUNNERVIC'] ? 'grayscale opacity-50' : 'opacity-100'}`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-          
-          <div className="absolute top-1.5 right-1.5 md:top-3 md:right-3">
-            <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full ${mutedUsers['GUNNERVIC'] ? 'bg-red-500/80 backdrop-blur' : 'bg-[coral]/90 backdrop-blur shadow-[0_0_15px_rgba(255,59,0,0.4)]'} flex items-center justify-center`}>
-              {mutedUsers['GUNNERVIC'] ? <MicOff className="w-3 h-3 text-foreground" /> : <Mic className="w-3 h-3 text-black" />}
-            </div>
-          </div>
-          
-          <div className="absolute bottom-1.5 left-1.5 md:bottom-3 md:left-3 flex items-center gap-1.5">
-             <span className={`text-[9px] md:text-sm font-bold ${mutedUsers['GUNNERVIC'] ? 'text-muted-foreground' : 'text-foreground'} drop-shadow-md truncate`}>GUNNERVIC</span>
-          </div>
-        </div>
-
-        {/* Speaker 6: Empty Slot */}
-        <div className={`${speakerClass} border-2 border-dashed border-border bg-card text-card-foreground/5 dark:bg-muted flex items-center justify-center transition-colors hover:bg-card text-card-foreground/10 dark:bg-muted/80 cursor-pointer`}>
-          <MoreHorizontal className="w-6 h-6 text-foreground/20" />
-        </div>
-      </>
-    );
+    return <>{slots}</>;
   };
 
   const renderPoll = () => (
@@ -419,9 +394,9 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
               <span className="text-xl">🍳</span>
               <span className="text-[8px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
             </button>
-            <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-lg py-1 font-black ${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}`}>
-              {isMicPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Hand className="w-4 h-4 fill-black" />}
-              <span className="text-[9px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
+            <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-0.5 rounded-lg py-1 font-black transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border shadow-inner' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] border border-[coral]/50'}`}>
+              {isMicPending ? <Loader2 className="w-4 h-4 animate-spin" /> : (localParticipant?.isMicrophoneEnabled ? <MicOff className="w-4 h-4 fill-current" /> : <Mic className="w-4 h-4 fill-black" />)}
+              <span className="text-[9px] tracking-widest uppercase">{isMicPending ? 'Pending' : (localParticipant?.isMicrophoneEnabled ? 'Mute Mic' : 'Request Mic')}</span>
             </button>
           </div>
           <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center relative z-20">
@@ -543,9 +518,9 @@ function StandRoomLayout({ matchId }: { matchId: string }) {
                 <span className="text-2xl">🍳</span>
                 <span className="text-[9px] font-black text-muted-foreground tracking-widest uppercase">Cooking</span>
               </button>
-              <button onClick={() => setIsMicPending(true)} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-3 hover:scale-[1.02] font-black cursor-pointer ${isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}`}>
-                {isMicPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Hand className="w-5 h-5 fill-black" />}
-                <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : 'Request Mic'}</span>
+              <button onClick={toggleMic} disabled={isMicPending} className={`flex-[2] flex flex-col items-center justify-center gap-1 rounded-xl py-3 hover:scale-[1.02] font-black cursor-pointer transition-colors ${localParticipant?.isMicrophoneEnabled ? 'bg-gradient-to-br from-red-600 to-red-800 text-white shadow-inner border border-red-500/50' : isMicPending ? 'bg-gradient-to-br from-gray-700 to-gray-900 text-muted-foreground border border-border' : 'bg-gradient-to-br from-[coral] to-[coral] text-black shadow-[0_0_20px_rgba(255,127,80,0.4)] hover:shadow-[0_0_30px_rgba(255,127,80,0.6)] border border-[coral]/50'}`}>
+                {isMicPending ? <Loader2 className="w-5 h-5 animate-spin" /> : (localParticipant?.isMicrophoneEnabled ? <MicOff className="w-5 h-5 fill-current" /> : <Mic className="w-5 h-5 fill-black" />)}
+                <span className="text-[10px] tracking-widest uppercase">{isMicPending ? 'Pending' : (localParticipant?.isMicrophoneEnabled ? 'Mute Mic' : 'Request Mic')}</span>
               </button>
             </div>
             <form onSubmit={handleSendMessage} className="bg-card text-card-foreground rounded-full p-1 border border-border flex items-center focus-within:border-[teal] focus-within:shadow-[0_0_20px_rgba(117, 251, 217,0.15)] transition-all">
