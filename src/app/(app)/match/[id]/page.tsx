@@ -208,6 +208,19 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
   const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
   const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('prematch');
+  const [disabledTabTooltip, setDisabledTabTooltip] = useState<string | null>(null);
+
+  const showTabTooltip = (tab: string) => {
+    setDisabledTabTooltip(tab);
+    setTimeout(() => setDisabledTabTooltip(null), 1800);
+  };
+
+  const isTabEnabled = (tab: string, status?: string) => {
+    if (tab === 'prematch') return true;
+    if (tab === 'live') return status === 'live' || status === 'finished';
+    if (tab === 'postmatch') return status === 'finished';
+    return false;
+  };
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState<HotTake[]>(initialHotTakes);
@@ -388,12 +401,14 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
           <div className="pointer-events-auto">
             <button 
               onClick={() => {
+                const url = window.location.href;
+                const title = `${matchInfo?.team1 || 'Home'} vs ${matchInfo?.team2 || 'Away'}`;
                 if (navigator.share) {
-                  navigator.share({
-                    title: `${matchInfo?.team1 || 'Home'} vs ${matchInfo?.team2 || 'Away'}`,
-                    text: 'Check out this match on Eyeconic!',
-                    url: window.location.href,
-                  }).catch(console.error);
+                  navigator.share({ title, text: 'Check out this match on Eyeconic!', url }).catch(console.error);
+                } else {
+                  navigator.clipboard.writeText(url).then(() =>
+                    toast.success('Link copied!', { description: 'Share the match with your crew.' })
+                  );
                 }
               }}
               className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-black/60 transition-colors backdrop-blur-md bg-black/40 text-white shadow-lg"
@@ -418,7 +433,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team1 || "Home"}</h2>
               
               {/* Goal Scorers */}
-              {matchState !== 'prematch' && (
+              {matchInfo?.status !== 'upcoming' && (
                 <div className="absolute top-[100%] left-0 right-0 h-10 md:h-12 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
@@ -441,7 +456,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
             {/* SCORE / TIME */}
             <div className="flex flex-col items-center justify-start shrink-0 relative z-10 w-24 md:w-32">
               <div className="h-16 md:h-24 flex flex-col items-center justify-center w-full">
-                {matchState === 'prematch' ? (
+                {matchInfo?.status === 'upcoming' ? (
                   <>
                     <span className="text-[9px] md:text-[11px] font-bold text-[#75fbd9] tracking-[0.2em] uppercase mb-1">Kickoff In</span>
                     <span className="text-4xl md:text-5xl font-black tracking-tighter text-foreground drop-shadow-2xl font-mono leading-none" style={{ fontVariantNumeric: 'tabular-nums' }}>45:00</span>
@@ -473,7 +488,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
               <h2 className="text-sm md:text-xl font-black tracking-wider uppercase text-center mb-0.5 md:mb-1">{matchInfo?.team2 || "Away"}</h2>
               
               {/* Goal Scorers */}
-              {matchState !== 'prematch' && (
+              {matchInfo?.status !== 'upcoming' && (
                 <div className="absolute top-[100%] left-0 right-0 h-10 md:h-12 overflow-hidden mt-1" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)' }}>
                   <div className="flex flex-col items-center gap-0.5 md:gap-1 text-[9px] md:text-[10px] font-bold text-muted-foreground animate-scorer-scroll">
                     <div className="flex items-center justify-center gap-1 md:gap-1.5 h-3 md:h-4 shrink-0">
@@ -498,7 +513,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
       {matchState === 'live' && (
-      <div className="w-full border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-1 bg-muted/10 backdrop-blur-md">
+      <div className="w-full border-t border-b border-border/50 flex items-center overflow-hidden h-8 mb-1 bg-[#0a0a0a]">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
@@ -518,21 +533,38 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       </div>
       )}
 
-      {/* Main 3-Tab Navigation */}
-      <div className="flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-2 max-w-lg mx-4 md:mx-auto shadow-2xl">
-        {['prematch', 'live', 'postmatch'].map((state) => (
-          <button
-            key={state}
-            onClick={() => setMatchState(state as 'prematch' | 'live' | 'postmatch')}
-            className={`flex-1 py-2 px-4 rounded-2xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
-              matchState === state 
-                ? 'bg-[#75fbd9] text-black shadow-[0_0_20px_rgba(117, 251, 217,0.3)]' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-            }`}
-          >
-            {state === 'prematch' ? 'PRE-MATCH' : state === 'live' ? 'LIVE' : 'THE FALLOUT'}
-          </button>
-        ))}
+      {/* Main 3-Tab Navigation — State Locked */}
+      <div className="relative flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-2 max-w-lg mx-4 md:mx-auto shadow-2xl">
+        {(['prematch', 'live', 'postmatch'] as const).map((tab) => {
+          const enabled = isTabEnabled(tab, matchInfo?.status);
+          const isActive = matchState === tab;
+          const tooltipMsg = tab === 'live' ? 'Unlocks at Kickoff' : 'Unlocks at Full Time';
+          return (
+            <div key={tab} className="relative flex-1">
+              <button
+                onClick={() => {
+                  if (!enabled) { showTabTooltip(tab); return; }
+                  setMatchState(tab);
+                }}
+                className={`w-full py-2 px-2 md:px-4 rounded-2xl text-[10px] md:text-xs font-black tracking-widest transition-all ${
+                  isActive
+                    ? 'bg-[#75fbd9] text-black shadow-[0_0_20px_rgba(117,251,217,0.3)]'
+                    : enabled
+                      ? 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                      : 'text-muted-foreground/25 cursor-not-allowed'
+                }`}
+              >
+                {tab === 'prematch' ? 'PRE-MATCH' : tab === 'live' ? 'LIVE' : 'THE FALLOUT'}
+              </button>
+              {disabledTabTooltip === tab && (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-black border border-white/20 rounded-xl text-[8px] font-black text-[#75fbd9] whitespace-nowrap shadow-xl z-50 animate-in fade-in zoom-in-95 duration-150 pointer-events-none">
+                  {tooltipMsg}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black" />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
 
@@ -1690,31 +1722,27 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
 }
 
 function SeasonContextTab({ matchInfo }: { matchInfo: any }) {
-  const items = [
-    <>League Position: <span className="font-mono text-white">4th vs 7th</span></>,
-    <>Gap: <span className="font-mono text-white">5 pts</span></>,
-    <>Recent Form: <span className="font-mono text-white">W-D-W-L-W vs L-W-L-D-W</span></>,
-    <>Last Meeting: <span className="font-mono text-white">{matchInfo?.team1 || 'Team A'} won (2-1)</span></>
+  const insights = [
+    { emoji: '🏆', label: 'League Position', value: '4th vs 7th' },
+    { emoji: '📊', label: 'Points Gap', value: '5 pts' },
+    { emoji: '📈', label: `${matchInfo?.team1 || 'Home'} Form`, value: 'W · D · W · L · W' },
+    { emoji: '📉', label: `${matchInfo?.team2 || 'Away'} Form`, value: 'L · W · L · D · W' },
+    { emoji: '⚔️', label: 'Last Meeting', value: `${matchInfo?.team1 || 'Home'} won (2-1)` },
+    { emoji: '🔥', label: 'Unbeaten Run', value: `${matchInfo?.team1 || 'Home'}: last 5 matches` },
+    { emoji: '🛡️', label: 'Clean Sheets (Home)', value: '12 this season' },
+    { emoji: '⚽', label: 'Danger Men', value: 'Salah (18G) vs Haaland (20G)' },
+    { emoji: '👟', label: `${matchInfo?.team2 || 'Away'} Avg Possession`, value: '64%' },
   ];
 
   return (
-    <div className="w-full flex items-center overflow-hidden py-2.5 border border-border/50 rounded-2xl bg-muted/10 backdrop-blur-md">
-      <div className="flex whitespace-nowrap animate-ticker w-[200%]">
-        <div className="flex justify-around min-w-[50%] shrink-0 gap-8 px-4">
-          {items.map((item, idx) => (
-            <span key={`ticker-1-${idx}`} className="text-[12px] md:text-[14px] font-black tracking-widest uppercase text-[#75fbd9]">
-              {item}
-            </span>
-          ))}
+    <div className="flex flex-col gap-2 py-2">
+      {insights.map((item, idx) => (
+        <div key={idx} className="flex items-center gap-3 px-4 py-2.5 bg-black/20 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+          <span className="text-lg shrink-0 w-7 text-center">{item.emoji}</span>
+          <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest flex-1">{item.label}</span>
+          <span className="text-[11px] font-black text-white text-right">{item.value}</span>
         </div>
-        <div className="flex justify-around min-w-[50%] shrink-0 gap-8 px-4">
-          {items.map((item, idx) => (
-            <span key={`ticker-2-${idx}`} className="text-[12px] md:text-[14px] font-black tracking-widest uppercase text-[#75fbd9]">
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

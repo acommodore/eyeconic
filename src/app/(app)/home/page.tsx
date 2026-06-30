@@ -282,15 +282,15 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                     <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-[#75fbd9] text-black px-3 py-3 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
                        MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
-
-                    <button 
-                       onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
-                       className={`flex-none inline-flex items-center justify-center text-[10px] font-black p-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
-                    >
-                       <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
-                    </button>
-                    
-                    {(isFinished || isStartingSoon) && (
+                    {!isFinished && (
+                       <button 
+                          onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
+                          className={`flex-none inline-flex items-center justify-center text-[10px] font-black p-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
+                       >
+                          <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
+                       </button>
+                    )}
+                    {(isFinished || isUpcoming) && (
                        <Link href={`/stands/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-coral text-black border border-coral/50 px-3 py-3 rounded-2xl uppercase tracking-widest hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(255,127,80,0.4)]">
                           <MessageSquare className="w-3 h-3" /> JOIN STAND
                        </Link>
@@ -316,18 +316,49 @@ const tickerItems = [
     "📈 JUV Fans: Tactical approval rising (+12%)",
 ];
 
+const DayRibbon = ({ activeDay, onDaySelect }: { activeDay: string; onDaySelect: (day: string) => void }) => {
+  const days = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() + i - 3);
+    const dayName = d.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase();
+    const dayNum = String(d.getDate()).padStart(2, '0');
+    const key = `${dayName}-${dayNum}`;
+    return { key, dayName, dayNum, isToday: i === 3 };
+  });
+  return (
+    <div className="w-full flex items-center gap-0.5 overflow-x-auto hide-scrollbar py-1 px-1">
+      {days.map(d => {
+        const isActive = activeDay === d.key;
+        return (
+          <button
+            key={d.key}
+            onClick={() => onDaySelect(d.key)}
+            className={`shrink-0 flex flex-col items-center gap-0 px-3 py-1.5 rounded-xl transition-all min-w-[44px] ${
+              isActive ? 'text-[#75fbd9]' : d.isToday ? 'text-foreground/70' : 'text-muted-foreground/50 hover:text-muted-foreground'
+            }`}
+          >
+            <span className="text-[7px] font-mono uppercase tracking-widest">{d.dayName}</span>
+            <span className={`text-sm font-black tabular-nums leading-tight ${isActive ? 'text-[#75fbd9]' : ''}`}>{d.dayNum}</span>
+            <div className={`h-0.5 rounded-full transition-all mt-0.5 ${isActive ? 'w-4 bg-[#75fbd9]' : d.isToday ? 'w-1 bg-white/30' : 'w-0'}`} />
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 const NewsTicker = () => (
-    <div className="w-full bg-[#111] border-y border-white/10 flex items-center overflow-hidden py-1.5 shadow-2xl"><div className="flex whitespace-nowrap animate-ticker w-[200%]">
+    <div className="w-full bg-[#0a0a0a] border-y border-white/10 flex items-center overflow-hidden h-8 shadow-2xl"><div className="flex whitespace-nowrap animate-ticker w-[200%]">
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-1-${idx}`} className="text-xs font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
+               <button key={`ticker-1-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors cursor-pointer">
                  {item}
                </button>
              ))}
           </div>
           <div className="flex justify-around min-w-[50%] shrink-0">
              {tickerItems.map((item, idx) => (
-               <button key={`ticker-2-${idx}`} className="text-xs font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors py-1 cursor-pointer">
+               <button key={`ticker-2-${idx}`} className="text-[10px] font-mono tracking-widest uppercase text-[#75fbd9]/80 px-10 hover:text-white transition-colors cursor-pointer">
                  {item}
                </button>
              ))}
@@ -348,7 +379,11 @@ export default function DiscoverPage() {
   const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
   
   const [sortMode, setSortMode] = useState<'watchability' | 'league'>('watchability');
-  const [activeFilter, setActiveFilter] = useState("All"); 
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeDay, setActiveDay] = useState<string>(() => {
+    const d = new Date();
+    return `${d.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase()}-${String(d.getDate()).padStart(2, '0')}`;
+  });
 
   const toggleGroup = (groupName: string) => {
     setCollapsedGroups(prev => {
@@ -563,7 +598,7 @@ export default function DiscoverPage() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-2 md:px-8">
         
         {/* FILTERS AND SORTING ROW */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-1">
 
            {/* PRIMARY: WATCHABILITY / LEAGUE SORT TABS */}
            <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
@@ -604,6 +639,11 @@ export default function DiscoverPage() {
              <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
            </div>
 
+        </div>
+
+        {/* DAY RIBBON */}
+        <div className="mb-3 border-b border-white/5 pb-2">
+          <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} />
         </div>
 
         {/* TERMINAL FEED LIST */}
