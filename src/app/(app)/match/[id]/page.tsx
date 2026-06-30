@@ -209,18 +209,22 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
   const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('prematch');
   const [disabledTabTooltip, setDisabledTabTooltip] = useState<string | null>(null);
+  // unlockedLevel tracks what tabs are accessible based on real match status:
+  // 0 = upcoming (only prematch), 1 = live (prematch + live), 2 = finished (all)
+  const [unlockedLevel, setUnlockedLevel] = useState(0);
 
   const showTabTooltip = (tab: string) => {
     setDisabledTabTooltip(tab);
     setTimeout(() => setDisabledTabTooltip(null), 1800);
   };
 
-  const isTabEnabled = (tab: string, status?: string) => {
+  const isTabEnabled = (tab: string) => {
     if (tab === 'prematch') return true;
-    if (tab === 'live') return status === 'live' || status === 'finished';
-    if (tab === 'postmatch') return status === 'finished';
+    if (tab === 'live') return unlockedLevel >= 1;
+    if (tab === 'postmatch') return unlockedLevel >= 2;
     return false;
   };
+
   const [activeTab, setActiveTab] = useState('OVERVIEW');
   const [prematchTab, setPrematchTab] = useState('LINEUP');
   const [takes, setTakes] = useState<HotTake[]>(initialHotTakes);
@@ -244,7 +248,10 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     if (matchInfo) {
-      setMatchState(matchInfo.status === 'upcoming' ? 'prematch' : matchInfo.status === 'finished' ? 'postmatch' : 'live');
+      const status = matchInfo.status;
+      const level = status === 'finished' ? 2 : status === 'live' ? 1 : 0;
+      setUnlockedLevel(level);
+      setMatchState(status === 'upcoming' ? 'prematch' : status === 'finished' ? 'postmatch' : 'live');
       if (matchInfo.hotTakes) setTakes(matchInfo.hotTakes as any);
       if (matchInfo.timelineEvents) setPulseEvents(matchInfo.timelineEvents);
     }
@@ -536,7 +543,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       {/* Main 3-Tab Navigation — State Locked */}
       <div className="relative flex gap-2 p-1 bg-[#1A1A1A]/80 backdrop-blur-xl border border-border rounded-2xl mb-2 max-w-lg mx-4 md:mx-auto shadow-2xl">
         {(['prematch', 'live', 'postmatch'] as const).map((tab) => {
-          const enabled = isTabEnabled(tab, matchInfo?.status);
+          const enabled = isTabEnabled(tab);
           const isActive = matchState === tab;
           const tooltipMsg = tab === 'live' ? 'Unlocks at Kickoff' : 'Unlocks at Full Time';
           return (

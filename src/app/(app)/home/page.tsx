@@ -215,7 +215,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
               style={{ color: getVolatilityColor(match.volatility) }}
             />
             <span
-              className="absolute text-[7px] md:text-[8px] font-black tabular-nums text-white leading-none translate-y-[2px]"
+              className="absolute text-[7px] md:text-[8px] font-black tabular-nums text-white leading-none translate-y-[4px]"
               style={{textShadow:'0 1px 3px rgba(0,0,0,0.95)'}}
             >{match.volatility}</span>
          </div>
@@ -330,7 +330,7 @@ const tickerItems = [
     "📈 JUV Fans: Tactical approval rising (+12%)",
 ];
 
-const DayRibbon = ({ activeDay, onDaySelect }: { activeDay: string; onDaySelect: (day: string) => void }) => {
+const DayRibbon = ({ activeDay, onDaySelect, compact }: { activeDay: string; onDaySelect: (day: string) => void; compact?: boolean }) => {
   const days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date();
     d.setDate(d.getDate() + i - 3);
@@ -340,20 +340,20 @@ const DayRibbon = ({ activeDay, onDaySelect }: { activeDay: string; onDaySelect:
     return { key, dayName, dayNum, isToday: i === 3 };
   });
   return (
-    <div className="w-full flex items-center gap-0.5 overflow-x-auto hide-scrollbar py-1 px-1">
+    <div className={`w-full flex items-center overflow-x-auto hide-scrollbar ${compact ? 'py-0.5' : 'py-1 gap-0.5 px-1'}`}>
       {days.map(d => {
         const isActive = activeDay === d.key;
         return (
           <button
             key={d.key}
             onClick={() => onDaySelect(d.key)}
-            className={`shrink-0 flex flex-col items-center gap-0 px-3 py-1.5 rounded-xl transition-all min-w-[44px] ${
+            className={`${compact ? 'flex-1' : 'shrink-0 min-w-[44px] px-3'} flex flex-col items-center gap-0 ${compact ? 'py-1' : 'py-1.5'} rounded-xl transition-all ${
               isActive ? 'text-[#75fbd9]' : d.isToday ? 'text-foreground/70' : 'text-muted-foreground/50 hover:text-muted-foreground'
             }`}
           >
-            <span className="text-[7px] font-mono uppercase tracking-widest">{d.dayName}</span>
-            <span className={`text-sm font-black tabular-nums leading-tight ${isActive ? 'text-[#75fbd9]' : ''}`}>{d.dayNum}</span>
-            <div className={`h-0.5 rounded-full transition-all mt-0.5 ${isActive ? 'w-4 bg-[#75fbd9]' : d.isToday ? 'w-1 bg-white/30' : 'w-0'}`} />
+            <span className={`${compact ? 'text-[6px]' : 'text-[7px]'} font-mono uppercase tracking-widest`}>{d.dayName}</span>
+            <span className={`${compact ? 'text-xs' : 'text-sm'} font-black tabular-nums leading-tight ${isActive ? 'text-[#75fbd9]' : ''}`}>{d.dayNum}</span>
+            <div className={`h-0.5 rounded-full transition-all mt-0.5 ${isActive ? (compact ? 'w-3' : 'w-4') + ' bg-[#75fbd9]' : d.isToday ? 'w-1 bg-white/30' : 'w-0'}`} />
           </button>
         );
       })}
@@ -541,6 +541,13 @@ export default function DiscoverPage() {
       {/* Background pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       
+      {/* MOBILE DAY RIBBON — above hero card */}
+      <div className="lg:hidden w-full bg-black border-b border-white/5">
+        <div className="flex items-stretch overflow-x-auto hide-scrollbar">
+          <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} compact />
+        </div>
+      </div>
+
       {/* ABSOLUTE TOP HERO SECTION */}
       {heroMatch && heroCuration && (
       <section className="relative w-full pt-2 pb-2 md:pt-6 md:pb-6 border-b border-white/10 bg-black overflow-hidden">
@@ -654,25 +661,45 @@ export default function DiscoverPage() {
         {/* FILTERS AND SORTING ROW */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-1">
 
-           {/* PRIMARY: WATCHABILITY / LEAGUE SORT TABS */}
-           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
-              <div className="flex w-full border-b border-white/10">
+           {/* PRIMARY: WATCHABILITY / LEAGUE SORT TABS + DESKTOP CALENDAR */}
+           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto gap-0">
+              <div className="flex border-b border-white/10 flex-1 lg:flex-none">
                 <button 
                   onClick={() => setSortMode('watchability')}
-                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'watchability' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                  className={`flex-1 lg:flex-none px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'watchability' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
                    <Activity className="w-3 h-3" />
                    WATCHABILITY
                 </button>
                 <button 
                   onClick={() => setSortMode('league')}
-                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'league' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                  className={`flex-1 lg:flex-none px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'league' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
                    <Swords className="w-3 h-3" />
                    LEAGUE
                 </button>
               </div>
+
+              {/* DESKTOP CALENDAR — same height as the tabs */}
+              <div className="hidden lg:block relative shrink-0 border-b border-white/10 pb-px -mb-px" id="calendar-dropdown">
+                <button
+                  onClick={() => setCalendarOpen(v => !v)}
+                  className={`flex items-center gap-1.5 px-4 py-2 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${
+                    calendarOpen ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Calendar className="w-3 h-3" />
+                  {activeDay.split('-')[1] ? `${activeDay.split('-')[0]} ${activeDay.split('-')[1]}` : 'DATE'}
+                </button>
+                {calendarOpen && (
+                  <MonthCalendar
+                    activeDay={activeDay}
+                    onDaySelect={(d) => { setActiveDay(d); setCalendarOpen(false); }}
+                    onClose={() => setCalendarOpen(false)}
+                  />
+                )}
+              </div>
            </div>
 
-           {/* SECONDARY: EMOTIONAL FILTER PILLS + DESKTOP CALENDAR */}
+           {/* SECONDARY: EMOTIONAL FILTER PILLS */}
            <div className="flex items-center gap-2 w-full lg:w-auto">
              <div className="relative flex-1 lg:flex-none lg:w-auto">
                <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
@@ -693,34 +720,11 @@ export default function DiscoverPage() {
                {/* Fade overlay */}
                <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
              </div>
-
-             {/* DESKTOP CALENDAR ICON */}
-             <div className="hidden lg:block relative shrink-0 self-start mt-0.5" id="calendar-dropdown">
-               <button
-                 onClick={() => setCalendarOpen(v => !v)}
-                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-mono uppercase tracking-widest transition-all border ${
-                   calendarOpen ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/40' : 'text-muted-foreground/60 border-white/10 hover:text-muted-foreground hover:border-white/20'
-                 }`}
-               >
-                 <Calendar className="w-3 h-3" />
-                 {activeDay.split('-')[1] ? `${activeDay.split('-')[0]} ${activeDay.split('-')[1]}` : 'Date'}
-               </button>
-               {calendarOpen && (
-                 <MonthCalendar
-                   activeDay={activeDay}
-                   onDaySelect={(d) => { setActiveDay(d); setCalendarOpen(false); }}
-                   onClose={() => setCalendarOpen(false)}
-                 />
-               )}
-             </div>
            </div>
 
         </div>
 
-        {/* DAY RIBBON — mobile only */}
-        <div className="lg:hidden mb-3 border-b border-white/5 pb-2">
-          <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} />
-        </div>
+        {/* DAY RIBBON — mobile only, now shown above hero so removed here */}
 
         {/* TERMINAL FEED LIST */}
         <section className="space-y-1">
@@ -728,7 +732,7 @@ export default function DiscoverPage() {
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
                   {/* League Header */}
-                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-1 pl-2 pt-1 w-full text-left group">
+                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-1 pl-2 pt-2 w-full text-left group">
                     <div className="w-1.5 h-6 bg-[#75fbd9] rounded-full shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
                     <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-[#75fbd9] transition-colors">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
@@ -763,7 +767,7 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-1 pl-2 pt-1 w-full text-left group">
+                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-1 pl-2 pt-2 w-full text-left group">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]'}`}></div>
                     <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-[#75fbd9]'}`}>{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
