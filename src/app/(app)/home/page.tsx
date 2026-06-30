@@ -54,10 +54,15 @@ const getMatchCurations = (matchId: number, team1: string, status: string) => {
   }
 };
 
-const MetricDial = ({ label, value, colorHex }: { label: string, value: number, colorHex: string }) => {
+const MetricDial = ({ label, value, colorHex }: { label: string; value: number; colorHex: string }) => {
+  const [displayed, setDisplayed] = React.useState(0);
+  React.useEffect(() => {
+    const t = setTimeout(() => setDisplayed(value), 80);
+    return () => clearTimeout(t);
+  }, [value]);
   const radius = 36;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (value / 100) * circumference;
+  const offset = circumference - (displayed / 100) * circumference;
 
   return (
     <div className="flex flex-col items-center justify-center p-1 md:p-1.5 bg-black/20 rounded-2xl border border-white/5 shadow-inner">
@@ -75,7 +80,7 @@ const MetricDial = ({ label, value, colorHex }: { label: string, value: number, 
             className="transition-all duration-1000 ease-out" 
           />
         </svg>
-        <span className="text-[9px] sm:text-[10px] md:text-xs font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{value}</span>
+        <span className="text-[9px] sm:text-[10px] md:text-xs font-black text-white relative z-10 tabular-nums drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">{displayed}</span>
       </div>
       <span className="text-[6px] sm:text-[7px] md:text-[9px] uppercase font-mono tracking-widest text-muted-foreground mt-1 md:mt-2 text-center truncate w-full px-1">{label}</span>
     </div>
@@ -215,7 +220,7 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
               style={{ color: getVolatilityColor(match.volatility) }}
             />
             <span
-              className="absolute text-[7px] md:text-[8px] font-black tabular-nums text-white leading-none translate-y-[4px]"
+              className="absolute text-[7px] md:text-[8px] font-black tabular-nums text-white leading-none translate-y-[7px]"
               style={{textShadow:'0 1px 3px rgba(0,0,0,0.95)'}}
             >{match.volatility}</span>
          </div>
@@ -238,21 +243,10 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  
                  <div className="relative z-10 grid grid-cols-4 gap-2 mb-3">
                     {/* Live/Finished vs Upcoming logic */}
-                    {isLive || isFinished ? (
-                       <>
-                          <MetricDial label="Stakes" value={curation.metrics.stakes} colorHex="#f97316" />
-                          <MetricDial label="Intensity" value={curation.metrics.intensity} colorHex="#ef4444" />
-                          <MetricDial label="Quality" value={curation.metrics.quality} colorHex="#a855f7" />
-                          <MetricDial label="Tempo" value={curation.metrics.tempo} colorHex="#eab308" />
-                       </>
-                    ) : (
-                       <>
-                          <MetricDial label="Stakes" value={curation.metrics.stakes} colorHex="#f97316" />
-                          <MetricDial label="Fan Temp" value={curation.metrics.fanTemp} colorHex="#facc15" />
-                          <MetricDial label="Volatility" value={curation.metrics.volatility} colorHex="#75fbd9" />
-                          <MetricDial label="Star Power" value={curation.metrics.starPower} colorHex="#a855f7" />
-                       </>
-                    )}
+                    <MetricDial label="Stakes" value={curation.metrics.stakes} colorHex="#f97316" />
+                    <MetricDial label="Quality" value={curation.metrics.quality ?? curation.metrics.starPower} colorHex="#a855f7" />
+                    <MetricDial label="Intensity" value={curation.metrics.intensity ?? curation.metrics.volatility} colorHex="#ef4444" />
+                    <MetricDial label="Tempo" value={curation.metrics.tempo ?? curation.metrics.fanTemp} colorHex="#eab308" />
                  </div>
 
                  {(isLive || isFinished) && (
@@ -293,13 +287,13 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
                  </div>
 
                  <div className="mt-2 md:mt-3 flex flex-wrap gap-2 md:gap-3">
-                    <Link href={`/match/${match.id}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-[#75fbd9] text-black px-3 py-3 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
+                    <Link href={`/match/${match.id}?status=${isLive ? 'live' : isFinished ? 'finished' : 'upcoming'}`} className="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 text-[9px] font-black bg-[#75fbd9] text-black px-3 py-3 rounded-2xl uppercase tracking-widest hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_15px_rgba(117, 251, 217,0.3)]">
                        MATCH CENTRE <ArrowRight className="w-3 h-3" />
                     </Link>
                     {!isFinished && (
                        <button 
                           onClick={(e) => { e.stopPropagation(); onToggleBookmark(match.id); }}
-                          className={`flex-none inline-flex items-center justify-center text-[10px] font-black p-3.5 rounded-2xl uppercase tracking-widest transition-all ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}
+                          className={`flex-none inline-flex items-center justify-center text-[10px] font-black p-3.5 rounded-2xl uppercase tracking-widest transition-all border ${isBookmarked ? 'bg-[#75fbd9]/20 text-[#75fbd9] border-[#75fbd9]/30 shadow-[0_0_20px_rgba(117,251,217,0.15)]' : 'bg-white/5 text-muted-foreground border-white/10 hover:bg-white/10'}`}
                        >
                           <Bookmark className="w-3.5 h-3.5" fill={isBookmarked ? "currentColor" : "none"} />
                        </button>
@@ -541,11 +535,9 @@ export default function DiscoverPage() {
       {/* Background pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,1) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       
-      {/* MOBILE DAY RIBBON — above hero card */}
-      <div className="lg:hidden w-full bg-black border-b border-white/5">
-        <div className="flex items-stretch overflow-x-auto hide-scrollbar">
-          <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} compact />
-        </div>
+      {/* MOBILE DAY RIBBON — sticky at top */}
+      <div className="lg:hidden sticky top-0 z-50 w-full bg-black/95 backdrop-blur-md border-b border-white/5">
+        <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} compact />
       </div>
 
       {/* ABSOLUTE TOP HERO SECTION */}
@@ -652,7 +644,7 @@ export default function DiscoverPage() {
       </section>
       )}
 
-      <div className="relative z-10 w-full mb-2 md:mb-4">
+      <div className="relative z-10 w-full">
         <NewsTicker />
       </div>
 

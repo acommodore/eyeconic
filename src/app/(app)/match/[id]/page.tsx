@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { ArrowLeft, Share, Eye, Shield, Zap, X, Play, ThumbsUp, ThumbsDown, ChevronRight, ChevronDown, BarChart3, Activity, Clock, Mic, Flame, Users, Bell, Trophy, Target, Lock, Building2 } from "lucide-react";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackButton } from "@/components/ui/BackButton";
@@ -207,11 +208,17 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   
   const [pulseEvents, setPulseEvents] = useState<any[]>([]);
   const [isSeasonContextOpen, setIsSeasonContextOpen] = useState(false);
-  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>('prematch');
+  const searchParams = useSearchParams();
+  const routeStatus = searchParams.get('status') ?? 'upcoming';
+  const computeLevel = (s: string) => s === 'finished' ? 2 : s === 'live' ? 1 : 0;
+
+  const [matchState, setMatchState] = useState<'prematch' | 'live' | 'postmatch'>(() =>
+    routeStatus === 'finished' ? 'postmatch' : routeStatus === 'live' ? 'live' : 'prematch'
+  );
   const [disabledTabTooltip, setDisabledTabTooltip] = useState<string | null>(null);
-  // unlockedLevel tracks what tabs are accessible based on real match status:
-  // 0 = upcoming (only prematch), 1 = live (prematch + live), 2 = finished (all)
-  const [unlockedLevel, setUnlockedLevel] = useState(0);
+  // unlockedLevel only ever increases — preserves access when user switches tabs
+  const unlockedLevelRef = useRef(computeLevel(routeStatus));
+  const [unlockedLevel, setUnlockedLevel] = useState(computeLevel(routeStatus));
 
   const showTabTooltip = (tab: string) => {
     setDisabledTabTooltip(tab);
@@ -249,9 +256,16 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
   useEffect(() => {
     if (matchInfo) {
       const status = matchInfo.status;
-      const level = status === 'finished' ? 2 : status === 'live' ? 1 : 0;
-      setUnlockedLevel(level);
-      setMatchState(status === 'upcoming' ? 'prematch' : status === 'finished' ? 'postmatch' : 'live');
+      const level = computeLevel(status);
+      // Only increase — never reset unlocked access when switching tabs
+      if (level > unlockedLevelRef.current) {
+        unlockedLevelRef.current = level;
+        setUnlockedLevel(level);
+      }
+      // Only snap matchState if no status was passed via URL
+      if (!searchParams.get('status')) {
+        setMatchState(status === 'upcoming' ? 'prematch' : status === 'finished' ? 'postmatch' : 'live');
+      }
       if (matchInfo.hotTakes) setTakes(matchInfo.hotTakes as any);
       if (matchInfo.timelineEvents) setPulseEvents(matchInfo.timelineEvents);
     }
@@ -561,7 +575,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                       : 'text-muted-foreground/25 cursor-not-allowed'
                 }`}
               >
-                {tab === 'prematch' ? 'PRE-MATCH' : tab === 'live' ? 'LIVE' : 'THE FALLOUT'}
+                {tab === 'prematch' ? 'BUILD-UP' : tab === 'live' ? 'LIVE' : 'THE FALLOUT'}
               </button>
               {disabledTabTooltip === tab && (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-1.5 bg-[#0a0a0a] border border-[#75fbd9]/40 rounded-xl text-[9px] font-black text-[#75fbd9] whitespace-nowrap shadow-[0_0_20px_rgba(117,251,217,0.2)] z-50 pointer-events-none">
@@ -673,7 +687,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={mvpWatchPlayer}
                           onChange={(e) => setMvpWatchPlayer(e.target.value)}
-                          disabled={matchInfo?.status === 'finished'}
+                          disabled={matchInfo?.status !== 'upcoming'}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#75fbd9] transition-colors pb-1 border-b border-border disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
@@ -698,7 +712,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                         <select 
                           value={fraudWatchPlayer}
                           onChange={(e) => setFraudWatchPlayer(e.target.value)}
-                          disabled={matchInfo?.status === 'finished'}
+                          disabled={matchInfo?.status !== 'upcoming'}
                           className="w-full bg-transparent text-lg font-black uppercase mb-1 focus:outline-none appearance-none cursor-pointer hover:text-[#D32F2F] transition-colors pb-1 border-b border-[#D32F2F]/30 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {getTeamPlayers().map(p => <option key={p.name} value={p.name} className="bg-muted text-muted-foreground text-sm">{p.name}</option>)}
@@ -1671,8 +1685,8 @@ function LineupTab({ matchInfo }: { matchInfo: any }) {
                setVibe(parseInt(e.target.value));
                if (!hasVotedAs) setHasVotedAs('fan');
              }}
-             disabled={hasVotedAs === 'neutral' || matchInfo?.status === 'finished'}
-             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#75fbd9] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' || matchInfo?.status === 'finished' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+             disabled={hasVotedAs === 'neutral' || matchInfo?.status !== 'upcoming'}
+             className={`w-full h-1 bg-muted/80 rounded-full appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#75fbd9] [&::-webkit-slider-thumb]:rounded-full ${hasVotedAs === 'neutral' || matchInfo?.status !== 'upcoming' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
            />
          </div>
 
