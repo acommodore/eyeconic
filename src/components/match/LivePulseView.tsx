@@ -11,7 +11,7 @@ const matchEvents = [
   { id: 2, minute: 34, type: 'card', title: 'YELLOW CARD', player: 'Rodri', desc: 'Tactical foul to stop a dangerous counter attack in the midfield.', likes: '1.2K', isMajor: false },
   { id: 3, minute: 45, type: 'half', title: 'HALF TIME', player: '', desc: 'Liverpool lead 1-0 at the break after an intense, high-paced 45 minutes.', likes: '5.4K', isMajor: false },
   { id: 4, minute: 72, type: 'save', title: 'SAVE!', player: 'Alisson Becker', desc: 'Point-blank stop to deny Foden from close range.', likes: '4.2K', isMajor: false },
-  { id: 5, minute: 78, type: 'save', title: 'SAVE! ALISSON\nBECKER', player: 'Alisson', desc: 'Incredible point-blank reaction save to deny a certain equalizer from Haaland.', likes: '6.7K', isMajor: true },
+  { id: 5, minute: 78, type: 'save', title: 'SAVE!', player: 'Alisson Becker', desc: 'Incredible point-blank reaction save to deny a certain equalizer from Haaland.', likes: '6.7K', isMajor: true },
   { id: 6, minute: 81, type: 'shot', title: 'SHOT ON TARGET', player: 'Kevin De Bruyne', desc: 'Great dipping effort from distance forces a massive corner.', likes: '2.1K', isMajor: false },
   { id: 7, minute: 83, type: 'sub', title: 'SUBSTITUTION', player: 'Doku OFF, Foden ON', desc: 'Tactical change for Man City as they chase the game late.', likes: '1.3K', isMajor: false },
   { id: 8, minute: 88, type: 'var', title: 'VAR REVIEW', player: 'Possible Penalty', desc: 'Checking for a handball in the box by Ruben Dias.', likes: '8.1K', isMajor: false },
@@ -94,8 +94,8 @@ const getDotColor = (type: string) => {
 
 // --- Sub-components ---
 const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, handleEcho }: { event: any, isActive: boolean, voiceNotes: any[], onRecordClick?: () => void, echoedNotes: Set<number>, handleEcho: (id: number) => void }) => (
-  <div className={`w-full bg-card rounded-[2rem] border ${isActive ? 'border-[#75fbd9]/50 shadow-[0_0_30px_rgba(117, 251, 217,0.1)]' : 'border-border'} p-6 md:p-8 relative transition-all duration-500 flex flex-col overflow-hidden`}>
-    <div className="flex items-center justify-between mb-4">
+  <div className={`w-full bg-card rounded-[2rem] border ${isActive ? 'border-[#75fbd9]/50 shadow-[0_0_30px_rgba(117, 251, 217,0.1)]' : 'border-border'} p-5 md:p-6 relative transition-all duration-500 flex flex-col overflow-hidden`}>
+    <div className="flex items-center justify-between mb-2">
       <span className="text-[#75fbd9] font-mono font-bold text-xl">{event.minute}&apos;</span>
       
       <div className="flex items-center gap-4">
@@ -110,12 +110,17 @@ const EventCard = ({ event, isActive, voiceNotes, onRecordClick, echoedNotes, ha
       </div>
     </div>
     
-    <h3 className="font-black uppercase leading-none mb-4 text-xl md:text-2xl truncate">
-      {event.title}
+    <h3 className="font-black uppercase leading-none mb-3 text-xl md:text-2xl truncate flex items-center gap-2">
+      <span>{event.title}</span>
+      {event.player && (
+        <>
+           <span className="text-muted-foreground text-sm font-bold opacity-50">•</span>
+           <span className="text-sm font-bold text-foreground">{event.player}</span>
+        </>
+      )}
     </h3>
     
     <p className={`text-sm md:text-base text-muted-foreground leading-relaxed mb-6 w-full break-words ${isActive ? '' : 'line-clamp-3'}`}>
-      {event.player && <strong className="text-foreground block mb-1">{event.player}</strong>}
       {event.desc}
     </p>
 
@@ -494,13 +499,14 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Timeline Axis Labels */}
-            <div className="w-full px-4 flex items-center justify-between text-[8px] md:text-[9px] font-mono text-muted-foreground font-black mb-0">
+            <div className="w-full px-4 flex items-center justify-between text-[8px] md:text-[9px] font-mono text-muted-foreground font-black mb-0 relative">
               <span>0'</span>
+              <span className="absolute left-1/2 -translate-x-1/2">45'</span>
               <span>90'</span>
             </div>
 
             {/* Momentum Activity Bars */}
-            <div className="relative w-full px-4 mb-1 h-16 shrink-0 flex items-center gap-[2px]">
+            <div className="relative w-full px-4 mb-0 h-16 shrink-0 flex items-center gap-[2px]">
               <div className="absolute left-4 right-4 top-1/2 h-px bg-white/20 z-0"></div>
               {momentumData.map((dataPoint) => {
                 const normalizedValue = dataPoint.value - 50;
@@ -527,7 +533,7 @@ export default function LivePulseView({ isMatchFinished = false, matchId }: { is
             </div>
 
             {/* Interactive Timeline */}
-            <div className="relative w-full px-4 mb-4 h-10 shrink-0">
+            <div className="relative w-full px-4 mb-2 h-6 shrink-0">
               {/* The base line */}
               <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-black/10 dark:bg-white/10 -translate-y-1/2" />
               {/* The progress line up to the current minute (assuming 90 max) */}

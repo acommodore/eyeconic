@@ -200,9 +200,12 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
         {/* RIGHT CONTROLS */}
         <div className="w-[65px] md:w-[80px] flex items-center justify-end gap-1.5 shrink-0">
-           <Flame className="w-3 h-3 md:w-3.5 md:h-3.5 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
-           <span className="text-xs md:text-base font-mono font-black tabular-nums text-foreground drop-shadow-md">{match.volatility}%</span>
-           <ChevronDown className={`shrink-0 w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+         {/* FIRE BADGE — number inside the flame */}
+         <div className="relative flex items-center justify-center shrink-0">
+            <Flame className="w-8 h-8 md:w-9 md:h-9 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
+            <span className="absolute text-[8px] md:text-[9px] font-black tabular-nums text-white leading-none" style={{textShadow:'0 1px 2px rgba(0,0,0,0.9)'}}>{match.volatility}</span>
+         </div>
+         <ChevronDown className={`shrink-0 w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
       </button>
 
@@ -561,7 +564,26 @@ export default function DiscoverPage() {
         
         {/* FILTERS AND SORTING ROW */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 mb-4">
-           {/* EMOTIONAL FILTERS */}
+
+           {/* PRIMARY: WATCHABILITY / LEAGUE SORT TABS */}
+           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
+              <div className="flex w-full border-b border-white/10">
+                <button 
+                  onClick={() => setSortMode('watchability')}
+                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'watchability' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                   <Activity className="w-3 h-3" />
+                   WATCHABILITY
+                </button>
+                <button 
+                  onClick={() => setSortMode('league')}
+                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'league' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
+                   <Swords className="w-3 h-3" />
+                   LEAGUE
+                </button>
+              </div>
+           </div>
+
+           {/* SECONDARY: EMOTIONAL FILTER PILLS */}
            <div className="relative w-full lg:w-auto">
              <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
                 {filters.map(f => {
@@ -582,22 +604,6 @@ export default function DiscoverPage() {
              <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
            </div>
 
-           <div className="flex items-center shrink-0 pb-2 w-full lg:w-auto">
-              <div className="flex w-full border-b border-white/10">
-                <button 
-                  onClick={() => setSortMode('watchability')}
-                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'watchability' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
-                   <Activity className="w-3 h-3" />
-                   WATCHABILITY
-                </button>
-                <button 
-                  onClick={() => setSortMode('league')}
-                  className={`flex-1 px-4 py-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest transition-all border-b-2 -mb-px ${sortMode === 'league' ? 'border-[#75fbd9] text-[#75fbd9]' : 'border-transparent text-muted-foreground hover:text-foreground'}`}>
-                   <Swords className="w-3 h-3" />
-                   LEAGUE
-                </button>
-              </div>
-           </div>
         </div>
 
         {/* TERMINAL FEED LIST */}
@@ -606,7 +612,7 @@ export default function DiscoverPage() {
              Object.entries(groupedMatches).map(([league, matches]) => (
                <div key={league} className="flex flex-col">
                   {/* League Header */}
-                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-1 pl-2 w-full text-left group">
+                  <button onClick={() => toggleGroup(league)} className="flex items-center gap-4 mb-1 pl-2 pt-1 w-full text-left group">
                     <div className="w-1.5 h-6 bg-[#75fbd9] rounded-full shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
                     <h2 className="text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg group-hover:text-[#75fbd9] transition-colors">{league}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>

@@ -498,7 +498,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
       {/* 0. SEASON CONTEXT TICKER TAPE */}
       {matchState === 'live' && (
-      <div className="w-full max-w-[1200px] mx-auto border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-1 bg-muted/10 backdrop-blur-md">
+      <div className="w-full border-t border-b border-border/50 flex items-center overflow-hidden py-2 mb-1 bg-muted/10 backdrop-blur-md">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
                {seasonContextItems.map((item, idx) => (
