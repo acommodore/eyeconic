@@ -463,9 +463,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                   </>
                 ) : (
                   <>
-                    <span className={`text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1 ${matchState === 'live' ? 'text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]' : 'text-muted-foreground'}`}>
-                      {matchState === 'live' ? (
-                        <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>72'</span>
+                    <span className={`text-[9px] md:text-[11px] font-bold tracking-[0.2em] uppercase mb-1 ${matchInfo?.status === 'live' ? 'text-coral animate-pulse drop-shadow-[0_0_8px_rgba(255,107,107,0.8)]' : 'text-muted-foreground'}`}>
+                      {matchInfo?.status === 'live' ? (
+                        <span className="flex items-center gap-1.5"><span className="inline-block w-1.5 h-1.5 bg-coral rounded-full shadow-[0_0_8px_rgba(255,127,80,0.8)]"></span>LIVE</span>
                       ) : "FT"}
                     </span>
                     <div className="text-4xl md:text-5xl font-black tracking-tighter tabular-nums drop-shadow-xl z-10 relative font-mono leading-none whitespace-nowrap">
@@ -511,8 +511,8 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {/* 0. SEASON CONTEXT TICKER TAPE */}
-      {matchState === 'live' && (
+      {/* 0. SEASON CONTEXT TICKER TAPE — live matches only */}
+      {matchState === 'live' && matchInfo?.status !== 'finished' && (
       <div className="w-full border-t border-b border-border/50 flex items-center overflow-hidden h-8 mb-1 bg-[#0a0a0a]">
          <div className="flex whitespace-nowrap animate-ticker w-[200%]">
             <div className="flex justify-around min-w-[50%] shrink-0">
@@ -557,9 +557,9 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
                 {tab === 'prematch' ? 'PRE-MATCH' : tab === 'live' ? 'LIVE' : 'THE FALLOUT'}
               </button>
               {disabledTabTooltip === tab && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-black border border-white/20 rounded-xl text-[8px] font-black text-[#75fbd9] whitespace-nowrap shadow-xl z-50 animate-in fade-in zoom-in-95 duration-150 pointer-events-none">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-1.5 bg-[#0a0a0a] border border-[#75fbd9]/40 rounded-xl text-[9px] font-black text-[#75fbd9] whitespace-nowrap shadow-[0_0_20px_rgba(117,251,217,0.2)] z-50 pointer-events-none">
                   {tooltipMsg}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black" />
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#75fbd9]/40" />
                 </div>
               )}
             </div>
@@ -591,20 +591,15 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
       {/* Tab Navigation - Modern Pills */}
       {matchState === 'prematch' && (
         <div className="mb-4 border-b border-border">
-          <div className="flex items-center gap-4 mb-4 pl-2 w-full">
-            <div className="w-1 h-6 rounded-full bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]"></div>
-            <h2 className="text-sm font-black uppercase tracking-widest text-foreground drop-shadow-lg">MATCH INTEL</h2>
-            <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
-          </div>
           <div className="flex gap-3 overflow-x-auto pb-6 hover-scrollbar hide-scrollbar-mobile">
             {['LINEUP', 'H2H', 'SEASON CONTEXT', 'KEY BATTLES'].map((tab) => (
               <button 
                 key={tab}
                 onClick={() => setPrematchTab(tab)}
-                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all ${
+                className={`px-6 py-3 rounded-full text-xs font-black tracking-widest whitespace-nowrap flex items-center gap-2 transition-all active:scale-95 ${
                   prematchTab === tab 
                     ? 'bg-[#75fbd9]/10 border border-[#75fbd9]/30 text-[#75fbd9] shadow-[0_0_20px_rgba(117, 251, 217,0.15)]' 
-                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                    : 'border border-border text-muted-foreground hover:bg-muted/50 hover:text-foreground active:bg-muted/30'
                 }`}
               >
                 {tab}

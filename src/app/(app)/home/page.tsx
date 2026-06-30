@@ -3,11 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
-import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity, Flame, Sparkles, ChevronDown, Filter, MessageSquare } from 'lucide-react';
+import { Zap, Brain, ArrowRight, Bookmark, Shuffle, Swords, Activity, Flame, Sparkles, ChevronDown, Filter, MessageSquare, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { matchService } from '@/services/matchService';
 import { Match } from '@/types/match';
 
 // --- MOCK RANKING DATA ---
+const getVolatilityColor = (v: number) => {
+  if (v >= 90) return '#FF0000';
+  if (v >= 80) return '#FF4500';
+  if (v >= 70) return '#FF8C00';
+  if (v >= 50) return '#FFC000';
+  return '#8A9A86';
+};
+
 const getMatchCurations = (matchId: number, team1: string, status: string) => {
   const isUpcoming = status === 'upcoming';
 
@@ -200,10 +208,16 @@ const TerminalRow = React.memo(({ match, isExpanded, onToggle, isLive = false, i
 
         {/* RIGHT CONTROLS */}
         <div className="w-[65px] md:w-[80px] flex items-center justify-end gap-1.5 shrink-0">
-         {/* FIRE BADGE — number inside the flame */}
+         {/* FIRE BADGE — score in the belly, color based on volatility */}
          <div className="relative flex items-center justify-center shrink-0">
-            <Flame className="w-8 h-8 md:w-9 md:h-9 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
-            <span className="absolute text-[8px] md:text-[9px] font-black tabular-nums text-white leading-none" style={{textShadow:'0 1px 2px rgba(0,0,0,0.9)'}}>{match.volatility}</span>
+            <Flame
+              className="w-8 h-8 md:w-9 md:h-9 drop-shadow-[0_0_8px_rgba(249,115,22,0.7)]"
+              style={{ color: getVolatilityColor(match.volatility) }}
+            />
+            <span
+              className="absolute text-[7px] md:text-[8px] font-black tabular-nums text-white leading-none translate-y-[2px]"
+              style={{textShadow:'0 1px 3px rgba(0,0,0,0.95)'}}
+            >{match.volatility}</span>
          </div>
          <ChevronDown className={`shrink-0 w-3.5 h-3.5 md:w-4 md:h-4 text-muted-foreground transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
         </div>
@@ -367,6 +381,46 @@ const NewsTicker = () => (
     </div>
 );
 
+const MonthCalendar = ({ activeDay, onDaySelect, onClose }: { activeDay: string; onDaySelect: (d: string) => void; onClose: () => void }) => {
+  const [viewDate, setViewDate] = React.useState(new Date());
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const monthLabel = viewDate.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }).toUpperCase();
+  const firstDow = (new Date(year, month, 1).getDay() + 6) % 7; // Mon-based
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  const cells: (null | { d: number; key: string; isToday: boolean })[] = [
+    ...Array.from({ length: firstDow }, () => null),
+    ...Array.from({ length: daysInMonth }, (_, i) => {
+      const d = i + 1;
+      const date = new Date(year, month, d);
+      const dayName = date.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase();
+      const dayNum = String(d).padStart(2, '0');
+      return { d, key: `${dayName}-${dayNum}`, isToday: date.toDateString() === today.toDateString() };
+    }),
+  ];
+  return (
+    <div className="absolute right-0 top-full mt-2 z-50 bg-[#0d0d0d] border border-white/15 rounded-2xl shadow-2xl p-4 w-60 backdrop-blur-xl" onClick={e => e.stopPropagation()}>
+      <div className="flex items-center justify-between mb-3">
+        <button onClick={() => setViewDate(new Date(year, month - 1, 1))} className="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"><ChevronLeft className="w-3.5 h-3.5 text-muted-foreground" /></button>
+        <span className="text-[9px] font-black tracking-widest text-muted-foreground">{monthLabel}</span>
+        <button onClick={() => setViewDate(new Date(year, month + 1, 1))} className="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"><ChevronRight className="w-3.5 h-3.5 text-muted-foreground" /></button>
+      </div>
+      <div className="grid grid-cols-7 gap-0.5 mb-1 text-center">
+        {['M','T','W','T','F','S','S'].map((l, i) => <span key={i} className="text-[7px] font-mono text-muted-foreground/50 py-1">{l}</span>)}
+      </div>
+      <div className="grid grid-cols-7 gap-0.5">
+        {cells.map((cell, i) => cell === null ? <div key={i} /> : (
+          <button key={i} onClick={() => { onDaySelect(cell.key); onClose(); }}
+            className={`w-7 h-7 mx-auto flex items-center justify-center rounded-lg text-[10px] font-black transition-all ${
+              activeDay === cell.key ? 'bg-[#75fbd9] text-black' : cell.isToday ? 'text-[#75fbd9] border border-[#75fbd9]/30' : 'text-muted-foreground hover:bg-white/10'
+            }`}>{cell.d}</button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function DiscoverPage() {
   const supabase = createClient();
   const [liveMatches, setLiveMatches] = useState<Match[]>([]);
@@ -384,7 +438,7 @@ export default function DiscoverPage() {
     const d = new Date();
     return `${d.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase()}-${String(d.getDate()).padStart(2, '0')}`;
   });
-
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const toggleGroup = (groupName: string) => {
     setCollapsedGroups(prev => {
       const next = new Set(prev);
@@ -618,31 +672,53 @@ export default function DiscoverPage() {
               </div>
            </div>
 
-           {/* SECONDARY: EMOTIONAL FILTER PILLS */}
-           <div className="relative w-full lg:w-auto">
-             <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
-                {filters.map(f => {
-                  const Icon = f.icon;
-                  const isActive = activeFilter === f.name;
-                  return (
-                    <button 
-                      key={f.name}
-                      onClick={() => setActiveFilter(f.name)}
-                      className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 px-3 py-1 rounded-xl text-[9px] font-mono uppercase tracking-widest transition-all ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border border-[#75fbd9]/40' : 'text-muted-foreground/60 hover:text-muted-foreground'}`}
-                    >
-                      <Icon className="w-3 h-3" /> {f.name}
-                    </button>
-                  )
-                })}
+           {/* SECONDARY: EMOTIONAL FILTER PILLS + DESKTOP CALENDAR */}
+           <div className="flex items-center gap-2 w-full lg:w-auto">
+             <div className="relative flex-1 lg:flex-none lg:w-auto">
+               <div className="flex items-center gap-3 overflow-x-auto hide-scrollbar pb-2 pr-8">
+                  {filters.map(f => {
+                    const Icon = f.icon;
+                    const isActive = activeFilter === f.name;
+                    return (
+                      <button 
+                        key={f.name}
+                        onClick={() => setActiveFilter(f.name)}
+                        className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 px-3 py-1 rounded-xl text-[9px] font-mono uppercase tracking-widest transition-all active:scale-95 ${isActive ? 'bg-[#75fbd9]/10 text-[#75fbd9] border border-[#75fbd9]/40' : 'text-muted-foreground/60 hover:text-muted-foreground active:text-muted-foreground'}`}
+                      >
+                        <Icon className="w-3 h-3" /> {f.name}
+                      </button>
+                    )
+                  })}
+               </div>
+               {/* Fade overlay */}
+               <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
              </div>
-             {/* Fade overlay */}
-             <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#020202] via-[#020202]/80 to-transparent pointer-events-none lg:hidden"></div>
+
+             {/* DESKTOP CALENDAR ICON */}
+             <div className="hidden lg:block relative shrink-0 self-start mt-0.5" id="calendar-dropdown">
+               <button
+                 onClick={() => setCalendarOpen(v => !v)}
+                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-mono uppercase tracking-widest transition-all border ${
+                   calendarOpen ? 'bg-[#75fbd9]/10 text-[#75fbd9] border-[#75fbd9]/40' : 'text-muted-foreground/60 border-white/10 hover:text-muted-foreground hover:border-white/20'
+                 }`}
+               >
+                 <Calendar className="w-3 h-3" />
+                 {activeDay.split('-')[1] ? `${activeDay.split('-')[0]} ${activeDay.split('-')[1]}` : 'Date'}
+               </button>
+               {calendarOpen && (
+                 <MonthCalendar
+                   activeDay={activeDay}
+                   onDaySelect={(d) => { setActiveDay(d); setCalendarOpen(false); }}
+                   onClose={() => setCalendarOpen(false)}
+                 />
+               )}
+             </div>
            </div>
 
         </div>
 
-        {/* DAY RIBBON */}
-        <div className="mb-3 border-b border-white/5 pb-2">
+        {/* DAY RIBBON — mobile only */}
+        <div className="lg:hidden mb-3 border-b border-white/5 pb-2">
           <DayRibbon activeDay={activeDay} onDaySelect={setActiveDay} />
         </div>
 
@@ -687,7 +763,7 @@ export default function DiscoverPage() {
                if (group.matches.length === 0) return null;
                return (
                <div key={group.groupName} className="flex flex-col">
-                  <button onClick={() => toggleGroup(group.groupName)} className={`flex items-center gap-4 mb-1 pl-2 w-full text-left group ${group.groupName === 'Live Matches' ? 'pt-4' : 'pt-1'}`}>
+                  <button onClick={() => toggleGroup(group.groupName)} className="flex items-center gap-4 mb-1 pl-2 pt-1 w-full text-left group">
                     <div className={`w-1.5 h-6 rounded-full ${group.groupName === 'Live Matches' ? 'bg-coral shadow-[0_0_12px_rgba(255,107,107,0.8)]' : group.groupName === 'Finished Matches' ? 'bg-zinc-500 shadow-[0_0_12px_rgba(161,161,170,0.5)]' : 'bg-[#75fbd9] shadow-[0_0_12px_rgba(117, 251, 217,0.8)]'}`}></div>
                     <h2 className={`text-xl font-black uppercase tracking-widest text-foreground drop-shadow-lg transition-colors ${group.groupName === 'Live Matches' ? 'group-hover:text-coral' : group.groupName === 'Finished Matches' ? 'group-hover:text-zinc-500' : 'group-hover:text-[#75fbd9]'}`}>{group.groupName}</h2>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent"></div>
