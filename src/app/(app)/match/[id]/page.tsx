@@ -255,7 +255,7 @@ export default function MatchDetailsPage({ params }: { params: Promise<{ id: str
 
   useEffect(() => {
     if (matchInfo) {
-      const status = matchInfo.status;
+      const status = matchInfo.status || 'upcoming';
       const level = computeLevel(status);
       // Only increase — never reset unlocked access when switching tabs
       if (level > unlockedLevelRef.current) {
